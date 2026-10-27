@@ -3,7 +3,7 @@
 ## What these tools do
 All tools run entirely in the browser. No employee or payroll data is sent to a server by the tools.
 
-## Protections built in (version 1.1.0)
+## Protections built in (version 1.2.0)
 - Content Security Policy (meta tag): scripts only from this site and cdnjs.cloudflare.com; no connections to other hosts; no plug-ins; no framing of forms; `base` tag blocked.
 - Clickjacking guard: the page breaks out of any frame.
 - Referrer policy and `nosniff` hints.

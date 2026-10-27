@@ -4,10 +4,10 @@ Published at https://tools.complypro.co.in/
 
 | Tool | Folder | Version |
 |---|---|---|
-| PF ECR File Creator | `pf-ecr-creator/` | 1.1.0 |
-| ESIC Monthly Contribution Creator | `esic-mc-creator/` | 1.1.0 |
-| Statutory Payroll Planner | `payroll-planner/` | 1.1.0 |
-| Income Tax Calculator for Government Employees | `govt-tax-calculator/` | 1.1.0 |
+| PF ECR File Creator | `pf-ecr-creator/` | 1.2.0 |
+| ESIC Monthly Contribution Creator | `esic-mc-creator/` | 1.2.0 |
+| Statutory Payroll Planner | `payroll-planner/` | 1.2.0 |
+| Income Tax Calculator for Government Employees | `govt-tax-calculator/` | 1.2.0 |
 
 Each folder holds a single self-contained `index.html` and the release notes and error codes PDF for that version.
 Every tool has an **Error codes** tab that lists each message code, its cause and its solution.
