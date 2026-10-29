@@ -3,7 +3,7 @@
  * Config.gs - constants, database schema, roles, permissions, enums.
  * CA Office Work Management System (Google Apps Script + Sheets + Drive + Gmail)
  */
-var APP = { NAME: 'CA Office Work Management System', VERSION: '1.0.0', SCHEMA_VERSION: 2, TZ: 'Asia/Kolkata', TZ_OFFSET: '+05:30' };
+var APP = { NAME: 'CA Office Work Management System', VERSION: '1.0.0', BUILD: 2, SCHEMA_VERSION: 2, TZ: 'Asia/Kolkata', TZ_OFFSET: '+05:30' };
 
 var ROLES = {
   ADMIN: 'Firm Administrator', MANAGING_PARTNER: 'Managing Partner', PARTNER: 'Partner',
@@ -3033,7 +3033,7 @@ function doPost(e) {
   return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
 }
 function doGet(e) {
-  if (e && e.parameter && e.parameter.ping) return ContentService.createTextOutput(JSON.stringify({ ok: true, name: APP.NAME, version: APP.VERSION })).setMimeType(ContentService.MimeType.JSON);
+  if (e && e.parameter && e.parameter.ping) return ContentService.createTextOutput(JSON.stringify({ ok: true, name: APP.NAME, version: APP.VERSION, build: APP.BUILD })).setMimeType(ContentService.MimeType.JSON);
   var t; try { t = HtmlService.createTemplateFromFile('Index'); } catch (err) {
     return HtmlService.createHtmlOutput('<!doctype html><meta charset="utf-8"><title>' + APP.NAME + '</title><body style="font-family:Arial,sans-serif;padding:24px"><h2>' + APP.NAME + ' - data service</h2><p>This address is the firm data service. Open the CA Office Manager page and use the firm link you were given.</p></body>');
   }
@@ -3057,7 +3057,7 @@ act_('register.resend', function (u, p) { return Admin.resendCode(p); }, true, t
 act_('users.approve', function (u, p) { return Admin.approveUser(u, p); }, true);
 act_('activate', function (u, p) { Auth.activate(p.email, p.code, p.password); return { activated: true }; }, true, true);
 /* ---- session ---- */
-act_('me', function (u) { autoMigrate_(); if (Perm.effective(u)['backup.manage']) Jobs.ensureTriggers(); return { enums: { ENTITY_TYPES: ENTITY_TYPES, PIPELINE: PIPELINE, PRIORITIES: PRIORITIES, TASK_STATUSES: TASK_STATUSES, TIME_CATEGORIES: TIME_CATEGORIES, LEAVE_TYPES: LEAVE_TYPES, PAYMENT_MODES: PAYMENT_MODES, FILE_STATUSES: FILE_STATUSES, FILE_OUT_STATUSES: FILE_OUT_STATUSES, COMPLIANCE_CATEGORIES: COMPLIANCE_CATEGORIES, RECURRENCE: RECURRENCE, ROLES: ROLES }, me: userView_(u), settings: Admin.publicSettings(), directory: Admin.directory(u), pending_acks: Files.myPendingAcks(u).length }; });
+act_('me', function (u) { autoMigrate_(); if (Perm.effective(u)['backup.manage']) Jobs.ensureTriggers(); return { build: APP.BUILD, app_version: APP.VERSION, enums: { ENTITY_TYPES: ENTITY_TYPES, PIPELINE: PIPELINE, PRIORITIES: PRIORITIES, TASK_STATUSES: TASK_STATUSES, TIME_CATEGORIES: TIME_CATEGORIES, LEAVE_TYPES: LEAVE_TYPES, PAYMENT_MODES: PAYMENT_MODES, FILE_STATUSES: FILE_STATUSES, FILE_OUT_STATUSES: FILE_OUT_STATUSES, COMPLIANCE_CATEGORIES: COMPLIANCE_CATEGORIES, RECURRENCE: RECURRENCE, ROLES: ROLES }, me: userView_(u), settings: Admin.publicSettings(), directory: Admin.directory(u), pending_acks: Files.myPendingAcks(u).length }; });
 act_('logout', function (u, p, ctx) { Auth.logout(ctx.token); Audit.log(u, 'LOGOUT', 'Auth', 'User', u.user_id, '', '', '', 'OK'); return true; }, true);
 act_('changePassword', function (u, p) { return Auth.changePassword(u, p.old_password, p.new_password); }, true);
 act_('dashboard', function (u) { return Reports.dashboard(u); });

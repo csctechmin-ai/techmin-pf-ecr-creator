@@ -1,6 +1,15 @@
 {
   "timeZone": "Asia/Kolkata",
-  "dependencies": {},
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "CAOMS",
+        "libraryId": "1bnTuUUTTsbb9AR2SY-MB42E2_8UBswDx5U2jUFzu5aUOhjX56e3AJ8GX",
+        "version": "0",
+        "developmentMode": true
+      }
+    ]
+  },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "oauthScopes": [
