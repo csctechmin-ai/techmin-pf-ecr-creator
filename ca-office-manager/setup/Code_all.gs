@@ -183,6 +183,14 @@ var DEFAULT_SETTINGS = [
   ['firm_email', '', 'Firm email (reply-to for client emails)'],
   ['firm_gstin', '', 'Firm GSTIN used on tax invoices (validate before real use)'],
   ['firm_state', '', 'Firm state (to decide CGST+SGST vs IGST)'],
+  ['firm_city', '', 'Firm city'],
+  ['firm_pincode', '', 'Firm pincode (6 digits)'],
+  ['firm_pan', '', 'Firm PAN'],
+  ['firm_frn', '', 'ICAI firm registration number (optional)'],
+  ['firm_contact', '', 'Contact person for Techmin and clients'],
+  ['firm_phone', '', 'Firm mobile number (10 digits)'],
+  ['registry_id', '', 'Firm id issued by Techmin when the firm registered (set automatically)'],
+  ['registry_key', '', 'Secret key for the Techmin account (set automatically; never shown)'],
   ['work_hours_per_day', '8', 'Scheduled working hours per day'],
   ['work_days', '1,2,3,4,5,6', 'Working weekdays (0=Sun..6=Sat). Default Mon-Sat'],
   ['holidays', '', 'Comma-separated holiday dates yyyy-mm-dd'],
@@ -2233,7 +2241,22 @@ var Admin = (function () {
 
   /* ---------- settings ---------- */
   var NUMERIC = ['work_hours_per_day', 'default_tax_rate_pct', 'deadline_reminder_days', 'review_escalation_days', 'file_return_grace_days', 'max_download_mb', 'session_hours', 'backup_retention'];
-  function getSettings(user) { Perm.require(user, 'settings.manage'); return DB.all('Settings').filter(function (s) { return s.key.indexOf('seq_') !== 0; }); }
+  function getSettings(user) { Perm.require(user, 'settings.manage'); return DB.all('Settings').filter(function (s) { return s.key.indexOf('seq_') !== 0 && s.key !== 'registry_key' && s.key !== 'registry_id'; }); }
+  /** Techmin registration: the profile the firm shares, the id and (for administrators only) the key used to talk to the Techmin registry. */
+  function registryGet(user) {
+    Perm.require(user, 'settings.manage');
+    var keys = ['firm_name', 'firm_address', 'firm_city', 'firm_state', 'firm_pincode', 'firm_gstin', 'firm_pan', 'firm_frn', 'firm_contact', 'firm_email', 'firm_phone'], p = {};
+    keys.forEach(function (k) { p[k] = Settings.get(k, ''); });
+    var id = Settings.get('registry_id', ''), key = Settings.get('registry_key', '');
+    return { profile: p, registry_id: id, registry_key: id && key ? key : '', registered: !!(id && key), active_users: DB.where('Users', function (u) { return u.employment_status === 'Active' || u.employment_status === ''; }).length, version: APP.VERSION };
+  }
+  function registrySave(user, p) {
+    Perm.require(user, 'settings.manage'); p = p || {};
+    V.req(/^F-[A-Z0-9-]{6,30}$/.test(String(p.registry_id || '')), 'The Techmin firm id is not valid.'); V.req(/^[a-f0-9]{32}$/.test(String(p.registry_key || '')), 'The Techmin firm key is not valid.');
+    V.req(!Settings.get('registry_id', '') || Settings.get('registry_id') === p.registry_id, 'This workspace is already registered with Techmin. Contact Techmin support to change it.');
+    DB.tx(function () { Settings.set('registry_id', p.registry_id, user.user_id); Settings.set('registry_key', p.registry_key, user.user_id); });
+    Audit.log(user, 'REGISTRY_REGISTER', 'Settings', 'Settings', 'registry_id', '', { registry_id: p.registry_id }, '', 'OK'); return { registered: true };
+  }
   function firmLink() {
     var base = Settings.get('app_url', ''), svc = ''; try { svc = ScriptApp.getService().getUrl() || ''; } catch (e) { svc = ''; }
     if (!base) return ''; if (!svc) return base;
@@ -2302,12 +2325,17 @@ var Admin = (function () {
   function saveSettings(user, map) {
     Perm.require(user, 'settings.manage'); var known = Util.indexBy(DB.all('Settings'), 'key'), changed = {};
     Object.keys(map || {}).forEach(function (k) {
-      V.req(known[k] && k.indexOf('seq_') !== 0, 'Unknown setting ' + k); var v = Util.clean(map[k], 500);
+      V.req(known[k] && k.indexOf('seq_') !== 0, 'Unknown setting ' + k); V.req(k !== 'registry_id' && k !== 'registry_key', 'The Techmin registration cannot be edited here.'); var v = Util.clean(map[k], 500);
       if (NUMERIC.indexOf(k) > -1) V.num(v, k, 0, 100000);
       if (k === 'work_days') V.req(/^[0-6](,[0-6])*$/.test(v), 'Working days must be digits 0-6 separated by commas.');
       if (k === 'open_registration' || k === 'registration_approval') V.oneOf(v, ['Y', 'N'], k.replace(/_/g, ' '));
       if (k === 'registration_default_role') V.oneOf(v, ['CLERK', 'SENIOR', 'ACCOUNTS'], 'Default role for self-registered users');
       if (k === 'mail_from' && v) V.email(v, 'Send-as address');
+      if (k === 'firm_pan' && v) V.req(V.PAN.test(v.toUpperCase()), 'PAN is not in the correct format (for example ABCDE1234F).');
+      if (k === 'firm_gstin' && v) V.req(V.GSTIN.test(v.toUpperCase()), 'GSTIN is not in the correct format.');
+      if (k === 'firm_pincode' && v) V.req(/^[1-9][0-9]{5}$/.test(v), 'Pincode must be 6 digits.');
+      if (k === 'firm_phone' && v) V.req(V.MOBILE.test(v), 'Mobile number must be a 10-digit Indian mobile number.');
+      if (k === 'firm_email' && v) V.email(v, 'Firm email');
       if (k === 'app_url' && v) V.req(/^https:\/\/[^\s]+$/.test(v), 'Web address must start with https://');
       if (k === 'holidays' && v) v.split(',').forEach(function (x) { V.date(x.trim(), 'Holiday'); });
       if (k === 'ageing_buckets') V.req(/^\d+(,\d+)*$/.test(v), 'Ageing buckets must be numbers separated by commas.');
@@ -2346,7 +2374,7 @@ var Admin = (function () {
     return { rows: rows, total: total, note: 'This log is stored in a Google Sheet and is not tamper-proof. Restrict edit access to the spreadsheet.' };
   }
   return { directory: directory, listUsers: listUsers, saveUser: saveUser, deactivate: deactivate, reactivate: reactivate, resetAccess: resetAccess, permMatrix: permMatrix, setRolePerms: setRolePerms, setUserPerm: setUserPerm, setClientAccess: setClientAccess,
-    getClientAccess: getClientAccess, getSettings: getSettings, saveSettings: saveSettings, publicSettings: publicSettings, register: register, resendCode: resendCode, approveUser: approveUser, masterList: masterList, masterSave: masterSave, masterRemove: masterRemove, auditList: auditList, MASTERS: MASTERS };
+    getClientAccess: getClientAccess, getSettings: getSettings, saveSettings: saveSettings, registryGet: registryGet, registrySave: registrySave, publicSettings: publicSettings, register: register, resendCode: resendCode, approveUser: approveUser, masterList: masterList, masterSave: masterSave, masterRemove: masterRemove, auditList: auditList, MASTERS: MASTERS };
 })();
 
 
@@ -2808,6 +2836,8 @@ act_('perm.matrix', function (u) { return Admin.permMatrix(u); });
 act_('perm.setRole', function (u, p) { return Admin.setRolePerms(u, p.role, p.perms); }, true);
 act_('perm.setUser', function (u, p) { return Admin.setUserPerm(u, p.user_id, p.perm, p.effect, p.reason); }, true);
 act_('settings.get', function (u) { return Admin.getSettings(u); });
+act_('registry.get', function (u) { return Admin.registryGet(u); });
+act_('registry.save', function (u, p) { return Admin.registrySave(u, p); }, true);
 act_('settings.save', function (u, p) { return Admin.saveSettings(u, p.values); }, true);
 act_('master.list', function (u, p) { return Admin.masterList(u, p.table); });
 act_('master.save', function (u, p) { return Admin.masterSave(u, p.table, p.data); }, true);
