@@ -2258,7 +2258,7 @@ var Admin = (function () {
     Audit.log(user, 'REGISTRY_REGISTER', 'Settings', 'Settings', 'registry_id', '', { registry_id: p.registry_id }, '', 'OK'); return { registered: true };
   }
   function firmLink() {
-    var base = Settings.get('app_url', ''), svc = ''; try { svc = ScriptApp.getService().getUrl() || ''; } catch (e) { svc = ''; }
+    var base = Settings.get('app_url', ''), svc = webAppUrl_();
     if (!base) return ''; if (!svc) return base;
     return base + (base.indexOf('?') < 0 ? '?' : '&') + 'ws=' + encodeURIComponent(svc);
   }
@@ -2660,8 +2660,8 @@ function setupApplication() {
     Audit.log({ user_id: 'system', role: 'SYSTEM' }, 'SETUP', 'Setup', 'Users', admin.user_id, '', 'first administrator created', '', 'OK');
   });
   var mailed = false;
-  try { var fl = ''; try { fl = ScriptApp.getService().getUrl() || ''; } catch (e0) { fl = ''; }
-    Mailer.send(adminEmail, 'Your CA Office Manager administrator activation key', 'Dear ' + adminName + ',\n\nYour CA Office Manager workspace has been set up in your own Google account. All data stays in your Google Drive.\n\nYour one-time activation key: ' + out.code + '\n(valid for 3 days, usable once)\n\n1. Open this firm link: ' + (Settings.get('app_url') + (fl ? '?ws=' + encodeURIComponent(fl) : '')) + (fl ? '' : '\n   (Deploy the web app first and use its address: see the setup guide.)') + '\n2. Choose "First time? Activate your account", enter this email address, the key above and a new password.\n\nShare the same firm link with your staff so they can register.\n'); mailed = true;
+  try { var fl = webAppUrl_();
+    Mailer.send(adminEmail, 'Your CA Office Manager administrator activation key', 'Dear ' + adminName + ',\n\nYour CA Office Manager workspace has been set up in your own Google account. All data stays in your Google Drive.\n\nYour one-time activation key: ' + out.code + '\n(valid for 3 days, usable once)\n\n1. Open this firm link: ' + (Settings.get('app_url') + (fl ? '?ws=' + encodeURIComponent(fl) : '')) + (fl ? '' : '\n   (This email was sent while setup ran from the script editor, so it cannot show your workspace address. Open the page above, and in the box paste your workspace address: in the script editor choose Deploy > Manage deployments and copy the Web app URL ending /exec. Setup guide, Step 8.)') + '\n2. Choose "First time? Activate your account", enter this email address, the key above and a new password.\n\nShare the same firm link with your staff so they can register.\n'); mailed = true;
   } catch (e1) { Logger.log('The activation key could not be emailed: ' + e1); }
   Logger.log('SETUP COMPLETE.' + (mailed ? ' The administrator key was also emailed to ' + adminEmail + '.' : '')+ '\n\nDatabase: ' + ss.getUrl() + '\nFirst administrator: ' + out.email + '\nOne-time activation code: ' + out.code + '\nOpen the web app, choose "Activate account", enter the email and this code, then set your password. The code expires in 3 days.');
   return { database: ss.getUrl(), admin: out.email, activation_code: out.code };
@@ -2799,6 +2799,8 @@ function doGet(e) {
   }
   return t.evaluate().setTitle(APP.NAME).addMetaTag('viewport', 'width=device-width, initial-scale=1').setXFrameOptionsMode(HtmlService.XFrameOptionsMode.DEFAULT);
 }
+/** Public web-app address. When code runs from the editor Google returns the owner-only test address ending /dev, which nobody else can open and which cannot be turned into the published /exec address, so it is treated as unknown (blank). */
+function webAppUrl_() { var u = ''; try { u = ScriptApp.getService().getUrl() || ''; } catch (e) { u = ''; } return /\/exec$/.test(u) ? u : ''; }
 function include(name) { return HtmlService.createHtmlOutputFromFile(name).getContent(); }
 
 var ACTIONS = {};
