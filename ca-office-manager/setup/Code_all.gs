@@ -1523,16 +1523,25 @@ var Time = (function () {
     for (var d = from; d <= to; d = Util.addDays(d, 1)) if (days.indexOf(Util.dow(d)) > -1 && hol.indexOf(d) < 0) n++;
     return n;
   }
+  /** Who decides this person's leave: the reporting manager or partner; otherwise the other administrators, managing partners and partners (never the applicant). If nobody else exists (for example a sole firm administrator) the leave is recorded as approved automatically. */
+  function leaveRoute(user) {
+    var users = DB.all('Users').filter(function (u) { return u.user_id !== user.user_id && u.employment_status !== 'Left'; }), ids = [];
+    var direct = [user.reporting_manager_id, user.partner_id].filter(function (x) { return x && x !== user.user_id; });
+    direct.forEach(function (id) { var u = users.filter(function (x) { return x.user_id === id; })[0]; if (u && Perm.has(u, 'leave.approve') && ids.indexOf(id) < 0) ids.push(id); });
+    if (!ids.length) users.forEach(function (u) { if (['ADMIN', 'MANAGING_PARTNER', 'PARTNER'].indexOf(u.role) > -1 && Perm.has(u, 'leave.approve') && ids.indexOf(u.user_id) < 0) ids.push(u.user_id); });
+    var by = Util.indexBy(users, 'user_id');
+    return { ids: ids, names: ids.map(function (i) { return by[i].full_name + ' (' + (ROLES[by[i].role] || by[i].role) + ')'; }), auto: !ids.length };
+  }
   function leaveApply(user, d) {
     var type = V.oneOf(d.leave_type, LEAVE_TYPES, 'Leave type'), f = V.date(d.from_date, 'From date'), t = V.date(d.to_date, 'To date');
     V.req(t >= f, 'To date cannot be before from date.'); V.req(Util.diffDays(f, t) <= 180, 'Leave period is too long.');
     var clash = DB.findOne('LeaveRequests', function (l) { return l.user_id === user.user_id && ['Pending', 'Approved'].indexOf(l.status) > -1 && l.from_date <= t && l.to_date >= f; });
     V.req(!clash, 'You already have a leave request overlapping these dates.');
     var days = workingDaysBetween(f, t); V.req(days > 0, 'The selected dates contain no working days.');
-    var approver = user.reporting_manager_id || user.partner_id || '';
-    var r = DB.insert('LeaveRequests', { user_id: user.user_id, leave_type: type, from_date: f, to_date: t, days: days, reason: Util.clean(d.reason, 300), approver_id: approver, status: 'Pending' }, user.user_id);
-    var approvers = approver ? [approver] : DB.where('Users', function (u) { return u.role === 'ADMIN' || u.role === 'MANAGING_PARTNER'; }).map(function (u) { return u.user_id; });
-    Notify.send(approvers, 'LEAVE_REQUEST', 'Leave request: ' + user.full_name, f + ' to ' + t + ' (' + days + ' working days)', 'Leave', r.leave_id);
+    var route = leaveRoute(user), approver = route.ids[0] || '';
+    var r = DB.insert('LeaveRequests', { user_id: user.user_id, leave_type: type, from_date: f, to_date: t, days: days, reason: Util.clean(d.reason, 300), approver_id: route.auto ? '' : approver, status: route.auto ? 'Approved' : 'Pending', decided_at: route.auto ? Util.now() : '', decision_remarks: route.auto ? 'Recorded automatically: there is no other approver in the firm.' : '' }, user.user_id);
+    if (!route.auto) Notify.send(route.ids, 'LEAVE_REQUEST', 'Leave request: ' + user.full_name, f + ' to ' + t + ' (' + days + ' working days)', 'Leave', r.leave_id);
+    r.auto_approved = !!route.auto;
     Audit.log(user, 'LEAVE_APPLY', 'Leave', 'LeaveRequests', r.leave_id, '', { from: f, to: t, days: days }, '', 'OK'); return r;
   }
   function leaveDecide(user, id, approve, remarks) {
@@ -1596,7 +1605,7 @@ var Time = (function () {
     return productivity(uid, from, to);
   }
   return { start: start, stop: stop, pause: pause, resume: resume, manual: manual, myLogs: myLogs, requestCorrection: requestCorrection, decideCorrection: decideCorrection, correctDirect: correctDirect, corrections: corrections,
-    checkIn: checkIn, checkOut: checkOut, attendanceList: attendanceList, attendanceCorrect: attendanceCorrect, leaveApply: leaveApply, leaveDecide: leaveDecide, leaveCancel: leaveCancel, leaveList: leaveList, leaveBalance: leaveBalance,
+    checkIn: checkIn, checkOut: checkOut, attendanceList: attendanceList, attendanceCorrect: attendanceCorrect, leaveApply: leaveApply, leaveRoute: leaveRoute, leaveDecide: leaveDecide, leaveCancel: leaveCancel, leaveList: leaveList, leaveBalance: leaveBalance,
     productivity: productivity, myProductivity: myProductivity, scheduledMinutes: scheduledMinutes, running: running, METHOD: METHOD, workingDaysBetween: workingDaysBetween };
 })();
 
@@ -2507,6 +2516,7 @@ var Reports = (function () {
     function card(key, label, value, hint, link) { cards.push({ key: key, label: label, value: value, hint: hint || '', link: link || '' }); }
     var tasks = Perm.has(user, 'task.view') ? DB.all('Tasks').filter(function (t) { return Perm.canSeeTask(user, t); }) : [], mine = DB.all('TaskAssignments').filter(function (a) { return a.user_id === user.user_id && !a.released_at; }).map(function (a) { return a.task_id; });
     var open = tasks.filter(function (t) { return OPEN_STATUSES.indexOf(t.status) > -1 && t.status !== 'Draft'; });
+    if (Perm.has(user, 'leave.approve')) card('leave_wait', 'Leave waiting for my approval', DB.where('LeaveRequests', function (l) { return l.status === 'Pending' && l.user_id !== user.user_id && Perm.canSeeUser(user, l.user_id); }).length, 'Open Time & leave to approve or reject', 'time/leave');
     if (user.role === 'CLERK' || (Perm.has(user, 'task.work') && !Perm.has(user, 'task.assign'))) {
       var my = tasks.filter(function (t) { return mine.indexOf(t.task_id) > -1; }), myOpen = my.filter(function (t) { return OPEN_STATUSES.indexOf(t.status) > -1 && t.status !== 'Draft'; });
       card('my_open', 'My open tasks', myOpen.length, '', 'tasks'); card('today', 'Due today', myOpen.filter(function (t) { return t.due_date === t0; }).length); card('soon', 'Due in next 3 days', myOpen.filter(function (t) { return t.due_date > t0 && t.due_date <= Util.addDays(t0, 3); }).length);
@@ -2910,6 +2920,7 @@ act_('att.list', function (u, p) { return Time.attendanceList(u, p); });
 act_('att.correct', function (u, p) { return Time.attendanceCorrect(u, p); }, true);
 act_('leave.apply', function (u, p) { return Time.leaveApply(u, p); }, true);
 act_('leave.decide', function (u, p) { return Time.leaveDecide(u, p.leave_id, p.approve, p.remarks); }, true);
+act_('leave.route', function (u) { var r = Time.leaveRoute(u); return { names: r.names, auto: r.auto }; });
 act_('leave.cancel', function (u, p) { return Time.leaveCancel(u, p.leave_id); }, true);
 act_('leave.list', function (u, p) { return Time.leaveList(u, p); });
 act_('leave.balance', function (u, p) { return LEAVE_TYPES.map(function (t) { return Time.leaveBalance(u.user_id, t, (p && p.year) || Util.today().slice(0, 4)); }); });
