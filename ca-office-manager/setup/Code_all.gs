@@ -360,7 +360,7 @@ var V = {
  * - Dates are stored as yyyy-mm-dd text, timestamps as yyyy-mm-ddTHH:mm:ss (IST) text; sheets are formatted as plain text.
  */
 var DB = (function () {
-  var ssObj = null, cache = {}, txDepth = 0, lockObj = null, memSeq = null, sheetCache = {}, pending = [];
+  var ssObj = null, cache = {}, txDepth = 0, lockObj = null, memSeq = null, sheetCache = {}, pending = [], appendNext = {};
 
   function ss() {
     if (!ssObj) {
@@ -370,17 +370,20 @@ var DB = (function () {
     }
     return ssObj;
   }
-  function reset() { ssObj = null; cache = {}; sheetCache = {}; pending = []; }
+  function reset() { ssObj = null; cache = {}; sheetCache = {}; pending = []; appendNext = {}; }
   function def(name) { var d = SCHEMA[name]; if (!d) throw new Error('Unknown table ' + name); return d; }
   function headers(name) { var d = def(name); return [d.pk].concat(d.cols, AUDIT_COLS); }
   function sheet(name) { if (sheetCache[name]) return sheetCache[name]; var s = ss().getSheetByName(name); if (!s) throw new AppError('SETUP', 'Missing tab ' + name + '. Run setupApplication().'); sheetCache[name] = s; return s; }
   /** Row writes are queued and written together at the end of the transaction: neighbouring rows of one tab go out in a single call (much faster on Google Sheets). */
+  /** Small, often-read tables are also kept in the script cache for a short time so most requests need not open the spreadsheet at all. */
+  var CACHEABLE = { Settings: 1, Users: 1 };
   function queue(name, row, arr) { pending.push({ n: name, r: row, a: arr }); }
   function flushWrites() {
     if (!pending.length) return;
     var list = pending, by = {}; pending = [];
     list.forEach(function (w) { (by[w.n] = by[w.n] || {})[w.r] = w.a; });
     Object.keys(by).forEach(function (n) {
+      if (CACHEABLE[n]) { try { CacheService.getScriptCache().remove('tbl:' + n); } catch (e) {} }
       var rows = Object.keys(by[n]).map(Number).sort(function (a, b) { return a - b; }), i = 0;
       while (i < rows.length) { var j = i; while (j + 1 < rows.length && rows[j + 1] === rows[j] + 1) j++; var block = []; for (var k = i; k <= j; k++) block.push(by[n][rows[k]]); sheet(n).getRange(rows[i], 1, block.length, block[0].length).setValues(block); i = j + 1; }
     });
@@ -393,7 +396,15 @@ var DB = (function () {
   }
   function load(name) {
     if (cache[name]) return cache[name];
-    var d = def(name), h = headers(name), s = sheet(name), last = s.getLastRow(), rows = [], idx = {};
+    if (pending.length && pending.some(function (w) { return w.n === name; })) flushWrites();
+    var d = def(name), h = headers(name), rows = [], idx = {}, cc = null, hit = null;
+    if (CACHEABLE[name]) { try { cc = CacheService.getScriptCache(); var raw = cc.get('tbl:' + name); if (raw) hit = JSON.parse(raw); } catch (e) { hit = null; } }
+    if (hit && hit.h.join('|') === h.join('|')) {
+      rows = hit.rows; rows.forEach(function (o, i) { idx[o[d.pk]] = i; });
+      cache[name] = { rows: rows, idx: idx, h: h, nextRow: -1 };
+      return cache[name];
+    }
+    var s = sheet(name), last = s.getLastRow();
     if (last > 1) {
       var vals = s.getRange(2, 1, last - 1, h.length).getValues();
       for (var i = 0; i < vals.length; i++) {
@@ -404,9 +415,24 @@ var DB = (function () {
         rows.push(o); idx[o[d.pk]] = rows.length - 1;
       }
     }
+    if (cc) { try { var js = JSON.stringify({ h: h, rows: rows }); if (js.length < 90000) cc.put('tbl:' + name, js, 120); } catch (e) {} }
     cache[name] = { rows: rows, idx: idx, h: h, nextRow: last + 1 };
     return cache[name];
   }
+  /** Adds one row to a log-style table without reading the existing rows (they only grow). */
+  function append(name, obj, userId) {
+    needTx();
+    var d = def(name), h = headers(name), o = {}, ts = Util.now();
+    d.cols.forEach(function (col) { var v = obj[col]; o[col] = v === undefined || v === null ? (d.num[col] ? 0 : '') : (d.num[col] ? Number(v) : String(v)); });
+    o[d.pk] = Util.uid(d.pfx);
+    o.created_at = ts; o.created_by = userId || ''; o.updated_at = ts; o.updated_by = userId || ''; o.is_active = 'Y';
+    if (appendNext[name] === undefined) appendNext[name] = cache[name] ? cacheNext(name) : sheet(name).getLastRow() + 1;
+    var row = appendNext[name]++;
+    queue(name, row, h.map(function (k) { return o[k] === undefined ? '' : o[k]; }));
+    if (cache[name]) { o.__row = row; cache[name].rows.push(o); cache[name].idx[o[d.pk]] = cache[name].rows.length - 1; }
+    return strip(o);
+  }
+  function cacheNext(name) { var c = cache[name]; if (c.nextRow < 0) c.nextRow = sheet(name).getLastRow() + 1; return c.nextRow; }
   function strip(o) { if (!o) return o; var c = {}; for (var k in o) if (k !== '__row') c[k] = o[k]; return c; }
 
   function all(name, includeInactive) {
@@ -468,8 +494,8 @@ var DB = (function () {
     validate(name, o, true, null);
     o.created_at = ts; o.created_by = userId || ''; o.updated_at = ts; o.updated_by = userId || ''; o.is_active = 'Y';
     var arr = c.h.map(function (h) { return o[h] === undefined ? '' : o[h]; });
-    queue(name, c.nextRow, arr);
-    o.__row = c.nextRow; c.nextRow++;
+    var nr = cacheNext(name); queue(name, nr, arr);
+    o.__row = nr; c.nextRow++;
     c.rows.push(o); c.idx[o[d.pk]] = c.rows.length - 1;
     return strip(o);
   }
@@ -516,7 +542,7 @@ var DB = (function () {
   }
   function setSpreadsheet(s) { ssObj = s; cache = {}; }
   function spreadsheet() { return ss(); }
-  return { all: all, get: get, where: where, findOne: findOne, insert: insert, insertMany: insertMany, update: update, deactivate: deactivate, tx: tx, nextSeq: nextSeq,
+  return { all: all, get: get, where: where, findOne: findOne, insert: insert, append: append, insertMany: insertMany, update: update, deactivate: deactivate, tx: tx, nextSeq: nextSeq,
     ensureSchema: ensureSchema, flushWrites: flushWrites, reset: reset, headers: headers, count: count, setSpreadsheet: setSpreadsheet, spreadsheet: spreadsheet, def: def, strip: strip };
 })();
 
@@ -646,7 +672,7 @@ var Audit = (function () {
   /** Must be called inside DB.tx(). */
   function log(user, action, module, recType, recId, prev, next, reason, status) {
     try {
-      DB.insert('AuditLogs', { ts: Util.now(), user_id: (user && (user.user_id || user.id)) || '', user_role: (user && user.role) || '', action: action, module: module || '', record_type: recType || '', record_id: recId || '',
+      DB.append('AuditLogs', { ts: Util.now(), user_id: (user && (user.user_id || user.id)) || '', user_role: (user && user.role) || '', action: action, module: module || '', record_type: recType || '', record_id: recId || '',
         previous_value: summarise(prev), new_value: summarise(next), reason: reason || '', status: status || 'OK' }, (user && user.user_id) || 'system');
     } catch (e) { /* never block the business operation because of audit write problems, but surface in logs */ console.error('Audit write failed: ' + e); }
   }
