@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex">
+<meta name="description" content="CA Office Manager - work, client, time and fee management for CA firms.">
+<title>CA Office Manager</title>
+<style>
+:root{--navy:#12345A;--navy2:#0c2644;--teal:#087E8B;--gold:#F4C542;--bg:#f3f6f9;--card:#fff;--line:#d9e1ea;--ink:#1d2733;--mut:#5d6b7a;--ok:#1e7b46;--warn:#b86e00;--bad:#b3261e;--r:8px}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:14px;color:var(--ink);background:var(--bg);line-height:1.4}
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+button,input,select,textarea{font:inherit;color:inherit}
+h1{font-size:20px;margin:0 0 4px;color:var(--navy)}h2{font-size:16px;margin:0 0 8px;color:var(--navy)}h3{font-size:14px;margin:12px 0 6px;color:var(--navy)}
+.muted{color:var(--mut)}.small{font-size:12px}.right{text-align:right}.nowrap{white-space:nowrap}.hide{display:none!important}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(135deg,var(--navy),var(--navy2))}
+.login{background:#fff;border-radius:12px;padding:24px;width:100%;max-width:400px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.login .brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}.logo{width:38px;height:38px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.shell{display:flex;min-height:100vh}
+.side{width:224px;background:var(--navy);color:#dbe6f3;flex:none;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.side .brand{padding:14px;display:flex;gap:10px;align-items:center;border-bottom:1px solid rgba(255,255,255,.12)}.side .brand b{color:#fff;font-size:15px}
+.side nav{padding:8px;flex:1}.side nav a{display:flex;align-items:center;gap:8px;padding:9px 10px;color:#dbe6f3;border-radius:6px;margin-bottom:2px}
+.side nav a:hover{background:rgba(255,255,255,.08);text-decoration:none}.side nav a.on{background:var(--teal);color:#fff}
+.side .grp{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#8fa6c2;padding:10px 10px 4px}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{background:#fff;border-bottom:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20}
+.top .sp{flex:1}.burger{display:none;background:none;border:0;font-size:22px;cursor:pointer;color:var(--navy)}
+.content{padding:16px;max-width:1280px;width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px}
+.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.stat{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:var(--r);padding:12px;cursor:pointer}.stat .v{font-size:24px;font-weight:700;color:var(--navy)}.stat .l{color:var(--mut);font-size:12px}
+.stat.warn{border-left-color:var(--gold)}.stat.bad{border-left-color:var(--bad)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.bar .sp{flex:1}
+.btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:7px 12px;cursor:pointer;color:var(--navy);white-space:nowrap}.btn:hover{background:#eef3f8}
+.btn.pri{background:var(--teal);border-color:var(--teal);color:#fff}.btn.pri:hover{background:#066a75}.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}.btn.sm{padding:3px 8px;font-size:12px}.btn[disabled]{opacity:.5;cursor:not-allowed}
+input,select,textarea{border:1px solid #b9c5d3;border-radius:6px;padding:7px 9px;background:#fff;max-width:100%}input:focus,select:focus,textarea:focus{outline:2px solid rgba(8,126,139,.35);border-color:var(--teal)}
+textarea{width:100%;min-height:70px}label{display:block;font-size:12px;color:var(--mut);margin:0 0 3px}
+.f{margin-bottom:10px}.f input:not([type=checkbox]),.f select,.f textarea{width:100%}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;background:#fff}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eef3f8;color:var(--navy);font-size:12px;position:sticky;top:0;white-space:nowrap}tr:hover td{background:#fafcfe}
+td.num,th.num{text-align:right;white-space:nowrap}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;background:#e6edf5;color:var(--navy);white-space:nowrap}
+.b-ok{background:#dff3e7;color:var(--ok)}.b-warn{background:#fff1d1;color:var(--warn)}.b-bad{background:#fbe0de;color:var(--bad)}.b-info{background:#d9f0f2;color:#055a63}
+.tabs{display:flex;gap:2px;border-bottom:2px solid var(--line);margin-bottom:12px;overflow-x:auto}.tabs a{padding:8px 14px;color:var(--mut);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}.tabs a.on{color:var(--navy);border-color:var(--teal);font-weight:700}.tabs a:hover{text-decoration:none;background:#eef3f8}
+.modal-bg{position:fixed;inset:0;background:rgba(10,25,45,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:20px 10px;overflow-y:auto}
+.modal{background:#fff;border-radius:10px;width:100%;max-width:640px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.35)}.modal.wide{max-width:900px}
+.modal .acts{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
+.toast{position:fixed;right:14px;bottom:14px;z-index:200;display:flex;flex-direction:column;gap:8px;max-width:calc(100vw - 28px)}.toast div{background:var(--navy);color:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.3)}.toast .e{background:var(--bad)}
+.banner{padding:10px 12px;border-radius:6px;margin-bottom:12px;background:#fff7e0;border:1px solid #ecd48a}.banner.bad{background:#fdecea;border-color:#e8b4b0}.banner.ok{background:#e7f6ee;border-color:#a9d9bd}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:4px 12px}.kv dt{color:var(--mut)}.kv dd{margin:0;word-break:break-word}
+.board{display:flex;gap:10px;overflow-x:auto;align-items:flex-start}.col{background:#e9eff5;border-radius:8px;min-width:230px;width:230px;padding:8px}.col h3{margin:0 0 8px;font-size:12px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px;margin-bottom:6px;font-size:13px}
+.timer{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.timer .t{font-size:28px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.tl{border-left:3px solid var(--line);margin-left:6px;padding-left:12px}.tl .it{margin-bottom:10px}.tl .it:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--teal);margin-left:-18px;margin-right:9px}
+.notif{position:relative}.notif .n{position:absolute;top:-6px;right:-8px;background:var(--bad);color:#fff;border-radius:10px;font-size:10px;padding:1px 5px}
+.pop{position:absolute;right:0;top:36px;width:340px;max-width:92vw;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:50;max-height:70vh;overflow:auto}.pop .it{padding:9px 12px;border-bottom:1px solid var(--line)}.pop .it.un{background:#f0f9fa}
+.spin{display:inline-block;width:16px;height:16px;border:3px solid #cfe0e5;border-top-color:var(--teal);border-radius:50%;animation:sp .8s linear infinite;vertical-align:middle}@keyframes sp{to{transform:rotate(360deg)}}
+.mx{display:flex;flex-wrap:wrap;gap:4px 14px}.mx label{display:flex;gap:5px;align-items:center;color:var(--ink);font-size:12px;margin:0}
+.err{color:var(--bad);font-size:12px;margin-top:4px}
+@media(max-width:860px){.side{position:fixed;left:-250px;z-index:60;transition:left .2s;width:240px}.side.open{left:0}.burger{display:block}.row2,.row3{grid-template-columns:1fr}.kv{grid-template-columns:110px 1fr}.content{padding:12px}.modal{padding:14px}}
+@media print{.side,.top,.bar,.tabs,.btn,.no-print{display:none!important}.content{padding:0}.card{border:0}body{background:#fff}th{position:static}}
+</style>
+</head>
+<body>
+<div id="app"></div><div id="modal-root"></div><div class="toast" id="toast"></div>
+<script>
+'use strict';
+/* ===== core helpers: output is escaped by default; only html`` results are trusted ===== */
+const RAW = Symbol('raw');
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const raw = s => ({ [RAW]: 1, s: String(s) });
+const part = v => (v == null || v === false) ? '' : Array.isArray(v) ? v.map(part).join('') : (typeof v === 'object' && v[RAW]) ? v.s : esc(v);
+const html = (s, ...v) => { let o = s[0]; v.forEach((x, i) => { o += part(x) + s[i + 1]; }); return raw(o); };
+const $ = (s, r) => (r || document).querySelector(s), $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const put = (el, h) => { el.innerHTML = part(h); };
+const S = { token: null, me: null, dir: [], enums: {}, settings: {}, pendingAcks: 0, route: [], timer: null, notif: null };
+const store = { get(k) { try { return sessionStorage.getItem(k); } catch (e) { return S['_' + k] || null; } }, set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { S['_' + k] = v; } }, del(k) { try { sessionStorage.removeItem(k); } catch (e) { delete S['_' + k]; } } };
+const has = p => !!(S.me && S.me.perms.indexOf(p) > -1);
+const hasAny = (...p) => p.some(has);
+const inr = n => (n == null || n === '') ? '' : Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const dmy = s => { s = String(s || ''); const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '-' + m[2] + '-' + m[1] + (s.length > 10 ? ' ' + s.slice(11, 16) : '') : s; };
+const today = () => { const d = new Date(Date.now() + 5.5 * 3600e3); return d.toISOString().slice(0, 10); };
+const addDays = (s, n) => { const d = new Date(s + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+const uname = id => { const u = S.dir.find(x => x.user_id === id); return u ? u.full_name : (id || ''); };
+const opt = (list, sel, blank) => html`${blank !== undefined ? html`<option value="">${blank}</option>` : ''}${list.map(o => { const v = Array.isArray(o) ? o[0] : o, l = Array.isArray(o) ? o[1] : o; return html`<option value="${v}" ${String(v) === String(sel) ? raw('selected') : ''}>${l}</option>`; })}`;
+const usersBy = roles => S.dir.filter(u => !roles || roles.indexOf(u.role) > -1).map(u => [u.user_id, u.full_name + ' (' + (S.enums.ROLES ? S.enums.ROLES[u.role] : u.role).split(' ')[0] + ')']);
+const KIND = { 'Completed': 'ok', 'Approved': 'ok', 'Active': 'ok', 'ISSUED': 'ok', 'SENT': 'ok', 'VERIFIED': 'ok', 'Filed': 'ok', 'Complete': 'ok', 'ACTIVE': 'ok', 'Verified': 'ok', 'Received': 'ok', 'Returned': 'ok', 'Paid': 'ok',
+  'In Progress': 'info', 'Assigned': 'info', 'Acknowledged': 'info', 'PENDING_APPROVAL': 'warn', 'Submitted for Review': 'warn', 'Under Review': 'warn', 'Resubmitted': 'warn', 'DRAFT': 'warn', 'UNVERIFIED': 'warn', 'Pending': 'warn', 'Promised': 'warn', 'Waiting for Client Documents': 'warn', 'On Hold': 'warn', 'Partially Received': 'warn', 'Open': 'warn', 'Docs Awaited': 'warn', 'APPROVED': 'info',
+  'Correction Required': 'bad', 'Rejected': 'bad', 'Cancelled': 'bad', 'CANCELLED': 'bad', 'FAILED': 'bad', 'REJECTED': 'bad', 'Blocked': 'bad', 'Urgent': 'bad', 'High': 'warn', 'Lost or Exception Reported': 'bad', 'REVERSED': 'bad', 'Issue': 'bad' };
+const badge = (t, k) => t === '' || t == null ? '' : html`<span class="badge b-${k || KIND[t] || ''}">${t}</span>`;
+function tbl(cols, rows, o) {
+  o = o || {};
+  if (!rows || !rows.length) return html`<div class="muted" style="padding:14px">${o.empty || 'Nothing to show.'}</div>`;
+  return html`<div class="tw"><table><thead><tr>${cols.map(c => html`<th class="${c.cls || ''}">${c.h}</th>`)}</tr></thead><tbody>${rows.map(r => html`<tr>${cols.map(c => html`<td class="${c.cls || ''}">${c.f ? c.f(r) : r[c.k]}</td>`)}</tr>`)}</tbody></table></div>`;
+}
+function fld(o) {
+  const t = o.t || 'text', v = o.v == null ? '' : o.v, nm = o.n, req = o.req ? raw('required') : '', ph = o.ph || '';
+  let inp;
+  if (t === 'select') inp = html`<select name="${nm}" ${req}>${opt(o.opts || [], v, o.blank === undefined ? '' : o.blank)}</select>`;
+  else if (t === 'textarea') inp = html`<textarea name="${nm}" rows="${o.rows || 3}" ${req} placeholder="${ph}">${v}</textarea>`;
+  else if (t === 'checkbox') return html`<div class="f"><label style="display:flex;gap:6px;align-items:center;color:var(--ink)"><input type="checkbox" name="${nm}" value="Y" ${v === true || v === 'Y' ? raw('checked') : ''}> ${o.l}</label></div>`;
+  else if (t === 'file') inp = html`<input type="file" name="${nm}" ${req} ${o.accept ? raw('accept="' + esc(o.accept) + '"') : ''}>`;
+  else inp = html`<input type="${t}" name="${nm}" value="${v}" ${req} placeholder="${ph}" ${o.min != null ? raw('min="' + esc(o.min) + '"') : ''} ${o.step ? raw('step="' + esc(o.step) + '"') : ''} autocomplete="${t === 'password' ? 'off' : 'on'}">`;
+  return html`<div class="f"><label>${o.l}${o.req ? ' *' : ''}</label>${inp}${o.hint ? html`<div class="small muted">${o.hint}</div>` : ''}</div>`;
+}
+function formData(form) {
+  const o = {};
+  $$('input,select,textarea', form).forEach(el => {
+    if (!el.name || el.type === 'file') return;
+    if (el.type === 'checkbox') { if (el.dataset.multi) { (o[el.name] = o[el.name] || []); if (el.checked) o[el.name].push(el.value); } else o[el.name] = el.checked ? 'Y' : ''; return; }
+    o[el.name] = el.value;
+  });
+  return o;
+}
+function toast(msg, bad) { const d = document.createElement('div'); if (bad) d.className = 'e'; d.textContent = msg; $('#toast').appendChild(d); setTimeout(() => d.remove(), bad ? 9000 : 3500); }
+function uuid() { try { return crypto.randomUUID(); } catch (e) { return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); } }
+/* When this page is hosted outside Apps Script (for example GitHub Pages) CA_API_URL holds the web-app address and calls go through fetch;
+   when it is blank (page served by Apps Script itself) google.script.run is used. */
+const CA_API_URL = 'https://script.google.com/macros/s/AKfycbx3nmJdZuVzD31NPyHmbcu3Yd1xWfBT_eHbqj87iHisuKIxexdHVJtEUN-cdIH3-0SM/exec';
+const LEGAL_URL = 'https://www.complypro.co.in/';
+function viaFetch(token, action, payload, rid, done) {
+  const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null, timer = ctl ? setTimeout(() => ctl.abort(), 120000) : null;
+  fetch(CA_API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ token: token, action: action, payload: payload, reqId: rid }), redirect: 'follow', credentials: 'omit', signal: ctl ? ctl.signal : undefined })
+    .then(r => r.text()).then(t => { let j; try { j = JSON.parse(t); } catch (e) { j = { ok: false, error: { code: 'SERVER', message: 'The server returned an unexpected reply. Please try again in a moment.' } }; } done(j); })
+    .catch(x => done({ ok: false, error: { code: 'NET', message: 'Could not reach the server. Check your connection and try again.' } }))
+    .finally(() => { if (timer) clearTimeout(timer); });
+}
+function api(action, payload, o) {
+  o = o || {};
+  return new Promise((res, rej) => {
+    const rid = uuid();
+    const done = r => {
+      if (r && r.ok) return res(r.data);
+      const e = (r && r.error) || { code: 'NET', message: 'No response from the server.' };
+      if (e.code === 'AUTH' && S.token && !o.quiet) { sessionExpired(e.message); }
+      rej(e);
+    };
+    if (CA_API_URL) return viaFetch(S.token, action, payload || {}, rid, done);
+    try { google.script.run.withSuccessHandler(done).withFailureHandler(x => done({ ok: false, error: { code: 'NET', message: 'Could not reach the server. Check your connection and try again. ' + (x && x.message ? '(' + x.message + ')' : '') } })).api(S.token, action, payload || {}, rid); }
+    catch (x) { done({ ok: false, error: { code: 'NET', message: 'The application is not available: ' + x.message } }); }
+  });
+}
+/* run an API call with standard error toast; resolves undefined on failure. Handles OVERLOAD by asking for confirmation. */
+async function act(action, payload, okMsg, o) {
+  try { const d = await api(action, payload, o); if (okMsg) toast(okMsg); return d; }
+  catch (e) {
+    if (e.code === 'OVERLOAD' && confirm(e.message + '\n\nAssign anyway?')) return act(action, Object.assign({}, payload, { confirm_overload: true }), okMsg, o);
+    if (e.code !== 'AUTH') toast(e.message, true); return undefined;
+  }
+}
+function sessionExpired(msg) { store.del('tok'); S.token = null; S.me = null; clearInterval(S.timer); renderLogin(msg || 'Your session has ended. Please sign in again.'); }
+/* ===== modal ===== */
+function modal(o) {
+  const bg = document.createElement('div'); bg.className = 'modal-bg';
+  const close = () => bg.remove();
+  put(bg, html`<div class="modal ${o.wide ? 'wide' : ''}" role="dialog" aria-modal="true"><h2>${o.title}</h2><form data-modal>${o.body}<div class="err hide" data-err></div><div class="acts"><button type="button" class="btn" data-close>${o.submit === null ? 'Close' : 'Cancel'}</button>${o.submit === null ? '' : html`<button class="btn pri" type="submit">${o.submit || 'Save'}</button>`}</div></form></div>`);
+  $('#modal-root').appendChild(bg);
+  $('[data-close]', bg).onclick = close;
+  const f = $('form', bg);
+  f.addEventListener('submit', async ev => {
+    ev.preventDefault(); if (!o.onSubmit) return close();
+    const b = $('button[type=submit]', f); if (b) b.disabled = true;
+    try { const r = await o.onSubmit(formData(f), f, close); if (r !== false) close(); }
+    catch (e) { const er = $('[data-err]', f); er.textContent = e.message || String(e); er.classList.remove('hide'); }
+    if (b) b.disabled = false;
+  });
+  if (o.onOpen) o.onOpen(bg, close);
+  const first = $('input:not([type=hidden]),select,textarea', f); if (first) first.focus();
+  return { close, el: bg };
+}
+/* call API inside a modal submit: throws so the modal shows the message instead of a toast */
+async function mcall(action, payload, okMsg) {
+  try { const d = await api(action, payload); if (okMsg) toast(okMsg); return d; }
+  catch (e) {
+    if (e.code === 'OVERLOAD' && confirm(e.message + '\n\nAssign anyway?')) return mcall(action, Object.assign({}, payload, { confirm_overload: true }), okMsg);
+    throw e;
+  }
+}
+function confirmBox(title, msg, label, fn, askReason) {
+  modal({ title, body: html`<p>${msg}</p>${askReason ? fld({ n: 'reason', l: 'Reason', t: 'textarea', req: true }) : ''}`, submit: label, onSubmit: async d => { await fn(d); } });
+}
+function download(name, text, mime) { const b = new Blob([text], { type: mime || 'text/csv;charset=utf-8' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+/* ===== routing & shell ===== */
+const NAV = [
+  ['dashboard', 'Dashboard', () => true, ''],
+  ['clients', 'Clients', () => has('client.view'), 'Work'],
+  ['tasks', 'Tasks', () => has('task.view'), 'Work'],
+  ['time', 'Time & leave', () => has('time.log') || true, 'Work'],
+  ['compliance', 'Compliance calendar', () => has('compliance.view'), 'Work'],
+  ['fees', 'Fees & receipts', () => has('fees.view'), 'Office'],
+  ['files', 'Physical files', () => has('files.view'), 'Office'],
+  ['documents', 'Documents', () => has('docs.view'), 'Office'],
+  ['email', 'Client email', () => has('email.draft'), 'Office'],
+  ['reports', 'Reports', () => true, 'Insight'],
+  ['admin', 'Administration', () => hasAny('user.manage', 'settings.manage', 'audit.view', 'backup.manage'), 'Admin']
+];
+const ROUTES = {};
+function go(p) { location.hash = '#/' + p; }
+function parseRoute() { const h = location.hash.replace(/^#\/?/, ''); return h ? h.split('/').map(decodeURIComponent) : ['dashboard']; }
+function renderShell() {
+  let last = null;
+  put($('#app'), html`<div class="shell"><aside class="side" id="side"><div class="brand"><div class="logo">CA</div><div><b>${S.settings.firm_name || 'CA Office'}</b><div class="small" style="color:#8fa6c2">Office Manager</div></div></div>
+    <nav>${NAV.filter(n => n[2]()).map(n => { const g = n[3] !== last && n[3] ? html`<div class="grp">${n[3]}</div>` : ''; last = n[3] || last; return html`${g}<a href="#/${n[0]}" data-nav="${n[0]}">${n[1]}</a>`; })}</nav>
+    <div style="padding:10px;font-size:11px;color:#8fa6c2">v${S.settings.version || ''}${S.settings.demo_mode === 'Y' ? ' · DEMO DATA' : ''}</div></aside>
+    <div class="main"><div class="top"><button class="burger" data-act="menu" aria-label="Menu">&#9776;</button><div class="sp"></div>
+      <div class="notif"><button class="btn sm" data-act="notif" aria-label="Notifications">Alerts <span class="n hide" id="nbadge">0</span></button><div class="pop hide" id="npop"></div></div>
+      <button class="btn sm" data-act="chpw">${S.me.full_name} · ${S.me.role_label.split(' ')[0]}</button><button class="btn sm" data-act="logout">Sign out</button></div>
+      <div class="content" id="view"></div></div></div>`);
+}
+async function route() {
+  if (!S.me) return;
+  S.route = parseRoute(); const name = S.route[0];
+  $$('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === name));
+  $('#side').classList.remove('open');
+  const v = $('#view'); put(v, html`<div class="muted"><span class="spin"></span> Loading…</div>`);
+  const fn = ROUTES[name] || ROUTES.dashboard;
+  try { await fn(v, S.route.slice(1)); } catch (e) { if (e && e.code === 'AUTH') return; put(v, html`<div class="banner bad">${(e && e.message) || 'Something went wrong.'}</div>`); }
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+async function loadMe() {
+  const d = await api('me', {}, { quiet: true });
+  S.me = d.me; S.dir = d.directory; S.enums = d.enums || {}; S.settings = d.settings; S.pendingAcks = d.pending_acks;
+}
+async function boot() {
+  S.token = store.get('tok');
+  if (!S.token) { try { S.settings = await api('info', {}, { quiet: true }); } catch (e) { S.settings = {}; } return renderLogin(); }
+  try { await loadMe(); renderShell(); route(); pollNotif(); } catch (e) { store.del('tok'); S.token = null; renderLogin(e.code === 'AUTH' ? 'Your session has ended. Please sign in again.' : e.message); }
+}
+/* ===== login / activation ===== */
+function renderLogin(msg, mode) {
+  mode = mode || 'login';
+  put($('#app'), html`<div class="login-wrap"><div class="login"><div class="brand"><div class="logo">CA</div><div><h1 style="margin:0">${S.settings.firm_name || 'CA Office Manager'}</h1><div class="muted small">Work, fees and compliance management</div></div></div>
+    ${msg ? html`<div class="banner bad">${msg}</div>` : ''}
+    ${mode === 'login' ? html`<form data-sub="login">${fld({ n: 'email', l: 'Email', t: 'email', req: 1 })}${fld({ n: 'password', l: 'Password', t: 'password', req: 1 })}<button class="btn pri" style="width:100%" type="submit">Sign in</button></form>
+      <p class="small"><a href="#" data-act="show-activate">First time? Activate your account with your activation key</a></p>
+      ${S.settings.open_registration === 'N' ? '' : html`<p class="small"><a href="#" data-act="show-register">New here? Create an account</a></p>`}`
+    : mode === 'register' ? html`<form data-sub="register"><p class="small muted">Register with your email address. We will email you an activation key.${S.settings.registration_approval === 'N' ? '' : ' Your account is enabled after the firm administrator approves it.'}</p>${fld({ n: 'full_name', l: 'Full name', req: 1 })}${fld({ n: 'email', l: 'Email', t: 'email', req: 1 })}${fld({ n: 'mobile', l: 'Mobile (10 digits, optional)' })}${fld({ n: 'organisation', l: 'Firm / organisation (optional)' })}
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="small" style="display:flex;gap:8px;align-items:flex-start;margin:10px 0"><input type="checkbox" name="consent" style="margin-top:3px"><span>I agree to the terms of use and privacy policy published at <a href="${LEGAL_URL}" target="_blank" rel="noopener">${LEGAL_URL.replace('https://', '')}</a>.</span></label>
+      <button class="btn pri" style="width:100%" type="submit">Register</button></form><p class="small"><a href="#" data-act="show-login">Back to sign in</a></p>`
+    : mode === 'resend' ? html`<form data-sub="resend"><p class="small muted">Enter your email address. If you have a registration that is not yet activated, we will email a new activation key.</p>${fld({ n: 'email', l: 'Email', t: 'email', req: 1 })}<button class="btn pri" style="width:100%" type="submit">Send a new key</button></form><p class="small"><a href="#" data-act="show-activate">Back</a></p>`
+    : html`<form data-sub="activate"><p class="small muted">Enter the activation key from the email we sent you (or given by your administrator) and choose a password (at least 10 characters with upper case, lower case and a digit).</p>${fld({ n: 'email', l: 'Email', t: 'email', req: 1 })}${fld({ n: 'code', l: 'Activation key', req: 1 })}${fld({ n: 'password', l: 'New password', t: 'password', req: 1 })}<button class="btn pri" style="width:100%" type="submit">Activate account</button></form><p class="small"><a href="#" data-act="show-resend">Did not get the key? Send it again</a> · <a href="#" data-act="show-login">Back to sign in</a></p>`}
+    <details class="small muted" style="margin-top:10px"><summary>How sign-in works</summary><p>Access is controlled by this application's own accounts, not by your Google account. You register or your administrator creates your account, you activate it once with the emailed key, and every request is then checked on the server against your role. Passwords are stored only as salted hashes and sessions expire after inactivity.</p></details>
+    ${S.settings.demo_mode === 'Y' ? html`<div class="banner" style="margin-top:10px">Demo database: fictional data only.</div>` : ''}</div></div>`);
+}
+const SUB = {};
+SUB.login = async (d, f) => { try { const r = await api('login', { email: d.email, password: d.password }, { quiet: true }); S.token = r.token; store.set('tok', r.token); await loadMe(); renderShell(); go('dashboard'); route(); pollNotif(); } catch (e) { renderLogin(e.message); } };
+SUB.register = async d => { try { const r = await api('register', d, { quiet: true }); renderLogin(r.message + ' Then enter it below to activate your account.', 'activate'); } catch (e) { renderLogin(e.message, 'register'); } };
+SUB.resend = async d => { try { const r = await api('register.resend', d, { quiet: true }); renderLogin(r.message, 'activate'); } catch (e) { renderLogin(e.message, 'resend'); } };
+SUB.activate = async d => { try { await api('activate', d, { quiet: true }); renderLogin('Account activated. You can now sign in. (If you registered yourself, sign-in works once the administrator has approved your account.)'); } catch (e) { renderLogin(e.message, 'activate'); } };
+/* ===== global actions ===== */
+const ACT = {};
+document.addEventListener('click', ev => { const t = ev.target.closest('[data-act]'); if (!t) { const p = $('#npop'); if (p && !ev.target.closest('.notif')) p.classList.add('hide'); return; } const f = ACT[t.dataset.act]; if (f) { if (t.tagName === 'A') ev.preventDefault(); f(t, ev); } });
+document.addEventListener('submit', ev => { const f = ev.target.closest('form[data-sub]'); if (!f) return; ev.preventDefault(); const b = $('button[type=submit]', f); if (b) b.disabled = true; Promise.resolve(SUB[f.dataset.sub](formData(f), f)).finally(() => { if (b && document.body.contains(b)) b.disabled = false; }); });
+ACT.menu = () => $('#side').classList.toggle('open');
+ACT['show-activate'] = () => renderLogin('', 'activate'); ACT['show-register'] = () => renderLogin('', 'register'); ACT['show-resend'] = () => renderLogin('', 'resend'); ACT['show-login'] = () => renderLogin('', 'login');
+ACT.logout = async () => { try { await api('logout', {}, { quiet: true }); } catch (e) {} sessionExpired('You have been signed out.'); };
+ACT.chpw = () => modal({ title: 'My account', body: html`<dl class="kv"><dt>Name</dt><dd>${S.me.full_name}</dd><dt>Email</dt><dd>${S.me.email}</dd><dt>Role</dt><dd>${S.me.role_label}</dd></dl><h3>Change password</h3>${fld({ n: 'old_password', l: 'Current password', t: 'password' })}${fld({ n: 'new_password', l: 'New password', t: 'password', hint: 'At least 10 characters with upper case, lower case and a digit.' })}`, submit: 'Change password', onSubmit: async d => { if (!d.old_password && !d.new_password) return; await mcall('changePassword', d, 'Password changed'); } });
+async function pollNotif() {
+  try { const d = await api('notif.list', {}, { quiet: true }); S.notif = d; const b = $('#nbadge'); if (b) { b.textContent = d.unread; b.classList.toggle('hide', !d.unread); } } catch (e) {}
+  clearTimeout(S.np); S.np = setTimeout(pollNotif, 120000);
+}
+ACT.notif = async () => {
+  const p = $('#npop'); if (!p.classList.contains('hide')) return p.classList.add('hide');
+  await pollNotif(); const d = S.notif || { items: [], announcements: [] };
+  put(p, html`${d.announcements.map(a => html`<div class="it" style="background:#fff7e0"><b>${a.title}</b><div class="small">${a.message}</div></div>`)}
+    ${d.items.length ? d.items.slice(0, 30).map(n => html`<div class="it ${n.is_read !== 'Y' ? 'un' : ''}"><a href="#" data-act="notif-open" data-t="${n.ref_type}" data-id="${n.ref_id}" data-n="${n.notification_id}"><b>${n.title}</b></a><div class="small muted">${n.body} · ${dmy(n.created_at)}</div></div>`) : html`<div class="it muted">No notifications.</div>`}
+    ${d.unread ? html`<div class="it"><a href="#" data-act="notif-readall">Mark all as read</a></div>` : ''}`);
+  p.classList.remove('hide');
+};
+ACT['notif-readall'] = async () => { const ids = (S.notif.items || []).filter(n => n.is_read !== 'Y').map(n => n.notification_id); await act('notif.read', { ids }); await pollNotif(); $('#npop').classList.add('hide'); };
+ACT['notif-open'] = async el => { const { t, id, n } = el.dataset; await act('notif.read', { ids: [n] }, null, { quiet: true }); $('#npop').classList.add('hide'); pollNotif(); const m = { Task: 'tasks/' + id, Client: 'clients/' + id, File: 'files', Leave: 'time/leave', Email: 'email', FollowUp: 'fees/followups', Compliance: 'compliance/records', TimeLog: 'time' }[t]; if (m) go(m); };
+/* ===== dashboard ===== */
+const TBL_TITLES = { workload: 'Team workload', overdue_list: 'Overdue work', promises_missed: 'Broken payment promises', upcoming: 'Upcoming deadlines', my_tasks: 'My open tasks', review_queue: 'Awaiting my review' };
+const pretty = k => k.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
+ROUTES.dashboard = async v => {
+  const d = await api('dashboard', {});
+  put(v, html`<h1>Dashboard</h1><div class="muted small" style="margin-bottom:12px">${d.role} view · generated ${dmy(d.generated)}${d.demo ? ' · demo data' : ''}</div>
+   ${S.pendingAcks ? html`<div class="banner">You have ${S.pendingAcks} physical file(s) waiting for your acknowledgement. <a href="#/files">Open files</a></div>` : ''}
+   <div class="grid g4">${d.cards.map(c => html`<div class="stat ${/overdue|broken|missed|exception/i.test(c.label) && Number(c.value) > 0 ? 'bad' : ''}" ${c.link ? raw('data-act="dlink" data-l="' + esc(c.link) + '"') : ''}><div class="v">${c.value}</div><div class="l">${c.label}</div>${c.hint ? html`<div class="small muted">${c.hint}</div>` : ''}</div>`)}</div>
+   ${Object.keys(d.tables || {}).map(k => { const rows = d.tables[k]; if (!rows || !rows.length) return ''; const keys = Object.keys(rows[0]).filter(x => !/_id$/.test(x)).slice(0, 7); return html`<div class="card" style="margin-top:14px"><h2>${TBL_TITLES[k] || pretty(k)}</h2>${tbl(keys.map(x => ({ h: pretty(x), f: r => /status/.test(x) ? badge(r[x]) : r[x], cls: typeof rows[0][x] === 'number' ? 'num' : '' })), rows.slice(0, 12))}</div>`; })}`);
+};
+ACT.dlink = el => go(el.dataset.l);
+/* ===== clients ===== */
+const cache = {};
+async function clientList(force) { if (!cache.clients || force) cache.clients = (await api('clients.list', { pageSize: 500 })).rows; return cache.clients; }
+const clientOpts = list => list.map(c => [c.client_id, c.name + ' (' + c.client_code + ')']);
+ROUTES.clients = async (v, a) => {
+  if (a[0]) return clientDetail(v, a[0], a[1]);
+  const q = store.get('cq') || '', st = store.get('cst') || '';
+  const d = await api('clients.list', { q, stage: st, pageSize: 200 }); cache.clients = q || st ? cache.clients : d.rows;
+  put(v, html`<div class="bar"><h1>Clients</h1><div class="sp"></div>${has('client.import') ? html`<button class="btn" data-act="cl-import">Import CSV</button><button class="btn" data-act="cl-export">Export CSV</button>` : ''}${has('client.edit') ? html`<button class="btn pri" data-act="cl-new">+ New client</button>` : ''}</div>
+   <form class="bar" data-sub="cl-filter"><input name="q" placeholder="Search name, code, PAN, GSTIN" value="${q}" style="min-width:230px"><select name="st">${opt(S.enums.PIPELINE || [], st, 'All stages')}</select><button class="btn">Filter</button></form>
+   <div class="card" style="padding:0">${tbl([{ h: 'Code', k: 'client_code' }, { h: 'Name', f: r => html`<a href="#/clients/${r.client_id}">${r.name}</a>` }, { h: 'Type', k: 'entity_type' }, { h: 'PAN', k: 'pan' }, { h: 'Partner', k: 'partner_name' }, { h: 'Stage', f: r => badge(r.pipeline_stage, 'info') }, { h: 'Status', f: r => badge(r.status) }, { h: 'Fee', f: r => inr(r.agreed_fee), cls: 'num' }], d.rows, { empty: 'No clients found.' })}</div><div class="small muted">${d.total} client(s)</div>`);
+};
+SUB['cl-filter'] = d => { store.set('cq', d.q); store.set('cst', d.st); route(); };
+function clientForm(c) {
+  c = c || {};
+  return html`<div class="row2">${fld({ n: 'name', l: 'Client name', v: c.name, req: 1 })}${fld({ n: 'entity_type', l: 'Entity type', t: 'select', opts: S.enums.ENTITY_TYPES, v: c.entity_type, req: 1 })}</div>
+   <div class="row3">${fld({ n: 'pan', l: 'PAN', v: c.pan })}${fld({ n: 'gstin', l: 'GSTIN', v: c.gstin })}${fld({ n: 'tan', l: 'TAN', v: c.tan })}</div>
+   <div class="row2">${fld({ n: 'contact_person', l: 'Contact person', v: c.contact_person })}${fld({ n: 'mobile', l: 'Mobile (10 digits)', v: c.mobile })}</div>
+   <div class="row2">${fld({ n: 'email', l: 'Email', t: 'email', v: c.email })}${fld({ n: 'state', l: 'State', v: c.state })}</div>
+   <div class="row3">${fld({ n: 'partner_id', l: 'Partner in charge', t: 'select', opts: usersBy(['PARTNER', 'MANAGING_PARTNER']), v: c.partner_id })}${fld({ n: 'senior_id', l: 'Senior / reviewer', t: 'select', opts: usersBy(['SENIOR', 'PARTNER', 'MANAGING_PARTNER']), v: c.senior_id })}${fld({ n: 'clerk_id', l: 'Primary clerk', t: 'select', opts: usersBy(['CLERK', 'SENIOR']), v: c.clerk_id })}</div>
+   <div class="row3">${fld({ n: 'agreed_fee', l: 'Agreed fee (₹)', t: 'number', v: c.agreed_fee, step: '0.01' })}${fld({ n: 'billing_frequency', l: 'Billing frequency', t: 'select', opts: ['Monthly', 'Quarterly', 'Half-yearly', 'Annual', 'Per assignment'], v: c.billing_frequency || 'Monthly' })}${fld({ n: 'renewal_date', l: 'Renewal date', t: 'date', v: c.renewal_date })}</div>
+   ${fld({ n: 'address', l: 'Address', t: 'textarea', v: c.address })}${fld({ n: 'internal_remarks', l: 'Internal remarks', t: 'textarea', v: c.internal_remarks })}`;
+}
+ACT['cl-new'] = () => modal({ title: 'New client', wide: 1, body: clientForm(), onSubmit: async d => { const r = await mcall('clients.save', d, 'Client created'); cache.clients = null; go('clients/' + r.client_id); } });
+ACT['cl-edit'] = async el => { const c = (await api('clients.get', { client_id: el.dataset.id })).client; modal({ title: 'Edit client', wide: 1, body: html`<input type="hidden" name="client_id" value="${c.client_id}">${clientForm(c)}`, onSubmit: async d => { await mcall('clients.save', d, 'Client updated'); cache.clients = null; route(); } }); };
+ACT['cl-export'] = async () => { const r = await act('clients.export', {}); if (r) download(r.filename, r.csv); };
+ACT['cl-import'] = () => modal({ title: 'Import clients from CSV', wide: 1, body: html`<p class="small muted">Required columns: <b>name, entity_type</b>. Optional: pan, gstin, tan, state, contact_person, email, mobile, partner_email, agreed_fee. Maximum 500 rows. Run a check first; nothing is saved during a check.</p><input type="file" name="f" accept=".csv,text/csv"><div id="imp-out" class="small" style="margin-top:8px"></div><input type="hidden" name="dry" value="1">`,
+  submit: 'Check file', onSubmit: async (d, f) => {
+    const file = $('input[type=file]', f).files[0]; if (!file) throw new Error('Choose a CSV file.');
+    const text = await file.text(); const dry = !f.dataset.ready; const r = await mcall('clients.import', { csv: text, dryRun: dry });
+    put($('#imp-out', f), html`<div class="banner ${r.errors.length ? '' : 'ok'}">${dry ? 'Check' : 'Import'} result: ${r.ok} of ${r.total} rows ${dry ? 'valid' : 'imported'}, ${r.errors.length} with errors.${r.errors.slice(0, 20).map(e => html`<div>Row ${e.row}: ${e.message}</div>`)}</div>`);
+    if (dry && r.ok) { f.dataset.ready = '1'; $('button[type=submit]', f).textContent = 'Import ' + r.ok + ' valid rows'; return false; }
+    cache.clients = null; if (!dry) route();
+  } });
+async function clientDetail(v, id, tab) {
+  const d = await api('clients.get', { client_id: id }); const c = d.client; tab = tab || 'overview';
+  const tabs = [['overview', 'Overview'], ['tasks', 'Tasks (' + d.tasks.length + ')'], ['contacts', 'Contacts'], ['services', 'Services'], ...(d.fees ? [['fees', 'Fees']] : []), ['documents', 'Documents'], ['files', 'Files'], ['emails', 'Emails']];
+  put(v, html`<div class="bar"><a href="#/clients">&larr; Clients</a><div class="sp"></div>${has('client.edit') ? html`<button class="btn" data-act="cl-edit" data-id="${id}">Edit</button>` : ''}${has('task.create') ? html`<button class="btn pri" data-act="task-new" data-client="${id}">+ Task</button>` : ''}</div>
+   <h1>${c.name} <span class="muted small">${c.client_code}</span></h1><div style="margin-bottom:10px">${badge(c.status)} ${badge(c.pipeline_stage, 'info')} ${badge(c.entity_type)}</div>
+   <div class="tabs">${tabs.map(t => html`<a href="#/clients/${id}/${t[0]}" class="${tab === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>
+   <div class="card">${(() => {
+     if (tab === 'overview') return html`<dl class="kv"><dt>PAN</dt><dd>${c.pan}</dd><dt>GSTIN</dt><dd>${c.gstin}</dd><dt>TAN</dt><dd>${c.tan}</dd><dt>Contact</dt><dd>${c.contact_person} ${c.mobile} ${c.email}</dd><dt>State</dt><dd>${c.state}</dd><dt>Partner</dt><dd>${uname(c.partner_id)}</dd><dt>Senior</dt><dd>${uname(c.senior_id)}</dd><dt>Clerk</dt><dd>${uname(c.clerk_id)}</dd><dt>Agreed fee</dt><dd>${c.agreed_fee != null ? '₹ ' + inr(c.agreed_fee) : ''} ${c.billing_frequency}</dd><dt>Address</dt><dd>${c.address}</dd><dt>Remarks</dt><dd>${c.internal_remarks}</dd></dl>
+       ${has('client.edit') ? html`<h3>Onboarding stage</h3><form class="bar" data-sub="cl-stage"><input type="hidden" name="client_id" value="${id}"><select name="stage">${opt(S.enums.PIPELINE, c.pipeline_stage)}</select><input name="note" placeholder="Note (required to close)"><button class="btn">Change stage</button></form>` : ''}
+       <h3>Onboarding history</h3>${tbl([{ h: 'When', f: r => dmy(r.created_at) }, { h: 'From', k: 'from_stage' }, { h: 'To', k: 'to_stage' }, { h: 'By', f: r => uname(r.created_by) }, { h: 'Note', k: 'note' }], d.onboarding || [])}`;
+     if (tab === 'tasks') return tbl([{ h: 'No.', f: r => html`<a href="#/tasks/${r.task_id}">${r.task_no}</a>` }, { h: 'Title', k: 'title' }, { h: 'Due', f: r => dmy(r.due_date) }, { h: 'Priority', f: r => badge(r.priority) }, { h: 'Status', f: r => badge(r.status) }], d.tasks, { empty: 'No tasks for this client.' });
+     if (tab === 'contacts') return html`${has('client.edit') ? html`<button class="btn sm" data-act="ct-add" data-id="${id}">+ Contact</button>` : ''}${tbl([{ h: 'Name', k: 'name' }, { h: 'Designation', k: 'designation' }, { h: 'Email', k: 'email' }, { h: 'Mobile', k: 'mobile' }, { h: 'Primary', k: 'is_primary' }, { h: '', f: r => has('client.edit') ? html`<button class="btn sm" data-act="ct-del" data-id="${r.contact_id}">Remove</button>` : '' }], d.contacts)}`;
+     if (tab === 'services') return html`${has('client.edit') ? html`<button class="btn sm" data-act="sv-add" data-id="${id}">+ Service</button>` : ''}${tbl([{ h: 'Service', f: r => r.service_name || r.service_id }, { h: 'FY', k: 'fy' }, { h: 'Fee', f: r => inr(r.fee), cls: 'num' }, { h: 'Frequency', k: 'frequency' }, { h: 'Status', f: r => badge(r.status) }, { h: '', f: r => has('client.edit') ? html`<button class="btn sm" data-act="sv-del" data-id="${r.id}">Remove</button>` : '' }], d.services)}`;
+     if (tab === 'fees') return html`<p><b>Outstanding ₹ ${inr(d.fees.outstanding)}</b> · unallocated receipts ₹ ${inr(d.fees.unallocated_receipts)} · <a href="#/fees/statement/${id}">Statement</a></p>${tbl([{ h: 'Invoice', k: 'invoice_no' }, { h: 'Date', f: r => dmy(r.invoice_date) }, { h: 'Total', f: r => inr(r.total), cls: 'num' }, { h: 'Paid', f: r => inr(r.paid), cls: 'num' }, { h: 'Outstanding', f: r => inr(r.outstanding), cls: 'num' }, { h: 'Status', f: r => badge(r.status) }], d.fees.invoices)}`;
+     if (tab === 'documents') return html`${has('docs.upload') ? html`<button class="btn sm" data-act="doc-up" data-client="${id}">+ Upload</button>` : ''}${tbl([{ h: 'File', k: 'file_name' }, { h: 'Category', k: 'category' }, { h: 'FY', k: 'fy' }, { h: 'Version', k: 'version_ref' }, { h: 'Class', k: 'confidentiality' }, { h: '', f: r => html`<button class="btn sm" data-act="doc-dl" data-id="${r.doc_id}">Download</button>` }], d.documents)}<h3>Document requests</h3>${tbl([{ h: 'Request', k: 'title' }, { h: 'Status', f: r => badge(r.status) }, { h: 'Due', f: r => dmy(r.due_date) }], d.docRequests)}`;
+     if (tab === 'files') return tbl([{ h: 'Ref', k: 'file_ref_no' }, { h: 'Description', k: 'description' }, { h: 'Status', f: r => badge(r.status) }, { h: 'With', k: 'current_custodian_name' }], d.files, { empty: 'No physical files.' });
+     return tbl([{ h: 'Subject', k: 'subject' }, { h: 'To', k: 'to_email' }, { h: 'Status', f: r => badge(r.status) }, { h: 'Date', f: r => dmy(r.created_at) }], d.emails, { empty: 'No emails.' });
+   })()}</div>`);
+}
+SUB['cl-stage'] = async d => { if (await act('clients.stage', { client_id: d.client_id, stage: d.stage, note: d.note }, 'Stage updated')) route(); };
+ACT['ct-add'] = el => modal({ title: 'Add contact', body: html`${fld({ n: 'name', l: 'Name', req: 1 })}${fld({ n: 'designation', l: 'Designation' })}${fld({ n: 'email', l: 'Email', t: 'email' })}${fld({ n: 'mobile', l: 'Mobile' })}${fld({ n: 'is_primary', l: 'Primary contact', t: 'checkbox' })}`, onSubmit: async d => { await mcall('clients.contact.save', Object.assign(d, { client_id: el.dataset.id, is_primary: d.is_primary ? 'Y' : 'N' }), 'Contact added'); route(); } });
+ACT['ct-del'] = el => confirmBox('Remove contact', 'Remove this contact? The record is kept in history.', 'Remove', async () => { await mcall('clients.contact.remove', { id: el.dataset.id }); route(); });
+ACT['sv-add'] = async el => { const sv = await api('master.list', { table: 'ServiceCategories' }); modal({ title: 'Add service', body: html`${fld({ n: 'service_id', l: 'Service', t: 'select', opts: sv.map(s => [s.service_id, s.name]), req: 1 })}${fld({ n: 'fee', l: 'Fee (₹)', t: 'number', step: '0.01' })}${fld({ n: 'frequency', l: 'Frequency', t: 'select', opts: S.enums.RECURRENCE })}${fld({ n: 'fy', l: 'FY (e.g. 2026-27)' })}`, onSubmit: async d => { await mcall('clients.service.save', Object.assign(d, { client_id: el.dataset.id }), 'Service added'); route(); } }); };
+ACT['sv-del'] = el => confirmBox('Remove service', 'Remove this service from the client?', 'Remove', async () => { await mcall('clients.service.remove', { id: el.dataset.id }); route(); });
+/* ===== tasks ===== */
+const TVIEWS = [['all', 'All'], ['mine', 'My tasks'], ['overdue', 'Overdue'], ['review', 'Awaiting review'], ['docs', 'Waiting for documents'], ['board', 'Board']];
+const tfilter = v => ({ all: {}, mine: { mine: true }, overdue: { overdue: true }, review: { awaiting_review: true }, docs: { awaiting_docs: true }, board: { open_only: true } }[v] || {});
+const taskCols = sel => [...(sel ? [{ h: '', f: r => html`<input type="checkbox" data-multi="1" class="tsel" value="${r.task_id}" aria-label="Select">` }] : []), { h: 'No.', f: r => html`<a href="#/tasks/${r.task_id}">${r.task_no}</a>` }, { h: 'Title', k: 'title' }, { h: 'Client', k: 'client_name' }, { h: 'Assigned to', k: 'assignee_names' }, { h: 'Due', f: r => html`<span class="${r.overdue ? 'err' : ''}">${dmy(r.due_date)}</span>` }, { h: 'Priority', f: r => badge(r.priority) }, { h: 'Status', f: r => badge(r.status) }];
+ROUTES.tasks = async (v, a) => {
+  if (a[0] && !TVIEWS.some(t => t[0] === a[0])) return taskDetail(v, a[0]);
+  const view = a[0] || store.get('tv') || 'all'; store.set('tv', view); const q = store.get('tq') || '';
+  const d = await api('tasks.list', Object.assign({ q, pageSize: 500 }, tfilter(view)));
+  const bulk = has('task.bulk');
+  put(v, html`<div class="bar"><h1>Tasks</h1><div class="sp"></div>${bulk ? html`<button class="btn" data-act="task-bulk">Bulk create</button>` : ''}${has('task.create') ? html`<button class="btn pri" data-act="task-new">+ New task</button>` : ''}</div>
+   <div class="tabs">${TVIEWS.map(t => html`<a href="#/tasks/${t[0]}" class="${view === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>
+   <form class="bar" data-sub="task-filter"><input name="q" placeholder="Search title, number, client" value="${q}" style="min-width:240px"><button class="btn">Search</button>${bulk && view !== 'board' ? html`<div class="sp"></div><button type="button" class="btn" data-act="task-bulk-assign">Reassign selected</button><button type="button" class="btn" data-act="task-bulk-due">Shift due date</button>` : ''}</form>
+   ${view === 'board' ? html`<div class="board">${(S.enums.TASK_STATUSES || []).filter(s => !['Completed', 'Cancelled'].includes(s)).map(s => { const items = d.rows.filter(r => r.status === s); return html`<div class="col"><h3>${s} (${items.length})</h3>${items.map(r => html`<div class="tcard"><a href="#/tasks/${r.task_id}"><b>${r.task_no}</b></a> ${badge(r.priority)}<div>${r.title}</div><div class="small muted">${r.client_name}</div><div class="small ${r.overdue ? 'err' : 'muted'}">Due ${dmy(r.due_date)} · ${r.primary_name}</div></div>`)}</div>`; })}</div>`
+   : html`<div class="card" style="padding:0">${tbl(taskCols(bulk), d.rows, { empty: 'No tasks in this view.' })}</div><div class="small muted">${d.total} task(s)</div>`}`);
+};
+SUB['task-filter'] = d => { store.set('tq', d.q); route(); };
+const selTasks = () => $$('.tsel').filter(x => x.checked).map(x => x.value);
+ACT['task-bulk-assign'] = () => { const ids = selTasks(); if (!ids.length) return toast('Select tasks first.', true); modal({ title: 'Reassign ' + ids.length + ' task(s)', body: html`${fld({ n: 'clerk_id', l: 'New assignee', t: 'select', opts: usersBy(['CLERK', 'SENIOR', 'ACCOUNTS']), req: 1 })}${fld({ n: 'reason', l: 'Reason', t: 'textarea', req: 1 })}`, onSubmit: async d => { const r = await mcall('tasks.bulkReassign', Object.assign(d, { task_ids: ids })); toast(r.updated.length + ' reassigned' + (r.failed.length ? ', ' + r.failed.length + ' failed: ' + r.failed.map(x => x.reason).join('; ') : ''), r.failed.length > 0); route(); } }); };
+ACT['task-bulk-due'] = () => { const ids = selTasks(); if (!ids.length) return toast('Select tasks first.', true); modal({ title: 'Change due date of ' + ids.length + ' task(s)', body: html`${fld({ n: 'due_date', l: 'New due date (leave blank to shift by days)', t: 'date' })}${fld({ n: 'shift_days', l: 'Shift by days (+/-)', t: 'number' })}${fld({ n: 'reason', l: 'Reason', t: 'textarea', req: 1 })}`, onSubmit: async d => { const r = await mcall('tasks.bulkDue', Object.assign(d, { task_ids: ids })); toast(r.updated.length + ' updated' + (r.failed.length ? ', ' + r.failed.length + ' failed' : ''), r.failed.length > 0); route(); } }); };
+ACT['task-bulk'] = async () => {
+  const cl = await clientList(); const tpl = await api('master.list', { table: 'TaskTemplates' }).catch(() => []);
+  modal({ title: 'Create the same task for several clients', wide: 1, body: html`${fld({ n: 'template_id', l: 'Template (optional)', t: 'select', opts: tpl.map(t => [t.template_id, t.name]), blank: '— none —' })}${fld({ n: 'title', l: 'Task title (required without a template)' })}<div class="row3">${fld({ n: 'due_date', l: 'Due date', t: 'date', req: 1 })}${fld({ n: 'priority', l: 'Priority', t: 'select', opts: S.enums.PRIORITIES, v: 'Medium' })}${fld({ n: 'clerk_id', l: 'Assign to', t: 'select', opts: usersBy(['CLERK', 'SENIOR']), blank: '— unassigned (draft) —' })}</div>
+    <label>Clients (${cl.length})</label><div class="card mx" style="max-height:220px;overflow:auto">${cl.map(c => html`<label><input type="checkbox" data-multi="1" name="client_ids" value="${c.client_id}"> ${c.name}</label>`)}</div>`,
+    submit: 'Create tasks', onSubmit: async d => { if (!(d.client_ids || []).length) throw new Error('Select at least one client.'); const r = await mcall('tasks.bulkCreate', d); toast(r.created.length + ' created, ' + r.skipped.length + ' skipped' + (r.skipped.length ? ' (' + r.skipped.slice(0, 3).map(s => s.reason).join('; ') + ')' : ''), false); go('tasks/all'); } });
+};
+ACT['task-new'] = async el => {
+  const cl = await clientList(); const pre = el && el.dataset ? el.dataset.client : '';
+  modal({ title: 'New task', wide: 1, body: html`<div class="row2">${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), v: pre, req: 1 })}${fld({ n: 'title', l: 'Work title', req: 1 })}</div>
+    <div class="row3">${fld({ n: 'due_date', l: 'Due date', t: 'date', req: 1, v: addDays(today(), 7) })}${fld({ n: 'priority', l: 'Priority', t: 'select', opts: S.enums.PRIORITIES, v: 'Medium' })}${fld({ n: 'est_hours', l: 'Estimated hours', t: 'number', step: '0.25', v: 1 })}</div>
+    <div class="row3">${fld({ n: 'partner_id', l: 'Responsible partner', t: 'select', opts: usersBy(['PARTNER', 'MANAGING_PARTNER']), blank: '— client default —' })}${fld({ n: 'senior_id', l: 'Senior / reviewer', t: 'select', opts: usersBy(['SENIOR', 'PARTNER']), blank: '— client default —' })}${fld({ n: 'clerk_id', l: 'Assign to', t: 'select', opts: usersBy(['CLERK', 'SENIOR']), blank: '— unassigned (draft) —' })}</div>
+    ${fld({ n: 'description', l: 'Description', t: 'textarea' })}${fld({ n: 'instructions', l: 'Instructions for the assignee', t: 'textarea' })}${fld({ n: 'checklist', l: 'Checklist (one item per line; start with * for mandatory)', t: 'textarea', rows: 3 })}
+    <div class="mx">${fld({ n: 'requires_senior_review', l: 'Senior review required', t: 'checkbox', v: 'Y' })}${fld({ n: 'requires_partner_approval', l: 'Partner approval required', t: 'checkbox', v: 'Y' })}${fld({ n: 'draft', l: 'Save as draft', t: 'checkbox' })}</div>`,
+    onSubmit: async d => {
+      d.checklist = (d.checklist || '').split('\n').map(s => s.trim()).filter(Boolean).map(s => s[0] === '*' ? { text: s.slice(1).trim(), mandatory: true } : s);
+      d.requires_senior_review = d.requires_senior_review === 'Y'; d.requires_partner_approval = d.requires_partner_approval === 'Y'; d.draft = d.draft === 'Y';
+      ['partner_id', 'senior_id', 'clerk_id'].forEach(k => { if (!d[k]) delete d[k]; });
+      const t = await mcall('tasks.create', d, 'Task created'); go('tasks/' + t.task_id);
+    } });
+};
+function histLine(h) { return html`<div class="it"><b>${h.event}</b> ${h.from_status || h.to_status ? html`<span class="muted">${h.from_status} → ${h.to_status}</span>` : ''} <span class="small muted">${dmy(h.at)} · ${h.actor_name}</span><div class="small">${h.detail}</div></div>`; }
+async function taskDetail(v, id) {
+  const d = await api('tasks.get', { task_id: id }); const t = d.task, can = d.can, st = t.status;
+  const mine = d.assignments.some(a => a.user_id === S.me.user_id && !a.released_at);
+  const btn = (act, label, cls, extra) => html`<button class="btn ${cls || ''}" data-act="${act}" data-id="${id}" ${extra ? raw(extra) : ''}>${label}</button>`;
+  const work = [];
+  if (can.work) {
+    if (st === 'Assigned') work.push(btn('t-ack', 'Acknowledge', 'pri'));
+    if (['Assigned', 'Acknowledged', 'Not Started', 'Waiting for Client Documents', 'Blocked', 'Correction Required', 'On Hold'].includes(st)) work.push(btn('t-status', 'Start / resume work', 'pri', 'data-to="In Progress"'));
+    if (st === 'In Progress' || st === 'Correction Required') work.push(btn('t-submit', st === 'Correction Required' ? 'Resubmit for review' : 'Submit for review', 'gold'));
+    if (st === 'In Progress') work.push(btn('t-status', 'Waiting for client documents', '', 'data-to="Waiting for Client Documents" data-ask="1"'), btn('t-status', 'Blocked', '', 'data-to="Blocked" data-ask="1"'));
+    if (['In Progress', 'Waiting for Client Documents'].includes(st)) work.push(btn('t-status', 'On hold', '', 'data-to="On Hold" data-ask="1"'));
+    if (['In Progress', 'Acknowledged', 'Not Started', 'Assigned'].includes(st)) work.push(btn('t-timer', '▶ Start timer', ''));
+  }
+  if (can.review && ['Submitted for Review', 'Under Review', 'Resubmitted'].includes(st)) work.push(btn('t-review', 'Review', 'gold'));
+  if (can.manage) { if (st === 'Approved') work.push(btn('t-status', 'Mark completed', 'pri', 'data-to="Completed"')); if (st === 'Completed') work.push(btn('t-status', 'Reopen', '', 'data-to="In Progress" data-ask="1"')); work.push(btn('t-assign', 'Allocate / reassign'), btn('t-edit', 'Edit'), btn('t-instr', 'Instruction')); if (!['Completed', 'Cancelled'].includes(st)) work.push(btn('t-status', 'Cancel task', 'bad', 'data-to="Cancelled" data-ask="1"')); }
+  put(v, html`<div class="bar"><a href="#/tasks">&larr; Tasks</a><div class="sp"></div>${can.manage && has('fees.edit') ? html`<a class="btn" href="#/fees/invoices?task=${id}">Bill this work</a>` : ''}</div>
+   <h1>${t.task_no} · ${t.title}</h1><div style="margin-bottom:8px">${badge(st)} ${badge(t.priority)} ${t.review_stage ? badge('Review: ' + t.review_stage, 'info') : ''} ${t.requires_senior_review === 'Y' ? badge('Senior review', 'info') : ''} ${t.requires_partner_approval === 'Y' ? badge('Partner approval', 'info') : ''}</div>
+   <div class="bar">${work}</div>
+   <div class="grid g2"><div class="card"><h2>Details</h2><dl class="kv"><dt>Client</dt><dd>${d.client ? html`<a href="#/clients/${d.client.client_id}">${d.client.name}</a>` : ''}</dd><dt>Due date</dt><dd>${dmy(t.due_date)}</dd><dt>FY / AY</dt><dd>${t.fy} / ${t.ay}</dd><dt>Partner</dt><dd>${uname(t.partner_id)}</dd><dt>Senior</dt><dd>${uname(t.senior_id)}</dd><dt>Estimated</dt><dd>${t.est_hours} h (logged ${d.logged_hours} h)</dd><dt>Submissions</dt><dd>${t.submission_no}</dd><dt>Description</dt><dd>${t.description}</dd></dl>
+     <h3>Assigned to</h3>${d.assignments.filter(a => !a.released_at).map(a => html`<div>${a.name} ${badge(a.role_in_task, 'info')} <span class="small muted">${a.ack_at ? 'ack ' + dmy(a.ack_at) : 'not acknowledged'}</span></div>`)}
+     ${d.assignments.some(a => a.released_at) ? html`<details class="small"><summary>Previous assignments</summary>${d.assignments.filter(a => a.released_at).map(a => html`<div>${a.name} until ${dmy(a.released_at)} — ${a.reason}</div>`)}</details>` : ''}</div>
+    <div class="card"><h2>Instructions</h2>${d.instructions.length ? d.instructions.slice().reverse().map((i, ix) => html`<div style="margin-bottom:8px"><div class="small muted">v${i.version} · ${i.author_name} · ${dmy(i.created_at)} ${i.urgent === 'Y' ? badge('Urgent', 'bad') : ''}${ix ? '' : ' (current)'}</div><div>${i.text}</div>${i.version > 1 ? html`<div class="small muted">Reason: ${i.reason}</div>` : ''}${i.expected_deliverable ? html`<div class="small">Deliverable: ${i.expected_deliverable}</div>` : ''}</div>`) : html`<div class="muted">No instructions recorded.</div>`}</div></div>
+   <div class="grid g2"><div class="card"><h2>Checklist</h2>${d.checklist.map(c => html`<div><label style="display:flex;gap:6px;align-items:center;color:var(--ink);font-size:14px"><input type="checkbox" data-act="t-chk" data-id="${c.item_id}" ${c.done === 'Y' ? raw('checked') : ''} ${can.work || can.manage ? '' : raw('disabled')}> ${c.text} ${c.mandatory === 'Y' ? badge('mandatory', 'warn') : ''}</label></div>`)}${d.checklist.length ? '' : html`<div class="muted">No checklist.</div>`}${can.manage ? html`<button class="btn sm" data-act="t-chk-add" data-id="${id}">+ Item</button>` : ''}
+     <h3>Dependencies</h3>${d.dependencies.map(x => html`<div>${x.task_no} ${x.title} ${badge(x.status)} ${can.manage ? html`<button class="btn sm" data-act="t-dep-del" data-id="${x.id}">×</button>` : ''}</div>`)}${can.manage ? html`<button class="btn sm" data-act="t-dep-add" data-id="${id}">+ Dependency</button>` : ''}</div>
+    <div class="card"><h2>Reviews</h2>${d.reviews.length ? tbl([{ h: 'Stage', k: 'stage' }, { h: 'Outcome', f: r => badge(r.outcome) }, { h: 'By', k: 'reviewer_name' }, { h: 'Remarks', k: 'remarks' }, { h: 'When', f: r => dmy(r.created_at) }], d.reviews) : html`<div class="muted">No reviews yet.</div>`}</div></div>
+   <div class="card"><h2>Discussion</h2>${d.comments.map(c => html`<div style="margin-bottom:8px;${c.parent_id ? 'margin-left:24px' : ''}"><b>${c.author_name}</b> <span class="small muted">${dmy(c.created_at)} ${c.kind !== 'COMMENT' ? c.kind : ''}</span><div>${c.text}</div></div>`)}<form class="bar" data-sub="t-comment"><input type="hidden" name="task_id" value="${id}"><input name="text" placeholder="Add a comment (use @name to mention)" style="flex:1;min-width:220px" required><select name="kind"><option value="COMMENT">Comment</option><option value="QUESTION">Question</option><option value="NOTE">Note</option></select><button class="btn">Post</button></form></div>
+   <div class="card"><h2>History</h2><div class="tl">${d.history.slice().reverse().map(histLine)}</div></div>
+   ${d.documents && d.documents.length ? html`<div class="card"><h2>Documents</h2>${tbl([{ h: 'File', k: 'file_name' }, { h: '', f: r => html`<button class="btn sm" data-act="doc-dl" data-id="${r.doc_id}">Download</button>` }], d.documents)}</div>` : ''}`);
+}
+SUB['t-comment'] = async d => { if (await act('tasks.comment', d)) route(); };
+ACT['t-ack'] = async el => { if (await act('tasks.ack', { task_id: el.dataset.id }, 'Acknowledged')) route(); };
+ACT['t-chk'] = async el => { const r = await act('tasks.checklist.toggle', { item_id: el.dataset.id, done: el.checked }); if (!r) el.checked = !el.checked; };
+ACT['t-chk-add'] = el => modal({ title: 'Add checklist item', body: html`${fld({ n: 'text', l: 'Item', req: 1 })}${fld({ n: 'mandatory', l: 'Mandatory before submission', t: 'checkbox' })}`, onSubmit: async d => { await mcall('tasks.checklist.add', { task_id: el.dataset.id, text: d.text, mandatory: d.mandatory === 'Y' }); route(); } });
+ACT['t-dep-add'] = async el => { const l = await api('tasks.list', { pageSize: 500 }); modal({ title: 'Task depends on…', body: fld({ n: 'depends_on', l: 'Prerequisite task', t: 'select', opts: l.rows.filter(r => r.task_id !== el.dataset.id).map(r => [r.task_id, r.task_no + ' · ' + r.title]), req: 1 }), onSubmit: async d => { await mcall('tasks.dep.add', { task_id: el.dataset.id, depends_on: d.depends_on }); route(); } }); };
+ACT['t-dep-del'] = async el => { if (await act('tasks.dep.remove', { id: el.dataset.id })) route(); };
+ACT['t-status'] = el => {
+  const to = el.dataset.to, go_ = async (remarks) => { if (await act('tasks.status', { task_id: el.dataset.id, status: to, remarks })) route(); };
+  if (el.dataset.ask) modal({ title: 'Change status to "' + to + '"', body: fld({ n: 'remarks', l: 'Reason / remarks', t: 'textarea', req: 1 }), onSubmit: async d => { await mcall('tasks.status', { task_id: el.dataset.id, status: to, remarks: d.remarks }, 'Status updated'); route(); } }); else go_('');
+};
+ACT['t-submit'] = el => modal({ title: 'Submit for review', body: fld({ n: 'note', l: 'Note to reviewer', t: 'textarea' }), submit: 'Submit', onSubmit: async d => { await mcall('tasks.submit', { task_id: el.dataset.id, note: d.note }, 'Submitted for review'); route(); } });
+ACT['t-review'] = el => modal({ title: 'Review outcome', body: html`${fld({ n: 'outcome', l: 'Outcome', t: 'select', opts: ['Approved', 'Correction Required', 'More Information Required', 'On Hold', 'Rejected'], req: 1 })}${fld({ n: 'remarks', l: 'Remarks (required unless approving)', t: 'textarea' })}<p class="small muted">You cannot review work assigned to you. Senior review comes before partner approval.</p>`, submit: 'Record review', onSubmit: async d => { await mcall('tasks.review', Object.assign(d, { task_id: el.dataset.id }), 'Review recorded'); route(); } });
+ACT['t-assign'] = el => modal({ title: 'Allocate task', body: html`${fld({ n: 'clerk_id', l: 'Primary assignee', t: 'select', opts: usersBy(['CLERK', 'SENIOR', 'ACCOUNTS']) })}<label>Team members</label><div class="mx card">${usersBy(['CLERK', 'SENIOR']).map(u => html`<label><input type="checkbox" data-multi="1" name="team_ids" value="${u[0]}"> ${u[1]}</label>`)}</div>${fld({ n: 'reason', l: 'Reason (required when changing an existing allocation)', t: 'textarea' })}`, onSubmit: async d => { await mcall('tasks.assign', Object.assign(d, { task_id: el.dataset.id }), 'Allocated'); route(); } });
+ACT['t-edit'] = async el => { const t = (await api('tasks.get', { task_id: el.dataset.id })).task; modal({ title: 'Edit task', wide: 1, body: html`${fld({ n: 'title', l: 'Title', v: t.title, req: 1 })}<div class="row3">${fld({ n: 'due_date', l: 'Due date', t: 'date', v: t.due_date })}${fld({ n: 'priority', l: 'Priority', t: 'select', opts: S.enums.PRIORITIES, v: t.priority })}${fld({ n: 'est_hours', l: 'Estimated hours', t: 'number', step: '0.25', v: t.est_hours })}</div>${fld({ n: 'description', l: 'Description', t: 'textarea', v: t.description })}${fld({ n: 'reason', l: 'Reason (required if the due date changes)', t: 'textarea' })}`, onSubmit: async d => { d.due_date === t.due_date && delete d.reason; await mcall('tasks.update', Object.assign(d, { task_id: t.task_id }), 'Task updated'); route(); } }); };
+ACT['t-instr'] = el => modal({ title: 'Write / revise instruction', body: html`${fld({ n: 'text', l: 'Instruction', t: 'textarea', rows: 5, req: 1 })}${fld({ n: 'expected_deliverable', l: 'Expected deliverable' })}${fld({ n: 'reason', l: 'Reason for revision (required after the first version)', t: 'textarea' })}${fld({ n: 'urgent', l: 'Urgent', t: 'checkbox' })}`, onSubmit: async d => { d.urgent = d.urgent === 'Y'; await mcall('tasks.instruct', Object.assign(d, { task_id: el.dataset.id }), 'Instruction saved'); route(); } });
+ACT['t-timer'] = async el => { if (await act('time.start', { task_id: el.dataset.id, category: 'TASK' }, 'Timer started')) route(); };
+/* ===== time, attendance, leave ===== */
+const TT = [['logs', 'My time'], ['att', 'Attendance'], ['leave', 'Leave'], ['prod', 'Productivity'], ['corr', 'Corrections']];
+const mins = m => (m == null ? '' : Math.floor(m / 60) + 'h ' + String(m % 60).padStart(2, '0') + 'm');
+function tickTimer() { clearInterval(S.timer); const el = $('#tm'); if (!el) return; const st = el.dataset.start; const f = () => { const e = $('#tm'); if (!e) return clearInterval(S.timer); const s = Math.max(0, Math.floor((Date.now() - new Date(st + '+05:30').getTime()) / 1000)); e.textContent = String(Math.floor(s / 3600)).padStart(2, '0') + ':' + String(Math.floor(s % 3600 / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }; f(); S.timer = setInterval(f, 1000); }
+ROUTES.time = async (v, a) => {
+  const tab = a[0] || 'logs', from = store.get('tf') || addDays(today(), -7), to = store.get('tt') || today();
+  const head = html`<h1>Time, attendance &amp; leave</h1><div class="tabs">${TT.map(t => html`<a href="#/time/${t[0]}" class="${tab === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>`;
+  if (tab === 'logs') {
+    const d = await api('time.logs', { from, to }); const myTasks = has('task.work') ? (await api('tasks.list', { mine: true, open_only: true, pageSize: 200 })).rows : [];
+    cache.myTasks = myTasks; const r = d.running;
+    put(v, html`${head}<div class="card"><div class="timer">${r ? html`<div><div class="small muted">Timer running${r.task_id ? ' on a task' : ' · ' + r.category}</div><div class="t" id="tm" data-start="${r.start_ts}">00:00:00</div></div><button class="btn pri" data-act="tm-stop">Stop</button><span class="small muted">${r.description}</span>`
+      : html`<form class="bar" data-sub="tm-start" style="margin:0"><select name="task_id"><option value="">No task (other activity)</option>${myTasks.map(t => html`<option value="${t.task_id}">${t.task_no} · ${t.title}</option>`)}</select><select name="category">${opt(S.enums.TIME_CATEGORIES.filter(c => c !== 'TASK'), 'ADMIN')}</select><input name="description" placeholder="What are you working on?"><button class="btn pri">▶ Start timer</button></form>`}</div></div>
+     <form class="bar" data-sub="tm-range"><label style="margin:0">From</label><input type="date" name="from" value="${from}"><label style="margin:0">To</label><input type="date" name="to" value="${to}"><button class="btn">Show</button><div class="sp"></div><button type="button" class="btn" data-act="tm-manual">+ Manual entry</button></form>
+     <div class="card" style="padding:0">${tbl([{ h: 'Date', f: x => dmy(x.log_date) }, { h: 'Start', f: x => x.start_ts.slice(11, 16) }, { h: 'End', f: x => (x.end_ts || '').slice(11, 16) }, { h: 'Duration', f: x => mins(x.minutes), cls: 'num' }, { h: 'Category', k: 'category' }, { h: 'Task', k: 'task_title' }, { h: 'Notes', k: 'description' }, { h: '', f: x => x.state === 'STOPPED' ? html`<button class="btn sm" data-act="tm-corr" data-id="${x.log_id}" data-s="${x.start_ts}" data-e="${x.end_ts}">Correct</button>` : badge('running', 'info') }], d.rows, { empty: 'No time recorded in this period.' })}</div>
+     <div class="small muted">Total ${mins(d.rows.reduce((s, x) => s + (x.minutes || 0), 0))}</div>`); tickTimer();
+  } else if (tab === 'att') {
+    const d = await api('att.list', {}); const rows = Array.isArray(d) ? d : d.rows || [];
+    put(v, html`${head}<div class="bar"><button class="btn pri" data-act="att-in">Check in</button><button class="btn" data-act="att-out">Check out</button></div><div class="card" style="padding:0">${tbl([{ h: 'Date', f: x => dmy(x.att_date) }, ...(rows[0] && rows[0].user_id && has('attendance.view_team') ? [{ h: 'Staff', f: x => uname(x.user_id) }] : []), { h: 'In', f: x => (x.check_in || '').slice(11, 16) }, { h: 'Out', f: x => (x.check_out || '').slice(11, 16) }, { h: 'Status', f: x => badge(x.status) }, { h: 'Remarks', k: 'remarks' }], rows, { empty: 'No attendance recorded.' })}</div>`);
+  } else if (tab === 'leave') {
+    const [l, b] = await Promise.all([api('leave.list', {}), api('leave.balance', {})]); const rows = Array.isArray(l) ? l : l.rows || [];
+    put(v, html`${head}<div class="bar"><button class="btn pri" data-act="lv-apply">Apply for leave</button></div><div class="grid g4" style="margin-bottom:12px">${b.map(x => html`<div class="stat"><div class="v">${x.used}</div><div class="l">${x.type} days used this year${x.quota != null ? ' of ' + x.quota : ''}</div></div>`)}</div>
+     <div class="card" style="padding:0">${tbl([{ h: 'Staff', f: x => uname(x.user_id) }, { h: 'Type', k: 'leave_type' }, { h: 'From', f: x => dmy(x.from_date) }, { h: 'To', f: x => dmy(x.to_date) }, { h: 'Days', k: 'days', cls: 'num' }, { h: 'Reason', k: 'reason' }, { h: 'Status', f: x => badge(x.status, { Approved: 'ok', Pending: 'warn', Rejected: 'bad', Cancelled: 'bad' }[x.status]) }, { h: '', f: x => x.status === 'Pending' ? html`${has('leave.approve') && x.user_id !== S.me.user_id ? html`<button class="btn sm" data-act="lv-ok" data-id="${x.leave_id}">Approve</button> <button class="btn sm" data-act="lv-no" data-id="${x.leave_id}">Reject</button>` : ''}${x.user_id === S.me.user_id ? html`<button class="btn sm" data-act="lv-cancel" data-id="${x.leave_id}">Cancel</button>` : ''}` : '' }], rows, { empty: 'No leave requests.' })}</div>`);
+  } else if (tab === 'prod') {
+    const uid = a[1] || S.me.user_id; const d = await api('time.productivity', { user_id: uid, from, to });
+    put(v, html`${head}<form class="bar" data-sub="tm-range"><input type="hidden" name="keep" value="prod">${has('time.view_team') ? html`<select name="uid">${opt(S.dir.map(u => [u.user_id, u.full_name]), uid)}</select>` : ''}<input type="date" name="from" value="${from}"><input type="date" name="to" value="${to}"><button class="btn">Show</button></form>
+     <div class="grid g4"><div class="stat"><div class="v">${d.scheduled_hours}</div><div class="l">Scheduled hours</div></div><div class="stat"><div class="v">${d.leave_days}</div><div class="l">Leave days</div></div><div class="stat"><div class="v">${d.accounted_hours}</div><div class="l">Accounted hours</div></div><div class="stat warn"><div class="v">${d.unallocated_hours}</div><div class="l">Unallocated hours</div></div><div class="stat"><div class="v">${d.task_hours}</div><div class="l">Task hours</div></div><div class="stat"><div class="v">${d.tasks_completed}</div><div class="l">Tasks completed</div></div><div class="stat"><div class="v">${d.overdue_tasks}</div><div class="l">Overdue tasks</div></div><div class="stat"><div class="v">${d.utilisation_pct}%</div><div class="l">Utilisation</div></div></div>
+     <div class="banner" style="margin-top:12px"><b>How unallocated time is calculated.</b> ${d.methodology}</div>
+     <div class="card"><h2>Hours by category</h2>${tbl([{ h: 'Category', k: 'k' }, { h: 'Hours', f: r => r.v, cls: 'num' }], Object.keys(d.by_category_hours).map(k => ({ k, v: d.by_category_hours[k] })))}</div>`);
+  } else {
+    const d = await api('time.corr.list', {}); const rows = Array.isArray(d) ? d : d.rows || [];
+    put(v, html`${head}<div class="card" style="padding:0">${tbl([{ h: 'Staff', f: x => uname(x.user_id) }, { h: 'Original', f: x => (x.old_start || '').replace('T', ' ').slice(0, 16) + ' → ' + (x.old_end || '').slice(11, 16) }, { h: 'Requested', f: x => (x.new_start || '').replace('T', ' ').slice(0, 16) + ' → ' + (x.new_end || '').slice(11, 16) }, { h: 'Reason', k: 'reason' }, { h: 'Status', f: x => badge(x.status) }, { h: '', f: x => x.status === 'Pending' && has('time.correct') && x.user_id !== S.me.user_id ? html`<button class="btn sm" data-act="co-ok" data-id="${x.correction_id}">Approve</button> <button class="btn sm" data-act="co-no" data-id="${x.correction_id}">Reject</button>` : '' }], rows, { empty: 'No correction requests.' })}</div>`);
+  }
+};
+SUB['tm-range'] = d => { store.set('tf', d.from); store.set('tt', d.to); if (d.keep) go('time/prod/' + (d.uid || S.me.user_id)); else route(); };
+SUB['tm-start'] = async d => { if (await act('time.start', { task_id: d.task_id || undefined, category: d.task_id ? 'TASK' : d.category, description: d.description }, 'Timer started')) route(); };
+ACT['tm-stop'] = async () => { const r = await act('time.stop', {}, 'Timer stopped'); if (r) route(); };
+ACT['tm-manual'] = () => modal({ title: 'Manual time entry', body: html`<div class="row3">${fld({ n: 'date', l: 'Date', t: 'date', v: today(), req: 1 })}${fld({ n: 'start', l: 'Start', t: 'time', req: 1 })}${fld({ n: 'end', l: 'End', t: 'time', req: 1 })}</div>${fld({ n: 'task_id', l: 'Task', t: 'select', opts: (cache.myTasks || []).map(t => [t.task_id, t.task_no + ' · ' + t.title]), blank: '— none (other activity) —' })}${fld({ n: 'category', l: 'Category (when no task)', t: 'select', opts: S.enums.TIME_CATEGORIES.filter(c => c !== 'TASK'), v: 'ADMIN' })}${fld({ n: 'description', l: 'Notes' })}`, onSubmit: async d => { if (d.task_id) delete d.category; await mcall('time.manual', d, 'Time recorded'); route(); } });
+ACT['tm-corr'] = el => { const s = el.dataset.s, e = el.dataset.e; modal({ title: 'Correct time entry', body: html`<p class="small muted">${has('time.correct') ? 'As a partner you may correct entries of your team directly; otherwise a request goes to your manager.' : 'Your request will be sent to your manager for approval.'}</p><div class="row2">${fld({ n: 'new_start', l: 'New start', t: 'datetime-local', v: s.slice(0, 16), req: 1 })}${fld({ n: 'new_end', l: 'New end', t: 'datetime-local', v: e.slice(0, 16), req: 1 })}</div>${fld({ n: 'reason', l: 'Reason', t: 'textarea', req: 1 })}`, onSubmit: async d => { await mcall('time.corr.request', Object.assign(d, { log_id: el.dataset.id }), 'Correction requested'); route(); } }); };
+ACT['co-ok'] = async el => { if (await act('time.corr.decide', { correction_id: el.dataset.id, approve: true }, 'Approved')) route(); };
+ACT['co-no'] = el => modal({ title: 'Reject correction', body: fld({ n: 'remarks', l: 'Reason', t: 'textarea', req: 1 }), onSubmit: async d => { await mcall('time.corr.decide', { correction_id: el.dataset.id, approve: false, remarks: d.remarks }); route(); } });
+ACT['att-in'] = async () => { if (await act('att.in', {}, 'Checked in')) route(); };
+ACT['att-out'] = async () => { if (await act('att.out', {}, 'Checked out')) route(); };
+ACT['lv-apply'] = () => modal({ title: 'Apply for leave', body: html`${fld({ n: 'leave_type', l: 'Type', t: 'select', opts: S.enums.LEAVE_TYPES, req: 1 })}<div class="row2">${fld({ n: 'from_date', l: 'From', t: 'date', req: 1, v: today() })}${fld({ n: 'to_date', l: 'To', t: 'date', req: 1, v: today() })}</div>${fld({ n: 'reason', l: 'Reason', t: 'textarea' })}`, onSubmit: async d => { await mcall('leave.apply', d, 'Leave requested'); route(); } });
+ACT['lv-ok'] = async el => { if (await act('leave.decide', { leave_id: el.dataset.id, approve: true }, 'Approved')) route(); };
+ACT['lv-no'] = el => modal({ title: 'Reject leave', body: fld({ n: 'remarks', l: 'Reason', t: 'textarea', req: 1 }), onSubmit: async d => { await mcall('leave.decide', { leave_id: el.dataset.id, approve: false, remarks: d.remarks }); route(); } });
+ACT['lv-cancel'] = el => confirmBox('Cancel leave', 'Cancel this leave request?', 'Cancel leave', async () => { await mcall('leave.cancel', { leave_id: el.dataset.id }); route(); });
+/* ===== fees ===== */
+const FT = [['invoices', 'Invoices'], ['receipts', 'Receipts'], ['outstanding', 'Outstanding'], ['ageing', 'Ageing'], ['followups', 'Follow-ups'], ['statement', 'Statement']];
+ROUTES.fees = async (v, a) => {
+  const arg0 = (a[0] || 'invoices').split('?')[0], qs = new URLSearchParams((a[0] || '').split('?')[1] || ''), tab = arg0;
+  const head = html`<h1>Fees &amp; receipts</h1><div class="tabs">${FT.map(t => html`<a href="#/fees/${t[0]}" class="${tab === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>`;
+  if (tab === 'invoices') {
+    const d = await api('fees.invoice.list', {});
+    put(v, html`${head}<div class="bar">${has('fees.edit') ? html`<button class="btn pri" data-act="inv-new" data-task="${qs.get('task') || ''}">+ New invoice</button>` : ''}</div><div class="card" style="padding:0">${tbl([{ h: 'No.', f: r => r.invoice_no || html`<i class="muted">draft</i>` }, { h: 'Type', k: 'invoice_type' }, { h: 'Client', k: 'client_name' }, { h: 'Date', f: r => dmy(r.invoice_date) }, { h: 'Due', f: r => dmy(r.due_date) }, { h: 'Total ₹', f: r => inr(r.total), cls: 'num' }, { h: 'Paid ₹', f: r => inr(r.paid), cls: 'num' }, { h: 'Outstanding ₹', f: r => inr(r.outstanding), cls: 'num' }, { h: 'Status', f: r => badge(r.status) },
+      { h: '', f: r => html`<button class="btn sm" data-act="inv-view" data-id="${r.invoice_id}">View</button> ${has('fees.edit') && r.status === 'DRAFT' ? html`<button class="btn sm pri" data-act="inv-issue" data-id="${r.invoice_id}">Issue</button>` : ''}${has('fees.edit') && r.status === 'ISSUED' && r.invoice_type === 'TAX' ? html`<button class="btn sm" data-act="inv-adj" data-id="${r.invoice_id}" data-out="${r.outstanding}">Credit / write-off</button>` : ''}${has('fees.edit') && r.status !== 'CANCELLED' ? html`<button class="btn sm" data-act="inv-cancel" data-id="${r.invoice_id}">Cancel</button>` : ''}` }], d.rows, { empty: 'No invoices yet.' })}</div>
+     <div class="small muted">Only issued TAX invoices count towards outstanding. Proforma invoices and drafts never do.</div>`);
+    if (qs.get('task')) ACT['inv-new']({ dataset: { task: qs.get('task') } });
+  } else if (tab === 'receipts') {
+    const d = await api('fees.receipt.list', {});
+    put(v, html`${head}<div class="bar">${has('receipt.edit') ? html`<button class="btn pri" data-act="rc-new">+ Record receipt</button>` : ''}</div><div class="card" style="padding:0">${tbl([{ h: 'No.', k: 'receipt_no' }, { h: 'Client', k: 'client_name' }, { h: 'Date', f: r => dmy(r.receipt_date) }, { h: 'Mode', k: 'mode' }, { h: 'Reference', k: 'txn_ref' }, { h: 'Amount ₹', f: r => inr(r.amount), cls: 'num' }, { h: 'Unallocated ₹', f: r => inr(r.unallocated), cls: 'num' }, { h: 'Status', f: r => badge(r.status) }, { h: '', f: r => r.status === 'ACTIVE' && has('receipt.edit') ? html`${r.unallocated > 0 ? html`<button class="btn sm" data-act="rc-alloc" data-id="${r.receipt_id}" data-client="${r.client_id}" data-un="${r.unallocated}">Allocate</button>` : ''} <button class="btn sm" data-act="rc-cancel" data-id="${r.receipt_id}">Cancel</button>` : '' }], d.rows, { empty: 'No receipts yet.' })}</div>`);
+  } else if (tab === 'outstanding' || tab === 'ageing') {
+    const r = await api('reports.run', { id: tab === 'ageing' ? 'fee_ageing' : 'fee_outstanding' });
+    put(v, html`${head}${reportTable(r)}`);
+  } else if (tab === 'followups') {
+    const d = await api('fees.followup.list', {});
+    put(v, html`${head}<div class="bar">${has('followup.edit') ? html`<button class="btn pri" data-act="fu-new">+ Log follow-up</button>` : ''}</div><div class="card" style="padding:0">${tbl([{ h: 'Client', k: 'client_name' }, { h: 'Date', f: r => dmy(r.followup_date) }, { h: 'Method', k: 'method' }, { h: 'Outstanding ₹', f: r => inr(r.outstanding), cls: 'num' }, { h: 'Summary', k: 'summary' }, { h: 'Promised', f: r => r.promised_date ? dmy(r.promised_date) + (r.promised_amount ? ' · ₹' + inr(r.promised_amount) : '') : '' }, { h: 'Next', f: r => html`<span class="${r.overdue ? 'err' : ''}">${dmy(r.next_followup_date)}</span>` }, { h: 'Status', f: r => html`${badge(r.status)} ${r.promise_broken ? badge('promise missed', 'bad') : ''}` }, { h: 'By', k: 'assigned_name' }], d.rows, { empty: 'No follow-ups recorded.' })}</div>`);
+  } else {
+    const cl = await clientList(); const cid = a[1] || store.get('stc') || '';
+    const st = cid ? await api('fees.statement', { client_id: cid }) : null;
+    put(v, html`${head}<form class="bar" data-sub="st-pick"><select name="client_id">${opt(clientOpts(cl), cid, 'Select a client')}</select><button class="btn">Show statement</button>${st ? html`<button type="button" class="btn" onclick="window.print()">Print</button>` : ''}</form>
+     ${st ? html`<div class="card"><h2>Statement — ${st.client}</h2>${tbl([{ h: 'Date', f: r => dmy(r.date) }, { h: 'Type', k: 'type' }, { h: 'Reference', k: 'ref' }, { h: 'Debit ₹', f: r => r.debit ? inr(r.debit) : '', cls: 'num' }, { h: 'Credit ₹', f: r => r.credit ? inr(r.credit) : '', cls: 'num' }, { h: 'Balance ₹', f: r => inr(r.balance), cls: 'num' }, { h: 'Note', k: 'note' }], st.lines)}<p><b>Closing balance ₹ ${inr(st.closing_balance)}</b></p><div class="small muted">${st.note}</div></div>` : ''}`);
+  }
+};
+SUB['st-pick'] = d => { store.set('stc', d.client_id); go('fees/statement/' + d.client_id); };
+const lineRow = () => html`<div class="row3 ln" style="grid-template-columns:3fr 1fr 1fr 1fr;align-items:end"><div class="f"><label>Description</label><input name="ld"></div><div class="f"><label>SAC</label><input name="ls" value="9982"></div><div class="f"><label>Qty</label><input name="lq" type="number" step="0.001" value="1"></div><div class="f"><label>Rate ₹</label><input name="lr" type="number" step="0.01"></div></div>`;
+ACT['inv-new'] = async el => {
+  const cl = await clientList(); const rate = S.settings.default_tax_rate_pct || 18;
+  modal({ title: 'New invoice', wide: 1, body: html`<div class="row3">${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), req: 1 })}${fld({ n: 'invoice_type', l: 'Type', t: 'select', opts: [['TAX', 'Tax invoice'], ['PROFORMA', 'Proforma (not billed)']], blank: undefined, v: 'TAX' })}${fld({ n: 'service_desc', l: 'Summary description' })}</div><div id="lines">${lineRow()}${lineRow()}</div><button type="button" class="btn sm" data-act="ln-add">+ Line</button>
+    <div class="row3" style="margin-top:10px">${fld({ n: 'tax_type', l: 'Tax', t: 'select', opts: [['', 'Auto (by state)'], ['CGST_SGST', 'CGST + SGST'], ['IGST', 'IGST'], ['NONE', 'No tax']], blank: undefined })}${fld({ n: 'tax_rate_pct', l: 'Tax rate % (default from settings)', t: 'number', step: '0.01', ph: String(rate) })}<input type="hidden" name="task_id" value="${el && el.dataset ? el.dataset.task || '' : ''}"></div><p class="small muted">Totals and tax are calculated by the server when you save. The invoice number is assigned when it is issued.</p>`,
+    submit: 'Save draft', onSubmit: async (d, f) => {
+      const g = n => $$('[name=' + n + ']', f).map(x => x.value); const D = g('ld'), Sc = g('ls'), Q = g('lq'), R = g('lr');
+      d.items = D.map((x, i) => ({ description: x, sac: Sc[i], qty: Q[i], rate: R[i] })).filter(x => x.description || x.rate);
+      ['ld', 'ls', 'lq', 'lr'].forEach(k => delete d[k]); if (!d.tax_type) delete d.tax_type; if (!d.tax_rate_pct) delete d.tax_rate_pct; if (!d.task_id) delete d.task_id;
+      await mcall('fees.invoice.save', d, 'Draft saved'); route();
+    } });
+};
+ACT['ln-add'] = () => { const w = document.createElement('div'); put(w, lineRow()); $('#lines').appendChild(w.firstChild); };
+ACT['inv-view'] = async el => {
+  const d = await api('fees.invoice.get', { invoice_id: el.dataset.id }); const i = d.invoice;
+  modal({ title: (i.invoice_no || 'Draft invoice') + ' · ' + d.client.name, wide: 1, submit: null, body: html`<dl class="kv"><dt>Type / status</dt><dd>${i.invoice_type} ${badge(i.status)}</dd><dt>Date / due</dt><dd>${dmy(i.invoice_date)} / ${dmy(i.due_date)}</dd><dt>Tax</dt><dd>${i.tax_type} @ ${i.tax_rate_pct}%</dd></dl>${tbl([{ h: 'Description', k: 'description' }, { h: 'SAC', k: 'sac' }, { h: 'Qty', k: 'qty', cls: 'num' }, { h: 'Rate', f: r => inr(r.rate), cls: 'num' }, { h: 'Amount', f: r => inr(r.amount), cls: 'num' }], d.items)}
+    <p class="right">Taxable ₹ ${inr(i.taxable_value)} · Tax ₹ ${inr(i.tax_amount)} · <b>Total ₹ ${inr(i.total)}</b></p>${d.balance ? html`<p class="right">Paid ₹ ${inr(d.balance.paid)} · Credits ₹ ${inr(d.balance.credits)} · <b>Outstanding ₹ ${inr(d.balance.outstanding)}</b></p>` : ''}
+    <h3>Receipt allocations</h3>${tbl([{ h: 'Amount ₹', f: r => inr(r.amount), cls: 'num' }, { h: 'Status', f: r => badge(r.status) }, { h: 'Reason', k: 'reversed_reason' }, { h: '', f: r => r.status === 'ACTIVE' && has('receipt.edit') ? html`<button class="btn sm" data-act="al-rev" data-id="${r.allocation_id}">Reverse</button>` : '' }], d.allocations, { empty: 'No receipts allocated.' })}
+    <h3>Credit notes / write-offs</h3>${tbl([{ h: 'Type', k: 'adj_type' }, { h: 'Date', f: r => dmy(r.adj_date) }, { h: 'Amount ₹', f: r => inr(r.amount), cls: 'num' }, { h: 'Reason', k: 'reason' }, { h: 'Status', f: r => badge(r.status) }, { h: '', f: r => r.status === 'ACTIVE' && has('fees.edit') ? html`<button class="btn sm" data-act="adj-cancel" data-id="${r.adjustment_id}">Cancel</button>` : '' }], d.adjustments, { empty: 'None.' })}<button type="button" class="btn" onclick="window.print()">Print</button>` });
+};
+ACT['inv-issue'] = el => modal({ title: 'Issue invoice', body: html`<p class="small muted">Issuing assigns the next invoice number and locks the invoice for editing.</p><div class="row2">${fld({ n: 'invoice_date', l: 'Invoice date', t: 'date', v: today() })}${fld({ n: 'due_days', l: 'Due in (days)', t: 'number', v: 15 })}</div>`, submit: 'Issue', onSubmit: async d => { await mcall('fees.invoice.issue', Object.assign(d, { invoice_id: el.dataset.id }), 'Invoice issued'); route(); } });
+ACT['inv-cancel'] = el => confirmBox('Cancel invoice', 'Cancel this invoice? If receipts are allocated, reverse them first.', 'Cancel invoice', async d => { await mcall('fees.invoice.cancel', { invoice_id: el.dataset.id, reason: d.reason }, 'Cancelled'); route(); }, true);
+ACT['inv-adj'] = el => modal({ title: 'Credit note / write-off', body: html`<p class="small muted">Outstanding on this invoice: ₹ ${inr(el.dataset.out)}</p>${fld({ n: 'adj_type', l: 'Type', t: 'select', opts: [['CREDIT_NOTE', 'Credit note'], ['WRITE_OFF', 'Write-off'], ['DEBIT_ADJUSTMENT', 'Debit adjustment']], blank: undefined })}${fld({ n: 'amount', l: 'Amount ₹', t: 'number', step: '0.01', req: 1 })}${fld({ n: 'reason', l: 'Reason', t: 'textarea', req: 1 })}`, onSubmit: async d => { await mcall('fees.adj.add', Object.assign(d, { invoice_id: el.dataset.id }), 'Adjustment recorded'); route(); } });
+ACT['adj-cancel'] = el => confirmBox('Cancel adjustment', 'Cancel this adjustment?', 'Cancel', async d => { await mcall('fees.adj.cancel', { adjustment_id: el.dataset.id, reason: d.reason }); route(); $$('.modal-bg').forEach(m => m.remove()); }, true);
+ACT['al-rev'] = el => confirmBox('Reverse allocation', 'The receipt amount becomes unallocated again and the invoice outstanding increases.', 'Reverse', async d => { await mcall('fees.alloc.reverse', { allocation_id: el.dataset.id, reason: d.reason }, 'Reversed'); $$('.modal-bg').forEach(m => m.remove()); route(); }, true);
+ACT['rc-cancel'] = el => confirmBox('Cancel receipt', 'Allocations of this receipt are reversed automatically. The record is kept.', 'Cancel receipt', async d => { await mcall('fees.receipt.cancel', { receipt_id: el.dataset.id, reason: d.reason }, 'Receipt cancelled'); route(); }, true);
+async function allocRows(cid) { const s = await api('fees.client', { client_id: cid }); const open = s.invoices.filter(i => i.status === 'ISSUED' && i.invoice_type === 'TAX' && i.outstanding > 0); return open.length ? html`<table><thead><tr><th>Invoice</th><th class="num">Outstanding ₹</th><th>Allocate ₹</th></tr></thead><tbody>${open.map(i => html`<tr><td>${i.invoice_no}</td><td class="num">${inr(i.outstanding)}</td><td><input type="number" step="0.01" min="0" data-inv="${i.invoice_id}" style="width:120px"></td></tr>`)}</tbody></table>` : html`<div class="muted">No outstanding tax invoices for this client; the full amount will be held as an advance.</div>`; }
+const readAlloc = f => $$('[data-inv]', f).filter(x => x.value && Number(x.value) > 0).map(x => ({ invoice_id: x.dataset.inv, amount: x.value }));
+ACT['rc-new'] = async () => {
+  const cl = await clientList();
+  modal({ title: 'Record receipt', wide: 1, body: html`<div class="row3">${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), req: 1 })}${fld({ n: 'receipt_date', l: 'Date received', t: 'date', v: today(), req: 1 })}${fld({ n: 'amount', l: 'Amount ₹', t: 'number', step: '0.01', req: 1 })}</div><div class="row3">${fld({ n: 'mode', l: 'Mode', t: 'select', opts: S.enums.PAYMENT_MODES, blank: undefined })}${fld({ n: 'txn_ref', l: 'Transaction / cheque no.' })}${fld({ n: 'remarks', l: 'Remarks' })}</div><h3>Allocate to invoices (optional)</h3><div id="alloc" class="muted small">Select a client to see outstanding invoices.</div>`,
+    onOpen: bg => { $('[name=client_id]', bg).addEventListener('change', async e => { const t = $('#alloc', bg); if (!e.target.value) return; put(t, html`<span class="spin"></span>`); try { put(t, await allocRows(e.target.value)); } catch (x) { put(t, html`<div class="err">${x.message}</div>`); } }); },
+    onSubmit: async (d, f) => { d.allocations = readAlloc(f); await mcall('fees.receipt.record', d, 'Receipt recorded'); route(); } });
+};
+ACT['rc-alloc'] = async el => modal({ title: 'Allocate receipt (unallocated ₹ ' + inr(el.dataset.un) + ')', wide: 1, body: html`<div id="alloc">${await allocRows(el.dataset.client)}</div>`, onSubmit: async (d, f) => { const a = readAlloc(f); if (!a.length) throw new Error('Enter an amount against at least one invoice.'); await mcall('fees.receipt.allocate', { receipt_id: el.dataset.id, allocations: a }, 'Allocated'); route(); } });
+ACT['fu-new'] = async () => { const cl = await clientList(); modal({ title: 'Log follow-up', body: html`${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), req: 1 })}<div class="row2">${fld({ n: 'followup_date', l: 'Date', t: 'date', v: today() })}${fld({ n: 'method', l: 'Method', t: 'select', opts: ['Phone', 'Email', 'Visit', 'Letter', 'Other'], blank: undefined })}</div>${fld({ n: 'summary', l: 'Discussion', t: 'textarea', req: 1 })}<div class="row3">${fld({ n: 'promised_date', l: 'Promised date', t: 'date' })}${fld({ n: 'promised_amount', l: 'Promised ₹', t: 'number', step: '0.01' })}${fld({ n: 'next_followup_date', l: 'Next follow-up', t: 'date' })}</div>`, onSubmit: async d => { await mcall('fees.followup.save', d, 'Follow-up logged'); route(); } }); };
+/* ===== physical files ===== */
+ROUTES.files = async v => {
+  const f = store.get('ff') || '', d = await api('files.list', f === 'overdue' ? { overdue: true } : f === 'transit' ? { in_transit: true } : {});
+  put(v, html`<div class="bar"><h1>Physical files</h1><div class="sp"></div>${has('files.edit') ? html`<button class="btn pri" data-act="fl-new">+ Inward entry</button>` : ''}</div>
+   <div class="tabs">${[['', 'All'], ['transit', 'Outside office'], ['overdue', 'Overdue']].map(t => html`<a href="#" data-act="fl-f" data-f="${t[0]}" class="${f === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>
+   <div class="card" style="padding:0">${tbl([{ h: 'Ref', k: 'file_ref_no' }, { h: 'Client', k: 'client_name' }, { h: 'Description', k: 'description' }, { h: 'With', f: r => html`${r.current_custodian_name}${r.pending_ack ? html` ${badge('awaiting ack', 'warn')}` : ''}` }, { h: 'Status', f: r => badge(r.status) }, { h: 'Expected back', f: r => html`<span class="${r.overdue ? 'err' : ''}">${dmy(r.expected_return_date)}</span>` },
+     { h: '', f: r => html`<button class="btn sm" data-act="fl-hist" data-id="${r.file_id}">History</button> ${has('files.edit') && r.status !== 'Archived' ? html`<button class="btn sm" data-act="fl-tr" data-id="${r.file_id}">Transfer</button> ${['Returned', 'Received', 'In Office'].includes(r.status) ? html`<button class="btn sm" data-act="fl-arch" data-id="${r.file_id}">Archive</button>` : html`<button class="btn sm" data-act="fl-ret" data-id="${r.file_id}">Return to office</button>`}` : ''}` }], d.rows, { empty: 'No files.' })}</div>`);
+};
+ACT['fl-f'] = el => { store.set('ff', el.dataset.f); route(); };
+ACT['fl-new'] = async () => { const cl = await clientList(); modal({ title: 'Inward file entry', body: html`${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), req: 1 })}${fld({ n: 'description', l: 'Description', req: 1 })}<div class="row2">${fld({ n: 'file_type', l: 'File type' })}${fld({ n: 'received_from', l: 'Received from' })}</div><div class="row2">${fld({ n: 'received_date', l: 'Received on', t: 'date', v: today() })}${fld({ n: 'location', l: 'Location', v: 'Office' })}</div>`, onSubmit: async d => { await mcall('files.create', d, 'File recorded'); route(); } }); };
+ACT['fl-tr'] = el => modal({ title: 'Transfer file', body: html`${fld({ n: 'status_after', l: 'Movement', t: 'select', opts: S.enums.FILE_STATUSES.filter(s => !['Received', 'Returned', 'Archived'].includes(s)), blank: undefined, v: 'Assigned to Employee' })}${fld({ n: 'to_user_id', l: 'To (employee / partner)', t: 'select', opts: S.dir.map(u => [u.user_id, u.full_name]), blank: '— external recipient —' })}${fld({ n: 'to_name', l: 'External recipient (if no employee)' })}${fld({ n: 'purpose', l: 'Purpose' })}<div class="row2">${fld({ n: 'dispatch_date', l: 'Dispatch date', t: 'date', v: today() })}${fld({ n: 'expected_return_date', l: 'Expected return (required if leaving office)', t: 'date' })}</div>`, onSubmit: async d => { if (!d.to_user_id) delete d.to_user_id; if (!d.expected_return_date) delete d.expected_return_date; await mcall('files.transfer', Object.assign(d, { file_id: el.dataset.id }), 'File transferred'); route(); } });
+ACT['fl-ret'] = el => modal({ title: 'File returned to office', body: html`${fld({ n: 'return_date', l: 'Returned on', t: 'date', v: today() })}${fld({ n: 'remarks', l: 'Remarks' })}`, onSubmit: async d => { await mcall('files.return', Object.assign(d, { file_id: el.dataset.id }), 'Recorded'); route(); } });
+ACT['fl-arch'] = el => modal({ title: 'Archive file', body: fld({ n: 'location', l: 'Archive location (rack / shelf / box)', req: 1 }), onSubmit: async d => { await mcall('files.archive', Object.assign(d, { file_id: el.dataset.id }), 'Archived'); route(); } });
+ACT['fl-hist'] = async el => { const d = await api('files.history', { file_id: el.dataset.id }); modal({ title: d.file.file_ref_no + ' · movement history', wide: 1, submit: null, body: html`${tbl([{ h: '#', k: 'seq' }, { h: 'Date', f: r => dmy(r.dispatch_date) }, { h: 'From', k: 'from_name' }, { h: 'To', k: 'to_name' }, { h: 'Purpose', k: 'purpose' }, { h: 'Status', f: r => badge(r.status_after) }, { h: 'Acknowledged', f: r => r.ack_at ? dmy(r.ack_at) : (r.to_user_id ? 'Pending' : '') }, { h: '', f: r => r.to_user_id === S.me.user_id && !r.ack_at ? html`<button class="btn sm pri" data-act="fl-ack" data-id="${r.movement_id}">Acknowledge receipt</button>` : '' }], d.movements)}
+   ${has('files.edit') ? html`<button type="button" class="btn" data-act="fl-exc" data-id="${d.file.file_id}">Report lost / exception</button>` : ''}` }); };
+ACT['fl-ack'] = async el => { if (await act('files.ack', { movement_id: el.dataset.id }, 'Receipt acknowledged')) { $$('.modal-bg').forEach(m => m.remove()); S.pendingAcks = Math.max(0, S.pendingAcks - 1); route(); } };
+ACT['fl-exc'] = el => modal({ title: 'Report exception', body: fld({ n: 'remarks', l: 'What happened?', t: 'textarea', req: 1 }), onSubmit: async d => { await mcall('files.exception', { file_id: el.dataset.id, remarks: d.remarks }, 'Exception reported'); $$('.modal-bg').forEach(m => m.remove()); route(); } });
+/* ===== documents ===== */
+const DT = [['register', 'Register'], ['requests', 'Client document requests']];
+ROUTES.documents = async (v, a) => {
+  const tab = a[0] || 'register', head = html`<div class="bar"><h1>Documents</h1><div class="sp"></div>${has('docs.upload') ? html`<button class="btn pri" data-act="doc-up">+ Upload</button><button class="btn" data-act="dr-new">+ Request documents</button>` : ''}</div><div class="tabs">${DT.map(t => html`<a href="#/documents/${t[0]}" class="${tab === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>`;
+  if (tab === 'register') {
+    const q = store.get('dq') || ''; const d = await api('docs.list', { q });
+    put(v, html`${head}<form class="bar" data-sub="doc-q"><input name="q" value="${q}" placeholder="Search file name, category" style="min-width:240px"><button class="btn">Search</button>${has('backup.manage') || has('report.firm') ? html`<button type="button" class="btn" data-act="doc-exp">Export register</button>` : ''}</form><div class="card" style="padding:0">${tbl([{ h: 'File', k: 'file_name' }, { h: 'Client', k: 'client_name' }, { h: 'Category', k: 'category' }, { h: 'FY', k: 'fy' }, { h: 'Ver', k: 'version_ref' }, { h: 'Class', f: r => badge(r.confidentiality, r.confidentiality === 'Restricted' ? 'bad' : r.confidentiality === 'Confidential' ? 'warn' : '') }, { h: 'Uploaded', f: r => dmy(r.upload_date) + ' · ' + (r.uploaded_by_name || '') }, { h: '', f: r => html`<button class="btn sm" data-act="doc-dl" data-id="${r.doc_id}">Download</button>` }], d.rows, { empty: 'No documents.' })}</div><div class="small muted">Files stay private in Google Drive. Downloads are checked against your permissions on the server and recorded in the audit log.</div>`);
+  } else {
+    const d = await api('docreq.list', {});
+    put(v, html`${head}${d.length ? d.map(r => html`<div class="card"><div class="bar" style="margin:0"><h2 style="margin:0">${r.title}</h2>${badge(r.status)}<span class="muted small">${r.client_name} · due ${dmy(r.due_date)} · ${r.missing} required item(s) missing</span></div>${tbl([{ h: 'Document', k: 'name' }, { h: 'Required', f: x => x.required === 'Y' ? 'Yes' : 'No' }, { h: 'Status', f: x => badge(x.status, { Received: 'ok', Requested: 'warn', Incomplete: 'bad' }[x.status]) }, { h: 'Verification', f: x => badge(x.verification_status) }, { h: '', f: x => has('docs.upload') ? html`<button class="btn sm" data-act="dri-upd" data-id="${x.item_id}" data-s="${x.status}" data-v="${x.verification_status}">Update</button>` : '' }], r.items)}</div>`) : html`<div class="card muted">No document requests.</div>`}`);
+  }
+};
+SUB['doc-q'] = d => { store.set('dq', d.q); route(); };
+ACT['doc-up'] = async el => {
+  const cl = await clientList(); const pre = el && el.dataset ? el.dataset.client : '';
+  modal({ title: 'Upload document', body: html`${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), v: pre, req: 1 })}${fld({ n: 'file', l: 'File', t: 'file', req: 1, hint: 'PDF, images, Office files, CSV, ZIP. Executable and script files are rejected. Maximum size is set by the administrator (default 20 MB).' })}<div class="row2">${fld({ n: 'category', l: 'Category', t: 'select', opts: ['General', 'Bank', 'Sales', 'Purchase', 'GST', 'TDS', 'Income Tax', 'ROC', 'Audit', 'Agreements', 'Correspondence', 'Other'], blank: undefined })}${fld({ n: 'confidentiality', l: 'Access class', t: 'select', opts: ['Normal', 'Confidential', 'Restricted'], blank: undefined })}</div>${fld({ n: 'description', l: 'Description' })}`,
+    onSubmit: async (d, f) => {
+      const file = $('input[type=file]', f).files[0]; if (!file) throw new Error('Choose a file.'); if (file.size > 25 * 1024 * 1024) throw new Error('File is too large for upload through the browser.');
+      const b64 = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = () => rej(new Error('Could not read the file.')); r.readAsDataURL(file); });
+      await mcall('docs.upload', Object.assign(d, { file_name: file.name, mime: file.type, base64: b64 }), 'Uploaded'); route();
+    } });
+};
+ACT['doc-dl'] = async el => {
+  const r = await act('docs.download', { doc_id: el.dataset.id }); if (!r) return;
+  const bin = atob(r.base64), arr = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([arr], { type: r.mime || 'application/octet-stream' })); a.download = r.file_name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+};
+ACT['doc-exp'] = async () => { const r = await act('docs.export', {}); if (r) download(r.filename || 'documents.csv', r.csv); };
+ACT['dr-new'] = async () => { const [cl, tp] = await Promise.all([clientList(), api('master.list', { table: 'ChecklistTemplates' }).catch(() => [])]); modal({ title: 'Request documents from a client', body: html`${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), req: 1 })}${fld({ n: 'title', l: 'Request title', req: 1 })}${fld({ n: 'template_id', l: 'Checklist template', t: 'select', opts: tp.map(t => [t.template_id, t.name]), blank: '— enter items manually —' })}${fld({ n: 'items', l: 'Items (one per line; add " | O" for optional)', t: 'textarea', rows: 4 })}${fld({ n: 'due_date', l: 'Due date', t: 'date' })}`, onSubmit: async d => { d.items = (d.items || '').split('\n').map(s => s.trim()).filter(Boolean).map(s => { const p = s.split('|'); return { name: p[0].trim(), required: !(p[1] && p[1].trim().toUpperCase() === 'O') }; }); if (d.template_id) d.items = undefined; else delete d.template_id; await mcall('docreq.create', d, 'Request created'); go('documents/requests'); } }); };
+ACT['dri-upd'] = el => modal({ title: 'Update document item', body: html`${fld({ n: 'status', l: 'Status', t: 'select', opts: ['Requested', 'Received', 'Incomplete', 'Not Applicable'], v: el.dataset.s, blank: undefined })}${fld({ n: 'received_date', l: 'Received on', t: 'date', v: today() })}${fld({ n: 'verification_status', l: 'Verification', t: 'select', opts: ['Pending', 'Verified', 'Issue'], v: el.dataset.v, blank: undefined })}${fld({ n: 'remarks', l: 'Remarks' })}`, onSubmit: async d => { if (d.status !== 'Received') delete d.received_date; await mcall('docreq.item', Object.assign(d, { item_id: el.dataset.id }), 'Updated'); route(); } });
+/* ===== client email ===== */
+const MS = ['', 'DRAFT', 'PENDING_APPROVAL', 'APPROVED', 'SENT', 'FAILED', 'REJECTED'];
+ROUTES.email = async v => {
+  const st = store.get('es') || ''; const d = await api('mail.list', st ? { status: st } : {});
+  put(v, html`<div class="bar"><h1>Client email</h1><div class="sp"></div><span class="small muted">${d.quota_remaining != null ? 'Gmail quota remaining today: ' + d.quota_remaining : ''}</span>${has('email.draft') ? html`<button class="btn pri" data-act="em-new">+ Draft email</button>` : ''}</div>
+   <div class="tabs">${MS.map(s => html`<a href="#" data-act="em-f" data-f="${s}" class="${st === s ? 'on' : ''}">${s || 'All'}</a>`)}</div><div class="banner">Emails are sent from the firm's Gmail only after the approval level for the template is met. The person who drafted an email cannot approve it.</div>
+   <div class="card" style="padding:0">${tbl([{ h: 'Client', k: 'client_name' }, { h: 'To', k: 'to_email' }, { h: 'Subject', k: 'subject' }, { h: 'Approval', k: 'approval_level' }, { h: 'Drafted by', k: 'drafted_by_name' }, { h: 'Status', f: r => html`${badge(r.status)}${r.last_error ? html`<div class="small err">${r.last_error}</div>` : ''}` },
+     { h: '', f: r => html`<button class="btn sm" data-act="em-view" data-id="${r.queue_id}">Open</button> ${r.drafted_by === S.me.user_id && ['DRAFT', 'REJECTED'].includes(r.status) ? html`<button class="btn sm" data-act="em-edit" data-id="${r.queue_id}">Edit</button> <button class="btn sm pri" data-act="em-sub" data-id="${r.queue_id}">Submit</button>` : ''}${r.status === 'PENDING_APPROVAL' && has('email.approve') ? html`<button class="btn sm pri" data-act="em-ok" data-id="${r.queue_id}">Approve</button> <button class="btn sm" data-act="em-no" data-id="${r.queue_id}">Reject</button>` : ''}${['APPROVED', 'FAILED'].includes(r.status) && has('email.send') ? html`<button class="btn sm gold" data-act="em-send" data-id="${r.queue_id}">${r.status === 'FAILED' ? 'Retry send' : 'Send'}</button>` : ''}` }], d.rows, { empty: 'No emails in this view.' })}</div>`);
+  cache.mailRows = d.rows;
+};
+ACT['em-f'] = el => { store.set('es', el.dataset.f); route(); };
+ACT['em-new'] = async () => {
+  const [cl, tp] = await Promise.all([clientList(), api('master.list', { table: 'EmailTemplates' })]);
+  modal({ title: 'Draft client email', wide: 1, body: html`<div class="row2">${fld({ n: 'client_id', l: 'Client', t: 'select', opts: clientOpts(cl), req: 1 })}${fld({ n: 'template_code', l: 'Template', t: 'select', opts: tp.map(t => [t.code, t.name + ' (approval: ' + t.approval_level + ')']), blank: '— write my own —' })}</div><div class="row2">${fld({ n: 'to_email', l: 'To (defaults to the client email)', t: 'email' })}${fld({ n: 'cc_email', l: 'Cc', t: 'email' })}</div>${fld({ n: 'subject', l: 'Subject (leave blank to use the template)' })}${fld({ n: 'body', l: 'Message (leave blank to use the template)', t: 'textarea', rows: 6 })}<p class="small muted">Placeholders such as {{client_name}} are filled from the client and task. Any {{placeholder}} left unfilled must be fixed before submission.</p>`,
+    onSubmit: async d => { ['to_email', 'cc_email', 'subject', 'body', 'template_code'].forEach(k => { if (!d[k]) delete d[k]; }); const q = await mcall('mail.draft', d, 'Draft saved'); if (q.warnings && q.warnings.length) toast(q.warnings.join(' '), true); route(); } });
+};
+ACT['em-view'] = el => { const q = (cache.mailRows || []).find(x => x.queue_id === el.dataset.id); modal({ title: q.subject, submit: null, wide: 1, body: html`<dl class="kv"><dt>To</dt><dd>${q.to_email} ${q.cc_email ? '(cc ' + q.cc_email + ')' : ''}</dd><dt>Status</dt><dd>${badge(q.status)} ${q.sent_at ? dmy(q.sent_at) : ''}</dd><dt>Approval</dt><dd>${q.approval_level}${q.approved_by ? ' · by ' + uname(q.approved_by) : ''}</dd></dl><div class="card" style="white-space:pre-wrap">${q.body}</div>` }); };
+ACT['em-edit'] = el => { const q = cache.mailRows.find(x => x.queue_id === el.dataset.id); modal({ title: 'Edit draft', wide: 1, body: html`${fld({ n: 'to_email', l: 'To', v: q.to_email })}${fld({ n: 'subject', l: 'Subject', v: q.subject })}${fld({ n: 'body', l: 'Message', t: 'textarea', rows: 8, v: q.body })}`, onSubmit: async d => { await mcall('mail.edit', Object.assign(d, { queue_id: q.queue_id }), 'Saved'); route(); } }); };
+ACT['em-sub'] = async el => { if (await act('mail.submit', { queue_id: el.dataset.id }, 'Submitted')) route(); };
+ACT['em-ok'] = async el => { if (await act('mail.decide', { queue_id: el.dataset.id, approve: true }, 'Approved')) route(); };
+ACT['em-no'] = el => modal({ title: 'Reject email', body: fld({ n: 'remarks', l: 'Reason', t: 'textarea', req: 1 }), onSubmit: async d => { await mcall('mail.decide', { queue_id: el.dataset.id, approve: false, remarks: d.remarks }); route(); } });
+ACT['em-send'] = el => confirmBox('Send email', 'This sends the approved email from the firm\'s Gmail account now. It cannot be recalled.', 'Send now', async () => { const r = await mcall('mail.send', { queue_id: el.dataset.id }); toast(r.status === 'SENT' ? 'Email sent' : (r.error || 'Send failed'), r.status !== 'SENT'); route(); });
+/* ===== compliance ===== */
+ROUTES.compliance = async (v, a) => {
+  const tab = a[0] || 'records', head = html`<div class="bar"><h1>Compliance calendar</h1><div class="sp"></div>${has('compliance.manage') && tab === 'calendar' ? html`<button class="btn pri" data-act="cc-new">+ Due date</button>` : ''}</div><div class="tabs">${[['records', 'Client filings'], ['calendar', 'Due-date calendar']].map(t => html`<a href="#/compliance/${t[0]}" class="${tab === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>`;
+  if (tab === 'calendar') {
+    const d = await api('comp.cal.list', {});
+    put(v, html`${head}<div class="banner">Due dates are maintained by the administrator or a partner and are <b>not</b> built into the software. An entry marked <b>UNVERIFIED</b> has not been checked against the official notification; verify it (recording the source) before relying on it. Always confirm statutory due dates and extensions on the official portals.</div><div class="card" style="padding:0">${tbl([{ h: 'Category', k: 'category' }, { h: 'Compliance', k: 'name' }, { h: 'Period', k: 'period_label' }, { h: 'Due date', f: r => dmy(r.due_date) }, { h: 'Extension (days)', k: 'adjust_days', cls: 'num' }, { h: 'Effective due', f: r => html`<b>${dmy(r.effective_due)}</b>` }, { h: 'Status', f: r => badge(r.status) }, { h: 'Source', k: 'source_note' },
+     { h: '', f: r => has('compliance.manage') ? html`<button class="btn sm" data-act="cc-edit" data-id="${r.calendar_id}">Edit</button> <button class="btn sm" data-act="cc-ver" data-id="${r.calendar_id}">Verify</button> <button class="btn sm" data-act="cc-gen" data-id="${r.calendar_id}">Create client filings</button>` : '' }], d, { empty: 'No due dates entered yet.' })}</div>`);
+    cache.cal = d;
+  } else {
+    const f = store.get('cf') || ''; const d = await api('comp.rec.list', f === 'overdue' ? { overdue: true } : f ? { status: f } : {});
+    put(v, html`${head}<div class="tabs" style="margin-top:-6px">${[['', 'All'], ['overdue', 'Overdue'], ['Pending', 'Pending'], ['In Progress', 'In progress'], ['Filed', 'Filed']].map(t => html`<a href="#" data-act="cr-f" data-f="${t[0]}" class="${f === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div><div class="card" style="padding:0">${tbl([{ h: 'Client', k: 'client_name' }, { h: 'Compliance', f: r => html`${r.calendar_name} ${r.verified ? '' : badge('due date unverified', 'warn')}` }, { h: 'Period', k: 'period_label' }, { h: 'Due', f: r => html`<span class="${r.overdue ? 'err' : ''}">${dmy(r.due_date)}</span>` }, { h: 'Owner', k: 'responsible_name' }, { h: 'Status', f: r => badge(r.status) }, { h: 'Ack / ref', k: 'ack_no' },
+      { h: '', f: r => html`<button class="btn sm" data-act="cr-upd" data-id="${r.record_id}" data-s="${r.status}" data-a="${r.ack_no}" data-fd="${r.filed_date}">Update</button> ${!r.task_id && has('task.create') ? html`<button class="btn sm" data-act="cr-task" data-id="${r.record_id}">Create task</button>` : r.task_id ? html`<a class="btn sm" href="#/tasks/${r.task_id}">Task</a>` : ''}` }], d.rows, { empty: 'No client filings. Add a due date, then use "Create client filings".' })}</div>`);
+  }
+};
+ACT['cr-f'] = el => { store.set('cf', el.dataset.f); route(); };
+const ccForm = c => { c = c || {}; return html`<div class="row2">${fld({ n: 'category', l: 'Category', t: 'select', opts: S.enums.COMPLIANCE_CATEGORIES, v: c.category, blank: undefined })}${fld({ n: 'name', l: 'Compliance / form', v: c.name, req: 1 })}</div><div class="row3">${fld({ n: 'form_ref', l: 'Form / return', v: c.form_ref })}${fld({ n: 'period_label', l: 'Period (e.g. Oct 2026)', v: c.period_label })}${fld({ n: 'fy', l: 'FY', v: c.fy || '2026-27' })}</div><div class="row2">${fld({ n: 'due_date', l: 'Statutory due date', t: 'date', v: c.due_date, req: 1 })}${fld({ n: 'adjust_days', l: 'Extension (days, +/-)', t: 'number', v: c.adjust_days || 0 })}</div>${fld({ n: 'source_note', l: 'Source (notification / portal notice)', v: c.source_note })}<p class="small muted">Saving a changed date marks the entry UNVERIFIED until it is verified again.</p>`; };
+ACT['cc-new'] = () => modal({ title: 'Add due date', body: ccForm(), onSubmit: async d => { await mcall('comp.cal.save', d, 'Saved (unverified)'); route(); } });
+ACT['cc-edit'] = el => { const c = cache.cal.find(x => x.calendar_id === el.dataset.id); modal({ title: 'Edit due date', body: html`<input type="hidden" name="calendar_id" value="${c.calendar_id}">${ccForm(c)}`, onSubmit: async d => { await mcall('comp.cal.save', d, 'Saved'); route(); } }); };
+ACT['cc-ver'] = el => { const c = cache.cal.find(x => x.calendar_id === el.dataset.id); modal({ title: 'Verify due date', body: html`<p>${c.name} · ${c.period_label} · effective due <b>${dmy(c.effective_due)}</b></p>${fld({ n: 'note', l: 'Authoritative source used to verify (required)', v: c.source_note, req: 1 })}`, submit: 'Mark verified', onSubmit: async d => { await mcall('comp.verify', { calendar_id: c.calendar_id, note: d.note }, 'Verified'); route(); } }); };
+ACT['cc-gen'] = async el => { const r = await act('comp.generate', { calendar_id: el.dataset.id }); if (r) { toast(r.created + ' filing(s) created, ' + r.skipped + ' already existed'); go('compliance/records'); } };
+ACT['cr-upd'] = el => modal({ title: 'Update filing status', body: html`${fld({ n: 'status', l: 'Status', t: 'select', opts: ['Pending', 'Docs Awaited', 'In Progress', 'Filed', 'Not Applicable'], v: el.dataset.s, blank: undefined })}<div class="row2">${fld({ n: 'filed_date', l: 'Filed on', t: 'date', v: el.dataset.fd })}${fld({ n: 'ack_no', l: 'Acknowledgement / ARN', v: el.dataset.a })}</div>${fld({ n: 'remarks', l: 'Remarks' })}<p class="small muted">"Filed" needs a filing date and an acknowledgement number.</p>`, onSubmit: async d => { await mcall('comp.rec.update', Object.assign(d, { record_id: el.dataset.id }), 'Updated'); route(); } });
+ACT['cr-task'] = async el => { const r = await act('comp.rec.task', { record_id: el.dataset.id }, 'Task created'); if (r) go('tasks/' + r.task_id); };
+/* ===== reports ===== */
+function reportTable(r) {
+  const fmt = (c, row) => { const x = row[c.key]; if (x == null) return ''; if (c.type === 'money') return inr(x); if (c.type === 'date') return dmy(x); if (/status$/i.test(c.key) || c.key === 'priority') return badge(x); return x; };
+  return html`<div class="card"><h2>${r.title}</h2><div class="small muted">Generated ${dmy(r.generated)} by ${r.generated_by}</div>${tbl(r.columns.map(c => ({ h: c.label, f: row => fmt(c, row), cls: c.type === 'money' || c.type === 'num' ? 'num' : '' })), r.rows, { empty: 'No rows for this report.' })}${(r.notes || []).map(n => html`<div class="small muted" style="margin-top:6px">• ${n}</div>`)}</div>`;
+}
+ROUTES.reports = async (v, a) => {
+  const cat = await api('reports.catalog', {}); const id = a[0] || '';
+  const side = html`<div class="card" style="padding:6px">${cat.map(c => html`<a href="#/reports/${c.id}" style="display:block;padding:6px 8px;border-radius:6px" class="${id === c.id ? 'btn pri' : ''}">${c.title}</a>`)}</div>`;
+  if (!id) return put(v, html`<h1>Reports</h1><p class="muted">Choose a report. Reports include only the clients and staff you are authorised to see. Use Export CSV for spreadsheets or Print for a paper copy.</p><div class="grid g2">${cat.map(c => html`<a class="card" href="#/reports/${c.id}"><b>${c.title}</b></a>`)}</div>`);
+  const f = { from: store.get('rf') || addDays(today(), -30), to: store.get('rt') || today(), client_id: store.get('rc') || '' }; const filters = {}; if (f.from) filters.from = f.from; if (f.to) filters.to = f.to; if (f.client_id) filters.client_id = f.client_id;
+  const cl = has('client.view') ? await clientList() : [];
+  const r = await api('reports.run', { id, filters });
+  put(v, html`<div class="bar"><a href="#/reports">&larr; Reports</a><div class="sp"></div><button class="btn" data-act="rp-csv" data-id="${id}">Export CSV</button><button class="btn" onclick="window.print()">Print</button></div>
+   <form class="bar no-print" data-sub="rp-filter"><input type="hidden" name="id" value="${id}"><label style="margin:0">From</label><input type="date" name="from" value="${f.from}"><label style="margin:0">To</label><input type="date" name="to" value="${f.to}">${cl.length ? html`<select name="client_id">${opt(clientOpts(cl), f.client_id, 'All clients')}</select>` : ''}<button class="btn pri">Run</button></form>${reportTable(r)}`);
+};
+SUB['rp-filter'] = d => { store.set('rf', d.from); store.set('rt', d.to); store.set('rc', d.client_id || ''); route(); };
+ACT['rp-csv'] = async el => { const f = {}; const fr = store.get('rf'), to = store.get('rt'), c = store.get('rc'); if (fr) f.from = fr; if (to) f.to = to; if (c) f.client_id = c; const r = await act('reports.export', { id: el.dataset.id, filters: f }); if (r) download(r.filename, r.csv); };
+/* ===== administration ===== */
+const AT = [['users', 'Users', 'user.manage'], ['perms', 'Permissions', 'user.manage'], ['settings', 'Settings', 'settings.manage'], ['masters', 'Masters & templates', 'settings.manage'], ['audit', 'Audit log', 'audit.view'], ['backup', 'Backup & triggers', 'backup.manage'], ['integrations', 'Integrations', 'settings.manage'], ['announce', 'Announcements', 'announce.post']];
+ROUTES.admin = async (v, a) => {
+  const tabs = AT.filter(t => has(t[2])); const tab = a[0] || (tabs[0] && tabs[0][0]);
+  const head = html`<h1>Administration</h1><div class="tabs">${tabs.map(t => html`<a href="#/admin/${t[0]}" class="${tab === t[0] ? 'on' : ''}">${t[1]}</a>`)}</div>`;
+  if (tab === 'users') {
+    const d = await api('users.list', {});
+    put(v, html`${head}<div class="bar"><button class="btn pri" data-act="us-new">+ Add user</button></div><div class="card" style="padding:0">${tbl([{ h: 'Name', k: 'full_name' }, { h: 'Email', k: 'email' }, { h: 'Role', f: r => S.enums.ROLES[r.role] }, { h: 'Status', f: r => r.is_active === 'N' ? badge('Deactivated', 'bad') : r.employment_status === 'Pending Approval' ? badge('Pending approval', 'warn') : !r.activated ? badge('Awaiting activation', 'warn') : r.locked ? badge('Locked', 'bad') : badge('Active', 'ok') }, { h: 'Last login', f: r => dmy(r.last_login) },
+      { h: '', f: r => html`<button class="btn sm" data-act="us-edit" data-id="${r.user_id}">Edit</button> ${r.employment_status === 'Pending Approval' ? html`<button class="btn sm pri" data-act="us-approve" data-id="${r.user_id}">Approve</button> ` : ''}<button class="btn sm" data-act="us-access" data-id="${r.user_id}">Clients</button> <button class="btn sm" data-act="us-perm" data-id="${r.user_id}">Permissions</button> ${r.is_active === 'N' ? html`<button class="btn sm" data-act="us-react" data-id="${r.user_id}">Reactivate</button>` : html`<button class="btn sm" data-act="us-reset" data-id="${r.user_id}">Reset access</button> <button class="btn sm" data-act="us-deact" data-id="${r.user_id}">Deactivate</button>`}` }], d)}</div>`);
+    cache.users = d;
+  } else if (tab === 'perms') {
+    const m = await api('perm.matrix', {}); const roles = Object.keys(m.roles);
+    put(v, html`${head}<div class="banner">Role permissions are enforced on the server for every request. Changes apply to the next request. The Firm Administrator role always keeps every permission. Individual exceptions are set from <a href="#/admin/users">Users → Permissions</a>.</div>
+     <div class="card" style="padding:0"><div class="tw"><table><thead><tr><th>Permission</th>${roles.map(r => html`<th>${m.role_labels[r].split(' ')[0]}${r === 'SENIOR' ? ' / Rev.' : ''}</th>`)}</tr></thead><tbody>${Object.keys(m.perms).map(p => html`<tr><td>${m.perms[p]}<div class="small muted">${p}</div></td>${roles.map(r => html`<td><input type="checkbox" data-role="${r}" data-perm="${p}" ${m.roles[r].includes(p) ? raw('checked') : ''} ${r === 'ADMIN' ? raw('disabled') : ''}></td>`)}</tr>`)}</tbody></table></div></div>
+     <div class="bar" style="margin-top:10px">${roles.filter(r => r !== 'ADMIN').map(r => html`<button class="btn" data-act="pm-save" data-role="${r}">Save ${m.role_labels[r].split(' ')[0]}</button>`)}</div>
+     <h3>Individual exceptions</h3>${tbl([{ h: 'User', f: r => uname(r.user_id) }, { h: 'Permission', k: 'perm' }, { h: 'Effect', f: r => badge(r.effect, r.effect === 'DENY' ? 'bad' : 'ok') }, { h: 'Reason', k: 'reason' }], m.overrides || [], { empty: 'No individual exceptions.' })}`);
+  } else if (tab === 'settings') {
+    const d = await api('settings.get', {});
+    put(v, html`${head}<form data-sub="set-save" class="card">${d.map(s => html`<div class="f"><label>${s.key} <span class="muted">— ${s.description}</span></label><input name="${s.key}" value="${s.value}"></div>`)}<button class="btn pri">Save settings</button></form>`);
+  } else if (tab === 'masters') {
+    const t = a[1] || 'ServiceCategories'; const tables = ['ServiceCategories', 'TaskTemplates', 'ChecklistTemplates', 'EmailTemplates', 'RecurringTaskRules'];
+    const d = await api('master.list', { table: t }); const cols = d[0] ? Object.keys(d[0]).filter(k => !/^(created|updated)_|is_active/.test(k)).slice(0, 7) : [];
+    put(v, html`${head}<div class="bar">${tables.map(x => html`<a class="btn ${x === t ? 'pri' : ''}" href="#/admin/masters/${x}">${x.replace(/([A-Z])/g, ' $1').trim()}</a>`)}<div class="sp"></div><button class="btn pri" data-act="ms-new" data-t="${t}">+ Add</button></div><div class="card" style="padding:0">${tbl([...cols.map(k => ({ h: pretty(k), f: r => String(r[k] == null ? '' : r[k]).slice(0, 80) })), { h: '', f: r => html`<button class="btn sm" data-act="ms-edit" data-t="${t}" data-i="${d.indexOf(r)}">Edit</button> <button class="btn sm" data-act="ms-del" data-t="${t}" data-i="${d.indexOf(r)}">Remove</button>` }], d)}</div>`);
+    cache.master = d;
+  } else if (tab === 'audit') {
+    const f = { module: store.get('am') || '', action: store.get('aa') || '' }; const d = await api('audit.list', Object.assign({ limit: 300 }, f.module ? { module: f.module } : {}, f.action ? { action: f.action } : {}));
+    put(v, html`${head}<form class="bar" data-sub="au-filter"><input name="module" placeholder="Module" value="${f.module}"><input name="action" placeholder="Action (e.g. DENIED)" value="${f.action}"><button class="btn">Filter</button></form><div class="banner">${d.note} Showing ${d.rows.length} of ${d.total}.</div><div class="card" style="padding:0">${tbl([{ h: 'Time', f: r => dmy(r.ts) }, { h: 'User', k: 'user_name' }, { h: 'Action', f: r => badge(r.action, r.status !== 'OK' ? 'bad' : '') }, { h: 'Module', k: 'module' }, { h: 'Record', f: r => r.record_type + ' ' + r.record_id }, { h: 'Before', f: r => String(r.previous_value || '').slice(0, 70) }, { h: 'After', f: r => String(r.new_value || '').slice(0, 70) }, { h: 'Reason', k: 'reason' }, { h: 'Result', k: 'status' }], d.rows)}</div>`);
+  } else if (tab === 'backup') {
+    const d = await api('backup.list', {});
+    put(v, html`${head}<div class="banner">Backups copy the database spreadsheet inside Google Drive. They protect against mistakes, not against loss of the Google account. Document files in Drive and the script source are <b>not</b> included in a database backup; see the backup and restore guide.</div><div class="bar"><button class="btn pri" data-act="bk-db">Backup database now</button><button class="btn" data-act="bk-csv">Export all tables (CSV)</button><button class="btn" data-act="bk-inv">Document inventory</button><button class="btn" data-act="bk-cfg">Export configuration</button></div>
+     <h3>Scheduled jobs</h3>${d.triggers.length ? tbl([{ h: 'Function', k: 'handler' }, { h: 'Type', k: 'type' }], d.triggers) : html`<div class="muted">No time-driven triggers installed. Daily reminders and weekly backups will not run until you install them.</div>`}<div class="bar" style="margin-top:8px"><button class="btn" data-act="tr-inst">Install / re-install triggers</button><button class="btn" data-act="tr-run">Run daily job now</button><button class="btn" data-act="tr-rem">Remove triggers</button></div>
+     <h3>Backup log (retention ${d.retention} database copies)</h3><div class="card" style="padding:0">${tbl([{ h: 'Started', f: r => dmy(r.started_at) }, { h: 'Kind', k: 'kind' }, { h: 'Status', f: r => badge(r.status, r.status === 'OK' ? 'ok' : r.status === 'FAILED' ? 'bad' : '') }, { h: 'Detail', k: 'detail' }, { h: '', f: r => r.kind === 'DATABASE' && r.status === 'OK' ? html`<button class="btn sm" data-act="bk-ver" data-id="${r.target}">Verify</button>` : '' }], d.logs, { empty: 'No backups yet.' })}</div>`);
+  } else if (tab === 'integrations') {
+    const d = await api('master.list', { table: 'IntegrationRegister' });
+    put(v, html`${head}<div class="banner">No external system other than Google Drive, Gmail and Google Sheets is connected. Everything marked Pending is a placeholder: nothing is sent to or read from these services. Before any is enabled, review its authentication, cost, data permissions and fallback below.</div><div class="card" style="padding:0">${tbl([{ h: 'Integration', k: 'integration' }, { h: 'Purpose', k: 'purpose' }, { h: 'Status', f: r => badge(r.status, r.status === 'Core platform service' ? 'ok' : r.status === 'Pending' ? 'warn' : '') }, { h: 'Fallback today', k: 'fallback_process' }], d)}</div>`);
+  } else if (tab === 'announce') {
+    put(v, html`${head}<form data-sub="an-post" class="card">${fld({ n: 'title', l: 'Title', req: 1 })}${fld({ n: 'message', l: 'Message', t: 'textarea', req: 1 })}${fld({ n: 'audience_role', l: 'Audience', t: 'select', opts: Object.keys(S.enums.ROLES).map(r => [r, S.enums.ROLES[r]]), blank: 'Everyone' })}${fld({ n: 'expires_on', l: 'Show until', t: 'date' })}<button class="btn pri">Post announcement</button></form>`);
+  }
+};
+SUB['set-save'] = async d => { if (await act('settings.save', { values: d }, 'Settings saved')) route(); };
+SUB['au-filter'] = d => { store.set('am', d.module); store.set('aa', d.action); route(); };
+SUB['an-post'] = async d => { if (await act('announce.post', d, 'Announcement posted')) route(); };
+const showCode = (title, name, email, code) => modal({ title, submit: null, body: html`<div class="banner ok"><b>${name}</b> (${email})<br>Give this one-time activation code to the user now. It is shown only once, expires in 3 days and is stored only as a hash.</div><div class="card" style="font-size:22px;letter-spacing:2px;text-align:center;font-weight:700;user-select:all">${code}</div><p class="small muted">The user opens the sign-in page, chooses "First time?", enters their email, this code and a new password.</p>` });
+const userForm = u => { u = u || {}; return html`<div class="row2">${fld({ n: 'full_name', l: 'Full name', v: u.full_name, req: 1 })}${fld({ n: 'email', l: 'Email', t: 'email', v: u.email, req: 1 })}</div><div class="row2">${fld({ n: 'role', l: 'Role', t: 'select', opts: Object.keys(S.enums.ROLES).map(r => [r, S.enums.ROLES[r]]), v: u.role || 'CLERK', blank: undefined })}${fld({ n: 'partner_id', l: 'Reporting partner', t: 'select', opts: usersBy(['PARTNER', 'MANAGING_PARTNER']), v: u.partner_id, blank: '— none —' })}</div><div class="row3">${fld({ n: 'reporting_manager_id', l: 'Reporting manager', t: 'select', opts: S.dir.map(x => [x.user_id, x.full_name]), v: u.reporting_manager_id, blank: '— none —' })}${fld({ n: 'employee_code', l: 'Employee code', v: u.employee_code })}${fld({ n: 'department', l: 'Department', v: u.department })}</div><div class="row3">${fld({ n: 'joining_date', l: 'Joining date', t: 'date', v: u.joining_date })}${fld({ n: 'contact_number', l: 'Contact number', v: u.contact_number })}${fld({ n: 'client_access', l: 'Client visibility', t: 'select', opts: [['ASSIGNED', 'Only assigned clients'], ['ALL', 'All clients']], v: u.client_access || 'ASSIGNED', blank: undefined })}</div>`; };
+ACT['us-approve'] = el => { const u = cache.users.find(x => x.user_id === el.dataset.id); modal({ title: 'Approve ' + u.full_name, body: html`<p class="small muted">${u.email}${u.department ? ' · ' + u.department : ''}. Choose the role this person will have. Access to clients is still granted separately.</p>${fld({ n: 'role', l: 'Role', t: 'select', opts: Object.keys(S.enums.ROLES).map(k => [k, S.enums.ROLES[k]]), v: u.role })}`, submit: 'Approve', onSubmit: async d => { await mcall('users.approve', { user_id: u.user_id, role: d.role }, 'User approved'); route(); } }); };
+ACT['us-new'] = () => modal({ title: 'Add user', wide: 1, body: userForm(), onSubmit: async d => { const r = await mcall('users.save', d); route(); setTimeout(() => showCode('Activation code', r.user.full_name, r.user.email, r.activation_code), 50); } });
+ACT['us-edit'] = el => { const u = cache.users.find(x => x.user_id === el.dataset.id); modal({ title: 'Edit user', wide: 1, body: html`<input type="hidden" name="user_id" value="${u.user_id}">${userForm(u)}`, onSubmit: async d => { await mcall('users.save', d, 'User updated'); route(); } }); };
+ACT['us-reset'] = el => confirmBox('Reset access', 'This invalidates the current password and issues a new one-time activation code.', 'Reset', async () => { const r = await mcall('users.reset', { user_id: el.dataset.id }); const u = cache.users.find(x => x.user_id === el.dataset.id); route(); setTimeout(() => showCode('New activation code', u.full_name, u.email, r.activation_code), 50); });
+ACT['us-deact'] = el => confirmBox('Deactivate user', 'The user is signed out immediately and cannot sign in. Their records are kept. Open tasks must be reassigned.', 'Deactivate', async d => { const r = await mcall('users.deactivate', { user_id: el.dataset.id, reason: d.reason }); toast(r.open_tasks_to_reassign ? 'Deactivated. ' + r.open_tasks_to_reassign + ' open task(s) need reassignment.' : 'Deactivated'); route(); }, true);
+ACT['us-react'] = async el => { const r = await act('users.reactivate', { user_id: el.dataset.id }); if (r) { const u = cache.users.find(x => x.user_id === el.dataset.id); route(); setTimeout(() => showCode('Activation code', u.full_name, u.email, r.activation_code), 50); } };
+ACT['us-access'] = async el => { const [cur, cl] = await Promise.all([api('users.getClientAccess', { user_id: el.dataset.id }), clientList(true)]); const have = new Set((cur || []).map(x => x.client_id || x)); modal({ title: 'Extra client access', wide: 1, body: html`<p class="small muted">Users always see clients they are assigned to. Tick additional clients this user may open.</p><div class="mx card" style="max-height:300px;overflow:auto">${cl.map(c => html`<label><input type="checkbox" data-multi="1" name="client_ids" value="${c.client_id}" ${have.has(c.client_id) ? raw('checked') : ''}> ${c.name}</label>`)}</div>`, onSubmit: async d => { await mcall('users.setClientAccess', { user_id: el.dataset.id, client_ids: d.client_ids || [] }, 'Access updated'); } }); };
+ACT['us-perm'] = async el => {
+  const m = await api('perm.matrix', {}); const u = cache.users.find(x => x.user_id === el.dataset.id); const ov = (m.overrides || []).filter(o => o.user_id === u.user_id); const cur = {}; ov.forEach(o => cur[o.perm] = o.effect);
+  modal({ title: 'Individual permissions — ' + u.full_name, wide: 1, body: html`<p class="small muted">Role: ${S.enums.ROLES[u.role]}. An exception overrides the role for this person only. Choose "Role default" to remove an exception.</p><div class="tw"><table><tbody>${Object.keys(m.perms).map(p => html`<tr><td>${m.perms[p]} <span class="small muted">${p}</span><br><span class="small">${m.roles[u.role].includes(p) ? 'role grants this' : 'role does not grant this'}</span></td><td><select name="${p}">${opt([['', 'Role default'], ['GRANT', 'Grant'], ['DENY', 'Deny']], cur[p] || '')}</select></td></tr>`)}</tbody></table></div>${fld({ n: '__reason', l: 'Reason for change', req: 1 })}`,
+    onSubmit: async d => { let n = 0; for (const p of Object.keys(m.perms)) { if ((d[p] || '') !== (cur[p] || '')) { await mcall('perm.setUser', { user_id: u.user_id, perm: p, effect: d[p] || '', reason: d.__reason }); n++; } } toast(n + ' change(s) saved'); } });
+};
+ACT['pm-save'] = async el => { const role = el.dataset.role; const perms = $$('[data-role="' + role + '"]').filter(x => x.checked).map(x => x.dataset.perm); if (!confirm('Save permissions for this role? ' + perms.length + ' permission(s) selected.')) return; if (await act('perm.setRole', { role, perms }, 'Role permissions saved')) route(); };
+const mForm = (t, r) => { r = r || {}; const def = { ServiceCategories: ['code', 'name', 'category', 'description', 'default_est_hours'], TaskTemplates: ['name', 'service_id', 'title_pattern', 'description', 'instructions', 'est_hours', 'priority', 'requires_senior_review', 'requires_partner_approval', 'checklist', 'default_due_offset_days'], ChecklistTemplates: ['name', 'service_id', 'items'], EmailTemplates: ['code', 'name', 'subject', 'body', 'approval_level'], RecurringTaskRules: ['name', 'template_id', 'client_id', 'frequency', 'due_offset_days', 'start_date', 'end_date', 'partner_id', 'senior_id', 'clerk_id', 'status'] }[t]; const pk = { ServiceCategories: 'service_id', TaskTemplates: 'template_id', ChecklistTemplates: 'template_id', EmailTemplates: 'code', RecurringTaskRules: 'rule_id' }[t];
+  return html`${r[pk] ? html`<input type="hidden" name="${pk}" value="${r[pk]}">` : ''}${def.map(k => fld({ n: k, l: pretty(k), v: r[k], t: /body|instructions|description|items|checklist/.test(k) ? 'textarea' : /date$/.test(k) ? 'date' : 'text', req: k === 'name' || (k === 'code' && !r[pk]) ? 1 : 0 }))}<p class="small muted">Checklist templates: items separated by semicolons; add |O for optional (e.g. "Bank statements;Purchase register|O").</p>`; };
+ACT['ms-new'] = el => modal({ title: 'Add record', wide: 1, body: mForm(el.dataset.t), onSubmit: async d => { await mcall('master.save', { table: el.dataset.t, data: d }, 'Saved'); route(); } });
+ACT['ms-edit'] = el => { const r = cache.master[+el.dataset.i]; modal({ title: 'Edit record', wide: 1, body: mForm(el.dataset.t, r), onSubmit: async d => { await mcall('master.save', { table: el.dataset.t, data: d }, 'Saved'); route(); } }); };
+ACT['ms-del'] = el => { const r = cache.master[+el.dataset.i]; const pk = { ServiceCategories: 'service_id', TaskTemplates: 'template_id', ChecklistTemplates: 'template_id', EmailTemplates: 'code', RecurringTaskRules: 'rule_id' }[el.dataset.t]; confirmBox('Remove record', 'Remove "' + (r.name || r[pk]) + '"? It is hidden from lists; existing records that used it are unchanged.', 'Remove', async () => { await mcall('master.remove', { table: el.dataset.t, id: r[pk] }, 'Removed'); route(); }); };
+ACT['bk-db'] = async el => { el.disabled = true; const r = await act('backup.db', {}, 'Backup created'); el.disabled = false; if (r) route(); };
+ACT['bk-csv'] = async el => { el.disabled = true; const r = await act('backup.csv', {}, 'CSV export saved to Drive › System Exports'); el.disabled = false; if (r) route(); };
+ACT['bk-inv'] = async el => { el.disabled = true; const r = await act('backup.inventory', {}); el.disabled = false; if (r) { toast('Inventory of ' + r.count + ' file(s) saved to Drive'); route(); } };
+ACT['bk-cfg'] = async el => { const r = await act('backup.config', {}, 'Configuration exported to Drive'); if (r) route(); };
+ACT['bk-ver'] = async el => { const r = await act('backup.verify', { file_id: el.dataset.id }); if (r) modal({ title: 'Backup verification', submit: null, body: html`<div class="banner ${r.structure_ok ? 'ok' : 'bad'}">${r.structure_ok ? 'All tabs are present in the backup copy.' : 'Some tabs are missing from the backup copy.'}</div>${tbl([{ h: 'Tab', k: 'tab' }, { h: 'Backup rows', k: 'backup' }, { h: 'Live rows', k: 'live' }], r.differences, { empty: 'Row counts match the live database.' })}<p class="small muted">${r.note}</p>` }); route(); };
+ACT['tr-inst'] = async () => { const r = await act('jobs.install', {}, 'Triggers installed'); if (r) route(); };
+ACT['tr-rem'] = async () => { const r = await act('jobs.remove', {}, 'Triggers removed'); if (r !== undefined) route(); };
+ACT['tr-run'] = async el => { el.disabled = true; const r = await act('jobs.runNow', {}); el.disabled = false; if (r) toast('Daily job done: ' + (r.recurring ? r.recurring.created.length : 0) + ' recurring task(s) created, ' + r.reminders + ' reminder(s), ' + r.autoStopped + ' timer(s) auto-stopped'); };
+boot();
+</script>
+</body>
+</html>
