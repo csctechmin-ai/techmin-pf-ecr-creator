@@ -96,6 +96,8 @@ function t_(name, pfx, pk, cols, opt) {
 }
 
 t_('Settings', 'S', 'key', ['value', 'description'], { noPkGen: true, req: ['key'] });
+t_('Messages', 'MG', 'message_id', ['thread_id', 'parent_id', 'sender_id', 'subject', 'body', 'priority', 'sent_at'], { req: ['sender_id', 'body'], enums: { priority: ['Normal', 'Urgent'] }, fk: { sender_id: 'Users' } });
+t_('MessageRecipients', 'MR', 'id', ['message_id', 'thread_id', 'user_id', 'read_at'], { req: ['message_id', 'user_id'], fk: { message_id: 'Messages', user_id: 'Users' } });
 t_('Users', 'U', 'user_id', ['full_name', 'email', 'role', 'employee_code', 'partner_id', 'reporting_manager_id', 'joining_date', 'employment_status', 'department', 'contact_number', 'client_access', 'deactivated_on'],
   { req: ['full_name', 'email', 'role'], enums: { role: Object.keys(ROLES), client_access: ['ASSIGNED', 'ALL'] }, uniq: [['email']], fk: { partner_id: 'Users', reporting_manager_id: 'Users' } });
 t_('Credentials', 'C', 'user_id', ['salt', 'hash', 'rounds:n', 'activation_hash', 'activation_expires', 'failed_count:n', 'locked_until', 'must_change', 'last_login', 'last_password_change'], { noPkGen: true, fk: { user_id: 'Users' } });
@@ -772,6 +774,106 @@ var Notify = (function () {
     return a;
   }
   return { send: send, list: list, markRead: markRead, postAnnouncement: postAnnouncement };
+})();
+
+
+// ======== Messages.gs ========
+/**
+ * Messages.gs - two-way internal messages between people in the firm (partners to staff and back).
+ * - Every message has named recipients; each recipient's reading is recorded (read_at) and shown to the sender.
+ * - Sending and reading are written to the audit log (who, whom, when, subject). The message text is NOT copied into the audit log
+ *   and administrators cannot read other people's messages; only senders and recipients can open a thread.
+ * - Records are never deleted.
+ */
+var Msg = (function () {
+  var PRIORITIES = ['Normal', 'Urgent'];
+
+  function activeUsers() { return DB.all('Users').filter(function (u) { return u.employment_status !== 'Left'; }); }
+  function nameOf(users, id) { return (users[id] || {}).full_name || id; }
+
+  /** Everyone who sent or received anything in the thread. */
+  function threadMembers(threadId) {
+    var seen = {}, out = [];
+    DB.where('Messages', function (m) { return m.thread_id === threadId; }).forEach(function (m) { if (!seen[m.sender_id]) { seen[m.sender_id] = 1; out.push(m.sender_id); } });
+    DB.where('MessageRecipients', function (r) { return r.thread_id === threadId; }).forEach(function (r) { if (!seen[r.user_id]) { seen[r.user_id] = 1; out.push(r.user_id); } });
+    return out;
+  }
+
+  function send(user, d) {
+    d = d || {};
+    var body = Util.clean(d.body, 4000); V.req(body, 'Please write a message.');
+    var prio = d.priority ? V.oneOf(d.priority, PRIORITIES, 'Priority') : 'Normal';
+    var users = Util.indexBy(activeUsers(), 'user_id'), to = [], thread, parent = null, subject;
+    function add(id) { if (id && id !== user.user_id && users[id] && to.indexOf(id) < 0) to.push(id); }
+    if (d.reply_to) {
+      parent = DB.get('Messages', d.reply_to); V.req(parent, 'The message you are replying to was not found.');
+      V.req(threadMembers(parent.thread_id).indexOf(user.user_id) > -1, 'You are not part of this conversation.');
+      thread = parent.thread_id; subject = DB.get('Messages', thread).subject;
+      (Array.isArray(d.to) && d.to.length ? d.to : threadMembers(thread)).forEach(add);
+    } else {
+      subject = Util.clean(d.subject, 150); V.req(subject, 'Please enter a subject.');
+      (Array.isArray(d.to) ? d.to : []).forEach(add);
+      if (d.group) {
+        V.req(d.group === 'ALL' || ROLES[d.group], 'Unknown group.');
+        Object.keys(users).forEach(function (id) { if (d.group === 'ALL' || users[id].role === d.group) add(id); });
+      }
+    }
+    V.req(to.length > 0, 'Choose at least one person to send this to.'); V.req(to.length <= 60, 'A message can go to at most 60 people.');
+    var id = Util.uid('MG'); thread = thread || id;
+    DB.insert('Messages', { message_id: id, thread_id: thread, parent_id: parent ? parent.message_id : '', sender_id: user.user_id, subject: subject, body: body, priority: prio, sent_at: Util.now() }, user.user_id);
+    to.forEach(function (uid) { DB.insert('MessageRecipients', { message_id: id, thread_id: thread, user_id: uid, read_at: '' }, user.user_id); });
+    Notify.send(to, 'MESSAGE', (prio === 'Urgent' ? 'URGENT message from ' : 'Message from ') + user.full_name, subject, 'Message', thread);
+    Audit.log(user, 'MESSAGE_SEND', 'Messages', 'Message', id, '', { thread: thread, subject: subject, priority: prio, to: to.map(function (x) { return nameOf(users, x); }).join(', '), reply: !!parent }, '', 'OK');
+    return { message_id: id, thread_id: thread, recipients: to.length };
+  }
+
+  /** Conversations I take part in, newest first, with my unread count. */
+  function inbox(user, p) {
+    p = p || {}; var users = Util.indexBy(DB.all('Users', true), 'user_id'), threads = {};
+    var msgs = DB.all('Messages'), recs = DB.all('MessageRecipients');
+    var myThreads = {};
+    msgs.forEach(function (m) { if (m.sender_id === user.user_id) myThreads[m.thread_id] = 1; });
+    recs.forEach(function (r) { if (r.user_id === user.user_id) myThreads[r.thread_id] = 1; });
+    msgs.forEach(function (m) {
+      if (!myThreads[m.thread_id]) return;
+      var t = threads[m.thread_id] = threads[m.thread_id] || { thread_id: m.thread_id, subject: '', count: 0, last_at: '', last_from: '', last_snippet: '', unread: 0, urgent: false, members: {} };
+      t.count++; t.members[m.sender_id] = 1; if (m.parent_id === '') t.subject = m.subject; if (m.priority === 'Urgent') t.urgent = true;
+      if (m.sent_at >= t.last_at) { t.last_at = m.sent_at; t.last_from = nameOf(users, m.sender_id); t.last_snippet = String(m.body).replace(/\s+/g, ' ').slice(0, 90); }
+    });
+    recs.forEach(function (r) { var t = threads[r.thread_id]; if (!t) return; t.members[r.user_id] = 1; if (r.user_id === user.user_id && !r.read_at) t.unread++; });
+    var out = Object.keys(threads).map(function (k) { var t = threads[k]; t.members = Object.keys(t.members).filter(function (x) { return x !== user.user_id; }).map(function (x) { return nameOf(users, x); }); return t; });
+    if (p.box === 'unread') out = out.filter(function (t) { return t.unread > 0; });
+    out.sort(function (a, b) { return a.last_at < b.last_at ? 1 : -1; });
+    return { threads: out.slice(0, 200), unread: out.reduce(function (n, t) { return n + t.unread; }, 0) };
+  }
+
+  /** Open a conversation: marks every message addressed to me as read (once) and records it in the audit log. */
+  function thread(user, threadId) {
+    var members = threadMembers(threadId); V.req(members.length && members.indexOf(user.user_id) > -1, 'Conversation not found.');
+    var users = Util.indexBy(DB.all('Users', true), 'user_id'), now = Util.now();
+    var msgs = DB.where('Messages', function (m) { return m.thread_id === threadId; }).sort(function (a, b) { return a.sent_at < b.sent_at ? -1 : (a.sent_at > b.sent_at ? 1 : (a.message_id < b.message_id ? -1 : 1)); });
+    var recs = DB.where('MessageRecipients', function (r) { return r.thread_id === threadId; }), newlyRead = 0;
+    recs.forEach(function (r) {
+      if (r.user_id === user.user_id && !r.read_at) {
+        DB.update('MessageRecipients', r.id, { read_at: now }, user.user_id); r.read_at = now; newlyRead++;
+        var m = msgs.filter(function (x) { return x.message_id === r.message_id; })[0];
+        Audit.log(user, 'MESSAGE_READ', 'Messages', 'Message', r.message_id, '', { subject: m ? m.subject : '', from: m ? nameOf(users, m.sender_id) : '', read_at: now }, '', 'OK');
+      }
+    });
+    DB.where('Notifications', function (n) { return n.user_id === user.user_id && n.type === 'MESSAGE' && n.ref_id === threadId && n.is_read !== 'Y'; }).forEach(function (n) { DB.update('Notifications', n.notification_id, { is_read: 'Y' }, user.user_id); });
+    return {
+      thread_id: threadId, subject: (msgs[0] || {}).subject || '', newly_read: newlyRead,
+      messages: msgs.map(function (m) {
+        return { message_id: m.message_id, from_id: m.sender_id, from: nameOf(users, m.sender_id), mine: m.sender_id === user.user_id, sent_at: m.sent_at, body: m.body, priority: m.priority,
+          to: recs.filter(function (r) { return r.message_id === m.message_id; }).map(function (r) { return { user_id: r.user_id, name: nameOf(users, r.user_id), read_at: r.read_at }; }) };
+      }),
+      members: members.filter(function (x) { return x !== user.user_id; }).map(function (x) { return { user_id: x, name: nameOf(users, x) }; })
+    };
+  }
+
+  function unreadCount(user) { return DB.where('MessageRecipients', function (r) { return r.user_id === user.user_id && !r.read_at; }).length; }
+
+  return { send: send, inbox: inbox, thread: thread, unreadCount: unreadCount };
 })();
 
 
@@ -2847,7 +2949,10 @@ act_('logout', function (u, p, ctx) { Auth.logout(ctx.token); Audit.log(u, 'LOGO
 act_('changePassword', function (u, p) { return Auth.changePassword(u, p.old_password, p.new_password); }, true);
 act_('dashboard', function (u) { return Reports.dashboard(u); });
 /* ---- notifications ---- */
-act_('notif.list', function (u, p) { return Notify.list(u, p); });
+act_('notif.list', function (u, p) { var r = Notify.list(u, p); r.messages_unread = Msg.unreadCount(u); return r; });
+act_('msg.send', function (u, p) { return Msg.send(u, p); }, true);
+act_('msg.inbox', function (u, p) { return Msg.inbox(u, p); });
+act_('msg.thread', function (u, p) { return Msg.thread(u, p.thread_id); }, true);
 act_('notif.read', function (u, p) { return Notify.markRead(u, p.ids); }, true);
 act_('announce.post', function (u, p) { return Notify.postAnnouncement(u, p); }, true);
 /* ---- admin ---- */
