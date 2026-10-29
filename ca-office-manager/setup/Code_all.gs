@@ -3,7 +3,7 @@
  * Config.gs - constants, database schema, roles, permissions, enums.
  * CA Office Work Management System (Google Apps Script + Sheets + Drive + Gmail)
  */
-var APP = { NAME: 'CA Office Work Management System', VERSION: '1.0.0', SCHEMA_VERSION: 1, TZ: 'Asia/Kolkata', TZ_OFFSET: '+05:30' };
+var APP = { NAME: 'CA Office Work Management System', VERSION: '1.0.0', SCHEMA_VERSION: 2, TZ: 'Asia/Kolkata', TZ_OFFSET: '+05:30' };
 
 var ROLES = {
   ADMIN: 'Firm Administrator', MANAGING_PARTNER: 'Managing Partner', PARTNER: 'Partner',
@@ -176,6 +176,7 @@ t_('AuditLogs', 'AL', 'audit_id', ['ts', 'user_id', 'user_role', 'action', 'modu
 t_('IntegrationRegister', 'IR', 'integration', ['provider', 'purpose', 'status', 'auth_requirements', 'expected_cost', 'data_permissions', 'security_implications', 'rate_limits', 'setup_instructions', 'fallback_process'], { noPkGen: true });
 t_('BackupLogs', 'BL', 'backup_id', ['started_at', 'finished_at', 'kind', 'status', 'target', 'detail', 'run_by'], {});
 
+var BACKUP_DAYS = ['DAILY', 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 var SHEET_ORDER = Object.keys(SCHEMA);
 
 /** Default settings (key, value, description). Statutory dates / rates are NOT hard-coded. */
@@ -210,6 +211,7 @@ var DEFAULT_SETTINGS = [
   ['max_download_mb', '20', 'Largest document that can be opened through the app'],
   ['session_hours', '6', 'Login session length in hours (max 6 for the script cache)'],
   ['backup_retention', '10', 'Number of database backups to retain'],
+  ['backup_weekday', 'SUNDAY', 'Automatic backup day, chosen by the firm administrator: DAILY or a weekday such as SUNDAY. Backups cannot be switched off.'],
   ['root_folder_id', '', 'Google Drive root folder id (set by setupApplication)'],
   ['backup_folder_id', '', 'Google Drive backup folder id'],
   ['open_registration', 'Y', 'Y lets visitors register themselves and receive an activation key by email; N closes registration'],
@@ -433,6 +435,15 @@ var DB = (function () {
     return strip(o);
   }
   function cacheNext(name) { var c = cache[name]; if (c.nextRow < 0) c.nextRow = sheet(name).getLastRow() + 1; return c.nextRow; }
+  /** Replaces every data row of a tab with the given rows (arrays in the tab's column order). Used by restore only. */
+  function replaceTable(name, rows) {
+    needTx(); flushWrites();
+    var h = headers(name), s = sheet(name), last = s.getLastRow();
+    if (last > 1) s.getRange(2, 1, last - 1, h.length).clearContent();
+    if (rows.length) s.getRange(2, 1, rows.length, h.length).setValues(rows);
+    delete cache[name]; delete appendNext[name];
+    try { CacheService.getScriptCache().remove('tbl:' + name); } catch (e) {}
+  }
   function strip(o) { if (!o) return o; var c = {}; for (var k in o) if (k !== '__row') c[k] = o[k]; return c; }
 
   function all(name, includeInactive) {
@@ -542,7 +553,7 @@ var DB = (function () {
   }
   function setSpreadsheet(s) { ssObj = s; cache = {}; }
   function spreadsheet() { return ss(); }
-  return { all: all, get: get, where: where, findOne: findOne, insert: insert, append: append, insertMany: insertMany, update: update, deactivate: deactivate, tx: tx, nextSeq: nextSeq,
+  return { all: all, get: get, where: where, findOne: findOne, insert: insert, append: append, replaceTable: replaceTable, headers: headers, insertMany: insertMany, update: update, deactivate: deactivate, tx: tx, nextSeq: nextSeq,
     ensureSchema: ensureSchema, flushWrites: flushWrites, reset: reset, headers: headers, count: count, setSpreadsheet: setSpreadsheet, spreadsheet: spreadsheet, def: def, strip: strip };
 })();
 
@@ -2475,8 +2486,10 @@ var Admin = (function () {
   function saveSettings(user, map) {
     Perm.require(user, 'settings.manage'); var known = Util.indexBy(DB.all('Settings'), 'key'), changed = {};
     Object.keys(map || {}).forEach(function (k) {
-      V.req(known[k] && k.indexOf('seq_') !== 0, 'Unknown setting ' + k); V.req(k !== 'registry_id' && k !== 'registry_key', 'The Techmin registration cannot be edited here.'); var v = Util.clean(map[k], 500);
+      if (k === 'backup_weekday' && !known[k]) { DB.insert('Settings', { key: k, value: 'SUNDAY', description: 'Automatic backup day' }, 'system'); known[k] = DB.get('Settings', k); } V.req(known[k] && k.indexOf('seq_') !== 0, 'Unknown setting ' + k); V.req(k !== 'registry_id' && k !== 'registry_key', 'The Techmin registration cannot be edited here.'); var v = Util.clean(map[k], 500);
       if (NUMERIC.indexOf(k) > -1) V.num(v, k, 0, 100000);
+      if (k === 'backup_weekday') V.oneOf(v.toUpperCase(), BACKUP_DAYS, 'Backup day');
+      if (k === 'backup_retention') V.req(Number(v) >= 2, 'Keep at least 2 backups.');
       if (k === 'work_days') V.req(/^[0-6](,[0-6])*$/.test(v), 'Working days must be digits 0-6 separated by commas.');
       if (k === 'open_registration' || k === 'registration_approval') V.oneOf(v, ['Y', 'N'], k.replace(/_/g, ' '));
       if (k === 'registration_default_role') V.oneOf(v, ['CLERK', 'SENIOR', 'ACCOUNTS'], 'Default role for self-registered users');
@@ -2727,21 +2740,85 @@ var Backup = (function () {
     SHEET_ORDER.forEach(function (t) { var s = copy.getSheetByName(t); if (!s) { diffs.push({ tab: t, backup: 'MISSING', live: DB.count(t) }); ok = false; return; } var b = Math.max(0, s.getLastRow() - 1), live = DB.all(t, true).length; if (b !== live) diffs.push({ tab: t, backup: b, live: live }); });
     log(user, 'VERIFY', ok && !diffs.length ? 'OK' : 'DIFFERENCES', backupFileId, diffs.length + ' tab differences', started); return { structure_ok: ok, differences: diffs, note: 'Differences are expected if data changed after the backup was taken.' };
   }
-  function list(user) { Perm.require(user, 'backup.manage'); return { logs: DB.all('BackupLogs').sort(function (a, b) { return a.started_at < b.started_at ? 1 : -1; }).slice(0, 100), retention: Settings.get('backup_retention'), triggers: Jobs.listTriggers() }; }
-  return { backupDatabase: backupDatabase, exportCsvAll: exportCsvAll, documentInventory: documentInventory, exportConfig: exportConfig, verifyBackup: verifyBackup, list: list, EXPORT_TABLES: EXPORT_TABLES };
+  var KEEP_SETTINGS = ['root_folder_id', 'backup_folder_id', 'registry_id', 'registry_key', 'schema_version'];
+  /** Whole database as one JSON file. Contains every table, including password hashes, so it must be stored like the database itself. */
+  function buildJson() {
+    DB.flushWrites();
+    var tables = {}, counts = {};
+    SHEET_ORDER.forEach(function (t) { var h = DB.headers(t), rows = DB.all(t, true).map(function (r) { return h.map(function (k) { return r[k] === undefined ? '' : r[k]; }); }); tables[t] = { h: h, rows: rows }; counts[t] = rows.length; });
+    return { text: JSON.stringify({ app: 'CA-OMS', format: 1, schema_version: APP.SCHEMA_VERSION, app_version: APP.VERSION, created_at: Util.now(), firm: Settings.get('firm_name') || '', tables: tables }), counts: counts };
+  }
+  function backupJson(user) {
+    Perm.require(user, 'backup.manage'); var started = Util.now(), j = buildJson(), total = 0; Object.keys(j.counts).forEach(function (k) { total += j.counts[k]; });
+    log(user, 'JSON_DOWNLOAD', 'OK', '', total + ' rows', started); Audit.log(user, 'EXPORT', 'Backup', 'Database', '', '', 'JSON backup downloaded (' + total + ' rows)', '', 'OK');
+    return { name: 'CA-OMS-backup-' + started.replace('T', '-').replace(/:/g, '').slice(0, 15) + '.json', json: j.text, rows: total };
+  }
+  function saveJsonToDrive(started) {
+    try {
+      var name = 'CA-OMS JSON Backup ' + started.replace('T', ' ').replace(/:/g, '').slice(0, 15) + '.json', f = backupFolder().createFile(name, buildJson().text, 'application/json');
+      log(null, 'JSON', 'OK', f.getId(), name, started);
+      var keep = Settings.num('backup_retention', 10), olds = DB.where('BackupLogs', function (x) { return x.kind === 'JSON' && x.status === 'OK' && x.target; }).sort(function (a, c) { return a.started_at < c.started_at ? 1 : -1; });
+      olds.slice(keep).forEach(function (x) { try { DriveApp.getFileById(x.target).setTrashed(true); DB.update('BackupLogs', x.backup_id, { status: 'EXPIRED' }, 'system'); } catch (e) {} });
+    } catch (e) { log(null, 'JSON', 'FAILED', '', String(e && e.message || e), started); }
+  }
+  /** Replaces the live data with the contents of a JSON backup. A copy of the current database is taken first. */
+  function restoreJson(user, text, confirm) {
+    Perm.require(user, 'backup.manage'); var started = Util.now();
+    V.req(String(confirm || '').trim().toUpperCase() === 'RESTORE', 'Type RESTORE to confirm.');
+    var b; try { b = JSON.parse(String(text || '')); } catch (e) { throw new AppError('VALIDATION', 'This is not a valid backup file.'); }
+    V.req(b && b.app === 'CA-OMS' && b.format === 1 && b.tables && typeof b.tables === 'object', 'This file is not a CA Office Manager backup.');
+    V.req(Number(b.schema_version) <= APP.SCHEMA_VERSION, 'This backup was made by a newer version of the application. Update your workspace code first.');
+    V.req(b.tables.Users && b.tables.Users.rows && b.tables.Users.rows.length, 'The backup contains no users, so it cannot be restored.');
+    var safety = backupDatabase(user), keep = {}; DB.all('Settings', true).forEach(function (r) { if (KEEP_SETTINGS.indexOf(r.key) > -1) keep[r.key] = r.value; });
+    var done = {};
+    SHEET_ORDER.forEach(function (t) {
+      var src = b.tables[t]; if (!src || !src.h || !src.rows) return;
+      var h = DB.headers(t), pos = h.map(function (k) { return src.h.indexOf(k); }), rows = src.rows.map(function (r) { return pos.map(function (p) { return p < 0 || r[p] === undefined || r[p] === null ? '' : r[p]; }); });
+      if (t === 'Settings') rows.forEach(function (r) { if (keep[r[0]] !== undefined) r[h.indexOf('value')] = keep[r[0]]; });
+      DB.replaceTable(t, rows); done[t] = rows.length;
+    });
+    DB.reset(); try { CacheService.getScriptCache().remove('tbl:Users'); CacheService.getScriptCache().remove('tbl:Settings'); } catch (e) {}
+    log(user, 'RESTORE', 'OK', safety.file_id, 'Restored from backup made ' + (b.created_at || '?') + '; safety copy ' + safety.name, started);
+    Audit.log(user, 'RESTORE', 'Backup', 'Database', '', '', 'Restored from JSON backup made ' + (b.created_at || '?'), '', 'OK');
+    return { restored: done, safety_copy: safety.name, made_at: b.created_at || '' };
+  }
+  function weekdayOf(d) { return ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][new Date(d + 'T00:00:00Z').getUTCDay()]; }
+  function addDays(d, n) { var t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); }
+  function backupDay() { var w = String(Settings.get('backup_weekday') || 'SUNDAY').toUpperCase(); return BACKUP_DAYS.indexOf(w) > -1 ? w : 'SUNDAY'; }
+  function nextBackup() {
+    var today = Util.today(), hr = Number(Util.now().slice(11, 13)), w = backupDay();
+    for (var i = 0; i < 8; i++) { var d = addDays(today, i); if ((w === 'DAILY' || weekdayOf(d) === w) && (i > 0 || hr < 2)) return d + ' 02:00'; }
+    return '';
+  }
+  function lastOk() { var l = DB.where('BackupLogs', function (x) { return x.kind === 'DATABASE' && (x.status === 'OK' || x.status === 'EXPIRED'); }).sort(function (a, c) { return a.started_at < c.started_at ? 1 : -1; })[0]; return l ? l.started_at : ''; }
+  /** True when the newest good backup is older than the schedule allows. */
+  function overdue() { var l = lastOk(), gap = backupDay() === 'DAILY' ? 2 : 9; return !l || Util.diffDays(l.slice(0, 10), Util.today()) > gap; }
+  function admins() { return DB.all('Users').filter(function (u) { return u.role === 'ADMIN' || u.role === 'MANAGING_PARTNER'; }).map(function (u) { return u.user_id; }); }
+  function scheduled() {
+    if (backupDay() !== 'DAILY' && weekdayOf(Util.today()) !== backupDay()) return null;
+    var started = Util.now();
+    try { var r = backupDatabase(null); saveJsonToDrive(started); return r; }
+    catch (e) { Notify.send(admins(), 'BACKUP_FAILED', 'The automatic backup failed', String(e && e.message || e).slice(0, 200), 'Backup', '', 'bkf|' + Util.today()); throw e; }
+  }
+  function list(user) { Perm.require(user, 'backup.manage'); return { schedule: { weekday: backupDay(), days: BACKUP_DAYS, next: nextBackup(), last_ok: lastOk(), overdue: overdue(), mandatory: true }, logs: DB.all('BackupLogs').sort(function (a, b) { return a.started_at < b.started_at ? 1 : -1; }).slice(0, 100), retention: Settings.get('backup_retention'), triggers: Jobs.listTriggers() }; }
+  return { backupJson: backupJson, restoreJson: restoreJson, scheduled: scheduled, overdue: overdue, admins: admins, backupDay: backupDay, backupDatabase: backupDatabase, exportCsvAll: exportCsvAll, documentInventory: documentInventory, exportConfig: exportConfig, verifyBackup: verifyBackup, list: list, EXPORT_TABLES: EXPORT_TABLES };
 })();
 
 
 // ======== Jobs.gs ========
 /** Jobs.gs - scheduled work (time-driven triggers): recurring task generation, reminders, escalations. Triggers are installed idempotently. */
 var Jobs = (function () {
-  var HANDLERS = ['dailyJob', 'weeklyBackupJob'];
+  var HANDLERS = ['dailyJob', 'weeklyBackupJob', 'scheduledBackupJob'];
 
   function installTriggers() {
     removeTriggers(); // never leave duplicates
     ScriptApp.newTrigger('dailyJob').timeBased().everyDays(1).atHour(7).create();
-    ScriptApp.newTrigger('weeklyBackupJob').timeBased().onWeekDay(ScriptApp.WeekDay.SUNDAY).atHour(2).create();
+    ScriptApp.newTrigger('scheduledBackupJob').timeBased().everyDays(1).atHour(2).create(); // runs every night; the firm's chosen backup day is checked inside
     return listTriggers();
+  }
+  /** Backups are mandatory: if either trigger is missing it is put back. Checked at most every few hours. */
+  function ensureTriggers() {
+    try { var c = CacheService.getScriptCache(); if (c.get('trig_ok')) return false; var have = ScriptApp.getProjectTriggers().map(function (t) { return t.getHandlerFunction(); }); var ok = have.indexOf('dailyJob') > -1 && have.indexOf('scheduledBackupJob') > -1; if (!ok) installTriggers(); c.put('trig_ok', '1', 6 * 3600); return !ok; } catch (e) { return false; }
   }
   function removeTriggers() { var n = 0; ScriptApp.getProjectTriggers().forEach(function (t) { if (HANDLERS.indexOf(t.getHandlerFunction()) > -1) { ScriptApp.deleteTrigger(t); n++; } }); return n; }
   function listTriggers() { return ScriptApp.getProjectTriggers().map(function (t) { return { handler: t.getHandlerFunction(), type: String(t.getEventType()), id: t.getUniqueId() }; }); }
@@ -2778,14 +2855,16 @@ var Jobs = (function () {
         DB.update('TimeLogs', l.log_id, { end_ts: l.log_date + 'T23:59:00', minutes: Util.minutesBetween(l.start_ts, l.log_date + 'T23:59:00'), state: 'STOPPED', corrected: 'Y', description: (l.description + ' [auto-stopped at 23:59: timer was left running]').trim() }, 'system');
         Notify.send([l.user_id], 'TIMER', 'A timer was left running and was stopped at 23:59', 'Please review the time log and request a correction if needed.', 'TimeLog', l.log_id); res.autoStopped++;
       });
+      if (Backup.overdue()) n += Notify.send(admins, 'BACKUP_OVERDUE', 'No recent backup', 'The mandatory automatic backup has not completed recently. Open Administration > Backup, check the log and press Backup database now.', 'Backup', '', 'bko|' + today);
       res.reminders = n; Audit.log({ user_id: 'system', role: 'SYSTEM' }, 'DAILY_JOB', 'Jobs', '', '', '', { recurring_created: res.recurring.created.length, reminders: n }, '', 'OK');
     });
     return res;
   }
-  return { installTriggers: installTriggers, removeTriggers: removeTriggers, listTriggers: listTriggers, run: run };
+  return { ensureTriggers: ensureTriggers, installTriggers: installTriggers, removeTriggers: removeTriggers, listTriggers: listTriggers, run: run };
 })();
 function dailyJob() { return Jobs.run(); }
-function weeklyBackupJob() { try { DB.reset(); return DB.tx(function () { return Backup.backupDatabase(null); }); } catch (e) { console.error('Weekly backup failed: ' + e); } }
+function scheduledBackupJob() { try { DB.reset(); return DB.tx(function () { return Backup.scheduled(); }); } catch (e) { console.error('Scheduled backup failed: ' + e); } }
+function weeklyBackupJob() { return scheduledBackupJob(); }
 
 
 // ======== Setup.gs ========
@@ -2827,6 +2906,14 @@ function migrateSchema() {
   });
   DB.tx(function () { Settings.set('schema_version', String(APP.SCHEMA_VERSION), 'system'); seedDefaults_(true); });
   Logger.log('Schema checked. New tabs: ' + created.join(', ') + '. Tabs with new columns: ' + added.join(', ')); return { created: created, extended: added };
+}
+/** After the code is updated, the first person to sign in brings the database up to date (new tabs, columns, settings) so nobody has to run migrateSchema by hand. */
+function autoMigrate_() {
+  try {
+    if (Number(Settings.get('schema_version') || 0) >= APP.SCHEMA_VERSION) return false;
+    var lock = LockService.getScriptLock(); lock.waitLock(25000);
+    try { if (Number((DB.reset(), Settings.get('schema_version')) || 0) >= APP.SCHEMA_VERSION) return false; migrateSchema(); return true; } finally { lock.releaseLock(); }
+  } catch (e) { console.error('Automatic update failed: ' + e); return false; }
 }
 function seedDefaults_(onlyMissing) {
   DEFAULT_SETTINGS.forEach(function (r) { if (!DB.get('Settings', r[0])) DB.insert('Settings', { key: r[0], value: r[1], description: r[2] }, 'system'); });
@@ -2970,7 +3057,7 @@ act_('register.resend', function (u, p) { return Admin.resendCode(p); }, true, t
 act_('users.approve', function (u, p) { return Admin.approveUser(u, p); }, true);
 act_('activate', function (u, p) { Auth.activate(p.email, p.code, p.password); return { activated: true }; }, true, true);
 /* ---- session ---- */
-act_('me', function (u) { return { enums: { ENTITY_TYPES: ENTITY_TYPES, PIPELINE: PIPELINE, PRIORITIES: PRIORITIES, TASK_STATUSES: TASK_STATUSES, TIME_CATEGORIES: TIME_CATEGORIES, LEAVE_TYPES: LEAVE_TYPES, PAYMENT_MODES: PAYMENT_MODES, FILE_STATUSES: FILE_STATUSES, FILE_OUT_STATUSES: FILE_OUT_STATUSES, COMPLIANCE_CATEGORIES: COMPLIANCE_CATEGORIES, RECURRENCE: RECURRENCE, ROLES: ROLES }, me: userView_(u), settings: Admin.publicSettings(), directory: Admin.directory(u), pending_acks: Files.myPendingAcks(u).length }; });
+act_('me', function (u) { autoMigrate_(); if (Perm.effective(u)['backup.manage']) Jobs.ensureTriggers(); return { enums: { ENTITY_TYPES: ENTITY_TYPES, PIPELINE: PIPELINE, PRIORITIES: PRIORITIES, TASK_STATUSES: TASK_STATUSES, TIME_CATEGORIES: TIME_CATEGORIES, LEAVE_TYPES: LEAVE_TYPES, PAYMENT_MODES: PAYMENT_MODES, FILE_STATUSES: FILE_STATUSES, FILE_OUT_STATUSES: FILE_OUT_STATUSES, COMPLIANCE_CATEGORIES: COMPLIANCE_CATEGORIES, RECURRENCE: RECURRENCE, ROLES: ROLES }, me: userView_(u), settings: Admin.publicSettings(), directory: Admin.directory(u), pending_acks: Files.myPendingAcks(u).length }; });
 act_('logout', function (u, p, ctx) { Auth.logout(ctx.token); Audit.log(u, 'LOGOUT', 'Auth', 'User', u.user_id, '', '', '', 'OK'); return true; }, true);
 act_('changePassword', function (u, p) { return Auth.changePassword(u, p.old_password, p.new_password); }, true);
 act_('dashboard', function (u) { return Reports.dashboard(u); });
@@ -3115,12 +3202,14 @@ act_('reports.export', function (u, p) { return Reports.exportCsv(u, p.id, p.fil
 /* ---- backup / jobs ---- */
 act_('backup.list', function (u) { return Backup.list(u); });
 act_('backup.db', function (u) { return Backup.backupDatabase(u); }, true);
+act_('backup.json', function (u) { return Backup.backupJson(u); }, true);
+act_('backup.restore', function (u, p) { return Backup.restoreJson(u, p.json, p.confirm); }, true);
 act_('backup.csv', function (u) { return Backup.exportCsvAll(u); }, true);
 act_('backup.inventory', function (u) { return Backup.documentInventory(u); }, true);
 act_('backup.config', function (u) { return Backup.exportConfig(u); }, true);
 act_('backup.verify', function (u, p) { return Backup.verifyBackup(u, p.file_id); }, true);
 act_('jobs.install', function (u) { Perm.require(u, 'backup.manage'); Audit.log(u, 'TRIGGERS_INSTALL', 'Jobs', '', '', '', '', '', 'OK'); return Jobs.installTriggers(); }, true);
-act_('jobs.remove', function (u) { Perm.require(u, 'backup.manage'); Audit.log(u, 'TRIGGERS_REMOVE', 'Jobs', '', '', '', '', '', 'OK'); return Jobs.removeTriggers(); }, true);
+act_('jobs.remove', function (u) { Perm.require(u, 'backup.manage'); throw new AppError('VALIDATION', 'Scheduled backups are mandatory and cannot be removed. Use Install / re-install to repair them.'); Audit.log(u, 'TRIGGERS_REMOVE', 'Jobs', '', '', '', '', '', 'OK'); return Jobs.removeTriggers(); }, true);
 act_('jobs.runNow', function (u) { Perm.require(u, 'backup.manage'); return Jobs.run(); }, true);
 
 /** The only function the browser calls. */
