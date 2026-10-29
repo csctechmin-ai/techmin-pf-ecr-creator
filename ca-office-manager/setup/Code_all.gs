@@ -358,7 +358,7 @@ var V = {
  * - Dates are stored as yyyy-mm-dd text, timestamps as yyyy-mm-ddTHH:mm:ss (IST) text; sheets are formatted as plain text.
  */
 var DB = (function () {
-  var ssObj = null, cache = {}, txDepth = 0, lockObj = null, memSeq = null;
+  var ssObj = null, cache = {}, txDepth = 0, lockObj = null, memSeq = null, sheetCache = {}, pending = [];
 
   function ss() {
     if (!ssObj) {
@@ -368,10 +368,21 @@ var DB = (function () {
     }
     return ssObj;
   }
-  function reset() { ssObj = null; cache = {}; }
+  function reset() { ssObj = null; cache = {}; sheetCache = {}; pending = []; }
   function def(name) { var d = SCHEMA[name]; if (!d) throw new Error('Unknown table ' + name); return d; }
   function headers(name) { var d = def(name); return [d.pk].concat(d.cols, AUDIT_COLS); }
-  function sheet(name) { var s = ss().getSheetByName(name); if (!s) throw new AppError('SETUP', 'Missing tab ' + name + '. Run setupApplication().'); return s; }
+  function sheet(name) { if (sheetCache[name]) return sheetCache[name]; var s = ss().getSheetByName(name); if (!s) throw new AppError('SETUP', 'Missing tab ' + name + '. Run setupApplication().'); sheetCache[name] = s; return s; }
+  /** Row writes are queued and written together at the end of the transaction: neighbouring rows of one tab go out in a single call (much faster on Google Sheets). */
+  function queue(name, row, arr) { pending.push({ n: name, r: row, a: arr }); }
+  function flushWrites() {
+    if (!pending.length) return;
+    var list = pending, by = {}; pending = [];
+    list.forEach(function (w) { (by[w.n] = by[w.n] || {})[w.r] = w.a; });
+    Object.keys(by).forEach(function (n) {
+      var rows = Object.keys(by[n]).map(Number).sort(function (a, b) { return a - b; }), i = 0;
+      while (i < rows.length) { var j = i; while (j + 1 < rows.length && rows[j + 1] === rows[j] + 1) j++; var block = []; for (var k = i; k <= j; k++) block.push(by[n][rows[k]]); sheet(n).getRange(rows[i], 1, block.length, block[0].length).setValues(block); i = j + 1; }
+    });
+  }
 
   function norm(d, h, v) {
     if (v instanceof Date) return Utilities.formatDate(v, APP.TZ, "yyyy-MM-dd'T'HH:mm:ss");
@@ -415,7 +426,7 @@ var DB = (function () {
     try { return fn(); }
     finally {
       txDepth--;
-      if (txDepth === 0) { try { SpreadsheetApp.flush(); } catch (e) {} cache = {}; try { lockObj.releaseLock(); } catch (e2) {} }
+      if (txDepth === 0) { var werr = null; try { flushWrites(); } catch (e0) { werr = e0; } try { SpreadsheetApp.flush(); } catch (e) {} cache = {}; try { lockObj.releaseLock(); } catch (e2) {} if (werr) throw werr; }
     }
   }
   function needTx() { if (txDepth === 0) throw new Error('Internal: write outside DB.tx()'); }
@@ -455,7 +466,7 @@ var DB = (function () {
     validate(name, o, true, null);
     o.created_at = ts; o.created_by = userId || ''; o.updated_at = ts; o.updated_by = userId || ''; o.is_active = 'Y';
     var arr = c.h.map(function (h) { return o[h] === undefined ? '' : o[h]; });
-    sheet(name).getRange(c.nextRow, 1, 1, c.h.length).setValues([arr]);
+    queue(name, c.nextRow, arr);
     o.__row = c.nextRow; c.nextRow++;
     c.rows.push(o); c.idx[o[d.pk]] = c.rows.length - 1;
     return strip(o);
@@ -477,7 +488,7 @@ var DB = (function () {
     for (var k2 in p) cur[k2] = p[k2];
     cur.updated_at = Util.now(); cur.updated_by = userId || '';
     var arr = c.h.map(function (h) { return cur[h] === undefined ? '' : cur[h]; });
-    sheet(name).getRange(cur.__row, 1, 1, c.h.length).setValues([arr]);
+    queue(name, cur.__row, arr);
     return strip(cur);
   }
 
@@ -504,7 +515,7 @@ var DB = (function () {
   function setSpreadsheet(s) { ssObj = s; cache = {}; }
   function spreadsheet() { return ss(); }
   return { all: all, get: get, where: where, findOne: findOne, insert: insert, insertMany: insertMany, update: update, deactivate: deactivate, tx: tx, nextSeq: nextSeq,
-    ensureSchema: ensureSchema, reset: reset, headers: headers, count: count, setSpreadsheet: setSpreadsheet, spreadsheet: spreadsheet, def: def, strip: strip };
+    ensureSchema: ensureSchema, flushWrites: flushWrites, reset: reset, headers: headers, count: count, setSpreadsheet: setSpreadsheet, spreadsheet: spreadsheet, def: def, strip: strip };
 })();
 
 /** Settings helper */
@@ -2255,7 +2266,9 @@ var Admin = (function () {
     V.req(/^F-[A-Z0-9-]{6,30}$/.test(String(p.registry_id || '')), 'The Techmin firm id is not valid.'); V.req(/^[a-f0-9]{32}$/.test(String(p.registry_key || '')), 'The Techmin firm key is not valid.');
     V.req(!Settings.get('registry_id', '') || Settings.get('registry_id') === p.registry_id, 'This workspace is already registered with Techmin. Contact Techmin support to change it.');
     DB.tx(function () { Settings.set('registry_id', p.registry_id, user.user_id); Settings.set('registry_key', p.registry_key, user.user_id); });
-    Audit.log(user, 'REGISTRY_REGISTER', 'Settings', 'Settings', 'registry_id', '', { registry_id: p.registry_id }, '', 'OK'); return { registered: true };
+    Audit.log(user, 'REGISTRY_REGISTER', 'Settings', 'Settings', 'registry_id', '', { registry_id: p.registry_id }, '', 'OK');
+    var warn = ''; if (p.values && typeof p.values === 'object') { try { saveSettings(user, p.values); } catch (e) { warn = String(e && e.message || e); } }
+    var out = registryGet(user); out.registered = true; if (warn) out.warning = warn; return out;
   }
   function firmLink() {
     var base = Settings.get('app_url', ''), svc = webAppUrl_();
@@ -2545,6 +2558,7 @@ var Backup = (function () {
   function backupDatabase(user) {
     if (user) Perm.require(user, 'backup.manage'); var started = Util.now();
     try {
+      DB.flushWrites();
       var id = PropertiesService.getScriptProperties().getProperty('DB_ID'), name = 'CA-OMS Database Backup ' + started.replace('T', ' ').replace(/:/g, '').slice(0, 15), copy = DriveApp.getFileById(id).makeCopy(name, backupFolder());
       var keep = Settings.num('backup_retention', 10), olds = DB.where('BackupLogs', function (b) { return b.kind === 'DATABASE' && b.status === 'OK' && b.target; }).sort(function (a, b) { return a.started_at < b.started_at ? 1 : -1; });
       var removed = 0; olds.slice(keep - 1).forEach(function (b) { try { DriveApp.getFileById(b.target).setTrashed(true); removed++; DB.update('BackupLogs', b.backup_id, { status: 'EXPIRED' }, 'system'); } catch (e) {} });
@@ -2766,6 +2780,7 @@ var Demo = (function () {
   function purge() {
     if (Settings.get('demo_mode', 'N') !== 'Y') throw new Error('Refusing to purge: demo mode is not active on this database. Use this only on a TEST copy that holds fictional demo data.');
     var demoUsers = DB.all('Users', true).filter(function (u) { return /@demo-ca\.test$/.test(u.email); }).map(function (u) { return u.user_id; });
+    DB.flushWrites();
     var tables = SHEET_ORDER.filter(function (t) { return ['Settings', 'Roles', 'Permissions', 'ServiceCategories', 'TaskTemplates', 'ChecklistTemplates', 'EmailTemplates', 'IntegrationRegister', 'BackupLogs'].indexOf(t) < 0; });
     tables.forEach(function (t) { var sh = DB.spreadsheet().getSheetByName(t); if (sh.getLastRow() > 1) sh.getRange(2, 1, sh.getLastRow() - 1, sh.getLastColumn()).clearContent(); });
     DB.reset(); Settings.set('demo_mode', 'N', 'system');
