@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en-IN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="X-Content-Type-Options" content="nosniff"><script>try{if(window.top!==window.self){window.top.location=window.self.location}}catch(e){document.documentElement.style.display="none"}</script><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CMA Report Maker: free CMA data, Forms I to VI, MPBF and ratios | Techmin</title>
+<meta name="description" content="Free CMA (Credit Monitoring Arrangement) report maker for CA firms and MSMEs: operating statement, balance sheet, MPBF, funds flow and ratios. Works in your browser; sample data, JSON backup.">
+<meta name="keywords" content="CMA data software, CMA report maker, credit monitoring arrangement, CMA format Excel, MPBF calculator, Tandon committee, CMA data for bank loan, working capital assessment, CMA for CA, Form II operating statement, Techmin Wealth Partners">
+<meta name="author" content="Techmin Wealth Partners"><meta name="robots" content="index,follow"><meta name="theme-color" content="#12345A"><meta name="application-name" content="Techmin CMA Report Maker">
+<link rel="canonical" href="https://tools.complypro.co.in/cma-report-maker/"><link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta property="og:type" content="website"><meta property="og:title" content="CMA Report Maker | Techmin"><meta property="og:description" content="Free CMA data maker: Forms I to VI, MPBF and ratios in your browser."><meta property="og:url" content="https://tools.complypro.co.in/cma-report-maker/"><meta property="og:image" content="https://tools.complypro.co.in/og-image.png"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "CMA Report Maker", "url": "https://tools.complypro.co.in/cma-report-maker/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any modern web browser", "softwareVersion": "1.0.0", "description": "Free CMA (Credit Monitoring Arrangement) report maker for CA firms and MSMEs: operating statement, balance sheet, MPBF, funds flow and ratios. Works in your browser; sample data, JSON backup.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@type": "Organization", "name": "Techmin Wealth Partners"}, "inLanguage": "en-IN"}</script>
+<style>:root{--ink:#1c2b3a;--mut:#5b6b7b;--navy:#12345a;--teal:#0b7a8a;--bg:#f4f7fa;--card:#fff;--line:#d5dde6;--ok:#1a7f4b;--okbg:#d9f2e4;--warn:#8a5a00;--warnbg:#fdecc8;--bad:#a33;--badbg:#f8d9d9;--calc:#f1f6fb;--in:#fffef6}
+@media(prefers-color-scheme:dark){:root{--ink:#e6edf5;--mut:#9fb0c2;--navy:#0d2540;--bg:#0f1720;--card:#16212d;--line:#2a3948;--calc:#1a2836;--in:#1d2a38;--okbg:#14391f;--warnbg:#3d2f0a;--badbg:#431c1c;--ok:#7bd6a0;--warn:#f0c46c;--bad:#f19a9a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.tstb{position:sticky;top:0;z-index:99999;background:#7A1F1F;color:#fff;text-align:center;font:700 14px/1.4 system-ui,sans-serif;padding:8px 12px;letter-spacing:.02em}.tstb span{animation:tstblink 1s steps(2,start) infinite}@keyframes tstblink{to{visibility:hidden}}@media(prefers-reduced-motion:reduce){.tstb span{animation:none}}
+header.top{background:var(--navy);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}header.top b{font-size:18px}header.top .sp{flex:1}header.top a{color:#cfe0f1}
+.who{font-size:13px;color:#cfe0f1}.saved{font-size:12px;color:#9fe0b6}
+main{max-width:1280px;margin:0 auto;padding:14px 14px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:0 0 14px}
+h1{font-size:22px;margin:4px 0 10px;color:var(--navy)}h2{font-size:18px;margin:4px 0 8px;color:var(--navy)}h3{font-size:16px;margin:0 0 6px;color:var(--navy)}
+@media(prefers-color-scheme:dark){h1,h2,h3{color:#cfe0f1}}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:7px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}.btn:hover{filter:brightness(1.08)}.btn.alt{background:transparent;color:var(--teal);border:1px solid var(--teal)}.btn.bad{background:var(--bad)}.btn.sm{padding:4px 9px;font-size:13px}.btn[disabled]{opacity:.55;cursor:wait}
+input,select,textarea{font:inherit;color:var(--ink);padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--card);width:100%}input:focus,select:focus,textarea:focus,.btn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}.row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.mut{color:var(--mut)}.small{font-size:13px}
+.msg{padding:9px 12px;border-radius:7px;margin:0 0 12px}.msg.bad{background:var(--badbg);color:var(--bad)}.msg.ok{background:var(--okbg);color:var(--ok)}.msg.warn{background:var(--warnbg);color:var(--warn)}
+.auth{max-width:520px;margin:30px auto}.auth .btn{width:100%;margin-top:14px;padding:11px}.code{font-size:26px;letter-spacing:.4em;text-align:center}.links{display:flex;justify-content:space-between;margin-top:12px;font-size:14px}.links a{color:var(--teal);cursor:pointer;text-decoration:underline}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 12px;position:sticky;top:34px;background:var(--bg);z-index:50;padding:6px 0}nav.tabs a{padding:7px 12px;border-radius:7px;cursor:pointer;color:var(--ink);border:1px solid var(--line);background:var(--card);font-size:14px}nav.tabs a.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tw{overflow:auto;max-height:78vh;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table.g{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px}table.g th,table.g td{padding:3px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.g thead th{position:sticky;top:0;background:var(--navy);color:#fff;z-index:3;text-align:center;font-weight:600;padding:6px}
+table.g thead input,table.g thead select{padding:3px 5px;font-size:12.5px;text-align:center;background:#fff;color:#1c2b3a}
+table.g td.no{width:48px;color:var(--mut);font-size:12px;text-align:right;position:sticky;left:0;background:var(--card);z-index:1}
+table.g td.l{min-width:300px;max-width:420px;position:sticky;left:48px;background:var(--card);z-index:1;border-right:1px solid var(--line)}
+table.g tr.h td{background:var(--calc);font-weight:700;color:var(--navy)}@media(prefers-color-scheme:dark){table.g tr.h td{color:#cfe0f1}}
+table.g td.n{text-align:right;min-width:104px;font-variant-numeric:tabular-nums}table.g td.n.c{background:var(--calc)}table.g td.n input{text-align:right;background:var(--in);padding:4px 6px;min-width:96px}
+table.g tr.b td{font-weight:700}table.g td.ok{color:var(--ok);font-weight:700}table.g td.bad{color:var(--bad);font-weight:700;background:var(--badbg)}table.g td.warn{color:var(--warn)}
+table.s{border-collapse:collapse;width:100%;font-size:14px}table.s th,table.s td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}table.s th{background:var(--calc);font-weight:600}table.s td.r,table.s th.r{text-align:right}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}.chip{padding:3px 10px;border-radius:12px;font-size:13px}.chip.ok{background:var(--okbg);color:var(--ok)}.chip.bad{background:var(--badbg);color:var(--bad)}.chip.warn{background:var(--warnbg);color:var(--warn)}
+.legend span{display:inline-block;padding:1px 8px;border-radius:5px;margin-right:8px;font-size:12px;border:1px solid var(--line)}
+.foot{margin-top:24px;font-size:12.5px;color:var(--mut);text-align:center}
+.pr{display:none}
+@media print{body{background:#fff;color:#000}.tstb,header.top,main>*:not(.pr){display:none!important}main{padding:0;max-width:none}.pr{display:block!important}.pr .pg{page-break-after:always;margin:0 0 10px}.pr table{width:100%;border-collapse:collapse;font-size:10.5px}.pr th,.pr td{border:1px solid #888;padding:2px 4px}.pr td.n{text-align:right}.pr .ph{font-size:12px;margin-bottom:6px}@page{size:A4 landscape;margin:10mm}}
+</style></head><body>
+<div class="tstb" role="status"><span>&#9888; IT'S UNDER TESTING &hellip; ERRORS MAY OCCUR</span></div>
+<header class="top" id="bar"></header>
+<main id="main"><noscript><div class="card">CMA Report Maker needs JavaScript. Please turn it on in your browser.</div></noscript></main>
+<script>/* CMA engine: pure calculations for Forms II-VI and ratios. No DOM. Amounts in Rs. lakhs. 6 columns: 2 audited, 1 actual, 3 estimates. */
+(function (root) {
+'use strict';
+var N = 6;
+function z() { return [0, 0, 0, 0, 0, 0]; }
+function num(v) { var x = typeof v === 'number' ? v : parseFloat(String(v == null ? '' : v).replace(/,/g, '')); return isFinite(x) ? x : 0; }
+function r2(x) { return Math.round((x + (x < 0 ? -1e-9 : 1e-9)) * 100) / 100; }
+function div(a, b) { return b ? a / b : null; }
+
+/* Input fields: key -> label. Grouped by form in FORMS below. */
+var FORM2 = [
+  { h: '1. Gross income' },
+  { l: 'Domestic sales (net of returns)', i: 'dom', no: 'I(a)' },
+  { l: 'Export sales', i: 'exp', no: 'I(b)' },
+  { l: 'Sub-total (a+b)', f: 'gross_sales', no: 'I(c)', b: 1 },
+  { l: 'Less: Excise duty / other duty on sales', f: 'excise' },
+  { l: 'Net sales', f: 'net_sales', b: 1 },
+  { l: 'Percentage rise (+) / fall (-) in sales over previous year', f: 'sales_growth', pct: 1 },
+  { l: 'Other income: job-work / processing charges', i: 'oth_proc', no: 'II(a)' },
+  { l: 'Other income: miscellaneous', i: 'oth_misc', no: 'II(b)' },
+  { l: 'Total income', f: 'total_income', no: 'III', b: 1 },
+  { h: '2. Cost of sales' },
+  { l: 'Raw materials (incl. stores): imported', i: 'rm_imp', no: 'I' },
+  { l: 'Raw materials (incl. stores): indigenous', i: 'rm_ind' },
+  { l: 'Power and fuel', i: 'power', no: 'II' },
+  { l: 'Direct labour (wages, salaries, bonus, staff welfare)', i: 'labour', no: 'III' },
+  { l: 'Other manufacturing expenses', i: 'mfg', no: 'IV' },
+  { l: 'Depreciation', i: 'depn', no: 'V' },
+  { l: 'Sub-total (I to V)', f: 'cost_sub', b: 1 },
+  { l: 'Add: opening stock of work-in-process (first column: enter)', i: 'wip_open', fo: 'wip_open', no: 'IV' },
+  { l: 'Sub-total (III+IV)', f: 'cost_sub2' },
+  { l: 'Less: closing stock of work-in-process', i: 'wip_close', no: 'VI' },
+  { l: 'Total cost of production', f: 'cop', b: 1, no: 'VII' },
+  { l: 'Add: opening stock of finished goods (first column: enter)', i: 'fg_open', fo: 'fg_open', no: 'VIII' },
+  { l: 'Sub-total (VII+VIII)', f: 'cop_fg' },
+  { l: 'Less: closing stock of finished goods', i: 'fg_close', no: 'X' },
+  { l: 'Total cost of sales', f: 'cos', b: 1, no: 'XI' },
+  { l: 'Cost of sales as % of gross sales', f: 'cos_pct', pct: 1 },
+  { h: '3 to 7. Overheads, interest and operating profit' },
+  { l: 'Selling, general and administrative expenses', i: 'sga', no: '3' },
+  { l: 'Operating profit before interest [1(III) - 2(XI) - 3]', f: 'op_bi', b: 1, no: '4' },
+  { l: 'Operating profit as % of gross sales', f: 'op_pct', pct: 1 },
+  { l: 'Interest on working capital', i: 'int_wc', no: '5' },
+  { l: 'Interest on term loans', i: 'int_tl' },
+  { l: 'Operating profit after interest [4 - 5]', f: 'op_ai', b: 1, no: '7' },
+  { h: '8. Other non-operating income and expenses' },
+  { l: 'Add: interest received', i: 'no_int' },
+  { l: 'Add: prior-period income', i: 'no_prior' },
+  { l: 'Add: other non-operating income', i: 'no_oth' },
+  { l: 'Less: other non-operating expenses (a)', i: 'ne_a' },
+  { l: 'Less: other non-operating expenses (b)', i: 'ne_b' },
+  { l: 'Net of other non-operating income / expenses', f: 'no_net' },
+  { l: 'Profit before tax / (loss) [7 + 8]', f: 'pbt', b: 1, no: '9' },
+  { l: 'Provision for taxes', f: 'tax', no: '10' },
+  { l: 'Net profit / (loss) [9 - 10]', f: 'pat', b: 1, no: '11' },
+  { l: 'Net profit as % of net sales', f: 'pat_pct', pct: 1 },
+  { l: 'Equity dividend paid', i: 'div', no: '12(a)' },
+  { l: 'Retained profit [11 - 12]', f: 'retained', b: 1, no: '13' },
+  { l: 'Retained profit as % of net profit', f: 'ret_pct', pct: 1, no: '14' },
+  { h: '15. Break-up of sales turnover (domestic, quarterly split 26 / 24 / 18 / 32 %)' },
+  { l: '1st quarter', f: 'q1' }, { l: '2nd quarter', f: 'q2' }, { l: '3rd quarter', f: 'q3' }, { l: '4th quarter', f: 'q4' }
+];
+var FORM3L = [
+  { h: 'Current liabilities' },
+  { l: 'Short-term borrowings from the applicant bank', i: 'bank_app', no: '1(a)' },
+  { l: 'Short-term borrowings from other banks', i: 'bank_oth', no: '1(b)' },
+  { l: 'Sub-total (A): bank borrowings', f: 'bank_tot', b: 1 },
+  { l: 'Short-term borrowings from others', i: 'stb_oth', no: '2' },
+  { l: 'Sundry creditors (trade)', i: 'cred', no: '3' },
+  { l: 'Advance payments from customers / deposits from dealers', i: 'adv_cust', no: '4' },
+  { l: 'Provision for taxation', i: 'prov_tax', no: '5' },
+  { l: 'Dividend payable', i: 'div_pay', no: '6' },
+  { l: 'Other statutory liabilities (due within one year)', i: 'stat_oth', no: '7' },
+  { l: 'Instalments of term loans / deposits / debentures due within one year', i: 'tl_inst', no: '8' },
+  { l: 'Other current liabilities and provisions (due within one year)', i: 'ocl', no: '9' },
+  { l: 'Sub-total (B): other than bank borrowings', f: 'ocl_tot', b: 1 },
+  { l: 'Total current liabilities (A + B)', f: 'cl', b: 1, no: '10' },
+  { h: 'Term liabilities' },
+  { l: 'Debentures (not maturing within one year)', i: 'deb', no: '11' },
+  { l: 'Preference shares (redeemable after one year)', i: 'pref', no: '12' },
+  { l: 'Term loan', i: 'tl1', no: '13' },
+  { l: 'Term loan II / other term loan', i: 'tl2' },
+  { l: 'Corporate loan', i: 'corp' },
+  { l: 'Deferred payment credits (excluding instalments due within one year)', i: 'dpg', no: '14' },
+  { l: 'Term deposits (repayable after one year)', i: 'term_dep', no: '15' },
+  { l: 'Other term liabilities: unsecured loans', i: 'unsec', no: '16' },
+  { l: 'Total term liabilities', f: 'tl', b: 1, no: '17' },
+  { l: 'Total outside liabilities (10 + 17)', f: 'tol', b: 1, no: '18' },
+  { h: 'Net worth' },
+  { l: 'Share capital / partners\' capital', i: 'cap', no: '19' },
+  { l: 'General reserve', i: 'gres', no: '20' },
+  { l: 'Revaluation reserve', i: 'rres', no: '21' },
+  { l: 'Other reserves (excluding provisions)', i: 'ores', no: '22' },
+  { l: 'Surplus (+) / deficit (-) in profit and loss account (first column: enter; then carried forward)', i: 'surplus', fo: 'surplus', no: '23' },
+  { l: 'Net worth', f: 'nw', b: 1, no: '24' },
+  { l: 'Total liabilities (18 + 24)', f: 'tliab', b: 1, no: '25' }
+];
+var FORM3A = [
+  { h: 'Current assets' },
+  { l: 'Cash and bank balances', i: 'cash', no: '26' },
+  { l: 'Investments: government and other trustee securities', i: 'inv_gov', no: '27(I)' },
+  { l: 'Investments: fixed deposits with banks', i: 'fd', no: '27(II)' },
+  { l: 'Receivables other than deferred and exports (incl. bills purchased / discounted)', i: 'rec_dom', no: '28(I)' },
+  { l: 'Export receivables (incl. bills purchased / discounted)', i: 'rec_exp', no: '28(II)' },
+  { l: 'Instalments under deferred receivables (due within one year)', i: 'def_rec', no: '29' },
+  { l: 'Raw materials: imported', i: 'rms_imp', no: '30' },
+  { l: 'Raw materials: indigenous', i: 'rms_ind' },
+  { l: 'Stocks in process (from the operating statement)', f: 'wip_close' },
+  { l: 'Finished goods (from the operating statement)', f: 'fg_close' },
+  { l: 'Goods in transit', i: 'git' },
+  { l: 'Other consumable spares', i: 'spares' },
+  { l: 'Advances to suppliers of merchandise', i: 'adv_sup', no: '31' },
+  { l: 'Advance payment of taxes', i: 'adv_tax', no: '32' },
+  { l: 'Other current assets', i: 'oca', no: '33' },
+  { l: 'Total current assets', f: 'ca', b: 1, no: '34' },
+  { h: 'Fixed assets' },
+  { l: 'Gross block (land, building, machinery, furniture, vehicles)', i: 'gross', no: '35' },
+  { l: 'Depreciation to date (first column: enter; then carried forward)', i: 'adep', fo: 'adep', no: '36' },
+  { l: 'Net block (35 - 36)', f: 'netblock', b: 1, no: '37' },
+  { h: 'Other non-current assets' },
+  { l: 'Investments in subsidiaries / affiliates', i: 'nc_sub', no: '38' },
+  { l: 'Other investments, book debts, advances not current assets', i: 'nc_inv' },
+  { l: 'Advances to suppliers of capital goods and contractors', i: 'nc_cap' },
+  { l: 'Deferred receivables (maturity exceeding one year)', i: 'nc_def' },
+  { l: 'Security / tender deposits', i: 'nc_sec' },
+  { l: 'Other non-current assets (incl. dues from directors)', i: 'nc_oth', no: '40' },
+  { l: 'Obsolete stocks', i: 'nc_obs', no: '39' },
+  { l: 'Total other non-current assets', f: 'nca', b: 1, no: '41' },
+  { l: 'Intangible assets (patents, goodwill, preliminary expenses etc.)', i: 'intang', no: '42' },
+  { l: 'Total assets (34 + 37 + 41 + 42)', f: 'ta', b: 1, no: '43' },
+  { l: 'Difference: total liabilities less total assets (must be nil)', f: 'bs_diff', chk: 1 },
+  { h: 'Analysis' },
+  { l: 'Tangible net worth (24 - 42)', f: 'tnw', b: 1, no: '44' },
+  { l: 'Net working capital [(17 + 24) - (37 + 41 + 42)]', f: 'nwc', b: 1, no: '45' },
+  { l: 'Current ratio (34 / 10)', f: 'cr', ratio: 1, no: '46' },
+  { l: 'Total outside liabilities / tangible net worth', f: 'tol_tnw', ratio: 1, no: '47' }
+];
+var FORM4 = [
+  { h: 'A. Current assets' },
+  { l: 'Raw materials: imported', f: 'f4_rm_imp', no: '1' },
+  { l: 'Raw materials: indigenous (incl. goods in transit)', f: 'f4_rm_ind' },
+  { l: 'months\' consumption', f: 'm_rm', mon: 1 },
+  { l: 'Stocks in process', f: 'wip_close', no: '2' },
+  { l: 'months\' cost of production', f: 'm_wip', mon: 1 },
+  { l: 'Finished goods', f: 'fg_close', no: '3' },
+  { l: 'months\' cost of sales', f: 'm_fg', mon: 1 },
+  { l: 'Other consumable spares', f: 'spares', no: '4' },
+  { l: 'months\' consumption', f: 'm_sp', mon: 1 },
+  { l: 'Receivables other than export and deferred', f: 'rec_dom', no: '5' },
+  { l: 'months\' domestic sales', f: 'm_rec', mon: 1 },
+  { l: 'Export receivables', f: 'rec_exp', no: '6' },
+  { l: 'Advances to suppliers of merchandise', f: 'adv_sup', no: '7' },
+  { l: 'Other current assets incl. cash, bank, investments, deferred receivables', f: 'f4_oca', no: '8' },
+  { l: 'Total current assets', f: 'f4_ca', b: 1, no: '9' },
+  { l: 'Difference from Form III item 34 (must be nil)', f: 'f4_ca_diff', chk: 1 },
+  { h: 'B. Current liabilities (other than bank borrowings for working capital)' },
+  { l: 'Sundry creditors (trade)', f: 'cred', no: '10' },
+  { l: 'months\' purchases', f: 'm_cred', mon: 1 },
+  { l: 'Advances from customers / deposits from dealers', f: 'adv_cust', no: '11' },
+  { l: 'Statutory liabilities (incl. provision for taxation)', f: 'f4_stat', no: '12' },
+  { l: 'Other current liabilities (short-term borrowings, unsecured loans, instalments of term loans etc.)', f: 'f4_ocl', no: '13' },
+  { l: 'Total', f: 'f4_cl', b: 1, no: '14' },
+  { l: 'Difference from Form III sub-total B (must be nil)', f: 'f4_cl_diff', chk: 1 }
+];
+var FORM5 = [
+  { h: 'Method I: 25% of working capital gap from long-term sources (as in the workbook)' },
+  { l: 'Total current assets (Form IV item 9)', f: 'f4_ca', no: '1' },
+  { l: 'Other current liabilities, other than bank borrowing (Form IV item 14)', f: 'f4_cl', no: '2' },
+  { l: 'Working capital gap (WCG) (1 - 2)', f: 'wcg', b: 1, no: '3' },
+  { l: 'Minimum stipulated net working capital (25% of WCG)', f: 'm1_min', no: '4' },
+  { l: 'Actual / projected net working capital (Form III item 45)', f: 'nwc', no: '5' },
+  { l: 'Item 3 minus item 4', f: 'm1_a', no: '6' },
+  { l: 'Item 3 minus item 5', f: 'm1_b', no: '7' },
+  { l: 'Maximum permissible bank finance (MPBF): lower of 6 and 7', f: 'm1_mpbf', b: 1, no: '8' },
+  { l: 'Excess borrowings representing shortfall in NWC (4 - 5)', f: 'm1_excess', no: '9' },
+  { h: 'Method II: 25% of current assets from long-term sources (extra)' },
+  { l: 'Minimum net working capital (25% of current assets)', f: 'm2_min' },
+  { l: 'MPBF [75% of current assets - other current liabilities], not below nil', f: 'm2_mpbf', b: 1 },
+  { h: 'Comparison with bank borrowings shown in the balance sheet' },
+  { l: 'Bank borrowings in the balance sheet (Form III 1)', f: 'bank_tot' },
+  { l: 'Headroom (+) / excess (-) against Method I MPBF', f: 'head1', b: 1 },
+  { l: 'Headroom (+) / excess (-) against Method II MPBF', f: 'head2' }
+];
+var FORM6 = [
+  { h: '1. Sources' },
+  { l: 'Net profit (after tax)', f: 'fl_np', no: 'a' },
+  { l: 'Depreciation', f: 'fl_dep', no: 'b' },
+  { l: 'Miscellaneous expenditure written off', f: 'fl_misc', no: 'c' },
+  { l: 'Increase in capital', f: 'fl_cap', no: 'd' },
+  { l: 'Increase in term liabilities (incl. public deposits)', f: 'fl_tl_up', no: 'e' },
+  { l: 'Decrease in fixed assets', f: 'fl_fa_dn', no: 'f(I)' },
+  { l: 'Decrease in other non-current assets', f: 'fl_nca_dn', no: 'f(II)' },
+  { l: 'Total sources', f: 'fl_src', b: 1, no: 'g' },
+  { h: '2. Uses' },
+  { l: 'Net loss', f: 'fl_loss', no: 'a' },
+  { l: 'Decrease in term liabilities (incl. public deposits)', f: 'fl_tl_dn', no: 'b' },
+  { l: 'Increase in fixed assets', f: 'fl_fa_up', no: 'c(I)' },
+  { l: 'Increase in other non-current assets', f: 'fl_nca_up', no: 'c(II)' },
+  { l: 'Dividend payments (previous year\'s dividend, as in the workbook)', f: 'fl_div', no: 'd' },
+  { l: 'Others (fall in reserves not explained by retained profit)', f: 'fl_oth', no: 'e' },
+  { l: 'Total uses', f: 'fl_use', b: 1, no: 'f' },
+  { l: 'Long-term surplus (+) / deficit (-) [1 - 2]', f: 'fl_lt', b: 1, no: '3' },
+  { l: 'Increase / decrease in current assets', f: 'fl_ca', no: '4' },
+  { l: 'Increase / decrease in current liabilities other than bank borrowings', f: 'fl_cl', no: '5' },
+  { l: 'Increase / decrease in working capital gap', f: 'fl_wcg', no: '6' },
+  { l: 'Net surplus (+) / deficit (-) [3 + 6]', f: 'fl_net', b: 1, no: '7' },
+  { l: 'Increase / decrease in bank borrowings', f: 'fl_bank', no: '8' },
+  { l: 'Increase / decrease in net sales', f: 'fl_sales' },
+  { h: 'Break-up of item 4' },
+  { l: 'Increase / decrease in stock-in-trade', f: 'fl_stock', no: 'i' },
+  { l: 'Increase / decrease in receivables: domestic', f: 'fl_rd', no: 'ii(a)' },
+  { l: 'Increase / decrease in receivables: export', f: 'fl_re', no: 'ii(b)' },
+  { l: 'Increase / decrease in other current assets', f: 'fl_oca', no: 'iii' },
+  { l: 'Difference from item 4 (must be nil)', f: 'fl_diff', chk: 1 }
+];
+
+/* Ratios: key, label, group, norm text, type (x = times, p = percent, d = days, r = ratio), direction (>, <), limit, function name */
+var RATIOS = [
+  ['Efficiency', 'Net sales / total assets (times)', 'r_ns_ta', 'x', '>', 1.5],
+  ['Efficiency', 'PBT / total assets (%)', 'r_pbt_ta', 'p', '>', 0.05],
+  ['Efficiency', 'Operating cost / net sales (%)', 'r_opc', 'p', '<', 0.75],
+  ['Efficiency', 'Bank finance / current assets (%)', 'r_bank_ca', 'p', '<', 0.5],
+  ['Efficiency', 'Inventory + receivables / net sales (days)', 'r_inv_rec', 'd', '<', 60],
+  ['Liquidity', 'Current ratio', 'cr', 'x', '>', 1.33],
+  ['Liquidity', 'Acid test ratio', 'r_acid', 'x', '>', 1],
+  ['Liquidity', 'Bank finance to working capital gap', 'r_bank_wcg', 'x', '<', 0.75],
+  ['Leverage', 'Debt equity ratio', 'r_de', 'x', '<', 2],
+  ['Leverage', 'TOL / TNW', 'tol_tnw', 'x', '<', 3],
+  ['Leverage', 'Debt-assets ratio', 'r_da', 'x', '<', 0.6],
+  ['Leverage', 'Fixed assets coverage', 'r_fac', 'x', '<', 0.6],
+  ['Leverage', 'Interest coverage ratio', 'r_icr', 'x', '>', 2],
+  ['Turnover', 'Inventory turnover period (days)', 'r_invdays', 'd', '<', 30],
+  ['Turnover', 'Average collection period (days)', 'r_coll', 'd', '<', 30],
+  ['Turnover', 'Total assets turnover (times)', 'r_ns_ta', 'x', '>', 1],
+  ['Turnover', 'Average credit period: creditors (days)', 'r_cred', 'd', '<', 30],
+  ['Turnover', 'Bank finance turnover (times)', 'r_bank_to', 'x', '>', 5],
+  ['Turnover', 'Current assets turnover (times)', 'r_ca_to', 'x', '>', 3],
+  ['Profitability', 'Net profit margin after tax (%)', 'r_npm', 'p', '>', 0.05],
+  ['Profitability', 'Net income to assets (%)', 'r_nia', 'p', '>', 0.10],
+  ['Profitability', 'Return on investment: PBDIT / total assets (%)', 'r_roi', 'p', '>', 0.20],
+  ['Profitability', 'Return on equity (%)', 'r_roe', 'p', '>', 0.18],
+  ['Profitability', 'Operating profitability (%)', 'r_opp', 'p', '>', 0.20],
+  ['Profitability', 'Pre-tax profitability (%)', 'r_ptp', 'p', '>', 0.15],
+  ['Profitability', 'PBT / total assets (%)', 'r_pbt_ta', 'p', '>', 0.10],
+  ['Structural', 'Retained profit (%)', 'r_ret', 'p', '>', 0.20],
+  ['Structural', 'Raw material content (%)', 'r_rmc', 'p', '<', 0.50],
+  ['Structural', 'Operating cost / sales (%)', 'r_opc2', 'p', '<', 0.75]
+];
+
+/* Every input key in order, with the first-column-only keys marked. */
+var INPUTS = []; var FIRST_ONLY = {};
+[FORM2, FORM3L, FORM3A].forEach(function (f) { f.forEach(function (r) { if (r.i) { INPUTS.push(r.i); if (r.fo) FIRST_ONLY[r.i] = 1; } }); });
+
+function blankCase(name) {
+  var v = {}; INPUTS.forEach(function (k) { v[k] = z(); });
+  return {
+    id: 'c' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36), name: name || 'New borrower',
+    meta: { company: '', bank: '', branch: '', constitution: '', activity: '', address: '', prepared_by: '', date: '', excise: 0, tax: 30, units: 'Rs. in lakhs' },
+    years: ['31.03.2023', '31.03.2024', '31.03.2025', '31.03.2026', '31.03.2027', '31.03.2028'],
+    kinds: ['Audited', 'Audited', 'Actual', 'Estimate', 'Estimate', 'Estimate'],
+    v: v, limits: [], assoc: [], updated: ''
+  };
+}
+
+function compute(c) {
+  var m = c.meta || {}, V = c.v || {}, d = {};
+  function A(k) { var a = z(); var s = V[k] || []; for (var i = 0; i < N; i++) a[i] = num(s[i]); return a; }
+  function each(f) { var a = z(); for (var i = 0; i < N; i++) a[i] = f(i); return a; }
+  var ex = num(m.excise) / 100, tx = num(m.tax) / 100;
+  INPUTS.forEach(function (k) { d[k] = A(k); });
+  d.gross_sales = each(function (i) { return d.dom[i] + d.exp[i]; });
+  d.excise = each(function (i) { return Math.round(d.gross_sales[i] * ex); });
+  d.net_sales = each(function (i) { return d.gross_sales[i] - d.excise[i]; });
+  d.sales_growth = each(function (i) { return i === 0 ? null : div(d.gross_sales[i] - d.gross_sales[i - 1], d.gross_sales[i - 1]); });
+  d.total_income = each(function (i) { return d.net_sales[i] + d.oth_proc[i] + d.oth_misc[i]; });
+  d.cost_sub = each(function (i) { return d.rm_imp[i] + d.rm_ind[i] + d.power[i] + d.labour[i] + d.mfg[i] + d.depn[i]; });
+  d.wip_open = each(function (i) { return i === 0 ? A('wip_open')[0] : d.wip_close[i - 1]; });
+  d.fg_open = each(function (i) { return i === 0 ? A('fg_open')[0] : d.fg_close[i - 1]; });
+  d.cost_sub2 = each(function (i) { return d.wip_open[i] + d.cost_sub[i]; });
+  d.cop = each(function (i) { return d.cost_sub2[i] - d.wip_close[i]; });
+  d.cop_fg = each(function (i) { return d.cop[i] + d.fg_open[i]; });
+  d.cos = each(function (i) { return d.cop_fg[i] - d.fg_close[i]; });
+  d.cos_pct = each(function (i) { return div(d.cos[i], d.gross_sales[i]); });
+  d.op_bi = each(function (i) { return d.total_income[i] - d.cos[i] - d.sga[i]; });
+  d.op_pct = each(function (i) { return div(d.op_bi[i], d.gross_sales[i]); });
+  d.op_ai = each(function (i) { return d.op_bi[i] - d.int_wc[i] - d.int_tl[i]; });
+  d.no_net = each(function (i) { return d.no_int[i] + d.no_prior[i] + d.no_oth[i] - d.ne_a[i] - d.ne_b[i]; });
+  d.pbt = each(function (i) { return d.op_ai[i] + d.no_net[i]; });
+  d.tax = each(function (i) { return d.pbt[i] > 0 ? d.pbt[i] * tx : 0; });
+  d.pat = each(function (i) { return d.pbt[i] - d.tax[i]; });
+  d.pat_pct = each(function (i) { return div(d.pat[i], d.net_sales[i]); });
+  d.retained = each(function (i) { return d.pat[i] - d.div[i]; });
+  d.ret_pct = each(function (i) { return d.pat[i] > 0 ? d.retained[i] / d.pat[i] : null; });
+  d.q1 = each(function (i) { return d.dom[i] * 0.26; }); d.q2 = each(function (i) { return d.dom[i] * 0.24; });
+  d.q3 = each(function (i) { return d.dom[i] * 0.18; }); d.q4 = each(function (i) { return d.dom[i] * 0.32; });
+  /* balance sheet */
+  d.bank_tot = each(function (i) { return d.bank_app[i] + d.bank_oth[i]; });
+  d.ocl_tot = each(function (i) { return d.stb_oth[i] + d.cred[i] + d.adv_cust[i] + d.prov_tax[i] + d.div_pay[i] + d.stat_oth[i] + d.tl_inst[i] + d.ocl[i]; });
+  d.cl = each(function (i) { return d.bank_tot[i] + d.ocl_tot[i]; });
+  d.tl = each(function (i) { return d.deb[i] + d.pref[i] + d.tl1[i] + d.tl2[i] + d.corp[i] + d.dpg[i] + d.term_dep[i] + d.unsec[i]; });
+  d.tol = each(function (i) { return d.cl[i] + d.tl[i]; });
+  d.surplus = z(); for (var si = 0; si < N; si++) d.surplus[si] = si === 0 ? A('surplus')[0] : d.surplus[si - 1] + d.retained[si];
+  d.nw = each(function (i) { return d.cap[i] + d.gres[i] + d.rres[i] + d.ores[i] + d.surplus[i]; });
+  d.tliab = each(function (i) { return d.tol[i] + d.nw[i]; });
+  d.wip_close = A('wip_close'); d.fg_close = A('fg_close');
+  d.ca = each(function (i) { return d.cash[i] + d.inv_gov[i] + d.fd[i] + d.rec_dom[i] + d.rec_exp[i] + d.def_rec[i] + d.rms_imp[i] + d.rms_ind[i] + d.wip_close[i] + d.fg_close[i] + d.git[i] + d.spares[i] + d.adv_sup[i] + d.adv_tax[i] + d.oca[i]; });
+  d.adep = z(); for (var ai = 0; ai < N; ai++) d.adep[ai] = ai === 0 ? A('adep')[0] : d.adep[ai - 1] + d.depn[ai];
+  d.netblock = each(function (i) { return d.gross[i] - d.adep[i]; });
+  d.nca = each(function (i) { return d.nc_sub[i] + d.nc_inv[i] + d.nc_cap[i] + d.nc_def[i] + d.nc_sec[i] + d.nc_oth[i] + d.nc_obs[i]; });
+  d.ta = each(function (i) { return d.ca[i] + d.netblock[i] + d.nca[i] + d.intang[i]; });
+  d.bs_diff = each(function (i) { return r2(d.tliab[i] - d.ta[i]); });
+  d.tnw = each(function (i) { return d.nw[i] - d.intang[i]; });
+  d.nwc = each(function (i) { return r2(d.tl[i] + d.nw[i] - d.nca[i] - d.intang[i] - d.netblock[i]); });
+  d.cr = each(function (i) { return div(d.ca[i], d.cl[i]); });
+  d.tol_tnw = each(function (i) { return div(d.tol[i], d.tnw[i]); });
+  /* Form IV */
+  d.f4_rm_imp = d.rms_imp.slice();
+  d.f4_rm_ind = each(function (i) { return d.rms_ind[i] + d.git[i]; });
+  function mon(a, b) { return each(function (i) { return b[i] ? a[i] * 12 / b[i] : null; }); }
+  d.m_rm = mon(d.f4_rm_ind, d.rm_ind); d.m_wip = mon(d.wip_close, d.cop); d.m_fg = mon(d.fg_close, d.cos);
+  d.m_sp = mon(d.spares, d.rm_ind); d.m_rec = mon(d.rec_dom, d.dom); d.m_cred = mon(d.cred, d.rm_ind);
+  d.f4_oca = each(function (i) { return d.cash[i] + d.inv_gov[i] + d.fd[i] + d.def_rec[i] + d.adv_tax[i] + d.oca[i]; });
+  d.f4_ca = each(function (i) { return d.f4_rm_imp[i] + d.f4_rm_ind[i] + d.wip_close[i] + d.fg_close[i] + d.spares[i] + d.rec_dom[i] + d.rec_exp[i] + d.adv_sup[i] + d.f4_oca[i]; });
+  d.f4_ca_diff = each(function (i) { return r2(d.f4_ca[i] - d.ca[i]); });
+  d.f4_stat = each(function (i) { return d.prov_tax[i] + d.div_pay[i] + d.stat_oth[i]; });
+  d.f4_ocl = each(function (i) { return d.stb_oth[i] + d.tl_inst[i] + d.ocl[i]; });
+  d.f4_cl = each(function (i) { return d.cred[i] + d.adv_cust[i] + d.f4_stat[i] + d.f4_ocl[i]; });
+  d.f4_cl_diff = each(function (i) { return r2(d.f4_cl[i] - d.ocl_tot[i]); });
+  /* Form V */
+  d.wcg = each(function (i) { return d.f4_ca[i] - d.f4_cl[i]; });
+  d.m1_min = each(function (i) { return d.wcg[i] * 0.25; });
+  d.m1_a = each(function (i) { return d.wcg[i] - d.m1_min[i]; });
+  d.m1_b = each(function (i) { return d.wcg[i] - d.nwc[i]; });
+  d.m1_mpbf = each(function (i) { return Math.min(d.m1_a[i], d.m1_b[i]); });
+  d.m1_excess = each(function (i) { return d.m1_min[i] - d.nwc[i] > 0 ? d.m1_min[i] - d.nwc[i] : 0; });
+  d.m2_min = each(function (i) { return d.f4_ca[i] * 0.25; });
+  d.m2_mpbf = each(function (i) { return Math.max(0, d.f4_ca[i] * 0.75 - d.f4_cl[i]); });
+  d.head1 = each(function (i) { return d.m1_mpbf[i] - d.bank_tot[i]; });
+  d.head2 = each(function (i) { return d.m2_mpbf[i] - d.bank_tot[i]; });
+  /* Form VI: column i shows the movement from column i-1 to i (first column has no previous year) */
+  function mv(f) { return each(function (i) { return i === 0 ? null : f(i); }); }
+  function up(a, i) { return a[i] - a[i - 1] > 0 ? a[i] - a[i - 1] : 0; }
+  function dn(a, i) { return a[i] - a[i - 1] < 0 ? -(a[i] - a[i - 1]) : 0; }
+  d.fl_np = mv(function (i) { return d.pat[i] > 0 ? d.pat[i] : 0; });
+  d.fl_dep = mv(function (i) { return d.depn[i]; });
+  d.fl_misc = mv(function (i) { return d.intang[i - 1] - d.intang[i]; });
+  d.fl_cap = mv(function (i) { return d.cap[i] - d.cap[i - 1]; });
+  d.fl_tl_up = mv(function (i) { return up(d.tl, i); });
+  d.fl_fa_dn = mv(function (i) { return dn(d.gross, i); });
+  d.fl_nca_dn = mv(function (i) { return dn(d.nca, i); });
+  d.fl_src = mv(function (i) { return d.fl_np[i] + d.fl_dep[i] + d.fl_misc[i] + d.fl_cap[i] + d.fl_tl_up[i] + d.fl_fa_dn[i] + d.fl_nca_dn[i]; });
+  d.fl_loss = mv(function (i) { return d.pat[i] < 0 ? -d.pat[i] : 0; });
+  d.fl_tl_dn = mv(function (i) { return dn(d.tl, i); });
+  d.fl_fa_up = mv(function (i) { return up(d.gross, i); });
+  d.fl_nca_up = mv(function (i) { return up(d.nca, i); });
+  d.fl_div = mv(function (i) { return d.div[i - 1]; });
+  d.fl_oth = mv(function (i) { var x = d.surplus[i] - d.surplus[i - 1] - d.retained[i]; return x < 0 ? -x : 0; });
+  d.fl_use = mv(function (i) { return d.fl_loss[i] + d.fl_tl_dn[i] + d.fl_fa_up[i] + d.fl_nca_up[i] + d.fl_div[i] + d.fl_oth[i]; });
+  d.fl_lt = mv(function (i) { return d.fl_src[i] - d.fl_use[i]; });
+  d.fl_ca = mv(function (i) { return d.ca[i] - d.ca[i - 1]; });
+  d.fl_cl = mv(function (i) { return d.ocl_tot[i] - d.ocl_tot[i - 1]; });
+  d.fl_wcg = mv(function (i) { return (d.ca[i - 1] - d.ocl_tot[i - 1]) - (d.ca[i] - d.ocl_tot[i]); });
+  d.fl_net = mv(function (i) { return d.fl_lt[i] + d.fl_wcg[i]; });
+  d.fl_bank = mv(function (i) { return d.bank_tot[i] - d.bank_tot[i - 1]; });
+  d.fl_sales = mv(function (i) { return d.net_sales[i] - d.net_sales[i - 1]; });
+  function sk(i) { return d.rms_imp[i] + d.rms_ind[i] + d.wip_close[i] + d.fg_close[i] + d.git[i] + d.spares[i]; }
+  d.fl_stock = mv(function (i) { return sk(i) - sk(i - 1); });
+  d.fl_rd = mv(function (i) { return d.rec_dom[i] - d.rec_dom[i - 1]; });
+  d.fl_re = mv(function (i) { return d.rec_exp[i] - d.rec_exp[i - 1]; });
+  function oc(i) { return d.cash[i] + d.inv_gov[i] + d.fd[i] + d.def_rec[i] + d.adv_sup[i] + d.adv_tax[i] + d.oca[i]; }
+  d.fl_oca = mv(function (i) { return oc(i) - oc(i - 1); });
+  d.fl_diff = mv(function (i) { return r2(d.fl_stock[i] + d.fl_rd[i] + d.fl_re[i] + d.fl_oca[i] - d.fl_ca[i]); });
+  /* Ratios */
+  var ns = d.total_income, ta = d.ta; /* as in the bank workbook, ratios use total income (net sales plus other income) as the sales figure */
+  d.r_ns_ta = each(function (i) { return div(ns[i], ta[i]); });
+  d.r_pbt_ta = each(function (i) { return div(d.pbt[i], ta[i]); });
+  d.r_opc = each(function (i) { return ns[i] ? 1 - d.op_ai[i] / ns[i] : null; });
+  d.r_bank_ca = each(function (i) { return div(d.bank_tot[i], d.ca[i]); });
+  d.r_inv_rec = each(function (i) { return ns[i] ? (d.rec_dom[i] + d.rec_exp[i] + d.def_rec[i] + d.rms_imp[i] + d.rms_ind[i] + d.wip_close[i] + d.fg_close[i] + d.git[i] + d.spares[i]) / ns[i] * 365 : null; });
+  d.r_acid = each(function (i) { return div(d.cash[i] + d.inv_gov[i] + d.fd[i] + d.rec_dom[i] + d.rec_exp[i] + d.def_rec[i] + d.adv_sup[i] + d.adv_tax[i] + d.oca[i], d.cl[i]); });
+  d.r_bank_wcg = each(function (i) { return div(d.bank_tot[i], d.wcg[i]); });
+  d.r_de = each(function (i) { return div(d.tl[i], d.nw[i]); });
+  d.r_da = each(function (i) { return div(d.tl[i], ta[i]); });
+  d.r_fac = each(function (i) { return div(d.tl[i], d.netblock[i]); });
+  d.r_icr = each(function (i) { var it = d.int_wc[i] + d.int_tl[i]; return it ? (d.pbt[i] + it + d.depn[i]) / it : null; });
+  d.r_invdays = each(function (i) { return ns[i] ? Math.round((d.rms_imp[i] + d.rms_ind[i] + d.wip_close[i] + d.fg_close[i] + d.git[i] + d.spares[i]) * 365 / ns[i]) : null; });
+  d.r_coll = each(function (i) { return d.gross_sales[i] ? Math.round((d.rec_dom[i] + d.rec_exp[i] + d.def_rec[i]) * 365 / d.gross_sales[i]) : null; });
+  d.r_cred = each(function (i) { return d.rm_ind[i] ? d.cred[i] / d.rm_ind[i] * 365 : null; });
+  d.r_bank_to = each(function (i) { return div(ns[i], d.bank_tot[i]); });
+  d.r_ca_to = each(function (i) { return div(ns[i], d.ca[i]); });
+  d.r_npm = each(function (i) { return div(d.pat[i], ns[i]); });
+  d.r_nia = each(function (i) { return div(d.pat[i], ta[i]); });
+  d.r_roi = each(function (i) { return div(d.pbt[i] + d.int_wc[i] + d.int_tl[i] + d.depn[i], ta[i]); });
+  d.r_roe = each(function (i) { return div(d.pat[i], d.nw[i]); });
+  d.r_opp = each(function (i) { return div(d.op_ai[i], ns[i]); });
+  d.r_ptp = each(function (i) { return div(d.pbt[i], ns[i]); });
+  d.r_ret = d.ret_pct;
+  d.r_rmc = each(function (i) { return div(d.rm_ind[i], d.cost_sub[i]); });
+  d.r_opc2 = each(function (i) { return div(d.cos[i] + d.sga[i] + d.int_wc[i] + d.int_tl[i], ns[i]); });
+  return d;
+}
+
+/* Warnings shown to the user (not errors): things a bank officer would query. */
+function checks(c, d) {
+  var out = [];
+  for (var i = 0; i < N; i++) {
+    var y = c.years[i] || ('Column ' + (i + 1));
+    if (Math.abs(d.bs_diff[i]) > 0.5) out.push({ lvl: 'bad', col: i, msg: y + ': the balance sheet does not balance. Total liabilities differ from total assets by ' + d.bs_diff[i].toFixed(2) + '.' });
+    if (d.net_sales[i] && d.pat[i] < 0) out.push({ lvl: 'warn', col: i, msg: y + ': the year shows a net loss.' });
+    if (d.tnw[i] < 0) out.push({ lvl: 'bad', col: i, msg: y + ': tangible net worth is negative.' });
+    if (d.m1_mpbf[i] < 0 && d.f4_ca[i]) out.push({ lvl: 'warn', col: i, msg: y + ': Method I MPBF is negative, so no bank finance is assessed on this basis.' });
+    if (d.cr[i] !== null && d.cr[i] < 1.0 && d.cl[i]) out.push({ lvl: 'warn', col: i, msg: y + ': current ratio is below 1.' });
+  }
+  return out;
+}
+
+var api = { N: N, FORM2: FORM2, FORM3L: FORM3L, FORM3A: FORM3A, FORM4: FORM4, FORM5: FORM5, FORM6: FORM6, RATIOS: RATIOS, INPUTS: INPUTS, FIRST_ONLY: FIRST_ONLY, blankCase: blankCase, compute: compute, checks: checks, num: num, r2: r2 };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.CMA = api;
+})(typeof window !== 'undefined' ? window : this);
+</script><script>/* Sample borrower: a fictional steel processing unit. Cash is solved so that the sample balance sheet balances in every year. */
+(function (root) {
+'use strict';
+function sampleCase(E) {
+  var c = E.blankCase('Sample: Rajdhani Steel Processors (fictional)');
+  c.meta.company = 'Rajdhani Steel Processors Pvt. Ltd. (sample, fictional)';
+  c.meta.bank = 'Sample Bank Ltd.'; c.meta.branch = 'Main Branch'; c.meta.constitution = 'Private limited company';
+  c.meta.activity = 'Steel coil slitting and processing'; c.meta.address = 'Plot 14, Industrial Area, Sample City';
+  c.meta.prepared_by = 'Sample Associates, Chartered Accountants'; c.meta.excise = 0; c.meta.tax = 30;
+  var v = c.v, S = function (k, a) { v[k] = a.slice(); };
+  S('dom', [820, 905, 980, 1100, 1210, 1330]); S('exp', [0, 0, 0, 0, 0, 0]);
+  S('oth_proc', [24, 26, 28, 30, 33, 36]); S('oth_misc', [3, 3, 4, 4, 4, 5]);
+  S('rm_ind', [590, 652, 705, 792, 871, 958]); S('power', [22, 24, 26, 29, 32, 35]); S('labour', [38, 41, 44, 49, 54, 59]);
+  S('mfg', [18, 20, 21, 24, 26, 29]); S('depn', [28, 27, 26, 30, 33, 35]);
+  S('wip_open', [11, 0, 0, 0, 0, 0]); S('wip_close', [12, 13, 14, 16, 17, 19]);
+  S('fg_open', [32, 0, 0, 0, 0, 0]); S('fg_close', [35, 38, 41, 46, 50, 55]);
+  S('sga', [42, 46, 50, 56, 61, 67]); S('int_wc', [18, 20, 21, 23, 25, 27]); S('int_tl', [14, 12, 10, 9, 8, 6]);
+  S('no_int', [2, 2, 2, 2, 2, 2]); S('div', [0, 0, 5, 5, 6, 6]);
+  S('bank_app', [95, 105, 115, 130, 145, 160]); S('cred', [88, 96, 103, 115, 126, 139]); S('adv_cust', [6, 7, 8, 9, 10, 11]);
+  S('prov_tax', [24, 27, 30, 34, 37, 41]); S('stat_oth', [6, 7, 7, 8, 9, 10]); S('tl_inst', [20, 20, 20, 20, 20, 20]);
+  S('ocl', [12, 14, 15, 17, 18, 20]); S('div_pay', [0, 0, 5, 5, 6, 6]);
+  S('tl1', [160, 140, 120, 100, 80, 60]); S('unsec', [40, 45, 50, 50, 50, 50]);
+  S('cap', [225, 225, 225, 225, 225, 225]); S('gres', [20, 20, 20, 20, 20, 20]); S('surplus', [-35, 0, 0, 0, 0, 0]);
+  S('gross', [540, 600, 680, 790, 870, 940]); S('adep', [180, 0, 0, 0, 0, 0]);
+  S('rec_dom', [150, 165, 178, 200, 220, 242]); S('rms_ind', [58, 64, 70, 79, 87, 96]); S('spares', [4, 4, 5, 5, 6, 6]);
+  S('adv_sup', [8, 9, 10, 11, 12, 13]); S('adv_tax', [10, 12, 14, 16, 18, 20]); S('oca', [6, 6, 7, 7, 8, 8]); S('fd', [10, 10, 12, 12, 12, 15]);
+  S('nc_sec', [5, 5, 5, 5, 5, 5]);
+  var d = E.compute(c), cash = [0, 0, 0, 0, 0, 0];
+  for (var i = 0; i < 6; i++) cash[i] = Math.round((d.tliab[i] - (d.ta[i] - d.cash[i])) * 100) / 100;
+  S('cash', cash);
+  c.limits = [
+    { bank: 'Sample Bank Ltd.', nature: 'Cash credit (hypothecation of stock and book debts)', kind: 'Fund based', limit: 200, maxu: 196, minu: 168, bal: 192, proposed: 230 },
+    { bank: 'Sample Bank Ltd.', nature: 'Letter of credit / bank guarantee', kind: 'Non fund based', limit: 40, maxu: 31, minu: 12, bal: 22, proposed: 50 },
+    { bank: 'Sample Bank Ltd.', nature: 'Term loan (machinery)', kind: 'Term loan', limit: 200, maxu: 200, minu: 160, bal: 160, proposed: 160 }
+  ];
+  c.assoc = [{ name: 'Rajdhani Metals LLP (sample)', activity: 'Steel trading', bs_date: '31.03.2026', bank: 'Sample Bank Ltd.', wc_fb: 120, wc_nfb: 10, tl: 0, overdue: 0 }];
+  return c;
+}
+var api = { sampleCase: sampleCase };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.CMASAMPLE = api;
+})(typeof window !== 'undefined' ? window : this);
+</script><script>(function () {
+'use strict';
+var E = window.CMA, SMP = window.CMASAMPLE;
+var REG = 'https://script.google.com/macros/s/AKfycbxLt8l01NtC3f4CvYQz9vNnfNLXAf0rOIJuHeVq6cvk1AjaaWVfNSB3fILENEsUQJQ/exec', VER = '1.0.0', LS = 'cma:v1:';
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function ls(k, v) { try { if (v === undefined) return localStorage.getItem(LS + k); if (v === null) localStorage.removeItem(LS + k); else localStorage.setItem(LS + k, v); return true; } catch (e) { return false; } }
+function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(LS + k); if (v === null) sessionStorage.removeItem(LS + k); else sessionStorage.setItem(LS + k, v); return true; } catch (e) { return false; } }
+function ERR(code, msg) { var e = new Error(msg); e.cma = code; return e; }
+function errText(e) { return (e && e.message ? e.message : 'Something went wrong.') + (e && e.cma ? ' [' + e.cma + ']' : ''); }
+
+/* ---------- registry (Techmin) ---------- */
+var CODEMAP = { NOT_REGISTERED: 'CMA-AUTH-01', NOT_ACTIVATED: 'CMA-AUTH-02', BAD_CODE: 'CMA-AUTH-03', CODE_EXPIRED: 'CMA-AUTH-04', RATE: 'CMA-AUTH-05', BAD_KEY: 'CMA-AUTH-06', SUSPENDED: 'CMA-AUTH-07', DUPLICATE: 'CMA-AUTH-08', VALIDATION: 'CMA-REG-01', MAIL: 'CMA-MAIL-01', QUOTA: 'CMA-MAIL-02', BUSY: 'CMA-SRV-02', SETUP: 'CMA-SRV-03' };
+function reg(action, body) {
+  if (!REG) return Promise.reject(ERR('CMA-SRV-03', 'Sign-in is not connected yet. Please try again later.'));
+  var ctl = new AbortController(), t = setTimeout(function () { ctl.abort(); }, 30000);
+  return fetch(REG, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action: action, app_version: VER }, body || {})), redirect: 'follow', credentials: 'omit', signal: ctl.signal })
+    .then(function (r) { return r.text(); }).then(function (txt) { var j; try { j = JSON.parse(txt); } catch (x) { throw ERR('CMA-SRV-01', 'The sign-in service gave an unexpected reply. Please try again.'); } if (!j.ok) throw ERR(CODEMAP[j.error.code] || 'CMA-SRV-01', j.error.message); return j.data; })
+    .catch(function (e) { if (e && e.cma) throw e; throw ERR('CMA-NET-01', 'Could not reach the sign-in service. Check your internet connection and try again.'); })
+    .then(function (d) { clearTimeout(t); return d; }, function (e) { clearTimeout(t); throw e; });
+}
+
+/* ---------- state and storage ---------- */
+var S = { user: null, data: { cases: [], active: null, lastBackup: '' }, tab: 'home', d: null, saveT: 0, notices: [] };
+function dkey() { return 'data:' + (S.user ? S.user.email : ''); }
+function loadData() {
+  var raw = ls(dkey()), d = null; try { d = raw ? JSON.parse(raw) : null; } catch (e) { d = null; }
+  S.data = d && Array.isArray(d.cases) ? d : { cases: [], active: null, lastBackup: '' };
+  if (!S.data.cases.length) { var c = SMP.sampleCase(E); c.updated = now(); S.data.cases.push(c); S.data.active = null; }
+}
+function now() { return new Date().toISOString(); }
+function saveNow() { clearTimeout(S.saveT); var c = cur(); if (c) c.updated = now(); var ok = ls(dkey(), JSON.stringify(S.data)); setSaved(ok ? 'Saved in this browser' : 'NOT SAVED [CMA-STORE-01]', ok); return ok; }
+function saveSoon() { setSaved('Saving...', true); clearTimeout(S.saveT); S.saveT = setTimeout(saveNow, 500); }
+function setSaved(t, ok) { var e = $('#saved'); if (e) { e.textContent = t; e.style.color = ok ? '' : '#ff9d9d'; } }
+function cur() { return S.data.cases.filter(function (c) { return c.id === S.data.active; })[0] || null; }
+
+/* ---------- formatting ---------- */
+function money(v) { if (v === null || v === undefined || isNaN(v)) return '–'; v = Math.round(v * 100) / 100; if (v === 0) return '0.00'; return v.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtRow(r, v) {
+  if (v === null || v === undefined || (typeof v === 'number' && !isFinite(v))) return '–';
+  if (r.pct) return (v * 100).toFixed(2) + '%'; if (r.ratio || r.mon) return v.toFixed(2);
+  return money(v);
+}
+function fmtRatio(t, v) { if (v === null || v === undefined || !isFinite(v)) return '–'; if (t === 'p') return (v * 100).toFixed(2) + '%'; if (t === 'd') return Math.round(v) + ' days'; return v.toFixed(2); }
+
+/* ---------- grid ---------- */
+function headCols(c) {
+  var h = '<th class="no"></th><th class="l" style="text-align:left">Rs. in lakhs</th>';
+  for (var i = 0; i < 6; i++) h += '<th><input class="yr" data-y="' + i + '" value="' + esc(c.years[i]) + '" aria-label="Year ' + (i + 1) + '"><select class="kd" data-kd="' + i + '" aria-label="Type of year ' + (i + 1) + '">' + ['Audited', 'Actual', 'Estimate', 'Projection'].map(function (k) { return '<option' + (c.kinds[i] === k ? ' selected' : '') + '>' + k + '</option>'; }).join('') + '</select></th>';
+  return h;
+}
+function grid(rows, c, d, ro, raw) {
+  var out = '';
+  rows.forEach(function (r) {
+    if (r.h) { out += '<tr class="h"><td colspan="8">' + esc(r.h) + '</td></tr>'; return; }
+    var cls = r.b ? ' class="b"' : '', row = '<tr' + cls + '><td class="no">' + esc(r.no || '') + '</td><td class="l">' + esc(r.l) + '</td>';
+    for (var i = 0; i < 6; i++) {
+      var key = r.i || r.f, v = d[key] ? d[key][i] : null;
+      if (r.i && !ro && (!r.fo || i === 0)) {
+        row += '<td class="n"><input inputmode="decimal" autocomplete="off" data-k="' + r.i + '" data-i="' + i + '" value="' + (c.v[r.i][i] === 0 ? '' : esc(c.v[r.i][i])) + '" aria-label="' + esc(r.l) + ', ' + esc(c.years[i]) + '"></td>';
+      } else {
+        var t = raw ? (v === null || v === undefined || !isFinite(v) ? '' : (r.pct || r.ratio || r.mon ? Math.round(v * 10000) / 10000 : Math.round(v * 100) / 100)) : fmtRow(r, v);
+        var st = ''; if (r.chk && !raw) st = Math.abs(v || 0) > 0.5 ? ' bad' : ' ok';
+        row += '<td class="n c' + st + '" data-f="' + key + '" data-i="' + i + '" data-t="' + (r.pct ? 'p' : r.ratio ? 'r' : r.mon ? 'm' : r.chk ? 'k' : 'a') + '">' + t + '</td>';
+      }
+    }
+    out += row + '</tr>';
+  });
+  return out;
+}
+function formView(title, note, rows) {
+  var c = cur(), d = S.d;
+  return '<h2>' + esc(title) + '</h2><p class="small mut">' + note + '</p><div class="chips" id="chips"></div><div class="tw"><table class="g" id="grid"><thead><tr>' + headCols(c) + '</tr></thead><tbody>' + grid(rows, c, d, false) + '</tbody></table></div>' +
+    '<p class="legend small"><span style="background:var(--in)">Type here</span><span style="background:var(--calc)">Calculated</span> You can paste a row of numbers copied from Excel into any box; they fill across the years.</p>';
+}
+function refresh() {
+  var c = cur(); if (!c) return; S.d = E.compute(c); var d = S.d;
+  $$('[data-f]').forEach(function (td) {
+    var v = d[td.dataset.f] ? d[td.dataset.f][+td.dataset.i] : null, t = td.dataset.t, s;
+    if (t === 'k') { s = money(v); td.className = 'n c ' + (Math.abs(v || 0) > 0.5 ? 'bad' : 'ok'); } else if (t === 'p') s = fmtRow({ pct: 1 }, v); else if (t === 'r') s = fmtRow({ ratio: 1 }, v); else if (t === 'm') s = fmtRow({ mon: 1 }, v); else s = money(v);
+    if (td.textContent !== s) td.textContent = s;
+  });
+  var ch = $('#chips'); if (ch) { var cs = E.checks(c, d); ch.innerHTML = cs.length ? cs.slice(0, 6).map(function (x) { return '<span class="chip ' + x.lvl + '">' + esc(x.msg) + '</span>'; }).join('') + (cs.length > 6 ? '<span class="chip warn">and ' + (cs.length - 6) + ' more</span>' : '') : '<span class="chip ok">No problems found in the figures entered.</span>'; }
+}
+
+/* ---------- screens ---------- */
+function msgHTML(t, k) { return t ? '<div class="msg ' + (k || 'bad') + '" role="alert">' + esc(t) + '</div>' : ''; }
+function setMain(h) { $('#main').innerHTML = h; }
+function authShell(inner) { return '<div class="auth card">' + inner + '</div>'; }
+var AU = { email: '', step: 'signin' };
+function renderSignin(msg, kind) {
+  var last = ls('last_email') || '';
+  setMain(authShell('<h1>Sign in</h1><p class="mut">No password. Enter your email and we send a 6-digit code. You get a new code every time you sign in.</p>' + msgHTML(msg, kind) +
+    '<form id="f-signin"><label for="em">Email</label><input id="em" type="email" autocomplete="email" required value="' + esc(AU.email || last) + '"><button class="btn" type="submit">Email me a code</button></form>' +
+    '<div class="links"><a id="l-reg">New here? Register (free)</a><a id="l-key">I have a registration key</a></div><p class="small mut" style="margin-top:14px">Free. Your CMA figures stay in this browser. <a href="guide.html" target="_blank" rel="noopener">Setup guide and error codes</a></p>'));
+  $('#f-signin').onsubmit = function (ev) { ev.preventDefault(); var b = ev.submitter || $('#f-signin button'); AU.email = $('#em').value.trim().toLowerCase(); b.disabled = true; b.textContent = 'Sending...';
+    reg('cma.code', { email: AU.email }).then(function () { renderCode('A 6-digit code was emailed to ' + AU.email + '. It works for 10 minutes.', 'ok'); }).catch(function (e) { renderSignin(errText(e)); }); };
+  $('#l-reg').onclick = function () { renderRegister(); }; $('#l-key').onclick = function () { renderKey(); };
+}
+function renderCode(msg, kind) {
+  setMain(authShell('<h1>Enter your code</h1>' + msgHTML(msg, kind) + '<form id="f-code"><label for="cd">6-digit code from your email</label><input id="cd" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required><button class="btn" type="submit">Sign in</button></form>' +
+    '<div class="links"><a id="l-back">Use a different email</a><a id="l-again">Send a new code</a></div><p class="small mut">Check the spam folder if the email does not arrive within a minute.</p>'));
+  var cd = $('#cd'); cd.focus();
+  $('#f-code').onsubmit = function (ev) { ev.preventDefault(); var b = ev.submitter || $('#f-code button'); b.disabled = true; b.textContent = 'Checking...';
+    reg('cma.verify', { email: AU.email, code: cd.value }).then(function (r) { startSession(r); }).catch(function (e) { renderCode(errText(e)); }); };
+  $('#l-back').onclick = function () { renderSignin(); };
+  $('#l-again').onclick = function () { reg('cma.code', { email: AU.email }).then(function () { renderCode('A new code was emailed.', 'ok'); }).catch(function (e) { renderCode(errText(e)); }); };
+}
+var STATES = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'];
+function renderRegister(msg, v) {
+  v = v || {};
+  setMain(authShell('<h1>Register (free)</h1><p class="mut">Tell us who you are. We email a registration key to your address; paste it on the next screen to start.</p>' + msgHTML(msg) +
+    '<form id="f-reg"><label for="rn">Your name *</label><input id="rn" value="' + esc(v.name) + '" required maxlength="100" autocomplete="name"><label for="re">Email *</label><input id="re" type="email" required maxlength="150" autocomplete="email" value="' + esc(v.email || AU.email) + '"><label for="rm">Mobile number (10 digits) *</label><input id="rm" value="' + esc(v.mobile) + '" required inputmode="numeric" maxlength="10" pattern="[6-9][0-9]{9}" autocomplete="tel-national">' +
+    '<label for="ro">Firm / organisation</label><input id="ro" value="' + esc(v.organisation) + '" maxlength="150" autocomplete="organization"><div class="row"><div><label for="rd">Designation</label><input id="rd" value="' + esc(v.designation) + '" maxlength="80" placeholder="e.g. Partner, Accountant"></div><div><label for="rc">City</label><input id="rc" value="' + esc(v.city) + '" maxlength="80"></div></div>' +
+    '<label for="rs">State</label><select id="rs"><option value="">Select</option>' + STATES.map(function (s) { return '<option' + (v.state === s ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select>' +
+    '<div class="hp" aria-hidden="true"><label>Website<input id="rw" tabindex="-1" autocomplete="off"></label></div>' +
+    '<label style="display:flex;gap:8px;align-items:flex-start;color:var(--ink)"><input id="rcns" type="checkbox" style="width:auto;margin-top:4px" required' + (v.consent ? ' checked' : '') + '><span>I agree that Techmin records my name, email, mobile and firm details to send my key and sign-in codes and to share updates about this tool. My CMA figures stay only in my browser and are never sent to Techmin.</span></label>' +
+    '<button class="btn" type="submit">Register and email my key</button></form><div class="links"><a id="l-in">I already registered</a><a id="l-key">I have a key</a></div>'));
+  $('#f-reg').onsubmit = function (ev) { ev.preventDefault(); var b = ev.submitter || $('#f-reg button'); AU.email = $('#re').value.trim().toLowerCase(); b.disabled = true; b.textContent = 'Registering...';
+    var vals = { name: $('#rn').value, email: AU.email, mobile: $('#rm').value, organisation: $('#ro').value, designation: $('#rd').value, city: $('#rc').value, state: $('#rs').value, consent: $('#rcns').checked };
+    reg('cma.register', { consent: $('#rcns').checked, website: $('#rw').value, profile: vals })
+      .then(function () { renderKey('Registered. Your key was emailed to ' + AU.email + '. Paste it below.', 'ok'); }).catch(function (e) { renderRegister(errText(e), vals); }); };
+  $('#l-in').onclick = function () { renderSignin(); }; $('#l-key').onclick = function () { renderKey(); };
+}
+function renderKey(msg, kind) {
+  setMain(authShell('<h1>Paste your key</h1><p class="mut">Open the email titled "Your CMA Report Maker registration key" and paste the key here. You need the key only once.</p>' + msgHTML(msg, kind) +
+    '<form id="f-key"><label for="ke">Email</label><input id="ke" type="email" required value="' + esc(AU.email) + '"><label for="kk">Registration key</label><input id="kk" required maxlength="20" placeholder="XXXX-XXXX-XXXX" autocomplete="off" style="text-transform:uppercase;letter-spacing:.1em"><button class="btn" type="submit">Activate and start</button></form>' +
+    '<div class="links"><a id="l-in">Back to sign in</a><a id="l-reg">Register again (new key)</a></div>'));
+  $('#f-key').onsubmit = function (ev) { ev.preventDefault(); var b = ev.submitter || $('#f-key button'); AU.email = $('#ke').value.trim().toLowerCase(); b.disabled = true; b.textContent = 'Checking...';
+    reg('cma.verify', { email: AU.email, key: $('#kk').value }).then(function (r) { startSession(r); }).catch(function (e) { renderKey(errText(e)); }); };
+  $('#l-in').onclick = function () { renderSignin(); }; $('#l-reg').onclick = function () { renderRegister(); };
+}
+function startSession(r) {
+  S.user = r.user; S.notices = r.notices || []; ls('last_email', S.user.email); ls('profile:' + S.user.email, JSON.stringify(S.user));
+  ss('session', JSON.stringify({ email: S.user.email, name: S.user.name, exp: Date.now() + 12 * 3600 * 1000 }));
+  loadData(); S.tab = 'home'; shell(); route(); saveNow();
+}
+function signOut() { saveNow(); ss('session', null); S.user = null; $('#bar').innerHTML = ''; AU = { email: ls('last_email') || '', step: 'signin' }; renderSignin('You have signed out. Your cases remain in this browser.', 'ok'); }
+
+/* ---------- shell ---------- */
+function shell() {
+  $('#bar').innerHTML = '<b>CMA Report Maker</b><span class="sp"></span><span class="who">' + esc(S.user.name) + ' &middot; ' + esc(S.user.email) + '</span><span class="saved" id="saved">Saved in this browser</span><button class="btn alt sm" id="so" style="color:#cfe0f1;border-color:#cfe0f1">Sign out</button>';
+  $('#so').onclick = signOut;
+}
+var TABS = [['home', 'Cases'], ['details', 'Form I: details and limits'], ['f2', 'Form II: operating statement'], ['f3', 'Form III: balance sheet'], ['f4', 'Form IV: current assets and liabilities'], ['f5', 'Form V: MPBF'], ['f6', 'Form VI: funds flow'], ['ratios', 'Ratios'], ['tools', 'Interest helper'], ['report', 'Print / Excel']];
+function route() {
+  var c = cur(); if (!c && S.tab !== 'home') S.tab = 'home';
+  if (c) S.d = E.compute(c);
+  var nav = '<nav class="tabs" aria-label="Sections">' + TABS.map(function (t) { return (c || t[0] === 'home') ? '<a data-t="' + t[0] + '" class="' + (S.tab === t[0] ? 'on' : '') + '" tabindex="0">' + t[1] + '</a>' : ''; }).join('') + '</nav>';
+  var head = c && S.tab !== 'home' ? '<div class="small mut" style="margin-bottom:6px">Case: <b>' + esc(c.name) + '</b></div>' : '';
+  var body = ({ home: vHome, details: vDetails, f2: vF2, f3: vF3, f4: vF4, f5: vF5, f6: vF6, ratios: vRatios, tools: vTools, report: vReport })[S.tab]();
+  setMain(nav + head + body + '<p class="foot">CMA Report Maker ' + VER + ' by Techmin. <a href="guide.html" target="_blank" rel="noopener">Setup guide, user guide, error codes and release notes</a>. A working tool: check every figure against the audited accounts and your bank\'s own format before submission.</p>');
+  $$('nav.tabs a').forEach(function (a) { a.onclick = function () { S.tab = a.dataset.t; route(); window.scrollTo(0, 0); }; a.onkeydown = function (ev) { if (ev.key === 'Enter') a.onclick(); }; });
+  if ($('#grid')) { bindGrid(); refresh(); }
+  var f = ({ home: bHome, details: bDetails, tools: bTools, report: bReport })[S.tab]; if (f) f();
+}
+
+/* ---------- grid events ---------- */
+function bindGrid() {
+  var g = $('#grid'), c = cur();
+  g.addEventListener('input', function (ev) {
+    var t = ev.target;
+    if (t.dataset.k) { c.v[t.dataset.k][+t.dataset.i] = t.value.trim() === '' ? 0 : t.value.replace(/,/g, ''); refresh(); saveSoon(); }
+    else if (t.classList.contains('yr')) { c.years[+t.dataset.y] = t.value; $$('.yr').forEach(function (e) { if (e !== t && e.dataset.y === t.dataset.y) e.value = t.value; }); saveSoon(); }
+  });
+  g.addEventListener('change', function (ev) { var t = ev.target; if (t.dataset.kd !== undefined) { c.kinds[+t.dataset.kd] = t.value; saveSoon(); } });
+  g.addEventListener('keydown', function (ev) {
+    var t = ev.target; if (!t.dataset.k) return;
+    if (ev.key === 'Enter' || ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault(); var all = $$('input[data-i="' + t.dataset.i + '"][data-k]', g), ix = all.indexOf(t) + (ev.key === 'ArrowUp' ? -1 : 1); if (all[ix]) { all[ix].focus(); all[ix].select(); }
+    }
+  });
+  g.addEventListener('paste', function (ev) {
+    var t = ev.target; if (!t.dataset.k) return; var txt = (ev.clipboardData || window.clipboardData).getData('text'); if (!/[\t\n]/.test(txt.trim())) return;
+    ev.preventDefault(); var lines = txt.replace(/\r/g, '').split('\n').filter(function (l) { return l !== ''; }), all = $$('input[data-k]', g), startRow = 0;
+    var rowsKeys = []; $$('input[data-k]', g).forEach(function (e) { if (rowsKeys.indexOf(e.dataset.k) < 0) rowsKeys.push(e.dataset.k); });
+    var r0 = rowsKeys.indexOf(t.dataset.k);
+    lines.forEach(function (ln, li) { var key = rowsKeys[r0 + li]; if (!key) return; ln.split('\t').forEach(function (cell, ci) { var i = +t.dataset.i + ci; if (i > 5) return; var inp = $('input[data-k="' + key + '"][data-i="' + i + '"]', g); if (!inp) return; var val = cell.replace(/[,\s]/g, '').replace(/^\((.*)\)$/, '-$1'); if (val !== '' && isNaN(parseFloat(val))) return; inp.value = val; c.v[key][i] = val === '' ? 0 : val; }); });
+    refresh(); saveSoon();
+  });
+}
+
+/* ---------- views ---------- */
+function vF2() { return formView('Form II: Operating statement', 'Profit and loss account for the two audited years, the current year and the estimates. Opening stocks of the first year are typed in; later years take the previous closing stock.', E.FORM2); }
+function vF3() { return formView('Form III: Analysis of balance sheet', 'Liabilities, assets and the working capital position. The balance sheet must balance (check the "Difference" row). The profit and loss surplus carries forward from the operating statement.', E.FORM3L.concat(E.FORM3A)); }
+function vF4() { return formView('Form IV: Comparative statement of current assets and current liabilities', 'Built from Form III. Months\' holding periods use consumption, cost of production, cost of sales and domestic sales from Form II.', E.FORM4); }
+function vF5() { return formView('Form V: Maximum permissible bank finance (MPBF)', 'Method I follows the workbook. Method II is added for comparison. Read the columns for the last year, the current year and the following year.', E.FORM5); }
+function vF6() { return formView('Form VI: Funds flow statement', 'Each column shows the movement from the previous year to that year, so the first column is blank.', E.FORM6); }
+function vRatios() {
+  var c = cur(), d = S.d, last = '';
+  var rows = E.RATIOS.map(function (r) {
+    var g = r[0] !== last ? '<tr><th colspan="9">' + esc(r[0]) + ' ratios</th></tr>' : ''; last = r[0];
+    var norm = r[4] + ' ' + (r[3] === 'p' ? (r[5] * 100).toFixed(2) + '%' : r[3] === 'd' ? r[5] + ' days' : r[5]);
+    var cells = d[r[2]].map(function (v) { var ok = v === null || v === undefined || !isFinite(v) ? '' : (r[4] === '>' ? v >= r[5] : v <= r[5]) ? 'ok' : 'bad'; return '<td class="r ' + (ok === 'ok' ? 'rok' : ok === 'bad' ? 'rbad' : '') + '">' + fmtRatio(r[3], v) + '</td>'; }).join('');
+    return g + '<tr><td></td><td>' + esc(r[1]) + '</td><td class="r mut">' + esc(norm) + '</td>' + cells + '</tr>';
+  }).join('');
+  return '<h2>Ratio analysis</h2><p class="small mut">Compared with the usual norms from the workbook. Green meets the norm, red does not. Sales in the ratios means total income (net sales plus other income), as in the workbook.</p><div class="tw"><table class="s"><thead><tr><th></th><th>Ratio</th><th class="r">Usual norm</th>' + c.years.map(function (y, i) { return '<th class="r">' + esc(y) + '<div class="small mut">' + esc(c.kinds[i]) + '</div></th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table></div><style>td.rok{color:var(--ok);font-weight:600;background:var(--okbg)}td.rbad{color:var(--bad);font-weight:600;background:var(--badbg)}</style>';
+}
+function vHome() {
+  var list = S.data.cases.map(function (c) {
+    return '<tr><td><b>' + esc(c.name) + '</b><div class="small mut">' + esc(c.meta.company || '') + '</div></td><td>' + esc((c.updated || '').slice(0, 10)) + '</td><td style="white-space:nowrap"><button class="btn sm" data-o="' + esc(c.id) + '">Open</button> <button class="btn alt sm" data-dup="' + esc(c.id) + '">Copy</button> <button class="btn alt sm" data-ren="' + esc(c.id) + '">Rename</button> <button class="btn alt sm" data-del="' + esc(c.id) + '">Delete</button></td></tr>';
+  }).join('');
+  var warn = '';
+  if (S.data.cases.length && (!S.data.lastBackup || (Date.now() - Date.parse(S.data.lastBackup)) > 7 * 86400000)) warn = '<div class="msg warn">Your cases live only in this browser. Please download a backup file (JSON) now and then, so you do not lose them if the browser data is cleared.</div>';
+  var nt = (S.notices || []).map(function (n) { return '<div class="msg ' + (n.severity === 'critical' ? 'bad' : n.severity === 'warning' ? 'warn' : 'ok') + '"><b>' + esc(n.title) + '</b> ' + esc(n.message) + '</div>'; }).join('');
+  return '<h1>Your cases</h1>' + nt + warn + '<div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="new">New case</button><button class="btn alt" id="smp">Add the sample case</button><button class="btn alt" id="bk">Download backup (JSON)</button><button class="btn alt" id="rs">Restore from backup</button><input type="file" id="rf" accept=".json,application/json" class="hp"></div><p class="small mut">A case is one borrower. Everything is saved automatically in this browser on this computer. The sample case is fictional and can be deleted.</p></div>' +
+    '<div class="card tw" style="max-height:none"><table class="s"><thead><tr><th>Case</th><th>Last changed</th><th></th></tr></thead><tbody>' + (list || '<tr><td colspan="3" class="mut">No cases yet. Start a new case or add the sample.</td></tr>') + '</tbody></table></div>';
+}
+function bHome() {
+  $('#new').onclick = function () { var n = prompt('Name of the borrower / case:', ''); if (n === null) return; var c = E.blankCase(n.trim() || 'New borrower'); c.updated = now(); S.data.cases.unshift(c); S.data.active = c.id; saveNow(); S.tab = 'details'; route(); };
+  $('#smp').onclick = function () { var c = SMP.sampleCase(E); c.updated = now(); S.data.cases.unshift(c); saveNow(); route(); };
+  $('#bk').onclick = backup; $('#rs').onclick = function () { $('#rf').click(); }; $('#rf').onchange = function () { restore($('#rf').files[0]); $('#rf').value = ''; };
+  $$('[data-o]').forEach(function (b) { b.onclick = function () { S.data.active = b.dataset.o; saveNow(); S.tab = 'details'; route(); }; });
+  $$('[data-dup]').forEach(function (b) { b.onclick = function () { var c = S.data.cases.filter(function (x) { return x.id === b.dataset.dup; })[0], n = JSON.parse(JSON.stringify(c)); n.id = E.blankCase().id; n.name = c.name + ' (copy)'; n.updated = now(); S.data.cases.unshift(n); saveNow(); route(); }; });
+  $$('[data-ren]').forEach(function (b) { b.onclick = function () { var c = S.data.cases.filter(function (x) { return x.id === b.dataset.ren; })[0], n = prompt('New name:', c.name); if (n && n.trim()) { c.name = n.trim(); saveNow(); route(); } }; });
+  $$('[data-del]').forEach(function (b) { b.onclick = function () { var c = S.data.cases.filter(function (x) { return x.id === b.dataset.del; })[0]; if (!confirm('Delete "' + c.name + '"? This cannot be undone. Download a backup first if unsure.')) return; S.data.cases = S.data.cases.filter(function (x) { return x !== c; }); if (S.data.active === c.id) S.data.active = null; saveNow(); route(); }; });
+}
+function vDetails() {
+  var c = cur(), m = c.meta;
+  function f(k, l, ph) { return '<div><label>' + l + '</label><input data-m="' + k + '" value="' + esc(m[k]) + '" placeholder="' + (ph || '') + '"></div>'; }
+  var lim = c.limits.map(function (l, i) { return '<tr>' + ['bank', 'nature'].map(function (k) { return '<td><input data-l="' + i + '.' + k + '" value="' + esc(l[k]) + '"></td>'; }).join('') + '<td><select data-l="' + i + '.kind">' + ['Fund based', 'Non fund based', 'Term loan'].map(function (k) { return '<option' + (l.kind === k ? ' selected' : '') + '>' + k + '</option>'; }).join('') + '</select></td>' + ['limit', 'maxu', 'minu', 'bal', 'proposed'].map(function (k) { return '<td><input data-l="' + i + '.' + k + '" inputmode="decimal" style="text-align:right" value="' + esc(l[k]) + '"></td>'; }).join('') + '<td><button class="btn alt sm" data-ld="' + i + '">Remove</button></td></tr>'; }).join('');
+  var as = c.assoc.map(function (l, i) { return '<tr>' + [['name', 0], ['activity', 0], ['bs_date', 0], ['bank', 0], ['wc_fb', 1], ['wc_nfb', 1], ['tl', 1], ['overdue', 1]].map(function (k) { return '<td><input data-a="' + i + '.' + k[0] + '" value="' + esc(l[k[0]]) + '"' + (k[1] ? ' inputmode="decimal" style="text-align:right"' : '') + '></td>'; }).join('') + '<td><button class="btn alt sm" data-ad="' + i + '">Remove</button></td></tr>'; }).join('');
+  return '<h1>Form I: Particulars and limits</h1><div class="card"><h3>Borrower</h3><div class="row">' + f('company', 'Name of the borrower') + f('constitution', 'Constitution', 'Company, firm, proprietor') + f('activity', 'Activity') + f('bank', 'Bank / financial institution') + f('branch', 'Branch') + f('prepared_by', 'Prepared by') + f('date', 'Date of preparation', 'dd-mm-yyyy') + '</div><label>Address</label><input data-m="address" value="' + esc(m.address) + '"><div class="row"><div><label>Duty on sales deducted in Form II (%)</label><input data-m="excise" inputmode="decimal" value="' + esc(m.excise) + '"></div><div><label>Tax rate on profit (%)</label><input data-m="tax" inputmode="decimal" value="' + esc(m.tax) + '"></div></div><p class="small mut">The workbook assumed 14% excise duty and 30% tax. Enter 0 for duty if it does not apply (GST is not part of sales here).</p></div>' +
+    '<div class="card"><h3>Existing and proposed limits (Rs. in lakhs)</h3><div class="tw" style="max-height:none"><table class="s"><thead><tr><th>Bank / institution</th><th>Nature of facility</th><th>Type</th><th class="r">Existing limit</th><th class="r">Max. use (12 mths)</th><th class="r">Min. use (12 mths)</th><th class="r">Balance on date</th><th class="r">Proposed</th><th></th></tr></thead><tbody>' + lim + '</tbody><tfoot><tr><th colspan="3">Total</th><th class="r" id="lt-limit"></th><th class="r" id="lt-maxu"></th><th class="r" id="lt-minu"></th><th class="r" id="lt-bal"></th><th class="r" id="lt-proposed"></th><th></th></tr></tfoot></table></div><p><button class="btn alt sm" id="addl">Add a facility</button></p></div>' +
+    '<div class="card"><h3>Associate concerns (Rs. in lakhs)</h3><div class="tw" style="max-height:none"><table class="s"><thead><tr><th>Name</th><th>Activity</th><th>B/S date</th><th>Bank</th><th class="r">Fund based</th><th class="r">Non-fund based</th><th class="r">Term loan</th><th class="r">Overdues</th><th></th></tr></thead><tbody>' + as + '</tbody></table></div><p><button class="btn alt sm" id="adda">Add an associate concern</button></p></div>';
+}
+function bDetails() {
+  var c = cur();
+  function tot() { ['limit', 'maxu', 'minu', 'bal', 'proposed'].forEach(function (k) { var e = $('#lt-' + k); if (e) e.textContent = money(c.limits.reduce(function (s, l) { return s + E.num(l[k]); }, 0)); }); }
+  tot();
+  $$('[data-m]').forEach(function (i) { i.oninput = function () { c.meta[i.dataset.m] = i.value; if (i.dataset.m === 'company' && !c.name) c.name = i.value; saveSoon(); }; });
+  $$('[data-l]').forEach(function (i) { i.oninput = i.onchange = function () { var p = i.dataset.l.split('.'); c.limits[+p[0]][p[1]] = i.value; tot(); saveSoon(); }; });
+  $$('[data-a]').forEach(function (i) { i.oninput = function () { var p = i.dataset.a.split('.'); c.assoc[+p[0]][p[1]] = i.value; saveSoon(); }; });
+  $('#addl').onclick = function () { c.limits.push({ bank: '', nature: '', kind: 'Fund based', limit: '', maxu: '', minu: '', bal: '', proposed: '' }); saveSoon(); route(); };
+  $('#adda').onclick = function () { c.assoc.push({ name: '', activity: '', bs_date: '', bank: '', wc_fb: '', wc_nfb: '', tl: '', overdue: '' }); saveSoon(); route(); };
+  $$('[data-ld]').forEach(function (b) { b.onclick = function () { c.limits.splice(+b.dataset.ld, 1); saveSoon(); route(); }; });
+  $$('[data-ad]').forEach(function (b) { b.onclick = function () { c.assoc.splice(+b.dataset.ad, 1); saveSoon(); route(); }; });
+}
+/* interest helper (Workings sheet) */
+function vTools() {
+  var c = cur(), t = c.tools || (c.tools = { open: '', rate: '12.5', rep: ['', '', '', '', '', ''], wcrate: '11.5' });
+  var d = S.d; var cols = c.years.map(function (y, i) { return '<th class="r">' + esc(y) + '</th>'; }).join('');
+  return '<h1>Interest helper</h1><p class="small mut">Works out interest on a term loan from its repayment schedule (interest each quarter on the opening balance, as in the workbook) and on working capital from average borrowings. Use the result to fill Form II and the term-loan lines in Form III.</p>' +
+    '<div class="card"><h3>Term loan</h3><div class="row"><div><label>Balance at the start of the first year (Rs. lakhs)</label><input id="t-open" inputmode="decimal" value="' + esc(t.open) + '"></div><div><label>Rate of interest (% a year)</label><input id="t-rate" inputmode="decimal" value="' + esc(t.rate) + '"></div></div>' +
+    '<div class="tw" style="max-height:none;margin-top:10px"><table class="s"><thead><tr><th></th>' + cols + '</tr></thead><tbody><tr><td>Repayment each quarter</td>' + t.rep.map(function (v, i) { return '<td><input data-tr="' + i + '" inputmode="decimal" style="text-align:right" value="' + esc(v) + '"></td>'; }).join('') + '</tr><tr><td>Interest for the year</td>' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<td class="r" id="t-int' + i + '"></td>'; }).join('') + '</tr><tr><td>Repaid in the year</td>' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<td class="r" id="t-rep' + i + '"></td>'; }).join('') + '</tr><tr><td>Balance at year end</td>' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<td class="r" id="t-cl' + i + '"></td>'; }).join('') + '</tr><tr><td>Due within the next year</td>' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<td class="r" id="t-due' + i + '"></td>'; }).join('') + '</tr></tbody></table></div>' +
+    '<p><button class="btn" id="t-use">Put in Form II and Form III</button> <span class="small mut">Fills "Interest on term loans", "Instalments due within one year" and "Term loan" (balance less the instalments due).</span></p></div>' +
+    '<div class="card"><h3>Working capital interest</h3><div class="row"><div><label>Rate of interest (% a year)</label><input id="w-rate" inputmode="decimal" value="' + esc(t.wcrate) + '"></div></div><p class="small mut">Interest = average of the opening and closing bank borrowings (Form III item 1) &times; rate. The first year uses its closing balance.</p><div class="tw" style="max-height:none"><table class="s"><thead><tr><th></th>' + cols + '</tr></thead><tbody><tr><td>Average bank borrowings</td>' + d.bank_tot.map(function (v, i) { return '<td class="r">' + money(i === 0 ? v : (v + d.bank_tot[i - 1]) / 2) + '</td>'; }).join('') + '</tr><tr><td>Interest for the year</td>' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<td class="r" id="w-int' + i + '"></td>'; }).join('') + '</tr></tbody></table></div><p><button class="btn" id="w-use">Put in Form II</button></p></div>';
+}
+function bTools() {
+  var c = cur(), t = c.tools, calc = {};
+  function run() {
+    var bal = E.num(t.open), rate = E.num(t.rate) / 100; calc = { int: [], rep: [], cl: [], due: [] };
+    for (var i = 0; i < 6; i++) { var q = E.num(t.rep[i]), it = 0, rp = 0; for (var k = 0; k < 4; k++) { it += bal * rate / 4; var r = Math.min(q, bal); bal -= r; rp += r; } calc.int.push(it); calc.rep.push(rp); calc.cl.push(bal); }
+    for (var j = 0; j < 6; j++) calc.due.push(Math.min(calc.cl[j], (j < 5 ? E.num(t.rep[j + 1]) : E.num(t.rep[5])) * 4));
+    for (var x = 0; x < 6; x++) { $('#t-int' + x).textContent = money(calc.int[x]); $('#t-rep' + x).textContent = money(calc.rep[x]); $('#t-cl' + x).textContent = money(calc.cl[x]); $('#t-due' + x).textContent = money(calc.due[x]); }
+    var wr = E.num(t.wcrate) / 100; for (var y = 0; y < 6; y++) { var av = y === 0 ? S.d.bank_tot[0] : (S.d.bank_tot[y] + S.d.bank_tot[y - 1]) / 2; $('#w-int' + y).textContent = money(av * wr); calc['w' + y] = av * wr; }
+  }
+  run();
+  $('#t-open').oninput = function () { t.open = this.value; run(); saveSoon(); }; $('#t-rate').oninput = function () { t.rate = this.value; run(); saveSoon(); }; $('#w-rate').oninput = function () { t.wcrate = this.value; run(); saveSoon(); };
+  $$('[data-tr]').forEach(function (i) { i.oninput = function () { t.rep[+i.dataset.tr] = i.value; run(); saveSoon(); }; });
+  $('#t-use').onclick = function () { for (var i = 0; i < 6; i++) { c.v.int_tl[i] = Math.round(calc.int[i] * 100) / 100; c.v.tl_inst[i] = Math.round(calc.due[i] * 100) / 100; c.v.tl1[i] = Math.round((calc.cl[i] - calc.due[i]) * 100) / 100; } saveNow(); alert('Done. Form II interest on term loans and the Form III term-loan lines were filled for all six years.'); };
+  $('#w-use').onclick = function () { for (var i = 0; i < 6; i++) c.v.int_wc[i] = Math.round(calc['w' + i] * 100) / 100; saveNow(); alert('Done. Form II interest on working capital was filled for all six years.'); };
+}
+/* report and exports */
+function reportHTML(raw) {
+  var c = cur(), d = E.compute(c), m = c.meta, units = esc(m.units || 'Rs. in lakhs');
+  function head(t) { return '<div class="ph"><b>' + esc(m.company || c.name) + '</b>' + (m.bank ? ' &mdash; ' + esc(m.bank) + (m.branch ? ', ' + esc(m.branch) : '') : '') + '<br>ASSESSMENT OF WORKING CAPITAL REQUIREMENTS: ' + esc(t) + ' (' + units + ')</div>'; }
+  function tbl(rows) { return '<table><thead><tr><th></th><th>Particulars</th>' + c.years.map(function (y, i) { return '<th>' + esc(y) + '<br>' + esc(c.kinds[i]) + '</th>'; }).join('') + '</tr></thead><tbody>' + rows.map(function (r) { if (r.h) return '<tr><td colspan="8"><b>' + esc(r.h) + '</b></td></tr>'; return '<tr><td>' + esc(r.no || '') + '</td><td>' + (r.b ? '<b>' : '') + esc(r.l) + (r.b ? '</b>' : '') + '</td>' + d[r.i || r.f].map(function (v) { return '<td class="n">' + (raw ? (v === null || v === undefined || !isFinite(v) ? '' : Math.round(v * 10000) / 10000) : fmtRow(r, v)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>'; }
+  var pg = '<div class="pg"><div class="ph"><h2>CREDIT MONITORING ARRANGEMENT</h2><b>' + esc(m.company || c.name) + '</b><br>' + esc(m.constitution || '') + (m.activity ? ' | ' + esc(m.activity) : '') + '<br>' + esc(m.address || '') + '<br>Bank: ' + esc(m.bank || '') + ' ' + esc(m.branch || '') + '<br>Prepared by: ' + esc(m.prepared_by || '') + ' ' + esc(m.date || '') + '</div></div>';
+  pg += '<div class="pg">' + head('FORM I: PARTICULARS OF EXISTING / PROPOSED LIMITS') + '<table><thead><tr><th>Bank</th><th>Nature of facility</th><th>Type</th><th>Existing limit</th><th>Max. use</th><th>Min. use</th><th>Balance</th><th>Proposed</th></tr></thead><tbody>' + c.limits.map(function (l) { return '<tr><td>' + esc(l.bank) + '</td><td>' + esc(l.nature) + '</td><td>' + esc(l.kind) + '</td>' + ['limit', 'maxu', 'minu', 'bal', 'proposed'].map(function (k) { return '<td class="n">' + (l[k] === '' ? '' : money(E.num(l[k]))) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>' +
+    (c.assoc.length ? '<br><table><thead><tr><th>Associate concern</th><th>Activity</th><th>B/S date</th><th>Bank</th><th>Fund based</th><th>Non-fund based</th><th>Term loan</th><th>Overdues</th></tr></thead><tbody>' + c.assoc.map(function (l) { return '<tr><td>' + esc(l.name) + '</td><td>' + esc(l.activity) + '</td><td>' + esc(l.bs_date) + '</td><td>' + esc(l.bank) + '</td>' + ['wc_fb', 'wc_nfb', 'tl', 'overdue'].map(function (k) { return '<td class="n">' + (l[k] === '' ? '' : money(E.num(l[k]))) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>' : '') + '</div>';
+  pg += '<div class="pg">' + head('FORM II: OPERATING STATEMENT') + tbl(E.FORM2) + '</div><div class="pg">' + head('FORM III: ANALYSIS OF BALANCE SHEET') + tbl(E.FORM3L.concat(E.FORM3A)) + '</div><div class="pg">' + head('FORM IV: COMPARATIVE STATEMENT OF CURRENT ASSETS AND CURRENT LIABILITIES') + tbl(E.FORM4) + '</div><div class="pg">' + head('FORM V: COMPUTATION OF MAXIMUM PERMISSIBLE BANK FINANCE') + tbl(E.FORM5) + '</div><div class="pg">' + head('FORM VI: FUNDS FLOW STATEMENT') + tbl(E.FORM6) + '</div>';
+  pg += '<div class="pg">' + head('RATIO ANALYSIS') + '<table><thead><tr><th>Ratio</th><th>Norm</th>' + c.years.map(function (y) { return '<th>' + esc(y) + '</th>'; }).join('') + '</tr></thead><tbody>' + E.RATIOS.map(function (r) { return '<tr><td>' + esc(r[0] + ': ' + r[1]) + '</td><td>' + r[4] + ' ' + (r[3] === 'p' ? (r[5] * 100) + '%' : r[5]) + '</td>' + d[r[2]].map(function (v) { return '<td class="n">' + (raw ? (v === null || !isFinite(v) ? '' : Math.round(v * 10000) / 10000) : fmtRatio(r[3], v)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
+  return pg;
+}
+function vReport() {
+  var c = cur();
+  return '<h1>Print or download</h1><div class="card"><p>Prepare the complete CMA data set (Forms I to VI and ratios) for <b>' + esc(c.name) + '</b>.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="pr">Print / Save as PDF</button><button class="btn alt" id="xl">Download Excel file (.xls)</button><button class="btn alt" id="cj">Download this case (JSON)</button></div><p class="small mut">In the print window choose "Save as PDF" as the printer. Landscape A4 is set for you. The Excel file opens in Excel and LibreOffice; numbers are plain values.</p></div>' +
+    '<div class="msg warn">Before you submit: confirm the balance sheet difference is nil and compare each figure with the audited accounts. Banks may ask for their own format or extra columns.</div>';
+}
+function bReport() {
+  $('#pr').onclick = function () { var p = $('#prn'); if (!p) { p = document.createElement('div'); p.id = 'prn'; p.className = 'pr'; $('#main').appendChild(p); } p.innerHTML = reportHTML(false); window.print(); };
+  $('#xl').onclick = function () { var c = cur(), html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"><style>td,th{border:1px solid #999;padding:2px 4px;font:11px Arial}td.n{text-align:right}</style></head><body>' + reportHTML(true) + '</body></html>'; download(new Blob(['﻿' + html], { type: 'application/vnd.ms-excel' }), fname(c.name) + '.xls'); };
+  $('#cj').onclick = function () { var c = cur(); download(new Blob([JSON.stringify(pack([c]), null, 1)], { type: 'application/json' }), fname(c.name) + '.cma.json'); };
+}
+function fname(s) { return String(s).replace(/[^A-Za-z0-9._-]+/g, '_').slice(0, 60) || 'cma'; }
+function download(blob, name) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+/* backup / restore */
+function pack(cases) { return { app: 'CMA-RM', format: 1, version: VER, exported: now(), user: S.user ? { name: S.user.name, email: S.user.email } : null, cases: cases }; }
+function backup() { download(new Blob([JSON.stringify(pack(S.data.cases), null, 1)], { type: 'application/json' }), 'CMA-backup-' + now().slice(0, 10) + '.json'); S.data.lastBackup = now(); saveNow(); route(); }
+function validCase(c) { return c && typeof c === 'object' && typeof c.name === 'string' && c.v && c.years && c.years.length === 6 && E.INPUTS.every(function (k) { return Array.isArray(c.v[k]) && c.v[k].length === 6; }); }
+function restore(file) {
+  if (!file) return;
+  if (file.size > 20 * 1024 * 1024) return alert('This file is too large to be a CMA backup. [CMA-FILE-03]');
+  var fr = new FileReader();
+  fr.onload = function () {
+    var j; try { j = JSON.parse(fr.result); } catch (e) { return alert('This file is not a valid backup (it cannot be read). [CMA-FILE-01]'); }
+    if (!j || j.app !== 'CMA-RM' || !Array.isArray(j.cases)) return alert('This file is not a CMA Report Maker backup. [CMA-FILE-02]');
+    var good = j.cases.filter(validCase); if (!good.length) return alert('The backup has no usable cases. [CMA-FILE-01]');
+    var replace = confirm('Found ' + good.length + ' case(s) in the backup.\n\nOK = REPLACE all cases in this browser with the backup.\nCancel = choose to add them instead.');
+    if (!replace && !confirm('Add the ' + good.length + ' case(s) from the backup to your existing cases?')) return;
+    if (replace) { S.data.cases = good; S.data.active = null; } else good.forEach(function (c) { if (S.data.cases.some(function (x) { return x.id === c.id; })) c.id = E.blankCase().id; S.data.cases.unshift(c); });
+    saveNow(); route(); alert('Restored ' + good.length + ' case(s).');
+  };
+  fr.onerror = function () { alert('The file could not be read. [CMA-FILE-01]'); }; fr.readAsText(file);
+}
+
+/* ---------- boot ---------- */
+function boot() {
+  var s = null; try { s = JSON.parse(ss('session') || 'null'); } catch (e) { s = null; }
+  if (s && s.exp > Date.now() && s.email) { var u = null; try { u = JSON.parse(ls('profile:' + s.email) || 'null'); } catch (e) { u = null; } S.user = u || { email: s.email, name: s.name || s.email }; loadData(); shell(); route(); return; }
+  AU.email = ls('last_email') || ''; renderSignin();
+}
+window.addEventListener('beforeunload', function () { if (S.user) saveNow(); });
+window.CMAAPP = { S: S, boot: boot, reg: reg };
+boot();
+})();
+</script>
+</body></html>
