@@ -3,7 +3,7 @@
  * Config.gs - constants, database schema, roles, permissions, enums.
  * CA Office Work Management System (Google Apps Script + Sheets + Drive + Gmail)
  */
-var APP = { NAME: 'CA Office Work Management System', VERSION: '1.0.0', BUILD: 2, SCHEMA_VERSION: 2, TZ: 'Asia/Kolkata', TZ_OFFSET: '+05:30' };
+var APP = { NAME: 'CA Office Work Management System', VERSION: '1.0.0', BUILD: 3, SCHEMA_VERSION: 2, TZ: 'Asia/Kolkata', TZ_OFFSET: '+05:30' };
 
 var ROLES = {
   ADMIN: 'Firm Administrator', MANAGING_PARTNER: 'Managing Partner', PARTNER: 'Partner',
@@ -3060,6 +3060,15 @@ act_('activate', function (u, p) { Auth.activate(p.email, p.code, p.password); r
 act_('me', function (u) { autoMigrate_(); if (Perm.effective(u)['backup.manage']) Jobs.ensureTriggers(); return { build: APP.BUILD, app_version: APP.VERSION, enums: { ENTITY_TYPES: ENTITY_TYPES, PIPELINE: PIPELINE, PRIORITIES: PRIORITIES, TASK_STATUSES: TASK_STATUSES, TIME_CATEGORIES: TIME_CATEGORIES, LEAVE_TYPES: LEAVE_TYPES, PAYMENT_MODES: PAYMENT_MODES, FILE_STATUSES: FILE_STATUSES, FILE_OUT_STATUSES: FILE_OUT_STATUSES, COMPLIANCE_CATEGORIES: COMPLIANCE_CATEGORIES, RECURRENCE: RECURRENCE, ROLES: ROLES }, me: userView_(u), settings: Admin.publicSettings(), directory: Admin.directory(u), pending_acks: Files.myPendingAcks(u).length }; });
 act_('logout', function (u, p, ctx) { Auth.logout(ctx.token); Audit.log(u, 'LOGOUT', 'Auth', 'User', u.user_id, '', '', '', 'OK'); return true; }, true);
 act_('changePassword', function (u, p) { return Auth.changePassword(u, p.old_password, p.new_password); }, true);
+/* several read-only requests in one round trip (each round trip to Google costs 1-3 seconds) */
+act_('batch', function (u, p) {
+  return (p.calls || []).slice(0, 8).map(function (c) {
+    var d = Object.prototype.hasOwnProperty.call(ACTIONS, String(c.action)) ? ACTIONS[c.action] : null;
+    if (!d || d.w || d.pub || c.action === 'batch') return { ok: false, error: { code: 'VALIDATION', message: 'That request cannot be combined.' } };
+    try { return { ok: true, data: d.fn(u, c.payload || {}, {}) }; }
+    catch (e) { if (e instanceof AppError || (e && e.name === 'AppError')) return { ok: false, error: { code: e.code, message: e.message } }; throw e; }
+  });
+});
 act_('dashboard', function (u) { return Reports.dashboard(u); });
 /* ---- notifications ---- */
 act_('notif.list', function (u, p) { var r = Notify.list(u, p); r.messages_unread = Msg.unreadCount(u); return r; });
