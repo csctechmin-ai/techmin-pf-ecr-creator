@@ -1,5 +1,6 @@
+Contact: mailto:info@techmincsc.in
 Contact: https://www.complypro.co.in/
-Expires: 2027-10-27T00:00:00.000Z
+Expires: 2027-10-30T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://tools.complypro.co.in/.well-known/security.txt
 Policy: https://github.com/csctechmin-ai/techmin-pf-ecr-creator/blob/main/SECURITY.md
