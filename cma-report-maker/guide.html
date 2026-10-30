@@ -46,6 +46,8 @@
 <p>See <em>Error codes and solutions</em>. Most problems are an email that has not arrived (look in Spam, wait a minute, press <strong>Send a new code</strong>) or a code typed after it expired.</p>
 </section><section id="use"><h1>CMA Report Maker - User guide</h1>
 <p>CMA (Credit Monitoring Arrangement) data is what a bank asks a borrower for before it sanctions or renews working capital. This tool collects the figures once and produces Forms I to VI and the ratio analysis, following the standard workbook (Rs. in lakhs; two audited years, one actual year and three estimate years).</p>
+<h2>Signing in and your data</h2>
+<p>Register once with your name, email, mobile and firm; Techmin emails a registration key. After that every sign-in uses a 6-digit code sent to your email, valid for 10 minutes (see the setup guide). Your CMA figures stay in your own browser and are never sent to Techmin; download JSON backups regularly. If something fails, quote the error code shown (see <em>Error codes and solutions</em>).</p>
 <h2>The working screen</h2>
 <ul>
 <li><strong>Tabs</strong> across the top: Cases, Form I, Form II, Form III, Form IV, Form V, Form VI, Ratios, Loans and interest, Validate, Print / Excel.</li>
@@ -375,7 +377,7 @@
 </section><section id="notes"><h1>CMA Report Maker - Release notes</h1>
 <h2>Version 1.1.0 - 30 October 2026</h2>
 <p>Reworked after review of the first generated PDF, which had no page margins or numbering, uneven rows, repeated item numbers and no check before printing.</p>
-<p><strong>Status: under testing.</strong></p>
+<p><strong>Status: released.</strong> The &quot;Under testing&quot; notice has been removed from CMA Report Maker.</p>
 <h3>New</h3>
 <ul>
 <li><strong>Validate step.</strong> A new <em>Validate</em> tab recomputes every form and checks sums, data and bank norms. Each point names the year and gives a <strong>How to fix</strong> line with the amount to add or reduce, and <strong>Go to the place</strong> opens and highlights the box. Printing and Excel are enabled only after validation; any later edit removes the validation. JSON backup is always available.</li>
@@ -390,7 +392,8 @@
 <ul>
 <li>Form II and Form III item numbers renumbered so no number repeats (for example 13(a) to 13(c), 30(a) to 30(f)).</li>
 <li>Sample case retuned so it passes validation.</li>
-<li>The &quot;Under testing&quot; badge on the landing page and CA Office Manager card now stays on one line.</li>
+<li>The &quot;Under testing&quot; notice is removed from CMA Report Maker (page banner, landing card and listing). On the landing page the CA Office Manager badge now stays on one line.</li>
+<li>Landing-page search listing updated for all-India use (title, description, keywords, structured data).</li>
 </ul>
 <h3>Fixed</h3>
 <ul>
@@ -399,7 +402,7 @@
 <hr>
 <h2>Version 1.0.0 - 30 October 2026</h2>
 <p>First release of <strong>CMA Report Maker</strong>, a free browser tool that prepares CMA (Credit Monitoring Arrangement) data for bank working-capital applications.</p>
-<p><strong>Status: under testing.</strong> The calculations were compared with the standard CMA workbook&#39;s own formulas (468 values in two scenarios, all equal). The page passed 29 browser tests with a simulated sign-in service, and the registration, key and code emails were tried on the live Techmin service. Layout on real phones and use by many people at once have not yet been verified.</p>
+<p><strong>Status at release: under testing.</strong> The calculations were compared with the standard CMA workbook&#39;s own formulas (468 values in two scenarios, all equal). The page passed 29 browser tests with a simulated sign-in service, and the registration, key and code emails were tried on the live Techmin service. Layout on real phones and use by many people at once have not yet been verified.</p>
 <h2>What is included</h2>
 <ul>
 <li><strong>Forms I to VI and ratios</strong> as in the workbook: limits and associate concerns; operating statement; balance sheet analysis; comparative statement of current assets and liabilities; MPBF (Method I as in the workbook, Method II added); funds flow; 28 ratios with usual norms.</li>
