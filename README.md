@@ -11,6 +11,7 @@ Published at https://tools.complypro.co.in/
 | Indian Financial Statements Studio | `fs-studio/` | 3.7 (under testing) |
 | Techmin Payroll Manager | `payroll-manager/` | 1.2.0 (under testing) |
 | GSTR-7 Return Preparer | `gstr7-utility/` | 1.0.0 |
+| Project Report Generator | `project-report/` | 1.0.0 (under testing) |
 
 Each folder holds a single self-contained `index.html` and the release notes and error codes PDF for that version.
 Every tool has an **Error codes** tab that lists each message code, its cause and its solution.
