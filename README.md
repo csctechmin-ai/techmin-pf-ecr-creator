@@ -8,7 +8,7 @@ Published at https://tools.complypro.co.in/
 | ESIC Monthly Contribution Creator | `esic-mc-creator/` | 1.2.0 |
 | Statutory Payroll Planner | `payroll-planner/` | 1.2.0 |
 | Income Tax Calculator for Government Employees | `govt-tax-calculator/` | 1.2.0 |
-| Indian Financial Statements Studio | `fs-studio/` | 3.3 (under testing) |
+| Indian Financial Statements Studio | `fs-studio/` | 3.7 (under testing) |
 | Techmin Payroll Manager | `payroll-manager/` | 1.2.0 (under testing) |
 | GSTR-7 Return Preparer | `gstr7-utility/` | 1.0.0 |
 
