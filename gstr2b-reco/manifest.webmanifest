@@ -1,0 +1,15 @@
+{
+ "name": "GSTR-2B Reconciliation - ComplyPro",
+ "short_name": "GSTR-2B Reco",
+ "start_url": "index.html",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#06484B",
+ "icons": [
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

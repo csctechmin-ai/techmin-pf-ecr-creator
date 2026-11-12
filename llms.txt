@@ -15,6 +15,7 @@
 - [Project Report Generator](https://tools.complypro.co.in/project-report/): bank loan project reports
 - [CMA Report Maker](https://tools.complypro.co.in/cma-report-maker/): CMA data, MPBF, ratios
 - [GST Refund Preparer](https://tools.complypro.co.in/gst-refund/): inverted tax structure refund, Statement 1A, Annexure B
+- [GSTR-2B Reconciliation](https://tools.complypro.co.in/gstr2b-reco/): match GSTR-2B with purchase books (Tally, Busy, Excel), mismatches, ITC not in 2B, section 17(5) flags, section 16(4) and Rule 37 checks, supplier follow-up
 - [MSME Tools](https://tools.complypro.co.in/msme-tools/): delayed-payment interest, section 43B(h) checker, notices and documents
 
 ## Contact
