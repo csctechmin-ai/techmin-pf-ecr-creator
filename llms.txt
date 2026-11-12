@@ -20,3 +20,4 @@
 
 ## Contact
 info@techmincsc.in, +91 77361 86827, Aluva, Kerala
+- [EPFO Member Registration File Generator](https://tools.complypro.co.in/epfo-member-generator/): create the EPFO member registration bulk upload text file (30 fields) from entered or imported members
