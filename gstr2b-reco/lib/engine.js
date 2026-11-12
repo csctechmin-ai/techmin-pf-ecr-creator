@@ -4,7 +4,7 @@
   else root.GR = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
-  var VERSION = "1.0.1";
+  var VERSION = "1.0.2";
   var VERIFIED_ON = "2026-11-12";
 
   /* ================= dates (ISO strings, day numbers) ================= */

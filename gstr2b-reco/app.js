@@ -220,6 +220,7 @@
   function tabUpload(main) {
     var P = S.period;
     main.appendChild(h("h2", { text: "Upload and reconcile" }));
+    if (S.result) main.appendChild(h("div", { class: "banner" }, h("strong", { text: "Results are ready. " }), "Your last reconciliation (" + periodLabel() + ") is still loaded. ", btn("Open results", function () { S.tab = "results"; render(); }, "small primary", { id: "openres" })));
     var fys = []; for (var y = 2022; y <= 2027; y++) fys.push([y, "FY " + GR.fyLabel(y)]);
     var subSel = null;
     if (P.kind === "Month") subSel = sel(MONTHS, P.sub, function (v) { setPeriod({ sub: v }); render(); }, "p_sub");
@@ -609,8 +610,7 @@
     var d = autoOn() && S.clientId ? kv("draft:" + S.clientId, null) : null;
     if (!d) return false;
     S.period = d.period; S.itemWise = !!d.itemWise; S.files2b = d.files2b || []; S.books = d.books || null; if (d.asOf) S.asOf = d.asOf;
-    var tb = null; try { tb = localStorage.getItem("gr-tab"); } catch (e) {}
-    if (tb && TABS.some(function (x) { return x[0] === tb; })) S.tab = tb;
+    S.tab = "upload";
     if (S.books) reparseBooks();
     if (d.ran && S.files2b.length && S.booksParse && !S.booksParse.error) { runRecon(true); }
     S.restoredAt = d.at; return true;
@@ -655,7 +655,6 @@
     if (!client() && S.tab !== "backup") { main.appendChild(h("div", { class: "empty" }, h("h2", { text: "Welcome to GSTR-2B Reconciliation" }), h("p", { text: "Start by adding the client you are reconciling for. Everything stays in this browser." }), btn("Add client", function () { clientForm(null); }, "primary", { id: "welcomeadd" }), " ", btn("Try with sample data", function () { var c = { id: uid(), name: "Sample Company Pvt Ltd", gstin: SM.S.client, created: Date.now() }; S.clients.set(c.id, c); S.clientId = c.id; persist("clients", c); loadSample(); }, ""))); return; }
     (TABS.filter(function (t) { return t[0] === S.tab; })[0] || TABS[0])[2](main);
     window.scrollTo(0, S.tab === "results" ? sy : 0);
-    try { localStorage.setItem("gr-tab", S.tab); } catch (e) {}
     var cb = $("#autosave"); if (cb) cb.checked = autoOn();
     scheduleAutosave();
   }
