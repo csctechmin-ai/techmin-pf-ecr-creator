@@ -1,0 +1,24 @@
+{
+ "suite": "MSME Tools",
+ "version": "1.0.0",
+ "released": "2026-11-12",
+ "rateDataVerifiedThrough": "2026-11-12",
+ "apps": [
+  {
+   "id": "interest-calculator",
+   "name": "Delayed Payment Interest Calculator"
+  },
+  {
+   "id": "section-43bh-checker",
+   "name": "Section 43B(h) Applicability Checker"
+  },
+  {
+   "id": "document-generator",
+   "name": "MSME Document Generator"
+  },
+  {
+   "id": "notice-generator",
+   "name": "Delayed Payment Notice Generator"
+  }
+ ]
+}

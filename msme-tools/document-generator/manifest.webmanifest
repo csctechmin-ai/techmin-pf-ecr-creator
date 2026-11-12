@@ -1,0 +1,15 @@
+{
+ "name": "MSME Document Generator - MSME Tools",
+ "short_name": "Document Generator",
+ "start_url": "index.html",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#12345A",
+ "icons": [
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

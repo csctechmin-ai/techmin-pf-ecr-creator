@@ -1,0 +1,15 @@
+{
+ "name": "Section 43B(h) Applicability Checker - MSME Tools",
+ "short_name": "43B(h) Checker",
+ "start_url": "index.html",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#12345A",
+ "icons": [
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}
