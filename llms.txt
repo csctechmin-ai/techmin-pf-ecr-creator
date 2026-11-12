@@ -1,0 +1,21 @@
+# ComplyPro Tools by Techmin HR Solutions
+
+> Free, browser-based compliance tools for India from Techmin Wealth Partners and Techmin HR Solutions. No sign-up; data stays in the user's browser. Working aids, not legal or tax advice.
+
+## Tools
+- [PF ECR File Creator](https://tools.complypro.co.in/pf-ecr-creator/): Excel payroll to EPFO ECR text file
+- [ESIC Monthly Contribution Creator](https://tools.complypro.co.in/esic-mc-creator/): ESIC contribution file and report
+- [Statutory Payroll Planner](https://tools.complypro.co.in/payroll-planner/): salary structure comparison with EPF, ESI, gratuity, bonus, PT
+- [Income Tax Calculator for Government Employees](https://tools.complypro.co.in/govt-tax-calculator/): old vs new regime, Form 16 Part B, Form 12BB
+- [Indian Financial Statements Studio](https://tools.complypro.co.in/fs-studio/): Schedule III statements from a trial balance
+- [Techmin Payroll Manager](https://tools.complypro.co.in/payroll-manager/): monthly payroll and payslips
+- [GSTR-7 Return Preparer](https://tools.complypro.co.in/gstr7-utility/): GST TDS return JSON
+- [Partnership Deed Maker](https://tools.complypro.co.in/partnership-deed-maker/): partnership deed and bank/GST letters
+- [CA Office Manager](https://tools.complypro.co.in/ca-office-manager/): CA firm clients, tasks, fees and compliance
+- [Project Report Generator](https://tools.complypro.co.in/project-report/): bank loan project reports
+- [CMA Report Maker](https://tools.complypro.co.in/cma-report-maker/): CMA data, MPBF, ratios
+- [GST Refund Preparer](https://tools.complypro.co.in/gst-refund/): inverted tax structure refund, Statement 1A, Annexure B
+- [MSME Tools](https://tools.complypro.co.in/msme-tools/): delayed-payment interest, section 43B(h) checker, notices and documents
+
+## Contact
+info@techmincsc.in, +91 77361 86827, Aluva, Kerala
