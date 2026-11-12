@@ -220,3 +220,4 @@ tr.click:hover{background:#F0F6FA}
 .pill{border-radius:3px;background:#fff}
 .link{color:#DCE8F5}
 .stmt tr.sub td{color:var(--mut)}
+.autosw{display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;white-space:nowrap}.autosw input{width:auto}

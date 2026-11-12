@@ -108,7 +108,7 @@
     var c = client(); if (!c) return;
     modal("Delete client", h("p", { text: "Delete " + c.name + " with all its saved runs and decisions? This cannot be undone. Download a backup first if unsure." }), [{ label: "Keep" }, { label: "Delete", cls: "danger", onclick: function () {
       S.runs.forEach(function (r, id) { if (r.clientId === c.id) { S.runs.delete(id); unpersist("runs", id); } });
-      S.clients.delete(c.id); unpersist("clients", c.id); ["dec:", "fol:"].forEach(function (p) { delete S.kv[p + c.id]; unpersist("kv", p + c.id); });
+      S.clients.delete(c.id); unpersist("clients", c.id); ["dec:", "fol:", "draft:"].forEach(function (p) { delete S.kv[p + c.id]; unpersist("kv", p + c.id); });
       S.clientId = Array.from(S.clients.keys())[0] || null; render();
     } }]);
   }
@@ -173,7 +173,8 @@
     docs.forEach(function (d) { var k = [d.sec, d.gstin, d.inumN, d.cls, d.dt, d.tax, d.taxable].join("|"); if (seen[k]) { dup++; return; } seen[k] = 1; out.push(d); });
     return { docs: out, dup: dup };
   }
-  function runRecon() {
+  function runRecon(silent) {
+    if (silent !== true) silent = false;
     var st = settings(), warns = [];
     if (!S.files2b.length) { toast("Add at least one GSTR-2B file first.", "warn", "MT-GR-002"); return; }
     if (!S.booksParse || S.booksParse.error || !S.booksParse.docs.length) { toast("Add your purchase books file first.", "warn", S.booksParse && S.booksParse.error ? S.booksParse.error : "MT-GR-005"); return; }
@@ -190,7 +191,7 @@
     S.warnings = warns; S.filters = { status: "", q: "", limit: 300 };
     if (S.booksParse && S.books && S.books.fp) { var keep = {}; Object.keys(S.books.override || {}).forEach(function (k) { keep[k] = S.books.override[k]; }); if (Object.keys(keep).length) setKV("lay:" + S.books.fp, Object.assign({}, kv("lay:" + S.books.fp, {}), keep)); }
     if (!S.result.statement.ok) toast("The reconciliation statement does not balance.", "error", "MT-GR-007");
-    S.tab = "results"; render();
+    if (!silent) S.tab = "results"; render();
   }
   function loadSample() {
     S.files2b = []; var r = GR.parse2BJson(SM.json2b(), "Sample_GSTR2B_042025.json");
@@ -263,7 +264,7 @@
       }
     }
     main.appendChild(bookCard);
-    main.appendChild(h("div", { class: "toolbar" }, btn("Reconcile", runRecon, "primary gold", { id: "runbtn" }), btn("Load sample data", loadSample, "", { id: "samplebtn" }), h("span", { class: "small", text: "Matching settings (tolerance, date window) are in Master edit." })));
+    main.appendChild(h("div", { class: "toolbar" }, btn("Reconcile", runRecon, "primary gold", { id: "runbtn" }), btn("Load sample data", loadSample, "", { id: "samplebtn" }), btn("Start fresh", clearSession, "", { id: "freshbtn" }), h("span", { class: "small", text: autoOn() ? "Auto-save is on: your files, period and results are kept in this browser until you press Start fresh. Matching settings are in Master edit." : "Auto-save is off: files and results are lost when you close or refresh this page." })));
   }
 
   /* ---------- Results ---------- */
@@ -526,7 +527,7 @@
 
   /* ---------- Backup ---------- */
   function fnv(s) { var x = 2166136261; for (var i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 16777619) >>> 0; } return x.toString(16); }
-  function backupData() { var data = { clients: Array.from(S.clients.values()), runs: Array.from(S.runs.values()), kv: Object.keys(S.kv).map(function (k) { return { key: k, value: S.kv[k] }; }) }; var body = JSON.stringify(data); return JSON.stringify({ schema: 1, app: "gstr2b-reco", version: VERSION, created: new Date().toISOString(), checksum: fnv(body), data: data }); }
+  function backupData() { var data = { clients: Array.from(S.clients.values()), runs: Array.from(S.runs.values()), kv: Object.keys(S.kv).filter(function (k) { return k.indexOf("draft:") !== 0; }).map(function (k) { return { key: k, value: S.kv[k] }; }) }; var body = JSON.stringify(data); return JSON.stringify({ schema: 1, app: "gstr2b-reco", version: VERSION, created: new Date().toISOString(), checksum: fnv(body), data: data }); }
   function tabBackup(main) {
     main.appendChild(h("h2", { text: "Backup and restore" }));
     main.appendChild(h("div", { class: "card" }, h("p", { text: "Everything is stored in this browser only. Download a backup regularly, especially before clearing browser data or changing computer." }),
@@ -576,6 +577,50 @@
   };
   function rulesHTML() { var o = DOCMETA("Rules and Sources") + "<p><b>Important:</b> " + esc(GR.SRC_NOTE) + " Last checked " + GR.fmtDMY(GR.VERIFIED_ON) + ".</p>"; o += "<h2>Provisions used</h2><ul><li>Section 16(2)(aa) with Rule 36(4) CGST Rules - credit only as in GSTR-2B.</li><li>Section 16(4) CGST Act - 30 November following the financial year, or the annual return date if earlier.</li><li>Rule 37 CGST Rules - 180 days to pay the supplier.</li><li>Rule 37A CGST Rules - reversal where the supplier has not filed GSTR-3B.</li><li>Section 17(5) CGST Act - blocked credits (table below).</li></ul><h2>Section 17(5) register</h2><table><tr><th>Clause</th><th>Subject</th><th>Provision</th><th>Effective</th><th>Words and HSN used</th><th>When credit is still allowed</th></tr>"; GR.RULES17.forEach(function (r) { o += "<tr><td>" + esc(r.clause) + "</td><td>" + esc(r.title) + "</td><td>" + esc(r.prov) + "</td><td>" + esc(r.eff) + "</td><td>" + esc(r.kw.join(", ")) + (r.hsn.length ? "; HSN " + esc(r.hsn.join(", ")) : "") + "</td><td>" + esc(r.allowed) + "</td></tr>"; }); return o + "</table>"; }
 
+
+  /* ================= auto-save of the working session ================= */
+  var asTimer = null;
+  function autoOn() { return kv("autosave", true) !== false; }
+  function snapshot() {
+    if (!S.clientId || (!S.files2b.length && !S.books)) return null;
+    return { at: Date.now(), period: S.period, itemWise: S.itemWise, ran: !!S.result, asOf: S.asOf, files2b: S.files2b, books: S.books };
+  }
+  var lastSig = "";
+  function sig() { return JSON.stringify([S.clientId, S.period, S.itemWise, !!S.result, S.asOf, S.files2b.map(function (f) { return f.name + ":" + f.docs.length; }), S.books ? [S.books.name, S.books.sheetIdx, S.books.override] : null]); }
+  function flushAutosave() {
+    clearTimeout(asTimer);
+    if (!autoOn() || !S.clientId) return;
+    var snap = snapshot(), key = "draft:" + S.clientId;
+    if (snap) { lastSig = sig(); setKV(key, snap); }
+  }
+  function scheduleAutosave() {
+    if (!autoOn() || !S.ready || !S.clientId) return;
+    if (sig() === lastSig) return;
+    clearTimeout(asTimer);
+    setStatus("dirty", "Auto-save pending…");
+    asTimer = setTimeout(function () {
+      var snap = snapshot(), key = "draft:" + S.clientId; lastSig = sig();
+      if (!snap) { if (S.kv[key]) { delete S.kv[key]; unpersist("kv", key); } else setStatus("clean"); return; }
+      setKV(key, snap);
+    }, 900);
+  }
+  function restoreSession() {
+    S.files2b = []; S.books = null; S.booksParse = null; S.result = null;
+    var d = autoOn() && S.clientId ? kv("draft:" + S.clientId, null) : null;
+    if (!d) return false;
+    S.period = d.period; S.itemWise = !!d.itemWise; S.files2b = d.files2b || []; S.books = d.books || null; if (d.asOf) S.asOf = d.asOf;
+    var tb = null; try { tb = localStorage.getItem("gr-tab"); } catch (e) {}
+    if (tb && TABS.some(function (x) { return x[0] === tb; })) S.tab = tb;
+    if (S.books) reparseBooks();
+    if (d.ran && S.files2b.length && S.booksParse && !S.booksParse.error) { runRecon(true); }
+    S.restoredAt = d.at; return true;
+  }
+  function clearSession() {
+    S.files2b = []; S.books = null; S.booksParse = null; S.result = null; S.warnings = [];
+    var key = "draft:" + S.clientId; if (S.kv[key]) { delete S.kv[key]; unpersist("kv", key); }
+    render();
+  }
+
   /* ================= shell ================= */
   var TABS = [["upload", "Upload", tabUpload], ["results", "Results", tabResults], ["s175", "17(5) review", tab175], ["vendors", "Vendor follow-up", tabVendors], ["deadlines", "Deadlines", tabDeadlines], ["reports", "Download", tabReports], ["history", "Saved runs", tabHistory], ["master", "Master edit", tabMaster], ["backup", "Backup", tabBackup]];
   function feedbackForm() {
@@ -591,8 +636,8 @@
     document.body.appendChild(h("a", { class: "skip", href: "#main" }, "Skip to content"));
     document.body.appendChild(h("header", { class: "top" },
       h("div", { class: "row1" }, h("div", { class: "brand" }, window.GR_LOGO ? h("img", { class: "tlogo", src: window.GR_LOGO, alt: "Techmin Wealth Partners" }) : h("span", { class: "logo" }, "T"), h("div", null, h("strong", { text: "GSTR-2B Reconciliation" }), h("span", { class: "app", text: "ComplyPro tools by Techmin" }), h("span", { class: "ver", text: "v" + VERSION }))),
-        h("div", { class: "co" }, h("label", { class: "sr", for: "clientsel" }, "Client"), h("select", { id: "clientsel", onchange: function (e) { S.clientId = e.target.value; S.result = null; try { localStorage.setItem("gr-client", S.clientId); } catch (x) {} render(); } }), btn("+ Client", function () { clientForm(null); }, "small", { id: "addclient" }), btn("Edit", function () { clientForm(client()); }, "small", { id: "editclient" }), btn("Delete", deleteClient, "small danger", { id: "delclient" })),
-        h("div", { class: "savebox" }, h("span", { id: "savedot", class: "dot init" }), h("span", { id: "savestatus", "aria-live": "polite" }, "Starting…"), btn("SAVE", function () { if (pending === 0 && saveState !== "failed") { setStatus("saved", "Everything is already saved " + new Date().toLocaleTimeString("en-IN")); toast("All changes are saved in this browser.", "ok"); } else toast("Saving is still in progress.", "warn"); }, "gold", { id: "savebtn" }))),
+        h("div", { class: "co" }, h("label", { class: "sr", for: "clientsel" }, "Client"), h("select", { id: "clientsel", onchange: function (e) { flushAutosave(); S.clientId = e.target.value; restoreSession(); lastSig = sig(); try { localStorage.setItem("gr-client", S.clientId); } catch (x) {} render(); } }), btn("+ Client", function () { clientForm(null); }, "small", { id: "addclient" }), btn("Edit", function () { clientForm(client()); }, "small", { id: "editclient" }), btn("Delete", deleteClient, "small danger", { id: "delclient" })),
+        h("div", { class: "savebox" }, h("span", { id: "savedot", class: "dot init" }), h("span", { id: "savestatus", "aria-live": "polite" }, "Starting…"), h("label", { class: "autosw", title: "Keep your files, period and results in this browser so they are still here after a refresh or restart" }, h("input", { type: "checkbox", id: "autosave", onchange: function (e) { setKV("autosave", e.target.checked); if (e.target.checked) scheduleAutosave(); else { var k = "draft:" + S.clientId; if (S.kv[k]) { delete S.kv[k]; unpersist("kv", k); } setStatus("saved", "Auto-save off"); } } }), " Auto-save"), btn("SAVE", function () { if (pending === 0 && saveState !== "failed") { setStatus("saved", "Everything is already saved " + new Date().toLocaleTimeString("en-IN")); toast("All changes are saved in this browser.", "ok"); } else toast("Saving is still in progress.", "warn"); }, "gold", { id: "savebtn" }))),
       h("nav", { class: "row2", "aria-label": "Help links" }, [["Help / User Guide", "guide"], ["Error Codes", "errors"], ["Rules and sources", "rules"], ["Release Notes", "release"], ["Privacy", "privacy"]].map(function (x) { return h("button", { class: "link", type: "button", onclick: function () { openDoc(x[1]); } }, x[0]); }), h("button", { class: "link", type: "button", onclick: feedbackForm }, "Feedback"), h("a", { class: "link", href: "../" }, "All ComplyPro tools"), h("button", { class: "link", type: "button", onclick: function () { var cur = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", cur); try { localStorage.setItem("mt-theme", cur); } catch (e) {} } }, "Dark / Light"))));
     document.body.appendChild(h("div", { id: "banners", class: "banners" }));
     document.body.appendChild(h("nav", { id: "tabs", class: "tabs", role: "tablist" }));
@@ -610,6 +655,9 @@
     if (!client() && S.tab !== "backup") { main.appendChild(h("div", { class: "empty" }, h("h2", { text: "Welcome to GSTR-2B Reconciliation" }), h("p", { text: "Start by adding the client you are reconciling for. Everything stays in this browser." }), btn("Add client", function () { clientForm(null); }, "primary", { id: "welcomeadd" }), " ", btn("Try with sample data", function () { var c = { id: uid(), name: "Sample Company Pvt Ltd", gstin: SM.S.client, created: Date.now() }; S.clients.set(c.id, c); S.clientId = c.id; persist("clients", c); loadSample(); }, ""))); return; }
     (TABS.filter(function (t) { return t[0] === S.tab; })[0] || TABS[0])[2](main);
     window.scrollTo(0, S.tab === "results" ? sy : 0);
+    try { localStorage.setItem("gr-tab", S.tab); } catch (e) {}
+    var cb = $("#autosave"); if (cb) cb.checked = autoOn();
+    scheduleAutosave();
   }
   function fatal(code) {
     document.body.innerHTML = ""; var e = errInfo(code) || {}; var x = EXTRA_ERR[code] || e;
@@ -623,7 +671,7 @@
       all[0].forEach(function (c) { S.clients.set(c.id, c); }); all[1].forEach(function (r) { S.runs.set(r.id, r); }); all[2].forEach(function (x) { S.kv[x.key] = x.value; });
       var saved = null; try { saved = localStorage.getItem("gr-client"); } catch (e) {}
       S.clientId = S.clients.has(saved) ? saved : (Array.from(S.clients.keys())[0] || null);
-      S.ready = true; setStatus("clean"); render(); document.documentElement.setAttribute("data-ready", "1");
+      S.ready = true; setStatus("clean"); var back = restoreSession(); lastSig = sig(); render(); if (back) toast("Your last session was restored (auto-saved " + new Date(S.restoredAt).toLocaleString("en-IN") + ").", "ok"); document.documentElement.setAttribute("data-ready", "1");
       if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(function () {});
     }).catch(function (e) { fatal((e && e.code) || "MT-DBS-002"); });
   }
