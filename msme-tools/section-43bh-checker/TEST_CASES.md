@@ -1,6 +1,6 @@
 # Test Cases and Results - Section 43B(h) Applicability Checker
 
-Run on 2026-11-12. Result: **185 passed, 0 failed** of 185.
+Run on 2026-11-12. Result: **188 passed, 0 failed** of 188.
 
 | ID | Area | Case | Expected | Result |
 |---|---|---|---|---|
@@ -189,3 +189,6 @@ Run on 2026-11-12. Result: **185 passed, 0 failed** of 185.
 | U058 | Document app | Affidavit: annexures out of order (T to A), age 10 and paragraph 0 refused (MT-INP-012) | refused | PASS |
 | U059 | Document app | Buyer declaration: model text with claimant and respondent names, three numbered paragraphs | declaration | PASS |
 | U060 | Document app | Save to register, then Re-open restores the typed values; Word download produced; print window opens | register | PASS |
+| U061 | Feedback | Feedback form: empty message refused (MT-INP-014); Save as file downloads text with tool, version and message; no invoice data included; present in all four apps | feedback | PASS |
+| U062 | Feedback | Send by e-mail builds a mailto link to Techmin with subject and message | mailto | PASS |
+| U063 | Docs | Release notes, user guide and FAQ mention the logo/identity, left menu and feedback; error table includes MT-INP-014 | docs | PASS |

@@ -1,8 +1,8 @@
 # MSME Tools - Test Report
 
-Run on 2026-11-12. **185 passed, 0 failed** (185 total).
+Run on 2026-11-12. **188 passed, 0 failed** (188 total).
 
-Engine tests (125) run in Node; browser tests (60) run in headless Chromium with Playwright against the built files. Oracle cross-check: compared 388 pending 12 mismatches 0.
+Engine tests (125) run in Node; browser tests (63) run in headless Chromium with Playwright against the built files. Oracle cross-check: compared 388 pending 12 mismatches 0.
 
 | ID | Area | Case | Result |
 |---|---|---|---|
@@ -191,3 +191,6 @@ Engine tests (125) run in Node; browser tests (60) run in headless Chromium with
 | U058 | Document app | Affidavit: annexures out of order (T to A), age 10 and paragraph 0 refused (MT-INP-012) | PASS |
 | U059 | Document app | Buyer declaration: model text with claimant and respondent names, three numbered paragraphs | PASS |
 | U060 | Document app | Save to register, then Re-open restores the typed values; Word download produced; print window opens | PASS |
+| U061 | Feedback | Feedback form: empty message refused (MT-INP-014); Save as file downloads text with tool, version and message; no invoice data included; present in all four apps | PASS |
+| U062 | Feedback | Send by e-mail builds a mailto link to Techmin with subject and message | PASS |
+| U063 | Docs | Release notes, user guide and FAQ mention the logo/identity, left menu and feedback; error table includes MT-INP-014 | PASS |

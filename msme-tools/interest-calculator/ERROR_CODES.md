@@ -19,6 +19,7 @@ Every message in MSME Tools carries one of these codes. `Continue?` says whether
 | MT-INP-011 | Required document detail missing | Error | No | A detail that the document needs is empty. | A starred (*) box was left blank. | Fill in every box marked with a star. |
 | MT-INP-012 | Paragraph, annexure or age entry invalid | Error | No | Paragraph count must be a whole number from 1, annexures must be single capital letters in order (for example A to T) and age must be 18 to 119. | A typing error. | Correct the entry and preview again. |
 | MT-INP-013 | Goods line not understood | Error | No | Each line must be: Description | Quantity | Unit price. Quantity must be a positive number and unit price a positive amount in rupees. | A separator '|' is missing, or the quantity or price is not a number. | Example: Steel brackets | 500 | 120.50 |
+| MT-INP-014 | Feedback message is empty | Warning | Yes | Write at least a few words about what you want to tell us before sending the feedback. | The message box was left blank or has fewer than 5 characters. | Describe the problem or suggestion. For a problem, include the error code and what you were doing. |
 
 ## Date validation
 

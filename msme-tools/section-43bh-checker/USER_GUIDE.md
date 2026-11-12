@@ -160,6 +160,8 @@ Every message carries a code such as `MT-DAT-005`. Click the code anywhere in th
 
 **A new RBI rate was announced after 12 Nov 2026. What do I do?** Add it in Rate Master. Results that depend on it are marked PROVISIONAL until you verify it.
 
+**Where is the menu?** The sections of each tool are listed in the left-hand menu (a scrolling bar at the top on a phone). The links under the app name open Help, Error Codes, Release Notes, Privacy and Feedback.
+
 **Can I undo a deletion?** Deletions are permanent. Take a backup first.
 
 ## 13. Privacy and data-storage guide
@@ -171,4 +173,12 @@ Every message carries a code such as `MT-DAT-005`. Click the code anywhere in th
 - Anyone who uses the same browser profile can open the tool and see the data. Use a separate profile or log-out of the computer account if the computer is shared.
 - To remove all data: delete the company inside the tool, or clear site data for the address in the browser settings.
 
-## 14. **Limitations and professional review.** MSME Tools is a working aid. It applies the rules listed in the Legal source and rule register as understood on 12 November 2026. It does not give legal, tax or accounting advice. Several points are not settled by the statute or by the sources read (which Bank Rate applies over a long delay, the order in which part payments are appropriated, whether GST forms part of the interest base, whether suppliers who only trade are covered). The application shows each such point as a *convention*, lets you choose, and prints your choice on every report. Before sending a notice, filing a return, signing an audit report or making a claim before the Facilitation Council, have the result checked by a chartered accountant or an advocate. The built-in RBI Bank Rate table is verified up to 12 November 2026; later changes must be added by you in the Rate Master and are marked provisional until verified.
+## 14. Sending feedback
+
+Press **Feedback** in the links under the app name. Choose what the message is about, add the error code if you saw one, write your message and press **Send by e-mail**. Your mail program opens with the message ready; press Send there. If no mail program opens, press **Save as file** and attach the text file to an e-mail to info@techmincsc.in.
+
+- Nothing is sent automatically. The tool has no server, and your invoices, parties and company data are never added to the message.
+- The message carries the tool name and version, the date and your browser name so that we can reproduce a problem. You can read exactly what will be sent in the saved text file.
+- For a wrong legal rule or calculation, say which rule, which invoice dates and amounts you used, and what you expected. Anonymise names before sending.
+
+## 15. **Limitations and professional review.** MSME Tools is a working aid. It applies the rules listed in the Legal source and rule register as understood on 12 November 2026. It does not give legal, tax or accounting advice. Several points are not settled by the statute or by the sources read (which Bank Rate applies over a long delay, the order in which part payments are appropriated, whether GST forms part of the interest base, whether suppliers who only trade are covered). The application shows each such point as a *convention*, lets you choose, and prints your choice on every report. Before sending a notice, filing a return, signing an audit report or making a claim before the Facilitation Council, have the result checked by a chartered accountant or an advocate. The built-in RBI Bank Rate table is verified up to 12 November 2026; later changes must be added by you in the Rate Master and are marked provisional until verified.

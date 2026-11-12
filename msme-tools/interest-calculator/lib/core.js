@@ -607,6 +607,38 @@
   };
   MT.downloadReport = function (name, html) { download(name, "text/html;charset=utf-8", html); };
 
+  /* ---------- feedback ---------- */
+  var FB_TO = "info@techmincsc.in";
+  var FB_FIELDS = [
+    { key: "kind", label: "What is this about?", type: "select", options: [["Suggestion", "Suggestion or new feature"], ["Problem", "Something is not working"], ["Legal", "A legal rule or calculation looks wrong"], ["Other", "Other"]], wide: true },
+    { key: "code", label: "Error code (if you saw one)", ph: "e.g. MT-DBS-003", max: 20 },
+    { key: "name", label: "Your name (optional)", max: 80 },
+    { key: "contact", label: "E-mail or phone, if you want a reply (optional)", max: 80, wide: true },
+    { key: "message", label: "Your message", type: "textarea", rows: 6, wide: true, req: true, help: "Do not type passwords or client secrets. Invoice and company data are never added automatically." }
+  ];
+  function fbText(v) {
+    return ["MSME Tools feedback", "Tool: " + MT.cfg.appName + " v" + MT.cfg.version, "Type: " + v.kind, "Error code: " + (v.code || "-"), "Name: " + (v.name || "-"), "Contact: " + (v.contact || "-"), "Browser: " + (navigator.userAgent || "-"), "Date: " + new Date().toLocaleString("en-IN"), "", v.message].join("\n");
+  }
+  MT.feedbackForm = function () {
+    var form = h("div", { class: "form" }, h("div", { class: "fld wide" }, h("div", { class: "ferr", id: "e_formtop" })), FB_FIELDS.map(function (d) { return field(d, d.key === "kind" ? "Suggestion" : ""); }),
+      h("p", { class: "muted small", style: "grid-column:1/-1;margin:0" }, "This tool has no server, so feedback is not sent automatically. Press Send by e-mail to open your mail program with the message ready, or Save as file and attach it to an e-mail to " + FB_TO + "."));
+    function check() {
+      var v = readForm(form, FB_FIELDS);
+      if (!v.message || v.message.length < 5) { MT.showErrors(form, [{ code: "MT-INP-014", field: "message" }]); return null; }
+      return v;
+    }
+    modal("Send feedback to Techmin", form, [
+      { label: "Cancel" },
+      { label: "Save as file", keep: true, onclick: function () { var v = check(); if (!v) return false; download("MSME-Tools-feedback-" + MT.cfg.appId + ".txt", "text/plain;charset=utf-8", fbText(v)); toast("Feedback saved as a text file. Attach it to an e-mail to " + FB_TO + ".", "ok"); return false; } },
+      { label: "Send by e-mail", cls: "primary", keep: true, onclick: function (close) {
+        var v = check(); if (!v) return false;
+        var body = fbText(v); if (body.length > 1800) body = body.slice(0, 1800) + "\n[message shortened - use Save as file for the full text]";
+        window.location.href = "mailto:" + FB_TO + "?subject=" + encodeURIComponent("MSME Tools feedback - " + MT.cfg.appName + " v" + MT.cfg.version) + "&body=" + encodeURIComponent(body);
+        toast("Your mail program should open now. Press Send there to deliver the feedback.", "ok"); close();
+      } }
+    ], { wide: true });
+  };
+
   /* ---------- tabs / shell ---------- */
   var activeTab = null;
   MT.render = function () {
@@ -767,6 +799,7 @@
         h("button", { class: "link", type: "button", onclick: function () { MT.openDoc("errors"); } }, "Error Codes"),
         h("button", { class: "link", type: "button", onclick: function () { MT.openDoc("release"); } }, "Release Notes"),
         h("button", { class: "link", type: "button", onclick: function () { MT.openDoc("privacy"); } }, "Privacy"),
+        h("button", { class: "link", type: "button", onclick: function () { MT.feedbackForm(); } }, "Feedback"),
         h("a", { class: "link", href: "../" }, "All MSME Tools"),
         h("button", { class: "link", type: "button", id: "themebtn", onclick: toggleTheme }, "Dark / Light")));
     document.body.appendChild(head);
