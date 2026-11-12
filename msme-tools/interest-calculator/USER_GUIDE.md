@@ -179,7 +179,7 @@ Every message carries a code such as `MT-DAT-005`. Click the code anywhere in th
 
 ## 14. Sending feedback
 
-Press **Feedback** in the links under the app name. Choose what the message is about, add the error code if you saw one, write your message and press **Send by e-mail**. Your mail program opens with the message ready; press Send there. If no mail program opens, press **Save as file** and attach the text file to an e-mail to info@techmincsc.in.
+Press **Feedback** in the links under the app name. Choose what the message is about, add the error code if you saw one, write your message and press **Open feedback form**. The Techmin Google feedback form opens in a new tab; fill it and press Submit (internet is needed). If you are offline, or prefer a file, press **Save as file** and e-mail the text file to info@techmincsc.in.
 
 - Nothing is sent automatically. The tool has no server, and your invoices, parties and company data are never added to the message.
 - The message carries the tool name and version, the date and your browser name so that we can reproduce a problem. You can read exactly what will be sent in the saved text file.

@@ -1,6 +1,6 @@
 # MSME Tools
 
-Four independent, offline, browser-based tools for delayed payments to micro and small enterprises (version 1.0.0):
+Four independent, offline, browser-based tools for delayed payments to micro and small enterprises (version 1.0.1):
 
 - **Delayed Payment Interest Calculator** - `interest-calculator/` - Compound interest at three times the RBI Bank Rate with monthly rests, as required by section 16 of the MSMED Act, 2006.
 - **Section 43B(h) Applicability Checker** - `section-43bh-checker/` - Find which payables to micro and small enterprises are disallowed until actually paid under section 43B(h).

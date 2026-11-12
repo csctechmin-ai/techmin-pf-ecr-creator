@@ -1,5 +1,10 @@
 # Release Notes - Delayed Payment Interest Calculator
 
+## Version 1.0.1 - 12 November 2026
+
+- Feedback now opens the Techmin Google feedback form for MSME Tools in a new tab instead of opening your e-mail program. Save as file is kept for offline use.
+- No change to calculations, rules or saved data.
+
 ## Version 1.0.0 - 12 November 2026
 
 - First release of MSME Tools: Interest Calculator, Section 43B(h) Checker, Delayed Payment Notice Generator and Document Generator (sale-of-goods agreement, MSEFC affidavit, buyer's declaration).

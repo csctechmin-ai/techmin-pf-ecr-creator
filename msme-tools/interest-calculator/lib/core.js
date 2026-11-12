@@ -1,4 +1,4 @@
-/*! MSME Tools core v1.0.0 - shared UI, storage, autosave, backup. Runs entirely in the browser. */
+/*! MSME Tools core v1.0.1 - shared UI, storage, autosave, backup. Runs entirely in the browser. */
 (function () {
   "use strict";
   var E = window.MSME, D = window.MSMEDATA;
@@ -621,21 +621,16 @@
   }
   MT.feedbackForm = function () {
     var form = h("div", { class: "form" }, h("div", { class: "fld wide" }, h("div", { class: "ferr", id: "e_formtop" })), FB_FIELDS.map(function (d) { return field(d, d.key === "kind" ? "Suggestion" : ""); }),
-      h("p", { class: "muted small", style: "grid-column:1/-1;margin:0" }, "This tool has no server, so feedback is not sent automatically. Press Send by e-mail to open your mail program with the message ready, or Save as file and attach it to an e-mail to " + FB_TO + "."));
+      h("p", { class: "muted small", style: "grid-column:1/-1;margin:0" }, "Press Open feedback form to send your feedback through the Techmin Google Form (needs internet). If you are offline, fill this page and use Save as file, then e-mail the file to " + FB_TO + "."));
     function check() {
       var v = readForm(form, FB_FIELDS);
       if (!v.message || v.message.length < 5) { MT.showErrors(form, [{ code: "MT-INP-014", field: "message" }]); return null; }
       return v;
     }
-    modal("Send feedback to Techmin", form, [
+    modal("Give feedback to Techmin", form, [
       { label: "Cancel" },
       { label: "Save as file", keep: true, onclick: function () { var v = check(); if (!v) return false; download("MSME-Tools-feedback-" + MT.cfg.appId + ".txt", "text/plain;charset=utf-8", fbText(v)); toast("Feedback saved as a text file. Attach it to an e-mail to " + FB_TO + ".", "ok"); return false; } },
-      { label: "Send by e-mail", cls: "primary", keep: true, onclick: function (close) {
-        var v = check(); if (!v) return false;
-        var body = fbText(v); if (body.length > 1800) body = body.slice(0, 1800) + "\n[message shortened - use Save as file for the full text]";
-        window.location.href = "mailto:" + FB_TO + "?subject=" + encodeURIComponent("MSME Tools feedback - " + MT.cfg.appName + " v" + MT.cfg.version) + "&body=" + encodeURIComponent(body);
-        toast("Your mail program should open now. Press Send there to deliver the feedback.", "ok"); close();
-      } }
+      { label: "Open feedback form", cls: "primary", keep: true, onclick: function (close) { window.open("https://docs.google.com/forms/d/e/1FAIpQLSd-je3-B-HxlU6XCTP2YYzqsVJ1VLO1V9tTKKYJLb-YoHxl5w/viewform", "_blank", "noopener"); toast("The Techmin feedback form opened in a new tab.", "ok"); close(); } }
     ], { wide: true });
   };
 

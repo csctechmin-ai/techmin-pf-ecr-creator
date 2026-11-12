@@ -5,7 +5,7 @@ Part of **MSME Tools** by Techmin / ComplyPro. Compound interest at three times 
 - Works fully **offline** in the browser. No server, no account, no tracking.
 - Data is stored in your browser (IndexedDB) with auto save, a permanent SAVE button, JSON backup and restore, CSV and TXT import/export.
 - All money is calculated in whole paise (no floating point).
-- Version 1.0.0. Rule and rate data verified on 2026-11-12.
+- Version 1.0.1. Rule and rate data verified on 2026-11-12.
 
 ## Files
 

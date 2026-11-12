@@ -1,10 +1,10 @@
-/*! MSME Tools engine v1.0.0 - pure logic (no DOM). Money in integer paise, rates in hundredths of a percent. */
+/*! MSME Tools engine v1.0.1 - pure logic (no DOM). Money in integer paise, rates in hundredths of a percent. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory();
   else root.MSME = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
-  var VERSION = "1.0.0";
+  var VERSION = "1.0.1";
   var VERIFIED_ON = "2026-11-12";
 
   /* ---------- Dates (ISO YYYY-MM-DD, day numbers since 1970-01-01, UTC only) ---------- */
