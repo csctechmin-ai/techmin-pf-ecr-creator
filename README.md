@@ -5,7 +5,7 @@ Published at https://tools.complypro.co.in/
 | Tool | Folder | Version |
 |---|---|---|
 | PF ECR File Creator | `pf-ecr-creator/` | 1.2.0 |
-| ESIC Monthly Contribution Creator | `esic-mc-creator/` | 1.2.0 |
+| ESIC Monthly Contribution Creator | `esic-mc-creator/` | 2.0.0 |
 | Statutory Payroll Planner | `payroll-planner/` | 1.2.0 |
 | Income Tax Calculator for Government Employees | `govt-tax-calculator/` | 1.2.0 |
 | Indian Financial Statements Studio | `fs-studio/` | 3.7 (under testing) |
