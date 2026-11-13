@@ -4,7 +4,7 @@
   else root.GR = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
-  var VERSION = "1.1.0";
+  var VERSION = "1.1.1";
   var VERIFIED_ON = "2026-11-12";
 
   /* ================= dates (ISO strings, day numbers) ================= */
@@ -281,6 +281,9 @@
   function cellStr(row, spec) { if (spec === undefined || Array.isArray(spec)) return ""; var v = row[spec]; return v === null || v === undefined ? "" : String(v).trim(); }
   function classify(typeStr, sheetHint, role) {
     var s = (String(typeStr || "") + " " + (sheetHint || "")).toLowerCase();
+    var t1 = String(typeStr || "").trim().toUpperCase();
+    if (t1 === "C") return "CN";
+    if (t1 === "D") return role === "BOOKS" ? "CN" : "DN";
     if (/credit|cdn|purchase\s*return|return|cr\.?\s*note|\bcn\b/.test(s) && !/debit/.test(s.replace(/debit\/credit/, ""))) return "CN";
     if (/debit/.test(s)) { return role === "BOOKS" ? "CN" : "DN"; } /* in purchase books a debit note is a purchase return */
     return "INV";
@@ -291,7 +294,12 @@
     var hr = opts.headerRow !== undefined && opts.headerRow !== null ? opts.headerRow : findHeaderRow(aoa);
     if (hr < 0) return { docs: [], mapping: {}, headers: [], warnings: [], error: "MT-GR-003", headerRow: -1 };
     var headers = (aoa[hr] || []).map(function (x) { return x === null || x === undefined ? "" : String(x).trim(); });
-    // portal files sometimes have a two-line header; if next row has text in tax columns merge
+    /* portal files (GSTR-2A, GSTR-2B Excel) have a two-line header: group names on the line above, sub-names under them. Empty cells take the line above. */
+    if (hr > 0 && opts.mergeAbove !== false) {
+      var above = (aoa[hr - 1] || []).map(function (x) { return x === null || x === undefined ? "" : String(x).trim(); });
+      var filled = above.filter(function (x) { return x; }).length;
+      if (filled >= 3) headers = headers.map(function (x, c) { return x || above[c] || ""; });
+    }
     var map = autoMap(headers);
     if (opts.mapping) for (var k in opts.mapping) { if (opts.mapping[k] === null || opts.mapping[k] === "") delete map[k]; else map[k] = opts.mapping[k]; }
     var warns = [];
@@ -306,6 +314,7 @@
       if (!inum && !gstin) { skipped++; continue; }
       if (/^(grand\s*)?total|^sub\s*total/i.test(nameV) || /^(grand\s*)?total/i.test(inum)) { skipped++; continue; }
       if (!inum) { skipped++; continue; }
+      if (/-total$/i.test(inum)) { skipped++; continue; } /* portal 2A/2B Excel repeats each invoice as a "-Total" row */
       var cls = classify(cellStr(r, map.doctype), opts.sheetName, opts.src);
       var taxable = cellSum(r, map.taxable), igst = cellSum(r, map.igst), cgst = cellSum(r, map.cgst), sgst = cellSum(r, map.sgst), cess = cellSum(r, map.cess);
       var total = map.total !== undefined ? cellSum(r, map.total) : 0;
@@ -319,7 +328,7 @@
         amended: /a$/i.test(opts.sheetName || "") && /b2ba|cdnra/i.test(opts.sheetName || ""), file: opts.fileName || "", row: i + 1, rawType: cellStr(r, map.doctype)
       }));
     }
-    if (opts.itemWise || (opts.src === "2B")) docs = mergeLines(docs);
+    if (opts.itemWise || (opts.src === "2B") || (opts.src === "2A")) docs = mergeLines(docs);
     return { docs: docs, mapping: map, headers: headers, warnings: warns, headerRow: hr, skipped: skipped };
   }
   /* merge rows (lines) of the same document: item-wise registers and portal Excel (one row per rate) */
@@ -337,26 +346,55 @@
     return out;
   }
   /* workbook: [{name, aoa}] ; 2B portal workbook has sheets B2B, B2BA, B2B-CDNR, B2B-CDNRA etc. */
+  /* amendment sheets (B2BA, CDNRA): a group line says "Original details" then "Revised details". Original columns are renamed so that the revised columns are read as the live document. */
+  function prepAmend(aoa) {
+    var gi = -1, b = -1, a = -1, i, c;
+    for (i = 0; i < Math.min(aoa.length, 12) && gi < 0; i++) {
+      var r = aoa[i] || [];
+      for (c = 0; c < r.length; c++) { var t = String(r[c] === null || r[c] === undefined ? "" : r[c]).toLowerCase(); if (/original\s*details/.test(t)) a = c; if (/revised\s*details/.test(t)) b = c; }
+      if (a >= 0 && b > a) gi = i;
+    }
+    if (gi < 0 || !aoa[gi + 1]) return null;
+    var h1 = aoa[gi + 1] || [], h2 = aoa[gi + 2] || [], lab = [], oNum = -1, oDt = -1;
+    for (c = 0; c < Math.max(h1.length, h2.length); c++) {
+      var x = String(h2[c] === null || h2[c] === undefined || h2[c] === "" ? (h1[c] === null || h1[c] === undefined ? "" : h1[c]) : h2[c]).trim();
+      if (c < b) { lab[c] = "Original " + x; if (/(invoice|note)\s*number/i.test(x)) oNum = c; else if (/date/i.test(x) && oDt < 0) oDt = c; }
+      else lab[c] = x;
+    }
+    var copy = aoa.slice(); copy[gi + 2] = lab;
+    return { aoa: copy, headerRow: gi + 2, oNum: oNum, oDt: oDt };
+  }
   function parse2BWorkbook(sheets, fileName) {
-    var docs = [], warns = [], used = [];
+    var docs = [], warns = [], used = [], isA = false;
     sheets.forEach(function (sh) {
-      var nm = String(sh.name || "");
-      if (!/b2b|cdn/i.test(nm.replace(/\s/g, ""))) return;
-      var res = parseTable(sh.aoa, { src: "2B", sheetName: nm.toLowerCase().indexOf("cdn") >= 0 ? (/a$/i.test(nm) ? "CDNRA" : "CDNR") : (/a$/i.test(nm) ? "B2BA" : "B2B"), fileName: fileName });
+      var nm = String(sh.name || "").trim();
+      if (/^(tds|tcs|tdsa|tcsa)$/i.test(nm)) isA = true;
+      if (/read\s*me/i.test(nm)) (sh.aoa || []).slice(0, 12).forEach(function (r) { (r || []).forEach(function (c) { if (/gstr-?\s*2a/i.test(String(c))) isA = true; }); });
+    });
+    var src = isA ? "2A" : "2B";
+    sheets.forEach(function (sh) {
+      var nm = String(sh.name || "").trim(), key = nm.replace(/\s/g, "");
+      if (!/b2b|cdn|dnr/i.test(key)) return;
+      var dataRows = (sh.aoa || []).length;
+      if (/rejected|reversal/i.test(key)) { warns.push("Sheet " + nm + " is not reconciled (ITC rejected or reversal lists are not part of the ITC claim check)."); return; }
+      var isNote = /cdn|dnr/i.test(key), isAm = /a$/i.test(key), prep = null, aoa = sh.aoa;
+      if (isAm) { prep = prepAmend(sh.aoa); if (prep) aoa = prep.aoa; }
+      var sec = isNote ? (isAm ? "CDNRA" : "CDNR") : (isAm ? "B2BA" : "B2B");
+      var res = parseTable(aoa, { src: src, sheetName: sec, fileName: fileName, headerRow: prep ? prep.headerRow : undefined, mergeAbove: prep ? false : undefined });
       if (res.error) { if (res.error !== "MT-GR-003") warns.push("Sheet " + nm + ": " + res.error); return; }
       used.push(nm);
-      var isNote = /cdn/i.test(nm);
       res.docs.forEach(function (d) {
-        d.sec = isNote ? (/a$/i.test(nm) ? "CDNRA" : "CDNR") : (/a$/i.test(nm) ? "B2BA" : "B2B");
-        d.amended = /a$/i.test(nm.trim());
-        if (isNote && d.cls === "INV") { d.cls = /debit|^d$/i.test(d.rawType) ? "DN" : "CN"; if (d.cls === "CN") { ["taxable", "igst", "cgst", "sgst", "cess", "total"].forEach(function (k) { d[k] = -Math.abs(d[k]); }); d.tax = d.igst + d.cgst + d.sgst + d.cess; d.sign = -1; } }
-        if (d.itcavl === "" && /^(yes|no|y|n)$/i.test(d.reason)) d.itcavl = "";
+        d.sec = sec; d.amended = isAm;
+        if (prep && d.row) { var rr = aoa[d.row - 1] || []; if (prep.oNum >= 0 && rr[prep.oNum] !== undefined && rr[prep.oNum] !== "") d.oinum = String(rr[prep.oNum]).trim(); if (prep.oDt >= 0) d.odt = parseDate(rr[prep.oDt]); d.oinumN = normInv(d.oinum); }
+        if (isNote && (d.cls === "INV" || /dnr/i.test(key))) { d.cls = (/dnr/i.test(key) || /debit|^d$/i.test(d.rawType)) ? "DN" : "CN"; }
+        if (d.cls === "CN") { ["taxable", "igst", "cgst", "sgst", "cess", "total"].forEach(function (k) { d[k] = -Math.abs(d[k]); }); d.tax = d.igst + d.cgst + d.sgst + d.cess; d.sign = -1; }
         docs.push(d);
       });
       (res.warnings || []).forEach(function (w) { warns.push(nm + ": " + w); });
     });
     if (!used.length) return { docs: [], warnings: warns, error: "MT-GR-002", sheets: used };
-    return { docs: docs, warnings: warns, sheets: used };
+    if (isA) warns.unshift("This is a GSTR-2A file. GSTR-2A changes until the supplier files, and it does not say whether ITC is available, so every line is treated as available. Prefer the final GSTR-2B for the month.");
+    return { docs: docs, warnings: warns, sheets: used, kind: src };
   }
 
   /* ================= filters ================= */
@@ -692,6 +730,7 @@
     "MT-GR-005": { title: "No documents were read", cause: "The sheet was read but every row was empty or a total row.", action: "Pick another sheet, or check the header row." },
     "MT-GR-006": { title: "Date could not be read", cause: "A date cell is text in an unexpected format.", action: "Use dd-mm-yyyy or dd/mm/yyyy. Rows without a date are still reconciled but are skipped by deadline checks." },
     "MT-GR-007": { title: "Statement does not balance", cause: "A + C + D - B should equal the books total. A difference means a programming fault.", action: "Report it with the files you used through the Feedback tab." },
+    "MT-GR-011": { title: "Zip file could not be opened", cause: "The zip is damaged, password protected, or has no Excel, CSV or JSON file inside.", action: "Unzip it on your computer and add the file inside, or download the file again from the GST portal." },
     "MT-GR-010": { title: "No GSTR-1 data found in the file", cause: "The JSON file is not a GSTR-1 return, or it has no B2B, credit/debit note or B2CL sections.", action: "Download the GSTR-1 JSON (or the filed GSTR-1 summary file) from the GST portal and add that file." },
     "MT-GR-008": { title: "Backup file could not be read", cause: "The file is not a backup made by this tool, or has been edited.", action: "Choose a backup downloaded from the Backup tab." }
   };

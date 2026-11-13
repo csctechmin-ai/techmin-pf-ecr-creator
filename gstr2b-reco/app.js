@@ -131,12 +131,42 @@
   }
 
   /* ================= reading files ================= */
-  function readBuf(file) { return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res(fr.result); }; fr.onerror = function () { rej(); }; fr.readAsArrayBuffer(file); }); }
+  function readBuf(file) { if (file.buf) return Promise.resolve(file.buf); return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res(fr.result); }; fr.onerror = function () { rej(); }; fr.readAsArrayBuffer(file); }); }
+
+  /* .zip files from the GST portal: read the files inside (stored or deflate) without any library */
+  function inflateRaw(data) { var ds = new DecompressionStream("deflate-raw"); return new Response(new Blob([data]).stream().pipeThrough(ds)).arrayBuffer(); }
+  function unzipAll(buf) {
+    var u = new Uint8Array(buf), dv = new DataView(buf), i = u.length - 22;
+    while (i >= 0 && dv.getUint32(i, true) !== 0x06054b50) i--;
+    if (i < 0) return Promise.reject(new Error("zip"));
+    var n = dv.getUint16(i + 10, true), off = dv.getUint32(i + 16, true), ents = [], k;
+    for (k = 0; k < n; k++) {
+      if (dv.getUint32(off, true) !== 0x02014b50) break;
+      var nl = dv.getUint16(off + 28, true), el = dv.getUint16(off + 30, true), cl = dv.getUint16(off + 32, true);
+      ents.push({ method: dv.getUint16(off + 10, true), csize: dv.getUint32(off + 20, true), lho: dv.getUint32(off + 42, true), name: new TextDecoder("utf-8").decode(u.subarray(off + 46, off + 46 + nl)) });
+      off += 46 + nl + el + cl;
+    }
+    ents = ents.filter(function (e) { return /\.(xlsx|xls|csv|json)$/i.test(e.name) && !/\/$/.test(e.name); });
+    return Promise.all(ents.map(function (e) {
+      var ln = dv.getUint16(e.lho + 26, true), le = dv.getUint16(e.lho + 28, true), st = e.lho + 30 + ln + le, d = u.subarray(st, st + e.csize);
+      var p = e.method === 0 ? Promise.resolve(d.slice().buffer) : inflateRaw(d);
+      return p.then(function (b) { return { name: e.name.split("/").pop(), size: b.byteLength, buf: b }; });
+    }));
+  }
+  function expand(file) {
+    if (!/\.zip$/i.test(file.name)) return Promise.resolve([file]);
+    return readBuf(file).then(unzipAll).then(function (list) {
+      if (!list.length) { toast(file.name + " has no Excel, CSV or JSON file inside.", "error", "MT-GR-011"); return []; }
+      return list;
+    }, function () { toast(file.name + " could not be opened as a zip file.", "error", "MT-GR-011"); return []; });
+  }
+  function eachFile(file, fn) { return expand(file).then(function (list) { return list.reduce(function (p, it) { return p.then(function () { return fn(it); }); }, Promise.resolve()); }); }
   function workbookSheets(buf) {
     var wb = XLSX.read(buf, { type: "array", cellDates: false });
     return wb.SheetNames.map(function (n) { return { name: n, aoa: XLSX.utils.sheet_to_json(wb.Sheets[n], { header: 1, raw: true, defval: "", blankrows: false }) }; });
   }
-  function add2B(file) {
+  function add2B(file0) { return eachFile(file0, add2B1); }
+  function add2B1(file) {
     if (file.size > 40 * 1024 * 1024) { toast("File is larger than 40 MB.", "error", "MT-GR-009"); return Promise.resolve(); }
     return readBuf(file).then(function (buf) {
       var res;
@@ -145,11 +175,12 @@
       if (res.error) { toast("Could not read " + file.name + ": " + errInfo(res.error).title, "error", res.error); return; }
       S.files2b = S.files2b.filter(function (f) { return f.name !== file.name; });
       S.files2b.push({ name: file.name, docs: res.docs, meta: res.meta || {}, warnings: res.warnings || [] });
-      toast(file.name + ": " + res.docs.length + " documents read from GSTR-2B.", "ok"); render();
+      toast(file.name + ": " + res.docs.length + " documents read from " + (res.kind === "2A" || (res.docs[0] && res.docs[0].src === "2A") ? "GSTR-2A" : "GSTR-2B") + ".", "ok"); render();
     }, function () { toast("The file could not be read.", "error", "MT-GR-002"); });
   }
   function fingerprint(headers) { var s = headers.map(function (x) { return String(x).toLowerCase().replace(/[^a-z0-9]/g, ""); }).join("|"), x = 2166136261; for (var i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 16777619) >>> 0; } return x.toString(16); }
-  function addBooks(file) {
+  function addBooks(file0) { return eachFile(file0, addBooks1); }
+  function addBooks1(file) {
     if (file.size > 40 * 1024 * 1024) { toast("File is larger than 40 MB.", "error", "MT-GR-009"); return Promise.resolve(); }
     return readBuf(file).then(function (buf) {
       var sheets = workbookSheets(buf);
@@ -238,12 +269,12 @@
     var list = S.files2b.length ? h("ul", { class: "files" }, S.files2b.map(function (f) {
       return h("li", null, h("strong", { text: f.name }), " - " + f.docs.length + " documents" + (f.meta && f.meta.period ? ", return period " + f.meta.period : "") + " ", btn("Remove", function () { S.files2b = S.files2b.filter(function (x) { return x !== f; }); S.result = null; render(); }, "small"), f.warnings.map(function (w) { return h("div", { class: "small warnline", text: w }); }));
     })) : h("p", { class: "small", text: "No GSTR-2B file added yet." });
-    main.appendChild(h("div", { class: "card" }, h("h3", { text: "2. GSTR-2B from the GST portal" }), h("p", { class: "small", text: "JSON or Excel as downloaded from the portal. Add more than one file to cover several months; the same document in two files is counted once." }),
-      h("input", { type: "file", id: "f2b", accept: ".json,.xlsx,.xls,.csv", multiple: true, "aria-label": "GSTR-2B files", onchange: function (e) { var fs = Array.prototype.slice.call(e.target.files); fs.reduce(function (p, f) { return p.then(function () { return add2B(f); }); }, Promise.resolve()); } }), list));
+    main.appendChild(h("div", { class: "card" }, h("h3", { text: "2. GSTR-2B or GSTR-2A from the GST portal" }), h("p", { class: "small", text: "JSON, Excel or the .zip exactly as downloaded from the portal (GSTR-2B, or GSTR-2A when 2B is not available). Add more than one file to cover several months; the same document in two files is counted once." }),
+      h("input", { type: "file", id: "f2b", accept: ".json,.xlsx,.xls,.csv,.zip", multiple: true, "aria-label": "GSTR-2B or GSTR-2A files", onchange: function (e) { var fs = Array.prototype.slice.call(e.target.files); fs.reduce(function (p, f) { return p.then(function () { return add2B(f); }); }, Promise.resolve()); } }), list));
     // books
     var B = S.books, bookCard = h("div", { class: "card" }, h("h3", { text: "3. Purchase books" }),
       h("p", { class: "small", text: "Excel or CSV from Tally, Busy, or any register with a supplier GSTIN, invoice number, date and tax columns. The column names are recognised automatically; you can change any of them below, and the choice is remembered for this layout." }),
-      h("input", { type: "file", id: "fbooks", accept: ".xlsx,.xls,.csv", "aria-label": "Purchase books file", onchange: function (e) { if (e.target.files[0]) addBooks(e.target.files[0]); } }),
+      h("input", { type: "file", id: "fbooks", accept: ".xlsx,.xls,.csv,.zip", "aria-label": "Purchase books file", onchange: function (e) { if (e.target.files[0]) addBooks(e.target.files[0]); } }),
       h("div", { class: "toolbar" }, h("label", null, h("input", { type: "checkbox", id: "itemwise", checked: S.itemWise, onchange: function (e) { S.itemWise = e.target.checked; reparseBooks(); render(); } }), " Item-wise register (add up the lines of one invoice)"), btn("Download books template", templateXlsx, "small")));
     if (B) {
       bookCard.appendChild(h("p", null, h("strong", { text: B.name }), B.sheets.length > 1 ? [" - sheet ", sel(B.sheets.map(function (s, i) { return [i, s.name]; }), B.sheetIdx, function (v) { B.sheetIdx = +v; B.override = {}; reparseBooks(); render(); }, "bsheet")] : ""));
@@ -629,7 +660,8 @@
   function g1lab(x) { return G1LAB[x] || x; }
   function g1text(t) { return String(t).replace(/\b2B\b/g, "GSTR-1").replace(/\bbooks\b/g, "sales register"); }
   function bestSheet(sheets) { var best = 0, bs = -1; sheets.forEach(function (sh, i) { var hr = GR.findHeaderRow(sh.aoa); var n = hr >= 0 ? sh.aoa.length : -1; if (n > bs) { bs = n; best = i; } }); return sheets[best]; }
-  function addGstr1(file) {
+  function addGstr1(file0) { return eachFile(file0, addGstr11); }
+  function addGstr11(file) {
     if (file.size > 40 * 1024 * 1024) { toast("File is larger than 40 MB.", "error", "MT-GR-009"); return Promise.resolve(); }
     return readBuf(file).then(function (buf) {
       var res;
@@ -641,7 +673,8 @@
       G1.result = null; toast(file.name + ": " + res.docs.length + " GSTR-1 documents read.", "ok"); render();
     }, function () { toast("The file could not be read.", "error", "MT-GR-002"); });
   }
-  function addSalesBooks(file) {
+  function addSalesBooks(file0) { return eachFile(file0, addSalesBooks1); }
+  function addSalesBooks1(file) {
     if (file.size > 40 * 1024 * 1024) { toast("File is larger than 40 MB.", "error", "MT-GR-009"); return Promise.resolve(); }
     return readBuf(file).then(function (buf) {
       var sh = bestSheet(workbookSheets(buf)); if (!sh) { toast("No sheet found in the file.", "error", "MT-GR-003"); return; }
@@ -697,8 +730,8 @@
   function tabSales(main) {
     main.appendChild(h("h2", { text: "Sales register vs GSTR-1" }));
     main.appendChild(h("p", { class: "small", text: "Check what you sold against what you reported in GSTR-1, before you file or amend. Missing invoices, wrong tax amounts and wrong GSTINs show up here. Your files stay in this browser." }));
-    var f1 = h("input", { type: "file", id: "fg1", accept: ".json,.xlsx,.xls,.csv", multiple: true, "aria-label": "GSTR-1 files", onchange: function (e) { var fs = Array.prototype.slice.call(e.target.files), i = 0; (function next() { if (i < fs.length) addGstr1(fs[i++]).then(next); })(); } });
-    var f2 = h("input", { type: "file", id: "fsales", accept: ".xlsx,.xls,.csv", "aria-label": "Sales register file", onchange: function (e) { if (e.target.files[0]) addSalesBooks(e.target.files[0]); } });
+    var f1 = h("input", { type: "file", id: "fg1", accept: ".json,.xlsx,.xls,.csv,.zip", multiple: true, "aria-label": "GSTR-1 files", onchange: function (e) { var fs = Array.prototype.slice.call(e.target.files), i = 0; (function next() { if (i < fs.length) addGstr1(fs[i++]).then(next); })(); } });
+    var f2 = h("input", { type: "file", id: "fsales", accept: ".xlsx,.xls,.csv,.zip", "aria-label": "Sales register file", onchange: function (e) { if (e.target.files[0]) addSalesBooks(e.target.files[0]); } });
     main.appendChild(h("div", { class: "grid2" },
       h("div", { class: "card" }, h("h3", { text: "1. GSTR-1" }), h("p", { class: "small", text: "GSTR-1 JSON from the GST portal (B2B, credit/debit notes and B2CL are matched invoice by invoice). One file per month; add several for a longer period. A GSTR-1 Excel file also works." }), f1,
         h("ul", { id: "g1files" }, G1.files.map(function (f) { return h("li", null, f.name + " - " + f.docs.length + " documents ", btn("Remove", function () { G1.files = G1.files.filter(function (x) { return x !== f; }); G1.result = null; render(); }, "small")); }))),
