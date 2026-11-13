@@ -4,7 +4,7 @@
   else root.GR = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
-  var VERSION = "1.2.0";
+  var VERSION = "1.2.1";
   var VERIFIED_ON = "2026-11-12";
 
   /* ================= dates (ISO strings, day numbers) ================= */
@@ -308,9 +308,28 @@
   function tallyNum(t) { var x = String(t === undefined ? "" : t).replace(/,/g, "").replace(/[^0-9.\-]/g, ""); if (x === "" || x === "-" || x === ".") return 0; var v = parseFloat(x); return isNaN(v) ? 0 : v; }
   function tallyDate(t) { var s = String(t || "").trim(), m = /^(\d{4})-?(\d{2})-?(\d{2})$/.exec(s); if (m) return m[3] + "-" + m[2] + "-" + m[1]; m = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/.exec(s); if (m) return ("0" + m[1]).slice(-2) + "-" + ("0" + m[2]).slice(-2) + "-" + m[3]; return s; }
   function yes(t) { return /^(yes|y|true|1)$/i.test(String(t || "").trim()); }
+  var MON = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
+  function gstrDate(t) { var m = /^(\d{1,2})-([A-Za-z]{3})[a-z]*-(\d{2,4})$/.exec(String(t || "").trim()); if (!m) return tallyDate(t); var y = m[3].length === 2 ? "20" + m[3] : m[3]; return ("0" + m[1]).slice(-2) + "-" + ("0" + (MON[m[2].toLowerCase()] || 1)).slice(-2) + "-" + y; }
+  // Tally "GSTR-3B Voucher Register" report: flat repeated GSTR* tags, one group per voucher.
+  function tallyGstrRegister(text, kind) {
+    var sales = kind === "sales", re = /<(GSTR[A-Z]+)>([^<]*)<\/\1>/g, m, cur = null, list = [];
+    while ((m = re.exec(text))) { if (m[1] === "GSTRDATE") { cur = {}; list.push(cur); } if (cur) cur[m[1]] = xmlUnesc(m[2]).trim(); }
+    var head = ["Date", sales ? "Invoice No" : "Supplier Invoice No", "Voucher No", "Party Name", "GSTIN/UIN", "Taxable Value", "IGST", "CGST", "SGST", "Cess", "Invoice Value", "Voucher Type", "Ledger"], rows = [], other = 0;
+    list.forEach(function (g) {
+      var vt = g.GSTRVCHTYPE || "", ok = sales ? (/sales|credit\s*note/i.test(vt) && !/order|delivery|quotation/i.test(vt)) : (/purchase|debit\s*note/i.test(vt) && !/order|receipt/i.test(vt));
+      if (!ok) { other++; return; }
+      var tx = Math.abs(tallyNum(g.GSTRTAXABLEAMOUNT)), ig = Math.abs(tallyNum(g.GSTRIGSTAMOUNT)), cg = Math.abs(tallyNum(g.GSTRCGSTAMOUNT)), sg = Math.abs(tallyNum(g.GSTRSGSTAMOUNT)), ce = Math.abs(tallyNum(g.GSTRCESSAMOUNT));
+      rows.push([gstrDate(g.GSTRDATE), g.GSTRVCHNUMBER || "", g.GSTRVCHNUMBER || "", g.GSTRVCHPARTICULARS || "", "", tx, ig, cg, sg, ce, Math.round((tx + ig + cg + sg + ce) * 100) / 100, vt, ""]);
+    });
+    if (!rows.length) return { aoa: [], warnings: [], error: "MT-GR-012" };
+    var w = ["This is Tally's GSTR-3B Voucher Register. It has no supplier GSTIN and no supplier invoice number, so rows can only be matched by party name and voucher number, and most will show as not matched. For a proper reconciliation export the Day Book or Purchase Register (Alt+E, XML) instead."];
+    if (other) w.push(other + " voucher(s) of other types (for example GST Journal) were ignored.");
+    return { aoa: [head].concat(rows), warnings: w, vouchers: rows.length };
+  }
   function tallyToAoa(text, kind) {
     var warns = [], root;
     text = String(text || "").replace(/^﻿/, "");
+    if (/<GSTRVCHTYPE>/i.test(text)) return tallyGstrRegister(text, kind);
     try { root = /^\s*[\[{]/.test(text) ? jsonToNodes(JSON.parse(text), "#") : xmlToNodes(text); } catch (e) { return { aoa: [], warnings: [], error: "MT-GR-012" }; }
     var vouchers = [], stack = [root];
     while (stack.length) { var nd = stack.pop(); if (nd.n === "VOUCHER" || kid(nd, "VOUCHERTYPENAME") || nd.a.VCHTYPE) { vouchers.push(nd); continue; } for (var q = nd.c.length - 1; q >= 0; q--) stack.push(nd.c[q]); }
