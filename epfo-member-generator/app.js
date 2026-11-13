@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   var EP = window.EP, VERSION = EP.VERSION;
-  var FEEDBACK_URL = "https://docs.google.com/forms/d/e/1FAIpQLScuOveiMJWKBWAvIlWStZ3Xmc7uooUAoy-C9Gk4dAEjQs2EfQ/viewform";
+  var FEEDBACK_URL = "__FEEDBACK_URL__";
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var LAZY = {};
   function lazy(src) { return LAZY[src] || (LAZY[src] = new Promise(function (ok, no) { var e = document.createElement("script"); e.src = src; e.onload = ok; e.onerror = function () { delete LAZY[src]; no(new Error("load")); }; document.head.appendChild(e); })); }
