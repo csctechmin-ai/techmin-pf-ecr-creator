@@ -4,7 +4,7 @@
   else root.GR = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
-  var VERSION = "1.1.1";
+  var VERSION = "1.2.0";
   var VERIFIED_ON = "2026-11-12";
 
   /* ================= dates (ISO strings, day numbers) ================= */
@@ -270,6 +270,97 @@
       if (env[k] && (Array.isArray(env[k]) ? env[k].length : Object.keys(env[k]).length)) warns.push("Section " + k.toUpperCase() + " is present in the file but is summary or non-invoice data and is not matched invoice by invoice.");
     });
     return { docs: docs, meta: meta, warnings: warns };
+  }
+
+
+  /* ---------- Tally export (XML or JSON) -> a table the normal books reader understands ---------- */
+  function xmlUnesc(t) { return t.replace(/&#(\d+);/g, function (m, n) { return String.fromCharCode(+n); }).replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&"); }
+  function tallyName(n) { return String(n).toUpperCase().replace(/\.LIST$/, ""); }
+  function xmlToNodes(txt) {
+    txt = txt.replace(/&#(?:[0-8]|1[0-9]|2[0-9]|3[01]);/g, "").replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, "");
+    var re = /<([A-Za-z_][^\s>\/]*)((?:\s[^>]*?)?)(\/?)>|<\/([^>\s]+)\s*>|([^<]+)/g, m, root = { n: "#", a: {}, c: [], t: "" }, stack = [root], top = root;
+    while ((m = re.exec(txt))) {
+      top = stack[stack.length - 1];
+      if (m[1]) {
+        var node = { n: tallyName(m[1]), a: {}, c: [], t: "" }, ar = /([A-Za-z_:][\w:.-]*)\s*=\s*"([^"]*)"/g, am;
+        while ((am = ar.exec(m[2] || ""))) node.a[am[1].toUpperCase()] = xmlUnesc(am[2]);
+        top.c.push(node); if (!m[3]) stack.push(node);
+      } else if (m[4]) { if (stack.length > 1) stack.pop(); }
+      else if (m[5]) top.t += m[5];
+    }
+    return root;
+  }
+  function jsonToNodes(v, name) {
+    var node = { n: tallyName(name || "#"), a: {}, c: [], t: "" };
+    if (Array.isArray(v)) { v.forEach(function (x) { node.c.push(jsonToNodes(x, name)); }); node.arr = true; return node; }
+    if (v && typeof v === "object") {
+      Object.keys(v).forEach(function (k) {
+        var x = v[k];
+        if (Array.isArray(x)) x.forEach(function (y) { node.c.push(jsonToNodes(y, k)); });
+        else if (x && typeof x === "object") node.c.push(jsonToNodes(x, k));
+        else { var ch = { n: tallyName(k), a: {}, c: [], t: x === null || x === undefined ? "" : String(x) }; node.c.push(ch); }
+      });
+    } else node.t = v === null || v === undefined ? "" : String(v);
+    return node;
+  }
+  function kid(n, name) { for (var i = 0; i < n.c.length; i++) if (n.c[i].n === name) return n.c[i]; return null; }
+  function kidTxt(n, names) { for (var j = 0; j < names.length; j++) { var k = kid(n, names[j]); if (k && xmlUnesc(k.t).trim()) return xmlUnesc(k.t).trim(); } return ""; }
+  function tallyNum(t) { var x = String(t === undefined ? "" : t).replace(/,/g, "").replace(/[^0-9.\-]/g, ""); if (x === "" || x === "-" || x === ".") return 0; var v = parseFloat(x); return isNaN(v) ? 0 : v; }
+  function tallyDate(t) { var s = String(t || "").trim(), m = /^(\d{4})-?(\d{2})-?(\d{2})$/.exec(s); if (m) return m[3] + "-" + m[2] + "-" + m[1]; m = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/.exec(s); if (m) return ("0" + m[1]).slice(-2) + "-" + ("0" + m[2]).slice(-2) + "-" + m[3]; return s; }
+  function yes(t) { return /^(yes|y|true|1)$/i.test(String(t || "").trim()); }
+  function tallyToAoa(text, kind) {
+    var warns = [], root;
+    text = String(text || "").replace(/^﻿/, "");
+    try { root = /^\s*[\[{]/.test(text) ? jsonToNodes(JSON.parse(text), "#") : xmlToNodes(text); } catch (e) { return { aoa: [], warnings: [], error: "MT-GR-012" }; }
+    var vouchers = [], stack = [root];
+    while (stack.length) { var nd = stack.pop(); if (nd.n === "VOUCHER" || kid(nd, "VOUCHERTYPENAME") || nd.a.VCHTYPE) { vouchers.push(nd); continue; } for (var q = nd.c.length - 1; q >= 0; q--) stack.push(nd.c[q]); }
+    if (!vouchers.length) return { aoa: [], warnings: [], error: "MT-GR-012" };
+    var sales = kind === "sales", rows = [], skippedType = 0, skippedCancel = 0, noGstin = 0, noRef = 0, noParty = 0;
+    var head = ["Date", sales ? "Invoice No" : "Supplier Invoice No", "Voucher No", "Party Name", "GSTIN/UIN", "Taxable Value", "IGST", "CGST", "SGST", "Cess", "Invoice Value", "Voucher Type", "Ledger"];
+    vouchers.sort(function (a, b) { return 0; });
+    vouchers.forEach(function (v) {
+      var vt = kidTxt(v, ["VOUCHERTYPENAME"]) || (v.a.VCHTYPE || "");
+      var ok = sales ? (/sales|credit\s*note/i.test(vt) && !/order|delivery|quotation/i.test(vt)) : (/purchase|debit\s*note/i.test(vt) && !/order|receipt/i.test(vt));
+      if (!ok) { skippedType++; return; }
+      if (yes(kidTxt(v, ["ISCANCELLED"])) || yes(kidTxt(v, ["ISOPTIONAL"])) || /cancel/i.test(v.a.ACTION || "")) { skippedCancel++; return; }
+      var party = kidTxt(v, ["PARTYLEDGERNAME", "PARTYNAME", "BASICBUYERNAME"]), gstin = kidTxt(v, ["PARTYGSTIN", "GSTIN", "BUYERGSTIN"]);
+      var vno = kidTxt(v, ["VOUCHERNUMBER"]), ref = kidTxt(v, ["REFERENCE", "SUPPLIERINVOICENO", "BASICORDERREF"]);
+      var dt = kidTxt(v, sales ? ["DATE"] : ["REFERENCEDATE", "SUPPLIERINVOICEDATE", "DATE"]) || kidTxt(v, ["DATE"]);
+      var entries = [];
+      v.c.forEach(function (c) {
+        if (/LEDGERENTRIES$/.test(c.n)) entries.push(c);
+        else if (/INVENTORYENTRIES$/.test(c.n)) c.c.forEach(function (a) { if (/ACCOUNTINGALLOCATIONS$/.test(a.n)) entries.push(a); });
+      });
+      var partyAmt = null, partyDeemed = null, igst = 0, cgst = 0, sgst = 0, cess = 0, taxable = 0, ledger = "", anyFlag = false;
+      entries.forEach(function (e) { var nm = kidTxt(e, ["LEDGERNAME"]); if (party && nm === party && partyAmt === null) { partyAmt = Math.abs(tallyNum(kidTxt(e, ["AMOUNT"]))); partyDeemed = kidTxt(e, ["ISDEEMEDPOSITIVE"]); } });
+      entries.forEach(function (e) {
+        var nm = kidTxt(e, ["LEDGERNAME"]), amt = tallyNum(kidTxt(e, ["AMOUNT"])), fl = kidTxt(e, ["ISDEEMEDPOSITIVE"]);
+        if (party && nm === party) return;
+        if (!nm || amt === 0) return;
+        var sgn = 1;
+        if (partyDeemed !== null && partyDeemed !== "" && fl !== "") { anyFlag = true; sgn = (yes(fl) === yes(partyDeemed)) ? -1 : 1; }
+        var val = Math.abs(amt) * sgn, l = nm.toLowerCase();
+        if (/igst|integrated/.test(l)) igst += val;
+        else if (/cgst|central/.test(l)) cgst += val;
+        else if (/sgst|utgst|state\s*(gst|tax)/.test(l)) sgst += val;
+        else if (/cess/.test(l)) cess += val;
+        else if (/round/.test(l)) { /* rounding is not part of taxable value */ }
+        else { taxable += val; if (!ledger) ledger = nm; }
+      });
+      var tax = igst + cgst + sgst + cess, total = partyAmt !== null ? partyAmt : taxable + tax;
+      if (taxable <= 0 && total > 0 && tax >= 0 && !anyFlag) taxable = Math.max(0, total - tax);
+      if (!party) noParty++;
+      if (!gstin) noGstin++;
+      if (!sales && !ref) noRef++;
+      rows.push([tallyDate(dt), sales ? vno : (ref || vno), vno, party, gstin, taxable, igst, cgst, sgst, cess, total, vt, ledger]);
+    });
+    if (!rows.length) return { aoa: [], warnings: ["No " + (sales ? "sales" : "purchase") + " vouchers were found in the file (other voucher types were ignored)."], error: "MT-GR-012" };
+    if (skippedType) warns.push(skippedType + " voucher(s) of other types (not " + (sales ? "sales / credit notes" : "purchase / debit notes") + ") were ignored.");
+    if (skippedCancel) warns.push(skippedCancel + " cancelled or optional voucher(s) were ignored.");
+    if (noGstin) warns.push(noGstin + " voucher(s) have no party GSTIN in the export (unregistered party, or the GSTIN is not in the report). They cannot be matched by GSTIN.");
+    if (noRef) warns.push(noRef + " purchase voucher(s) have no supplier invoice number (Reference); the Tally voucher number was used instead and may not match 2B.");
+    warns.push("Tally data is read from the ledger names: ledgers with IGST, CGST, SGST/UTGST or Cess in the name are taken as tax, round-off is ignored and every other ledger is taxable value. Check the first few rows.");
+    return { aoa: [head].concat(rows), warnings: warns, vouchers: rows.length };
   }
 
   /* ---------- tabular (2B Excel portal download, Tally, Busy, any register) ---------- */
@@ -730,6 +821,7 @@
     "MT-GR-005": { title: "No documents were read", cause: "The sheet was read but every row was empty or a total row.", action: "Pick another sheet, or check the header row." },
     "MT-GR-006": { title: "Date could not be read", cause: "A date cell is text in an unexpected format.", action: "Use dd-mm-yyyy or dd/mm/yyyy. Rows without a date are still reconciled but are skipped by deadline checks." },
     "MT-GR-007": { title: "Statement does not balance", cause: "A + C + D - B should equal the books total. A difference means a programming fault.", action: "Report it with the files you used through the Feedback tab." },
+    "MT-GR-012": { title: "No usable Tally vouchers in the file", cause: "The file is not a Tally XML or JSON export of vouchers, or it has no purchase (or sales) vouchers.", action: "In Tally open Display > Account Books > Purchase Register (or Day Book), press Alt+E (Export), choose XML or JSON with all details, and add that file. Or export to Excel." },
     "MT-GR-011": { title: "Zip file could not be opened", cause: "The zip is damaged, password protected, or has no Excel, CSV or JSON file inside.", action: "Unzip it on your computer and add the file inside, or download the file again from the GST portal." },
     "MT-GR-010": { title: "No GSTR-1 data found in the file", cause: "The JSON file is not a GSTR-1 return, or it has no B2B, credit/debit note or B2CL sections.", action: "Download the GSTR-1 JSON (or the filed GSTR-1 summary file) from the GST portal and add that file." },
     "MT-GR-008": { title: "Backup file could not be read", cause: "The file is not a backup made by this tool, or has been edited.", action: "Choose a backup downloaded from the Backup tab." }
@@ -739,7 +831,7 @@
     VERSION: VERSION, VERIFIED_ON: VERIFIED_ON, DEFAULTS: DEFAULTS, RULES17: RULES17, ERRORS: ERRORS, FIELD_LABELS: FIELD_LABELS, FIELD_ORDER: FIELD_ORDER, SYN: SYN, DEFAULT_TEMPLATE: DEFAULT_TEMPLATE, SRC_NOTE: SRC_NOTE,
     parseDate: parseDate, fmtDMY: fmtDMY, fyOf: fyOf, fyLabel: fyLabel, dn: dn, fromDn: fromDn, toPaise: toPaise, inr: inr,
     gstinValid: gstinValid, gstinShape: gstinShape, gstinCheckChar: gstinCheckChar, normGstin: normGstin, lev: lev, normInv: normInv, tailNum: tailNum,
-    autoMap: autoMap, findHeaderRow: findHeaderRow, parseTable: parseTable, parse2BJson: parse2BJson, parseReturnJson: parseReturnJson, parse2BWorkbook: parse2BWorkbook, mergeLines: mergeLines, mkDoc: mkDoc, filterDocs: filterDocs,
+    autoMap: autoMap, findHeaderRow: findHeaderRow, parseTable: parseTable, parse2BJson: parse2BJson, tallyToAoa: tallyToAoa, parseReturnJson: parseReturnJson, parse2BWorkbook: parse2BWorkbook, mergeLines: mergeLines, mkDoc: mkDoc, filterDocs: filterDocs,
     reconcile: reconcile, flag17: flag17, review17: review17, billKey: billKey, s164Deadline: s164Deadline, deadlines: deadlines, rule37: rule37, vendorSummary: vendorSummary, vendorMessage: vendorMessage
   };
 });
