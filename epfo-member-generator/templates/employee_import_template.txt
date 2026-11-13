@@ -1,3 +1,3 @@
 UAN#~#prvMemberId#~#memberName#~#DOB#~#DOJ#~#Gender#~#fatherHusbandName#~#relation#~#mobileNo#~#emailId#~#nationality#~#epfWages#~#qualification#~#maritalStatus#~#isInternationalWorker#~#countryOfOrigin#~#passportNumber#~#passportValidFrom#~#passportValidTill#~#isPhisicalHandicap#~#locomotive#~#hearing#~#visual#~#BankAccNo#~#Ifsc#~#NameAsPerBank#~#PAN#~#NameAsPerPan#~#AadhaarNo#~#NameAsPerAadhaar
-#~##~#ASHA NAIR#~#01/05/1990#~#01/10/2026#~#F#~#SAMPLE FATHER#~#F#~#9876543210#~##~#77#~#12000#~#6#~#U#~##~##~##~##~##~##~##~##~##~##~##~##~##~##~#200000107916#~#ASHA NAIR
-#~##~#RAVI KUMAR#~#02/05/1991#~#01/10/2026#~#M#~#SAMPLE FATHER#~#F#~#9876543211#~##~#77#~#13000#~#6#~#U#~##~##~##~##~##~##~##~##~##~##~##~##~##~##~#200000115838#~#RAVI KUMAR
+#~##~#ASHA NAIR#~#01/05/1990#~#01/10/2026#~#F#~#SAMPLE FATHER#~#F#~#9876543210#~##~#77#~#12000#~#6#~#U#~#No#~##~##~##~##~#No#~#No#~#No#~#No#~#01234567890#~#SBIN0001234#~#ASHA NAIR#~##~##~#200000107916#~#ASHA NAIR
+#~##~#RAVI KUMAR#~#02/05/1991#~#01/10/2026#~#M#~#SAMPLE FATHER#~#F#~#9876543211#~##~#77#~#13000#~#6#~#U#~#No#~##~##~##~##~#No#~#No#~#No#~#No#~#01234567891#~#SBIN0001234#~#RAVI KUMAR#~##~##~#200000115838#~#RAVI KUMAR

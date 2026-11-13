@@ -1,9 +1,12 @@
 /*! Techmin EPFO Member Registration Bulk File Generator - UI. Runs entirely in the browser; nothing is uploaded. */
 (function () {
   "use strict";
-  var EP = window.EP, DOCS = window.EPDOCS || {}, VERSION = EP.VERSION;
-  var FEEDBACK_URL = "__FEEDBACK_URL__";
+  var EP = window.EP, VERSION = EP.VERSION;
+  var FEEDBACK_URL = "https://docs.google.com/forms/d/e/1FAIpQLScuOveiMJWKBWAvIlWStZ3Xmc7uooUAoy-C9Gk4dAEjQs2EfQ/viewform";
   var $ = function (s, r) { return (r || document).querySelector(s); };
+  var LAZY = {};
+  function lazy(src) { return LAZY[src] || (LAZY[src] = new Promise(function (ok, no) { var e = document.createElement("script"); e.src = src; e.onload = ok; e.onerror = function () { delete LAZY[src]; no(new Error("load")); }; document.head.appendChild(e); })); }
+  function needX(fn) { return function () { var a = arguments, t = this; if (window.XLSX) return fn.apply(t, a); lazy("lib/xlsx.full.min.js").then(function () { fn.apply(t, a); }, function () { toast("The Excel library could not be loaded. Reload the page and try again.", "error", "EP-LIB-001"); }); }; }
   function h(tag, attrs) {
     var el = document.createElement(tag);
     if (attrs) for (var k in attrs) {
@@ -28,7 +31,7 @@
   var DB = null, saveState = "init", pending = 0, draftTimer = null;
   var S = { members: new Map(), kv: {}, val: null, page: "dashboard", ready: false, editId: null, draft: null, focusField: null, imp: null,
     reg: { q: "", status: "", iw: "", da: "", sort: "name", dir: 1, page: 1, size: 25, sel: new Set() }, genScope: "all", vq: { level: "", q: "" } };
-  var SETTINGS_DEFAULT = { includeHeader: true, crlf: false, yesNo: "portal", defaultNationality: "77", defaultQualification: "", fileBase: "EPFO_Member_Registration_Bulk", autosave: true, requiredFields: EP.DEFAULT_CFG.requiredFields.slice(), requireMobile: false, requireEmail: false, requireBank: false, requirePan: false, requireConsent: true, checkAadhaarChecksum: true, checkNameMatch: true, confirmedYesNo: false };
+  var SETTINGS_DEFAULT = { includeHeader: true, crlf: false, yesNo: "yesno", defaultNationality: "77", defaultQualification: "", fileBase: "EPFO_Member_Registration_Bulk", autosave: true, requiredFields: EP.DEFAULT_CFG.requiredFields.slice(), requireMobile: false, requireEmail: false, requireBank: false, requirePan: false, requireConsent: true, checkAadhaarChecksum: true, checkNameMatch: true, confirmedYesNo: false };
   function settings() { return Object.assign({}, SETTINGS_DEFAULT, S.kv.settings || {}); }
   function cfg() { var s = settings(); return Object.assign({}, EP.DEFAULT_CFG, { includeHeader: s.includeHeader, eol: s.crlf ? "\r\n" : "\n", yesNo: s.yesNo, requiredFields: s.requiredFields, requireMobile: s.requireMobile, requireEmail: s.requireEmail, requireBank: s.requireBank, requirePan: s.requirePan, requireConsent: s.requireConsent, checkAadhaarChecksum: s.checkAadhaarChecksum, checkNameMatch: s.checkNameMatch }); }
   function lists() { var l = S.kv.codeLists || {}; return { nationality: l.nationality && l.nationality.length ? l.nationality : EP.CODES.nationality, countryOfOrigin: l.countryOfOrigin && l.countryOfOrigin.length ? l.countryOfOrigin : EP.CODES.countryOfOrigin }; }
@@ -137,7 +140,7 @@
     if (restored) main.appendChild(h("div", { class: "banner ok", text: "Your unfinished entry was restored from this browser's auto-save." }));
     main.appendChild(epfoNotice());
     function refresh() {
-      var rec = EP.normalise(F), is = EP.validate(rec, cfg(), lists()), by = {};
+      var rec = EP.normalise(F), is = EP.validate(rec, cfg(), lists()), by = {}; if (radioYes.checked && !rec.UAN) is.push({ field: "UAN", level: "error", code: "EP-PUAN", msg: "Enter the member's UAN, because previous employment / UAN is set to Yes." });
       is.forEach(function (i) { if (submitted || touched[i.field]) (by[i.field] = by[i.field] || []).push(i); });
       Object.keys(errEls).forEach(function (f) { var el = errEls[f], arr = by[f] || []; el.innerHTML = ""; arr.forEach(function (i) { el.appendChild(h("div", { class: i.level === "error" ? "ferr" : "small", style: i.level === "warn" ? "color:var(--warn)" : "", text: (i.level === "warn" ? "Warning: " : "") + i.msg })); }); var w = el.parentNode; if (w) w.classList.toggle("bad", arr.some(function (i) { return i.level === "error"; })); });
     }
@@ -152,9 +155,11 @@
     /* A. previous employment */
     var prevOn = !!(F.prvMemberId || F.UAN);
     var radioNo = h("input", { type: "radio", name: "prev", id: "prev_no", checked: !prevOn }), radioYes = h("input", { type: "radio", name: "prev", id: "prev_yes", checked: prevOn });
-    function setPrev(y) { F._prev = y; sync(); }
+    function setPrev(y) { F._prev = y; if (!y) { F.UAN = ""; F.prvMemberId = ""; ["UAN", "prvMemberId"].forEach(function (k) { if (inputs[k]) inputs[k].value = ""; }); S.draft.dirty = true; scheduleDraft(); } sync(); refresh(); }
     radioNo.addEventListener("change", function () { setPrev(false); }); radioYes.addEventListener("change", function () { setPrev(true); });
-    var secA = h("section", { class: "card" }, h("h2", { text: "A. Previous employment / UAN" }), h("div", { class: "toolbar" }, h("label", null, radioNo, " No"), h("label", null, radioYes, " Yes")), h("p", { class: "small muted", text: "Choose Yes only when the member already has a UAN or a previous member ID; the two fields then appear in section C. The EPFO bulk file always keeps its 30 fields; nothing is added or removed." }));
+    var uanW = txt("UAN", { max: 12, mode: "numeric", req: true, help: "12 digits. Leading zeroes are kept." }), prvW = txt("prvMemberId", { max: 30, help: "Previous member ID, if known. Kept as text." });
+    var prevFields = h("div", { class: "form" }, uanW, prvW);
+    var secA = h("section", { class: "card" }, h("h2", { text: "A. Previous employment / UAN" }), h("p", { class: "small", text: "Does the member already have a UAN or a previous EPF member ID?" }), h("div", { class: "toolbar" }, h("label", null, radioNo, " No (new member)"), h("label", null, radioYes, " Yes")), prevFields, h("p", { class: "small muted", text: "Choose Yes when the member already has a UAN; then the UAN is required. The EPFO bulk file always keeps its 30 fields." }));
     /* B. personal */
     var nameRow = txt("memberName", { req: true, max: 85, help: "As per Aadhaar. Up to 85 characters." });
     var secB = h("section", { class: "card" }, h("h2", { text: "B. Personal details" }), h("div", { class: "form" },
@@ -163,8 +168,7 @@
       txt("fatherHusbandName", { req: true, max: 85 }), sel("relation", EP.CODES.relation, { req: true }), sel("maritalStatus", EP.CODES.maritalStatus, { req: true }),
       txt("mobileNo", { max: 10, mode: "numeric", help: "10 digits" }), txt("emailId", { max: 100 }), sel("qualification", EP.CODES.qualification, {})));
     /* C. employment */
-    var uanW = txt("UAN", { max: 12, mode: "numeric", help: "12 digits. Leading zeroes are kept." }), prvW = txt("prvMemberId", { max: 30, help: "Kept as text." });
-    var secC = h("section", { class: "card" }, h("h2", { text: "C. Employment details" }), h("div", { class: "form" }, dateF("DOJ", { req: true }), txt("epfWages", { req: true, max: 8, mode: "decimal", help: "Actual EPF wages applicable. Gross salary is never substituted." }), uanW, prvW));
+    var secC = h("section", { class: "card" }, h("h2", { text: "C. Employment details" }), h("div", { class: "form" }, dateF("DOJ", { req: true }), txt("epfWages", { req: true, max: 8, mode: "decimal", help: "Actual EPF wages applicable. Gross salary is never substituted." })));
     /* D. international */
     var iwBox = chk("isInternationalWorker", "International worker");
     var iwFields = h("div", { class: "form" }, codeField("countryOfOrigin", L.countryOfOrigin, { help: "Country code as in the EPFO list." }), txt("passportNumber", { max: 10 }), dateF("passportValidFrom"), dateF("passportValidTill"));
@@ -184,11 +188,11 @@
     function sync() {
       var iw = F.isPhisicalHandicap, on = F.isInternationalWorker === "Y"; iwFields.style.display = on ? "" : "none"; if (!on) { /* hidden fields keep their value so that nothing is lost silently */ }
       daFields.style.display = F.isPhisicalHandicap === "Y" ? "" : "none";
-      var py = radioYes.checked; uanW.style.display = prvW.style.display = py ? "" : "none";
+      var py = radioYes.checked; prevFields.style.display = py ? "" : "none";
     }
     [secA, secB, secC, secD, secE, secF].forEach(function (s) { main.appendChild(s); });
     function save(again) {
-      submitted = true; var rec = EP.normalise(F), is = EP.validate(rec, cfg(), lists()), errs = is.filter(function (i) { return i.level === "error"; });
+      submitted = true; var rec = EP.normalise(F), is = EP.validate(rec, cfg(), lists()); if (radioYes.checked && !rec.UAN) is.push({ field: "UAN", level: "error", code: "EP-PUAN", msg: "Enter the UAN." }); var errs = is.filter(function (i) { return i.level === "error"; });
       refresh();
       if (!rec.memberName) { toast("Enter at least the member name to save.", "error"); var el = $("#f_memberName"); if (el) el.focus(); return; }
       var mm = m || newMember(); mm.d = rec;
@@ -265,7 +269,7 @@
     items.forEach(function (it) { it.issues.forEach(function (i) { rows.push([it.row, it.rec.memberName, i.level === "error" ? "Error" : "Warning", EP.LABEL[i.field] || i.field, i.msg]); }); });
     return rows;
   }
-  function saveSheet(name, rows, fname) { var ws = XLSX.utils.aoa_to_sheet(rows), wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, name); var out = XLSX.write(wb, { bookType: "xlsx", type: "array" }); download(fname, "application/octet-stream", new Blob([out])); }
+  var saveSheet = needX(function saveSheet0(name, rows, fname) { var ws = XLSX.utils.aoa_to_sheet(rows), wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, name); var out = XLSX.write(wb, { bookType: "xlsx", type: "array" }); download(fname, "application/octet-stream", new Blob([out])); });
   function renderPreview(box) {
     var I = S.imp; box.innerHTML = ""; if (!I || !I.items) return;
     var it = I.items, g = it.filter(function (x) { return x.status === "green"; }).length, a = it.filter(function (x) { return x.status === "amber"; }).length, r = it.filter(function (x) { return x.status === "red"; }).length, rej = (I.meta.rejects || []).length;
@@ -300,7 +304,7 @@
     main.appendChild(h("h2", { text: "Excel Import" })); main.appendChild(h("p", { text: "Import .xlsx, .xls or .csv. The file is read in this browser; nothing is uploaded. Download the template in Templates for the exact columns." }));
     var box = h("div", { id: "impbox" }), mapBox = h("div", null);
     main.appendChild(dropArea("Choose an Excel or CSV file", ".xlsx,.xls,.csv", function (file) {
-      readFile(file, false).then(function (buf) {
+      readFile(file, false).then(function (buf) { return window.XLSX ? buf : lazy("lib/xlsx.full.min.js").then(function () { return buf; }); }).then(function (buf) {
         var wb = XLSX.read(buf, { type: "array", cellDates: true, raw: false, dateNF: "dd/mm/yyyy" }), ws = wb.Sheets[wb.SheetNames[0]];
         var aoa = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: "", blankrows: false });
         if (aoa.length < 2) return toast("The first sheet has no data rows.", "error", "EP-IMP-001");
@@ -383,7 +387,7 @@
     main.appendChild(h("div", { class: "card" }, h("div", { class: "fld" }, h("label", { for: "gen_scope", text: "Records to export" }), sc), h("p", { class: "small muted", text: "File name: " + fileName() + ". Encoding: UTF-8. Each record has exactly 30 fields separated by #~#. " + (settings().includeHeader ? "The first line is the 30-name header line, as in the EPFO reference file." : "The header line is switched off in Settings.") })));
     var s = settings(), yn = EP.YESNO[s.yesNo];
     var how = s.yesNo === "portal" ? "<b>Y</b> for International worker and Differently abled, <b>Yes</b> for Locomotive, Hearing and Visual, and a blank for No (the values the EPFO registration form posts)" : "<b>" + esc(yn[0]) + "</b> for Yes and <b>" + (yn[1] === "" ? "a blank" : esc(yn[1])) + "</b> for No";
-    if (!s.confirmedYesNo) main.appendChild(notice("warn", "<strong>Please verify before uploading.</strong> The EPFO reference file does not show how Yes/No fields are written in the bulk file. This tool writes " + how + ". Check a file accepted by the portal and change the setting if needed."));
+    if (s.yesNo === "portal" && !s.confirmedYesNo) main.appendChild(notice("warn", "<strong>Please verify before uploading.</strong> The EPFO reference file does not show how Yes/No fields are written in the bulk file. This tool writes " + how + ". Check a file accepted by the portal and change the setting if needed."));
     if (errs.length) main.appendChild(h("div", { class: "banner err" }, h("strong", { text: errs.length + " record(s) have errors, so the file cannot be generated yet. " }), "Fix them in the Validation Centre, or export only the valid ones.", h("div", { class: "toolbar" }, btn("Open Validation Centre", function () { go("validation"); }), btn("Export valid records only", function () { S.genScope = "valid"; render(); }, "primary"))));
     if (!errs.length && warns.length) main.appendChild(notice("warn", "<strong>" + warns.length + " record(s) have warnings.</strong> You can still generate the file after confirming."));
     var block = !set.length || errs.length, tools = h("div", { class: "toolbar" });
@@ -405,7 +409,7 @@
     if (nWarn) confirmBox("Generate with warnings?", nWarn + " record(s) have warnings. Generate the file anyway?", "Generate", go2); else go2();
   }
   function jsonDoc(set) { return { application: "Techmin HR Solutions", format: "EPFO_MEMBER_REGISTRATION", version: "1.0", members: set.map(function (m) { var o = {}; EP.FIELDS.concat(EP.EXTRA).forEach(function (f) { o[f] = m.d[f]; }); return o; }) }; }
-  function downloadXlsx(set) { var head = EP.FIELDS.concat(EP.EXTRA), rows = [head]; set.forEach(function (m) { rows.push(head.map(function (f) { return m.d[f]; })); }); var ws = XLSX.utils.aoa_to_sheet(rows); textCols(ws, head, rows.length); var wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Members"); download("EPFO_Members_" + localStamp() + ".xlsx", "application/octet-stream", new Blob([XLSX.write(wb, { bookType: "xlsx", type: "array" })])); }
+  var downloadXlsx = needX(function downloadXlsx0(set) { var head = EP.FIELDS.concat(EP.EXTRA), rows = [head]; set.forEach(function (m) { rows.push(head.map(function (f) { return m.d[f]; })); }); var ws = XLSX.utils.aoa_to_sheet(rows); textCols(ws, head, rows.length); var wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Members"); download("EPFO_Members_" + localStamp() + ".xlsx", "application/octet-stream", new Blob([XLSX.write(wb, { bookType: "xlsx", type: "array" })])); });
   function textCols(ws, head, nrows) { head.forEach(function (f, c) { for (var r = 1; r < nrows; r++) { var a = XLSX.utils.encode_cell({ r: r, c: c }), cell = ws[a]; if (cell) { cell.t = "s"; cell.z = "@"; cell.v = String(cell.v); } } }); }
 
   /* ================= templates and sample ================= */
@@ -438,7 +442,7 @@
   function jsonTemplate() { var o = {}; EP.FIELDS.concat(EP.EXTRA).forEach(function (f) { o[f] = ""; }); o.nationality = "77"; return { application: "Techmin HR Solutions", format: "EPFO_MEMBER_REGISTRATION", version: "1.0", members: [o] }; }
   function pageTemplates(main) {
     main.appendChild(h("h2", { text: "Templates and sample data" }));
-    main.appendChild(h("div", { class: "card" }, h("h2", { text: "Import templates" }), h("p", { text: "Use these to prepare data for import. The Excel template has the 30 EPFO columns first, then two data-entry-only columns." }), h("div", { class: "toolbar" }, btn("Excel template (.xlsx)", function () { download("employee_import_template.xlsx", "application/octet-stream", templateXlsx()); }, "primary"), btn("JSON template", function () { download("employee_import_template.json", "application/json", JSON.stringify(jsonTemplate(), null, 2)); }), btn("TXT template", function () { download("employee_import_template.txt", "text/plain;charset=utf-8", EP.HEADER + "\n"); }))));
+    main.appendChild(h("div", { class: "card" }, h("h2", { text: "Import templates" }), h("p", { text: "Use these to prepare data for import. The Excel template has the 30 EPFO columns first, then two data-entry-only columns." }), h("div", { class: "toolbar" }, btn("Excel template (.xlsx)", needX(function () { download("employee_import_template.xlsx", "application/octet-stream", templateXlsx()); }), "primary"), btn("JSON template", function () { download("employee_import_template.json", "application/json", JSON.stringify(jsonTemplate(), null, 2)); }), btn("TXT template", function () { download("employee_import_template.txt", "text/plain;charset=utf-8", EP.HEADER + "\n"); }))));
     main.appendChild(h("div", { class: "card" }, h("h2", { text: "Sample employees (invented)" }), h("p", { text: "100 invented employees with made-up Aadhaar numbers, for trying the tool. Do not upload them to EPFO." }), h("div", { class: "toolbar" }, btn("Download sample JSON", function () { var set = sampleRecords(100).map(function (r) { return { d: EP.normalise(r) }; }); download("sample_members.json", "application/json", JSON.stringify(jsonDoc(set), null, 2)); }), btn("Download sample TXT", function () { download("sample_members.txt", "text/plain;charset=utf-8", EP.buildFile(sampleRecords(100).map(function (r) { return EP.normalise(r); }), cfg())); }), btn("Load sample into register", function () { confirmBox("Load sample data", "Add 100 invented members to your register? You can delete them later.", "Add sample", function () { var ms = sampleRecords(100).map(function (r) { return newMember(r); }); snapshotPrev().then(function () { return persistMany(ms); }).then(function () { toast("Sample data added.", "ok"); go("register"); }); }); }, "gold"))));
   }
 
@@ -499,9 +503,10 @@
 
   /* ================= help ================= */
   function openDoc(which, anchor) {
+    if (!window.EPDOCS) return lazy("docs.js").then(function () { openDoc(which, anchor); }, function () { toast("The guide could not be loaded.", "error", "EP-LIB-002"); });
     var pages = [["guide", "User guide"], ["errors", "Error codes"], ["rules", "Rules and sources"], ["release", "Release notes"], ["privacy", "Privacy"]];
     var body = h("div", null), cur = which;
-    function paint() { body.innerHTML = ""; body.appendChild(h("div", { class: "docnav" }, pages.map(function (p) { return h("button", { class: "btn small" + (p[0] === cur ? " primary" : ""), type: "button", onclick: function () { cur = p[0]; paint(); } }, p[1]); }))); var d = h("div", { class: "doc", id: "docbody", html: DOCS[cur] || "<p>Not available.</p>" }); body.appendChild(d); if (anchor) { var el = d.querySelector("#" + anchor); if (el) el.scrollIntoView(); } }
+    function paint() { body.innerHTML = ""; body.appendChild(h("div", { class: "docnav" }, pages.map(function (p) { return h("button", { class: "btn small" + (p[0] === cur ? " primary" : ""), type: "button", onclick: function () { cur = p[0]; paint(); } }, p[1]); }))); var d = h("div", { class: "doc", id: "docbody", html: (window.EPDOCS || {})[cur] || "<p>Not available.</p>" }); body.appendChild(d); if (anchor) { var el = d.querySelector("#" + anchor); if (el) el.scrollIntoView(); } }
     paint(); modal("Help", body, [{ label: "Close" }], { wide: true });
   }
   function pageHelp(main) {
@@ -535,7 +540,7 @@
     document.body.innerHTML = "";
     document.body.appendChild(h("a", { class: "skip", href: "#main" }, "Skip to content"));
     document.body.appendChild(h("header", { class: "top" },
-      h("div", { class: "row1" }, h("div", { class: "brand" }, window.EP_LOGO ? h("img", { class: "tlogo", src: window.EP_LOGO, alt: "Techmin HR Solutions" }) : h("span", { class: "logo" }, "T"), h("div", null, h("strong", { text: "TECHMIN HR SOLUTIONS" }), h("span", { class: "app", text: "EPFO Member Registration Bulk File Generator" }), h("span", { class: "ver", text: " v" + VERSION }))),
+      h("div", { class: "row1" }, h("div", { class: "brand" }, h("img", { class: "tlogo", src: "logo.png", alt: "Techmin HR Solutions", width: "190", height: "38" }), h("div", null, h("strong", { text: "TECHMIN HR SOLUTIONS" }), h("span", { class: "app", text: "EPFO Member Registration Bulk File Generator" }), h("span", { class: "ver", text: " v" + VERSION }))),
         h("div", { class: "savebox" }, h("span", { id: "savedot", class: "dot init" }), h("span", { id: "savestatus", "aria-live": "polite" }, "Starting…"), h("span", { id: "lastsaved", class: "small" }), btn("SAVE", function () { saveAll(); }, "gold", { id: "savebtn", title: "Save everything in this browser" }), btn("Settings", function () { go("settings"); }, "small", { id: "settingsbtn" }))),
       h("nav", { class: "row2", "aria-label": "Help links" }, [["Help / User Guide", "guide"], ["Error Codes", "errors"], ["Release Notes", "release"], ["Privacy", "privacy"]].map(function (x) { return h("button", { class: "link", type: "button", onclick: function () { openDoc(x[1]); } }, x[0]); }), h("button", { class: "link", type: "button", id: "fbbtn", onclick: function () { if (/^https:/.test(FEEDBACK_URL)) { window.open(FEEDBACK_URL, "_blank", "noopener"); toast("The Techmin feedback form opened in a new tab.", "ok"); } else toast("The feedback form is not linked yet.", "info"); } }, "Feedback"), h("a", { class: "link", href: "../" }, "All ComplyPro tools"))));
     document.body.appendChild(h("div", { id: "banners", class: "banners" }));
@@ -555,7 +560,6 @@
   function fatal(code) { var m = { "EP-DB-001": ["This browser cannot store data", "IndexedDB is not available (private window or restricted browser).", "Open the tool in a normal browser window."], "EP-DB-002": ["Storage could not be opened", "The browser blocked or failed to open its database.", "Close other tabs of this tool and reload, or check that the browser allows site data."] }[code] || ["Cannot start", "", ""]; document.body.innerHTML = ""; document.body.appendChild(h("div", { class: "fatal" }, h("h1", { text: "EPFO Member Registration Bulk File Generator cannot start" }), h("p", null, h("strong", { text: code + " - " + m[0] })), h("p", { text: m[1] }), h("p", { text: "What to do: " + m[2] }))); }
   function start() {
     try { var th = localStorage.getItem("ep-theme"); if (th) document.documentElement.setAttribute("data-theme", th); } catch (e) {}
-    if (typeof XLSX === "undefined") return fatal("EP-DB-002");
     shell();
     openDB().then(function () { return Promise.all([readAll("members"), readAll("kv")]); }).then(function (all) {
       all[0].forEach(function (m) { S.members.set(m.id, m); }); all[1].forEach(function (x) { S.kv[x.key] = x.value; });

@@ -1,7 +1,7 @@
 /*! Techmin EPFO Member Registration Bulk File Generator - engine v1.0.0 (pure logic, no DOM, no network). */
 (function (root) {
   "use strict";
-  var VERSION = "1.0.0";
+  var VERSION = "1.0.1";
   var DELIM = "#~#";
   /* The 30 output fields, in the exact order of the supplied memberregistrationbulk.txt. Do not reorder. */
   var FIELDS = ["UAN", "prvMemberId", "memberName", "DOB", "DOJ", "Gender", "fatherHusbandName", "relation", "mobileNo", "emailId", "nationality", "epfWages", "qualification", "maritalStatus", "isInternationalWorker", "countryOfOrigin", "passportNumber", "passportValidFrom", "passportValidTill", "isPhisicalHandicap", "locomotive", "hearing", "visual", "BankAccNo", "Ifsc", "NameAsPerBank", "PAN", "NameAsPerPan", "AadhaarNo", "NameAsPerAadhaar"];
@@ -27,7 +27,7 @@
   var DEFAULT_CFG = {
     includeHeader: true,           /* the supplied reference file begins with the 30-name header line */
     eol: "\n",                     /* the supplied reference uses LF */
-    yesNo: "portal",               /* not shown by the reference file: portal form values, verify */
+    yesNo: "yesno",               /* not shown by the reference file: portal form values, verify */
     requiredFields: ["memberName", "DOB", "DOJ", "Gender", "fatherHusbandName", "relation", "nationality", "epfWages", "maritalStatus", "AadhaarNo", "NameAsPerAadhaar"],
     requireMobile: false, requireEmail: false, requireBank: false, requirePan: false,
     requireConsent: true, checkAadhaarChecksum: true, checkNameMatch: true, wagesCeilingWarn: 15000
