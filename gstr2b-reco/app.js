@@ -212,7 +212,7 @@
   function sel(options, value, onchange, id) {
     var s = h("select", { id: id, onchange: function (e) { onchange(e.target.value); } }, options.map(function (o) { return h("option", { value: o[0], selected: String(o[0]) === String(value) }, o[1]); })); return s;
   }
-  function statusPill(s) { var c = { "Matched": "ok", "Mismatch": "err", "Probable match": "warn", "Not in Books": "err", "Not in 2B": "err", "Amended in 2B": "warn" }[s] || ""; return h("span", { class: "pill " + c, text: s }); }
+  function statusPill(s, label) { var c = { "Matched": "ok", "Mismatch": "err", "Probable match": "warn", "Not in Books": "err", "Not in 2B": "err", "Amended in 2B": "warn" }[s] || ""; return h("span", { class: "pill " + c, text: label || s }); }
   function stat(k, v, cls) { return h("div", { class: "stat " + (cls || "") }, h("div", { class: "k", text: k }), h("div", { class: "v", text: v })); }
   function pName(n) { return settings().hideNames ? "(hidden)" : n; }
 
@@ -622,7 +622,114 @@
   }
 
   /* ================= shell ================= */
-  var TABS = [["upload", "Upload", tabUpload], ["results", "Results", tabResults], ["s175", "17(5) review", tab175], ["vendors", "Vendor follow-up", tabVendors], ["deadlines", "Deadlines", tabDeadlines], ["reports", "Download", tabReports], ["history", "Saved runs", tabHistory], ["master", "Master edit", tabMaster], ["backup", "Backup", tabBackup]];
+
+  /* ================= Sales register vs GSTR-1 ================= */
+  var G1 = { files: [], sales: null, salesParse: null, result: null, f: { status: "", q: "", limit: 300 }, warns: [], range: null };
+  var G1LAB = { "Not in 2B": "Not in GSTR-1", "Not in Books": "Not in sales register", "Amended in 2B": "Amended in GSTR-1" };
+  function g1lab(x) { return G1LAB[x] || x; }
+  function g1text(t) { return String(t).replace(/\b2B\b/g, "GSTR-1").replace(/\bbooks\b/g, "sales register"); }
+  function bestSheet(sheets) { var best = 0, bs = -1; sheets.forEach(function (sh, i) { var hr = GR.findHeaderRow(sh.aoa); var n = hr >= 0 ? sh.aoa.length : -1; if (n > bs) { bs = n; best = i; } }); return sheets[best]; }
+  function addGstr1(file) {
+    if (file.size > 40 * 1024 * 1024) { toast("File is larger than 40 MB.", "error", "MT-GR-009"); return Promise.resolve(); }
+    return readBuf(file).then(function (buf) {
+      var res;
+      if (/\.json$/i.test(file.name)) res = GR.parseReturnJson(new TextDecoder("utf-8").decode(buf), file.name, "GSTR1");
+      else { var sh = bestSheet(workbookSheets(buf)); res = sh ? GR.parseTable(sh.aoa, { src: "G1", mapping: {}, itemWise: false, fileName: file.name, sheetName: sh.name }) : { error: "MT-GR-010" }; }
+      if (res.error) { toast("Could not read " + file.name + ": " + errInfo(res.error).title, "error", res.error); return; }
+      G1.files = G1.files.filter(function (x) { return x.name !== file.name; });
+      G1.files.push({ name: file.name, docs: res.docs, warnings: res.warnings || [] });
+      G1.result = null; toast(file.name + ": " + res.docs.length + " GSTR-1 documents read.", "ok"); render();
+    }, function () { toast("The file could not be read.", "error", "MT-GR-002"); });
+  }
+  function addSalesBooks(file) {
+    if (file.size > 40 * 1024 * 1024) { toast("File is larger than 40 MB.", "error", "MT-GR-009"); return Promise.resolve(); }
+    return readBuf(file).then(function (buf) {
+      var sh = bestSheet(workbookSheets(buf)); if (!sh) { toast("No sheet found in the file.", "error", "MT-GR-003"); return; }
+      var res = GR.parseTable(sh.aoa, { src: "BOOKS", mapping: {}, itemWise: false, fileName: file.name, sheetName: sh.name });
+      if (res.error) { toast("Could not read " + file.name + ": " + errInfo(res.error).title, "error", res.error); return; }
+      G1.sales = { name: file.name }; G1.salesParse = res; G1.result = null; toast(file.name + ": " + res.docs.length + " sales entries read.", "ok"); render();
+    }, function () { toast("The file could not be read.", "error", "MT-GR-002"); });
+  }
+  function runG1() {
+    if (!G1.files.length) { toast("Add a GSTR-1 file first.", "warn", "MT-GR-010"); return; }
+    if (!G1.salesParse || !G1.salesParse.docs.length) { toast("Add your sales register first.", "warn", "MT-GR-005"); return; }
+    var st = settings(), warns = [], all = [];
+    G1.files.forEach(function (f) { all = all.concat(f.docs); f.warnings.forEach(function (w) { warns.push(f.name + ": " + w); }); });
+    var dd = dedupe2B(all); if (dd.dup) warns.push(dd.dup + " identical GSTR-1 document(s) appeared in more than one file and were counted once.");
+    var sales = G1.salesParse.docs, dts = dd.docs.map(function (d) { return d.dt; }).filter(Boolean).sort();
+    var scope = document.getElementById("g1scope");
+    if (dts.length && (!scope || scope.checked)) {
+      var from = dts[0].slice(0, 8) + "01", e = dts[dts.length - 1], y = +e.slice(0, 4), m = +e.slice(5, 7), last = new Date(Date.UTC(y, m, 0)).getUTCDate(), to = e.slice(0, 8) + ("0" + last).slice(-2);
+      var before = sales.length; sales = GR.filterDocs(sales, from, to); G1.range = GR.fmtDMY(from) + " to " + GR.fmtDMY(to);
+      if (before !== sales.length) warns.push((before - sales.length) + " sales entries dated outside " + G1.range + " (the span of the GSTR-1 documents) were left out of the comparison.");
+    } else G1.range = null;
+    (G1.salesParse.warnings || []).forEach(function (w) { warns.push("Sales register: " + w); });
+    G1.result = GR.reconcile(dd.docs, sales, { tol: Math.round(st.tolRs * 100), dateWin: st.win });
+    G1.warns = warns; G1.f = { status: "", q: "", limit: 300 }; render();
+  }
+  function g1Customers(R) {
+    var m = {};
+    R.rows.forEach(function (r) {
+      var d = r.b2[0] || r.bk[0], k = r.gstin || "-"; var o = m[k] = m[k] || { gstin: k === "-" ? "" : k, name: d ? d.name : "", n: 0, ok: 0, mm: 0, nog1: 0, nobk: 0, diff: 0 };
+      if (!o.name && d && d.name) o.name = d.name;
+      o.n++; if (r.status === "Matched" || r.status === "Probable match") o.ok++; else if (r.status === "Mismatch") o.mm++; else if (r.status === "Not in 2B") o.nog1++; else if (r.status === "Not in Books") o.nobk++;
+      o.diff += r.taxBk - r.tax2;
+    });
+    return Object.keys(m).map(function (k) { return m[k]; }).filter(function (o) { return o.mm || o.nog1 || o.nobk; }).sort(function (a, b) { return Math.abs(b.diff) - Math.abs(a.diff); });
+  }
+  function exportG1() {
+    var R = G1.result; if (!R) return;
+    var wb = XLSX.utils.book_new();
+    function sheet(name, aoa, w) { var ws = XLSX.utils.aoa_to_sheet(aoa); ws["!cols"] = (w || []).map(function (x) { return { wch: x }; }); XLSX.utils.book_append_sheet(wb, ws, name); }
+    var sm = [["Sales register vs GSTR-1 reconciliation"], ["Client", (client() ? client().name : "")], ["GSTR-1 files", G1.files.map(function (f) { return f.name; }).join("; ")], ["Sales register", G1.sales ? G1.sales.name : ""], ["Compared period", G1.range || "All entries"], [], ["Status", "Documents", "Tax per GSTR-1 (Rs)", "Tax per sales register (Rs)"]];
+    Object.keys(R.byStatus).forEach(function (k) { var g = R.byStatus[k]; sm.push([g1lab(k), g.n, g.tax2 / 100, g.taxBk / 100]); });
+    sheet("Summary", sm, [34, 12, 22, 26]);
+    var cu = [["Customer", "GSTIN", "Documents", "Matched", "Mismatch", "Not in GSTR-1", "Not in sales register", "Tax difference (sales - GSTR-1) Rs"]];
+    g1Customers(R).forEach(function (o) { cu.push([o.name, o.gstin, o.n, o.ok, o.mm, o.nog1, o.nobk, o.diff / 100]); });
+    sheet("Customer-wise", cu, [34, 18, 10, 10, 10, 14, 18, 30]);
+    var iv = [["Status", "Customer", "GSTIN", "Invoice (GSTR-1)", "Invoice (sales register)", "Date", "Taxable per GSTR-1", "Taxable per sales", "Tax per GSTR-1", "Tax per sales", "Difference", "What to check"]];
+    R.rows.forEach(function (r) { var a = r.b2[0], b = r.bk[0]; iv.push([g1lab(r.status), (a || b).name, r.gstin, a ? a.inum : "", b ? b.inum : "", GR.fmtDMY((b || a).dt), a ? sumD(r.b2, "taxable") / 100 : "", b ? sumD(r.bk, "taxable") / 100 : "", r.tax2 / 100, r.taxBk / 100, (r.taxBk - r.tax2) / 100, g1text(r.reasons.join("; "))]); });
+    sheet("Invoice-wise", iv, [18, 30, 18, 18, 18, 12, 16, 16, 14, 14, 14, 60]);
+    var out = XLSX.write(wb, { type: "array", bookType: "xlsx" });
+    download("Sales_vs_GSTR1_" + today() + ".xlsx", "application/octet-stream", new Blob([out]));
+  }
+  function sumD(a, f) { var t = 0; a.forEach(function (d) { t += d[f]; }); return t; }
+  function tabSales(main) {
+    main.appendChild(h("h2", { text: "Sales register vs GSTR-1" }));
+    main.appendChild(h("p", { class: "small", text: "Check what you sold against what you reported in GSTR-1, before you file or amend. Missing invoices, wrong tax amounts and wrong GSTINs show up here. Your files stay in this browser." }));
+    var f1 = h("input", { type: "file", id: "fg1", accept: ".json,.xlsx,.xls,.csv", multiple: true, "aria-label": "GSTR-1 files", onchange: function (e) { var fs = Array.prototype.slice.call(e.target.files), i = 0; (function next() { if (i < fs.length) addGstr1(fs[i++]).then(next); })(); } });
+    var f2 = h("input", { type: "file", id: "fsales", accept: ".xlsx,.xls,.csv", "aria-label": "Sales register file", onchange: function (e) { if (e.target.files[0]) addSalesBooks(e.target.files[0]); } });
+    main.appendChild(h("div", { class: "grid2" },
+      h("div", { class: "card" }, h("h3", { text: "1. GSTR-1" }), h("p", { class: "small", text: "GSTR-1 JSON from the GST portal (B2B, credit/debit notes and B2CL are matched invoice by invoice). One file per month; add several for a longer period. A GSTR-1 Excel file also works." }), f1,
+        h("ul", { id: "g1files" }, G1.files.map(function (f) { return h("li", null, f.name + " - " + f.docs.length + " documents ", btn("Remove", function () { G1.files = G1.files.filter(function (x) { return x !== f; }); G1.result = null; render(); }, "small")); }))),
+      h("div", { class: "card" }, h("h3", { text: "2. Sales register" }), h("p", { class: "small", text: "Excel or CSV from Tally, Busy or any software, with customer GSTIN, invoice number, date, taxable value and tax columns. The columns are recognised automatically." }), f2,
+        G1.sales ? h("p", { id: "g1sales", text: G1.sales.name + " - " + G1.salesParse.docs.length + " entries" }) : h("p", { class: "small", text: "No sales register added yet." }))));
+    main.appendChild(h("div", { class: "toolbar" }, h("label", null, h("input", { type: "checkbox", id: "g1scope", checked: true }), " Compare only the sales entries inside the GSTR-1 period (recommended)"), btn("Compare sales with GSTR-1", runG1, "primary gold", { id: "g1run" })));
+    var R = G1.result; if (!R) return;
+    var f = G1.f;
+    if (G1.warns.length) main.appendChild(h("div", { class: "banner warn" }, h("strong", { text: "Please note: " }), h("ul", null, G1.warns.map(function (w) { return h("li", { text: w }); }))));
+    main.appendChild(h("div", { class: "grid3", id: "g1stats" }, STATUSES.filter(function (x) { return R.byStatus[x]; }).map(function (x) { var g = R.byStatus[x]; return stat(g1lab(x), g.n + " | " + inr(x === "Not in Books" ? g.tax2 : g.taxBk), x === "Matched" ? "" : (x === "Probable match" || x === "Amended in 2B" ? "warn" : "err")); })));
+    var cust = g1Customers(R);
+    if (cust.length) main.appendChild(h("div", { class: "card" }, h("h3", { text: "Customers to look at (largest tax difference first)" }), h("div", { class: "tablewrap" }, h("table", { class: "grid", id: "g1cust" }, h("thead", null, h("tr", null, ["Customer", "GSTIN", "Docs", "Mismatch", "Not in GSTR-1", "Not in sales register", "Tax difference"].map(function (x, i) { return h("th", { class: i >= 2 ? "n" : "", text: x }); }))),
+      h("tbody", null, cust.slice(0, 50).map(function (o) { return h("tr", { class: "click", tabindex: "0", onclick: function () { f.q = o.gstin || o.name; f.status = ""; render(); }, onkeydown: function (e) { if (e.key === "Enter") { f.q = o.gstin || o.name; render(); } } }, h("td", { text: pName(o.name) || "-" }), h("td", { class: "mono small", text: o.gstin || "no GSTIN" }), h("td", { class: "n", text: o.n }), h("td", { class: "n", text: o.mm }), h("td", { class: "n", text: o.nog1 }), h("td", { class: "n", text: o.nobk }), h("td", { class: "n", text: inr(o.diff) })); }))))));
+    var chips = [h("button", { class: "btn small" + (f.status === "" ? " primary" : ""), type: "button", onclick: function () { f.status = ""; f.limit = 300; render(); } }, "All (" + R.rows.length + ")")];
+    STATUSES.forEach(function (x) { var g = R.byStatus[x]; if (!g) return; chips.push(h("button", { class: "btn small" + (f.status === x ? " primary" : ""), type: "button", "data-status": x, onclick: function () { f.status = x; f.limit = 300; render(); } }, g1lab(x) + " (" + g.n + ")")); });
+    var q = h("input", { type: "search", id: "g1q", placeholder: "Search customer, GSTIN or invoice no", value: f.q, "aria-label": "Search", oninput: function (e) { f.q = e.target.value; f.limit = 300; clearTimeout(q._t); q._t = setTimeout(rows, 200); } });
+    main.appendChild(h("div", { class: "toolbar" }, chips, q, btn("Download Excel", exportG1, "", { id: "g1xlsx" })));
+    var holder = h("div", { id: "g1rows" }); main.appendChild(holder);
+    function rows() {
+      var list = R.rows.filter(function (r) { if (f.status && r.status !== f.status) return false; if (f.q) { var hay = ((r.name || "") + " " + r.gstin + " " + r.b2.concat(r.bk).map(function (d) { return d.inum; }).join(" ")).toLowerCase(); if (hay.indexOf(f.q.toLowerCase()) < 0) return false; } return true; });
+      holder.innerHTML = ""; var shown = list.slice(0, f.limit);
+      holder.appendChild(h("p", { class: "small", id: "g1count", text: list.length + " row(s)" + (list.length > shown.length ? ", showing the first " + shown.length : "") }));
+      holder.appendChild(h("div", { class: "tablewrap" }, h("table", { class: "grid", id: "g1table" }, h("thead", null, h("tr", null, ["Status", "Customer", "Invoice (GSTR-1 | sales)", "Date", "Tax per GSTR-1", "Tax per sales", "Difference", "What to check"].map(function (x, i) { return h("th", { class: (i >= 4 && i <= 6) ? "n" : "", text: x }); }))),
+        h("tbody", null, shown.map(function (r) { var a = r.b2[0], b = r.bk[0], d = r.taxBk - r.tax2;
+          return h("tr", null, h("td", null, statusPill(r.status, g1lab(r.status))), h("td", null, h("div", { text: pName((a || b).name) || "-" }), h("div", { class: "small mono", text: r.gstin || "no GSTIN" })),
+            h("td", { text: (a ? a.inum : "-") + "  |  " + (b ? b.inum : "-") }), h("td", { class: "nw", text: GR.fmtDMY((b || a).dt) }), h("td", { class: "n", text: a ? inr(r.tax2) : "-" }), h("td", { class: "n", text: b ? inr(r.taxBk) : "-" }), h("td", { class: "n", text: a && b ? inr(d) : (a ? inr(-r.tax2) : inr(r.taxBk)) }), h("td", { class: "small", text: g1text(r.reasons.join("; ")) })); })))));
+      if (list.length > shown.length) holder.appendChild(btn("Show 300 more", function () { f.limit += 300; rows(); }));
+    }
+    rows();
+  }
+  var TABS = [["upload", "Upload", tabUpload], ["results", "Results", tabResults], ["s175", "17(5) review", tab175], ["vendors", "Vendor follow-up", tabVendors], ["sales", "Sales vs GSTR-1", tabSales], ["deadlines", "Deadlines", tabDeadlines], ["reports", "Download", tabReports], ["history", "Saved runs", tabHistory], ["master", "Master edit", tabMaster], ["backup", "Backup", tabBackup]];
   function feedbackForm() {
     var kind = h("select", { id: "fb_kind" }, [["Suggestion", "Suggestion or new feature"], ["Problem", "Something is not working"], ["Legal", "A legal rule or match looks wrong"], ["Other", "Other"]].map(function (o) { return h("option", { value: o[0], text: o[1] }); }));
     var code = h("input", { id: "fb_code", maxlength: "20", placeholder: "e.g. MT-GR-003" }), name = h("input", { id: "fb_name", maxlength: "80" }), contact = h("input", { id: "fb_contact", maxlength: "80" }), msg = h("textarea", { id: "fb_msg", rows: "6" }), err = h("div", { class: "ferr" });

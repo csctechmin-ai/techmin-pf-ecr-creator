@@ -4,7 +4,7 @@
   else root.GR = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
-  var VERSION = "1.0.3";
+  var VERSION = "1.1.0";
   var VERIFIED_ON = "2026-11-12";
 
   /* ================= dates (ISO strings, day numbers) ================= */
@@ -191,7 +191,7 @@
     if (items && items.length) {
       items.forEach(function (it) {
         var q = it.itm_det || it;
-        out.taxable += toPaise(q.txval); out.igst += toPaise(q.igst); out.cgst += toPaise(q.cgst); out.sgst += toPaise(q.sgst); out.cess += toPaise(q.cess);
+        out.taxable += toPaise(q.txval); out.igst += toPaise(q.igst !== undefined ? q.igst : q.iamt); out.cgst += toPaise(q.cgst !== undefined ? q.cgst : q.camt); out.sgst += toPaise(q.sgst !== undefined ? q.sgst : q.samt); out.cess += toPaise(q.cess !== undefined ? q.cess : q.csamt);
       });
     } else {
       out.taxable = toPaise(x.txval); out.igst = toPaise(x.igst); out.cgst = toPaise(x.cgst); out.sgst = toPaise(x.sgst); out.cess = toPaise(x.cess);
@@ -204,6 +204,11 @@
     var env = obj;
     if (env && env.data && env.data.data) env = env.data.data;
     else if (env && env.data && (env.data.docdata || env.data.gstin)) env = env.data;
+    if (env && !env.docdata && (env.b2b || env.cdn || env.cdnr || (env.data && (env.data.b2b || env.data.cdn)))) {
+      var r2a = parseReturnJson(obj, fileName, "2A");
+      if (!r2a.error) { r2a.warnings.unshift("This is a GSTR-2A file. GSTR-2A changes until the supplier files, and it does not say whether ITC is available, so every line is treated as available. Prefer the final GSTR-2B for the month."); }
+      return r2a;
+    }
     if (!env || !env.docdata) return { docs: [], meta: meta, warnings: [], error: "MT-GR-002" };
     meta.gstin = env.gstin || ""; meta.period = env.rtnprd || ""; meta.genDate = env.gendt || "";
     var dd = env.docdata, n = 0;
@@ -229,6 +234,40 @@
     (dd.cdnra || []).forEach(function (s) { (s.nt || []).forEach(function (i) { addNote(s, i, "CDNRA", true); }); });
     ["isd", "isda", "impg", "impgsez", "ecom", "ecoma"].forEach(function (k) {
       if (dd[k] && (Array.isArray(dd[k]) ? dd[k].length : Object.keys(dd[k]).length)) warns.push("Section " + k.toUpperCase() + " is present in the file but is not reconciled against purchase books by this tool.");
+    });
+    return { docs: docs, meta: meta, warnings: warns };
+  }
+
+
+  /* ---------- GSTR-2A and GSTR-1 JSON (same b2b / cdnr layout as the portal returns) ---------- */
+  function parseReturnJson(obj, fileName, kind) {
+    var warns = [], docs = [], meta = { gstin: "", period: "", genDate: "" };
+    if (typeof obj === "string") { try { obj = JSON.parse(obj); } catch (e) { return { docs: [], meta: meta, warnings: [], error: "MT-GR-001" }; } }
+    var env = obj;
+    if (env && env.data && !env.b2b && !env.cdnr && !env.cdn) env = env.data;
+    if (env && env.data && env.data.data) env = env.data.data;
+    if (!env || !(env.b2b || env.cdnr || env.cdn || env.b2cl || env.b2ba || env.cdnra)) return { docs: [], meta: meta, warnings: [], error: kind === "GSTR1" ? "MT-GR-010" : "MT-GR-002" };
+    meta.gstin = env.gstin || ""; meta.period = env.fp || env.ret_period || env.rtnprd || ""; meta.genDate = "";
+    var n = 0, src = kind === "GSTR1" ? "G1" : "2A";
+    function dtOf(x) { return parseDate(x.idt || x.dt || x.nt_dt || x.ntdt || x.inv_dt); }
+    function addInv(s, i, sec, amended, pos) {
+      var t = sumItems(i);
+      docs.push(mkDoc({ src: src, sec: sec, gstin: s.ctin || "", name: s.trdnm || s.cname || (s.ctin ? "" : "Unregistered (B2CL)"), inum: i.inum, dt: dtOf(i), cls: "INV", total: toPaise(i.val),
+        taxable: t.taxable, igst: t.igst, cgst: t.cgst, sgst: t.sgst, cess: t.cess, pos: i.pos || pos || "", amended: amended, oinum: i.oinum, odt: parseDate(i.oidt),
+        rev: i.rchrg, file: fileName, row: ++n, rawType: i.inv_typ || "" }));
+    }
+    function addNote(s, nt, sec, amended) {
+      var t = sumItems(nt); var ty = String(nt.ntty || nt.typ || "C").toUpperCase().charAt(0), isC = ty !== "D";
+      docs.push(mkDoc({ src: src, sec: sec, gstin: s.ctin || "", name: s.trdnm || s.cname || "", inum: nt.nt_num || nt.ntnum || nt.inum, dt: dtOf(nt), cls: isC ? "CN" : "DN", total: toPaise(nt.val),
+        taxable: t.taxable, igst: t.igst, cgst: t.cgst, sgst: t.sgst, cess: t.cess, pos: nt.pos || "", amended: amended, oinum: nt.ont_num || nt.ontnum, odt: parseDate(nt.ont_dt || nt.ontdt), rev: nt.rchrg, file: fileName, row: ++n, rawType: nt.ntty || "" }));
+    }
+    (env.b2b || []).forEach(function (s) { (s.inv || []).forEach(function (i) { addInv(s, i, "B2B", false); }); });
+    (env.b2ba || []).forEach(function (s) { (s.inv || []).forEach(function (i) { addInv(s, i, "B2BA", true); }); });
+    (env.cdnr || env.cdn || []).forEach(function (s) { (s.nt || []).forEach(function (i) { addNote(s, i, "CDNR", false); }); });
+    (env.cdnra || []).forEach(function (s) { (s.nt || []).forEach(function (i) { addNote(s, i, "CDNRA", true); }); });
+    (env.b2cl || []).forEach(function (blk) { (blk.inv || []).forEach(function (i) { addInv({}, i, "B2CL", false, blk.pos); }); });
+    ["b2cs", "exp", "nil", "hsn", "doc_issue", "at", "txpd", "cdnur", "isd", "impg", "impgsez", "ecom"].forEach(function (k) {
+      if (env[k] && (Array.isArray(env[k]) ? env[k].length : Object.keys(env[k]).length)) warns.push("Section " + k.toUpperCase() + " is present in the file but is summary or non-invoice data and is not matched invoice by invoice.");
     });
     return { docs: docs, meta: meta, warnings: warns };
   }
@@ -653,6 +692,7 @@
     "MT-GR-005": { title: "No documents were read", cause: "The sheet was read but every row was empty or a total row.", action: "Pick another sheet, or check the header row." },
     "MT-GR-006": { title: "Date could not be read", cause: "A date cell is text in an unexpected format.", action: "Use dd-mm-yyyy or dd/mm/yyyy. Rows without a date are still reconciled but are skipped by deadline checks." },
     "MT-GR-007": { title: "Statement does not balance", cause: "A + C + D - B should equal the books total. A difference means a programming fault.", action: "Report it with the files you used through the Feedback tab." },
+    "MT-GR-010": { title: "No GSTR-1 data found in the file", cause: "The JSON file is not a GSTR-1 return, or it has no B2B, credit/debit note or B2CL sections.", action: "Download the GSTR-1 JSON (or the filed GSTR-1 summary file) from the GST portal and add that file." },
     "MT-GR-008": { title: "Backup file could not be read", cause: "The file is not a backup made by this tool, or has been edited.", action: "Choose a backup downloaded from the Backup tab." }
   };
 
@@ -660,7 +700,7 @@
     VERSION: VERSION, VERIFIED_ON: VERIFIED_ON, DEFAULTS: DEFAULTS, RULES17: RULES17, ERRORS: ERRORS, FIELD_LABELS: FIELD_LABELS, FIELD_ORDER: FIELD_ORDER, SYN: SYN, DEFAULT_TEMPLATE: DEFAULT_TEMPLATE, SRC_NOTE: SRC_NOTE,
     parseDate: parseDate, fmtDMY: fmtDMY, fyOf: fyOf, fyLabel: fyLabel, dn: dn, fromDn: fromDn, toPaise: toPaise, inr: inr,
     gstinValid: gstinValid, gstinShape: gstinShape, gstinCheckChar: gstinCheckChar, normGstin: normGstin, lev: lev, normInv: normInv, tailNum: tailNum,
-    autoMap: autoMap, findHeaderRow: findHeaderRow, parseTable: parseTable, parse2BJson: parse2BJson, parse2BWorkbook: parse2BWorkbook, mergeLines: mergeLines, mkDoc: mkDoc, filterDocs: filterDocs,
+    autoMap: autoMap, findHeaderRow: findHeaderRow, parseTable: parseTable, parse2BJson: parse2BJson, parseReturnJson: parseReturnJson, parse2BWorkbook: parse2BWorkbook, mergeLines: mergeLines, mkDoc: mkDoc, filterDocs: filterDocs,
     reconcile: reconcile, flag17: flag17, review17: review17, billKey: billKey, s164Deadline: s164Deadline, deadlines: deadlines, rule37: rule37, vendorSummary: vendorSummary, vendorMessage: vendorMessage
   };
 });
