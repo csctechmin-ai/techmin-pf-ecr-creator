@@ -42,6 +42,7 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 9. **Audit log.** VLEBook keeps an audit log of sign-ins, failed sign-in attempts, sign-outs, backups, restores and important changes. The log is kept on your computer and in your backup folder only. You must not alter or delete it outside VLEBook. It is your record; Techmin does not receive it.
 10. **CVs and resumes.** When you make a CV for a customer you must use only information the customer gives and confirms, record the customer's approval before printing, and never create a CV with false qualifications, experience, certificates or identity. You are responsible for the content of CVs you prepare and for keeping the customer's personal data confidential. Techmin does not verify CV content and gives no assurance of employment.
 11. **Activity records.** You agree that VLEBook records the activity of every user from sign-in onwards in the audit log on your computer, and you will inform your staff of this.
+12. **Goods, GST and stock.** If you sell goods through VLEBook invoices, you are responsible for the selling price, the GST rate, the HSN code, whether a price includes GST, issuing a correct tax invoice and keeping your stock entries and physical counts accurate. Reference numbers you record must be the ones issued to that customer.
 
 ## 5. Notices and communications
 

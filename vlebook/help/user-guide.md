@@ -79,12 +79,16 @@ Add each citizen once with mobile number and name. The **360° view** shows all 
 
 ### Billing & Invoices
 1. Type the mobile number — an existing customer is filled in; a new one is registered automatically.
-2. Add one or more services. Government fee, service charge and GST are calculated from the Service Catalogue.
+2. Add one or more services. Government fee, service charge and GST are calculated from the Service Catalogue. Prices, fees and any commission in the Service Catalogue are entered by you — VLEBook does not add commission rates.
 3. Choose who handled the bill (staff), the payment mode and the amount received. A part payment leaves a balance due.
 4. **Generate Invoice**, then print A4 / 80 mm thermal, download PDF or share on WhatsApp. Your centre logo, GSTIN, CSC ID and Akshaya ID (when filled in) are printed on the invoice.
 5. A wrong bill is **cancelled**, never deleted: a credit note is made and money, commission and stock are reversed (Owner/Manager only).
 
 **GST bills (Tax Invoice).** Choose *GST Intra-State* or *GST Inter-State* only if the centre is GST-registered — VLEBook asks for your GSTIN in Settings before it saves a GST bill. GST is charged on the **service charge only, never on the government fee**, at each service's GST rate (set in Service Management; *No GST (0%)* for services without GST). The rate of a line can be changed in the **GST %** column of that bill. The invoice then says **TAX INVOICE** and shows your GSTIN, place of supply, taxable value, CGST + SGST (or IGST), any round off and an optional SAC code. Bills already saved keep their amounts; cancel and re-issue a bill if it must change.
+
+**Selling items from stock.** Pens, paper, files, pen drives and any other item kept in Stock & Inventory can be billed: choose the item in **Add Item from Stock** below the service picker, then type the quantity. The item's selling price is used as set in Stock & Inventory — **including GST** (GST is worked out from inside the price) or **excluding GST** (GST is added on top) — with its GST rate and HSN code. On a GST bill, GST is charged on the full value of the item. Saving the bill reduces the stock by the quantity sold; cancelling the bill puts it back. If the quantity is more than the stock, the line shows *Stock will go negative* and VLEBook asks before saving.
+
+**Reference numbers.** Under each service line you can type the **Application No.**, **Acknowledgement No.** and **Tracking No.** given by the portal or department (for example a PAN acknowledgement number or a certificate application number). They are printed on the invoice and shown in the customer's 360° ledger. Numbers received later can be added from **Customers → 360° Ledger → Applications & reference numbers → Edit numbers** or from **Pending Work → Edit numbers**; a reprint of the invoice then shows them.
 
 ### Pending Work & Applications
 Track each application from *Received* to *Delivered*, with portal reference numbers and expected dates. Overdue applications are highlighted. Send status updates on WhatsApp.
@@ -105,6 +109,9 @@ Expenses, transfers and daily closing. At day end count the cash with the denomi
 - **Edit item:** click **Edit** to change the name, prices, reorder level or supplier. To correct the quantity, type the right figure in **Correct stock to** with a **reason** — VLEBook saves it as a *Stock adjustment (+/−)* entry so the history stays complete.
 - **Delete item:** click **Delete** and type the reason (Owner / Manager). Past stock entries stay in the history and the deletion is written in the audit log.
 - Tick **Deduct 1 from this item for every printed page billed** on one item (for example A4 paper) to reduce it automatically when printing is billed.
+- **Selling price, GST and HSN:** for each item set the selling price and choose whether it **includes** or **excludes GST**, the **GST rate that applies to that product** (you must choose it — VLEBook does not assume a rate; check with your tax adviser) and the HSN code. These are used when the item is billed; a GST bill is not saved while an item has no GST rate.
+- **Physical Stock Check:** open the *Physical Stock Check* tab, choose the date (as on), and type the quantity actually counted on the shelf. If the count is **less** than the software stock (for example software 30, counted 20), the difference of 10 is recorded as **Consumption (physical check)**. If it is **more** (software 20, counted 30), the difference of 10 is added as **Difference on physical check**. Both appear in the movement ledger and the audit log.
+- **Alerts:** a yellow alert reminds you when a physical stock check is due (every 30 days by default — change it on the Physical Stock Check tab). A red **Negative stock** alert appears on the dashboard and in Stock & Inventory when more was sold or used than the stock shows; record the missing purchase or do a physical check.
 
 ### Staff Commission
 Set each staff member's commission (percentage or fixed per service, daily or monthly). See what is payable today or this month and record payouts.
@@ -164,6 +171,7 @@ VLEBook records **every activity from sign-in onwards** with the user name, date
 - The bell at the top shows notices from {{entity}} (software updates, offers, reminders) and articles from our blog.
 - Important notices pop up when VLEBook opens.
 - Turn on **push notifications** in Techmin Updates to receive notices on your computer even when VLEBook is closed (Chrome or Edge must be running).
+- **After every update** VLEBook shows each user, once, what is new in that version (Help & Legal → Release Notes has the full list).
 
 ## 7. Languages, appearance and logo
 

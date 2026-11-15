@@ -151,6 +151,27 @@ GST केवल सेवा शुल्क पर, सेवा की दर
 ### काम रद्द करते समय "Please write the reason (at least 5 characters)"
 लिखें कि आवेदन क्यों रद्द हो रहा है (जैसे *Customer withdrew*)। कारण काम के साथ और ऑडिट लॉग में सेव होता है।
 
+### "Negative stock" अलर्ट / "Stock will go negative"
+VLEBook के स्टॉक से अधिक बेचा या उपयोग किया गया। आमतौर पर कोई खरीद दर्ज नहीं हुई। उसे **Stock Inward** में दर्ज करें, या शेल्फ़ गिनकर **Physical Stock Check** में लिखें। पुष्टि करने के बाद बिल फिर भी सेव हो सकता है।
+
+### "Physical stock check due"
+Physical Stock Check टैब पर तय दिनों (डिफ़ॉल्ट 30) से कोई भौतिक गिनती सेव नहीं हुई। आइटम गिनें और **Save physical stock** क्लिक करें, या वहाँ दिनों की संख्या बदलें।
+
+### "The physical check date cannot be in the future" / "Enter the counted quantity of at least one item"
+आज की या पिछली तारीख चुनें, और कम से कम एक आइटम की गिनती लिखें। खाली छोड़े आइटम छोड़ दिए जाते हैं।
+
+### भौतिक जाँच ने अनपेक्षित "Consumption" या "Difference on physical check" एंट्री बनाई
+गिनती की तुलना **चुनी गई तारीख के अनुसार** सॉफ़्टवेयर स्टॉक से होती है। तारीख या गिनती गलत थी तो Movement Ledger में उस एंट्री पर **Reverse** करें और गिनती फिर से लिखें।
+
+### "This item has no selling price yet"
+बिल के Rate कॉलम में कीमत लिखें, या **Stock & Inventory → Items → Edit** में बिक्री मूल्य (और क्या उसमें GST शामिल है) तय करें।
+
+### आइटम पर GST अपेक्षा से अलग दिखता है
+आइटम की कीमत **GST सहित** हो तो VLEBook कीमत के अंदर से GST निकालता है (18% पर ₹118 = ₹100 + ₹18 GST)। **GST के बिना** हो तो GST ऊपर से जुड़ता है। स्टॉक व इन्वेंटरी → Items में सेटिंग देखें। Non-GST बिल पर GST नहीं लगता।
+
+### पुराने इनवॉइस पर संदर्भ संख्याएँ नहीं हैं
+ग्राहक के 360° लेजर या Pending Work में **Edit numbers** से जोड़ें, फिर इनवॉइस दोबारा प्रिंट करें। "Application or invoice line not found" का मतलब है कि बिल हटाया गया या पुराने बैकअप से रीस्टोर हुआ।
+
 ## केंद्र का लोगो
 
 ### "Use a PNG, JPG or WEBP image for the logo"

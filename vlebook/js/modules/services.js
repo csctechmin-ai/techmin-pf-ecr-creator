@@ -1,4 +1,4 @@
-import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B}from"../core/db.js";import{notifyCrossTabSync as N,lineGstRate as O}from"../core/accounting.js";import{uid as V,formatINR as f,toPaise as c,fromPaise as m,esc as i}from"../core/utils.js";let h="ALL",w="",n=null,d="";const b=new Map,P=["Government & Citizen Services","Banking & Financial Services","Insurance & Agriculture","Digital & Commercial Services"];async function l(a){const p=await G("services"),s=n?p.find(e=>e.id===n):null,A=Array.from(new Set([...P,...p.map(e=>e.category).filter(Boolean)])),y=w.trim().toLowerCase(),E=p.filter(e=>h!=="ALL"&&e.category!==h?!1:y?String(e.name||"").toLowerCase().includes(y)||String(e.id||"").toLowerCase().includes(y)||String(e.category||"").toLowerCase().includes(y)||String(e.state||"").toLowerCase().includes(y):!0);a.innerHTML=`
+import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B}from"../core/db.js";import{notifyCrossTabSync as N,lineGstRate as O}from"../core/accounting.js";import{uid as V,formatINR as f,toPaise as c,fromPaise as m,esc as i}from"../core/utils.js";let h="ALL",w="",n=null,d="";const b=new Map,P=["Government & Citizen Services","Banking & Financial Services","Insurance & Agriculture","Digital & Commercial Services"];async function l(a){const p=await G("services"),s=n?p.find(e=>e.id===n):null,E=Array.from(new Set([...P,...p.map(e=>e.category).filter(Boolean)])),y=w.trim().toLowerCase(),A=p.filter(e=>h!=="ALL"&&e.category!==h?!1:y?String(e.name||"").toLowerCase().includes(y)||String(e.id||"").toLowerCase().includes(y)||String(e.category||"").toLowerCase().includes(y)||String(e.state||"").toLowerCase().includes(y):!0);a.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Service Catalogue & Pricing Management</h1>
@@ -22,7 +22,7 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
           <div class="card-header">
             <div class="pill-tabs" id="srv-cat-tabs">
               <button class="pill-tab ${h==="ALL"?"active":""}" data-cat="ALL">All Services (${p.length})</button>
-              ${A.map(e=>`<button class="pill-tab ${h===e?"active":""}" data-cat="${i(e)}">${i(e.split("&")[0].trim())}</button>`).join("")}
+              ${E.map(e=>`<button class="pill-tab ${h===e?"active":""}" data-cat="${i(e)}">${i(e.split("&")[0].trim())}</button>`).join("")}
             </div>
             <input type="search" class="form-control" id="srv-search-inp" placeholder="Search service name or ID..." value="${i(w)}" style="max-width:240px;">
           </div>
@@ -45,7 +45,7 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
                 </tr>
               </thead>
               <tbody>
-                ${E.length===0?'<tr><td colspan="7" style="text-align:center; padding:22px; color:var(--color-text-muted);">No matching services found. Use the form on the right to create a new service.</td></tr>':E.map(e=>`
+                ${A.length===0?'<tr><td colspan="7" style="text-align:center; padding:22px; color:var(--color-text-muted);">No matching services found. Use the form on the right to create a new service.</td></tr>':A.map(e=>`
                   <tr style="${n===e.id?"background:var(--color-info-bg);":""}">
                     <td>
                       <input type="text" class="form-control inline-srv-name" data-id="${i(e.id)}" value="${i(e.name)}" style="font-weight:600; margin-bottom:4px; padding:4px 8px;">
@@ -103,7 +103,7 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
                 <label class="form-label">Category</label>
                 <input type="text" class="form-control" name="category" list="srv-cat-datalist" required value="${i(s?.category||P[0])}">
                 <datalist id="srv-cat-datalist">
-                  ${A.map(e=>`<option value="${i(e)}"></option>`).join("")}
+                  ${E.map(e=>`<option value="${i(e)}"></option>`).join("")}
                 </datalist>
               </div>
               <div class="form-group">
@@ -135,6 +135,7 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
               <div class="form-group">
                 <label class="form-label">Commission (₹)</label>
                 <input type="number" step="0.01" min="0" class="form-control" name="commission" value="${s?m(s.commissionPaise||0):"0"}">
+                <div class="form-hint">Only the commission you actually receive for this service, if any. VLEBook does not add any commission rates.</div>
               </div>
             </div>
 
