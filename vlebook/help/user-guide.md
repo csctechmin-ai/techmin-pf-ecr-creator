@@ -82,7 +82,7 @@ Add each citizen once with mobile number and name. The **360° view** shows all 
 2. Add one or more services. Government fee, service charge and GST are calculated from the Service Catalogue. Prices, fees and any commission in the Service Catalogue are entered by you — VLEBook does not add commission rates.
 3. Choose who handled the bill (staff), the payment mode and the amount received. A part payment leaves a balance due.
 4. **Generate Invoice**, then print A4 / 80 mm thermal, download PDF or share on WhatsApp. Your centre logo, GSTIN, CSC ID and Akshaya ID (when filled in) are printed on the invoice.
-5. A wrong bill is **cancelled**, never deleted: a credit note is made and money, commission and stock are reversed (Owner/Manager only).
+5. A wrong bill is **cancelled**, never deleted: a credit note is made and money, commission and stock are reversed (Owner/Manager only). When a bill is cancelled, the money taken on it goes back out of **each account it came into** (cash, UPI, bank — including payments collected later), any advance used is returned to the customer, its commission and linked applications are cancelled, and Accounts, the Day Book and the Smart Counter show the same figures as before the bill. In the Day Book the entry is marked **CANCELLED** in red.
 
 **GST bills (Tax Invoice).** Choose *GST Intra-State* or *GST Inter-State* only if the centre is GST-registered — VLEBook asks for your GSTIN in Settings before it saves a GST bill. GST is charged on the **service charge only, never on the government fee**, at each service's GST rate (set in Service Management; *No GST (0%)* for services without GST). The rate of a line can be changed in the **GST %** column of that bill. The invoice then says **TAX INVOICE** and shows your GSTIN, place of supply, taxable value, CGST + SGST (or IGST), any round off and an optional SAC code. Bills already saved keep their amounts; cancel and re-issue a bill if it must change.
 
@@ -133,6 +133,11 @@ Make professional CVs for customers at the counter, using **only the details the
 ### Reports & Profit BI
 Daily, monthly and yearly reports of income, true service profit, commissions, dues, AEPS and stock. Export to CSV, Excel or PDF.
 
+### Government Service Catalogue & Portal Directory
+Keep the official portal links your centre uses, with the documents needed, processing time and your fee guide. Use the tabs to filter by group or state, and **+ Add** your own links (only full web addresses starting with https:// or http:// are accepted). Your own links can be changed with **Edit** (the form on the right fills in; click **Save Changes**, or **Cancel edit**) and removed with **Delete** after you confirm. Every addition, change and deletion is written in the audit log.
+
+The **Techmin** tab lists Techmin's websites: ComplyPro (https://www.complypro.co.in/), Finance and Accounting Tools (https://tools.complypro.co.in/), Techmin Wealth Partners (https://www.techmincsc.in/), IFSC Tracker (https://www.ifsctracker.in/). These four links are built into VLEBook, are always available and cannot be edited or deleted. They are also in the **Techmin** menu on the left (available in every mode).
+
 ## 5. Backups — protect your data
 
 **Your business data is kept only on this computer and in the backups you save. {{entity}} does not store it on any server, does not keep a copy and cannot recover it.** VLEBook gives no assurance of data safety beyond the tools described here, so please set up automatic backup on the first day.
@@ -150,6 +155,7 @@ From then on VLEBook saves each backup to that folder **automatically, without a
 - Old automatic backups are removed after the number of days you choose (default 30). The audit-log file is never removed.
 - When you close VLEBook after making changes, it offers a backup. This happens every time: save it if you want to, or ignore it.
 - A yellow **Backup needed** button at the top means data changed since the last backup. Click it (or **Save Now**) to take the backup at once — to your backup folder when one is connected, otherwise to Downloads. The button then disappears, also in other open VLEBook tabs.
+- **Start fresh (Settings → Start fresh, Owner only):** clears all bills, payments, day-book entries, counter closings, AEPS entries, commissions, staff payouts and stock movements, and sets account opening balances and stock quantities to zero. Users, operators, passwords, customers, services, stock items, settings, licence and the audit log are **kept**. Take the offered backup first; you must type **START FRESH** to confirm. It cannot be undone except by restoring a backup.
 
 ### Restore
 - **Data Ownership & Backup → Restore**: choose a .json or .txt backup → *Validate* → *Restore*. TXT backups carry a checksum; an edited file is refused.
@@ -168,7 +174,7 @@ VLEBook records **every activity from sign-in onwards** with the user name, date
 
 ## 6. Techmin Updates and notifications
 
-- The bell at the top shows notices from {{entity}} (software updates, offers, reminders) and articles from our blog.
+- The bell at the top shows notices from {{entity}} (software updates, offers, reminders) and articles from our blog. Click **↻ Check for new updates** in Techmin Updates at any time: VLEBook says *VLEBook is up to date (version …)* or *New version … is available* with an **Update now** button (your data stays on this computer; only the program files are reloaded). If the check cannot reach the server, it says so.
 - Important notices pop up when VLEBook opens.
 - Turn on **push notifications** in Techmin Updates to receive notices on your computer even when VLEBook is closed (Chrome or Edge must be running).
 - **After every update** VLEBook shows each user, once, what is new in that version (Help & Legal → Release Notes has the full list).

@@ -42,6 +42,8 @@ This includes fees a centre charges its customers for preparing a CV or resume. 
 
 Goods a centre sells to its customers (for example paper, pens or pen drives), and any return or refund of them, are also the centre's matter under its own policy. In VLEBook, cancelling the invoice returns the items to stock; it does not refund any money by itself.
 
+Products or services bought on Techmin's other websites (ComplyPro, Finance and Accounting Tools, IFSC Tracker) follow the refund terms published on those websites. Opening them from VLEBook does not change those terms.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.
