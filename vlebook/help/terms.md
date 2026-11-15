@@ -40,6 +40,8 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 7. **Accuracy.** Calculations of fees, GST, TDS, commissions and profit depend on the rates and entries you configure. Verify them. VLEBook is a record-keeping tool and does not give tax, legal or financial advice.
 8. Keep your computer, operating system and browser updated and protected.
 9. **Audit log.** VLEBook keeps an audit log of sign-ins, failed sign-in attempts, sign-outs, backups, restores and important changes. The log is kept on your computer and in your backup folder only. You must not alter or delete it outside VLEBook. It is your record; Techmin does not receive it.
+10. **CVs and resumes.** When you make a CV for a customer you must use only information the customer gives and confirms, record the customer's approval before printing, and never create a CV with false qualifications, experience, certificates or identity. You are responsible for the content of CVs you prepare and for keeping the customer's personal data confidential. Techmin does not verify CV content and gives no assurance of employment.
+11. **Activity records.** You agree that VLEBook records the activity of every user from sign-in onwards in the audit log on your computer, and you will inform your staff of this.
 
 ## 5. Notices and communications
 

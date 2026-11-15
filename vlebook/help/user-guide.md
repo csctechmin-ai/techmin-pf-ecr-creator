@@ -1,6 +1,6 @@
 # VLEBook User Guide
 
-VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billing, customers, applications, AEPS, accounts, stock, staff commission, PDF & image tools and reports. It runs in Google Chrome or Microsoft Edge. **Your business data is stored only on your own computer.**
+VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billing, customers, applications, AEPS, accounts, stock, staff commission, a CV & resume builder (including the Europass format), PDF & image tools and reports. It runs in Google Chrome or Microsoft Edge. **Your business data is stored only on your own computer.**
 
 **Early access.** VLEBook is in early access: it is still being developed, features and screens may change, and some errors may remain. Keep regular backups, check important figures before you rely on them, and report problems to {{email}}.
 
@@ -49,7 +49,7 @@ If the trial ends, or a licence ends and is not renewed, VLEBook does **not** lo
 | Billing – up to **10 invoices a day**, print and share | AEPS & banking records |
 | Pending work & applications | Commissions and staff commission |
 | Service catalogue (view) | Stock & inventory |
-| Techmin Updates, Help & Legal | Document studio, PDF & image tools |
+| Techmin Updates, Help & Legal | Document studio, **CV & resume builder** (incl. Europass format), PDF & image tools |
 | Data backup and restore (automatic backup keeps running) | Reports & profit, saved links vault |
 | Settings, Users & Licence | Staff sign-in (only the **Owner** can sign in) |
 
@@ -84,8 +84,12 @@ Add each citizen once with mobile number and name. The **360° view** shows all 
 4. **Generate Invoice**, then print A4 / 80 mm thermal, download PDF or share on WhatsApp. Your centre logo, GSTIN, CSC ID and Akshaya ID (when filled in) are printed on the invoice.
 5. A wrong bill is **cancelled**, never deleted: a credit note is made and money, commission and stock are reversed (Owner/Manager only).
 
+**GST bills (Tax Invoice).** Choose *GST Intra-State* or *GST Inter-State* only if the centre is GST-registered — VLEBook asks for your GSTIN in Settings before it saves a GST bill. GST is charged on the **service charge only, never on the government fee**, at each service's GST rate (set in Service Management; *No GST (0%)* for services without GST). The rate of a line can be changed in the **GST %** column of that bill. The invoice then says **TAX INVOICE** and shows your GSTIN, place of supply, taxable value, CGST + SGST (or IGST), any round off and an optional SAC code. Bills already saved keep their amounts; cancel and re-issue a bill if it must change.
+
 ### Pending Work & Applications
 Track each application from *Received* to *Delivered*, with portal reference numbers and expected dates. Overdue applications are highlighted. Send status updates on WhatsApp.
+
+**Cancel work:** click **Cancel work** on the application and type the reason (at least 5 characters). The work is marked *Cancelled* with the reason, the user and the time; it is kept in the history and written in the audit log. A cancelled work cannot be reopened — enter it again if needed.
 
 ### AEPS & Banking
 Record AEPS / Micro-ATM withdrawals, deposits, Aadhaar Pay, DMT and BBPS. Each entry shows its effect on cash in hand and on your wallet, with commission and TDS. **Never type a customer's PIN, OTP or biometric data into VLEBook.**
@@ -96,13 +100,28 @@ Expenses, transfers and daily closing. At day end count the cash with the denomi
 ### Stock & Inventory
 - **Stock Inward**: purchases, customer returns, opening stock and adjustments.
 - **Stock Outward**: sales, items used in service, damaged items, returns to supplier.
-- **Stock Summary** shows opening, inward, outward, closing and value for any period. A4 paper used in billing is deducted automatically.
+- **Stock Summary** shows opening, inward, outward, closing and value for any period.
+- **Stock starts empty.** Add your own items with **+ New Item** (VLEBook no longer adds sample items; unused sample items from older versions are removed automatically).
+- **Edit item:** click **Edit** to change the name, prices, reorder level or supplier. To correct the quantity, type the right figure in **Correct stock to** with a **reason** — VLEBook saves it as a *Stock adjustment (+/−)* entry so the history stays complete.
+- **Delete item:** click **Delete** and type the reason (Owner / Manager). Past stock entries stay in the history and the deletion is written in the audit log.
+- Tick **Deduct 1 from this item for every printed page billed** on one item (for example A4 paper) to reduce it automatically when printing is billed.
 
 ### Staff Commission
 Set each staff member's commission (percentage or fixed per service, daily or monthly). See what is payable today or this month and record payouts.
 
 ### PDF & Image Tools and Studio
 Merge, split, compress, edit and convert PDFs; resize photos and signatures to portal sizes; make passport photo sheets and QR codes. Files are processed on your computer and never uploaded.
+
+### CV & Resume Builder (full version)
+Make professional CVs for customers at the counter, using **only the details the customer gives**.
+1. Open **CV & Resume Builder** → **+ New resume** or **+ New Europass CV**.
+2. Answer the questions step by step: *Personal details* (you can fill from an existing customer), *Job goal & profile*, *Work experience*, *Education & training*, *Skills*, *Languages*, *Certificates, projects & more* and *Declaration & finish*. The live preview on the right updates as you type.
+3. **Profile summary:** type your own, or click **Build summary from my answers** — it is made only from the answers given and can be edited. Nothing is invented.
+4. Click **Show designs to customer**: the customer sees **their own CV** in every design — Classic, Modern sidebar, Professional, Executive, Minimal, Job-portal (ATS) friendly and **Europass format** — and in six colours. Select the design the customer likes, type the customer's name and click **Customer approved this design**. If the CV is changed after approval, it goes back to *Draft* and must be shown again.
+5. **Print / Save as PDF** (choose *Save as PDF* in the print window) or download a **Word copy** for further editing.
+- The **Europass format** follows the European CV layout: personal information, about me, work experience, education and training (with optional EQF level), mother tongue and the **CEFR language grid** (A1–C2 for listening, reading, spoken production, spoken interaction and writing), digital skills, driving licence and additional information. VLEBook is not connected with the European Union or the official Europass service; customers applying through europass.europa.eu can use the official editor.
+- Photo, date of birth, gender and marital status are printed only if you tick them. Many employers abroad prefer CVs without them.
+- CVs are saved on this computer with the rest of your data and included in backups. Creating, approving, printing, Word copies and deleting a CV (with a reason) are written in the audit log.
 
 ### Reports & Profit BI
 Daily, monthly and yearly reports of income, true service profit, commissions, dues, AEPS and stock. Export to CSV, Excel or PDF.
@@ -123,6 +142,7 @@ From then on VLEBook saves each backup to that folder **automatically, without a
 - After VLEBook is reopened, Chrome may ask once more for folder access: click **Reconnect backup folder** (choose *Allow on every visit* if offered). Until you do, automatic backups are paused (they are not downloaded) and the button stays at the top of the screen.
 - Old automatic backups are removed after the number of days you choose (default 30). The audit-log file is never removed.
 - When you close VLEBook after making changes, it offers a backup. This happens every time: save it if you want to, or ignore it.
+- A yellow **Backup needed** button at the top means data changed since the last backup. Click it (or **Save Now**) to take the backup at once — to your backup folder when one is connected, otherwise to Downloads. The button then disappears, also in other open VLEBook tabs.
 
 ### Restore
 - **Data Ownership & Backup → Restore**: choose a .json or .txt backup → *Validate* → *Restore*. TXT backups carry a checksum; an edited file is refused.
@@ -133,7 +153,7 @@ Clearing **browsing history** or **cached images and files** does not delete VLE
 
 ## 5A. Audit log
 
-VLEBook records every sign-in (and every failed attempt), sign-out, backup, restore, data reset and important change with the user name, date and time. See it in **Settings → Audit log**, and download the full log with **Download full audit log (CSV)**.
+VLEBook records **every activity from sign-in onwards** with the user name, date and time: every sign-in (and every failed attempt) and sign-out, every screen opened, every record added, changed, cancelled or deleted (bills, payments, customers, services, applications, stock, CVs, settings and so on), every print, file download and outside link opened, and every backup, restore and data reset. See it in **Settings → Audit log** — search by user, activity, screen or date — and download the full log with **Download full audit log (CSV)**.
 
 - Entries cannot be edited or deleted in VLEBook. A data reset or a restore keeps them.
 - Each entry is linked to the one before it by a code (hash). **Chain check: intact** means no entry was changed or removed outside VLEBook.
