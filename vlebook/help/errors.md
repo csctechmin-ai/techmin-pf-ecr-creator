@@ -151,6 +151,27 @@ From version 2.11.0 VLEBook does not add sample items. Add your own items with *
 ### "Please write the reason (at least 5 characters)" when cancelling work
 Type why the application is cancelled (for example *Customer withdrew*). The reason is saved with the work and in the audit log.
 
+### "Negative stock" alert / "Stock will go negative"
+More was sold or used than the stock in VLEBook. Usually a purchase was not entered. Record it in **Stock Inward**, or count the shelf and enter it in **Physical Stock Check**. A bill can still be saved after you confirm.
+
+### "Physical stock check due"
+No physical count has been saved for the number of days set on the Physical Stock Check tab (30 by default). Count the items and click **Save physical stock**, or change the number of days there.
+
+### "The physical check date cannot be in the future" / "Enter the counted quantity of at least one item"
+Choose today or a past date, and type a count for at least one item. Items left empty are skipped.
+
+### The physical check made a "Consumption" or "Difference on physical check" entry I did not expect
+The count is compared with the software stock **as on the chosen date**. If the date or the count was wrong, use **Reverse** on that entry in the Movement Ledger and enter the count again.
+
+### "This item has no selling price yet"
+Type the price in the Rate column of the bill, or set the selling price (and whether it includes GST) in **Stock & Inventory → Items → Edit**.
+
+### GST on an item looks different from what I expected
+If the item's price **includes GST**, VLEBook takes the GST out of the price (₹118 at 18% = ₹100 + ₹18 GST). If it **excludes GST**, GST is added on top. Check the setting in Stock & Inventory → Items. On a Non-GST bill no GST is charged.
+
+### Reference numbers are not on an old invoice
+Add them with **Edit numbers** in the customer's 360° ledger or in Pending Work, then print the invoice again. "Application or invoice line not found" means the bill was deleted or restored from an older backup.
+
 ## Centre logo
 
 ### "Use a PNG, JPG or WEBP image for the logo"

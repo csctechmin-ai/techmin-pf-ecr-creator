@@ -40,6 +40,8 @@ Fees, government charges and service charges that a centre collects from its own
 
 This includes fees a centre charges its customers for preparing a CV or resume. The CV & Resume Builder is part of the full version; it is included in the 14-day trial and in paid licences, and no separate fee is charged for it.
 
+Goods a centre sells to its customers (for example paper, pens or pen drives), and any return or refund of them, are also the centre's matter under its own policy. In VLEBook, cancelling the invoice returns the items to stock; it does not refund any money by itself.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.

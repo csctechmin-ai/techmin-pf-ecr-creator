@@ -26,6 +26,8 @@ PDF & Image Tools and the Document Workbench process files on the centre's compu
 
 **CV & Resume Builder.** CVs contain only the information typed by the centre or the customer; VLEBook does not check it. The customer and the centre are responsible for its truth. A CV made with VLEBook does not guarantee an interview, a job or a visa. The CV designs are VLEBook's own. The *Europass format* follows the publicly described European CV layout and the CEFR language levels; Europass is a trademark of the European Union and VLEBook is not produced by, endorsed by or connected with the European Union or the official Europass service. Employers, portals and embassies may ask for their own formats.
 
+**Stock and sale of goods.** Stock balances, physical-check adjustments, consumption and negative-stock alerts are worked out only from the entries made in VLEBook; they are not an audit of physical stock. GST rates, HSN codes and whether a price includes GST are set by the centre and must be checked by it. VLEBook does not decide the tax treatment of any item. Application, acknowledgement and tracking numbers are recorded as typed; VLEBook does not check them with any portal or department.
+
 ## 5. Techmin Updates and blog
 
 Notices and blog articles shown in VLEBook are for general information. They may be summaries and may not reflect the latest change in law or procedure. Always confirm with the official source.

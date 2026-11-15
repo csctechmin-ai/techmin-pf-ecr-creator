@@ -2,6 +2,17 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.12.0 — 15 November 2026
+
+- New: **Physical Stock Check** in Stock & Inventory. Enter the stock counted on the shelf as on a date; a shortfall is booked as *Consumption (physical check)* and an excess as *Difference on physical check*. A reminder appears when a check is due (every 30 days by default).
+- New: **Sell stock items on invoices** — pens, paper, pen drives or any item in Stock & Inventory. Each item has a selling price **including or excluding GST**, a GST rate and an HSN code; on a GST bill GST is charged on the item's full value. Stock decreases with the quantity sold and comes back if the bill is cancelled.
+- New: **Negative stock alert** on the bill line, before saving, on the dashboard and in Stock & Inventory.
+- New: **Application No., Acknowledgement No. and Tracking No.** for each service on a bill. They print on the invoice (A4, thermal and PDF), appear in the customer's 360° ledger (*Applications & reference numbers*) and in Pending Work, and can be added later with *Edit numbers*. Every change is written in the audit log.
+- Changed: invoices show an **HSN/SAC** column when codes are set.
+- Changed: an item's GST rate is never assumed — choose it for each product; a GST bill is not saved while an item has no rate.
+- Changed: **Service Catalogue & Pricing** no longer comes with any commission amounts. Enter only the commission you actually receive; commissions pre-filled by older versions on the starter services are cleared if you never changed them.
+- New: **What's new after every update.** The first time each user opens a new version, VLEBook shows what changed since they last used it, in their language. It works offline and is recorded in the audit log; the full list stays in Help & Legal → Release Notes.
+
 ## Version 2.11.0 — 15 November 2026
 
 - New: **CV & Resume Builder** (full version). A step-by-step questionnaire (personal details, job goal, experience, education, skills, languages, certificates and more) with a live preview. Seven designs — Classic, Modern sidebar, Professional, Executive, Minimal, Job-portal (ATS) friendly and a **CV in the Europass format** with the CEFR language grid — in six colours. Show the designs to the customer, record the customer's approval, then print / save as PDF or download a Word copy. The CV contains only what is typed; the optional summary is built only from the answers.
