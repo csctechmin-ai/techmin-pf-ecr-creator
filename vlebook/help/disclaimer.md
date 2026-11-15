@@ -30,10 +30,18 @@ Notices and blog articles shown in VLEBook are for general information. They may
 
 VLEBook works offline once loaded. Online features — licence delivery, notices, blog articles and push notifications — depend on the internet and on third-party services (such as GitHub, Google and browser push services) and may occasionally be unavailable.
 
-## 7. Limitation
+## 7. Trial and Basic mode
+
+The 14-day trial and Basic mode are provided free of charge so that centres can evaluate VLEBook and are never cut off from their own records. Their features and limits may change with notice. Choose a paid licence if your centre depends on the full version every day.
+
+## 8. Translations
+
+Help documents are provided in English, Hindi and Malayalam. Translations are for convenience; if there is any difference, the English version prevails.
+
+## 9. Limitation
 
 To the extent permitted by law, {{entity}} is not liable for any loss arising from the use of, or inability to use, VLEBook, from errors in entries or configured rates, or from loss of data that was not backed up. See the Terms & Conditions for the full limitation of liability.
 
-## 8. Contact
+## 10. Contact
 
 {{entity}}, {{address}} · {{email}}{{phoneSep}} · {{website}}

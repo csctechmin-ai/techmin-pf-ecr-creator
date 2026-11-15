@@ -2,6 +2,15 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.10.0 — 15 November 2026
+
+- **14-day full-version trial** for every new centre: all features, up to 3 users.
+- **Paid licences by the month:** {{entity}} issues licences for 1 month or more. VLEBook shows **"Licence valid for N days"** (till the end date) at the top of the screen and in Users & Licence, counting down each day.
+- **Basic mode** instead of a lock: when the trial or a licence ends (after 3 grace days), VLEBook keeps working for minimal tasks — customers, up to 10 invoices a day, pending work, dashboard, service catalogue, backup and restore. Only the Owner can sign in. Other screens show a FULL tag and open again as soon as a licence is activated.
+- **New registration details:** type of centre, full address with PIN code (required), GSTIN (optional, validated), CSC ID (optional) and Akshaya Centre ID (required for Akshaya centres). These can also be edited in Settings and are printed on invoices.
+- **Help & Legal in three languages:** every document — User Guide, Errors & Solutions, Release Notes, Terms & Conditions, Privacy Policy, Refund Policy and Disclaimer — is now available in English, Hindi and Malayalam.
+- Fixed: the Help, Terms and Privacy pages at tools.complypro.co.in/vlebook/help.html now scroll with the mouse wheel.
+
 ## Version 2.9.0 — 15 November 2026
 
 - **VLEBook logo** in the app, the sign-in screen, the browser tab and the installed app icon.
@@ -40,3 +49,4 @@ Published by {{entity}}. The version you are using is shown in **Settings** and 
 - VLEBook runs in your browser and keeps data on your computer. Use automatic backup and keep a copy outside the computer.
 - Automatic backup and push notifications work while the browser is running.
 - Choosing a backup folder needs Google Chrome or Microsoft Edge on a computer.
+- If the Hindi or Malayalam version of a document differs from the English version, the English version prevails.

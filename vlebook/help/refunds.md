@@ -4,16 +4,17 @@ Version {{version}} · Effective {{effectiveDate}}
 
 This policy explains how payments, cancellations and refunds work for VLEBook licences sold by **{{entity}}**, {{address}}.
 
-## 1. Free launch period
+## 1. Free trial
 
-VLEBook is currently provided **free of cost**. New centres receive a free full-version licence during the launch period. No payment is collected, so no refund arises. {{entity}} will announce paid plans in VLEBook (Techmin Updates) and by email well before they begin; using VLEBook free does not oblige you to buy a paid plan.
+Every new centre gets a **14-day free trial of the full version**. No payment is collected for the trial, so no refund arises. Please use the trial to check that VLEBook suits your centre before you pay. After the trial VLEBook continues in free Basic mode; buying a licence is never compulsory.
 
-## 2. Paid plans (when introduced)
+## 2. Paid licences
 
-- Licences are sold for a fixed period (for example monthly, quarterly, half-yearly or yearly), paid in advance, for the number of computers and users stated in the licence.
+- Licences are sold for **one month or more** (for example 1, 2, 3, 6 or 12 months), paid in advance, for the number of computers and users stated in the licence.
 - Prices are shown or quoted before payment and are exclusive of GST unless stated.
-- A licence starts on the date shown in **Users & Licence** and is delivered to the centre's computer automatically.
-- The free trial or free launch licence lets you evaluate VLEBook fully before paying.
+- A licence starts on the date shown in **Users & Licence** and is delivered to the centre's computer automatically. VLEBook shows the number of days the licence is valid for.
+- There is no automatic renewal or automatic debit. When a licence ends, VLEBook changes to Basic mode until you renew.
+- Any free licence that {{entity}} gives (for example during a launch offer) has no fee and so no refund.
 
 ## 3. Refunds
 
@@ -28,7 +29,7 @@ VLEBook is currently provided **free of cost**. New centres receive a free full-
 - You may stop using VLEBook at any time. Your licence stays valid until its end date; unused periods are not refunded except as stated above.
 - Auto-renewal is not used: a plan ends on its end date unless you renew.
 - {{entity}} may cancel a licence for breach of the Terms & Conditions or non-payment.
-- Your data always remains on your computer. After a licence ends you can still download a complete backup.
+- Your data always remains on your computer. After a licence ends VLEBook works in Basic mode and you can always download a complete backup.
 
 ## 5. Services of the centre
 
@@ -41,3 +42,5 @@ Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Li
 ## 7. Grievances
 
 If you are not satisfied, contact the Grievance Officer: {{grievanceOfficer}} · {{grievanceEmail}}.
+
+This policy is also available in Hindi and Malayalam. If a translation differs, the English version prevails.

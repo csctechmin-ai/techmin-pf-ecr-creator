@@ -1,4 +1,4 @@
-import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from"../core/db.js";import{getLang as _,DEFAULT_WHATSAPP_TEMPLATES as q}from"../core/i18n.js";import{loadOptionalAcceptanceDataset as O}from"../core/sample-data.js";import{formatDate as W,esc as i,hashLockPin as G}from"../core/utils.js";import{applyAppearance as S,currentPalette as T,currentMode as D}from"../core/appearance.js";import{isCloseWarningEnabled as H,setCloseWarningEnabled as B}from"../core/closeguard.js";import{processLogoFile as z,applyCentreBranding as V,isValidLogo as E}from"../core/branding.js";const Y=["CSC (Common Service Centre)","Akshaya Centre (Kerala)","E-Seva Centre","Maha e-Seva Kendra (Maharashtra)","Jan Seva Kendra","Cyber Cafe & Digital Desk","Photocopy & Printing Centre","Other Digital Business"];async function d(s,o){const[A,M]=await Promise.all([p("settings","CENTRE_CONFIG"),F("audit_logs")]),a=A||{},P=a.enabledModules||{},u=a.whatsappTemplates||q,y=[...M].sort((e,l)=>String(l.timestamp||"").localeCompare(String(e.timestamp||""))).slice(0,35);s.innerHTML=`
+import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from"../core/db.js";import{getLang as O,DEFAULT_WHATSAPP_TEMPLATES as W}from"../core/i18n.js";import{loadOptionalAcceptanceDataset as G}from"../core/sample-data.js";import{formatDate as H,esc as l,hashLockPin as B}from"../core/utils.js";import{applyAppearance as S,currentPalette as A,currentMode as D}from"../core/appearance.js";import{isCloseWarningEnabled as z,setCloseWarningEnabled as V}from"../core/closeguard.js";import{processLogoFile as Y,applyCentreBranding as j,isValidLogo as k}from"../core/branding.js";import{CENTRE_TYPES as F,isAkshaya as I,checkCentreDetails as U}from"../core/centreinfo.js";async function g(s,o){const[M,R]=await Promise.all([b("settings","CENTRE_CONFIG"),q("audit_logs")]),a=M||{},E=a.enabledModules||{},y=a.whatsappTemplates||W,x=[...R].sort((e,i)=>String(i.timestamp||"").localeCompare(String(e.timestamp||""))).slice(0,35);s.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Settings, Centre Setup Wizard & Security</h1>
@@ -17,13 +17,13 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
           <div class="card-title">Centre Identity & Invoice Setup</div>
         </div>
         <div class="logo-setting">
-          <div class="logo-preview" id="set-logo-preview">${E(a.centreLogo)?`<img src="${a.centreLogo}" alt="Centre logo">`:"No logo"}</div>
+          <div class="logo-preview" id="set-logo-preview">${k(a.centreLogo)?`<img src="${a.centreLogo}" alt="Centre logo">`:"No logo"}</div>
           <div style="flex:1; min-width:200px;">
             <div style="font-weight:600;">Centre logo</div>
             <div class="form-hint">Shown at the top of the screen and on the dashboard, and printed on invoices, receipts and PDF reports. PNG, JPG or WEBP, up to 3 MB. A square or wide logo on a white or transparent background works best.</div>
             <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
-              <label class="btn btn-sm btn-primary" style="cursor:pointer;">${E(a.centreLogo)?"Change logo":"Upload logo"}<input type="file" id="set-logo-file" accept="image/png,image/jpeg,image/webp" hidden></label>
-              ${E(a.centreLogo)?'<button type="button" class="btn btn-sm btn-outline" id="set-logo-remove">Remove logo</button>':""}
+              <label class="btn btn-sm btn-primary" style="cursor:pointer;">${k(a.centreLogo)?"Change logo":"Upload logo"}<input type="file" id="set-logo-file" accept="image/png,image/jpeg,image/webp" hidden></label>
+              ${k(a.centreLogo)?'<button type="button" class="btn btn-sm btn-outline" id="set-logo-remove">Remove logo</button>':""}
             </div>
             <div class="auth-error" id="set-logo-msg"></div>
           </div>
@@ -32,12 +32,12 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
           <div class="grid-2" style="gap:10px;">
             <div class="form-group">
               <label class="form-label">Centre Name <span class="req">*</span></label>
-              <input type="text" class="form-control" name="centreName" required value="${i(a.centreName||"")}">
+              <input type="text" class="form-control" name="centreName" required value="${l(a.centreName||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Centre Type</label>
               <select class="form-control" name="centreType">
-                ${Y.map(e=>`<option value="${i(e)}" ${a.centreType===e?"selected":""}>${i(e)}</option>`).join("")}
+                ${F.map(e=>`<option value="${l(e)}" ${a.centreType===e?"selected":""}>${l(e)}</option>`).join("")}
               </select>
             </div>
           </div>
@@ -45,42 +45,52 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
           <div class="grid-2" style="gap:10px;">
             <div class="form-group">
               <label class="form-label">Owner / VLE Name</label>
-              <input type="text" class="form-control" name="ownerName" value="${i(a.ownerName||"")}">
+              <input type="text" class="form-control" name="ownerName" value="${l(a.ownerName||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Official Mobile Number</label>
-              <input type="tel" class="form-control" name="mobile" maxlength="10" value="${i(a.mobile||"")}">
+              <input type="tel" class="form-control" name="mobile" maxlength="10" value="${l(a.mobile||"")}">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Street / Market Address</label>
-            <input type="text" class="form-control" name="address" value="${i(a.address||"")}">
+            <label class="form-label">Full Address (building, street, place)</label>
+            <textarea class="form-control" name="address" rows="2">${l(a.address||"")}</textarea>
           </div>
 
           <div class="grid-3" style="gap:8px;">
             <div class="form-group">
               <label class="form-label">District</label>
-              <input type="text" class="form-control" name="district" value="${i(a.district||"")}">
+              <input type="text" class="form-control" name="district" value="${l(a.district||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">State</label>
-              <input type="text" class="form-control" name="state" value="${i(a.state||"Kerala")}">
+              <input type="text" class="form-control" name="state" value="${l(a.state||"Kerala")}">
             </div>
             <div class="form-group">
               <label class="form-label">PIN Code</label>
-              <input type="text" class="form-control" name="pinCode" maxlength="6" value="${i(a.pinCode||"")}">
+              <input type="text" class="form-control" name="pinCode" maxlength="6" value="${l(a.pinCode||"")}">
             </div>
           </div>
 
           <div class="grid-3" style="gap:8px;">
             <div class="form-group">
               <label class="form-label">GSTIN (Optional)</label>
-              <input type="text" class="form-control" name="gstin" value="${i(a.gstin||"")}">
+              <input type="text" class="form-control" name="gstin" maxlength="15" style="text-transform:uppercase" value="${l(a.gstin||"")}">
             </div>
             <div class="form-group">
+              <label class="form-label">CSC ID (Optional)</label>
+              <input type="text" class="form-control" name="cscId" maxlength="30" value="${l(a.cscId||"")}">
+            </div>
+            <div class="form-group" id="settings-akshaya-wrap" ${I(a.centreType)?"":"hidden"}>
+              <label class="form-label">Akshaya Centre ID</label>
+              <input type="text" class="form-control" name="akshayaId" maxlength="30" value="${l(a.akshayaId||"")}">
+            </div>
+          </div>
+          <div class="grid-3" style="gap:8px;">
+            <div class="form-group">
               <label class="form-label">Invoice Prefix</label>
-              <input type="text" class="form-control" name="invoicePrefix" value="${i(a.invoicePrefix||"VLE")}">
+              <input type="text" class="form-control" name="invoicePrefix" value="${l(a.invoicePrefix||"VLE")}">
             </div>
             <div class="form-group">
               <label class="form-label">Next Invoice #</label>
@@ -91,7 +101,7 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
           <div class="grid-3" style="gap:8px;">
             <div class="form-group">
               <label class="form-label">Financial Year</label>
-              <input type="text" class="form-control" name="financialYear" value="${i(a.financialYear||"2026-27")}">
+              <input type="text" class="form-control" name="financialYear" value="${l(a.financialYear||"2026-27")}">
             </div>
             <div class="form-group">
               <label class="form-label">Interface Language</label>
@@ -109,10 +119,11 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
 
           <div class="form-group">
             <label class="form-label">Invoice Footer Note</label>
-            <input type="text" class="form-control" name="footerNote" value="${i(a.footerNote||"")}">
+            <input type="text" class="form-control" name="footerNote" value="${l(a.footerNote||"")}">
           </div>
 
           <button type="submit" class="btn btn-primary">Save Centre Configuration</button>
+          <div class="auth-error" id="settings-centre-error" style="margin-top:6px;"></div>
         </form>
       </div>
 
@@ -126,8 +137,8 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
             <div class="form-group">
               <label class="form-label">Colour Theme</label>
               <select class="form-control" id="set-palette">
-                <option value="zoho" ${T()==="zoho"?"selected":""}>Zoho Books style</option>
-                <option value="erpnext" ${T()==="erpnext"?"selected":""}>ERPNext style</option>
+                <option value="zoho" ${A()==="zoho"?"selected":""}>Zoho Books style</option>
+                <option value="erpnext" ${A()==="erpnext"?"selected":""}>ERPNext style</option>
               </select>
             </div>
             <div class="form-group">
@@ -140,7 +151,7 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
           </div>
           <span class="form-hint">Applies instantly. Night mode can also be switched with the moon button at the top.</span>
           <label style="display:flex; gap:8px; align-items:center; font-size:13px; margin-top:12px;">
-            <input type="checkbox" id="set-close-warning" ${H()?"checked":""}>
+            <input type="checkbox" id="set-close-warning" ${z()?"checked":""}>
             Warn me when closing the tab if data is unsaved or not backed up
           </label>
         </div>
@@ -168,9 +179,9 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
             <div class="form-group">
               <label class="form-label">Enable / Disable Sidebar Modules:</label>
               <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; background:var(--color-surface-alt); padding:10px; border-radius:var(--radius-sm);">
-                ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","Document Workbench"],["tools","PDF & Image Tools"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,l])=>`
+                ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","Document Workbench"],["tools","PDF & Image Tools"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,i])=>`
                   <label style="font-size:12px; display:flex; align-items:center; gap:6px;">
-                    <input type="checkbox" name="mod_${e}" ${P[e]!==!1?"checked":""}> ${l}
+                    <input type="checkbox" name="mod_${e}" ${E[e]!==!1?"checked":""}> ${i}
                   </label>`).join("")}
               </div>
             </div>
@@ -186,15 +197,15 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
           <form id="settings-wa-form" class="form-grid" style="grid-template-columns:1fr; gap:8px;">
             <div class="form-group">
               <label class="form-label">English Invoice Template</label>
-              <input type="text" class="form-control" name="en_invoice" value="${i(u.en?.invoice||"")}">
+              <input type="text" class="form-control" name="en_invoice" value="${l(y.en?.invoice||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Hindi Invoice Template (हिन्दी)</label>
-              <input type="text" class="form-control" name="hi_invoice" value="${i(u.hi?.invoice||"")}">
+              <input type="text" class="form-control" name="hi_invoice" value="${l(y.hi?.invoice||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Malayalam Invoice Template (മലയാളം)</label>
-              <input type="text" class="form-control" name="ml_invoice" value="${i(u.ml?.invoice||"")}">
+              <input type="text" class="form-control" name="ml_invoice" value="${l(y.ml?.invoice||"")}">
             </div>
             <button type="submit" class="btn btn-sm btn-outline">Update WhatsApp Templates</button>
           </form>
@@ -205,7 +216,7 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
     <!-- Immutable Financial & System Audit Log -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title">Financial & Operational Audit Trail (${y.length} recent events)</div>
+        <div class="card-title">Financial & Operational Audit Trail (${x.length} recent events)</div>
       </div>
       <div class="table-wrap" style="max-height:260px; overflow-y:auto;">
         <table class="data-table">
@@ -219,16 +230,16 @@ import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from
             </tr>
           </thead>
           <tbody>
-            ${y.length===0?'<tr><td colspan="5" style="text-align:center; padding:14px;">No audited operations recorded yet.</td></tr>':y.map(e=>`
+            ${x.length===0?'<tr><td colspan="5" style="text-align:center; padding:14px;">No audited operations recorded yet.</td></tr>':x.map(e=>`
                   <tr>
-                    <td>${i(W(e.timestamp,!0))}</td>
-                    <td><span class="badge badge-info">${i(e.action)}</span></td>
-                    <td>${i(e.module)}</td>
-                    <td style="font-family:var(--font-mono);">${i(e.entityId)}</td>
-                    <td>${i(e.summary)}</td>
+                    <td>${l(H(e.timestamp,!0))}</td>
+                    <td><span class="badge badge-info">${l(e.action)}</span></td>
+                    <td>${l(e.module)}</td>
+                    <td style="font-family:var(--font-mono);">${l(e.entityId)}</td>
+                    <td>${l(e.summary)}</td>
                   </tr>`).join("")}
           </tbody>
         </table>
       </div>
     </div>
-  `;let n=null;const h=async(e=!1)=>{const l=s.querySelector("#settings-profile-form");if(!l)return;const t=new FormData(l),r=t.get("language")||"en",c=r!==_(),v=await p("settings","CENTRE_CONFIG")||a;if(await b("settings",{...v,id:"CENTRE_CONFIG",centreName:(t.get("centreName")||"").trim()||v.centreName,centreType:t.get("centreType")||v.centreType,ownerName:(t.get("ownerName")||"").trim(),mobile:(t.get("mobile")||"").trim(),address:(t.get("address")||"").trim(),district:(t.get("district")||"").trim(),state:(t.get("state")||"").trim(),pinCode:(t.get("pinCode")||"").trim(),gstin:(t.get("gstin")||"").trim(),invoicePrefix:(t.get("invoicePrefix")||"").trim()||"VLE",nextInvoiceNumber:Number(t.get("nextInvoiceNumber")||1001),financialYear:(t.get("financialYear")||"").trim(),language:r,backupReminderDays:Number(t.get("backupReminderDays")||3),footerNote:(t.get("footerNote")||"").trim()}),c){const{switchLanguage:x}=await import("../app.js");await x(r);return}o&&await o(),e&&await d(s,o)},w=s.querySelector("#settings-profile-form");w?.addEventListener("input",()=>{n&&clearTimeout(n),n=setTimeout(()=>h(!1),380)}),w?.addEventListener("change",()=>{n&&clearTimeout(n),h(!1)});const k=async e=>{const t={...await p("settings","CENTRE_CONFIG")};e?t.centreLogo=e:delete t.centreLogo,await b("settings",t),await V(t),await d(s,o)};s.querySelector("#set-logo-file")?.addEventListener("change",async e=>{const l=e.target.files?.[0];if(l)try{await k(await z(l))}catch(t){const r=s.querySelector("#set-logo-msg");r&&(r.textContent=t.message)}}),s.querySelector("#set-logo-remove")?.addEventListener("click",async()=>{confirm("Remove the centre logo from the screen, invoices and PDFs?")&&await k(null)}),w?.addEventListener("submit",async e=>{e.preventDefault(),n&&clearTimeout(n),await h(!0)}),s.querySelector("#set-palette")?.addEventListener("change",e=>S({palette:e.target.value})),s.querySelector("#set-night-mode")?.addEventListener("change",e=>S({mode:e.target.value})),s.querySelector("#set-close-warning")?.addEventListener("change",e=>B(e.target.checked));const L=async(e=!1)=>{const l=s.querySelector("#settings-security-form");if(!l)return;const t=new FormData(l),r={...P,dashboard:!0,backup:!0,settings:!0};["customers","services","billing","accounts","pending","aeps","commissions","staff","inventory","studio","tools","catalogue","reports","vault"].forEach(m=>{r[m]=t.get(`mod_${m}`)==="on"});const c=await p("settings","CENTRE_CONFIG")||a,{lockPin:v,...x}=c;let g=c.lockPinHash||"";const N=String(t.get("lockPin")||"").trim(),f=s.querySelector("#pin-status-hint");if(t.get("removePin")==="on")g="";else if(N){if(!/^\d{4,6}$/.test(N)){f&&(f.textContent="PIN must be 4 to 6 digits. Not saved.");return}g=await G(N);const m=l.querySelector('[name="lockPin"]');m&&(m.value="")}await b("settings",{...x,id:"CENTRE_CONFIG",lockPinHash:g,inactivityLockMinutes:Number(t.get("inactivityLockMinutes")||0),enabledModules:r}),f&&(f.textContent=g?"PIN active (stored as a secure hash)":"No PIN set"),o&&await o(),e&&await d(s,o)},C=s.querySelector("#settings-security-form");C?.addEventListener("change",()=>L(!1)),C?.addEventListener("submit",async e=>{e.preventDefault(),await L(!0)});const $=async(e=!1)=>{const l=s.querySelector("#settings-wa-form");if(!l)return;const t=new FormData(l),r=structuredClone(u);r.en.invoice=t.get("en_invoice"),r.hi.invoice=t.get("hi_invoice"),r.ml.invoice=t.get("ml_invoice");const c=await p("settings","CENTRE_CONFIG")||a;await b("settings",{...c,id:"CENTRE_CONFIG",whatsappTemplates:r}),e&&await d(s,o)},I=s.querySelector("#settings-wa-form");I?.addEventListener("change",()=>$(!1)),I?.addEventListener("submit",async e=>{e.preventDefault(),await $(!0)}),s.querySelector("#set-load-acceptance-btn")?.addEventListener("click",async()=>{await O(),o&&await o(),await d(s,o)}),s.querySelector("#set-reset-db-btn")?.addEventListener("click",async()=>{confirm("Are you sure you want to clear all local database records and restore clean factory defaults?")&&(await R(!1),o&&await o(),await d(s,o))})}export{Y as CENTRE_TYPES,d as renderSettingsModule};
+  `;let c=null;const w=async(e=!1)=>{const i=s.querySelector("#settings-profile-form");if(!i)return;const t=new FormData(i),r=t.get("language")||"en",u=r!==O(),n=await b("settings","CENTRE_CONFIG")||a,f=U({centreType:t.get("centreType")||n.centreType,address:t.get("address"),district:t.get("district"),state:t.get("state"),pinCode:t.get("pinCode"),gstin:t.get("gstin"),cscId:t.get("cscId"),akshayaId:I(t.get("centreType")||n.centreType)?t.get("akshayaId"):""}),d=s.querySelector("#settings-centre-error");d&&(d.textContent=f.error);const v=f.error?{centreType:n.centreType,address:n.address,district:n.district,state:n.state,pinCode:n.pinCode,gstin:n.gstin,cscId:n.cscId,akshayaId:n.akshayaId}:f.values,m=s.querySelector("#settings-akshaya-wrap");if(m&&(m.hidden=!I(t.get("centreType"))),await h("settings",{...n,id:"CENTRE_CONFIG",centreName:(t.get("centreName")||"").trim()||n.centreName,ownerName:(t.get("ownerName")||"").trim(),mobile:(t.get("mobile")||"").trim(),...v,centreType:v.centreType||n.centreType,invoicePrefix:(t.get("invoicePrefix")||"").trim()||"VLE",nextInvoiceNumber:Number(t.get("nextInvoiceNumber")||1001),financialYear:(t.get("financialYear")||"").trim(),language:r,backupReminderDays:Number(t.get("backupReminderDays")||3),footerNote:(t.get("footerNote")||"").trim()}),u){const{switchLanguage:p}=await import("../app.js");await p(r);return}o&&await o(),e&&await g(s,o)},N=s.querySelector("#settings-profile-form");N?.addEventListener("input",()=>{c&&clearTimeout(c),c=setTimeout(()=>w(!1),380)}),N?.addEventListener("change",()=>{c&&clearTimeout(c),w(!1)});const P=async e=>{const t={...await b("settings","CENTRE_CONFIG")};e?t.centreLogo=e:delete t.centreLogo,await h("settings",t),await j(t),await g(s,o)};s.querySelector("#set-logo-file")?.addEventListener("change",async e=>{const i=e.target.files?.[0];if(i)try{await P(await Y(i))}catch(t){const r=s.querySelector("#set-logo-msg");r&&(r.textContent=t.message)}}),s.querySelector("#set-logo-remove")?.addEventListener("click",async()=>{confirm("Remove the centre logo from the screen, invoices and PDFs?")&&await P(null)}),N?.addEventListener("submit",async e=>{e.preventDefault(),c&&clearTimeout(c),await w(!0)}),s.querySelector("#set-palette")?.addEventListener("change",e=>S({palette:e.target.value})),s.querySelector("#set-night-mode")?.addEventListener("change",e=>S({mode:e.target.value})),s.querySelector("#set-close-warning")?.addEventListener("change",e=>V(e.target.checked));const $=async(e=!1)=>{const i=s.querySelector("#settings-security-form");if(!i)return;const t=new FormData(i),r={...E,dashboard:!0,backup:!0,settings:!0};["customers","services","billing","accounts","pending","aeps","commissions","staff","inventory","studio","tools","catalogue","reports","vault"].forEach(p=>{r[p]=t.get(`mod_${p}`)==="on"});const u=await b("settings","CENTRE_CONFIG")||a,{lockPin:n,...f}=u;let d=u.lockPinHash||"";const v=String(t.get("lockPin")||"").trim(),m=s.querySelector("#pin-status-hint");if(t.get("removePin")==="on")d="";else if(v){if(!/^\d{4,6}$/.test(v)){m&&(m.textContent="PIN must be 4 to 6 digits. Not saved.");return}d=await B(v);const p=i.querySelector('[name="lockPin"]');p&&(p.value="")}await h("settings",{...f,id:"CENTRE_CONFIG",lockPinHash:d,inactivityLockMinutes:Number(t.get("inactivityLockMinutes")||0),enabledModules:r}),m&&(m.textContent=d?"PIN active (stored as a secure hash)":"No PIN set"),o&&await o(),e&&await g(s,o)},L=s.querySelector("#settings-security-form");L?.addEventListener("change",()=>$(!1)),L?.addEventListener("submit",async e=>{e.preventDefault(),await $(!0)});const T=async(e=!1)=>{const i=s.querySelector("#settings-wa-form");if(!i)return;const t=new FormData(i),r=structuredClone(y);r.en.invoice=t.get("en_invoice"),r.hi.invoice=t.get("hi_invoice"),r.ml.invoice=t.get("ml_invoice");const u=await b("settings","CENTRE_CONFIG")||a;await h("settings",{...u,id:"CENTRE_CONFIG",whatsappTemplates:r}),e&&await g(s,o)},C=s.querySelector("#settings-wa-form");C?.addEventListener("change",()=>T(!1)),C?.addEventListener("submit",async e=>{e.preventDefault(),await T(!0)}),s.querySelector("#set-load-acceptance-btn")?.addEventListener("click",async()=>{await G(),o&&await o(),await g(s,o)}),s.querySelector("#set-reset-db-btn")?.addEventListener("click",async()=>{confirm("Are you sure you want to clear all local database records and restore clean factory defaults?")&&(await _(!1),o&&await o(),await g(s,o))})}export{F as CENTRE_TYPES,g as renderSettingsModule};

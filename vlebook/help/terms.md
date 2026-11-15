@@ -13,27 +13,30 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 ## 2. Licence to use
 
 1. Subject to these Terms and payment of the applicable fee, Techmin grants you a limited, non-exclusive, non-transferable, revocable licence to use VLEBook for the internal operations of your Centre, on the computer(s) and for the number of users stated in your licence, for the licence period.
-2. A free trial licence is given for 14 days from first installation, for evaluation only.
-3. Licences are locked to the Device Code of a computer unless stated otherwise. Moving a licence to another computer requires Techmin's approval.
-4. **You must not**: copy, modify, translate, decompile, reverse-engineer or disassemble VLEBook or attempt to obtain its source code; remove or bypass the licence check, sign-in, or any security feature; create, share, sell or publish licence keys; rent, resell, sub-license or offer VLEBook as a service to others; use VLEBook for any unlawful purpose.
-5. VLEBook, its code, design, names and logos are the property of Techmin and are protected by the Copyright Act, 1957 and other laws. All rights not expressly granted are reserved. Open-source components included in VLEBook are licensed under their own licences (see THIRD_PARTY_NOTICES).
+2. **Trial.** A free trial of the full version is given for 14 days from first installation, for up to 3 users, for evaluation.
+3. **Paid licence.** After the trial, the full version is licensed for the period you pay for (one month or more). VLEBook shows the number of days for which the licence is valid and its end date.
+4. **Basic mode.** When the trial ends, or a paid licence ends and is not renewed within the 3 grace days, VLEBook continues in Basic mode with limited features (customers, up to 10 invoices a day, pending work, dashboard, service catalogue, backup and restore, settings) for the Owner only. Techmin may change the features and limits of Basic mode with notice. Basic mode is provided free of charge, as a courtesy, and without any commitment about its continuation.
+5. Licences are locked to the Device Code of a computer unless stated otherwise. Moving a licence to another computer requires Techmin's approval.
+6. **You must not**: copy, modify, translate, decompile, reverse-engineer or disassemble VLEBook or attempt to obtain its source code; remove or bypass the licence check, sign-in, or any security feature; create, share, sell or publish licence keys; rent, resell, sub-license or offer VLEBook as a service to others; use VLEBook for any unlawful purpose.
+7. VLEBook, its code, design, names and logos are the property of Techmin and are protected by the Copyright Act, 1957 and other laws. All rights not expressly granted are reserved. Open-source components included in VLEBook are licensed under their own licences (see THIRD_PARTY_NOTICES).
 
 ## 3. Fees, renewal and taxes
 
 1. Plans, prices and payment terms are as published or agreed with Techmin at the time of purchase. Prices are exclusive of GST unless stated.
-2. The licence ends on its expiry date unless renewed. VLEBook warns you 7 days before expiry and allows 3 days of grace after expiry; it then locks until renewal. You can always download a full backup of your data while locked.
-3. Refunds and cancellations are governed by the **Refund & Cancellation Policy** shown in Help & Legal. VLEBook is currently offered free of cost during the launch period; Techmin will give advance notice before paid plans begin.
+2. The licence ends on its end date unless renewed. There is no automatic renewal. VLEBook warns you 7 days before the end date and allows 3 days of grace after it; it then changes to Basic mode until renewal. VLEBook is locked only if a licence is cancelled, the account is suspended or the computer's date is tampered with; you can always download a full backup of your data.
+3. Refunds and cancellations are governed by the **Refund & Cancellation Policy** shown in Help & Legal.
 4. Techmin may change prices for future periods with reasonable notice through the software or other means.
 
 ## 4. Your responsibilities
 
 1. **Backups.** You are solely responsible for keeping regular backups of your data in a safe place outside the computer. VLEBook provides automatic and manual backup tools; Techmin cannot recover data from your computer and is not responsible for data lost because of hardware failure, clearing of browser data, viruses, theft, wrong restores or not keeping backups.
 2. **Security.** Keep passwords, the Owner recovery code and licence keys confidential. You are responsible for all activity under your users. Remove access of staff who leave.
-3. **Lawful use and customer data.** You are the data fiduciary for the personal data of your customers and staff that you record. You must collect and use it lawfully, with notice and consent where required, and comply with the Digital Personal Data Protection Act, 2023, the Aadhaar Act, 2016 and its regulations, the rules of CSC SPV, State IT Missions, banks and other partners, and all other applicable laws.
-4. **Logos and content you add.** You confirm that you have the right to use any logo, name or content you add to VLEBook (for example your centre logo on invoices).
-5. **Never store** customers' Aadhaar biometric data, PINs, OTPs, passwords of government portals or full card numbers in VLEBook. Mask Aadhaar numbers where the law requires.
-6. **Accuracy.** Calculations of fees, GST, TDS, commissions and profit depend on the rates and entries you configure. Verify them. VLEBook is a record-keeping tool and does not give tax, legal or financial advice.
-7. Keep your computer, operating system and browser updated and protected.
+3. **Correct registration details.** The centre name, type, address, PIN code, GSTIN, CSC ID, Akshaya ID, mobile number and email you give must be true and belong to your Centre. Techmin may refuse or cancel a licence given on false details.
+4. **Lawful use and customer data.** You are the data fiduciary for the personal data of your customers and staff that you record. You must collect and use it lawfully, with notice and consent where required, and comply with the Digital Personal Data Protection Act, 2023, the Aadhaar Act, 2016 and its regulations, the rules of CSC SPV, State IT Missions, banks and other partners, and all other applicable laws.
+5. **Logos and content you add.** You confirm that you have the right to use any logo, name or content you add to VLEBook (for example your centre logo on invoices).
+6. **Never store** customers' Aadhaar biometric data, PINs, OTPs, passwords of government portals or full card numbers in VLEBook. Mask Aadhaar numbers where the law requires.
+7. **Accuracy.** Calculations of fees, GST, TDS, commissions and profit depend on the rates and entries you configure. Verify them. VLEBook is a record-keeping tool and does not give tax, legal or financial advice.
+8. Keep your computer, operating system and browser updated and protected.
 
 ## 5. Notices and communications
 
@@ -53,7 +56,6 @@ By using VLEBook you agree that Techmin may show notices inside the software, se
 
 Please also read the separate **Disclaimer** in Help & Legal.
 
-
 VLEBook is provided "as is" and "as available". To the maximum extent permitted by law, Techmin disclaims all warranties, express or implied, including merchantability, fitness for a particular purpose, accuracy and non-infringement. Techmin does not warrant that VLEBook will be error-free or meet every requirement of every government portal or partner.
 
 ## 9. Limitation of liability
@@ -67,6 +69,8 @@ You agree to indemnify Techmin against claims, penalties and costs arising from 
 ## 11. Changes to these Terms
 
 Techmin may update these Terms. The new version will be shown in VLEBook (Help & Legal) with its effective date and, for material changes, notified to you. Continued use after the effective date means you accept the updated Terms.
+
+These Terms are also published in Hindi and Malayalam for convenience. If a translation differs from the English version, the English version prevails.
 
 ## 12. Governing law and disputes
 
