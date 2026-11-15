@@ -1,7 +1,7 @@
 /*! Techmin EPFO Member Registration Bulk File Generator - engine v1.0.0 (pure logic, no DOM, no network). */
 (function (root) {
   "use strict";
-  var VERSION = "1.0.1";
+  var VERSION = "1.0.2";
   var DELIM = "#~#";
   /* The 30 output fields, in the exact order of the supplied memberregistrationbulk.txt. Do not reorder. */
   var FIELDS = ["UAN", "prvMemberId", "memberName", "DOB", "DOJ", "Gender", "fatherHusbandName", "relation", "mobileNo", "emailId", "nationality", "epfWages", "qualification", "maritalStatus", "isInternationalWorker", "countryOfOrigin", "passportNumber", "passportValidFrom", "passportValidTill", "isPhisicalHandicap", "locomotive", "hearing", "visual", "BankAccNo", "Ifsc", "NameAsPerBank", "PAN", "NameAsPerPan", "AadhaarNo", "NameAsPerAadhaar"];
