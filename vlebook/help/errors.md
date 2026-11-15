@@ -92,8 +92,11 @@ Choose the folder that has files named like *CentreName_14112026_083015_pm.json*
 ### Audit log shows "Chain check: an entry was changed or removed outside VLEBook"
 An entry in the browser's database or in the audit-log file was edited or deleted by something other than VLEBook. Keep the computer and the backup folder safe, download the audit log (CSV) for your records, and contact {{entity}} if you need help.
 
+### "Choose backup folder" button at the top / Chrome asked to save JSON and TXT files
+Automatic backups are saved only to the backup folder you choose, without any download prompts. Until a folder is chosen they are paused, and the **Choose backup folder** button stays at the top. Click it and pick your Google Drive, OneDrive, Dropbox or USB folder. **Back up now** in Data Ownership & Backup still downloads a copy when you ask for one.
+
 ### "Backup folder needs permission again" / "📁 Reconnect backup folder"
-Chrome asks again for folder access after VLEBook is reopened. Click the button once and choose **Allow** (tick *Allow on every visit* if offered). Choosing *Allow on every visit* makes Chrome remember the permission. Until then backups are saved to Downloads, so nothing is missed.
+Chrome asks again for folder access after VLEBook is reopened. Click the button once and choose **Allow** (tick *Allow on every visit* if offered). Choosing *Allow on every visit* makes Chrome remember the permission. Until then automatic backups are paused and are not downloaded; the audit log records each one that was skipped.
 
 ### "This browser cannot save to a chosen folder"
 Only Google Chrome and Microsoft Edge on a computer support choosing a folder. In other browsers backups go to the Downloads folder.

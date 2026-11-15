@@ -120,7 +120,7 @@ Daily, monthly and yearly reports of income, true service profit, commissions, d
 From then on VLEBook saves each backup to that folder **automatically, without asking**, as files named like **CentreName_14112026_083015_pm.json** and **.txt**. Every save is written in the **audit log** (for example "Hourly automatic backup saved to Google Drive folder …").
 
 - Automatic backup runs while VLEBook is open; a backup missed while it was closed runs soon after you open it.
-- After VLEBook is reopened, Chrome may ask once more for folder access: click **Reconnect backup folder** (choose *Allow on every visit* if offered). Until then, backups go to your *Downloads* folder.
+- After VLEBook is reopened, Chrome may ask once more for folder access: click **Reconnect backup folder** (choose *Allow on every visit* if offered). Until you do, automatic backups are paused (they are not downloaded) and the button stays at the top of the screen.
 - Old automatic backups are removed after the number of days you choose (default 30). The audit-log file is never removed.
 - When you close VLEBook after making changes, it offers a backup. This happens every time: save it if you want to, or ignore it.
 

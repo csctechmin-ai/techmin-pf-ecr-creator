@@ -92,8 +92,11 @@ VLEBook फ़ाइलें आपके चुने फ़ोल्डर �
 ### ऑडिट लॉग में "Chain check: an entry was changed or removed outside VLEBook" दिखता है
 ब्राउज़र के डेटाबेस या ऑडिट-लॉग फ़ाइल की कोई एंट्री VLEBook के अलावा किसी और चीज़ से बदली या हटाई गई है। कंप्यूटर और बैकअप फ़ोल्डर सुरक्षित रखें, अपने रिकॉर्ड के लिए ऑडिट लॉग (CSV) डाउनलोड करें, और सहायता चाहिए तो {{entity}} से संपर्क करें।
 
+### ऊपर "Choose backup folder" बटन / Chrome ने JSON और TXT फ़ाइलें सेव करने को पूछा
+ऑटोमैटिक बैकअप केवल आपके चुने बैकअप फ़ोल्डर में, बिना किसी डाउनलोड प्रश्न के, सेव होते हैं। फ़ोल्डर चुने जाने तक वे रुके रहते हैं और ऊपर **Choose backup folder** बटन दिखता है। उस पर क्लिक करके अपना Google Drive, OneDrive, Dropbox या USB फ़ोल्डर चुनें। Data Ownership & Backup में **Back up now** माँगने पर अब भी एक प्रति डाउनलोड करता है।
+
 ### "Backup folder needs permission again" / "Reconnect backup folder"
-VLEBook दोबारा खोलने पर Chrome फ़ोल्डर की अनुमति फिर माँगता है। बटन पर एक बार क्लिक करें और **Allow** चुनें (*Allow on every visit* दिखे तो उसे चुनें)। *Allow on every visit* चुनने पर Chrome अनुमति याद रखता है। तब तक बैकअप Downloads में सेव होते हैं, इसलिए कुछ नहीं छूटता।
+VLEBook दोबारा खोलने पर Chrome फ़ोल्डर की अनुमति फिर माँगता है। बटन पर एक बार क्लिक करें और **Allow** चुनें (*Allow on every visit* दिखे तो उसे चुनें)। *Allow on every visit* चुनने पर Chrome अनुमति याद रखता है। तब तक ऑटोमैटिक बैकअप रुके रहते हैं और डाउनलोड नहीं होते; छूटा हर बैकअप ऑडिट लॉग में दर्ज होता है।
 
 ### "This browser cannot save to a chosen folder"
 फ़ोल्डर चुनने की सुविधा केवल कंप्यूटर पर Google Chrome और Microsoft Edge में है। दूसरे ब्राउज़र में बैकअप Downloads फ़ोल्डर में जाते हैं।

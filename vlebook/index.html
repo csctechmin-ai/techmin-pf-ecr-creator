@@ -24,7 +24,12 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
-<body>
+<body class="booting">
+  <div id="boot-splash" role="status" aria-live="polite">
+    <img src="icons/vlebook-logo.svg" alt="VLEBook" width="210" height="56">
+    <div class="boot-spinner" aria-hidden="true"></div>
+    <p>Starting VLEBook…</p>
+  </div>
   <div class="app-shell">
     <!-- Left Collapsible Sidebar -->
     <aside class="app-sidebar" id="app-sidebar" aria-label="Main Navigation">
