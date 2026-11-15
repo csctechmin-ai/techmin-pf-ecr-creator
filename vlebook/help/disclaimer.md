@@ -50,4 +50,4 @@ To the extent permitted by law, {{entity}} is not liable for any loss arising fr
 
 ## 10. Contact
 
-{{entity}}, {{address}} · {{email}}{{phoneSep}} · {{website}}
+{{entity}}, {{address}} · GSTIN {{gstin}} · {{email}}{{phoneSep}} · {{website}}

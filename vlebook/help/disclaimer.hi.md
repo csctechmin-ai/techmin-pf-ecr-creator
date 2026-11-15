@@ -50,4 +50,4 @@ VLEBook अर्ली एक्सेस में है: इसका वि
 
 ## 10. संपर्क
 
-{{entity}}, {{address}} · {{email}}{{phoneSep}} · {{website}}
+{{entity}}, {{address}} · GSTIN {{gstin}} · {{email}}{{phoneSep}} · {{website}}

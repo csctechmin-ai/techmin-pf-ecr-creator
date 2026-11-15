@@ -50,4 +50,4 @@ VLEBook ഏർലി ആക്സസിലാണ്: ഇതിന്റെ വ�
 
 ## 10. ബന്ധപ്പെടുക
 
-{{entity}}, {{address}} · {{email}}{{phoneSep}} · {{website}}
+{{entity}}, {{address}} · GSTIN {{gstin}} · {{email}}{{phoneSep}} · {{website}}

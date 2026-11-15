@@ -83,5 +83,5 @@ VLEBook ബിസിനസുകൾക്കുള്ളതാണ്. 18 വയ�
 
 പരാതി പരിഹാര ഓഫീസർ: {{grievanceOfficer}}
 ഇമെയിൽ: {{grievanceEmail}}
-{{entity}}, {{address}}
+{{entity}}, {{address}} · GSTIN {{gstin}}
 സപ്പോർട്ട്: {{email}}{{phoneSep}} · {{website}}
