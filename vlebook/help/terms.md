@@ -24,14 +24,14 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 ## 3. Fees, renewal and taxes
 
-1. Plans, prices and payment terms are as published or agreed with Techmin at the time of purchase. The total price, including GST where applicable, and the licence period are shown before you pay. Prices may change for future periods, but never for a period already paid.
+1. Plans, prices and payment terms are as published or agreed with Techmin at the time of purchase. The total price, including GST, and the licence period are shown before you pay. Techmin Wealth Partners is registered under GST and issues a GST tax invoice for every payment. Prices may change for future periods, but never for a period already paid.
 2. The licence ends on its end date unless renewed. There is no automatic renewal. VLEBook warns you 7 days before the end date and allows 3 days of grace after it; it then changes to Basic mode until renewal. VLEBook is locked only if a licence is cancelled, the account is suspended or the computer's date is tampered with; you can always download a full backup of your data.
 3. Refunds and cancellations are governed by the **Refund & Cancellation Policy** shown in Help & Legal.
 4. Techmin may change prices for future periods with reasonable notice through the software or other means.
 
 ## 4. Your responsibilities
 
-1. **Backups.** You are solely responsible for keeping regular backups of your data in a safe place outside the computer. VLEBook provides automatic and manual backup tools; Techmin cannot recover data from your computer and is not responsible for data lost because of hardware failure, clearing of browser data, viruses, theft, wrong restores or not keeping backups.
+1. **Your data and backups.** Your business data is kept only on your computer and in the backups you save. Techmin does not store it on any server, does not keep a copy, does not back it up and gives no assurance, warranty or guarantee about its safety, availability or recovery. You are solely responsible for keeping regular backups outside the computer (VLEBook provides automatic backup to a folder you choose, including a Google Drive, OneDrive or Dropbox folder). Techmin is not responsible for data lost because of hardware failure, clearing of browser data, viruses, theft, wrong restores, problems with a cloud service, or not keeping backups.
 2. **Security.** Keep passwords, the Owner recovery code and licence keys confidential. You are responsible for all activity under your users. Remove access of staff who leave.
 3. **Correct registration details.** The centre name, type, address, PIN code, GSTIN, CSC ID, Akshaya ID, mobile number and email you give must be true and belong to your Centre. Techmin may refuse or cancel a licence given on false details.
 4. **Lawful use and customer data.** You are the data fiduciary for the personal data of your customers and staff that you record. You must collect and use it lawfully, with notice and consent where required, and comply with the Digital Personal Data Protection Act, 2023, the Aadhaar Act, 2016 and its regulations, the rules of CSC SPV, State IT Missions, banks and other partners, and all other applicable laws.
@@ -39,6 +39,7 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 6. **Never store** customers' Aadhaar biometric data, PINs, OTPs, passwords of government portals or full card numbers in VLEBook. Mask Aadhaar numbers where the law requires.
 7. **Accuracy.** Calculations of fees, GST, TDS, commissions and profit depend on the rates and entries you configure. Verify them. VLEBook is a record-keeping tool and does not give tax, legal or financial advice.
 8. Keep your computer, operating system and browser updated and protected.
+9. **Audit log.** VLEBook keeps an audit log of sign-ins, failed sign-in attempts, sign-outs, backups, restores and important changes. The log is kept on your computer and in your backup folder only. You must not alter or delete it outside VLEBook. It is your record; Techmin does not receive it.
 
 ## 5. Notices and communications
 
@@ -80,7 +81,7 @@ These Terms are governed by the laws of India. Subject to any applicable arbitra
 
 ## 13. Compliance with law and seller information
 
-1. Techmin aims to follow the laws that apply to VLEBook and to its sale, including the Information Technology Act, 2000 and its rules, the Digital Personal Data Protection Act, 2023 and the Digital Personal Data Protection Rules, 2025, the Consumer Protection Act, 2019 and the Consumer Protection (E-Commerce) Rules, 2020, the Copyright Act, 1957 and GST law where applicable. Techmin will update VLEBook and these documents when the law changes.
+1. Techmin aims to follow the laws that apply to VLEBook and to its sale, including the Information Technology Act, 2000 and its rules, the Digital Personal Data Protection Act, 2023 and the Digital Personal Data Protection Rules, 2025, the Consumer Protection Act, 2019 and the Consumer Protection (E-Commerce) Rules, 2020, the Copyright Act, 1957 and GST law (Techmin Wealth Partners is registered under GST). Techmin will update VLEBook and these documents when the law changes.
 2. **Seller:** {{entity}}, a proprietorship firm, {{address}}. Email: {{email}}{{phoneSep}}.
 3. **Grievances:** the Grievance Officer acknowledges a complaint within 48 hours and resolves it within one month of receipt. If you are not satisfied, you may contact the National Consumer Helpline (1915, consumerhelpline.gov.in) or the consumer commission, and, for personal-data matters, the Data Protection Board of India.
 4. Nothing in these Terms takes away any right that a consumer has under Indian law.

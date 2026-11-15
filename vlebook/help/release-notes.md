@@ -2,6 +2,14 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.10.2 — 15 November 2026
+
+- **Automatic backup to Google Drive, OneDrive or Dropbox:** choose the service and a folder inside it; every backup is saved there automatically without asking, and the service's own app uploads it to your account.
+- **Audit log for every sign-in:** successful and failed sign-ins, sign-outs, backups, restores and data resets are recorded with user, date and time. Entries are linked by a hash so changes can be detected, cannot be deleted in VLEBook, survive a data reset, and are copied to the backup folder. Download the full log as CSV in Settings.
+- **Restore from backup folder** on the first screen brings back the latest backup and the full audit log after the browser's data was cleared, or on a new computer.
+- VLEBook asks the browser to protect its storage from automatic clean-up.
+- Documents updated in all three languages: Techmin keeps no copy of business data and gives no data assurance; GST invoice for every licence payment (Techmin Wealth Partners is registered under GST).
+
 ## Version 2.10.1 — 15 November 2026
 
 - VLEBook is now marked **Early access** on the sign-in screen, in the menu and in the welcome email.

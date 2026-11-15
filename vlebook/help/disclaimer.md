@@ -18,6 +18,8 @@ VLEBook is an independent product. It is **not** made, endorsed or approved by C
 
 Business data is stored only on the centre's computer and in backup files the centre saves. {{entity}} has no access to it and cannot recover it. The centre is responsible for taking and keeping backups, for the security of its computer, and for handling customers' personal data lawfully.
 
+{{entity}} gives **no assurance, warranty or guarantee** about the safety, availability or recovery of any centre's data, and keeps no copy of it. Backups saved to Google Drive, OneDrive, Dropbox or any other service are handled by that service under the centre's own account.
+
 ## 4. Tools and documents
 
 PDF & Image Tools and the Document Workbench process files on the centre's computer. Converted files (for example PDF to Word or Excel) may not match the original layout exactly; check every converted document before use. Photographs and signatures prepared for portals must meet the portal's current rules.

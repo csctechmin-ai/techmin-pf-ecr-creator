@@ -1,30 +1,34 @@
-import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js";import{generateJSONBackupString as A,generateTXTBackupString as L,parseAndValidateBackup as T,restoreValidatedBackup as N}from"../core/backup.js";import{formatDate as f,esc as s,downloadFile as $}from"../core/utils.js";import{putRecord as R}from"../core/db.js";import{can as O}from"../core/auth.js";import{getAutoBackupStatus as P,getAutoBackupConfig as V,chooseBackupFolder as j,reconnectBackupFolder as q,forgetBackupFolder as I,runAutoBackup as F,backupBaseName as E}from"../core/autobackup.js";let r=null,p="";async function l(t){const[d,b]=await Promise.all([C(),w("settings","CENTRE_CONFIG")]),v=Array.isArray(b?.backupHistory)?b.backupHistory:[],a=await P(),n=a.state.lastResult,y=e=>e?new Date(e).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):"—",S=`
+import{STORES as y,getRecord as E,getStorageDiagnostics as R}from"../core/db.js";import{generateJSONBackupString as T,generateTXTBackupString as P,parseAndValidateBackup as V,restoreValidatedBackup as I}from"../core/backup.js";import{formatDate as k,esc as a,downloadFile as D}from"../core/utils.js";import{putRecord as j}from"../core/db.js";import{can as q}from"../core/auth.js";import{getAutoBackupStatus as F,getAutoBackupConfig as M,chooseBackupFolder as H,reconnectBackupFolder as G,forgetBackupFolder as U,runAutoBackup as X,backupBaseName as S,BACKUP_PROVIDERS as B,getBackupProvider as J,setBackupProvider as K}from"../core/autobackup.js";import{auditFileName as _}from"../core/auditlog.js";const C={GDRIVE:"Choose a folder inside your Google Drive, for example “G:\\My Drive\\VLEBook backups”. Google Drive for desktop must be signed in on this computer; it uploads every backup to your Drive automatically.",ONEDRIVE:"Choose a folder inside OneDrive, for example “C:\\Users\\(your name)\\OneDrive\\VLEBook backups”. OneDrive uploads every backup automatically.",DROPBOX:"Choose a folder inside your Dropbox folder, for example “C:\\Users\\(your name)\\Dropbox\\VLEBook backups”. Dropbox uploads every backup automatically.",LOCAL:"Choose a folder on this computer or on a USB / external drive. Keep another copy away from this computer too."};let r=null,p="";async function l(t){const[d,b]=await Promise.all([R(),E("settings","CENTRE_CONFIG")]),v=Array.isArray(b?.backupHistory)?b.backupHistory:[],o=await F(),m=await J(),L=await _();let g=null;try{g=await navigator.storage?.persisted?.()??null}catch{}const c=o.state.lastResult,h=e=>e?new Date(e).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):"—",A=`
     <div class="card" id="auto-backup-card">
-      <div class="card-header"><div class="card-title">Automatic backup to this PC</div>
-        <label class="switch-label"><input type="checkbox" id="ab-enabled" ${a.cfg.enabled?"checked":""}> On</label></div>
+      <div class="card-header"><div class="card-title">Automatic backup to Google Drive, OneDrive, Dropbox or a folder</div>
+        <label class="switch-label"><input type="checkbox" id="ab-enabled" ${o.cfg.enabled?"checked":""}> On</label></div>
       <div class="grid-2" style="gap:16px;">
         <div>
-          <label class="auth-check"><input type="checkbox" id="ab-hourly" ${a.cfg.hourly?"checked":""}> Every hour</label>
+          <label class="auth-check"><input type="checkbox" id="ab-hourly" ${o.cfg.hourly?"checked":""}> Every hour</label>
           <label class="form-label" style="margin-top:8px;">Also at these times</label>
-          <div class="ab-times" id="ab-times">${a.cfg.times.map(e=>`<span class="ab-time" data-no-i18n>${s(e)} <button type="button" data-ab-del="${s(e)}" title="Remove">✕</button></span>`).join("")||'<span class="form-hint">No fixed times.</span>'}</div>
+          <div class="ab-times" id="ab-times">${o.cfg.times.map(e=>`<span class="ab-time" data-no-i18n>${a(e)} <button type="button" data-ab-del="${a(e)}" title="Remove">✕</button></span>`).join("")||'<span class="form-hint">No fixed times.</span>'}</div>
           <div style="display:flex; gap:6px; margin-top:6px;"><input type="time" class="form-control" id="ab-new-time" style="width:140px;"><button type="button" class="btn btn-sm btn-outline" id="ab-add-time">+ Add time</button></div>
           <label class="form-label" style="margin-top:10px;">Save as</label>
-          <div style="display:flex; gap:14px;"><label class="auth-check"><input type="checkbox" id="ab-json" ${a.cfg.json?"checked":""}> JSON</label><label class="auth-check"><input type="checkbox" id="ab-txt" ${a.cfg.txt?"checked":""}> TXT</label></div>
+          <div style="display:flex; gap:14px;"><label class="auth-check"><input type="checkbox" id="ab-json" ${o.cfg.json?"checked":""}> JSON</label><label class="auth-check"><input type="checkbox" id="ab-txt" ${o.cfg.txt?"checked":""}> TXT</label></div>
           <label class="form-label" style="margin-top:10px;">Delete automatic backups older than</label>
-          <select class="form-control" id="ab-retention" style="width:180px;">${[7,15,30,60,90,180,365,0].map(e=>`<option value="${e}" ${a.cfg.retentionDays===e?"selected":""}>${e?`${e} days`:"Never delete"}</option>`).join("")}</select>
+          <select class="form-control" id="ab-retention" style="width:180px;">${[7,15,30,60,90,180,365,0].map(e=>`<option value="${e}" ${o.cfg.retentionDays===e?"selected":""}>${e?`${e} days`:"Never delete"}</option>`).join("")}</select>
         </div>
         <div>
+          <label class="form-label">Where should backups be saved?</label>
+          <select class="form-control" id="ab-provider" style="max-width:280px;">${Object.entries(B).map(([e,s])=>`<option value="${e}" ${m===e?"selected":""}>${a(s)}</option>`).join("")}</select>
+          <p class="form-hint" id="ab-provider-hint" style="margin:6px 0 10px;">${a(C[m])}</p>
           <label class="form-label">Backup folder</label>
-          ${a.folderName?`<div class="ab-folder"><strong data-no-i18n>${s(a.folderName)}</strong> ${a.folderPermission==="granted"?'<span class="badge badge-success">Connected</span>':'<span class="badge badge-warning">Needs permission</span>'}</div>
-                 <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">${a.folderPermission!=="granted"?'<button type="button" class="btn btn-sm btn-primary" id="ab-reconnect">Reconnect backup folder</button>':""}<button type="button" class="btn btn-sm btn-outline" id="ab-choose">Change folder</button><button type="button" class="btn btn-sm btn-outline" id="ab-forget">Use Downloads instead</button></div>`:`<div class="form-hint">${a.folderSupported?"Not chosen — backups go to your Downloads folder.":"This browser saves backups to the Downloads folder (choosing a folder needs Chrome or Edge)."}</div>
-                 ${a.folderSupported?'<button type="button" class="btn btn-sm btn-primary" id="ab-choose" style="margin-top:6px;">Choose backup folder</button>':""}`}
-          <p class="form-hint" style="margin-top:8px;">Tip: choose a folder on a pen drive / external disk, or one synced by Google Drive or OneDrive.</p>
+          ${o.folderName?`<div class="ab-folder"><strong data-no-i18n>${a(o.folderName)}</strong> ${o.folderPermission==="granted"?'<span class="badge badge-success">Connected</span>':'<span class="badge badge-warning">Needs permission</span>'}</div>
+                 <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">${o.folderPermission!=="granted"?'<button type="button" class="btn btn-sm btn-primary" id="ab-reconnect">Reconnect backup folder</button>':""}<button type="button" class="btn btn-sm btn-outline" id="ab-choose">Change folder</button><button type="button" class="btn btn-sm btn-outline" id="ab-forget">Use Downloads instead</button></div>`:`<div class="form-hint">${o.folderSupported?"Not chosen — backups go to your Downloads folder.":"This browser saves backups to the Downloads folder (choosing a folder needs Chrome or Edge)."}</div>
+                 ${o.folderSupported?'<button type="button" class="btn btn-sm btn-primary" id="ab-choose" style="margin-top:6px;">Choose backup folder</button>':""}`}
+          <p class="form-hint" style="margin-top:8px;">Backups are saved to this folder automatically, without asking each time, and every save is written in the audit log. The audit log is also kept in this folder as <span data-no-i18n>${a(L)}</span>.</p>
+          <p class="form-hint">Browser storage protection: <strong>${g===!0?"On":g===!1?"Not granted by the browser":"Not available"}</strong>.</p>
           <label class="form-label" style="margin-top:8px;">File names</label>
-          <div class="ab-example" data-no-i18n>${s(a.exampleName)}.json<br>${s(a.exampleName)}.txt</div>
+          <div class="ab-example" data-no-i18n>${a(o.exampleName)}.json<br>${a(o.exampleName)}.txt</div>
           <div class="ab-status">
-            <div>Last automatic backup: <strong>${n?s(y(Date.parse(n.at))):"—"}</strong>${n?` (${n.destination==="FOLDER"?"saved to folder":"saved to Downloads"})`:""}</div>
-            <div>Next backup: <strong>${a.cfg.enabled?s(y(a.nextDueAt)):"Automatic backup is off"}</strong></div>
-            ${n?.note?`<div class="form-hint" style="color:var(--color-warning);">${s(n.note)}</div>`:""}
+            <div>Last automatic backup: <strong>${c?a(h(Date.parse(c.at))):"—"}</strong>${c?` (${c.destination==="FOLDER"?`saved to ${a(B[m])}`:"saved to Downloads"})`:""}</div>
+            <div>Next backup: <strong>${o.cfg.enabled?a(h(o.nextDueAt)):"Automatic backup is off"}</strong></div>
+            ${c?.note?`<div class="form-hint" style="color:var(--color-warning);">${a(c.note)}</div>`:""}
           </div>
           <button type="button" class="btn btn-sm btn-success" id="ab-run-now" style="margin-top:8px;">Back up now</button>
           <div class="form-hint" id="ab-msg"></div>
@@ -43,23 +47,23 @@ import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js"
 
     <div class="callout">
       <div>
-        <strong>Local-First Data Ownership Notice:</strong> All primary business records belong to this browser profile and device inside <code>IndexedDB (${s(d.dbName)})</code>. VLEBook does not send these business records to Techmin or any cloud server (only the centre's registration details are sent to Techmin, as explained in the Privacy Policy). Because clearing browser site data or switching computers can remove browser-local storage, download a JSON or TXT backup regularly.
+        <strong>Local-First Data Ownership Notice:</strong> All primary business records belong to this browser profile and device inside <code>IndexedDB (${a(d.dbName)})</code>. VLEBook does not send these business records to Techmin or any cloud server (only the centre's registration details are sent to Techmin, as explained in the Privacy Policy). Because clearing browser site data or switching computers can remove browser-local storage, download a JSON or TXT backup regularly.
       </div>
     </div>
 
-    ${S}
+    ${A}
 
     <!-- Database Health & Storage Strip -->
     <div class="grid-kpi">
       <div class="kpi-card navy">
         <div class="kpi-label">Total Database Records</div>
         <div class="kpi-value">${d.totalRecords}</div>
-        <div class="kpi-sub">Across ${g.length} IndexedDB Object Stores</div>
+        <div class="kpi-sub">Across ${y.length} IndexedDB Object Stores</div>
       </div>
       <div class="kpi-card success">
         <div class="kpi-label">Database Health Check</div>
         <div class="kpi-value">HEALTHY (v${d.schemaVersion})</div>
-        <div class="kpi-sub">App Version: ${s(d.appVersion)}</div>
+        <div class="kpi-sub">App Version: ${a(d.appVersion)}</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Browser Storage Used</div>
@@ -68,7 +72,7 @@ import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js"
       </div>
       <div class="kpi-card gold">
         <div class="kpi-label">Last Successful Backup</div>
-        <div class="kpi-value" style="font-size:14px;">${s(f(b?.lastBackupAt,!0))}</div>
+        <div class="kpi-value" style="font-size:14px;">${a(k(b?.lastBackupAt,!0))}</div>
         <div class="kpi-sub">${v.length} backups logged in history</div>
       </div>
     </div>
@@ -99,12 +103,12 @@ import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js"
           </div>
 
           <div class="form-group">
-            <label class="form-label">Select Modules to Include (Default: All ${g.length} Stores)</label>
+            <label class="form-label">Select Modules to Include (Default: All ${y.length} Stores)</label>
             <div style="display:flex; gap:8px; flex-wrap:wrap; background:var(--color-surface-alt); padding:10px; border-radius:var(--radius-sm);">
-              ${g.map(e=>`
+              ${y.map(e=>`
                 <label style="font-size:11.5px; display:inline-flex; align-items:center; gap:4px;">
-                  <input type="checkbox" class="bkp-store-chk" value="${s(e)}" checked>
-                  ${s(e)} (${d.counts[e]||0})
+                  <input type="checkbox" class="bkp-store-chk" value="${a(e)}" checked>
+                  ${a(e)} (${d.counts[e]||0})
                 </label>`).join("")}
             </div>
           </div>
@@ -131,8 +135,8 @@ import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js"
               <tbody>
                 ${v.length===0?'<tr><td colspan="4" style="text-align:center; padding:12px; color:var(--color-text-muted);">No manual backups exported yet.</td></tr>':v.map(e=>`
                       <tr>
-                        <td>${s(f(e.timestamp,!0))}</td>
-                        <td><span class="badge badge-info">${s(e.format)}</span></td>
+                        <td>${a(k(e.timestamp,!0))}</td>
+                        <td><span class="badge badge-info">${a(e.format)}</span></td>
                         <td class="num">${e.totalRecords}</td>
                         <td>${e.encrypted?"AES-GCM-256":"Plain Portable"}</td>
                       </tr>`).join("")}
@@ -166,16 +170,16 @@ import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js"
 
           <button type="button" class="btn btn-outline" id="bkp-validate-btn">Validate Structure, Detect Duplicates & Preview</button>
 
-          ${p?`<div class="callout danger"><span><strong>Validation Failed:</strong> ${s(p)}</span></div>`:""}
+          ${p?`<div class="callout danger"><span><strong>Validation Failed:</strong> ${a(p)}</span></div>`:""}
 
           ${r?`
               <div class="card" style="background:var(--color-surface-alt); margin-top:8px; margin-bottom:0;">
                 <div class="card-title" style="font-size:14px; color:var(--color-success); margin-bottom:8px;">
-                  Valid ${s(r.format)} Backup Verified (v${s(r.backupVersion)})
+                  Valid ${a(r.format)} Backup Verified (v${a(r.backupVersion)})
                 </div>
                 <div style="font-size:12px; margin-bottom:8px;">
-                  <div><strong>Centre Profile:</strong> ${s(r.centreProfile?.centreName||"VLEBook")} (${s(r.centreProfile?.centreType||"CSC")})</div>
-                  <div><strong>Exported At:</strong> ${s(f(r.exportTimestamp,!0))}</div>
+                  <div><strong>Centre Profile:</strong> ${a(r.centreProfile?.centreName||"VLEBook")} (${a(r.centreProfile?.centreType||"CSC")})</div>
+                  <div><strong>Exported At:</strong> ${a(k(r.exportTimestamp,!0))}</div>
                   <div><strong>Total Incoming Records:</strong> ${r.totalIncomingRecords}</div>
                   ${r.format==="TXT"?`<div><strong>SHA-256 Checksum:</strong> <span class="badge ${r.checksumStatus==="VERIFIED"?"badge-success":"badge-warning"}">${r.checksumStatus==="VERIFIED"?"Verified — file is intact":"Not present (older backup)"}</span></div>`:""}
                   <div><strong>Duplicate Record IDs Detected:</strong> <span class="badge ${r.duplicateIdCount>0?"badge-warning":"badge-success"}">${r.duplicateIdCount}</span></div>
@@ -198,4 +202,4 @@ import{STORES as g,getRecord as w,getStorageDiagnostics as C}from"../core/db.js"
         </div>
       </div>
     </div>
-  `;const k=()=>{const e=Array.from(t.querySelectorAll(".bkp-store-chk:checked")).map(D=>D.value),o=t.querySelector("#bkp-start-date")?.value||"",u=t.querySelector("#bkp-end-date")?.value||"",B=t.querySelector("#bkp-export-pass")?.value||"";return{selectedStores:e,startDate:o,endDate:u,password:B}},c=async e=>{const o=await w("settings","CENTRE_CONFIG"),u={...V(o),...e};await R("settings",{...o,autoBackup:u},{notifyAutosave:!1,skipChangeTracking:!0}),await l(t)},i=e=>t.querySelector(e);i("#ab-enabled")?.addEventListener("change",e=>c({enabled:e.target.checked})),i("#ab-hourly")?.addEventListener("change",e=>c({hourly:e.target.checked})),i("#ab-json")?.addEventListener("change",e=>c({json:e.target.checked,txt:e.target.checked?a.cfg.txt:!0})),i("#ab-txt")?.addEventListener("change",e=>c({txt:e.target.checked,json:e.target.checked?a.cfg.json:!0})),i("#ab-retention")?.addEventListener("change",e=>c({retentionDays:Number(e.target.value)})),i("#ab-add-time")?.addEventListener("click",()=>{const e=i("#ab-new-time").value;/^\d{2}:\d{2}$/.test(e)&&c({times:[...a.cfg.times,e]})}),t.querySelectorAll("[data-ab-del]").forEach(e=>e.addEventListener("click",()=>c({times:a.cfg.times.filter(o=>o!==e.dataset.abDel)}))),i("#ab-choose")?.addEventListener("click",async()=>{try{await j(),await l(t)}catch(e){e.name!=="AbortError"&&(i("#ab-msg").textContent=e.message)}}),i("#ab-reconnect")?.addEventListener("click",async()=>{await q(),await l(t)}),i("#ab-forget")?.addEventListener("click",async()=>{await I(),await l(t)}),i("#ab-run-now")?.addEventListener("click",async()=>{const e=await F({reason:"MANUAL"});await l(t);const o=t.querySelector("#ab-msg");o&&(o.textContent=`Saved ${e.files.join(" and ")} ${e.destination==="FOLDER"?"in "+e.folderName:"to Downloads"}.`)}),O("restore_backup")||t.querySelectorAll("#bkp-restore-merge-btn, #bkp-restore-replace-btn").forEach(e=>e.remove()),t.querySelector("#bkp-export-json-btn")?.addEventListener("click",async()=>{const e=k(),o=await A(e);$(o,`${E(b?.centreName)}.json`,"application/json"),await l(t)}),t.querySelector("#bkp-export-txt-btn")?.addEventListener("click",async()=>{const e=k(),o=await L(e);$(o,`${E(b?.centreName)}.txt`,"text/plain"),await l(t)});const h=t.querySelector("#bkp-import-file"),m=t.querySelector("#bkp-import-textarea");h?.addEventListener("change",async()=>{const e=h.files?.[0];if(!e)return;const o=await e.text();m&&(m.value=o)}),t.querySelector("#bkp-validate-btn")?.addEventListener("click",async()=>{const e=m?.value||"",o=t.querySelector("#bkp-import-pass")?.value||"";try{p="",r=await T(e,o)}catch(u){r=null,p=u.message}await l(t)});const x=async e=>{if(!t.querySelector("#bkp-confirm-restore-chk")?.checked){p="Please check the confirmation box before restoring the backup.",await l(t);return}await N(r,e),r=null,p="",await l(t)};t.querySelector("#bkp-restore-merge-btn")?.addEventListener("click",()=>x("MERGE")),t.querySelector("#bkp-restore-replace-btn")?.addEventListener("click",()=>x("REPLACE"))}export{l as renderBackupModule};
+  `;const x=()=>{const e=Array.from(t.querySelectorAll(".bkp-store-chk:checked")).map(N=>N.value),s=t.querySelector("#bkp-start-date")?.value||"",u=t.querySelector("#bkp-end-date")?.value||"",O=t.querySelector("#bkp-export-pass")?.value||"";return{selectedStores:e,startDate:s,endDate:u,password:O}},n=async e=>{const s=await E("settings","CENTRE_CONFIG"),u={...M(s),...e};await j("settings",{...s,autoBackup:u},{notifyAutosave:!1,skipChangeTracking:!0}),await l(t)},i=e=>t.querySelector(e);i("#ab-enabled")?.addEventListener("change",e=>n({enabled:e.target.checked})),i("#ab-hourly")?.addEventListener("change",e=>n({hourly:e.target.checked})),i("#ab-json")?.addEventListener("change",e=>n({json:e.target.checked,txt:e.target.checked?o.cfg.txt:!0})),i("#ab-txt")?.addEventListener("change",e=>n({txt:e.target.checked,json:e.target.checked?o.cfg.json:!0})),i("#ab-retention")?.addEventListener("change",e=>n({retentionDays:Number(e.target.value)})),i("#ab-add-time")?.addEventListener("click",()=>{const e=i("#ab-new-time").value;/^\d{2}:\d{2}$/.test(e)&&n({times:[...o.cfg.times,e]})}),t.querySelectorAll("[data-ab-del]").forEach(e=>e.addEventListener("click",()=>n({times:o.cfg.times.filter(s=>s!==e.dataset.abDel)}))),i("#ab-provider")?.addEventListener("change",async e=>{await K(e.target.value);const s=i("#ab-provider-hint");s&&(s.textContent=C[e.target.value]||"")}),i("#ab-choose")?.addEventListener("click",async()=>{try{await H(),await l(t)}catch(e){e.name!=="AbortError"&&(i("#ab-msg").textContent=e.message)}}),i("#ab-reconnect")?.addEventListener("click",async()=>{await G(),await l(t)}),i("#ab-forget")?.addEventListener("click",async()=>{await U(),await l(t)}),i("#ab-run-now")?.addEventListener("click",async()=>{const e=await X({reason:"MANUAL"});await l(t);const s=t.querySelector("#ab-msg");s&&(s.textContent=`Saved ${e.files.join(" and ")} ${e.destination==="FOLDER"?"in "+e.folderName:"to Downloads"}.`)}),q("restore_backup")||t.querySelectorAll("#bkp-restore-merge-btn, #bkp-restore-replace-btn").forEach(e=>e.remove()),t.querySelector("#bkp-export-json-btn")?.addEventListener("click",async()=>{const e=x(),s=await T(e);D(s,`${S(b?.centreName)}.json`,"application/json"),await l(t)}),t.querySelector("#bkp-export-txt-btn")?.addEventListener("click",async()=>{const e=x(),s=await P(e);D(s,`${S(b?.centreName)}.txt`,"text/plain"),await l(t)});const w=t.querySelector("#bkp-import-file"),f=t.querySelector("#bkp-import-textarea");w?.addEventListener("change",async()=>{const e=w.files?.[0];if(!e)return;const s=await e.text();f&&(f.value=s)}),t.querySelector("#bkp-validate-btn")?.addEventListener("click",async()=>{const e=f?.value||"",s=t.querySelector("#bkp-import-pass")?.value||"";try{p="",r=await V(e,s)}catch(u){r=null,p=u.message}await l(t)});const $=async e=>{if(!t.querySelector("#bkp-confirm-restore-chk")?.checked){p="Please check the confirmation box before restoring the backup.",await l(t);return}await I(r,e),r=null,p="",await l(t)};t.querySelector("#bkp-restore-merge-btn")?.addEventListener("click",()=>$("MERGE")),t.querySelector("#bkp-restore-replace-btn")?.addEventListener("click",()=>$("REPLACE"))}export{l as renderBackupModule};
