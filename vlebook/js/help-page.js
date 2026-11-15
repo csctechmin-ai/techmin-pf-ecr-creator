@@ -1,0 +1,1 @@
+import{renderHelpModule as e}from"./modules/help.js";import{applyAppearance as o}from"./core/appearance.js";o();const r=new URLSearchParams(location.search).get("doc")||"guide";e(document.getElementById("help-root"),{standalone:!0,docId:r});

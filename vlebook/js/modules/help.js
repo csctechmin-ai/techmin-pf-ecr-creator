@@ -1,0 +1,9 @@
+import{esc as o}from"../core/utils.js";import{DOCS as n,LEGAL as u,loadDoc as h}from"../core/helpdocs.js";import{renderDoc as v}from"../core/richtext.js";let l="guide";async function m(e,{standalone:i=!1,docId:a}={}){a&&n.some(t=>t.id===a)&&(l=a),e.innerHTML=`
+    ${i?"":'<div class="module-header"><div class="module-title-group"><h1>Help & Legal</h1><p>How to use VLEBook, solutions to common errors, and our terms and privacy policy</p></div><div class="module-actions"><button class="btn btn-outline btn-sm" id="help-print">Print</button></div></div>'}
+    <div class="pill-tabs" style="margin-bottom:16px;">
+      ${n.map(t=>`<button class="pill-tab ${l===t.id?"active":""}" data-help-tab="${t.id}">${o(t.title)}</button>`).join("")}
+    </div>
+    <div class="help-layout">
+      <nav class="help-toc card" id="help-toc"></nav>
+      <article class="card help-doc" id="help-doc" data-no-i18n><p>Loading…</p></article>
+    </div>`;const s=e.querySelector("#help-doc"),d=e.querySelector("#help-toc");try{const t=await h(l),{html:c,toc:p}=v(t.text);s.innerHTML=c+`<p class="help-foot">${o(u.entity)} · VLEBook</p>`,d.innerHTML=`<strong>${o(t.title)}</strong>`+p.map(r=>`<a href="#${o(r.id)}" data-toc="${o(r.id)}" data-no-i18n>${o(r.title)}</a>`).join("")}catch(t){s.innerHTML=`<div class="callout warning"><div>${o(t.message)}</div></div>`}d.querySelectorAll("[data-toc]").forEach(t=>t.addEventListener("click",c=>{c.preventDefault(),e.querySelector("#"+CSS.escape(t.dataset.toc))?.scrollIntoView({behavior:"smooth",block:"start"})})),e.querySelectorAll("[data-help-tab]").forEach(t=>t.addEventListener("click",()=>{l=t.dataset.helpTab,i&&history.replaceState(null,"",`?doc=${l}`),m(e,{standalone:i})})),e.querySelector("#help-print")?.addEventListener("click",()=>window.print())}export{m as renderHelpModule};
