@@ -4,6 +4,9 @@ Find the message you see (or the problem) below. If it is not solved, contact {{
 
 ## Licence and sign-in
 
+### "Activation needs an internet connection"
+Creating the Owner account and activating a licence are done online with {{entity}}. Connect the computer to the internet (Wi-Fi, broadband or mobile hotspot) and click the button again. If the internet works and the message continues, the Techmin service may be busy: try again after a few minutes, or contact {{entity}}. After activation, daily work continues offline.
+
 ### "Your 14-day full-version trial has ended. VLEBook now works in Basic mode"
 The trial is over. Your data is safe and you can still add customers, make up to 10 invoices a day, track pending work and take backups. To use all features again, send your **Device Code** (Users & Licence) and payment to {{entity}} for a licence of 1 month or more. The licence arrives automatically when the computer is online, or paste the licence key you receive and click **Activate Licence**.
 
@@ -81,7 +84,7 @@ The address, PIN code, GSTIN or Akshaya ID entered is not valid. Correct the fie
 ## Backups
 
 ### "Backup folder needs permission again" / "📁 Reconnect backup folder"
-Chrome asks again for folder access after VLEBook is reopened. Click the button once and choose **Allow** (tick *Allow on every visit* if offered). Installing VLEBook as an app helps Chrome remember the permission. Until then backups are saved to Downloads, so nothing is missed.
+Chrome asks again for folder access after VLEBook is reopened. Click the button once and choose **Allow** (tick *Allow on every visit* if offered). Choosing *Allow on every visit* makes Chrome remember the permission. Until then backups are saved to Downloads, so nothing is missed.
 
 ### "This browser cannot save to a chosen folder"
 Only Google Chrome and Microsoft Edge on a computer support choosing a folder. In other browsers backups go to the Downloads folder.
@@ -113,7 +116,7 @@ Search the mobile number and use the existing customer.
 Record the purchase first in **Stock Inward**, or correct the quantity.
 
 ### Malayalam/Hindi text prints as boxes
-Use the PDF download, which always prints correctly. For direct printing, install a Malayalam/Hindi font in Windows (Settings → Fonts → *Download fonts for all languages*).
+Use the PDF download, which always prints correctly. For direct printing, add a Malayalam/Hindi font in Windows (Settings → Fonts → *Download fonts for all languages*).
 
 ### The cash difference at day closing
 Count again with the denomination calculator; check AEPS withdrawals (they reduce cash) and expenses paid in cash. A reason must be entered if a difference remains.
@@ -138,7 +141,7 @@ Check that it shows in Settings → Centre logo. Then open the bill again and pr
 This was fixed in version 2.10.0. Press **Ctrl + Shift + R** to load the latest version.
 
 ### VLEBook shows an old version after an update
-Press **Ctrl + Shift + R**. If you installed it as an app, close and reopen it.
+Press **Ctrl + Shift + R**. If VLEBook is open in more than one tab, close the other tabs.
 
 ### "Storage is almost full" / app is slow
 Download a backup, then delete old PDF tool results from your Downloads folder. Free some space on drive C:. Close other heavy browser tabs.

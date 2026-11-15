@@ -1,11 +1,13 @@
 # VLEBook User Guide
 
-VLEBook is the complete office software for CSC, Akshaya, E-Seva and Jan Seva centres: billing, customers, applications, AEPS, accounts, stock, staff commission, PDF & image tools and reports. It runs in Google Chrome or Microsoft Edge. **Your business data is stored only on your own computer.**
+VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billing, customers, applications, AEPS, accounts, stock, staff commission, PDF & image tools and reports. It runs in Google Chrome or Microsoft Edge. **Your business data is stored only on your own computer.**
+
+**Early access.** VLEBook is in early access: it is still being developed, features and screens may change, and some errors may remain. Keep regular backups, check important figures before you rely on them, and report problems to {{email}}.
 
 ## 1. Getting started
 
-1. Open VLEBook at the address given by {{entity}} in **Google Chrome** or **Microsoft Edge**.
-2. Install it as an app: click the install icon at the right end of the address bar (or menu ⋮ → *Install VLEBook*). It then opens from the desktop like any program and works offline.
+1. Open VLEBook at **tools.complypro.co.in/vlebook/** in **Google Chrome** or **Microsoft Edge**, on a computer that is connected to the internet.
+2. Bookmark the page (Ctrl + D) so that you can open it quickly. After the first visit, VLEBook opens and works even without internet.
 3. The first screen asks you to create the **Owner account**. Fill in:
    - **Centre name**, **your name**, **mobile number** and **email** (your sign-in details are sent to this email).
    - **Type of centre**: CSC, Akshaya Centre, E-Seva, Jan Seva Kendra and so on.
@@ -14,20 +16,26 @@ VLEBook is the complete office software for CSC, Akshaya, E-Seva and Jan Seva ce
    - **Full address** (building, street, place), **district**, **state** and the 6-digit **PIN code** – all required.
    - **GSTIN** – only if the centre has GST registration (optional). VLEBook checks that the 15 characters are valid.
    - A **user name** and **password** for signing in. Read and accept the Terms & Conditions, Privacy Policy, Refund Policy and Disclaimer.
-4. When the computer is online, your centre is registered with {{entity}} and a **welcome email** arrives with your user name, Centre ID and Device Code. The password is never sent by email.
+4. When you click **Create**, VLEBook connects to {{entity}} to activate your centre — **this step needs the internet**. A **welcome email** then arrives with your user name, Centre ID and Device Code. The password is never sent by email.
 5. VLEBook shows a **recovery code** once. Write it down or download it and keep it safe. It is the only way to reset the Owner password without help from {{entity}}.
 6. Go to **Settings & Centre Setup** to check your centre details and add the invoice prefix and UPI ID. GSTIN, CSC ID and Akshaya ID can be added or corrected here later; they are printed on your invoices.
 7. Upload your **centre logo** (Settings & Centre Setup → Centre logo → Upload logo). Use a PNG, JPG or WEBP image up to 3 MB. The logo appears at the top of the screen and on the dashboard, and is printed on invoices, receipts and every PDF report.
 
+### Internet and offline use
+
+- **Needs the internet:** creating the Owner account (activation of the centre), activating or renewing a licence, the welcome email, Techmin notices and blog articles, and push notifications.
+- **Works offline:** all other work — billing, customers, applications, AEPS records, accounts, stock, reports, tools and backups. Everything is saved on this computer.
+- When the computer is online again, VLEBook checks with {{entity}} for licence renewals, cancelled licences and notices.
+
 ## 2. Trial, licence and Basic mode
 
 ### 14-day full-version trial
-A new installation starts a **14-day trial of the full version**: every feature is open, for up to 3 users. The top of the screen shows *Full trial · N days left*.
+A new centre account starts a **14-day trial of the full version**: every feature is open, for up to 3 users. The top of the screen shows *Full trial · N days left*.
 
 ### Paid licence
 To continue with all features after the trial, buy a licence from {{entity}} for **1 month or more** (for example 1, 2, 3, 6 or 12 months).
 - Send your **Device Code** (Users & Licence) and the payment to {{entity}}.
-- The licence reaches VLEBook **automatically** the next time the computer is online. If you received a licence key instead, paste it in **Users & Licence → Activate Licence**.
+- The licence reaches VLEBook **automatically** the next time the computer is online. If you received a licence key instead, paste it in **Users & Licence → Activate Licence**. Activation needs the internet.
 - VLEBook then shows **"Licence valid for N days"** (till the end date) at the top of the screen and in Users & Licence. A 1-month licence starting today shows about 30 days; a 2-month licence about 60 days, and so on. The number of days counts down every day.
 - 7 days before the end a yellow strip reminds you to renew. After the end date there are **3 grace days** with all features (red strip).
 
@@ -51,7 +59,7 @@ Menu items that need the full version show a **FULL** tag. When you buy or renew
 VLEBook is locked only if {{entity}} cancels the licence or suspends the account, or if the computer's date has been set back. Even then you can **download a full backup** of your data.
 
 ### Moving to a new computer
-Take a backup, install VLEBook on the new computer, restore the backup, then ask {{entity}} to move your licence to the new Device Code.
+Take a backup, open VLEBook on the new computer (the internet is needed to set it up), restore the backup, then ask {{entity}} to move your licence to the new Device Code.
 
 ## 3. Signing in and staff accounts
 

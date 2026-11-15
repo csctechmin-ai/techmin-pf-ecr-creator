@@ -2,6 +2,13 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.10.1 — 15 November 2026
+
+- VLEBook is now marked **Early access** on the sign-in screen, in the menu and in the welcome email.
+- **Activation online:** creating the Owner account and activating a licence now need an internet connection to {{entity}}. All other work continues offline.
+- Clearer wording: no claims that VLEBook is a "complete" or "guaranteed" system; the default watermark in PDF tools is now "COPY".
+- Help & Legal updated in English, Hindi and Malayalam: early access, internet and offline use, total price shown before payment, grievance timelines (acknowledgement within 48 hours, resolution within one month), the Digital Personal Data Protection Rules, 2025, and seller details.
+
 ## Version 2.10.0 — 15 November 2026
 
 - **14-day full-version trial** for every new centre: all features, up to 3 users.
@@ -13,7 +20,7 @@ Published by {{entity}}. The version you are using is shown in **Settings** and 
 
 ## Version 2.9.0 — 15 November 2026
 
-- **VLEBook logo** in the app, the sign-in screen, the browser tab and the installed app icon.
+- **VLEBook logo** in the app, the sign-in screen and the browser tab.
 - **Centre logo:** upload your centre's logo in **Settings & Centre Setup → Centre logo**. It appears at the top of the screen and on the dashboard, and is printed on A4 and thermal invoices, receipts and every PDF report.
 - **New documents** in Help & Legal: Release Notes, Disclaimer and Refund Policy. User Guide, Errors & Solutions, Terms & Conditions and Privacy Policy updated.
 - VLEBook is now published at **tools.complypro.co.in/vlebook/** along with the other ComplyPro tools.
