@@ -14,7 +14,7 @@ This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we")
 
 All records you enter in VLEBook are stored in your browser's storage (IndexedDB) on your computer and in backup files (.json / .txt) saved where you choose. Techmin has no access to them. For this data the **Centre is the data fiduciary** and is responsible for informing its customers, obtaining consent where needed, and keeping the data secure and accurate (see the Terms & Conditions, section 4).
 
-Passwords of VLEBook users are stored only as salted hashes. PDF and image tools process files on your computer; files are not uploaded.
+Passwords of VLEBook users are stored only as salted hashes. The centre logo is stored with the centre settings on your computer and in your backups; it is not sent to Techmin. PDF and image tools process files on your computer; files are not uploaded.
 
 ## 3. Data processed by Techmin
 

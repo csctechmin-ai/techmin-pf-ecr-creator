@@ -9,21 +9,28 @@
   "orientation": "any",
   "icons": [
     {
+      "src": "icons/vlebook-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%2312345A'/%3E%3Ctext x='64' y='82' font-family='Arial,sans-serif' font-size='56' font-weight='bold' fill='%23F4C542' text-anchor='middle'%3EVB%3C/text%3E%3C/svg%3E",
-      "sizes": "128x128",
-      "type": "image/svg+xml"
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
