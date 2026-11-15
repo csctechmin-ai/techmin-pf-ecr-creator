@@ -1,4 +1,4 @@
-import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from"../core/db.js";import{getLang as _,DEFAULT_WHATSAPP_TEMPLATES as R}from"../core/i18n.js";import{loadOptionalAcceptanceDataset as F}from"../core/sample-data.js";import{formatDate as q,esc as s,hashLockPin as O}from"../core/utils.js";import{applyAppearance as C,currentPalette as T,currentMode as L}from"../core/appearance.js";import{isCloseWarningEnabled as W,setCloseWarningEnabled as H}from"../core/closeguard.js";const G=["CSC (Common Service Centre)","Akshaya Centre (Kerala)","E-Seva Centre","Maha e-Seva Kendra (Maharashtra)","Jan Seva Kendra","Cyber Cafe & Digital Desk","Photocopy & Printing Centre","Other Digital Business"];async function m(l,i){const[S,A]=await Promise.all([b("settings","CENTRE_CONFIG"),D("audit_logs")]),t=S||{},k=t.enabledModules||{},p=t.whatsappTemplates||R,g=[...A].sort((e,o)=>String(o.timestamp||"").localeCompare(String(e.timestamp||""))).slice(0,35);l.innerHTML=`
+import{getRecord as p,putRecord as b,getAllRecords as F,clearAllStores as R}from"../core/db.js";import{getLang as _,DEFAULT_WHATSAPP_TEMPLATES as q}from"../core/i18n.js";import{loadOptionalAcceptanceDataset as O}from"../core/sample-data.js";import{formatDate as W,esc as i,hashLockPin as G}from"../core/utils.js";import{applyAppearance as S,currentPalette as T,currentMode as D}from"../core/appearance.js";import{isCloseWarningEnabled as H,setCloseWarningEnabled as B}from"../core/closeguard.js";import{processLogoFile as z,applyCentreBranding as V,isValidLogo as E}from"../core/branding.js";const Y=["CSC (Common Service Centre)","Akshaya Centre (Kerala)","E-Seva Centre","Maha e-Seva Kendra (Maharashtra)","Jan Seva Kendra","Cyber Cafe & Digital Desk","Photocopy & Printing Centre","Other Digital Business"];async function d(s,o){const[A,M]=await Promise.all([p("settings","CENTRE_CONFIG"),F("audit_logs")]),a=A||{},P=a.enabledModules||{},u=a.whatsappTemplates||q,y=[...M].sort((e,l)=>String(l.timestamp||"").localeCompare(String(e.timestamp||""))).slice(0,35);s.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Settings, Centre Setup Wizard & Security</h1>
@@ -16,16 +16,28 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
         <div class="card-header">
           <div class="card-title">Centre Identity & Invoice Setup</div>
         </div>
+        <div class="logo-setting">
+          <div class="logo-preview" id="set-logo-preview">${E(a.centreLogo)?`<img src="${a.centreLogo}" alt="Centre logo">`:"No logo"}</div>
+          <div style="flex:1; min-width:200px;">
+            <div style="font-weight:600;">Centre logo</div>
+            <div class="form-hint">Shown at the top of the screen and on the dashboard, and printed on invoices, receipts and PDF reports. PNG, JPG or WEBP, up to 3 MB. A square or wide logo on a white or transparent background works best.</div>
+            <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+              <label class="btn btn-sm btn-primary" style="cursor:pointer;">${E(a.centreLogo)?"Change logo":"Upload logo"}<input type="file" id="set-logo-file" accept="image/png,image/jpeg,image/webp" hidden></label>
+              ${E(a.centreLogo)?'<button type="button" class="btn btn-sm btn-outline" id="set-logo-remove">Remove logo</button>':""}
+            </div>
+            <div class="auth-error" id="set-logo-msg"></div>
+          </div>
+        </div>
         <form id="settings-profile-form" class="form-grid" style="grid-template-columns:1fr;">
           <div class="grid-2" style="gap:10px;">
             <div class="form-group">
               <label class="form-label">Centre Name <span class="req">*</span></label>
-              <input type="text" class="form-control" name="centreName" required value="${s(t.centreName||"")}">
+              <input type="text" class="form-control" name="centreName" required value="${i(a.centreName||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Centre Type</label>
               <select class="form-control" name="centreType">
-                ${G.map(e=>`<option value="${s(e)}" ${t.centreType===e?"selected":""}>${s(e)}</option>`).join("")}
+                ${Y.map(e=>`<option value="${i(e)}" ${a.centreType===e?"selected":""}>${i(e)}</option>`).join("")}
               </select>
             </div>
           </div>
@@ -33,71 +45,71 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
           <div class="grid-2" style="gap:10px;">
             <div class="form-group">
               <label class="form-label">Owner / VLE Name</label>
-              <input type="text" class="form-control" name="ownerName" value="${s(t.ownerName||"")}">
+              <input type="text" class="form-control" name="ownerName" value="${i(a.ownerName||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Official Mobile Number</label>
-              <input type="tel" class="form-control" name="mobile" maxlength="10" value="${s(t.mobile||"")}">
+              <input type="tel" class="form-control" name="mobile" maxlength="10" value="${i(a.mobile||"")}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Street / Market Address</label>
-            <input type="text" class="form-control" name="address" value="${s(t.address||"")}">
+            <input type="text" class="form-control" name="address" value="${i(a.address||"")}">
           </div>
 
           <div class="grid-3" style="gap:8px;">
             <div class="form-group">
               <label class="form-label">District</label>
-              <input type="text" class="form-control" name="district" value="${s(t.district||"")}">
+              <input type="text" class="form-control" name="district" value="${i(a.district||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">State</label>
-              <input type="text" class="form-control" name="state" value="${s(t.state||"Kerala")}">
+              <input type="text" class="form-control" name="state" value="${i(a.state||"Kerala")}">
             </div>
             <div class="form-group">
               <label class="form-label">PIN Code</label>
-              <input type="text" class="form-control" name="pinCode" maxlength="6" value="${s(t.pinCode||"")}">
+              <input type="text" class="form-control" name="pinCode" maxlength="6" value="${i(a.pinCode||"")}">
             </div>
           </div>
 
           <div class="grid-3" style="gap:8px;">
             <div class="form-group">
               <label class="form-label">GSTIN (Optional)</label>
-              <input type="text" class="form-control" name="gstin" value="${s(t.gstin||"")}">
+              <input type="text" class="form-control" name="gstin" value="${i(a.gstin||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Invoice Prefix</label>
-              <input type="text" class="form-control" name="invoicePrefix" value="${s(t.invoicePrefix||"VLE")}">
+              <input type="text" class="form-control" name="invoicePrefix" value="${i(a.invoicePrefix||"VLE")}">
             </div>
             <div class="form-group">
               <label class="form-label">Next Invoice #</label>
-              <input type="number" class="form-control" name="nextInvoiceNumber" value="${Number(t.nextInvoiceNumber||1001)}">
+              <input type="number" class="form-control" name="nextInvoiceNumber" value="${Number(a.nextInvoiceNumber||1001)}">
             </div>
           </div>
 
           <div class="grid-3" style="gap:8px;">
             <div class="form-group">
               <label class="form-label">Financial Year</label>
-              <input type="text" class="form-control" name="financialYear" value="${s(t.financialYear||"2026-27")}">
+              <input type="text" class="form-control" name="financialYear" value="${i(a.financialYear||"2026-27")}">
             </div>
             <div class="form-group">
               <label class="form-label">Interface Language</label>
               <select class="form-control" name="language">
-                <option value="en" ${t.language==="en"?"selected":""}>English</option>
-                <option value="ml" ${t.language==="ml"?"selected":""}>മലയാളം (Malayalam)</option>
-                <option value="hi" ${t.language==="hi"?"selected":""}>हिन्दी (Hindi)</option>
+                <option value="en" ${a.language==="en"?"selected":""}>English</option>
+                <option value="ml" ${a.language==="ml"?"selected":""}>മലയാളം (Malayalam)</option>
+                <option value="hi" ${a.language==="hi"?"selected":""}>हिन्दी (Hindi)</option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label">Backup Reminder (Days)</label>
-              <input type="number" min="1" max="30" class="form-control" name="backupReminderDays" value="${Number(t.backupReminderDays||3)}">
+              <input type="number" min="1" max="30" class="form-control" name="backupReminderDays" value="${Number(a.backupReminderDays||3)}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Invoice Footer Note</label>
-            <input type="text" class="form-control" name="footerNote" value="${s(t.footerNote||"")}">
+            <input type="text" class="form-control" name="footerNote" value="${i(a.footerNote||"")}">
           </div>
 
           <button type="submit" class="btn btn-primary">Save Centre Configuration</button>
@@ -121,14 +133,14 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
             <div class="form-group">
               <label class="form-label">Night Mode</label>
               <select class="form-control" id="set-night-mode">
-                <option value="light" ${L()==="light"?"selected":""}>Off (Day)</option>
-                <option value="dark" ${L()==="dark"?"selected":""}>On (Night)</option>
+                <option value="light" ${D()==="light"?"selected":""}>Off (Day)</option>
+                <option value="dark" ${D()==="dark"?"selected":""}>On (Night)</option>
               </select>
             </div>
           </div>
           <span class="form-hint">Applies instantly. Night mode can also be switched with the moon button at the top.</span>
           <label style="display:flex; gap:8px; align-items:center; font-size:13px; margin-top:12px;">
-            <input type="checkbox" id="set-close-warning" ${W()?"checked":""}>
+            <input type="checkbox" id="set-close-warning" ${H()?"checked":""}>
             Warn me when closing the tab if data is unsaved or not backed up
           </label>
         </div>
@@ -143,22 +155,22 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
             <div class="grid-2" style="gap:8px;">
               <div class="form-group">
                 <label class="form-label">Screen Lock PIN (4–6 digits, optional)</label>
-                <input type="password" inputmode="numeric" maxlength="6" autocomplete="new-password" class="form-control" name="lockPin" placeholder="${t.lockPinHash?"PIN is set — type a new PIN to change":"Leave blank for no lock"}">
-                ${t.lockPinHash?'<label style="display:flex; gap:6px; align-items:center; font-size:12px; margin-top:4px;"><input type="checkbox" name="removePin"> Remove PIN lock</label>':""}
-                <span class="form-hint" id="pin-status-hint">${t.lockPinHash?"PIN active (stored as a secure hash)":"No PIN set"}</span>
+                <input type="password" inputmode="numeric" maxlength="6" autocomplete="new-password" class="form-control" name="lockPin" placeholder="${a.lockPinHash?"PIN is set — type a new PIN to change":"Leave blank for no lock"}">
+                ${a.lockPinHash?'<label style="display:flex; gap:6px; align-items:center; font-size:12px; margin-top:4px;"><input type="checkbox" name="removePin"> Remove PIN lock</label>':""}
+                <span class="form-hint" id="pin-status-hint">${a.lockPinHash?"PIN active (stored as a secure hash)":"No PIN set"}</span>
               </div>
               <div class="form-group">
                 <label class="form-label">Auto-Lock Inactivity (Minutes)</label>
-                <input type="number" min="0" max="120" class="form-control" name="inactivityLockMinutes" value="${Number(t.inactivityLockMinutes||0)}">
+                <input type="number" min="0" max="120" class="form-control" name="inactivityLockMinutes" value="${Number(a.inactivityLockMinutes||0)}">
               </div>
             </div>
 
             <div class="form-group">
               <label class="form-label">Enable / Disable Sidebar Modules:</label>
               <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; background:var(--color-surface-alt); padding:10px; border-radius:var(--radius-sm);">
-                ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","Document Workbench"],["tools","PDF & Image Tools"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,o])=>`
+                ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","Document Workbench"],["tools","PDF & Image Tools"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,l])=>`
                   <label style="font-size:12px; display:flex; align-items:center; gap:6px;">
-                    <input type="checkbox" name="mod_${e}" ${k[e]!==!1?"checked":""}> ${o}
+                    <input type="checkbox" name="mod_${e}" ${P[e]!==!1?"checked":""}> ${l}
                   </label>`).join("")}
               </div>
             </div>
@@ -174,15 +186,15 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
           <form id="settings-wa-form" class="form-grid" style="grid-template-columns:1fr; gap:8px;">
             <div class="form-group">
               <label class="form-label">English Invoice Template</label>
-              <input type="text" class="form-control" name="en_invoice" value="${s(p.en?.invoice||"")}">
+              <input type="text" class="form-control" name="en_invoice" value="${i(u.en?.invoice||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Hindi Invoice Template (हिन्दी)</label>
-              <input type="text" class="form-control" name="hi_invoice" value="${s(p.hi?.invoice||"")}">
+              <input type="text" class="form-control" name="hi_invoice" value="${i(u.hi?.invoice||"")}">
             </div>
             <div class="form-group">
               <label class="form-label">Malayalam Invoice Template (മലയാളം)</label>
-              <input type="text" class="form-control" name="ml_invoice" value="${s(p.ml?.invoice||"")}">
+              <input type="text" class="form-control" name="ml_invoice" value="${i(u.ml?.invoice||"")}">
             </div>
             <button type="submit" class="btn btn-sm btn-outline">Update WhatsApp Templates</button>
           </form>
@@ -193,7 +205,7 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
     <!-- Immutable Financial & System Audit Log -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title">Financial & Operational Audit Trail (${g.length} recent events)</div>
+        <div class="card-title">Financial & Operational Audit Trail (${y.length} recent events)</div>
       </div>
       <div class="table-wrap" style="max-height:260px; overflow-y:auto;">
         <table class="data-table">
@@ -207,16 +219,16 @@ import{getRecord as b,putRecord as w,getAllRecords as D,clearAllStores as M}from
             </tr>
           </thead>
           <tbody>
-            ${g.length===0?'<tr><td colspan="5" style="text-align:center; padding:14px;">No audited operations recorded yet.</td></tr>':g.map(e=>`
+            ${y.length===0?'<tr><td colspan="5" style="text-align:center; padding:14px;">No audited operations recorded yet.</td></tr>':y.map(e=>`
                   <tr>
-                    <td>${s(q(e.timestamp,!0))}</td>
-                    <td><span class="badge badge-info">${s(e.action)}</span></td>
-                    <td>${s(e.module)}</td>
-                    <td style="font-family:var(--font-mono);">${s(e.entityId)}</td>
-                    <td>${s(e.summary)}</td>
+                    <td>${i(W(e.timestamp,!0))}</td>
+                    <td><span class="badge badge-info">${i(e.action)}</span></td>
+                    <td>${i(e.module)}</td>
+                    <td style="font-family:var(--font-mono);">${i(e.entityId)}</td>
+                    <td>${i(e.summary)}</td>
                   </tr>`).join("")}
           </tbody>
         </table>
       </div>
     </div>
-  `;let n=null;const y=async(e=!1)=>{const o=l.querySelector("#settings-profile-form");if(!o)return;const a=new FormData(o),r=a.get("language")||"en",c=r!==_(),u=await b("settings","CENTRE_CONFIG")||t;if(await w("settings",{...u,id:"CENTRE_CONFIG",centreName:(a.get("centreName")||"").trim()||u.centreName,centreType:a.get("centreType")||u.centreType,ownerName:(a.get("ownerName")||"").trim(),mobile:(a.get("mobile")||"").trim(),address:(a.get("address")||"").trim(),district:(a.get("district")||"").trim(),state:(a.get("state")||"").trim(),pinCode:(a.get("pinCode")||"").trim(),gstin:(a.get("gstin")||"").trim(),invoicePrefix:(a.get("invoicePrefix")||"").trim()||"VLE",nextInvoiceNumber:Number(a.get("nextInvoiceNumber")||1001),financialYear:(a.get("financialYear")||"").trim(),language:r,backupReminderDays:Number(a.get("backupReminderDays")||3),footerNote:(a.get("footerNote")||"").trim()}),c){const{switchLanguage:x}=await import("../app.js");await x(r);return}i&&await i(),e&&await m(l,i)},h=l.querySelector("#settings-profile-form");h?.addEventListener("input",()=>{n&&clearTimeout(n),n=setTimeout(()=>y(!1),380)}),h?.addEventListener("change",()=>{n&&clearTimeout(n),y(!1)}),h?.addEventListener("submit",async e=>{e.preventDefault(),n&&clearTimeout(n),await y(!0)}),l.querySelector("#set-palette")?.addEventListener("change",e=>C({palette:e.target.value})),l.querySelector("#set-night-mode")?.addEventListener("change",e=>C({mode:e.target.value})),l.querySelector("#set-close-warning")?.addEventListener("change",e=>H(e.target.checked));const E=async(e=!1)=>{const o=l.querySelector("#settings-security-form");if(!o)return;const a=new FormData(o),r={...k,dashboard:!0,backup:!0,settings:!0};["customers","services","billing","accounts","pending","aeps","commissions","staff","inventory","studio","tools","catalogue","reports","vault"].forEach(d=>{r[d]=a.get(`mod_${d}`)==="on"});const c=await b("settings","CENTRE_CONFIG")||t,{lockPin:u,...x}=c;let v=c.lockPinHash||"";const N=String(a.get("lockPin")||"").trim(),f=l.querySelector("#pin-status-hint");if(a.get("removePin")==="on")v="";else if(N){if(!/^\d{4,6}$/.test(N)){f&&(f.textContent="PIN must be 4 to 6 digits. Not saved.");return}v=await O(N);const d=o.querySelector('[name="lockPin"]');d&&(d.value="")}await w("settings",{...x,id:"CENTRE_CONFIG",lockPinHash:v,inactivityLockMinutes:Number(a.get("inactivityLockMinutes")||0),enabledModules:r}),f&&(f.textContent=v?"PIN active (stored as a secure hash)":"No PIN set"),i&&await i(),e&&await m(l,i)},P=l.querySelector("#settings-security-form");P?.addEventListener("change",()=>E(!1)),P?.addEventListener("submit",async e=>{e.preventDefault(),await E(!0)});const I=async(e=!1)=>{const o=l.querySelector("#settings-wa-form");if(!o)return;const a=new FormData(o),r=structuredClone(p);r.en.invoice=a.get("en_invoice"),r.hi.invoice=a.get("hi_invoice"),r.ml.invoice=a.get("ml_invoice");const c=await b("settings","CENTRE_CONFIG")||t;await w("settings",{...c,id:"CENTRE_CONFIG",whatsappTemplates:r}),e&&await m(l,i)},$=l.querySelector("#settings-wa-form");$?.addEventListener("change",()=>I(!1)),$?.addEventListener("submit",async e=>{e.preventDefault(),await I(!0)}),l.querySelector("#set-load-acceptance-btn")?.addEventListener("click",async()=>{await F(),i&&await i(),await m(l,i)}),l.querySelector("#set-reset-db-btn")?.addEventListener("click",async()=>{confirm("Are you sure you want to clear all local database records and restore clean factory defaults?")&&(await M(!1),i&&await i(),await m(l,i))})}export{G as CENTRE_TYPES,m as renderSettingsModule};
+  `;let n=null;const h=async(e=!1)=>{const l=s.querySelector("#settings-profile-form");if(!l)return;const t=new FormData(l),r=t.get("language")||"en",c=r!==_(),v=await p("settings","CENTRE_CONFIG")||a;if(await b("settings",{...v,id:"CENTRE_CONFIG",centreName:(t.get("centreName")||"").trim()||v.centreName,centreType:t.get("centreType")||v.centreType,ownerName:(t.get("ownerName")||"").trim(),mobile:(t.get("mobile")||"").trim(),address:(t.get("address")||"").trim(),district:(t.get("district")||"").trim(),state:(t.get("state")||"").trim(),pinCode:(t.get("pinCode")||"").trim(),gstin:(t.get("gstin")||"").trim(),invoicePrefix:(t.get("invoicePrefix")||"").trim()||"VLE",nextInvoiceNumber:Number(t.get("nextInvoiceNumber")||1001),financialYear:(t.get("financialYear")||"").trim(),language:r,backupReminderDays:Number(t.get("backupReminderDays")||3),footerNote:(t.get("footerNote")||"").trim()}),c){const{switchLanguage:x}=await import("../app.js");await x(r);return}o&&await o(),e&&await d(s,o)},w=s.querySelector("#settings-profile-form");w?.addEventListener("input",()=>{n&&clearTimeout(n),n=setTimeout(()=>h(!1),380)}),w?.addEventListener("change",()=>{n&&clearTimeout(n),h(!1)});const k=async e=>{const t={...await p("settings","CENTRE_CONFIG")};e?t.centreLogo=e:delete t.centreLogo,await b("settings",t),await V(t),await d(s,o)};s.querySelector("#set-logo-file")?.addEventListener("change",async e=>{const l=e.target.files?.[0];if(l)try{await k(await z(l))}catch(t){const r=s.querySelector("#set-logo-msg");r&&(r.textContent=t.message)}}),s.querySelector("#set-logo-remove")?.addEventListener("click",async()=>{confirm("Remove the centre logo from the screen, invoices and PDFs?")&&await k(null)}),w?.addEventListener("submit",async e=>{e.preventDefault(),n&&clearTimeout(n),await h(!0)}),s.querySelector("#set-palette")?.addEventListener("change",e=>S({palette:e.target.value})),s.querySelector("#set-night-mode")?.addEventListener("change",e=>S({mode:e.target.value})),s.querySelector("#set-close-warning")?.addEventListener("change",e=>B(e.target.checked));const L=async(e=!1)=>{const l=s.querySelector("#settings-security-form");if(!l)return;const t=new FormData(l),r={...P,dashboard:!0,backup:!0,settings:!0};["customers","services","billing","accounts","pending","aeps","commissions","staff","inventory","studio","tools","catalogue","reports","vault"].forEach(m=>{r[m]=t.get(`mod_${m}`)==="on"});const c=await p("settings","CENTRE_CONFIG")||a,{lockPin:v,...x}=c;let g=c.lockPinHash||"";const N=String(t.get("lockPin")||"").trim(),f=s.querySelector("#pin-status-hint");if(t.get("removePin")==="on")g="";else if(N){if(!/^\d{4,6}$/.test(N)){f&&(f.textContent="PIN must be 4 to 6 digits. Not saved.");return}g=await G(N);const m=l.querySelector('[name="lockPin"]');m&&(m.value="")}await b("settings",{...x,id:"CENTRE_CONFIG",lockPinHash:g,inactivityLockMinutes:Number(t.get("inactivityLockMinutes")||0),enabledModules:r}),f&&(f.textContent=g?"PIN active (stored as a secure hash)":"No PIN set"),o&&await o(),e&&await d(s,o)},C=s.querySelector("#settings-security-form");C?.addEventListener("change",()=>L(!1)),C?.addEventListener("submit",async e=>{e.preventDefault(),await L(!0)});const $=async(e=!1)=>{const l=s.querySelector("#settings-wa-form");if(!l)return;const t=new FormData(l),r=structuredClone(u);r.en.invoice=t.get("en_invoice"),r.hi.invoice=t.get("hi_invoice"),r.ml.invoice=t.get("ml_invoice");const c=await p("settings","CENTRE_CONFIG")||a;await b("settings",{...c,id:"CENTRE_CONFIG",whatsappTemplates:r}),e&&await d(s,o)},I=s.querySelector("#settings-wa-form");I?.addEventListener("change",()=>$(!1)),I?.addEventListener("submit",async e=>{e.preventDefault(),await $(!0)}),s.querySelector("#set-load-acceptance-btn")?.addEventListener("click",async()=>{await O(),o&&await o(),await d(s,o)}),s.querySelector("#set-reset-db-btn")?.addEventListener("click",async()=>{confirm("Are you sure you want to clear all local database records and restore clean factory defaults?")&&(await R(!1),o&&await o(),await d(s,o))})}export{Y as CENTRE_TYPES,d as renderSettingsModule};

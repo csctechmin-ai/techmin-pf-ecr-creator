@@ -10,6 +10,7 @@ VLEBook is the complete office software for CSC, Akshaya, E-Seva and Jan Seva ce
 4. When the computer is online, your centre is registered with {{entity}} and a **welcome email** arrives with your user name, Centre ID, Device Code and licence key. The password is never sent by email.
 5. VLEBook shows a **recovery code** once. Write it down or download it and keep it safe. It is the only way to reset the Owner password without help from {{entity}}.
 6. Go to **Settings & Centre Setup** and fill in your centre details, GSTIN (if any), invoice prefix and UPI ID.
+7. Upload your **centre logo** (Settings & Centre Setup → Centre logo → Upload logo). Use a PNG, JPG or WEBP image up to 3 MB; a square or wide logo on a white or transparent background looks best. The logo appears at the top of the screen and on the dashboard, and is printed on invoices, receipts and every PDF report. Use *Change logo* or *Remove logo* at any time.
 
 > A new installation runs as a **14-day free trial**. To continue after that, buy a licence from {{entity}} (see section 3).
 
@@ -40,7 +41,7 @@ Add each citizen once with mobile number and name. The **360° view** shows all 
 1. Type the mobile number — an existing customer is filled in; a new one is registered automatically.
 2. Add one or more services. Government fee, service charge and GST are calculated from the Service Catalogue.
 3. Choose who handled the bill (staff), the payment mode and the amount received. A part payment leaves a balance due.
-4. **Generate Invoice**, then print A4 / 80 mm thermal, download PDF or share on WhatsApp.
+4. **Generate Invoice**, then print A4 / 80 mm thermal, download PDF or share on WhatsApp. Your centre logo is printed at the top (in black and white on thermal receipts).
 5. A wrong bill is **cancelled**, never deleted: a credit note is made and money, commission and stock are reversed (Owner/Manager only).
 
 ### Pending Work & Applications
@@ -84,9 +85,9 @@ Your data lives in this browser on this computer. If the computer fails or brows
 - Important notices pop up when VLEBook opens.
 - Turn on **push notifications** in Techmin Updates to receive notices on your computer even when VLEBook is closed (Chrome or Edge must be running).
 
-## 7. Languages and appearance
+## 7. Languages, appearance and logo
 
-Switch between English, हिन्दी and മലയാളം from the language box at the top. Your own entries (names, service names) stay as typed. Settings → Appearance offers Zoho-Books-style and ERPNext-style colours and Night mode.
+Switch between English, हिन्दी and മലയാളം from the language box at the top. Your own entries (names, service names) stay as typed. Settings → Appearance offers Zoho-Books-style and ERPNext-style colours and Night mode. Your own centre logo is set in Settings & Centre Setup (see section 1).
 
 ## 8. Good practices
 
@@ -98,4 +99,4 @@ Switch between English, हिन्दी and മലയാളം from the langu
 
 ## 9. Help
 
-See **Errors & Solutions** for common problems. Contact {{entity}}: {{email}}{{phoneSep}} · {{website}}
+Help & Legal also has the **Release Notes** (what changed in each version), the **Disclaimer** and the **Refund Policy**. See **Errors & Solutions** for common problems. Contact {{entity}}: {{email}}{{phoneSep}} · {{website}}

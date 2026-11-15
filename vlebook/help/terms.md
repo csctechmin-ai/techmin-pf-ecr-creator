@@ -22,7 +22,7 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 1. Plans, prices and payment terms are as published or agreed with Techmin at the time of purchase. Prices are exclusive of GST unless stated.
 2. The licence ends on its expiry date unless renewed. VLEBook warns you 7 days before expiry and allows 3 days of grace after expiry; it then locks until renewal. You can always download a full backup of your data while locked.
-3. Fees once paid are non-refundable except where required by law or where Techmin, in its discretion, agrees otherwise.
+3. Refunds and cancellations are governed by the **Refund & Cancellation Policy** shown in Help & Legal. VLEBook is currently offered free of cost during the launch period; Techmin will give advance notice before paid plans begin.
 4. Techmin may change prices for future periods with reasonable notice through the software or other means.
 
 ## 4. Your responsibilities
@@ -30,9 +30,10 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 1. **Backups.** You are solely responsible for keeping regular backups of your data in a safe place outside the computer. VLEBook provides automatic and manual backup tools; Techmin cannot recover data from your computer and is not responsible for data lost because of hardware failure, clearing of browser data, viruses, theft, wrong restores or not keeping backups.
 2. **Security.** Keep passwords, the Owner recovery code and licence keys confidential. You are responsible for all activity under your users. Remove access of staff who leave.
 3. **Lawful use and customer data.** You are the data fiduciary for the personal data of your customers and staff that you record. You must collect and use it lawfully, with notice and consent where required, and comply with the Digital Personal Data Protection Act, 2023, the Aadhaar Act, 2016 and its regulations, the rules of CSC SPV, State IT Missions, banks and other partners, and all other applicable laws.
-4. **Never store** customers' Aadhaar biometric data, PINs, OTPs, passwords of government portals or full card numbers in VLEBook. Mask Aadhaar numbers where the law requires.
-5. **Accuracy.** Calculations of fees, GST, TDS, commissions and profit depend on the rates and entries you configure. Verify them. VLEBook is a record-keeping tool and does not give tax, legal or financial advice.
-6. Keep your computer, operating system and browser updated and protected.
+4. **Logos and content you add.** You confirm that you have the right to use any logo, name or content you add to VLEBook (for example your centre logo on invoices).
+5. **Never store** customers' Aadhaar biometric data, PINs, OTPs, passwords of government portals or full card numbers in VLEBook. Mask Aadhaar numbers where the law requires.
+6. **Accuracy.** Calculations of fees, GST, TDS, commissions and profit depend on the rates and entries you configure. Verify them. VLEBook is a record-keeping tool and does not give tax, legal or financial advice.
+7. Keep your computer, operating system and browser updated and protected.
 
 ## 5. Notices and communications
 
@@ -49,6 +50,9 @@ By using VLEBook you agree that Techmin may show notices inside the software, se
 2. You may stop using VLEBook at any time. On expiry or termination, your right to use VLEBook ends, but you remain the owner of your data and may export it.
 
 ## 8. Warranty disclaimer
+
+Please also read the separate **Disclaimer** in Help & Legal.
+
 
 VLEBook is provided "as is" and "as available". To the maximum extent permitted by law, Techmin disclaims all warranties, express or implied, including merchantability, fitness for a particular purpose, accuracy and non-infringement. Techmin does not warrant that VLEBook will be error-free or meet every requirement of every government portal or partner.
 

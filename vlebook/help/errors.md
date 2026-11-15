@@ -86,6 +86,20 @@ Use the PDF download, which always prints correctly. For direct printing, instal
 ### The cash difference at day closing
 Count again with the denomination calculator; check AEPS withdrawals (they reduce cash) and expenses paid in cash. A reason must be entered if a difference remains.
 
+## Centre logo
+
+### "Use a PNG, JPG or WEBP image for the logo"
+Save the logo as PNG, JPG or WEBP (for example with Paint: File → Save as → PNG) and upload again. PDF, SVG and other formats are not accepted.
+
+### "The logo image is larger than 3 MB"
+Use a smaller image, or reduce it with **PDF & Image Tools → Resize, Compress & Convert**, then upload.
+
+### The logo looks blurred or has a black or grey box around it
+Upload a clearer image at least 300 pixels wide. A logo with a transparent background on PNG gives the cleanest print. On thermal receipts the logo is printed in black and white.
+
+### The logo does not appear on the invoice or PDF
+Check that it shows in Settings → Centre logo. Then open the bill again and print or download the PDF. Logos are part of the centre settings and are included in backups.
+
 ## Display, speed and storage
 
 ### VLEBook shows an old version after an update
