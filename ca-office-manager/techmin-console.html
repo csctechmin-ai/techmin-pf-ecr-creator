@@ -24,7 +24,7 @@ dl{display:grid;grid-template-columns:150px 1fr;gap:4px 10px;margin:0}dt{color:v
 .chk{display:flex;gap:14px;flex-wrap:wrap}.chk label{display:flex;gap:5px;align-items:center;margin:0;color:var(--ink)}.chk input{width:auto}
 .fl{max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:6px;padding:6px}
 </style></head><body>
-<header><b>Techmin console</b><span class="mut" style="color:#cfe0f1">CA Office Manager &middot; CMA Report Maker &middot; firms, users and notices</span><nav id="nav" class="hide"><a data-t="firms" class="on">Firms</a><a data-t="cma">CMA users</a><a data-t="notices">Send a notice</a><a data-t="sent">Notices sent</a><a data-t="settings">Settings</a></nav><span class="sp"></span><button class="btn alt hide" id="out" style="color:#fff;border-color:#fff">Lock</button></header>
+<header><b>Techmin console</b><span class="mut" style="color:#cfe0f1">CA Office Manager &middot; CMA Report Maker &middot; VLEBook &middot; firms, centres, users and notices</span><nav id="nav" class="hide"><a data-t="firms" class="on">Firms</a><a data-t="cma">CMA users</a><a data-t="notices">Send a notice</a><a data-t="sent">Notices sent</a><a data-t="vle">VLEBook centres</a><a data-t="vlen">VLEBook notices</a><a data-t="vlek">VLEBook key</a><a data-t="settings">Settings</a></nav><span class="sp"></span><button class="btn alt hide" id="out" style="color:#fff;border-color:#fff">Lock</button></header>
 <main id="m"></main>
 <div class="drawer hide" id="dr" role="dialog" aria-modal="true"></div>
 <script>
@@ -48,9 +48,9 @@ const money = v => v === '' || v == null ? '-' : '₹ ' + Number(v).toLocaleStri
 const badge = (v, ok, bad) => '<span class="badge ' + (ok.includes(v) ? 'b-ok' : bad.includes(v) ? 'b-bad' : (v ? 'b-warn' : '')) + '">' + esc(v || '-') + '</span>';
 const stB = v => badge(v, ['Active'], ['Suspended', 'Closed']), payB = v => badge(v, ['Paid', 'Waived'], ['Overdue']);
 function msg(t, k) { const e = $('#flash'); if (e) { e.className = 'msg ' + (k || 'ok'); e.textContent = t; e.scrollIntoView({ block: 'nearest' }); } }
-function lock(note) { KEY = ''; D = null; try { sessionStorage.removeItem('tk'); } catch (e) { /* ignore */ } $('#nav').classList.add('hide'); $('#out').classList.add('hide'); $('#dr').classList.add('hide'); $('#m').innerHTML = '<div class="card" style="max-width:420px;margin:40px auto"><h1>Techmin console</h1>' + (note ? '<div class="msg bad">' + esc(note) + '</div>' : '') + '<p class="mut small">Enter the console key that was emailed to the Techmin account when the registry was set up. It is kept only in this browser tab.</p><form id="lf"><label for="k">Console key</label><input id="k" type="password" autocomplete="off" required><p><button class="btn" type="submit">Open console</button></p></form></div>'; $('#lf').onsubmit = async ev => { ev.preventDefault(); KEY = $('#k').value.trim().toUpperCase(); try { await load(); try { sessionStorage.setItem('tk', KEY); } catch (e) { /* ignore */ } show(); } catch (e) { lock(e.message); } }; }
+function lock(note) { KEY = ''; D = null; V = null; VK.sign = VK.vapid = null; try { sessionStorage.removeItem('tk'); } catch (e) { /* ignore */ } $('#nav').classList.add('hide'); $('#out').classList.add('hide'); $('#dr').classList.add('hide'); $('#m').innerHTML = '<div class="card" style="max-width:420px;margin:40px auto"><h1>Techmin console</h1>' + (note ? '<div class="msg bad">' + esc(note) + '</div>' : '') + '<p class="mut small">Enter the console key that was emailed to the Techmin account when the registry was set up. It is kept only in this browser tab.</p><form id="lf"><label for="k">Console key</label><input id="k" type="password" autocomplete="off" required><p><button class="btn" type="submit">Open console</button></p></form></div>'; $('#lf').onsubmit = async ev => { ev.preventDefault(); KEY = $('#k').value.trim().toUpperCase(); try { await load(); try { sessionStorage.setItem('tk', KEY); } catch (e) { /* ignore */ } show(); } catch (e) { lock(e.message); } }; }
 async function load() { D = await call('admin.overview'); }
-function show() { $('#nav').classList.remove('hide'); $('#out').classList.remove('hide'); document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.dataset.t === tab)); ({ firms: vFirms, cma: vCma, notices: vNotice, sent: vSent, settings: vSettings })[tab](); }
+function show() { $('#nav').classList.remove('hide'); $('#out').classList.remove('hide'); document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.dataset.t === tab)); ({ firms: vFirms, cma: vCma, notices: vNotice, sent: vSent, settings: vSettings, vle: vVle, vlen: vVleN, vlek: vVleK })[tab](); }
 document.addEventListener('click', ev => { const a = ev.target.closest('#nav a'); if (a) { tab = a.dataset.t; show(); } });
 $('#out').onclick = () => lock('');
 const FCOLS = [['Firm', f => '<b>' + esc(f.firm_name) + '</b><div class="small mut">' + esc(f.firm_id) + '</div>'], ['Registered', f => dmy(f.registered_at)], ['City', f => esc(f.city)], ['State', f => esc(f.state)], ['GSTIN', f => esc(f.gstin || '-')], ['PAN', f => esc(f.pan)], ['Contact', f => esc(f.contact_person) + '<div class="small mut">' + esc(f.mobile) + '</div>'], ['Status', f => stB(f.status)], ['Payment', f => payB(f.payment_status)], ['Due', f => money(f.amount_due)], ['Paid until', f => dmy(f.paid_until) || '-'], ['Version', f => esc(f.app_version || '-')], ['Users', f => esc(f.users || '-')], ['Last seen', f => dt(f.last_seen)]];
@@ -117,5 +117,238 @@ function vSettings() {
   $('#sf').onsubmit = async ev => { ev.preventDefault(); const v = {}; new FormData(ev.target).forEach((x, k) => v[k] = x); try { await call('admin.settings_save', { values: v }); await load(); msg('Settings saved.'); } catch (e) { msg(e.message, 'bad'); } };
   $('#sn').onclick = async ev => { ev.target.disabled = true; try { const r = await call('admin.send_now'); msg(r.sent + ' email(s) sent.'); } catch (e) { msg(e.message, 'bad'); } ev.target.disabled = false; };
 }
+/* ===================== VLEBook — added to the Techmin console =====================
+ * Tabs: VLEBook centres · VLEBook notices · VLEBook key & settings
+ * Licences, reset codes and push notifications are SIGNED IN THIS BROWSER with the Techmin
+ * signing key (.vlekey file + passphrase). The private key never leaves this browser tab.
+ * Needs VLEBook.gs in the registry Apps Script project.
+ * ================================================================================== */
+let V = null, VERR = '', vf = { q: '', status: '', plan: '', pay: '' }, vdraft = {};
+const VK = { file: null, sign: null, vapid: null, vapidPub: '', kid: '', test: false };
+const VPLANS = { TRIAL: ['Trial (14 days)', 0, 14], MONTHLY: ['Monthly', 1, 0], QUARTERLY: ['Quarterly (3 months)', 3, 0], HALFYEARLY: ['Half-yearly (6 months)', 6, 0], YEARLY: ['Yearly', 12, 0], LIFETIME: ['Lifetime', 0, 0], CUSTOM: ['Custom dates', 0, 0] };
+const VPAY = ['UPI', 'Cash', 'Bank transfer', 'Razorpay', 'Cheque', 'Free / complimentary'];
+const VTE = new TextEncoder();
+try { VK.file = JSON.parse(localStorage.getItem('vle_keyfile') || 'null'); } catch (e) { VK.file = null; }
+
+// ---------- crypto (same formats as the VLEBook app) ----------
+const vb64 = b => { const u = b instanceof Uint8Array ? b : new Uint8Array(b); let s = ''; for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+const vb64d = s => { s = String(s).replace(/-/g, '+').replace(/_/g, '/'); const b = atob(s + '==='.slice((s.length + 3) % 4)); const o = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) o[i] = b.charCodeAt(i); return o; };
+const vRand = n => vb64(crypto.getRandomValues(new Uint8Array(n))).replace(/[-_]/g, 'X').toUpperCase();
+async function vDerive(pass, salt, iter) { const base = await crypto.subtle.importKey('raw', VTE.encode(pass), 'PBKDF2', false, ['deriveKey']); return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']); }
+async function vUnlock(file, pass) {
+  if (!file || file.format !== 'VLEBOOK-SIGNING-KEY') throw new Error('This is not a VLEBook signing key file.');
+  const key = await vDerive(pass, vb64d(file.kdf.salt), file.kdf.iterations);
+  let b; try { b = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: vb64d(file.cipher.iv) }, key, vb64d(file.cipher.data)))); } catch (e) { throw new Error('Wrong passphrase.'); }
+  const alg = { name: 'ECDSA', namedCurve: 'P-256' };
+  VK.sign = await crypto.subtle.importKey('jwk', b.sign, alg, false, ['sign']);
+  VK.vapid = b.vapid ? await crypto.subtle.importKey('jwk', b.vapid, alg, false, ['sign']) : null;
+  VK.vapidPub = file.vapidPublicKey || ''; VK.kid = file.kid; VK.test = !!file.test;
+}
+async function vNewKeyFile(pass) {
+  const alg = { name: 'ECDSA', namedCurve: 'P-256' };
+  const kp = await crypto.subtle.generateKey(alg, true, ['sign', 'verify']), vp = await crypto.subtle.generateKey(alg, true, ['sign', 'verify']);
+  const d = new Date(), kid = 'PROD-' + d.toISOString().slice(0, 10).replace(/-/g, '') + '-' + vRand(3);
+  const pub = await crypto.subtle.exportKey('jwk', kp.publicKey), vpub = await crypto.subtle.exportKey('jwk', vp.publicKey);
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12)), iter = 310000;
+  const data = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, await vDerive(pass, salt, iter), VTE.encode(JSON.stringify({ sign: await crypto.subtle.exportKey('jwk', kp.privateKey), vapid: await crypto.subtle.exportKey('jwk', vp.privateKey) })));
+  const raw = new Uint8Array(65); raw[0] = 4; raw.set(vb64d(vpub.x), 1); raw.set(vb64d(vpub.y), 33);
+  const strip = j => ({ kty: j.kty, crv: j.crv, x: j.x, y: j.y });
+  return { format: 'VLEBOOK-SIGNING-KEY', version: 1, kid, test: false, createdAt: d.toISOString(), publicJwk: strip(pub), vapidPublicJwk: strip(vpub), vapidPublicKey: vb64(raw), kdf: { name: 'PBKDF2-SHA256', iterations: iter, salt: vb64(salt) }, cipher: { name: 'AES-256-GCM', iv: vb64(iv), data: vb64(data) } };
+}
+function vPubModule(file) {
+  return '/**\n * Public key(s) that VLEBook trusts for licences, reset codes and other signed keys.\n * Generated by the Techmin console. Public keys can only CHECK signatures, never create them.\n * To switch keys: replace this file in the app, rebuild and redeploy.\n */\nexport const LICENCE_KEYS = ' + JSON.stringify([{ kid: file.kid, test: false, jwk: file.publicJwk }], null, 2) + ';\n\n/** Web Push (VAPID) public key — lets Techmin send push notifications to centres. */\nexport const VAPID_PUBLIC_KEY = ' + JSON.stringify(file.vapidPublicKey) + ';\n';
+}
+async function vSign(payload) {
+  if (!VK.sign) throw new Error('Unlock the signing key first (VLEBook key & settings).');
+  const body = vb64(VTE.encode(JSON.stringify(payload)));
+  const sig = await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, VK.sign, VTE.encode('VLE1.' + body));
+  return 'VLE1.' + body + '.' + vb64(sig);
+}
+async function vVapidJwt(aud, sub) {
+  const h = vb64(VTE.encode(JSON.stringify({ typ: 'JWT', alg: 'ES256' })));
+  const p = vb64(VTE.encode(JSON.stringify({ aud, exp: Math.floor(Date.now() / 1000) + 12 * 3600, sub: sub || 'mailto:support@techmin.in' })));
+  const sig = await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, VK.vapid, VTE.encode(h + '.' + p));
+  return h + '.' + p + '.' + vb64(sig);
+}
+function vDownload(name, text, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: type || 'text/plain' })); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); }
+const vYmd = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+function vPlanEnd(plan, from) {
+  const p = VPLANS[plan]; if (!p || plan === 'LIFETIME' || plan === 'CUSTOM' || !from) return '';
+  const d = new Date(from + 'T00:00:00');
+  if (p[2]) d.setDate(d.getDate() + p[2] - 1); else { d.setMonth(d.getMonth() + p[1]); d.setDate(d.getDate() - 1); }
+  return vYmd(d);
+}
+const vDays = to => to ? Math.ceil((new Date(String(to).slice(0, 10) + 'T23:59:59') - new Date()) / 86400000) : null;
+const vWa = (mobile, text) => { const m = String(mobile || '').replace(/\D/g, '').slice(-10); return m ? 'https://wa.me/91' + m + '?text=' + encodeURIComponent(text) : ''; };
+
+// ---------- data ----------
+async function vLoad() { try { V = await call('admin.vle_overview'); VERR = ''; } catch (e) { V = null; VERR = e.message; } }
+function vNotReady() {
+  return '<div class="card"><h3>VLEBook is not connected to the registry yet</h3><div class="msg bad">' + esc(VERR) + '</div><p class="small">Add <b>VLEBook.gs</b> to the registry Apps Script project, add the 3 lines shown at the top of that file to <code>doPost</code>, then <b>Deploy → Manage deployments → Edit → New version</b>. Then press Refresh.</p><button class="btn alt" id="vrf">Refresh</button></div>';
+}
+function vBindRefresh(fn) { const b = $('#vrf'); if (b) b.onclick = async () => { await vLoad(); fn(); msg('Refreshed.'); }; }
+const vStB = v => badge(v, ['Active'], ['Suspended', 'Closed']);
+const vPayB = v => badge(v, ['Paid', 'Waived'], ['Overdue']);
+function vTill(to) { const d = vDays(to); if (d === null) return '<span class="mut">-</span>'; return dmy(to) + ' ' + (d < 0 ? '<span class="badge b-bad">expired</span>' : d <= 7 ? '<span class="badge b-warn">' + d + 'd left</span>' : ''); }
+
+// ---------- tab: centres ----------
+async function vVle() {
+  if (!V) await vLoad();
+  if (!V) { $('#m').innerHTML = '<h1>VLEBook centres</h1><div id="flash"></div>' + vNotReady(); vBindRefresh(vVle); return; }
+  const S = V.summary, L = V.lists, st = k => Object.keys(S[k] || {}).map(x => x + ': ' + S[k][x]).join(' · ') || '-';
+  const expiring = V.centres.filter(c => { const d = vDays(c.paid_until); return d !== null && d >= 0 && d <= 15; }).length;
+  const list = V.centres.filter(c => (!vf.status || c.status === vf.status) && (!vf.plan || c.plan === vf.plan) && (!vf.pay || c.payment_status === vf.pay) && (!vf.q || [c.centre_name, c.owner_name, c.mobile, c.email, c.district, c.state, c.centre_id, c.device_codes].join(' ').toLowerCase().includes(vf.q.toLowerCase())));
+  $('#m').innerHTML = '<h1>VLEBook centres</h1><div id="flash"></div>' + (VK.test ? '<div class="msg bad">The TEST signing key is unlocked. Create your own key in "VLEBook key & settings" before issuing real licences.</div>' : '') +
+    '<div class="grid" style="margin-bottom:14px"><div class="card stat"><div class="v">' + S.total + '</div><div class="l">Centres registered</div></div><div class="card stat"><div class="v">' + S.this_month + '</div><div class="l">New this month</div></div><div class="card stat"><div class="v">' + expiring + '</div><div class="l">Expiring in 15 days</div></div><div class="card stat"><div class="v">' + money(S.revenue_this_month) + '</div><div class="l">Licence income this month</div></div><div class="card"><div class="l mut small">By plan</div><div class="small">' + esc(st('by_plan')) + '</div><div class="l mut small" style="margin-top:6px">By status</div><div class="small">' + esc(st('by_status')) + '</div></div></div>' +
+    '<div class="card"><div class="bar"><div><label>Search</label><input id="vq" value="' + esc(vf.q) + '" placeholder="Centre, owner, mobile, place, device code"></div><div><label>Status</label><select id="vs"><option value="">All</option>' + L.statuses.map(x => '<option' + (vf.status === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div><div><label>Plan</label><select id="vp"><option value="">All</option>' + L.plans.map(x => '<option' + (vf.plan === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div><div><label>Payment</label><select id="vpy"><option value="">All</option>' + L.payments.map(x => '<option' + (vf.pay === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div><div><button class="btn alt" id="vcsv">Download CSV</button> <button class="btn alt" id="vrf">Refresh</button></div></div>' +
+    '<p class="small mut">' + list.length + ' of ' + V.centres.length + ' centres. Click a centre to issue or renew its licence.</p><div class="tw"><table><thead><tr><th>Centre</th><th>Registered</th><th>Place</th><th>Owner</th><th>Plan</th><th>Status</th><th>Payment</th><th>Paid until</th><th>Version</th><th>Users</th><th>Last seen</th></tr></thead><tbody>' +
+    (list.length ? list.map(c => '<tr class="click" data-vc="' + esc(c.centre_id) + '"><td><b>' + esc(c.centre_name) + '</b><div class="small mut">' + esc(c.centre_id) + ' · ' + esc(c.centre_type || '') + '</div></td><td>' + dmy(c.registered_at) + '</td><td>' + esc([c.district, c.state].filter(Boolean).join(', ') || '-') + '</td><td>' + esc(c.owner_name) + '<div class="small mut">' + esc(c.mobile) + '</div></td><td>' + esc(c.plan) + '</td><td>' + vStB(c.status) + '</td><td>' + vPayB(c.payment_status) + '</td><td>' + vTill(c.paid_until) + '</td><td>' + esc(c.app_version || '-') + '</td><td>' + esc(c.users || '-') + '</td><td>' + dt(c.last_seen) + '</td></tr>').join('') : '<tr><td colspan="11" class="mut">No centres yet. A centre appears here when its owner sets up VLEBook while online.</td></tr>') + '</tbody></table></div></div>';
+  const re = () => { vf = { q: $('#vq').value, status: $('#vs').value, plan: $('#vp').value, pay: $('#vpy').value }; const p = $('#vq').selectionStart; vVle(); const q = $('#vq'); q.focus(); try { q.setSelectionRange(p, p); } catch (e) { /* ignore */ } };
+  $('#vq').oninput = re; ['vs', 'vp', 'vpy'].forEach(i => $('#' + i).onchange = re);
+  vBindRefresh(vVle);
+  $('#vcsv').onclick = () => { const cols = ['centre_id', 'registered_at', 'centre_name', 'centre_type', 'owner_name', 'mobile', 'email', 'address', 'district', 'state', 'pincode', 'device_codes', 'plan', 'status', 'payment_status', 'paid_until', 'amount_due', 'payment_note', 'app_version', 'users', 'last_seen', 'notes']; const cell = v => { v = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; }; vDownload('vlebook-centres.csv', '﻿' + [cols.join(',')].concat(list.map(c => cols.map(k => cell(c[k])).join(','))).join('\r\n'), 'text/csv'); };
+  document.querySelectorAll('tr[data-vc]').forEach(r => r.onclick = () => vDrawer(r.dataset.vc));
+}
+
+function vDrawer(id, issued) {
+  const c = V.centres.find(x => x.centre_id === id), L = V.lists, dr = $('#dr'); if (!c) return;
+  const lic = V.licences.filter(l => l.centre_id === id).sort((a, b) => String(b.issued_at).localeCompare(String(a.issued_at)));
+  const row = (k, v) => '<dt>' + k + '</dt><dd>' + (v === '' || v == null ? '-' : esc(v)) + '</dd>';
+  const devs = String(c.device_codes || '').split(',').filter(Boolean);
+  const today = vYmd(new Date()), cur = c.paid_until && c.paid_until >= today ? c.paid_until : '';
+  const from = cur ? vYmd(new Date(new Date(cur + 'T00:00:00').getTime() + 86400000)) : today;
+  dr.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:start"><h1 style="margin:0">' + esc(c.centre_name) + '</h1><button class="btn alt" id="dx">Close</button></div><div class="mut small" style="margin-bottom:10px">' + esc(c.centre_id) + '</div><div id="dflash"></div>' +
+    (issued ? '<div class="card" style="border-color:var(--ok)"><h3>Licence issued ✓</h3><p class="small">VLEBook at this centre picks it up <b>automatically</b> the next time it is online. If the centre is offline, send this key:</p><textarea readonly id="vtok" style="min-height:70px;font-family:monospace;font-size:12px">' + esc(issued) + '</textarea><p><button class="btn alt" id="vcopy">Copy key</button> <button class="btn alt" id="vfile">Download licence file</button> ' + (vWa(c.mobile, '') ? '<a class="btn alt" target="_blank" rel="noopener" href="' + esc(vWa(c.mobile, 'Your VLEBook licence key (Users & Licence → Activate):\n' + issued)) + '">Send on WhatsApp</a>' : '') + '</p></div>' : '') +
+    '<div class="card"><h3>Centre details</h3><dl>' + row('Registered on', dt(c.registered_at)) + row('Type', c.centre_type) + row('Owner', c.owner_name) + row('Mobile', c.mobile) + row('Email', c.email) + row('Address', [c.address, c.district, c.state, c.pincode].filter(Boolean).join(', ')) + row('Device codes', devs.join(', ')) + row('Software version', c.app_version) + row('Users', c.users) + row('Last seen', dt(c.last_seen)) + '</dl></div>' +
+    '<form class="card" id="vli"><h3>Issue / renew licence</h3>' + (VK.sign ? '' : '<div class="msg bad">Unlock the signing key first: VLEBook key &amp; settings.</div>') + '<div class="row"><div><label>Plan</label><select name="plan">' + Object.keys(VPLANS).map(k => '<option value="' + k + '"' + (k === 'YEARLY' ? ' selected' : '') + '>' + esc(VPLANS[k][0]) + '</option>').join('') + '</select></div><div><label>Valid from</label><input type="date" name="from" value="' + from + '" required></div><div><label>Valid until</label><input type="date" name="to" value="' + vPlanEnd('YEARLY', from) + '"></div><div><label>Users allowed (0 = unlimited)</label><input type="number" name="users" min="0" value="3"></div></div>' +
+    '<label>Computers (Device codes)</label><div class="fl">' + (devs.map(d => '<label style="display:flex;gap:6px;margin:2px 0;color:inherit"><input type="checkbox" style="width:auto" name="dev" value="' + esc(d) + '" checked> ' + esc(d) + '</label>').join('') || '<span class="mut small">No device registered.</span>') + '<label style="display:flex;gap:6px;margin:6px 0 0;color:inherit"><input type="checkbox" style="width:auto" name="any"> Any computer (not locked to a device)</label></div>' +
+    '<div class="row"><div><label>Amount received (₹)</label><input type="number" name="amount" min="0" step="0.01"></div><div><label>Payment mode</label><select name="pay_mode">' + VPAY.map(x => '<option>' + esc(x) + '</option>').join('') + '</select></div><div><label>Reference / UTR</label><input name="pay_ref" maxlength="80"></div></div><label>Note (private)</label><input name="note" maxlength="300"><p><button class="btn" type="submit"' + (VK.sign ? '' : ' disabled') + '>Sign &amp; issue licence</button></p></form>' +
+    '<div class="card"><h3>Licence history</h3><div class="tw"><table><thead><tr><th>Issued</th><th>Plan</th><th>Valid</th><th>Users</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody>' + (lic.map(l => '<tr><td>' + dt(l.issued_at) + '<div class="small mut">' + esc(l.lid) + '</div></td><td>' + esc(l.plan) + '</td><td>' + dmy(l.valid_from) + ' → ' + (l.valid_to ? dmy(l.valid_to) : 'lifetime') + '</td><td>' + esc(l.max_users || '∞') + '</td><td>' + money(l.amount) + '<div class="small mut">' + esc(l.pay_mode) + ' ' + esc(l.pay_ref) + '</div></td><td>' + (String(l.revoked).toUpperCase() === 'Y' ? '<span class="badge b-bad">Cancelled</span>' : '<span class="badge b-ok">Valid</span>') + '</td><td><button class="btn alt" data-rv="' + esc(l.lid) + '" data-to="' + (String(l.revoked).toUpperCase() === 'Y' ? 'N' : 'Y') + '">' + (String(l.revoked).toUpperCase() === 'Y' ? 'Restore' : 'Cancel') + '</button></td></tr>').join('') || '<tr><td colspan="7" class="mut">No licence yet (free trial).</td></tr>') + '</tbody></table></div></div>' +
+    '<form class="card" id="vdf"><h3>Status and payment</h3><div class="row"><div><label>Status</label><select name="status">' + L.statuses.map(x => '<option' + (c.status === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div><div><label>Payment status</label><select name="payment_status">' + L.payments.map(x => '<option' + (c.payment_status === x ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div><div><label>Amount due (₹)</label><input type="number" min="0" step="0.01" name="amount_due" value="' + esc(c.amount_due) + '"></div></div><label>Device codes (comma separated)</label><input name="device_codes" value="' + esc(c.device_codes) + '"><label>Note shown to the centre if suspended</label><input name="payment_note" maxlength="300" value="' + esc(c.payment_note) + '"><label>Private note</label><textarea name="notes" maxlength="500">' + esc(c.notes) + '</textarea><p class="small mut">"Suspended" locks VLEBook at the centre the next time it is online (the centre can still download its data).</p><p><button class="btn" type="submit">Save</button> <button class="btn alt" type="button" id="vdn">Send a notice to this centre</button> <button class="btn alt" type="button" id="vwel"' + (c.email ? '' : ' disabled title="No email address"') + '>Resend welcome email</button></p><p class="small mut">Welcome email: ' + (c.welcome_sent_at ? 'sent ' + esc(dt(c.welcome_sent_at)) : 'not sent') + (c.owner_username ? ' · Owner user name: <b>' + esc(c.owner_username) + '</b>' : '') + '</p></form>' +
+    '<form class="card" id="vrs"><h3>Owner forgot password</h3><p class="small mut">Makes a one-time reset code, valid 48 hours, for one computer and one user name.</p><div class="row"><div><label>User name</label><input name="user" required></div><div><label>Computer</label><select name="dev">' + devs.map(d => '<option>' + esc(d) + '</option>').join('') + '</select></div></div><p><button class="btn alt" type="submit"' + (VK.sign && devs.length ? '' : ' disabled') + '>Make reset code</button></p><div id="vrsout"></div></form>';
+  dr.classList.remove('hide'); dr.scrollTop = 0; $('#dx').onclick = () => dr.classList.add('hide');
+  if (issued) { $('#vcopy').onclick = async () => { try { await navigator.clipboard.writeText(issued); } catch (e) { $('#vtok').select(); } }; $('#vfile').onclick = () => vDownload('VLEBook_Licence_' + c.centre_name.replace(/[^A-Za-z0-9]+/g, '_') + '.vlelic', issued); }
+  const f = $('#vli');
+  f.plan.onchange = f.from.onchange = () => { if (f.plan.value !== 'CUSTOM') f.to.value = vPlanEnd(f.plan.value, f.from.value); f.to.disabled = f.plan.value === 'LIFETIME'; };
+  f.onsubmit = async ev => {
+    ev.preventDefault(); const b = ev.submitter; b.disabled = true;
+    try {
+      const plan = f.plan.value, to = plan === 'LIFETIME' ? null : f.to.value;
+      if (plan !== 'LIFETIME' && (!to || to < f.from.value)) throw new Error('Choose a valid "valid until" date.');
+      const dev = f.any.checked ? ['*'] : [...f.querySelectorAll('input[name=dev]:checked')].map(x => x.value);
+      if (!dev.length) throw new Error('Choose at least one computer, or tick "Any computer".');
+      const lid = 'L-' + vYmd(new Date()).replace(/-/g, '') + '-' + vRand(4);
+      const payload = { v: 1, kid: VK.kid, typ: 'LIC', lid, cid: c.centre_id, centre: c.centre_name, owner: c.owner_name, mobile: c.mobile, plan, from: f.from.value, to, dev, users: Number(f.users.value) || 0, iat: Date.now() };
+      const token = await vSign(payload);
+      await call('admin.vle_licence_save', { values: { lid, centre_id: c.centre_id, plan, valid_from: payload.from, valid_to: to || '', devices: dev.join(','), max_users: payload.users, amount: f.amount.value, pay_mode: f.pay_mode.value, pay_ref: f.pay_ref.value, note: f.note.value, token } });
+      await vLoad(); vDrawer(id, token);
+    } catch (e) { $('#dflash').innerHTML = '<div class="msg bad">' + esc(e.message) + '</div>'; b.disabled = false; }
+  };
+  document.querySelectorAll('[data-rv]').forEach(b => b.onclick = async () => { if (b.dataset.to === 'Y' && !confirm('Cancel this licence? VLEBook at the centre will lock the next time it is online.')) return; b.disabled = true; try { await call('admin.vle_licence_revoke', { lid: b.dataset.rv, revoked: b.dataset.to }); await vLoad(); vDrawer(id); $('#dflash').innerHTML = '<div class="msg ok">Updated.</div>'; } catch (e) { $('#dflash').innerHTML = '<div class="msg bad">' + esc(e.message) + '</div>'; } });
+  $('#vdf').onsubmit = async ev => { ev.preventDefault(); const b = ev.submitter; b.disabled = true; const v = {}; new FormData(ev.target).forEach((x, k) => v[k] = x); try { await call('admin.vle_centre_update', { centre_id: id, values: v }); await vLoad(); vDrawer(id); $('#dflash').innerHTML = '<div class="msg ok">Saved. The centre sees the change the next time VLEBook is online.</div>'; if (tab === 'vle') vVle(); } catch (e) { $('#dflash').innerHTML = '<div class="msg bad">' + esc(e.message) + '</div>'; b.disabled = false; } };
+  $('#vwel').onclick = async ev => { ev.target.disabled = true; try { await call('admin.vle_resend_welcome', { centre_id: id }); await vLoad(); vDrawer(id); $('#dflash').innerHTML = '<div class="msg ok">Welcome email sent to ' + esc(c.email) + '.</div>'; } catch (e) { $('#dflash').innerHTML = '<div class="msg bad">' + esc(e.message) + '</div>'; ev.target.disabled = false; } };
+  $('#vdn').onclick = () => { vdraft = { audience: 'CENTRES', centre_ids: [id] }; dr.classList.add('hide'); tab = 'vlen'; show(); };
+  $('#vrs').onsubmit = async ev => {
+    ev.preventDefault(); const g = ev.target;
+    try {
+      const user = g.user.value.trim().toLowerCase(), exp = new Date(Date.now() + 48 * 3600000).toISOString();
+      const code = await vSign({ v: 1, kid: VK.kid, typ: 'RESET', rid: 'R-' + vRand(6), dev: g.dev.value, user, exp, iat: Date.now() });
+      $('#vrsout').innerHTML = '<label>Reset code (valid till ' + esc(dt(exp)) + ')</label><textarea readonly style="min-height:60px;font-family:monospace;font-size:12px">' + esc(code) + '</textarea>' + (vWa(c.mobile, '') ? '<p><a class="btn alt" target="_blank" rel="noopener" href="' + esc(vWa(c.mobile, 'VLEBook password reset code for user "' + user + '" (Sign in → Forgot password):\n' + code)) + '">Send on WhatsApp</a></p>' : '');
+    } catch (e) { $('#vrsout').innerHTML = '<div class="msg bad">' + esc(e.message) + '</div>'; }
+  };
+}
+
+// ---------- tab: notices ----------
+async function vVleN() {
+  if (!V) await vLoad();
+  if (!V) { $('#m').innerHTML = '<h1>VLEBook notices</h1><div id="flash"></div>' + vNotReady(); vBindRefresh(vVleN); return; }
+  const L = V.lists, dr = vdraft, sel = dr.centre_ids || [];
+  $('#m').innerHTML = '<h1>Send a notice to VLEBook centres</h1><div id="flash"></div><form class="card" id="vnf"><div class="row"><div><label>Title</label><input name="title" maxlength="150" required value="' + esc(dr.title) + '"></div><div><label>Colour / importance</label><select name="severity"><option value="info">Information (blue)</option><option value="warning">Warning (amber)</option><option value="critical">Important (red, pops up when VLEBook opens)</option></select></div></div><label>Message</label><textarea name="message" maxlength="2000" required>' + esc(dr.message) + '</textarea><p class="small mut">Formatting: **bold**, *italic*, [link text](https://…), lines starting with "- " become a list.</p><div class="row"><div><label>Link text (optional)</label><input name="link_text" maxlength="80"></div><div><label>Link address (optional, https://)</label><input name="link_url" type="url" placeholder="https://"></div></div>' +
+    '<label>Who receives it</label><select name="audience" id="vaud"><option value="ALL">All VLEBook centres (also during free trial)</option><option value="CENTRES">Selected centres</option><option value="PLANS">Centres on a plan</option><option value="PAYMENT">Centres with a payment status (reminders)</option></select>' +
+    '<div id="va-c" class="hide"><label>Choose centres</label><div class="fl">' + V.centres.map(c => '<label style="display:flex;gap:6px;margin:2px 0;color:inherit"><input type="checkbox" style="width:auto" name="cid" value="' + esc(c.centre_id) + '"' + (sel.includes(c.centre_id) ? ' checked' : '') + '> ' + esc(c.centre_name) + ' <span class="mut small">' + esc(c.district || '') + ' · ' + esc(c.plan) + '</span></label>').join('') + '</div></div>' +
+    '<div id="va-p" class="hide"><label>Plans</label><div class="chk">' + L.plans.map(x => '<label><input type="checkbox" name="plan" value="' + esc(x) + '"> ' + esc(x) + '</label>').join('') + '</div></div>' +
+    '<div id="va-y" class="hide"><label>Payment status</label><div class="chk">' + L.payments.map(x => '<label><input type="checkbox" name="pay" value="' + esc(x) + '"' + (['Due', 'Overdue'].includes(x) ? ' checked' : '') + '> ' + esc(x) + '</label>').join('') + '</div></div>' +
+    '<div class="row"><div><label>Show from (optional)</label><input type="date" name="starts"></div><div><label>Show until (optional)</label><input type="date" name="ends"></div></div>' +
+    '<div class="chk" style="margin-top:12px"><label><input type="checkbox" name="popup" value="Y"> Pop up when VLEBook opens</label><label><input type="checkbox" name="push" value="Y"> Also send as a <b>push notification</b> (' + esc(V.push_count || 0) + ' computer(s) allowed notifications)</label></div>' +
+    '<p id="vreach" class="small mut"></p><p><button class="btn" type="submit">Send notice</button></p></form>' +
+    '<h1 style="margin-top:20px">VLEBook notices sent</h1><div class="card"><div class="tw"><table><thead><tr><th>Sent</th><th>Title</th><th>Audience</th><th>Reach</th><th>Colour</th><th>Shown</th><th></th></tr></thead><tbody>' +
+    (V.notices.slice().reverse().map(n => '<tr><td>' + dt(n.created_at) + '</td><td class="w"><b>' + esc(n.title) + '</b><div class="small mut">' + esc(String(n.message).slice(0, 140)) + '</div></td><td>' + esc(n.audience) + (n.audience === 'PLANS' ? ' (' + esc(n.plans) + ')' : n.audience === 'PAYMENT' ? ' (' + esc(n.payment_status) + ')' : '') + '</td><td>' + esc(n.reach) + '</td><td>' + esc(n.severity) + '</td><td>' + (String(n.active).toUpperCase() === 'N' ? '<span class="badge b-bad">Withdrawn</span>' : '<span class="badge b-ok">Showing</span>') + '</td><td style="white-space:nowrap"><button class="btn alt" data-vt="' + esc(n.notice_id) + '" data-to="' + (String(n.active).toUpperCase() === 'N' ? 'Y' : 'N') + '">' + (String(n.active).toUpperCase() === 'N' ? 'Show again' : 'Withdraw') + '</button> <button class="btn alt" data-vpush="' + esc(n.notice_id) + '">Push</button></td></tr>').join('') || '<tr><td colspan="7" class="mut">No notices yet.</td></tr>') + '</tbody></table></div></div>';
+  const f = $('#vnf'), au = $('#vaud'); au.value = dr.audience || 'ALL'; if (dr.severity) f.severity.value = dr.severity;
+  const reach = () => { const a = au.value; $('#va-c').classList.toggle('hide', a !== 'CENTRES'); $('#va-p').classList.toggle('hide', a !== 'PLANS'); $('#va-y').classList.toggle('hide', a !== 'PAYMENT'); let n; const act = V.centres.filter(c => c.status !== 'Closed'); if (a === 'ALL') n = act.length; else if (a === 'CENTRES') n = f.querySelectorAll('input[name=cid]:checked').length; else if (a === 'PLANS') { const p = [...f.querySelectorAll('input[name=plan]:checked')].map(x => x.value); n = act.filter(c => p.includes(c.plan)).length; } else { const p = [...f.querySelectorAll('input[name=pay]:checked')].map(x => x.value); n = act.filter(c => p.includes(c.payment_status)).length; } $('#vreach').textContent = 'Reaches ' + n + ' centre(s)' + (a === 'ALL' ? ', plus new centres while it is showing' : '') + '.'; };
+  au.onchange = reach; f.querySelectorAll('input[name=cid],input[name=plan],input[name=pay]').forEach(i => i.onchange = reach); reach();
+  f.onsubmit = async ev => {
+    ev.preventDefault(); const b = ev.submitter, a = au.value;
+    const v = { title: f.title.value, message: f.message.value, severity: f.severity.value, link_text: f.link_text.value, link_url: f.link_url.value, audience: a, starts: f.starts.value, ends: f.ends.value, popup: f.popup.checked ? 'Y' : 'N', active: 'Y', centre_ids: [...f.querySelectorAll('input[name=cid]:checked')].map(x => x.value).join(','), plans: [...f.querySelectorAll('input[name=plan]:checked')].map(x => x.value).join(','), payment_status: [...f.querySelectorAll('input[name=pay]:checked')].map(x => x.value).join(',') };
+    const push = f.push.checked;
+    if (push && !VK.vapid) { msg('Unlock the signing key first (VLEBook key & settings) to send push notifications.', 'bad'); return; }
+    if (!confirm('Send "' + v.title + '" to ' + $('#vreach').textContent.replace('Reaches ', '').replace(/\.$/, '') + (push ? ' and as a push notification' : '') + '?')) return;
+    b.disabled = true;
+    try { const r = await call('admin.vle_notice_save', { values: v }); vdraft = {}; let pm = ''; if (push) pm = await vPush(r.notice_id); await vLoad(); vVleN(); msg('Notice sent. Centres see it the next time VLEBook is online.' + pm); } catch (e) { msg(e.message, 'bad'); b.disabled = false; }
+  };
+  document.querySelectorAll('[data-vt]').forEach(b => b.onclick = async () => { b.disabled = true; try { await call('admin.vle_notice_save', { notice_id: b.dataset.vt, values: { active: b.dataset.to } }); await vLoad(); vVleN(); msg('Updated.'); } catch (e) { msg(e.message, 'bad'); b.disabled = false; } });
+  document.querySelectorAll('[data-vpush]').forEach(b => b.onclick = async () => { if (!VK.vapid) { msg('Unlock the signing key first (VLEBook key & settings).', 'bad'); return; } b.disabled = true; try { msg('Push:' + await vPush(b.dataset.vpush)); } catch (e) { msg(e.message, 'bad'); } b.disabled = false; });
+}
+async function vPush(noticeId) {
+  const t = await call('admin.vle_push_targets', { notice_id: noticeId });
+  if (!t.count) return ' No computer has allowed push notifications yet.';
+  const vapid = {}, sub = 'mailto:' + ((V.settings && V.settings.support_email) || 'support@techmin.in');
+  for (const o of Object.keys(t.origins)) vapid[o] = await vVapidJwt(o, sub);
+  const r = await call('admin.vle_push_send', { notice_id: noticeId, vapid, vapid_public_key: VK.vapidPub });
+  return ' Push sent to ' + r.sent + ' computer(s)' + (r.failed ? ', ' + r.failed + ' failed' : '') + (r.removed ? ', ' + r.removed + ' old address(es) removed' : '') + '.';
+}
+
+// ---------- tab: key & settings ----------
+async function vVleK() {
+  if (!V) await vLoad();
+  const s = (V && V.settings) || {};
+  $('#m').innerHTML = '<h1>VLEBook key &amp; settings</h1><div id="flash"></div>' +
+    '<div class="card" style="max-width:720px"><h3>Signing key</h3>' + (VK.sign ? '<div class="msg ' + (VK.test ? 'bad' : 'ok') + '">Unlocked: <b>' + esc(VK.kid) + '</b>' + (VK.test ? ' — TEST key. Do not use for real customers.' : '') + '</div><button class="btn alt" id="vlock">Lock key</button>' :
+      '<p class="small mut">Licences, reset codes and push notifications are signed with the Techmin key. Open your key file and enter its passphrase. It stays unlocked only while this tab is open.</p><form id="vuk"><label>Key file (.vlekey)</label>' + (VK.file ? '<p class="small">Remembered: <b>' + esc(VK.file.kid) + '</b> <button class="btn alt" type="button" id="vforget">Use another file</button></p>' : '<input type="file" id="vkf" accept=".vlekey,.json">') + '<label>Passphrase</label><input type="password" id="vkp" name="vle-passphrase" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" required><label style="display:flex;gap:6px;align-items:center;margin:6px 0 0;color:inherit"><input type="checkbox" id="vkshow" style="width:auto"> Show passphrase</label><p><button class="btn" type="submit">Unlock key</button></p></form>') + '</div>' +
+    '<form class="card" id="vnk" style="max-width:720px"><h3>Create your own signing key (do this once, before going live)</h3><p class="small mut">Downloads two files: <b>Techmin-signing-key.vlekey</b> (keep it safe — with its passphrase it can issue licences) and <b>licence-pubkey.js</b> (put it in the VLEBook app at js/core/licence-pubkey.js and publish the app). Licences signed with the TEST key stop working after that.</p><div class="row"><div><label>New passphrase (12+ characters)</label><input type="password" name="p1" minlength="12" required autocomplete="new-password" spellcheck="false"></div><div><label>Repeat passphrase</label><input type="password" name="p2" minlength="12" required autocomplete="new-password"></div></div><p><button class="btn alt" type="submit">Create key</button></p></form>' +
+    (V ? '<form class="card" id="vfr" style="max-width:720px"><h3>Free launch licence (for every new centre)</h3>' +
+      (s.free_token ? '<div class="msg ok">Active: every new centre gets a free full-version licence' + (s.free_to ? ' valid till <b>' + esc(dmy(s.free_to)) + '</b>' : '') + (Number(s.free_users) ? ', ' + esc(s.free_users) + ' users' : ', unlimited users') + '. It is emailed with the welcome mail and activated automatically.</div><p><button class="btn alt" type="button" id="vfstop">Stop giving to new centres</button> <button class="btn bad" type="button" id="vfcancel">Cancel it for everyone</button></p>' :
+        '<p class="small mut">While VLEBook is free, sign one licence that works on any computer. New centres receive it by email and VLEBook activates it automatically. When subscriptions start, stop it here and issue paid licences per centre.</p>') +
+      '<div class="row"><div><label>Valid until</label><input type="date" name="to" required value="' + esc(s.free_to || '') + '"></div><div><label>Users per centre (0 = unlimited)</label><input type="number" name="users" min="0" value="' + esc(s.free_users || 0) + '"></div></div><p><button class="btn" type="submit"' + (VK.sign ? '' : ' disabled title="Unlock the signing key first"') + '>' + (s.free_token ? 'Replace free licence' : 'Sign &amp; start free licence') + '</button></p></form>' +
+      '<form class="card" id="vst" style="max-width:720px"><h3>Support contacts shown in VLEBook</h3><div class="row"><div><label>Name</label><input name="support_name" value="' + esc(s.support_name || 'Techmin') + '"></div><div><label>Phone</label><input name="support_phone" value="' + esc(s.support_phone) + '"></div><div><label>WhatsApp number</label><input name="support_whatsapp" value="' + esc(s.support_whatsapp) + '"></div><div><label>Email</label><input name="support_email" type="email" value="' + esc(s.support_email || 'admin@techmincsc.in') + '"></div><div><label>Website</label><input name="support_website" value="' + esc(s.support_website || 'https://www.complypro.co.in/') + '"></div><div><label>Email me when a centre registers</label><input name="notify_email" type="email" placeholder="vinodnkunni@gmail.com" value="' + esc(s.notify_email) + '"></div><div><label>Send that email</label><select name="notify_new"><option value="Y">Yes</option><option value="N"' + (s.notify_new === 'N' ? ' selected' : '') + '>No</option></select></div><div><label>VLEBook web address (used in emails)</label><input name="app_url" placeholder="https://tools.complypro.co.in/vlebook/" value="' + esc(s.app_url || 'https://tools.complypro.co.in/vlebook/') + '"></div><div><label>Send emails from</label><input name="mail_from" type="email" value="' + esc(s.mail_from || 'admin@techmincsc.in') + '"></div><div><label>Email sender name</label><input name="mail_from_name" value="' + esc(s.mail_from_name || 'Techmin Wealth Partners') + '"></div></div><p class="small mut">Registration and welcome emails are sent from this address. It must be the Google account that owns the registry script, or added to that Gmail account under Settings → Accounts → “Send mail as”. Otherwise Google sends from its default address.</p><p><button class="btn" type="submit">Save</button></p></form>' : vNotReady());
+  vBindRefresh(vVleK);
+  const lk = $('#vlock'); if (lk) lk.onclick = () => { VK.sign = VK.vapid = null; vVleK(); };
+  const fg = $('#vforget'); if (fg) fg.onclick = () => { VK.file = null; try { localStorage.removeItem('vle_keyfile'); } catch (e) { /* ignore */ } vVleK(); };
+  const vks = $('#vkshow'); if (vks) vks.onchange = () => { $('#vkp').type = vks.checked ? 'text' : 'password'; };
+  const uk = $('#vuk'); if (uk) uk.onsubmit = async ev => {
+    ev.preventDefault();
+    try {
+      let file = VK.file;
+      const inp = $('#vkf'); if (inp && inp.files[0]) file = JSON.parse(await inp.files[0].text());
+      if (!file) throw new Error('Choose the key file.');
+      await vUnlock(file, $('#vkp').value.trim());
+      VK.file = file; try { localStorage.setItem('vle_keyfile', JSON.stringify(file)); } catch (e) { /* ignore */ }
+      vVleK(); msg('Key unlocked.');
+    } catch (e) { msg(e.message, 'bad'); }
+  };
+  $('#vnk').onsubmit = async ev => {
+    ev.preventDefault(); const g = ev.target;
+    if (g.p1.value !== g.p2.value) { msg('The two passphrases do not match.', 'bad'); return; }
+    if (VK.file && !confirm('You already have a key (' + VK.file.kid + '). Create a NEW key? Existing licences will need to be re-issued after you publish the new app key.')) return;
+    const file = await vNewKeyFile(g.p1.value);
+    vDownload('Techmin-signing-key-' + file.kid + '.vlekey', JSON.stringify(file, null, 2), 'application/json');
+    vDownload('licence-pubkey.js', vPubModule(file), 'text/javascript');
+    await vUnlock(file, g.p1.value); VK.file = file; try { localStorage.setItem('vle_keyfile', JSON.stringify(file)); } catch (e) { /* ignore */ }
+    vVleK(); msg('New key created and unlocked. Keep the .vlekey file and passphrase safe; publish licence-pubkey.js with the app.');
+  };
+  const fr = $('#vfr'); if (fr) fr.onsubmit = async ev => {
+    ev.preventDefault(); const g = ev.target;
+    try {
+      const to = g.to.value; if (!to || to < vYmd(new Date())) throw new Error('Choose a future "valid until" date.');
+      const lid = 'L-FREE-' + vYmd(new Date()).replace(/-/g, '') + '-' + vRand(3);
+      const token = await vSign({ v: 1, kid: VK.kid, typ: 'LIC', lid, cid: '*', centre: 'All centres (free launch offer)', plan: 'FREE', from: vYmd(new Date()), to, dev: ['*'], users: Number(g.users.value) || 0, iat: Date.now() });
+      await call('admin.vle_free_save', { token, lid, valid_to: to, users: g.users.value }); await vLoad(); vVleK(); msg('Free licence is active for new centres.');
+    } catch (e) { msg(e.message, 'bad'); }
+  };
+  const fs1 = $('#vfstop'); if (fs1) fs1.onclick = async () => { if (!confirm('Stop giving the free licence to NEW centres? Centres that already have it keep it until its end date.')) return; await call('admin.vle_free_stop', { mode: 'stop' }); await vLoad(); vVleK(); msg('Stopped for new centres.'); };
+  const fs2 = $('#vfcancel'); if (fs2) fs2.onclick = async () => { if (!confirm('Cancel the free licence for EVERY centre that uses it? Their VLEBook locks until they get a paid licence.')) return; await call('admin.vle_free_stop', { mode: 'cancel' }); await vLoad(); vVleK(); msg('Free licence cancelled for everyone.'); };
+  const st = $('#vst'); if (st) st.onsubmit = async ev => { ev.preventDefault(); const v = {}; new FormData(ev.target).forEach((x, k) => v[k] = x); try { await call('admin.vle_settings_save', { values: v }); await vLoad(); msg('Saved. Centres see the new contacts the next time VLEBook is online.'); } catch (e) { msg(e.message, 'bad'); } };
+}
+/* ===================== end of VLEBook additions ===================== */
+
 (async () => { if (KEY) { try { await load(); show(); return; } catch (e) { lock(e.message); return; } } lock(''); })();
 </script></body></html>

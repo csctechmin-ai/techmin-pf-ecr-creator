@@ -1,0 +1,76 @@
+# Privacy Policy — VLEBook
+
+Version {{version}} · Effective {{effectiveDate}}
+
+This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we") processes when a Centre uses VLEBook, why, and the choices available. It is published in accordance with the Information Technology Act, 2000 and rules made under it, and the Digital Personal Data Protection Act, 2023 ("DPDP Act").
+
+## 1. The short version
+
+- **Your business data never comes to Techmin.** Customers, bills, payments, applications, AEPS records, stock, staff, accounts, reports and backups are stored only on your computer and in backup files you save.
+- Techmin receives only what is needed to register the Centre, run the licence, send notices and support you (section 3).
+- We do not sell personal data and we do not show third-party advertising in VLEBook.
+
+## 2. Data stored only on your computer
+
+All records you enter in VLEBook are stored in your browser's storage (IndexedDB) on your computer and in backup files (.json / .txt) saved where you choose. Techmin has no access to them. For this data the **Centre is the data fiduciary** and is responsible for informing its customers, obtaining consent where needed, and keeping the data secure and accurate (see the Terms & Conditions, section 4).
+
+Passwords of VLEBook users are stored only as salted hashes. PDF and image tools process files on your computer; files are not uploaded.
+
+## 3. Data processed by Techmin
+
+When VLEBook is online it exchanges the following with the Techmin registry:
+
+1. **Centre registration** (when the Owner account is created): centre name and type, Owner's name, mobile number, email, address, district, state and PIN code as entered in Settings, and the computer's Device Code (a random code created by VLEBook; it does not contain hardware or personal identifiers).
+2. **Check-in** (when VLEBook opens and every few hours): Device Code, Centre ID, VLEBook version, number of active users, current licence number, and — only if you turn on push notifications — the push address given by your browser's push service.
+3. **Licence and payment records** created by Techmin: plan, validity, computers and users allowed, amount, payment mode and reference.
+4. **Support communications** you send us (WhatsApp, email, phone).
+
+Techmin may also see the IP address and technical details of each request, as logged by its hosting providers.
+
+## 4. Why we use it (purposes and legal basis)
+
+- To register your Centre, issue, renew, verify and cancel licences, and prevent misuse of licence keys.
+- To send service notices, renewal and payment reminders, security alerts and software update information inside VLEBook, by push notification (if allowed), WhatsApp, SMS or email.
+- To provide support, including password-reset codes.
+- To keep accounts and tax records and meet legal obligations.
+- To understand usage at an aggregate level (for example, number of centres and versions) and improve VLEBook.
+
+We process this data on the basis of your consent given when you accept these terms and create the Owner account, and for the legitimate uses permitted under the DPDP Act (including performance of the licence you requested and compliance with law).
+
+## 5. Service providers
+
+We use the following providers to run VLEBook. They process data only to provide their service:
+
+- **Google** (Google Apps Script, Google Sheets, Gmail) — the Techmin registry and email notifications.
+- **GitHub** — hosting of the VLEBook web application files.
+- **Browser push services** (Google, Microsoft, Mozilla, Apple) — delivery of push notifications to your browser, if you allow them.
+- **Blogger (Google)** — the Techmin blog articles shown in VLEBook are loaded directly from {{website}}.
+
+Data may be stored on servers of these providers in or outside India, subject to applicable law.
+
+## 6. Retention
+
+Centre registration, licence and payment records are kept while your Centre uses VLEBook and for up to 8 years afterwards to meet accounting and tax requirements, unless a longer period is required by law. Push addresses are deleted when notifications are turned off or the push service reports them invalid.
+
+## 7. Security
+
+The registry is accessed over encrypted HTTPS. Licence keys and reset codes are digitally signed so they cannot be forged. Access to the Techmin console is protected by a secret key. No method of transmission or storage is completely secure; we act promptly on any security incident and notify you and authorities as required by law.
+
+## 8. Your rights and choices
+
+Under the DPDP Act you may: request a summary of personal data we process about you; ask us to correct, complete or update it; ask us to erase it where it is no longer needed (subject to legal retention); withdraw consent (this may end the licence, as registration is needed to run it); nominate another person to exercise these rights; and raise a grievance. Turn push notifications off at any time in your browser or in VLEBook. Write to the Grievance Officer below; we will respond within the period required by law. You may also approach the Data Protection Board of India.
+
+## 9. Children
+
+VLEBook is meant for businesses. It must not be used by persons under 18 years of age.
+
+## 10. Changes
+
+We may update this Policy. The current version is always available in VLEBook (Help & Legal) and at our website, with its effective date. Material changes will be notified in VLEBook.
+
+## 11. Grievance Officer and contact
+
+Grievance Officer: {{grievanceOfficer}}
+Email: {{grievanceEmail}}
+{{entity}}, {{address}}
+Support: {{email}}{{phoneSep}} · {{website}}

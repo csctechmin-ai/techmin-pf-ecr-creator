@@ -1,0 +1,1 @@
+const t=[{kid:"PROD-20261115-Iaj_",test:!1,jwk:{kty:"EC",crv:"P-256",x:"-tIh6VCiWEkg7TnqXpTLXCQNDkR03eoutMRJcRu7XlY",y:"XAc-UofxlNG2VUWbcltDEbZABtOPqsBngZcHmZeEQ6s"}}],c="BABFFd6fqWVWOtZMlMu5mwCqZJui6Uzg38IPv-6kD5AXWJdKKyoSDNiAxSTnhML959e_XRK0hclGrnJYmGZ73Y0";export{t as LICENCE_KEYS,c as VAPID_PUBLIC_KEY};
