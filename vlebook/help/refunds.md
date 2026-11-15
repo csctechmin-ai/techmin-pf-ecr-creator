@@ -17,7 +17,7 @@ VLEBook is in **early access**. Please use the trial to check that it suits your
 - A licence starts on the date shown in **Users & Licence** and is delivered to the centre's computer automatically. VLEBook shows the number of days the licence is valid for.
 - There is no automatic renewal or automatic debit. When a licence ends, VLEBook changes to Basic mode until you renew.
 - Any free licence that {{entity}} gives (for example during a launch offer) has no fee and so no refund.
-- Techmin Wealth Partners is registered under GST and issues a GST tax invoice for every payment. When a refund is approved, the GST is adjusted with a credit note as GST law requires.
+- Techmin Wealth Partners is registered under GST (GSTIN {{gstin}}) and issues a GST tax invoice for every payment. When a refund is approved, the GST is adjusted with a credit note as GST law requires.
 
 ## 3. Refunds
 

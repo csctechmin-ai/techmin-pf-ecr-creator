@@ -83,5 +83,5 @@ We may update this Policy. The current version is always available in VLEBook (H
 
 Grievance Officer: {{grievanceOfficer}}
 Email: {{grievanceEmail}}
-{{entity}}, {{address}}
+{{entity}}, {{address}} · GSTIN {{gstin}}
 Support: {{email}}{{phoneSep}} · {{website}}

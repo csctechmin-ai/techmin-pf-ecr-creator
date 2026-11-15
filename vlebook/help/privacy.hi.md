@@ -83,5 +83,5 @@ VLEBook व्यवसायों के लिए है। 18 वर्ष �
 
 शिकायत अधिकारी: {{grievanceOfficer}}
 ईमेल: {{grievanceEmail}}
-{{entity}}, {{address}}
+{{entity}}, {{address}} · GSTIN {{gstin}}
 सपोर्ट: {{email}}{{phoneSep}} · {{website}}

@@ -82,7 +82,7 @@ These Terms are governed by the laws of India. Subject to any applicable arbitra
 ## 13. Compliance with law and seller information
 
 1. Techmin aims to follow the laws that apply to VLEBook and to its sale, including the Information Technology Act, 2000 and its rules, the Digital Personal Data Protection Act, 2023 and the Digital Personal Data Protection Rules, 2025, the Consumer Protection Act, 2019 and the Consumer Protection (E-Commerce) Rules, 2020, the Copyright Act, 1957 and GST law (Techmin Wealth Partners is registered under GST). Techmin will update VLEBook and these documents when the law changes.
-2. **Seller:** {{entity}}, a proprietorship firm, {{address}}. Email: {{email}}{{phoneSep}}.
+2. **Seller:** {{entity}}, a proprietorship firm, {{address}}. GSTIN: {{gstin}}. Email: {{email}}{{phoneSep}}.
 3. **Grievances:** the Grievance Officer acknowledges a complaint within 48 hours and resolves it within one month of receipt. If you are not satisfied, you may contact the National Consumer Helpline (1915, consumerhelpline.gov.in) or the consumer commission, and, for personal-data matters, the Data Protection Board of India.
 4. Nothing in these Terms takes away any right that a consumer has under Indian law.
 
