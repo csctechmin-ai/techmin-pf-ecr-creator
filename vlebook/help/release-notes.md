@@ -2,6 +2,11 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.10.3 — 15 November 2026
+
+- Fixed: when VLEBook opened for the first time, the main screen briefly showed sample details before the registration screen. A start-up screen is now shown until sign-in or registration is ready.
+- Fixed: Chrome asked to save JSON and TXT backup files during registration. Automatic backups now start only after someone signs in, the backup clock starts fresh for a new centre, and scheduled backups are saved only to the chosen backup folder, never as download prompts. Without a folder, a **Choose backup folder** button reminds you.
+
 ## Version 2.10.2 — 15 November 2026
 
 - **Automatic backup to Google Drive, OneDrive or Dropbox:** choose the service and a folder inside it; every backup is saved there automatically without asking, and the service's own app uploads it to your account.
