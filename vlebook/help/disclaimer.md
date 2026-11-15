@@ -16,7 +16,7 @@ VLEBook is an independent product. It is **not** made, endorsed or approved by C
 
 ## 3. Data on the centre's computer
 
-Business data is stored only on the centre's computer and in backup files the centre saves. {{entity}} has no access to it and cannot recover it. The centre is responsible for taking and keeping backups, for the security of its computer, and for handling customers' personal data lawfully.
+Business data is stored only on the centre's computer and in backup files the centre saves. {{entity}} has no access to it and cannot recover it. The centre is responsible for taking and keeping backups, for the security of its computer, and for handling customers' personal data lawfully. **Start fresh** in Settings permanently clears the centre's transactions on that computer; take a backup first — it can be undone only by restoring a backup.
 
 {{entity}} gives **no assurance, warranty or guarantee** about the safety, availability or recovery of any centre's data, and keeps no copy of it. Backups saved to Google Drive, OneDrive, Dropbox or any other service are handled by that service under the centre's own account.
 
@@ -31,6 +31,8 @@ PDF & Image Tools and the Document Workbench process files on the centre's compu
 ## 5. Techmin Updates and blog
 
 Notices and blog articles shown in VLEBook are for general information. They may be summaries and may not reflect the latest change in law or procedure. Always confirm with the official source.
+
+**Techmin websites and outside portals.** The Techmin tab links to websites run by Techmin (ComplyPro, Finance and Accounting Tools, Techmin Wealth Partners, IFSC Tracker); their content and services are governed by the terms published on those sites. Other links in the catalogue lead to government and third-party portals that Techmin does not control; check fees, rules and documents on the official portal before you act.
 
 ## 6. Availability
 

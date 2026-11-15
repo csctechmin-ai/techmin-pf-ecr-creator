@@ -214,6 +214,15 @@ Click the lock icon in the address bar → Notifications → Allow, then reload 
 ### Techmin notices or blog posts do not appear
 They are fetched when the computer is online. Click **Check for new updates** in Techmin Updates.
 
+### "Enter a full web address starting with https:// (or http://)" in the Service Catalogue
+Type the complete address, for example *https://edistrict.kerala.gov.in*. Other kinds of links are refused for safety.
+
+### I cannot delete a link in the Techmin tab
+The Techmin links (ComplyPro, Finance and Accounting Tools, Techmin Wealth Partners website, IFSC Tracker) are part of VLEBook and cannot be deleted or edited. Links you added yourself can be deleted with ×.
+
+### A catalogue link shows "Invalid link"
+The link was saved by an older version without https:// or http://. Delete it and add it again with the full address.
+
 ## CV & Resume Builder
 
 ### "This feature needs a VLEBook licence" when opening CV & Resume Builder
@@ -239,3 +248,12 @@ The Word copy has the text and headings only, for further editing. Use **Print /
 
 ### Is this the official Europass CV?
 The Europass format follows the European CV layout and the CEFR language levels. It is not produced by or connected with the European Union. A customer who must apply on europass.europa.eu can use the official Europass editor there.
+
+### I cancelled an invoice but Accounts / Day Book / counter still show the amount
+Bills cancelled in version 2.13.0 or later are reversed in every account automatically. For a bill cancelled in an older version, record the refund in **Customers → ledger → Refund** (or an *Adjustment* in Accounts) for the money still showing. The Day Book lists the original bill and a red **CANCELLED** entry; together they come to zero.
+
+### Where is "Start fresh" and what does it delete?
+**Settings → Start fresh** (Owner only). It deletes transactions only — bills, payments, day book, counter closings, AEPS entries, commissions, payouts and stock movements — and sets balances and stock to zero. Users, operators, customers, services, stock items and settings stay. Restore a backup if you started fresh by mistake.
+
+### "Check for new updates" says it could not check
+The computer is offline or the server did not answer. Connect to the internet and click again. If it says a new version is available, click **Update now**; your data is not touched.

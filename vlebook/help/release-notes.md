@@ -2,6 +2,17 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.13.0 — 16 November 2026
+
+- New: **Techmin** tab in Government Service Catalogue & Portal Directory with ComplyPro, Finance and Accounting Tools, the Techmin Wealth Partners website and IFSC Tracker. These links are built in and cannot be edited or deleted.
+- Security: only web addresses starting with https:// or http:// can be saved and opened in the catalogue; links in Techmin notices, blog posts and support details are checked the same way before they are shown.
+- New: **Edit** for your own links in Government Service Catalogue & Portal Directory (title, group, state, address, fee guide, processing time, checklist and instructions), and **Delete** now asks for confirmation. Changes are written in the audit log.
+- New: **Techmin** menu on the left with the same four websites, available in every mode including Basic mode.
+- Fixed: a **cancelled invoice** no longer leaves a balance in Accounts, the Day Book or the Smart Counter. Money is returned from every account it came into (also payments collected later on the bill), the advance used is returned to the customer, and its commission and linked applications are cancelled. The Day Book now shows the actual money moved, with cancelled entries in red.
+- New: **Start fresh** in Settings (Owner only) — clears transactions, payments and balances to zero while keeping users, operators, customers, services, stock items and settings. Offers a backup first and asks you to type START FRESH.
+- Fixed: **↻ Check for new updates** now shows that it is checking, tells you whether VLEBook is up to date or a new version is available (with *Update now*), and refreshes notices and blog articles.
+- Fixed: dates now follow the computer's local (Indian) time, so bills made just after midnight count for the new day.
+
 ## Version 2.12.0 — 15 November 2026
 
 - New: **Physical Stock Check** in Stock & Inventory. Enter the stock counted on the shelf as on a date; a shortfall is booked as *Consumption (physical check)* and an excess as *Difference on physical check*. A reminder appears when a check is due (every 30 days by default).

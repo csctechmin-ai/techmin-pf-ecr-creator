@@ -22,7 +22,7 @@ Techmin does not store, copy or back up this data and cannot recover it. The **a
 
 **Application reference numbers.** Application, acknowledgement and tracking numbers that the centre records for a customer's application (for example a PAN acknowledgement number) are stored only on the centre's computer, printed on that customer's invoice and shown in the customer's ledger. They are not sent to Techmin. The centre should record them only to serve the customer and give them to no one else.
 
-**Activity log.** From version 2.11.0 the audit log records every activity in VLEBook from sign-in onwards — screens opened, records added, changed, cancelled or deleted, prints, downloads, outside links, backups and restores — with the user name, date and time. It stays on the centre's computer and in its backup folder; staff should be told that their activity in VLEBook is recorded.
+**Activity log.** From version 2.11.0 the audit log records every activity in VLEBook from sign-in onwards — screens opened, records added, changed, cancelled or deleted, prints, downloads, outside links, backups and restores — with the user name, date and time. It stays on the centre's computer and in its backup folder; staff should be told that their activity in VLEBook is recorded. The Owner can clear all transactions with **Settings → Start fresh**; this removes them from the computer only (backups already saved are not changed) and is itself written in the audit log.
 
 If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the files are uploaded by that service's own app under your account and that provider's terms and privacy policy apply. Techmin has no access to that account or those files.
 
@@ -57,6 +57,8 @@ We use the following providers to run VLEBook. They process data only to provide
 - **Blogger (Google)** — the Techmin blog articles shown in VLEBook are loaded directly from {{website}}.
 
 Data may be stored on servers of these providers in or outside India, subject to applicable law.
+
+**Links to Techmin websites and other portals.** The Service Catalogue opens outside websites, including Techmin's own sites (ComplyPro (https://www.complypro.co.in/), Finance and Accounting Tools (https://tools.complypro.co.in/), Techmin Wealth Partners (https://www.techmincsc.in/), IFSC Tracker (https://www.ifsctracker.in/)). Opening a link sends your browser's normal request to that site; VLEBook sends no centre or customer data with it. Each website has its own privacy policy.
 
 ## 6. Retention
 

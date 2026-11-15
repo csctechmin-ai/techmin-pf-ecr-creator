@@ -53,6 +53,8 @@ By using VLEBook you agree that Techmin may show notices inside the software, se
 1. Techmin may update VLEBook to fix errors, improve security, comply with law or add or change features. Updates are delivered automatically through the web address.
 2. VLEBook works offline after it has been loaded. Licence delivery, notices and blog posts need an internet connection. Techmin does not guarantee uninterrupted availability of the website or registry, which depend on third-party services (such as GitHub and Google).
 
+**Built-in Techmin links.** VLEBook includes links to Techmin's websites (ComplyPro, Finance and Accounting Tools, Techmin Wealth Partners, IFSC Tracker) in the Service Catalogue. They are part of the software and cannot be removed by the Centre. Use of those websites is governed by the terms published on them. Links you add to the catalogue must be lawful and must lead only to genuine websites.
+
 ## 7. Suspension and termination
 
 1. Techmin may suspend or cancel a licence, with notice where practical, if you breach these Terms, do not pay fees, misuse the software, or where required by law.
