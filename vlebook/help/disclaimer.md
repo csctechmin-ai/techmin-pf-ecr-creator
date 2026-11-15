@@ -24,6 +24,8 @@ Business data is stored only on the centre's computer and in backup files the ce
 
 PDF & Image Tools and the Document Workbench process files on the centre's computer. Converted files (for example PDF to Word or Excel) may not match the original layout exactly; check every converted document before use. Photographs and signatures prepared for portals must meet the portal's current rules.
 
+**CV & Resume Builder.** CVs contain only the information typed by the centre or the customer; VLEBook does not check it. The customer and the centre are responsible for its truth. A CV made with VLEBook does not guarantee an interview, a job or a visa. The CV designs are VLEBook's own. The *Europass format* follows the publicly described European CV layout and the CEFR language levels; Europass is a trademark of the European Union and VLEBook is not produced by, endorsed by or connected with the European Union or the official Europass service. Employers, portals and embassies may ask for their own formats.
+
 ## 5. Techmin Updates and blog
 
 Notices and blog articles shown in VLEBook are for general information. They may be summaries and may not reflect the latest change in law or procedure. Always confirm with the official source.

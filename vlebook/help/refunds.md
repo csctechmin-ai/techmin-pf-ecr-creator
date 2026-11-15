@@ -38,6 +38,8 @@ VLEBook is in **early access**. Please use the trial to check that it suits your
 
 Fees, government charges and service charges that a centre collects from its own customers are the centre's matter. {{entity}} does not collect them and cannot refund them.
 
+This includes fees a centre charges its customers for preparing a CV or resume. The CV & Resume Builder is part of the full version; it is included in the 14-day trial and in paid licences, and no separate fee is charged for it.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.

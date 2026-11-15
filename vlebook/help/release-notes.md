@@ -2,6 +2,25 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.11.0 — 15 November 2026
+
+- New: **CV & Resume Builder** (full version). A step-by-step questionnaire (personal details, job goal, experience, education, skills, languages, certificates and more) with a live preview. Seven designs — Classic, Modern sidebar, Professional, Executive, Minimal, Job-portal (ATS) friendly and a **CV in the Europass format** with the CEFR language grid — in six colours. Show the designs to the customer, record the customer's approval, then print / save as PDF or download a Word copy. The CV contains only what is typed; the optional summary is built only from the answers.
+- New: **Cancel work** in Application & Pending Work Tracker needs a reason; the reason, user and time are kept with the work and in the audit log.
+- New: the **audit log records every activity from sign-in onwards** — screens opened, every record added, changed, cancelled or deleted, prints, file downloads, outside links, backups and restores — with search by user, activity, screen and date.
+- New: **Stock & Inventory** — edit an item and correct its stock (saved as a stock adjustment with a reason), delete an item with a reason, and choose which item is deducted per printed page.
+- Changed: Stock & Inventory starts empty — no sample items. Unused sample items from older versions are removed automatically.
+- Changed: the CV & Resume Builder is part of the full version (14-day trial or paid licence); it is not available in Basic mode.
+
+## Version 2.10.5 — 15 November 2026
+
+- Fixed: **GST bills** did not charge GST because the default services were stored without GST. A GST bill now charges each service's GST rate on the service charge only (never on the government fee). Each bill line has a **GST %** column; services have a *No GST (0%)* option and an optional SAC code.
+- New: GST bills print as **TAX INVOICE** with the centre GSTIN, place of supply, taxable value, CGST/SGST or IGST and round off (A4, thermal and PDF). A GST bill cannot be saved until the GSTIN is entered in Settings.
+- Fixed: the **Backup needed** button stayed after clicking *Save Now*. Clicking *Backup needed*, or *Save Now* when a backup is due, now takes the backup at once, and the button clears in every open VLEBook tab.
+
+## Version 2.10.4 — 15 November 2026
+
+- Fixed: the first-time setup could stop with "Activation needs an internet connection" while the Techmin registry was being updated, even though the computer was online.
+
 ## Version 2.10.3 — 15 November 2026
 
 - Fixed: when VLEBook opened for the first time, the main screen briefly showed sample details before the registration screen. A start-up screen is now shown until sign-in or registration is ready.

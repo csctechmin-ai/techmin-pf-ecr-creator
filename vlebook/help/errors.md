@@ -116,6 +116,9 @@ The TXT backup file was edited or damaged. Use another backup file. Never edit b
 ### "Decryption failed: Invalid backup password"
 The backup was made with a password. Enter exactly the same password.
 
+### "Backup needed" stays at the top after I clicked Save
+*Save Now* saves your current entries; a backup is a separate file. From version 2.10.5, clicking **Backup needed** (or *Save Now* when a backup is due) takes the backup at once — to the backup folder if connected, otherwise to Downloads — and the button disappears. If it does not, check that Chrome is allowed to download files for this site.
+
 ## Billing and daily work
 
 ### "Add at least one service to the visit before generating the invoice"
@@ -132,6 +135,21 @@ Use the PDF download, which always prints correctly. For direct printing, add a 
 
 ### The cash difference at day closing
 Count again with the denomination calculator; check AEPS withdrawals (they reduce cash) and expenses paid in cash. A reason must be entered if a difference remains.
+
+### "A GST bill needs your GSTIN"
+A GST (tax) invoice can be issued only by a GST-registered centre. Add the GSTIN in **Settings & Centre Setup**, or choose **Non-GST Bill**.
+
+### GST is not added on a GST bill / GST shows 0
+GST is charged on the service charge only, at the service's rate. Check the **GST %** column of the bill line and the service's rate in **Service Management** (*No GST (0%)* means no GST). Government fees are never taxed. Bills saved before version 2.10.5 keep their old amounts — cancel and re-issue if needed.
+
+### "Enter the reason for the stock correction" / "A reason is needed to delete an item"
+Stock corrections and deletions are recorded in the audit log, so a short reason is required (for example *Physical count* or *Discontinued*).
+
+### Stock & Inventory shows no items
+From version 2.11.0 VLEBook does not add sample items. Add your own items with **+ New Item**.
+
+### "Please write the reason (at least 5 characters)" when cancelling work
+Type why the application is cancelled (for example *Customer withdrew*). The reason is saved with the work and in the audit log.
 
 ## Centre logo
 
@@ -174,3 +192,29 @@ Click the lock icon in the address bar → Notifications → Allow, then reload 
 
 ### Techmin notices or blog posts do not appear
 They are fetched when the computer is online. Click **Check for new updates** in Techmin Updates.
+
+## CV & Resume Builder
+
+### "This feature needs a VLEBook licence" when opening CV & Resume Builder
+The CV & Resume Builder is part of the full version (14-day trial or paid licence). It is not available in Basic mode.
+
+### The printed CV has no colours or the side panel is white
+In the print window open **More settings** and tick **Background graphics**, then print or *Save as PDF* again.
+
+### How do I save the CV as PDF?
+Click **Print / Save as PDF**, then choose **Save as PDF** as the printer and click **Save**. The file is named after the customer (for example *CV_Anjali_Nair.pdf*).
+
+### "Some parts are still empty" before printing
+VLEBook lists main parts that are not filled (name, phone or e-mail, a qualification, experience or "I am a fresher", key skills). Fill them, or print anyway if the customer agrees.
+
+### The CV went back to "Draft"
+The CV was changed after the customer approved it. Show the designs to the customer again and record the approval again.
+
+### "Photo is too large" / "This file is not a photo"
+Use a JPG, PNG or WEBP photo up to 8 MB. VLEBook resizes it to passport proportions.
+
+### The Word copy looks plain
+The Word copy has the text and headings only, for further editing. Use **Print / Save as PDF** for the designed CV.
+
+### Is this the official Europass CV?
+The Europass format follows the European CV layout and the CEFR language levels. It is not produced by or connected with the European Union. A customer who must apply on europass.europa.eu can use the official Europass editor there.
