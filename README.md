@@ -13,7 +13,7 @@ Published at https://tools.complypro.co.in/
 | GSTR-7 Return Preparer | `gstr7-utility/` | 1.0.0 |
 | Project Report Generator | `project-report/` | 1.0.0 (under testing) |
 | GST Refund Preparer (inverted tax structure) | `gst-refund/` | 1.0.18 |
-| VLEBook (CSC, Akshaya and e-Seva centres) | `vlebook/` | 2.10.1 (multi-file app; early access; 14-day trial then paid licence; help, release notes, terms, privacy, refund policy and disclaimer at `vlebook/help.html`) |
+| VLEBook (CSC, Akshaya and e-Seva centres) | `vlebook/` | 2.10.2 (multi-file app; early access; 14-day trial then paid licence; help, release notes, terms, privacy, refund policy and disclaimer at `vlebook/help.html`) |
 
 Each folder holds a single self-contained `index.html` and the release notes and error codes PDF for that version.
 Every tool has an **Error codes** tab that lists each message code, its cause and its solution.

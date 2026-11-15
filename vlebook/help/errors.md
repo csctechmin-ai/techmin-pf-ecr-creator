@@ -83,6 +83,15 @@ The address, PIN code, GSTIN or Akshaya ID entered is not valid. Correct the fie
 
 ## Backups
 
+### Backups are not reaching Google Drive, OneDrive or Dropbox
+VLEBook saves the files into the folder you chose; the Google Drive, OneDrive or Dropbox app on this computer uploads them. Check that the app is running and signed in, and that the folder you chose is inside the Google Drive / OneDrive / Dropbox folder (Data Ownership & Backup shows the folder name). The audit log shows every save.
+
+### "No VLEBook backup files were found in this folder"
+Choose the folder that has files named like *CentreName_14112026_083015_pm.json*. If Google Drive shows files "online only", open the folder once so they are available on this computer.
+
+### Audit log shows "Chain check: an entry was changed or removed outside VLEBook"
+An entry in the browser's database or in the audit-log file was edited or deleted by something other than VLEBook. Keep the computer and the backup folder safe, download the audit log (CSV) for your records, and contact {{entity}} if you need help.
+
 ### "Backup folder needs permission again" / "📁 Reconnect backup folder"
 Chrome asks again for folder access after VLEBook is reopened. Click the button once and choose **Allow** (tick *Allow on every visit* if offered). Choosing *Allow on every visit* makes Chrome remember the permission. Until then backups are saved to Downloads, so nothing is missed.
 

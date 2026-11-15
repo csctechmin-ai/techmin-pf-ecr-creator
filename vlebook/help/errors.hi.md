@@ -83,6 +83,15 @@ CSC ID ठीक वैसे ही लिखें जैसी आपके C
 
 ## बैकअप
 
+### बैकअप Google Drive, OneDrive या Dropbox तक नहीं पहुँच रहे
+VLEBook फ़ाइलें आपके चुने फ़ोल्डर में सेव करता है; इस कंप्यूटर पर Google Drive, OneDrive या Dropbox ऐप उन्हें अपलोड करता है। जाँचें कि वह ऐप चल रहा है और साइन-इन है, और चुना गया फ़ोल्डर Google Drive / OneDrive / Dropbox फ़ोल्डर के अंदर है (Data Ownership & Backup में फ़ोल्डर का नाम दिखता है)। हर सेव ऑडिट लॉग में दिखता है।
+
+### "No VLEBook backup files were found in this folder"
+वह फ़ोल्डर चुनें जिसमें *CentreName_14112026_083015_pm.json* जैसी फ़ाइलें हों। यदि Google Drive फ़ाइलें "online only" दिखाता है, तो फ़ोल्डर एक बार खोलें ताकि वे इस कंप्यूटर पर उपलब्ध हों।
+
+### ऑडिट लॉग में "Chain check: an entry was changed or removed outside VLEBook" दिखता है
+ब्राउज़र के डेटाबेस या ऑडिट-लॉग फ़ाइल की कोई एंट्री VLEBook के अलावा किसी और चीज़ से बदली या हटाई गई है। कंप्यूटर और बैकअप फ़ोल्डर सुरक्षित रखें, अपने रिकॉर्ड के लिए ऑडिट लॉग (CSV) डाउनलोड करें, और सहायता चाहिए तो {{entity}} से संपर्क करें।
+
 ### "Backup folder needs permission again" / "Reconnect backup folder"
 VLEBook दोबारा खोलने पर Chrome फ़ोल्डर की अनुमति फिर माँगता है। बटन पर एक बार क्लिक करें और **Allow** चुनें (*Allow on every visit* दिखे तो उसे चुनें)। *Allow on every visit* चुनने पर Chrome अनुमति याद रखता है। तब तक बैकअप Downloads में सेव होते हैं, इसलिए कुछ नहीं छूटता।
 

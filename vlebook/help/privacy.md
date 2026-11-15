@@ -16,6 +16,10 @@ All records you enter in VLEBook are stored in your browser's storage (IndexedDB
 
 Passwords of VLEBook users are stored only as salted hashes. The centre logo is stored with the centre settings on your computer and in your backups; it is not sent to Techmin. PDF and image tools process files on your computer; files are not uploaded.
 
+Techmin does not store, copy or back up this data and cannot recover it. The **audit log** (who signed in, failed sign-in attempts, sign-outs, backups and changes, with dates and times) is also kept only on your computer and in your backup folder; Techmin does not receive it.
+
+If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the files are uploaded by that service's own app under your account and that provider's terms and privacy policy apply. Techmin has no access to that account or those files.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:

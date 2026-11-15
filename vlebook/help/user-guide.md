@@ -109,15 +109,35 @@ Daily, monthly and yearly reports of income, true service profit, commissions, d
 
 ## 5. Backups — protect your data
 
-Your data lives in this browser on this computer. If the computer fails or browser data is cleared, only a backup can bring it back. Backup works in every mode, including Basic mode.
+**Your business data is kept only on this computer and in the backups you save. {{entity}} does not store it on any server, does not keep a copy and cannot recover it.** VLEBook gives no assurance of data safety beyond the tools described here, so please set up automatic backup on the first day.
 
-- **Automatic backup** (Data Ownership & Backup → Automatic backup): every hour and/or at times you choose (for example 1:30 pm and 8:00 pm). Each backup is saved as two files named like **CentreName_14112026_083015_pm.json** and **.txt**.
-- Click **Choose backup folder** once (Chrome/Edge) — for example a folder in *Documents*, a USB/external drive, or a folder synced by Google Drive / OneDrive. Without a folder, backups go to your *Downloads* folder.
-- After VLEBook is reopened, Chrome may ask again for folder access: click **Reconnect backup folder** at the top.
-- Automatic backup runs while VLEBook is open. A backup missed while it was closed runs shortly after you open it.
-- Old automatic backups in the folder are removed after the number of days you choose (default 30).
-- **Restore**: Data Ownership & Backup → choose a .json or .txt backup → *Validate* → *Restore*. TXT backups are protected with a checksum; an edited file is refused.
-- Keep at least one recent backup **outside** this computer (pen drive, external disk or cloud folder).
+### Automatic backup to Google Drive, OneDrive, Dropbox or a folder
+1. Open **Data Ownership & Backup → Automatic backup**.
+2. Under **Where should backups be saved?** choose **Google Drive**, **OneDrive**, **Dropbox** or **This computer / USB drive**.
+3. Click **Choose backup folder** and pick a folder inside that service's folder on this computer — for example *G:\My Drive\VLEBook backups* (Google Drive for desktop), *OneDrive\VLEBook backups* or *Dropbox\VLEBook backups*. The Google Drive, OneDrive or Dropbox app on this computer then uploads every file to your own account.
+4. Choose **Every hour** and/or fixed times (for example 1:30 pm and 8:00 pm), and JSON and/or TXT.
+
+From then on VLEBook saves each backup to that folder **automatically, without asking**, as files named like **CentreName_14112026_083015_pm.json** and **.txt**. Every save is written in the **audit log** (for example "Hourly automatic backup saved to Google Drive folder …").
+
+- Automatic backup runs while VLEBook is open; a backup missed while it was closed runs soon after you open it.
+- After VLEBook is reopened, Chrome may ask once more for folder access: click **Reconnect backup folder** (choose *Allow on every visit* if offered). Until then, backups go to your *Downloads* folder.
+- Old automatic backups are removed after the number of days you choose (default 30). The audit-log file is never removed.
+- When you close VLEBook after making changes, it offers a backup. This happens every time: save it if you want to, or ignore it.
+
+### Restore
+- **Data Ownership & Backup → Restore**: choose a .json or .txt backup → *Validate* → *Restore*. TXT backups carry a checksum; an edited file is refused.
+- **If this browser's data was cleared, or on a new computer:** on the first screen click **Restore from backup folder**, choose the same Google Drive / OneDrive / Dropbox / USB folder, and VLEBook brings back the latest backup and the full audit log. The internet is needed for this step.
+
+### What clearing the browser does
+Clearing **browsing history** or **cached images and files** does not delete VLEBook's data or its audit log. Clearing **cookies and other site data** for this site, resetting the browser or using a different Windows user does remove the copy in the browser. Your backup folder is not affected, and **Restore from backup folder** brings everything back. VLEBook also asks the browser to protect its storage (Data Ownership & Backup shows *Browser storage protection*).
+
+## 5A. Audit log
+
+VLEBook records every sign-in (and every failed attempt), sign-out, backup, restore, data reset and important change with the user name, date and time. See it in **Settings → Audit log**, and download the full log with **Download full audit log (CSV)**.
+
+- Entries cannot be edited or deleted in VLEBook. A data reset or a restore keeps them.
+- Each entry is linked to the one before it by a code (hash). **Chain check: intact** means no entry was changed or removed outside VLEBook.
+- When a backup folder is connected, the audit log is also kept there as *CentreName_audit_log.jsonl*. This file only grows, and it brings every entry back after the browser's data is cleared.
 
 ## 6. Techmin Updates and notifications
 

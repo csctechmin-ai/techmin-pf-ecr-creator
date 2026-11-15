@@ -1,4 +1,4 @@
-import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from"../core/db.js";import{getLang as O,DEFAULT_WHATSAPP_TEMPLATES as W}from"../core/i18n.js";import{loadOptionalAcceptanceDataset as G}from"../core/sample-data.js";import{formatDate as H,esc as l,hashLockPin as B}from"../core/utils.js";import{applyAppearance as S,currentPalette as A,currentMode as D}from"../core/appearance.js";import{isCloseWarningEnabled as z,setCloseWarningEnabled as V}from"../core/closeguard.js";import{processLogoFile as Y,applyCentreBranding as j,isValidLogo as k}from"../core/branding.js";import{CENTRE_TYPES as F,isAkshaya as I,checkCentreDetails as U}from"../core/centreinfo.js";async function g(s,o){const[M,R]=await Promise.all([b("settings","CENTRE_CONFIG"),q("audit_logs")]),a=M||{},E=a.enabledModules||{},y=a.whatsappTemplates||W,x=[...R].sort((e,i)=>String(i.timestamp||"").localeCompare(String(e.timestamp||""))).slice(0,35);s.innerHTML=`
+import{getRecord as b,putRecord as h,getAllRecords as R,clearAllStores as O,logAudit as W}from"../core/db.js";import{getLang as B,DEFAULT_WHATSAPP_TEMPLATES as G}from"../core/i18n.js";import{loadOptionalAcceptanceDataset as H}from"../core/sample-data.js";import{formatDate as A,esc as l,hashLockPin as V,safeFileName as z,downloadFile as Y}from"../core/utils.js";import{applyAppearance as D,currentPalette as _,currentMode as q}from"../core/appearance.js";import{isCloseWarningEnabled as j,setCloseWarningEnabled as U}from"../core/closeguard.js";import{processLogoFile as J,applyCentreBranding as K,isValidLogo as N}from"../core/branding.js";import{CENTRE_TYPES as F,isAkshaya as E,checkCentreDetails as Z}from"../core/centreinfo.js";async function g(s,o){const[M,I]=await Promise.all([b("settings","CENTRE_CONFIG"),R("audit_logs")]),a=M||{},$=a.enabledModules||{},y=a.whatsappTemplates||G,w=[...I].sort((e,i)=>String(i.timestamp||"").localeCompare(String(e.timestamp||""))).slice(0,35);s.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Settings, Centre Setup Wizard & Security</h1>
@@ -17,13 +17,13 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
           <div class="card-title">Centre Identity & Invoice Setup</div>
         </div>
         <div class="logo-setting">
-          <div class="logo-preview" id="set-logo-preview">${k(a.centreLogo)?`<img src="${a.centreLogo}" alt="Centre logo">`:"No logo"}</div>
+          <div class="logo-preview" id="set-logo-preview">${N(a.centreLogo)?`<img src="${a.centreLogo}" alt="Centre logo">`:"No logo"}</div>
           <div style="flex:1; min-width:200px;">
             <div style="font-weight:600;">Centre logo</div>
             <div class="form-hint">Shown at the top of the screen and on the dashboard, and printed on invoices, receipts and PDF reports. PNG, JPG or WEBP, up to 3 MB. A square or wide logo on a white or transparent background works best.</div>
             <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
-              <label class="btn btn-sm btn-primary" style="cursor:pointer;">${k(a.centreLogo)?"Change logo":"Upload logo"}<input type="file" id="set-logo-file" accept="image/png,image/jpeg,image/webp" hidden></label>
-              ${k(a.centreLogo)?'<button type="button" class="btn btn-sm btn-outline" id="set-logo-remove">Remove logo</button>':""}
+              <label class="btn btn-sm btn-primary" style="cursor:pointer;">${N(a.centreLogo)?"Change logo":"Upload logo"}<input type="file" id="set-logo-file" accept="image/png,image/jpeg,image/webp" hidden></label>
+              ${N(a.centreLogo)?'<button type="button" class="btn btn-sm btn-outline" id="set-logo-remove">Remove logo</button>':""}
             </div>
             <div class="auth-error" id="set-logo-msg"></div>
           </div>
@@ -82,7 +82,7 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
               <label class="form-label">CSC ID (Optional)</label>
               <input type="text" class="form-control" name="cscId" maxlength="30" value="${l(a.cscId||"")}">
             </div>
-            <div class="form-group" id="settings-akshaya-wrap" ${I(a.centreType)?"":"hidden"}>
+            <div class="form-group" id="settings-akshaya-wrap" ${E(a.centreType)?"":"hidden"}>
               <label class="form-label">Akshaya Centre ID</label>
               <input type="text" class="form-control" name="akshayaId" maxlength="30" value="${l(a.akshayaId||"")}">
             </div>
@@ -137,21 +137,21 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
             <div class="form-group">
               <label class="form-label">Colour Theme</label>
               <select class="form-control" id="set-palette">
-                <option value="zoho" ${A()==="zoho"?"selected":""}>Zoho Books style</option>
-                <option value="erpnext" ${A()==="erpnext"?"selected":""}>ERPNext style</option>
+                <option value="zoho" ${_()==="zoho"?"selected":""}>Zoho Books style</option>
+                <option value="erpnext" ${_()==="erpnext"?"selected":""}>ERPNext style</option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label">Night Mode</label>
               <select class="form-control" id="set-night-mode">
-                <option value="light" ${D()==="light"?"selected":""}>Off (Day)</option>
-                <option value="dark" ${D()==="dark"?"selected":""}>On (Night)</option>
+                <option value="light" ${q()==="light"?"selected":""}>Off (Day)</option>
+                <option value="dark" ${q()==="dark"?"selected":""}>On (Night)</option>
               </select>
             </div>
           </div>
           <span class="form-hint">Applies instantly. Night mode can also be switched with the moon button at the top.</span>
           <label style="display:flex; gap:8px; align-items:center; font-size:13px; margin-top:12px;">
-            <input type="checkbox" id="set-close-warning" ${z()?"checked":""}>
+            <input type="checkbox" id="set-close-warning" ${j()?"checked":""}>
             Warn me when closing the tab if data is unsaved or not backed up
           </label>
         </div>
@@ -181,7 +181,7 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
               <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; background:var(--color-surface-alt); padding:10px; border-radius:var(--radius-sm);">
                 ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","Document Workbench"],["tools","PDF & Image Tools"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,i])=>`
                   <label style="font-size:12px; display:flex; align-items:center; gap:6px;">
-                    <input type="checkbox" name="mod_${e}" ${E[e]!==!1?"checked":""}> ${i}
+                    <input type="checkbox" name="mod_${e}" ${$[e]!==!1?"checked":""}> ${i}
                   </label>`).join("")}
               </div>
             </div>
@@ -216,13 +216,16 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
     <!-- Immutable Financial & System Audit Log -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title">Financial & Operational Audit Trail (${x.length} recent events)</div>
+        <div class="card-title">Audit log — sign-ins, backups and changes (${I.length} entries, latest ${w.length} shown)</div>
+        <button type="button" class="btn btn-sm btn-outline" id="audit-csv-btn">Download full audit log (CSV)</button>
       </div>
+      <p class="form-hint" style="margin:0 0 8px;">Every sign-in (including failed attempts), sign-out, backup and important change is recorded with the user and time. Entries cannot be edited or deleted in VLEBook, and each entry is linked to the one before it so changes can be detected. <span id="audit-chain"></span></p>
       <div class="table-wrap" style="max-height:260px; overflow-y:auto;">
         <table class="data-table">
           <thead>
             <tr>
               <th>Timestamp</th>
+              <th>User</th>
               <th>Action</th>
               <th>Module</th>
               <th>Entity ID</th>
@@ -230,9 +233,10 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
             </tr>
           </thead>
           <tbody>
-            ${x.length===0?'<tr><td colspan="5" style="text-align:center; padding:14px;">No audited operations recorded yet.</td></tr>':x.map(e=>`
+            ${w.length===0?'<tr><td colspan="6" style="text-align:center; padding:14px;">No audited operations recorded yet.</td></tr>':w.map(e=>`
                   <tr>
-                    <td>${l(H(e.timestamp,!0))}</td>
+                    <td>${l(A(e.timestamp,!0))}</td>
+                    <td data-no-i18n>${l(e.userName||"—")}</td>
                     <td><span class="badge badge-info">${l(e.action)}</span></td>
                     <td>${l(e.module)}</td>
                     <td style="font-family:var(--font-mono);">${l(e.entityId)}</td>
@@ -242,4 +246,4 @@ import{getRecord as b,putRecord as h,getAllRecords as q,clearAllStores as _}from
         </table>
       </div>
     </div>
-  `;let c=null;const w=async(e=!1)=>{const i=s.querySelector("#settings-profile-form");if(!i)return;const t=new FormData(i),r=t.get("language")||"en",u=r!==O(),n=await b("settings","CENTRE_CONFIG")||a,f=U({centreType:t.get("centreType")||n.centreType,address:t.get("address"),district:t.get("district"),state:t.get("state"),pinCode:t.get("pinCode"),gstin:t.get("gstin"),cscId:t.get("cscId"),akshayaId:I(t.get("centreType")||n.centreType)?t.get("akshayaId"):""}),d=s.querySelector("#settings-centre-error");d&&(d.textContent=f.error);const v=f.error?{centreType:n.centreType,address:n.address,district:n.district,state:n.state,pinCode:n.pinCode,gstin:n.gstin,cscId:n.cscId,akshayaId:n.akshayaId}:f.values,m=s.querySelector("#settings-akshaya-wrap");if(m&&(m.hidden=!I(t.get("centreType"))),await h("settings",{...n,id:"CENTRE_CONFIG",centreName:(t.get("centreName")||"").trim()||n.centreName,ownerName:(t.get("ownerName")||"").trim(),mobile:(t.get("mobile")||"").trim(),...v,centreType:v.centreType||n.centreType,invoicePrefix:(t.get("invoicePrefix")||"").trim()||"VLE",nextInvoiceNumber:Number(t.get("nextInvoiceNumber")||1001),financialYear:(t.get("financialYear")||"").trim(),language:r,backupReminderDays:Number(t.get("backupReminderDays")||3),footerNote:(t.get("footerNote")||"").trim()}),u){const{switchLanguage:p}=await import("../app.js");await p(r);return}o&&await o(),e&&await g(s,o)},N=s.querySelector("#settings-profile-form");N?.addEventListener("input",()=>{c&&clearTimeout(c),c=setTimeout(()=>w(!1),380)}),N?.addEventListener("change",()=>{c&&clearTimeout(c),w(!1)});const P=async e=>{const t={...await b("settings","CENTRE_CONFIG")};e?t.centreLogo=e:delete t.centreLogo,await h("settings",t),await j(t),await g(s,o)};s.querySelector("#set-logo-file")?.addEventListener("change",async e=>{const i=e.target.files?.[0];if(i)try{await P(await Y(i))}catch(t){const r=s.querySelector("#set-logo-msg");r&&(r.textContent=t.message)}}),s.querySelector("#set-logo-remove")?.addEventListener("click",async()=>{confirm("Remove the centre logo from the screen, invoices and PDFs?")&&await P(null)}),N?.addEventListener("submit",async e=>{e.preventDefault(),c&&clearTimeout(c),await w(!0)}),s.querySelector("#set-palette")?.addEventListener("change",e=>S({palette:e.target.value})),s.querySelector("#set-night-mode")?.addEventListener("change",e=>S({mode:e.target.value})),s.querySelector("#set-close-warning")?.addEventListener("change",e=>V(e.target.checked));const $=async(e=!1)=>{const i=s.querySelector("#settings-security-form");if(!i)return;const t=new FormData(i),r={...E,dashboard:!0,backup:!0,settings:!0};["customers","services","billing","accounts","pending","aeps","commissions","staff","inventory","studio","tools","catalogue","reports","vault"].forEach(p=>{r[p]=t.get(`mod_${p}`)==="on"});const u=await b("settings","CENTRE_CONFIG")||a,{lockPin:n,...f}=u;let d=u.lockPinHash||"";const v=String(t.get("lockPin")||"").trim(),m=s.querySelector("#pin-status-hint");if(t.get("removePin")==="on")d="";else if(v){if(!/^\d{4,6}$/.test(v)){m&&(m.textContent="PIN must be 4 to 6 digits. Not saved.");return}d=await B(v);const p=i.querySelector('[name="lockPin"]');p&&(p.value="")}await h("settings",{...f,id:"CENTRE_CONFIG",lockPinHash:d,inactivityLockMinutes:Number(t.get("inactivityLockMinutes")||0),enabledModules:r}),m&&(m.textContent=d?"PIN active (stored as a secure hash)":"No PIN set"),o&&await o(),e&&await g(s,o)},L=s.querySelector("#settings-security-form");L?.addEventListener("change",()=>$(!1)),L?.addEventListener("submit",async e=>{e.preventDefault(),await $(!0)});const T=async(e=!1)=>{const i=s.querySelector("#settings-wa-form");if(!i)return;const t=new FormData(i),r=structuredClone(y);r.en.invoice=t.get("en_invoice"),r.hi.invoice=t.get("hi_invoice"),r.ml.invoice=t.get("ml_invoice");const u=await b("settings","CENTRE_CONFIG")||a;await h("settings",{...u,id:"CENTRE_CONFIG",whatsappTemplates:r}),e&&await g(s,o)},C=s.querySelector("#settings-wa-form");C?.addEventListener("change",()=>T(!1)),C?.addEventListener("submit",async e=>{e.preventDefault(),await T(!0)}),s.querySelector("#set-load-acceptance-btn")?.addEventListener("click",async()=>{await G(),o&&await o(),await g(s,o)}),s.querySelector("#set-reset-db-btn")?.addEventListener("click",async()=>{confirm("Are you sure you want to clear all local database records and restore clean factory defaults?")&&(await _(!1),o&&await o(),await g(s,o))})}export{F as CENTRE_TYPES,g as renderSettingsModule};
+  `;let c=null;const x=async(e=!1)=>{const i=s.querySelector("#settings-profile-form");if(!i)return;const t=new FormData(i),r=t.get("language")||"en",u=r!==B(),n=await b("settings","CENTRE_CONFIG")||a,f=Z({centreType:t.get("centreType")||n.centreType,address:t.get("address"),district:t.get("district"),state:t.get("state"),pinCode:t.get("pinCode"),gstin:t.get("gstin"),cscId:t.get("cscId"),akshayaId:E(t.get("centreType")||n.centreType)?t.get("akshayaId"):""}),d=s.querySelector("#settings-centre-error");d&&(d.textContent=f.error);const v=f.error?{centreType:n.centreType,address:n.address,district:n.district,state:n.state,pinCode:n.pinCode,gstin:n.gstin,cscId:n.cscId,akshayaId:n.akshayaId}:f.values,m=s.querySelector("#settings-akshaya-wrap");if(m&&(m.hidden=!E(t.get("centreType"))),await h("settings",{...n,id:"CENTRE_CONFIG",centreName:(t.get("centreName")||"").trim()||n.centreName,ownerName:(t.get("ownerName")||"").trim(),mobile:(t.get("mobile")||"").trim(),...v,centreType:v.centreType||n.centreType,invoicePrefix:(t.get("invoicePrefix")||"").trim()||"VLE",nextInvoiceNumber:Number(t.get("nextInvoiceNumber")||1001),financialYear:(t.get("financialYear")||"").trim(),language:r,backupReminderDays:Number(t.get("backupReminderDays")||3),footerNote:(t.get("footerNote")||"").trim()}),u){const{switchLanguage:p}=await import("../app.js");await p(r);return}o&&await o(),e&&await g(s,o)},k=s.querySelector("#settings-profile-form");k?.addEventListener("input",()=>{c&&clearTimeout(c),c=setTimeout(()=>x(!1),380)}),k?.addEventListener("change",()=>{c&&clearTimeout(c),x(!1)});const L=async e=>{const t={...await b("settings","CENTRE_CONFIG")};e?t.centreLogo=e:delete t.centreLogo,await h("settings",t),await K(t),await g(s,o)};s.querySelector("#set-logo-file")?.addEventListener("change",async e=>{const i=e.target.files?.[0];if(i)try{await L(await J(i))}catch(t){const r=s.querySelector("#set-logo-msg");r&&(r.textContent=t.message)}}),s.querySelector("#set-logo-remove")?.addEventListener("click",async()=>{confirm("Remove the centre logo from the screen, invoices and PDFs?")&&await L(null)}),k?.addEventListener("submit",async e=>{e.preventDefault(),c&&clearTimeout(c),await x(!0)}),s.querySelector("#set-palette")?.addEventListener("change",e=>D({palette:e.target.value})),s.querySelector("#set-night-mode")?.addEventListener("change",e=>D({mode:e.target.value})),s.querySelector("#set-close-warning")?.addEventListener("change",e=>U(e.target.checked));const P=async(e=!1)=>{const i=s.querySelector("#settings-security-form");if(!i)return;const t=new FormData(i),r={...$,dashboard:!0,backup:!0,settings:!0};["customers","services","billing","accounts","pending","aeps","commissions","staff","inventory","studio","tools","catalogue","reports","vault"].forEach(p=>{r[p]=t.get(`mod_${p}`)==="on"});const u=await b("settings","CENTRE_CONFIG")||a,{lockPin:n,...f}=u;let d=u.lockPinHash||"";const v=String(t.get("lockPin")||"").trim(),m=s.querySelector("#pin-status-hint");if(t.get("removePin")==="on")d="";else if(v){if(!/^\d{4,6}$/.test(v)){m&&(m.textContent="PIN must be 4 to 6 digits. Not saved.");return}d=await V(v);const p=i.querySelector('[name="lockPin"]');p&&(p.value="")}await h("settings",{...f,id:"CENTRE_CONFIG",lockPinHash:d,inactivityLockMinutes:Number(t.get("inactivityLockMinutes")||0),enabledModules:r}),m&&(m.textContent=d?"PIN active (stored as a secure hash)":"No PIN set"),o&&await o(),e&&await g(s,o)},T=s.querySelector("#settings-security-form");T?.addEventListener("change",()=>P(!1)),T?.addEventListener("submit",async e=>{e.preventDefault(),await P(!0)});const C=async(e=!1)=>{const i=s.querySelector("#settings-wa-form");if(!i)return;const t=new FormData(i),r=structuredClone(y);r.en.invoice=t.get("en_invoice"),r.hi.invoice=t.get("hi_invoice"),r.ml.invoice=t.get("ml_invoice");const u=await b("settings","CENTRE_CONFIG")||a;await h("settings",{...u,id:"CENTRE_CONFIG",whatsappTemplates:r}),e&&await g(s,o)},S=s.querySelector("#settings-wa-form");S?.addEventListener("change",()=>C(!1)),S?.addEventListener("submit",async e=>{e.preventDefault(),await C(!0)}),s.querySelector("#set-load-acceptance-btn")?.addEventListener("click",async()=>{await H(),o&&await o(),await g(s,o)}),s.querySelector("#audit-csv-btn")?.addEventListener("click",async()=>{const{auditCSV:e}=await import("../core/auditlog.js"),i=`${z(String(a.centreName||"VLEBook"))}_audit_log_${new Date().toISOString().slice(0,10)}.csv`;Y(await e(),i,"text/csv")}),import("../core/auditlog.js").then(async({verifyAuditChain:e})=>{const i=await e(),t=s.querySelector("#audit-chain");t&&(t.innerHTML=i.ok?`<strong style="color:var(--color-success);">Chain check: intact</strong> (${i.chained} linked entries${i.earlier?`, ${i.earlier} earlier entries made before linking`:""}).`:`<strong style="color:var(--color-danger);">Chain check: an entry was changed or removed outside VLEBook</strong> (near entry ${l(String(i.brokenAt?.seq||""))}, ${l(A(i.brokenAt?.timestamp||"",!0))}).`)}),s.querySelector("#set-reset-db-btn")?.addEventListener("click",async()=>{confirm("Are you sure you want to clear all local business records and restore clean factory defaults? Sign-in accounts and the audit log are kept.")&&(await O(!1),await W("DATA_RESET","settings","","All business records on this computer were cleared (Reset Local Database)"),o&&await o(),await g(s,o))})}export{F as CENTRE_TYPES,g as renderSettingsModule};
