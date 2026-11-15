@@ -20,7 +20,7 @@ Passwords of VLEBook users are stored only as salted hashes. The centre logo is 
 
 When VLEBook is online it exchanges the following with the Techmin registry:
 
-1. **Centre registration** (when the Owner account is created): centre name and type, Owner's name, mobile number, email, address, district, state and PIN code as entered in Settings, and the computer's Device Code (a random code created by VLEBook; it does not contain hardware or personal identifiers).
+1. **Centre registration** (when the Owner account is created): centre name and type, Owner's name, mobile number, email, full address, district, state and PIN code, and — if you enter them — the GSTIN, CSC ID and Akshaya Centre ID, as entered at registration or in Settings, and the computer's Device Code (a random code created by VLEBook; it does not contain hardware or personal identifiers).
 2. **Check-in** (when VLEBook opens and every few hours): Device Code, Centre ID, VLEBook version, number of active users, current licence number, and — only if you turn on push notifications — the push address given by your browser's push service.
 3. **Licence and payment records** created by Techmin: plan, validity, computers and users allowed, amount, payment mode and reference.
 4. **Support communications** you send us (WhatsApp, email, phone).
@@ -29,7 +29,7 @@ Techmin may also see the IP address and technical details of each request, as lo
 
 ## 4. Why we use it (purposes and legal basis)
 
-- To register your Centre, issue, renew, verify and cancel licences, and prevent misuse of licence keys.
+- To register your Centre, verify its identity (GSTIN, CSC ID, Akshaya ID), issue, renew, verify and cancel licences, raise invoices for licence fees, and prevent misuse of licence keys.
 - To send service notices, renewal and payment reminders, security alerts and software update information inside VLEBook, by push notification (if allowed), WhatsApp, SMS or email.
 - To provide support, including password-reset codes.
 - To keep accounts and tax records and meet legal obligations.
@@ -66,7 +66,7 @@ VLEBook is meant for businesses. It must not be used by persons under 18 years o
 
 ## 10. Changes
 
-We may update this Policy. The current version is always available in VLEBook (Help & Legal) and at our website, with its effective date. Material changes will be notified in VLEBook.
+We may update this Policy. The current version is always available in VLEBook (Help & Legal) and at our website, with its effective date. Material changes will be notified in VLEBook. This Policy is also available in Hindi and Malayalam; if a translation differs, the English version prevails.
 
 ## 11. Grievance Officer and contact
 

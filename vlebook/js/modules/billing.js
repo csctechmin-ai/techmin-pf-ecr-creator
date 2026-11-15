@@ -1,4 +1,4 @@
-import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as oe}from"../core/branding.js";import{getAllRecords as _,getRecord as ne,putRecord as re,deleteRecord as me}from"../core/db.js";import{calculateInvoiceLine as be,createMultiServiceInvoice as ge,cancelInvoiceWithReversal as fe,getCustomer360Profile as ye,notifyCrossTabSync as he}from"../core/accounting.js";import{SERVICE_CATEGORIES as xe}from"./services.js";import{uid as N,todayISO as de,nowISO as Pe,formatINR as l,fromPaise as P,toPaise as f,amountInWordsINR as J,esc as i,buildWhatsAppURL as $e,generateSimplePDFBlob as Se,downloadFile as Ce,printDocumentSheet as Ae}from"../core/utils.js";import{formatWhatsAppTemplate as Ie,getLang as we}from"../core/i18n.js";let c=[],p=null,y="NONE",C=!0,k=null,L="A4",A=null,M=null,Y=!1,$={mobile:"",name:""},x=(()=>{try{return localStorage.getItem("vlebook_last_staff")||""}catch{return""}})();async function B(){await re("drafts",{id:"DRAFT_BILLING_VISIT",currentLines:c,selectedCustomerId:p?.id||null,typedCustomer:$,gstMode:y,applyRoundOff:C,savedAt:Pe()})}async function d(t,s){const[b,u,I,S,m,pe]=await Promise.all([_("services"),_("customers"),_("bills"),ne("settings","CENTRE_CONFIG"),ne("drafts","DRAFT_BILLING_VISIT"),_("staff")]),w=pe.filter(e=>e.active!==!1).sort((e,a)=>e.name.localeCompare(a.name));x&&!w.some(e=>e.id===x)&&(x="");const R=ve();R?.staffId&&R.role==="OPERATOR"&&w.some(e=>e.id===R.staffId)&&(x=R.staffId),!Y&&m&&Array.isArray(m.currentLines)&&m.currentLines.length>0&&(c=m.currentLines,m.selectedCustomerId&&(p=u.find(e=>e.id===m.selectedCustomerId)||null),m.typedCustomer&&($={mobile:"",name:"",...m.typedCustomer}),m.gstMode&&(y=m.gstMode),typeof m.applyRoundOff=="boolean"&&(C=m.applyRoundOff),Y=!0),Y=!0;const X=sessionStorage.getItem("vlebook_preview_bill_id");X&&(sessionStorage.removeItem("vlebook_preview_bill_id"),k=X);const Z=sessionStorage.getItem("vlebook_preselect_customer");if(Z){sessionStorage.removeItem("vlebook_preselect_customer");const e=u.find(a=>a.id===Z);e&&(p=e)}const ee=sessionStorage.getItem("vlebook_workbench_bill_item");if(ee){sessionStorage.removeItem("vlebook_workbench_bill_item");try{const e=JSON.parse(ee);c.push(e)}catch{}}const F=p?await ye(p.id):null,z=F?.metrics?.availableAdvancePaise||0,q=c.map(e=>be(e,y)),te=q.reduce((e,a)=>e+a.lineGovtFeePaise,0),ae=q.reduce((e,a)=>e+a.lineServiceChargePaise,0),ie=q.reduce((e,a)=>e+a.totalTaxPaise,0),O=te+ae+ie,T=C?Math.round(O/100)*100:O,ue=T-O,D=[...I].sort((e,a)=>String(a.createdAt||a.date).localeCompare(String(e.createdAt||e.date))),n=k?I.find(e=>e.id===k):D[0];t.innerHTML=`
+import{getCurrentUser as ge,can as re}from"../core/auth.js";import{logoImgTag as de}from"../core/branding.js";import{getLicenceState as fe,BASIC_DAILY_BILLS as ce}from"../core/licence.js";import{getAllRecords as N,getRecord as pe,putRecord as ve,deleteRecord as ye}from"../core/db.js";import{calculateInvoiceLine as he,createMultiServiceInvoice as xe,cancelInvoiceWithReversal as Pe,getCustomer360Profile as $e,notifyCrossTabSync as Se}from"../core/accounting.js";import{SERVICE_CATEGORIES as Ce}from"./services.js";import{uid as L,todayISO as J,nowISO as Ie,formatINR as l,fromPaise as P,toPaise as g,amountInWordsINR as X,esc as i,buildWhatsAppURL as Ae,generateSimplePDFBlob as we,downloadFile as Te,printDocumentSheet as Ee}from"../core/utils.js";import{formatWhatsAppTemplate as ke,getLang as Ne}from"../core/i18n.js";let c=[],p=null,f="NONE",C=!0,R=null,F="A4",I=null,M=null,Z=!1,$={mobile:"",name:""},h=(()=>{try{return localStorage.getItem("vlebook_last_staff")||""}catch{return""}})();async function z(){await ve("drafts",{id:"DRAFT_BILLING_VISIT",currentLines:c,selectedCustomerId:p?.id||null,typedCustomer:$,gstMode:f,applyRoundOff:C,savedAt:Ie()})}async function d(t,s){const[b,v,A,S,m,me]=await Promise.all([N("services"),N("customers"),N("bills"),pe("settings","CENTRE_CONFIG"),pe("drafts","DRAFT_BILLING_VISIT"),N("staff")]),w=me.filter(e=>e.active!==!1).sort((e,a)=>e.name.localeCompare(a.name));h&&!w.some(e=>e.id===h)&&(h="");const q=ge();q?.staffId&&q.role==="OPERATOR"&&w.some(e=>e.id===q.staffId)&&(h=q.staffId),!Z&&m&&Array.isArray(m.currentLines)&&m.currentLines.length>0&&(c=m.currentLines,m.selectedCustomerId&&(p=v.find(e=>e.id===m.selectedCustomerId)||null),m.typedCustomer&&($={mobile:"",name:"",...m.typedCustomer}),m.gstMode&&(f=m.gstMode),typeof m.applyRoundOff=="boolean"&&(C=m.applyRoundOff),Z=!0),Z=!0;const ee=sessionStorage.getItem("vlebook_preview_bill_id");ee&&(sessionStorage.removeItem("vlebook_preview_bill_id"),R=ee);const te=sessionStorage.getItem("vlebook_preselect_customer");if(te){sessionStorage.removeItem("vlebook_preselect_customer");const e=v.find(a=>a.id===te);e&&(p=e)}const ae=sessionStorage.getItem("vlebook_workbench_bill_item");if(ae){sessionStorage.removeItem("vlebook_workbench_bill_item");try{const e=JSON.parse(ae);c.push(e)}catch{}}const D=p?await $e(p.id):null,O=D?.metrics?.availableAdvancePaise||0,G=c.map(e=>he(e,f)),ie=G.reduce((e,a)=>e+a.lineGovtFeePaise,0),se=G.reduce((e,a)=>e+a.lineServiceChargePaise,0),le=G.reduce((e,a)=>e+a.totalTaxPaise,0),V=ie+se+le,T=C?Math.round(V/100)*100:V,be=T-V,j=[...A].sort((e,a)=>String(a.createdAt||a.date).localeCompare(String(e.createdAt||e.date))),n=R?A.find(e=>e.id===R):j[0];t.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Unified Counter Multi-Service Billing & Invoicing</h1>
@@ -15,9 +15,9 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
         <div style="display:flex; gap:8px; align-items:center;">
           <label class="form-label" style="margin:0;">Tax Mode:</label>
           <select class="form-control" id="bill-gst-mode" style="width:190px;">
-            <option value="NONE" ${y==="NONE"?"selected":""}>Non-GST Bill</option>
-            <option value="INTRA" ${y==="INTRA"?"selected":""}>GST Intra-State (CGST+SGST)</option>
-            <option value="INTER" ${y==="INTER"?"selected":""}>GST Inter-State (IGST)</option>
+            <option value="NONE" ${f==="NONE"?"selected":""}>Non-GST Bill</option>
+            <option value="INTRA" ${f==="INTRA"?"selected":""}>GST Intra-State (CGST+SGST)</option>
+            <option value="INTER" ${f==="INTER"?"selected":""}>GST Inter-State (IGST)</option>
           </select>
         </div>
       </div>
@@ -34,16 +34,16 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
         </div>
         <div class="form-group">
           <label class="form-label">Invoice Date</label>
-          <input type="date" class="form-control" id="bill-date" value="${de()}">
+          <input type="date" class="form-control" id="bill-date" value="${J()}">
         </div>
       </div>
 
-      ${F?`<div class="callout success" style="margin-bottom:12px;">
+      ${D?`<div class="callout success" style="margin-bottom:12px;">
               <div>
                 <strong>Matched Customer 360°:</strong> ${i(p.name)} (${i(p.id)}) |
-                Previous Visits: <strong>${F.metrics.totalVisits}</strong> |
-                Pending Due: <strong>${l(F.metrics.outstandingDuePaise)}</strong> |
-                Available Advance: <strong>${l(z)}</strong>
+                Previous Visits: <strong>${D.metrics.totalVisits}</strong> |
+                Pending Due: <strong>${l(D.metrics.outstandingDuePaise)}</strong> |
+                Available Advance: <strong>${l(O)}</strong>
               </div>
               <button type="button" class="btn btn-xs btn-outline" id="bill-clear-cust">Clear</button>
             </div>`:""}
@@ -59,7 +59,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
         <button type="button" class="btn btn-outline" id="bill-add-five-demo-btn" title="Add 5 common citizen services in one click">5-Service Preset</button>
       </div>
 
-      ${A?(()=>{const e=A==="EDIT"?b.find(a=>a.id===M)||b[0]:null;return`
+      ${I?(()=>{const e=I==="EDIT"?b.find(a=>a.id===M)||b[0]:null;return`
               <div class="card" style="background:var(--color-surface-alt); border:2px solid var(--color-teal); margin-bottom:14px;">
                 <div class="card-header" style="padding-bottom:8px; margin-bottom:10px;">
                   <div class="card-title" style="font-size:14px;">
@@ -76,7 +76,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
                   <div class="form-group">
                     <label class="form-label">Category</label>
                     <select class="form-control" name="category">
-                      ${xe.map(a=>`<option value="${i(a)}" ${e?.category===a?"selected":""}>${i(a)}</option>`).join("")}
+                      ${Ce.map(a=>`<option value="${i(a)}" ${e?.category===a?"selected":""}>${i(a)}</option>`).join("")}
                     </select>
                   </div>
                   <div class="form-group">
@@ -117,7 +117,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
             </tr>
           </thead>
           <tbody>
-            ${q.map((e,a)=>`
+            ${G.map((e,a)=>`
               <tr>
                 <td>${a+1}</td>
                 <td>
@@ -156,7 +156,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
             <label class="form-label">Handled by (Staff)</label>
             <select class="form-control" id="bill-staff">
               <option value="">— Owner / No staff commission —</option>
-              ${w.map(e=>`<option value="${i(e.id)}" ${e.id===x?"selected":""}>${i(e.name)}${e.role?` (${i(e.role)})`:""}</option>`).join("")}
+              ${w.map(e=>`<option value="${i(e.id)}" ${e.id===h?"selected":""}>${i(e.name)}${e.role?` (${i(e.role)})`:""}</option>`).join("")}
             </select>
             ${w.length===0?'<span class="form-hint">Add staff in Staff Commission to track commission per bill.</span>':""}
           </div>
@@ -175,8 +175,8 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
             </div>
             <div class="form-group">
               <label class="form-label">Adjust Customer Advance (₹)</label>
-              <input type="number" step="0.01" min="0" max="${P(z)}" class="form-control" id="bill-advance-adj" value="0">
-              <span class="form-hint">Available Advance: ${l(z)}</span>
+              <input type="number" step="0.01" min="0" max="${P(O)}" class="form-control" id="bill-advance-adj" value="0">
+              <span class="form-hint">Available Advance: ${l(O)}</span>
             </div>
             <div class="form-group">
               <label class="form-label">Amount Paid Now (₹)</label>
@@ -196,26 +196,26 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
         <div class="card" style="background:var(--color-surface-alt); margin-bottom:0;">
           <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
             <span>Government / Challan Pass-through:</span>
-            <strong style="font-family:var(--font-mono); color:var(--color-warning);">${l(te)}</strong>
+            <strong style="font-family:var(--font-mono); color:var(--color-warning);">${l(ie)}</strong>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
             <span>Centre Taxable Service Revenue:</span>
-            <strong style="font-family:var(--font-mono); color:var(--color-success);">${l(ae)}</strong>
+            <strong style="font-family:var(--font-mono); color:var(--color-success);">${l(se)}</strong>
           </div>
-          ${y!=="NONE"?`<div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                  <span>${y==="INTRA"?"CGST + SGST":"IGST"} on Service Charge:</span>
-                  <strong style="font-family:var(--font-mono);">${l(ie)}</strong>
+          ${f!=="NONE"?`<div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                  <span>${f==="INTRA"?"CGST + SGST":"IGST"} on Service Charge:</span>
+                  <strong style="font-family:var(--font-mono);">${l(le)}</strong>
                 </div>`:""}
           <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12px; color:var(--color-text-muted);">
             <label><input type="checkbox" id="bill-roundoff-chk" ${C?"checked":""}> Apply Round-off</label>
-            <span>${l(ue)}</span>
+            <span>${l(be)}</span>
           </div>
           <div style="display:flex; justify-content:space-between; padding-top:8px; border-top:2px solid var(--color-border-strong); font-size:17px; font-weight:800;">
             <span>Grand Total Payable:</span>
             <span style="font-family:var(--font-mono); color:var(--color-navy);">${l(T)}</span>
           </div>
           <div style="font-size:11.5px; color:var(--color-text-muted); margin:6px 0 12px;">
-            <em>${i(J(T))}</em>
+            <em>${i(X(T))}</em>
           </div>
           <button type="button" class="btn btn-primary" id="bill-submit-btn" style="width:100%; padding:10px; font-size:14px;">
             Generate Invoice & Post to Ledger
@@ -228,7 +228,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
     <div class="grid-2">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">Recent Invoices (${D.length})</div>
+          <div class="card-title">Recent Invoices (${j.length})</div>
         </div>
         <div class="table-wrap">
           <table class="data-table">
@@ -244,7 +244,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
               </tr>
             </thead>
             <tbody>
-              ${D.length===0?'<tr><td colspan="7" style="text-align:center; padding:18px;">No invoices generated yet.</td></tr>':D.map(e=>`
+              ${j.length===0?'<tr><td colspan="7" style="text-align:center; padding:18px;">No invoices generated yet.</td></tr>':j.map(e=>`
                     <tr>
                       <td><strong>${i(e.invoiceNo)}</strong><br><small style="color:var(--color-text-muted);">${i(e.date)}</small></td>
                       <td>
@@ -261,7 +261,7 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
                         <div style="display:flex; gap:4px; flex-wrap:wrap;">
                           <button class="btn btn-xs btn-teal" data-view-bill="${i(e.id)}">View/Print</button>
                           <button class="btn btn-xs btn-outline" data-dup-bill="${i(e.id)}" title="Duplicate items into new bill">Dup</button>
-                          ${e.status!=="CANCELLED"&&le("cancel_invoice")?`<button class="btn btn-xs btn-danger" data-cancel-bill="${i(e.id)}" title="Cancel with Credit Note">Cancel</button>`:""}
+                          ${e.status!=="CANCELLED"&&re("cancel_invoice")?`<button class="btn btn-xs btn-danger" data-cancel-bill="${i(e.id)}" title="Cancel with Credit Note">Cancel</button>`:""}
                         </div>
                       </td>
                     </tr>`).join("")}
@@ -275,37 +275,37 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
           <div class="card-title">Invoice & Thermal Receipt Preview</div>
           ${n?`<div style="display:flex; gap:6px; flex-wrap:wrap;">
                   <div class="pill-tabs">
-                    <button class="pill-tab ${L==="A4"?"active":""}" data-fmt="A4">A4 Invoice</button>
-                    <button class="pill-tab ${L==="THERMAL"?"active":""}" data-fmt="THERMAL">80mm Thermal</button>
+                    <button class="pill-tab ${F==="A4"?"active":""}" data-fmt="A4">A4 Invoice</button>
+                    <button class="pill-tab ${F==="THERMAL"?"active":""}" data-fmt="THERMAL">80mm Thermal</button>
                   </div>
                   <button class="btn btn-xs btn-primary" id="bill-print-btn">Print</button>
                   <button class="btn btn-xs btn-outline" id="bill-pdf-btn">PDF</button>
-                  <a href="${i($e(n.customerMobile,Ie(we(),"invoice",{customerName:n.customerName,centreName:S?.centreName||"VLEBook Centre",invoiceNo:n.invoiceNo,totalAmount:l(n.grandTotalPaise),paidAmount:l(n.paidPaise),dueAmount:l(n.duePaise)},S?.whatsappTemplates)))}" target="_blank" rel="noopener" class="btn btn-xs btn-success">WhatsApp</a>
+                  <a href="${i(Ae(n.customerMobile,ke(Ne(),"invoice",{customerName:n.customerName,centreName:S?.centreName||"VLEBook Centre",invoiceNo:n.invoiceNo,totalAmount:l(n.grandTotalPaise),paidAmount:l(n.paidPaise),dueAmount:l(n.duePaise)},S?.whatsappTemplates)))}" target="_blank" rel="noopener" class="btn btn-xs btn-success">WhatsApp</a>
                 </div>`:""}
         </div>
         <div id="printable-area">
-          ${n?ce(n,S,L):'<p style="padding:20px; color:var(--color-text-muted); text-align:center;">Generate or select an invoice to preview A4 and Thermal layouts.</p>'}
+          ${n?ue(n,S,F):'<p style="padding:20px; color:var(--color-text-muted); text-align:center;">Generate or select an invoice to preview A4 and Thermal layouts.</p>'}
         </div>
       </div>
     </div>
-  `;const G=t.querySelector("#bill-cust-mobile"),V=t.querySelector("#bill-cust-name");G?.addEventListener("input",()=>{const e=G.value.replace(/\D/g,"").slice(-10);if(p||($.mobile=G.value),e.length===10){const a=u.find(o=>o.mobile===e);a&&(p=a,d(t,s))}}),V?.addEventListener("input",()=>{p||($.name=V.value)}),t.querySelector("#bill-clear-cust")?.addEventListener("click",()=>{p=null,$={mobile:"",name:""},d(t,s)}),t.querySelector("#bill-gst-mode")?.addEventListener("change",e=>{y=e.target.value,d(t,s)}),t.querySelector("#bill-roundoff-chk")?.addEventListener("change",e=>{C=e.target.checked,d(t,s)}),t.querySelector("#bill-add-line-btn")?.addEventListener("click",()=>{const e=t.querySelector("#bill-add-service-select")?.value,a=b.find(o=>o.id===e)||b[0];a&&(c.push({id:N("LN"),serviceId:a.id,serviceName:a.name,category:a.category,qty:1,ratePaise:a.customerPricePaise,govtFeePaise:a.govtFeePaise,thirdPartyPaise:a.thirdPartyPaise||0,directCostPaise:a.directCostPaise||0,commissionPaise:a.commissionPaise||0,discountPaise:0,gstApplicable:a.gstApplicable,gstRate:a.gstRate||18,createPendingTask:a.category==="Government & Citizen Services"}),B().catch(()=>{}),d(t,s))}),t.querySelector("#bill-quick-edit-srv-btn")?.addEventListener("click",()=>{M=t.querySelector("#bill-add-service-select")?.value||b[0]?.id,A="EDIT",d(t,s)}),t.querySelector("#bill-quick-new-srv-btn")?.addEventListener("click",()=>{A="CREATE",d(t,s)}),t.querySelector("#bill-close-quick-srv")?.addEventListener("click",()=>{A=null,d(t,s)}),t.querySelector("#bill-quick-srv-form")?.addEventListener("submit",async e=>{e.preventDefault();const a=new FormData(e.target),o=!a.get("id"),v=f(a.get("customerPrice")),j=f(a.get("govtFee")),Q=f(a.get("directCost")),h=o?null:b.find(g=>g.id===a.get("id")),r=await re("services",{...h,id:a.get("id")||N("SRV"),name:a.get("name").trim(),category:a.get("category"),state:h?.state||"Kerala / All India",customerPricePaise:v,govtFeePaise:j,thirdPartyPaise:0,serviceChargePaise:Math.max(0,v-j),directCostPaise:Q,commissionPaise:h?.commissionPaise||0,gstApplicable:h?.gstApplicable||!1,gstRate:h?.gstRate||18,turnaroundTime:h?.turnaroundTime||"Same Day",checklist:h?.checklist||"",active:!0});M=r.id,A=null,o?c.push({id:N("LN"),serviceId:r.id,serviceName:r.name,category:r.category,qty:1,ratePaise:r.customerPricePaise,govtFeePaise:r.govtFeePaise,thirdPartyPaise:0,directCostPaise:r.directCostPaise||0,commissionPaise:0,discountPaise:0,gstApplicable:!1,gstRate:18,createPendingTask:r.category==="Government & Citizen Services"}):c.forEach(g=>{g.serviceId===r.id&&(g.serviceName=r.name,g.ratePaise=r.customerPricePaise,g.govtFeePaise=r.govtFeePaise,g.directCostPaise=r.directCostPaise||0)}),he("SERVICE_UPDATED",{id:r.id}),await d(t,s)}),t.querySelector("#bill-add-five-demo-btn")?.addEventListener("click",()=>{c=b.slice(0,5).map(e=>({id:N("LN"),serviceId:e.id,serviceName:e.name,category:e.category,qty:e.id==="SRV-PRINT-BW"?10:1,ratePaise:e.customerPricePaise,govtFeePaise:e.govtFeePaise,thirdPartyPaise:e.thirdPartyPaise||0,directCostPaise:e.directCostPaise||0,commissionPaise:e.commissionPaise||0,discountPaise:0,gstApplicable:e.gstApplicable,gstRate:e.gstRate||18,createPendingTask:e.category==="Government & Citizen Services"})),d(t,s)}),t.querySelectorAll("[data-ln-field]").forEach(e=>{e.addEventListener("change",async()=>{const a=Number(e.getAttribute("data-idx")),o=e.getAttribute("data-ln-field"),v=c[a];v&&(o==="serviceName"?v.serviceName=e.value:o==="qty"?v.qty=Math.max(1,Number(e.value)||1):o==="rate"?v.ratePaise=f(e.value):o==="govtFee"?v.govtFeePaise=f(e.value):o==="discount"?v.discountPaise=f(e.value):o==="createPendingTask"&&(v.createPendingTask=e.checked),await B(),d(t,s))})}),t.querySelectorAll("[data-remove-ln]").forEach(e=>{e.addEventListener("click",async()=>{const a=Number(e.getAttribute("data-remove-ln"));a>=0&&a<c.length&&(c.splice(a,1),await B(),d(t,s))})});const E=t.querySelector("#bill-paid-now"),W=t.querySelector("#bill-advance-adj"),se=t.querySelector("#bill-due-preview"),H=t.querySelector("#bill-pay-mode");t.querySelector("#bill-staff")?.addEventListener("change",e=>{x=e.target.value;try{localStorage.setItem("vlebook_last_staff",x)}catch{}});const U=()=>{const e=f(E?.value||0),a=f(W?.value||0),o=Math.max(0,T-e-a);se&&(se.value=l(o))};E?.addEventListener("input",U),W?.addEventListener("input",U),H?.addEventListener("change",()=>{H.value==="CREDIT"&&E&&(E.value="0.00",U())}),t.querySelector("#bill-submit-btn")?.addEventListener("click",async()=>{const e=G?.value.trim()||"",a=V?.value.trim()||"Walk-in Citizen",o=t.querySelector("#bill-date")?.value||de(),v=H?.value||"CASH",j=v==="CREDIT"?0:f(E?.value||0),Q=f(W?.value||0),h=t.querySelector("#bill-notes")?.value||"";if(c.length===0){alert("Add at least one service to the visit before generating the invoice.");return}const r=e.replace(/\D/g,"");if(r&&r.length!==10){alert("Customer mobile must be 10 digits (or leave it blank for a walk-in).");return}let g;try{g=await ge({date:o,customerId:p?.id||null,customerName:a,customerMobile:e,gstMode:y,applyRoundOff:C,items:c,paidPaise:j,advanceAdjustedPaise:Q,paymentMode:v,staffId:x||null,staffName:w.find(K=>K.id===x)?.name||"",notes:h})}catch(K){alert(K.message||"Could not create the invoice.");return}k=g.id,c=[],p=null,$={mobile:"",name:""},await me("drafts","DRAFT_BILLING_VISIT",{notifyAutosave:!1}),await d(t,s)}),t.querySelectorAll("[data-view-bill]").forEach(e=>{e.addEventListener("click",()=>{k=e.getAttribute("data-view-bill"),d(t,s)})}),t.querySelectorAll("[data-dup-bill]").forEach(e=>{e.addEventListener("click",async()=>{const a=I.find(o=>o.id===e.getAttribute("data-dup-bill"));a&&(c=(a.items||[]).map(o=>({...o,id:N("LN"),ratePaise:o.unitRatePaise,govtFeePaise:o.unitGovtFeePaise,thirdPartyPaise:o.unitThirdPartyPaise,directCostPaise:o.unitDirectCostPaise,commissionPaise:o.unitCommissionPaise})),await B(),d(t,s))})}),t.querySelectorAll("[data-cancel-bill]").forEach(e=>{e.addEventListener("click",async()=>{const a=e.getAttribute("data-cancel-bill");if(!le("cancel_invoice"))return alert("You do not have permission to do this. Please ask the Owner.");await fe(a,"Operator issued cancellation & credit note"),await d(t,s)})}),t.querySelectorAll("[data-jump-c360]").forEach(e=>{e.addEventListener("click",a=>{a.preventDefault();const o=e.getAttribute("data-jump-c360");s("customers",o)})}),t.querySelectorAll("[data-fmt]").forEach(e=>{e.addEventListener("click",()=>{L=e.getAttribute("data-fmt"),d(t,s)})}),t.querySelector("#bill-print-btn")?.addEventListener("click",()=>{n&&Ae(ce(n,S,L))}),t.querySelector("#bill-pdf-btn")?.addEventListener("click",()=>{if(!n)return;const e=Se(`${S?.centreName||"VLEBook Digital Service Centre"} - Invoice ${n.invoiceNo}`,`Customer: ${n.customerName} (${n.customerMobile||"N/A"}) | Date: ${n.date} | Status: ${n.status}`,["Service","Qty","Govt Fee","Service Chg","Tax","Line Total"],(n.items||[]).map(a=>[a.serviceName.slice(0,24),String(a.qty),(a.lineGovtFeePaise/100).toFixed(2),(a.lineServiceChargePaise/100).toFixed(2),(a.totalTaxPaise/100).toFixed(2),(a.lineTotalPaise/100).toFixed(2)]),[`Grand Total: Rs.${(n.grandTotalPaise/100).toFixed(2)} (${J(n.grandTotalPaise)})`,`Paid: Rs.${(n.paidPaise/100).toFixed(2)} | Advance Adj: Rs.${((n.advanceAdjustedPaise||0)/100).toFixed(2)} | Balance Due: Rs.${(n.duePaise/100).toFixed(2)}`]);Ce(e,`Invoice_${n.invoiceNo}.pdf`,"application/pdf")})}function ce(t,s,b="A4"){return b==="THERMAL"?`
+  `;const _=t.querySelector("#bill-cust-mobile"),W=t.querySelector("#bill-cust-name");_?.addEventListener("input",()=>{const e=_.value.replace(/\D/g,"").slice(-10);if(p||($.mobile=_.value),e.length===10){const a=v.find(o=>o.mobile===e);a&&(p=a,d(t,s))}}),W?.addEventListener("input",()=>{p||($.name=W.value)}),t.querySelector("#bill-clear-cust")?.addEventListener("click",()=>{p=null,$={mobile:"",name:""},d(t,s)}),t.querySelector("#bill-gst-mode")?.addEventListener("change",e=>{f=e.target.value,d(t,s)}),t.querySelector("#bill-roundoff-chk")?.addEventListener("change",e=>{C=e.target.checked,d(t,s)}),t.querySelector("#bill-add-line-btn")?.addEventListener("click",()=>{const e=t.querySelector("#bill-add-service-select")?.value,a=b.find(o=>o.id===e)||b[0];a&&(c.push({id:L("LN"),serviceId:a.id,serviceName:a.name,category:a.category,qty:1,ratePaise:a.customerPricePaise,govtFeePaise:a.govtFeePaise,thirdPartyPaise:a.thirdPartyPaise||0,directCostPaise:a.directCostPaise||0,commissionPaise:a.commissionPaise||0,discountPaise:0,gstApplicable:a.gstApplicable,gstRate:a.gstRate||18,createPendingTask:a.category==="Government & Citizen Services"}),z().catch(()=>{}),d(t,s))}),t.querySelector("#bill-quick-edit-srv-btn")?.addEventListener("click",()=>{M=t.querySelector("#bill-add-service-select")?.value||b[0]?.id,I="EDIT",d(t,s)}),t.querySelector("#bill-quick-new-srv-btn")?.addEventListener("click",()=>{I="CREATE",d(t,s)}),t.querySelector("#bill-close-quick-srv")?.addEventListener("click",()=>{I=null,d(t,s)}),t.querySelector("#bill-quick-srv-form")?.addEventListener("submit",async e=>{e.preventDefault();const a=new FormData(e.target),o=!a.get("id"),u=g(a.get("customerPrice")),B=g(a.get("govtFee")),K=g(a.get("directCost")),y=o?null:b.find(x=>x.id===a.get("id")),r=await ve("services",{...y,id:a.get("id")||L("SRV"),name:a.get("name").trim(),category:a.get("category"),state:y?.state||"Kerala / All India",customerPricePaise:u,govtFeePaise:B,thirdPartyPaise:0,serviceChargePaise:Math.max(0,u-B),directCostPaise:K,commissionPaise:y?.commissionPaise||0,gstApplicable:y?.gstApplicable||!1,gstRate:y?.gstRate||18,turnaroundTime:y?.turnaroundTime||"Same Day",checklist:y?.checklist||"",active:!0});M=r.id,I=null,o?c.push({id:L("LN"),serviceId:r.id,serviceName:r.name,category:r.category,qty:1,ratePaise:r.customerPricePaise,govtFeePaise:r.govtFeePaise,thirdPartyPaise:0,directCostPaise:r.directCostPaise||0,commissionPaise:0,discountPaise:0,gstApplicable:!1,gstRate:18,createPendingTask:r.category==="Government & Citizen Services"}):c.forEach(x=>{x.serviceId===r.id&&(x.serviceName=r.name,x.ratePaise=r.customerPricePaise,x.govtFeePaise=r.govtFeePaise,x.directCostPaise=r.directCostPaise||0)}),Se("SERVICE_UPDATED",{id:r.id}),await d(t,s)}),t.querySelector("#bill-add-five-demo-btn")?.addEventListener("click",()=>{c=b.slice(0,5).map(e=>({id:L("LN"),serviceId:e.id,serviceName:e.name,category:e.category,qty:e.id==="SRV-PRINT-BW"?10:1,ratePaise:e.customerPricePaise,govtFeePaise:e.govtFeePaise,thirdPartyPaise:e.thirdPartyPaise||0,directCostPaise:e.directCostPaise||0,commissionPaise:e.commissionPaise||0,discountPaise:0,gstApplicable:e.gstApplicable,gstRate:e.gstRate||18,createPendingTask:e.category==="Government & Citizen Services"})),d(t,s)}),t.querySelectorAll("[data-ln-field]").forEach(e=>{e.addEventListener("change",async()=>{const a=Number(e.getAttribute("data-idx")),o=e.getAttribute("data-ln-field"),u=c[a];u&&(o==="serviceName"?u.serviceName=e.value:o==="qty"?u.qty=Math.max(1,Number(e.value)||1):o==="rate"?u.ratePaise=g(e.value):o==="govtFee"?u.govtFeePaise=g(e.value):o==="discount"?u.discountPaise=g(e.value):o==="createPendingTask"&&(u.createPendingTask=e.checked),await z(),d(t,s))})}),t.querySelectorAll("[data-remove-ln]").forEach(e=>{e.addEventListener("click",async()=>{const a=Number(e.getAttribute("data-remove-ln"));a>=0&&a<c.length&&(c.splice(a,1),await z(),d(t,s))})});const E=t.querySelector("#bill-paid-now"),H=t.querySelector("#bill-advance-adj"),oe=t.querySelector("#bill-due-preview"),U=t.querySelector("#bill-pay-mode");t.querySelector("#bill-staff")?.addEventListener("change",e=>{h=e.target.value;try{localStorage.setItem("vlebook_last_staff",h)}catch{}});const Q=()=>{const e=g(E?.value||0),a=g(H?.value||0),o=Math.max(0,T-e-a);oe&&(oe.value=l(o))};E?.addEventListener("input",Q),H?.addEventListener("input",Q),U?.addEventListener("change",()=>{U.value==="CREDIT"&&E&&(E.value="0.00",Q())}),t.querySelector("#bill-submit-btn")?.addEventListener("click",async()=>{const e=_?.value.trim()||"",a=W?.value.trim()||"Walk-in Citizen",o=t.querySelector("#bill-date")?.value||J(),u=U?.value||"CASH",B=u==="CREDIT"?0:g(E?.value||0),K=g(H?.value||0),y=t.querySelector("#bill-notes")?.value||"";if(c.length===0){alert("Add at least one service to the visit before generating the invoice.");return}const r=e.replace(/\D/g,"");if(r&&r.length!==10){alert("Customer mobile must be 10 digits (or leave it blank for a walk-in).");return}if((await fe()).tier==="BASIC"){const k=J();if((await N("bills")).filter(Y=>(Y.createdAt||Y.date||"").slice(0,10)===k&&Y.status!=="CANCELLED").length>=ce){alert(`Basic mode allows ${ce} invoices a day, and today's limit is reached. Buy or renew a licence in Users & Licence to make unlimited invoices.`);return}}let ne;try{ne=await xe({date:o,customerId:p?.id||null,customerName:a,customerMobile:e,gstMode:f,applyRoundOff:C,items:c,paidPaise:B,advanceAdjustedPaise:K,paymentMode:u,staffId:h||null,staffName:w.find(k=>k.id===h)?.name||"",notes:y})}catch(k){alert(k.message||"Could not create the invoice.");return}R=ne.id,c=[],p=null,$={mobile:"",name:""},await ye("drafts","DRAFT_BILLING_VISIT",{notifyAutosave:!1}),await d(t,s)}),t.querySelectorAll("[data-view-bill]").forEach(e=>{e.addEventListener("click",()=>{R=e.getAttribute("data-view-bill"),d(t,s)})}),t.querySelectorAll("[data-dup-bill]").forEach(e=>{e.addEventListener("click",async()=>{const a=A.find(o=>o.id===e.getAttribute("data-dup-bill"));a&&(c=(a.items||[]).map(o=>({...o,id:L("LN"),ratePaise:o.unitRatePaise,govtFeePaise:o.unitGovtFeePaise,thirdPartyPaise:o.unitThirdPartyPaise,directCostPaise:o.unitDirectCostPaise,commissionPaise:o.unitCommissionPaise})),await z(),d(t,s))})}),t.querySelectorAll("[data-cancel-bill]").forEach(e=>{e.addEventListener("click",async()=>{const a=e.getAttribute("data-cancel-bill");if(!re("cancel_invoice"))return alert("You do not have permission to do this. Please ask the Owner.");await Pe(a,"Operator issued cancellation & credit note"),await d(t,s)})}),t.querySelectorAll("[data-jump-c360]").forEach(e=>{e.addEventListener("click",a=>{a.preventDefault();const o=e.getAttribute("data-jump-c360");s("customers",o)})}),t.querySelectorAll("[data-fmt]").forEach(e=>{e.addEventListener("click",()=>{F=e.getAttribute("data-fmt"),d(t,s)})}),t.querySelector("#bill-print-btn")?.addEventListener("click",()=>{n&&Ee(ue(n,S,F))}),t.querySelector("#bill-pdf-btn")?.addEventListener("click",()=>{if(!n)return;const e=we(`${S?.centreName||"VLEBook Digital Service Centre"} - Invoice ${n.invoiceNo}`,`Customer: ${n.customerName} (${n.customerMobile||"N/A"}) | Date: ${n.date} | Status: ${n.status}`,["Service","Qty","Govt Fee","Service Chg","Tax","Line Total"],(n.items||[]).map(a=>[a.serviceName.slice(0,24),String(a.qty),(a.lineGovtFeePaise/100).toFixed(2),(a.lineServiceChargePaise/100).toFixed(2),(a.totalTaxPaise/100).toFixed(2),(a.lineTotalPaise/100).toFixed(2)]),[`Grand Total: Rs.${(n.grandTotalPaise/100).toFixed(2)} (${X(n.grandTotalPaise)})`,`Paid: Rs.${(n.paidPaise/100).toFixed(2)} | Advance Adj: Rs.${((n.advanceAdjustedPaise||0)/100).toFixed(2)} | Balance Due: Rs.${(n.duePaise/100).toFixed(2)}`]);Te(e,`Invoice_${n.invoiceNo}.pdf`,"application/pdf")})}function ue(t,s,b="A4"){return b==="THERMAL"?`
       <div class="invoice-sheet-thermal">
         <div style="text-align:center; border-bottom:1px dashed #000; padding-bottom:6px; margin-bottom:6px;">
-          ${oe(s,"display:block; margin:0 auto 4px; max-height:42px; max-width:60%; filter:grayscale(1);")}
+          ${de(s,"display:block; margin:0 auto 4px; max-height:42px; max-width:60%; filter:grayscale(1);")}
           <strong style="font-size:13px;">${i(s?.centreName||"VLEBook Centre")}</strong><br>
           <span>${i(s?.address||"")}</span><br>
           <span>Mob: ${i(s?.mobile||"")}</span>
-          ${s?.gstin?`<br><span>GSTIN: ${i(s.gstin)}</span>`:""}
+          ${s?.gstin?`<br><span>GSTIN: ${i(s.gstin)}</span>`:""}${s?.akshayaId?`<br><span>Akshaya ID: ${i(s.akshayaId)}</span>`:""}${s?.cscId?`<br><span>CSC ID: ${i(s.cscId)}</span>`:""}
         </div>
         <div>
           <strong>Inv: ${i(t.invoiceNo)}</strong> | Date: ${i(t.date)}<br>
           Cust: ${i(t.customerName)} (${i(t.customerMobile||"")})
         </div>
         <div style="border-top:1px dashed #000; border-bottom:1px dashed #000; margin:6px 0; padding:4px 0;">
-          ${(t.items||[]).map(u=>`
+          ${(t.items||[]).map(v=>`
             <div style="display:flex; justify-content:space-between;">
-              <span>${i(u.serviceName.slice(0,20))} x${u.qty}</span>
-              <span>${l(u.lineTotalPaise)}</span>
+              <span>${i(v.serviceName.slice(0,20))} x${v.qty}</span>
+              <span>${l(v.lineTotalPaise)}</span>
             </div>`).join("")}
         </div>
         <div style="display:flex; justify-content:space-between;"><span>Govt Fees:</span><span>${l(t.govtFeeTotalPaise)}</span></div>
@@ -323,12 +323,12 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
     <div class="invoice-sheet-a4">
       <div style="display:flex; justify-content:space-between; border-bottom:2px solid #12345A; padding-bottom:10px; margin-bottom:12px;">
         <div style="display:flex; gap:12px; align-items:flex-start;">
-          ${oe(s,"max-height:64px; max-width:140px; object-fit:contain;")}
+          ${de(s,"max-height:64px; max-width:140px; object-fit:contain;")}
           <div>
           <h2 style="color:#12345A; margin:0; font-size:18px;">${i(s?.centreName||"VLEBook Digital Service Centre")}</h2>
           <div>${i(s?.address||"")}, ${i(s?.district||"")}, ${i(s?.state||"")} - ${i(s?.pinCode||"")}</div>
           <div>Phone: ${i(s?.mobile||"")} | Email: ${i(s?.email||"")}</div>
-          ${s?.gstin?`<div><strong>GSTIN:</strong> ${i(s.gstin)}</div>`:""}
+          ${s?.gstin?`<div><strong>GSTIN:</strong> ${i(s.gstin)}</div>`:""}${s?.akshayaId?`<div><strong>Akshaya ID:</strong> ${i(s.akshayaId)}</div>`:""}${s?.cscId?`<div><strong>CSC ID:</strong> ${i(s.cscId)}</div>`:""}
           </div>
         </div>
         <div style="text-align:right;">
@@ -357,22 +357,22 @@ import{getCurrentUser as ve,can as le}from"../core/auth.js";import{logoImgTag as
           </tr>
         </thead>
         <tbody>
-          ${(t.items||[]).map((u,I)=>`
+          ${(t.items||[]).map((v,A)=>`
             <tr style="border-bottom:1px solid #E2E8F0;">
-              <td style="padding:6px;">${I+1}</td>
-              <td style="padding:6px;"><strong>${i(u.serviceName)}</strong></td>
-              <td style="padding:6px; text-align:right;">${u.qty}</td>
-              <td style="padding:6px; text-align:right;">${l(u.lineGovtFeePaise)}</td>
-              <td style="padding:6px; text-align:right;">${l(u.lineServiceChargePaise)}</td>
-              <td style="padding:6px; text-align:right;">${l(u.totalTaxPaise)}</td>
-              <td style="padding:6px; text-align:right; font-weight:700;">${l(u.lineTotalPaise)}</td>
+              <td style="padding:6px;">${A+1}</td>
+              <td style="padding:6px;"><strong>${i(v.serviceName)}</strong></td>
+              <td style="padding:6px; text-align:right;">${v.qty}</td>
+              <td style="padding:6px; text-align:right;">${l(v.lineGovtFeePaise)}</td>
+              <td style="padding:6px; text-align:right;">${l(v.lineServiceChargePaise)}</td>
+              <td style="padding:6px; text-align:right;">${l(v.totalTaxPaise)}</td>
+              <td style="padding:6px; text-align:right; font-weight:700;">${l(v.lineTotalPaise)}</td>
             </tr>`).join("")}
         </tbody>
       </table>
 
       <div style="display:flex; justify-content:space-between; align-items:flex-start;">
         <div style="max-width:55%; font-size:11.5px;">
-          <div><strong>Amount in Words:</strong> ${i(J(t.grandTotalPaise))}</div>
+          <div><strong>Amount in Words:</strong> ${i(X(t.grandTotalPaise))}</div>
           <div style="margin-top:6px; color:#475569;">${i(s?.footerNote||"")}</div>
         </div>
         <div style="min-width:230px; font-size:12px;">
