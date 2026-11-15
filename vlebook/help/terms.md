@@ -2,18 +2,20 @@
 
 Version {{version}} · Effective {{effectiveDate}}
 
-These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a proprietorship firm), {{address}} ("Techmin", "we", "us") and the person or business that installs or uses VLEBook ("you", "the Centre"). By creating an Owner account, activating a licence or using VLEBook you accept these Terms on behalf of yourself and your Centre. If you do not accept them, do not use VLEBook.
+These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a proprietorship firm), {{address}} ("Techmin", "we", "us") and the person or business that uses VLEBook ("you", "the Centre"). By creating an Owner account, activating a licence or using VLEBook you accept these Terms on behalf of yourself and your Centre. If you do not accept them, do not use VLEBook.
 
 ## 1. The software
 
 1. VLEBook is office management software for digital service centres (CSC, Akshaya, E-Seva, Jan Seva Kendra and similar), provided as a web application that runs in your browser.
 2. Your business records (customers, bills, payments, applications, AEPS entries, stock, staff, reports and backups) are stored **only on your computer**, in your browser's storage and in backup files you choose to save. Techmin does not receive or store them.
 3. VLEBook contacts the Techmin registry over the internet to register your Centre, check and deliver licences, deliver notices and push notifications, and show support contacts. See the Privacy Policy for exactly what is sent.
+4. **Early access.** VLEBook is offered as an early-access product. It is still being developed: features, screens and limits may change, and some errors may remain. Techmin will not reduce what a paid licence includes during the period already paid. Keep regular backups and check important figures.
+5. **Internet and offline use.** Creating the Owner account (activation) and activating or renewing a licence need an internet connection to the Techmin registry. Other daily work runs offline on your computer. When online, VLEBook checks in with Techmin for renewals, cancelled licences and notices.
 
 ## 2. Licence to use
 
 1. Subject to these Terms and payment of the applicable fee, Techmin grants you a limited, non-exclusive, non-transferable, revocable licence to use VLEBook for the internal operations of your Centre, on the computer(s) and for the number of users stated in your licence, for the licence period.
-2. **Trial.** A free trial of the full version is given for 14 days from first installation, for up to 3 users, for evaluation.
+2. **Trial.** A free trial of the full version is given for 14 days from the day the Owner account is created (activation), for up to 3 users, for evaluation.
 3. **Paid licence.** After the trial, the full version is licensed for the period you pay for (one month or more). VLEBook shows the number of days for which the licence is valid and its end date.
 4. **Basic mode.** When the trial ends, or a paid licence ends and is not renewed within the 3 grace days, VLEBook continues in Basic mode with limited features (customers, up to 10 invoices a day, pending work, dashboard, service catalogue, backup and restore, settings) for the Owner only. Techmin may change the features and limits of Basic mode with notice. Basic mode is provided free of charge, as a courtesy, and without any commitment about its continuation.
 5. Licences are locked to the Device Code of a computer unless stated otherwise. Moving a licence to another computer requires Techmin's approval.
@@ -22,7 +24,7 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 ## 3. Fees, renewal and taxes
 
-1. Plans, prices and payment terms are as published or agreed with Techmin at the time of purchase. Prices are exclusive of GST unless stated.
+1. Plans, prices and payment terms are as published or agreed with Techmin at the time of purchase. The total price, including GST where applicable, and the licence period are shown before you pay. Prices may change for future periods, but never for a period already paid.
 2. The licence ends on its end date unless renewed. There is no automatic renewal. VLEBook warns you 7 days before the end date and allows 3 days of grace after it; it then changes to Basic mode until renewal. VLEBook is locked only if a licence is cancelled, the account is suspended or the computer's date is tampered with; you can always download a full backup of your data.
 3. Refunds and cancellations are governed by the **Refund & Cancellation Policy** shown in Help & Legal.
 4. Techmin may change prices for future periods with reasonable notice through the software or other means.
@@ -76,7 +78,14 @@ These Terms are also published in Hindi and Malayalam for convenience. If a tran
 
 These Terms are governed by the laws of India. Subject to any applicable arbitration agreement, the courts at {{jurisdiction}} shall have exclusive jurisdiction.
 
-## 13. Contact and grievances
+## 13. Compliance with law and seller information
+
+1. Techmin aims to follow the laws that apply to VLEBook and to its sale, including the Information Technology Act, 2000 and its rules, the Digital Personal Data Protection Act, 2023 and the Digital Personal Data Protection Rules, 2025, the Consumer Protection Act, 2019 and the Consumer Protection (E-Commerce) Rules, 2020, the Copyright Act, 1957 and GST law where applicable. Techmin will update VLEBook and these documents when the law changes.
+2. **Seller:** {{entity}}, a proprietorship firm, {{address}}. Email: {{email}}{{phoneSep}}.
+3. **Grievances:** the Grievance Officer acknowledges a complaint within 48 hours and resolves it within one month of receipt. If you are not satisfied, you may contact the National Consumer Helpline (1915, consumerhelpline.gov.in) or the consumer commission, and, for personal-data matters, the Data Protection Board of India.
+4. Nothing in these Terms takes away any right that a consumer has under Indian law.
+
+## 14. Contact and grievances
 
 {{entity}}, {{address}}
 Email: {{email}}{{phoneSep}} · Website: {{website}}

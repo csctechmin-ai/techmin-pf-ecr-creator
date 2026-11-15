@@ -30,7 +30,11 @@ Notices and blog articles shown in VLEBook are for general information. They may
 
 VLEBook works offline once loaded. Online features — licence delivery, notices, blog articles and push notifications — depend on the internet and on third-party services (such as GitHub, Google and browser push services) and may occasionally be unavailable.
 
-## 7. Trial and Basic mode
+Creating the Owner account and activating a licence need an internet connection; other daily work does not.
+
+## 7. Early access, trial and Basic mode
+
+VLEBook is in early access: it is still being developed, features may change and some errors may remain. Use it with regular backups and check important figures.
 
 The 14-day trial and Basic mode are provided free of charge so that centres can evaluate VLEBook and are never cut off from their own records. Their features and limits may change with notice. Choose a paid licence if your centre depends on the full version every day.
 

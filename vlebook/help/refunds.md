@@ -8,10 +8,12 @@ This policy explains how payments, cancellations and refunds work for VLEBook li
 
 Every new centre gets a **14-day free trial of the full version**. No payment is collected for the trial, so no refund arises. Please use the trial to check that VLEBook suits your centre before you pay. After the trial VLEBook continues in free Basic mode; buying a licence is never compulsory.
 
+VLEBook is in **early access**. Please use the trial to check that it suits your centre before you pay.
+
 ## 2. Paid licences
 
 - Licences are sold for **one month or more** (for example 1, 2, 3, 6 or 12 months), paid in advance, for the number of computers and users stated in the licence.
-- Prices are shown or quoted before payment and are exclusive of GST unless stated.
+- The total price, including GST where applicable, and the licence period are shown before you pay. During early access, prices may change for future periods but never for a period already paid.
 - A licence starts on the date shown in **Users & Licence** and is delivered to the centre's computer automatically. VLEBook shows the number of days the licence is valid for.
 - There is no automatic renewal or automatic debit. When a licence ends, VLEBook changes to Basic mode until you renew.
 - Any free licence that {{entity}} gives (for example during a launch offer) has no fee and so no refund.
@@ -41,6 +43,6 @@ Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Li
 
 ## 7. Grievances
 
-If you are not satisfied, contact the Grievance Officer: {{grievanceOfficer}} · {{grievanceEmail}}.
+If you are not satisfied, contact the Grievance Officer: {{grievanceOfficer}} · {{grievanceEmail}}. Complaints are acknowledged within 48 hours and resolved within one month of receipt. You may also contact the National Consumer Helpline (1915, consumerhelpline.gov.in).
 
 This policy is also available in Hindi and Malayalam. If a translation differs, the English version prevails.

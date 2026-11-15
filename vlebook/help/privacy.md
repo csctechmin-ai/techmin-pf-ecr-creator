@@ -2,7 +2,7 @@
 
 Version {{version}} · Effective {{effectiveDate}}
 
-This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we") processes when a Centre uses VLEBook, why, and the choices available. It is published in accordance with the Information Technology Act, 2000 and rules made under it, and the Digital Personal Data Protection Act, 2023 ("DPDP Act").
+This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we") processes when a Centre uses VLEBook, why, and the choices available. It is published in accordance with the Information Technology Act, 2000 and rules made under it, and the Digital Personal Data Protection Act, 2023 ("DPDP Act") and the Digital Personal Data Protection Rules, 2025 ("DPDP Rules").
 
 ## 1. The short version
 
@@ -68,7 +68,14 @@ VLEBook is meant for businesses. It must not be used by persons under 18 years o
 
 We may update this Policy. The current version is always available in VLEBook (Help & Legal) and at our website, with its effective date. Material changes will be notified in VLEBook. This Policy is also available in Hindi and Malayalam; if a translation differs, the English version prevails.
 
-## 11. Grievance Officer and contact
+## 11. Grievances, data breaches and applicable law
+
+- Complaints about personal data are acknowledged within 48 hours and resolved within one month of receipt, which is within the 90-day limit set by the DPDP Rules.
+- If a personal data breach affects you, Techmin will inform you and the Data Protection Board of India as the DPDP Act and DPDP Rules require.
+- Obligations under the DPDP Act and DPDP Rules come into force in phases. Techmin will update this Policy as they apply.
+- Account setup and licence activation send the details listed in section 3 to Techmin over the internet. VLEBook does not send business records at any time.
+
+## 12. Grievance Officer and contact
 
 Grievance Officer: {{grievanceOfficer}}
 Email: {{grievanceEmail}}

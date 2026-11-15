@@ -1,7 +1,7 @@
 {
-  "name": "VLEBook — Digital ERP & Service Centre Operating System",
+  "name": "VLEBook — Office Software for CSC, Akshaya and e-Seva Centres",
   "short_name": "VLEBook",
-  "description": "Manage Your Centre. Serve Your Customers. Track Every Rupee. Complete Local-First ERP for CSC, Akshaya & E-Seva Centres.",
+  "description": "Billing, customers, applications, AEPS records, accounts and stock for CSC, Akshaya and e-Seva centres (early access).",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F4F7FA",
