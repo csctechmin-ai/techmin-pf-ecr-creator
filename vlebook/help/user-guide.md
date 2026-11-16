@@ -164,6 +164,17 @@ From then on VLEBook saves each backup to that folder **automatically, without a
 ### What clearing the browser does
 Clearing **browsing history** or **cached images and files** does not delete VLEBook's data or its audit log. Clearing **cookies and other site data** for this site, resetting the browser or using a different Windows user does remove the copy in the browser. Your backup folder is not affected, and **Restore from backup folder** brings everything back. VLEBook also asks the browser to protect its storage (Data Ownership & Backup shows *Browser storage protection*).
 
+## 5B. Working on more than one computer
+
+Staff can work at the same time on two or more computers. Every computer keeps the full data and works offline; changes are shared through the centre's **Google Drive backup folder**. Your data goes only to your own Google Drive, never to Techmin.
+1. On the main computer (Owner): install **Google Drive for desktop**, connect a Google Drive folder in **Data Ownership & Backup → Automatic backup**, then click **Turn on** under **Work on more than one computer** (internet needed). This computer becomes counter **A**.
+2. On each other computer: install Google Drive for desktop with the **same Google account**, open VLEBook in Chrome or Edge, click **Join my centre (shared Google Drive folder)** on the first screen and choose the same folder. Wait a minute after step 1 so Google Drive can upload. Staff then sign in with their own user name and password. The computer becomes counter B, C and so on.
+3. Ask {{entity}} to issue the licence for **Any computer**, so every computer gets the full version; otherwise a joined computer runs as a trial or in Basic mode (Owner only).
+- Changes reach the other computers in about a minute. The **Sync** button at the top shows the counter letter and the last sync time; *Sync paused* means the folder needs **Reconnect backup folder** (Chrome asks once after VLEBook is reopened).
+- Each computer has its own invoice series, for example **VLE-A-1001** and **VLE-B-1001**. Stock sold on different computers adds up; a record changed on two computers keeps the later change (both are in the audit log); different settings changed on two computers are both kept.
+- **Start fresh** on one computer clears transactions on every computer. **Restoring a backup** or **Reset Local Database** changes only the computer where it is done.
+- Users and passwords are shared: a staff login added on one computer works on all of them.
+
 ## 5A. Audit log
 
 VLEBook records **every activity from sign-in onwards** with the user name, date and time: every sign-in (and every failed attempt) and sign-out, every screen opened, every record added, changed, cancelled or deleted (bills, payments, customers, services, applications, stock, CVs, settings and so on), every print, file download and outside link opened, and every backup, restore and data reset. See it in **Settings → Audit log** — search by user, activity, screen or date — and download the full log with **Download full audit log (CSV)**.

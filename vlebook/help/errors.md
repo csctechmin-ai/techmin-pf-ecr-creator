@@ -257,3 +257,15 @@ Bills cancelled in version 2.13.0 or later are reversed in every account automat
 
 ### "Check for new updates" says it could not check
 The computer is offline or the server did not answer. Connect to the internet and click again. If it says a new version is available, click **Update now**; your data is not touched.
+
+### A new computer shows the registration screen and no sign-in
+This computer has no data yet. Do not create a new Owner account. Click **Join my centre (shared Google Drive folder)** at the top of the screen and choose the same Google Drive folder the main computer uses. If it says the folder is not shared yet, first click **Turn on** in *Data Ownership & Backup → Work on more than one computer* on the main computer and wait a minute.
+
+### Staff cannot sign in on the second computer (only the Owner can)
+The second computer is in Basic mode because the licence is locked to the main computer. Ask Techmin to issue the licence for **Any computer**; the second computer receives it when it is next online.
+
+### Bills made on one computer do not appear on the other
+Check that Google Drive for desktop is running and signed in with the same Google account on both computers, that the **Sync** button at the top does not say *Sync paused* (click **Reconnect backup folder**), and wait about a minute. Click **Sync now** in *Data Ownership & Backup* to check at once.
+
+### Invoice numbers now have a letter (VLE-A-1001)
+When the centre works on more than one computer, each computer has its own series so that two computers never give the same number. Earlier bills keep their numbers.
