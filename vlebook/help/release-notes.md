@@ -2,6 +2,15 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 2.14.0 — 16 November 2026
+
+- New: **Work on more than one computer.** Staff can work at the same time on two or more computers of the same centre. Each computer keeps working offline and shares bills, payments, customers, services, stock, applications, users and settings with the others through the centre's own **Google Drive backup folder** (Google Drive for desktop on every computer). Changes reach the other computers in about a minute. Turn it on in **Data Ownership & Backup → Work on more than one computer** (Owner).
+- New: **Join my centre** on the first screen of a new computer. Choose the same Google Drive folder: the centre's users, customers, services and accounts are loaded, and staff sign in with their own user name and password. The new computer is added to the same centre with Techmin; it is not registered as a new centre.
+- New: each computer has its **own invoice series** (for example VLE-A-1001 on counter A and VLE-B-1001 on counter B), so two computers never give the same number. Stock sold on different computers adds up correctly, and centre settings changed on different computers are merged.
+- New: a **Sync** indicator at the top shows the counter letter and when data was last shared; click it to see every computer of the centre. *Start fresh* on one computer clears transactions on all computers.
+- Licences: Techmin can issue a licence for **Any computer**, so every computer of the centre gets the full version.
+- Fixed: in the Techmin registry a newly registered centre could be listed twice in the console.
+
 ## Version 2.13.0 — 16 November 2026
 
 - New: **Techmin** tab in Government Service Catalogue & Portal Directory with ComplyPro, Finance and Accounting Tools, the Techmin Wealth Partners website and IFSC Tracker. These links are built in and cannot be edited or deleted.
