@@ -50,6 +50,8 @@ Version 3.1 features (GST registration modes, notes, TDS, bank reconciliation, T
 
 Version 3.2 features (professional invoice, signature, HSN / SAC master, editing invoices, compulsory round off) are part of the same full version; no separate fee is charged for them.
 
+The GST HSN / SAC list added in version 3.2.1 is part of the same full version; no separate fee is charged for it.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.

@@ -365,3 +365,6 @@ The original invoice's month is already filed, so it cannot be replaced. Issue a
 
 ### "… is not in the GST HSN / SAC list"
 The code you typed is not in the GST list built into VLEBook. Search the list by words and click **Use**, or check the code with your tax adviser. You can still save it; it is marked *Not in list*.
+
+### "The GST HSN / SAC list could not be opened"
+The list is part of VLEBook and is downloaded with the update. Open Help & Legal → **Check for updates**, reload VLEBook once while online, then try again. Your own HSN / SAC master is not affected.
