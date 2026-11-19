@@ -2,6 +2,10 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.1.1 — 19 November 2026
+
+- **GST billing change notice.** A centre that saved its GSTIN before version 3.1 is now told, after the update, that every bill is a Tax Invoice (regular) or a Bill of Supply (composition). The Owner, Manager or Accountant confirms the registration in the same window — Regular, Composition (with the rate) or *Not GST registered* (removes the GSTIN, so bills are non-GST again). Until it is confirmed VLEBook asks again at each sign-in; other staff see the notice once. Nothing is sent to Techmin.
+
 ## Version 3.1.0 — 19 November 2026
 
 - **GST follows your registration.** Not registered → VLEBook makes only non-GST bills. **Regular** GST dealer → every bill is a **Tax Invoice** (the non-GST option is no longer shown); CGST + SGST or IGST is chosen automatically from the place of supply or the customer's GSTIN. **Composition** dealer → **Bill of Supply** with the composition declaration; no GST is collected from customers. Add the GSTIN and choose Regular or Composition when you register, or later in **Books & GST → GST profile**.
