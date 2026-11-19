@@ -2,6 +2,10 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.2.1 — 19 November 2026
+
+- **GST HSN / SAC list built in.** The HSN / SAC master now has the full GST list of 22,479 codes (HSN codes of 4, 6 and 8 digits for goods and 6-digit SAC codes for services). Search it by code or by words (for example *photocopy*, *paper*, *9985*) and click **Use** — the code and its official description are filled in. Typing a code fills its description too, and a code that is not in the GST list is flagged. The list works offline.
+
 ## Version 3.2.0 — 19 November 2026
 
 - **Professional invoice.** The A4 invoice and the PDF download now share one clean, professional layout: centre details and logo, Tax Invoice / Bill of Supply / Invoice with *Original for recipient* and payment status, a *Billed to* box with the customer's GSTIN, invoice number, date, place of supply and reverse charge, a full items table (HSN/SAC, government fee, taxable value, GST rate, CGST + SGST or IGST), a GST rate summary, amount in words, totals and an authorised-signatory block. The PDF looks exactly like the printed page.
