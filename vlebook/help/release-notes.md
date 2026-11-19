@@ -2,6 +2,10 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.2.2 — 19 November 2026
+
+- Legal documents updated to version 1.15: the Privacy Policy, Terms, Disclaimer and Refund Policy now cover the built-in GST HSN / SAC list (searched on your computer, nothing sent to Techmin; the centre chooses the correct codes). The User Guide and Errors & Solutions are updated too. Each user is asked once to accept the updated documents.
+
 ## Version 3.2.1 — 19 November 2026
 
 - **GST HSN / SAC list built in.** The HSN / SAC master now has the full GST list of 22,479 codes (HSN codes of 4, 6 and 8 digits for goods and 6-digit SAC codes for services). Search it by code or by words (for example *photocopy*, *paper*, *9985*) and click **Use** — the code and its official description are filled in. Typing a code fills its description too, and a code that is not in the GST list is flagged. The list works offline.
