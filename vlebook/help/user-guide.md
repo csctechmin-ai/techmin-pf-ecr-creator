@@ -99,7 +99,7 @@ Track each application from *Received* to *Delivered*, with portal reference num
 Record AEPS / Micro-ATM withdrawals, deposits, Aadhaar Pay, DMT and BBPS. Each entry shows its effect on cash in hand and on your wallet, with commission and TDS. **Never type a customer's PIN, OTP or biometric data into VLEBook.**
 
 ### Accounts & Smart Counter
-Expenses, transfers and daily closing. At day end count the cash with the denomination calculator; any difference must be explained before closing.
+Expenses, transfers and daily closing (the books in **Books & GST** follow these entries automatically). At day end count the cash with the denomination calculator; any difference must be explained before closing.
 
 ### Stock & Inventory
 - **Stock Inward**: purchases, customer returns, opening stock and adjustments.
@@ -138,6 +138,32 @@ Keep the official portal links your centre uses, with the documents needed, proc
 
 The **Techmin** tab lists Techmin's websites: ComplyPro (https://www.complypro.co.in/), Finance and Accounting Tools (https://tools.complypro.co.in/), Techmin Wealth Partners (https://www.techmincsc.in/), IFSC Tracker (https://www.ifsctracker.in/). These four links are built into VLEBook, are always available and cannot be edited or deleted. They are also in the **Techmin** menu on the left (available in every mode).
 
+## 4A. Books & GST (accounts)
+
+**Books & GST** keeps full double-entry accounts for your centre. You keep working as before — billing, receipts, expenses, AEPS — and VLEBook writes every entry in the books for you. Open **Books & GST** in the menu.
+
+### The government fee is not your income — the ₹50 example
+1. A customer asks for a community certificate. You pay the **₹50 government fee** to the portal from your own current account.
+2. On the bill, next to that service, choose **Govt / portal fee paid from: Current account** and type the portal transaction reference. (If you pay later, choose *Not paid to portal yet* and use **Record portal payment** afterwards.)
+3. VLEBook keeps the ₹50 in **Government fee clearing**, against that customer and application. The Overview shows it under **Govt fees to recover**.
+4. When the customer pays the bill (₹50 fee + your service charge), the ₹50 comes back to clearing — the balance becomes **zero** — and only your service charge is counted as income.
+5. If the customer pays only part, the fee stays partly open; if the application is cancelled, any fee not recovered stays visible until it is recovered or the Owner writes it off with a reason.
+Click **Fee chain** (on the bill list, in Pending Work or in the clearing list) to see the whole story for one application.
+
+### Tabs in Books & GST
+- **Overview** — today's income, profit for the year, money in all accounts, what customers owe, fees to recover, GST estimate and quick actions.
+- **Vouchers** — every entry. VLEBook makes most of them; make your own journal, payment, receipt or contra vouchers with **New voucher**. Debits must equal credits. A posted voucher is never edited or deleted — **Reverse** it and enter a new one.
+- **Ledgers** — the chart of accounts. Click a ledger to see its statement. Add your own ledgers and groups.
+- **Books & reports** — Trial balance, Profit & loss, Balance sheet, Cash flow, Day book, Cash book, Bank/UPI/wallet book, registers, receivables with age, customer advances, payables, commission receivable, government fee clearing, portal payments, wallet reconciliation, service profitability (an estimate) and expenses by category. Every report has search, sort, **Excel**, **CSV** and **Print**.
+- **GST** — choose the return month. Check the tables (B2B, B2C large, B2C small, credit notes, HSN/SAC, rate-wise, nil/exempt, documents issued) and **Check before export**, then download the **Excel** workbook or **GSTR-1 JSON**. Set your GSTIN in **GST profile**. On a GST bill you can type the customer's GSTIN (B2B) and place of supply. VLEBook does not file returns.
+- **Wallets & portal fees** — add each portal wallet with a minimum balance. Record portal payments, confirm pending ones, mark failed or disputed ones, record refunds from the portal, and **Reconcile** with the balance the portal shows. A difference stays open until you explain it.
+- **Expenses** — enter supplier bills with GST, approve, pay in full or in parts. Add **recurring expenses** such as rent or internet: on each due date VLEBook prepares a draft for you to check and approve.
+- **Day close** — count the cash by denomination. If it differs from the expected cash, give the reason. After closing, the day is locked; ask for a **correction** if something must change — the Owner approves it. Records changed on two computers at once are listed here for the Owner.
+- **Books settings** — lock the books, close a financial year, choose how part payments are split, permissions for each role, the Google review QR on receipts, and **Review and convert** to bring earlier records into the books.
+
+### Who can do what
+The Owner can do everything. **Manager**, **Operator** and the new **Accountant** role have sensible defaults (for example, an Operator can record portal payments, enter expenses and close the day but cannot see the books; an Accountant can see the books and save draft vouchers but cannot post them). The Owner can change them in **Books settings → Who may do what**. The checks are made in the data itself, not only on screen.
+
 ## 5. Backups — protect your data
 
 **Your business data is kept only on this computer and in the backups you save. {{entity}} does not store it on any server, does not keep a copy and cannot recover it.** VLEBook gives no assurance of data safety beyond the tools described here, so please set up automatic backup on the first day.
@@ -171,7 +197,7 @@ Staff can work at the same time on two or more computers. Every computer keeps t
 2. On each other computer: install Google Drive for desktop with the **same Google account**, open VLEBook in Chrome or Edge, click **Join my centre (shared Google Drive folder)** on the first screen and choose the same folder. Wait a minute after step 1 so Google Drive can upload. Staff then sign in with their own user name and password. The computer becomes counter B, C and so on.
 3. Ask {{entity}} to issue the licence for **Any computer**, so every computer gets the full version; otherwise a joined computer runs as a trial or in Basic mode (Owner only).
 - Changes reach the other computers in about a minute. The **Sync** button at the top shows the counter letter and the last sync time; *Sync paused* means the folder needs **Reconnect backup folder** (Chrome asks once after VLEBook is reopened).
-- Each computer has its own invoice series, for example **VLE-A-1001** and **VLE-B-1001**. Stock sold on different computers adds up; a record changed on two computers keeps the later change (both are in the audit log); different settings changed on two computers are both kept.
+- Each computer has its own invoice series, for example **VLE-A-1001** and **VLE-B-1001**. Stock sold on different computers adds up; a record changed on two computers keeps the later change (both are in the audit log) — except bills, payments, expenses, vouchers and other money records, where the other version is kept as a **sync conflict** for the Owner (Books & GST → Day close); different settings changed on two computers are both kept.
 - **Start fresh** on one computer clears transactions on every computer. **Restoring a backup** or **Reset Local Database** changes only the computer where it is done.
 - Users and passwords are shared: a staff login added on one computer works on all of them.
 

@@ -26,6 +26,8 @@ Techmin does not store, copy or back up this data and cannot recover it. The **a
 
 If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the files are uploaded by that service's own app under your account and that provider's terms and privacy policy apply. Techmin has no access to that account or those files.
 
+**Books & GST (version 3.0).** Ledgers, vouchers, GST figures, supplier details, wallet balances and the Google review link are stored only on the centre's computer (and in its own backup / shared Google Drive folder). The GSTIN check is done on the computer; no GSTIN, return or financial figure is sent to Techmin or to the GST portal by VLEBook. GST files are downloaded to the computer and uploaded to the GST portal only by the centre. A customer who scans the Google review QR goes directly to Google; VLEBook does not see it.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:
