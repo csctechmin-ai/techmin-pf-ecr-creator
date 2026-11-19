@@ -374,3 +374,18 @@ GSTIN का एक अक्षर गलत टाइप हुआ है। V
 
 ### अपडेट सूचना बार-बार आती है
 एक बार **Update now** दबाएँ, या *अपने-आप जाँच न करें* चुनें और सुविधा अनुसार **↻ Check for new updates** का उपयोग करें। कंप्यूटर ऑफ़लाइन होने पर अपडेट ऑनलाइन होने तक रुकता है।
+
+### "A financial year is already closed, so opening balances can no longer be changed"
+ओपनिंग बैलेंस बही की शुरुआत के होते हैं। वर्ष बंद होने के बाद खुले वर्ष की तिथि वाले जर्नल वाउचर से शेष सुधारें।
+
+### "Enter the amount without a minus sign and choose Debit or Credit"
+ओपनिंग राशि सामान्य संख्या के रूप में लिखें और Debit (संपत्ति, खर्च, आपको मिलने वाला पैसा) या Credit (पूँजी, ऋण, आपको देय पैसा) चुनें।
+
+### "The opening debits and credits differ by …"
+ओपनिंग बैलेंस मेल नहीं खाते। हर एक (जैसे पूँजी, बैंक, ग्राहक और आपूर्तिकर्ता) जाँचें जब तक डेबिट क्रेडिट के बराबर न हो; तब तक अंतर *Difference in opening balances* के रूप में दिखता है।
+
+### "Give the reason for changing this voucher" / "Only a posted voucher can be edited this way"
+पोस्ट किया वाउचर बदलने के लिए कम से कम 5 अक्षरों का कारण चाहिए। उलटा गया वाउचर फिर नहीं बदला जा सकता — उसका नवीनतम सुधरा संस्करण (-R संख्या) बदलें।
+
+### "This entry comes from a bill, receipt or other document"
+स्वचालित प्रविष्टियाँ अपने दस्तावेज़ों का पालन करती हैं। इनवॉइस, रसीद या खर्च को बदलें या रद्द करें, बही अपने-आप अद्यतन होगी।

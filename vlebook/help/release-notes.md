@@ -2,6 +2,12 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.2.4 — 19 November 2026
+
+- **Opening balances.** A new *Opening balances* tab in Books & GST lets you add, edit and delete the opening balance of any ledger — cash, bank, UPI and wallet accounts included — as Debit or Credit, with debit and credit totals and the difference shown. Every change is in the audit log.
+- **Edit posted vouchers.** Vouchers you entered can now be edited after posting: VLEBook reverses the original on its own date and posts the corrected voucher as *original-R1* (R2 …), with the reason recorded. Automatic entries are still corrected through their bill, receipt or expense; locked periods stay locked.
+- Legal documents updated to version 1.17.
+
 ## Version 3.2.3 — 19 November 2026
 
 - **Automatic software updates.** VLEBook can now update itself: in Techmin Updates choose *Update automatically when the computer is idle* (default), *Ask me before updating* or *Do not check automatically*. Automatic updates wait until the computer has been idle for 2 minutes with no window or form open, show a 15-second notice with **Later** and **Update now**, and keep your data and any unfinished bill.

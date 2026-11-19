@@ -56,6 +56,8 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 **Automatic updates (version 3.2.3).** By default VLEBook installs new versions automatically when the computer is idle. The Centre may choose on each computer to be asked first or to update only manually, and should keep VLEBook updated, because older versions may not support current rules, features or security fixes.
 
+**Opening balances and voucher corrections (version 3.2.4).** The Centre is responsible for the correctness of its opening balances and of every voucher correction. A posted voucher is corrected only by a reversal and a corrected voucher, both kept in the books; the Centre shall give a true reason and shall not use corrections to alter figures already reported to any authority.
+
 ## 5. Notices and communications
 
 By using VLEBook you agree that Techmin may show notices inside the software, send push notifications to computers where notifications are allowed, and contact the registered mobile number or email about your licence, renewals, payments, security and important updates. You can turn push notifications off at any time in your browser or in VLEBook.
