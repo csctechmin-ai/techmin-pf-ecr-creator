@@ -2,6 +2,10 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.1.2 — 19 November 2026
+
+- **Blog articles from complypro.co.in now appear** in Techmin Updates → Blog. Blogger does not let other websites read its feed directly, so the Techmin registry reads the latest posts and passes on only the title, date, short summary, picture and link (as plain text). VLEBook sends no centre data with this request. Posts are kept on the computer so they show offline too.
+
 ## Version 3.1.1 — 19 November 2026
 
 - **GST billing change notice.** A centre that saved its GSTIN before version 3.1 is now told, after the update, that every bill is a Tax Invoice (regular) or a Bill of Supply (composition). The Owner, Manager or Accountant confirms the registration in the same window — Regular, Composition (with the rate) or *Not GST registered* (removes the GSTIN, so bills are non-GST again). Until it is confirmed VLEBook asks again at each sign-in; other staff see the notice once. Nothing is sent to Techmin.

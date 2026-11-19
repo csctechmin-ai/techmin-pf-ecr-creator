@@ -212,7 +212,7 @@ Notifications must be turned on in **Techmin Updates → Turn on push notificati
 Click the lock icon in the address bar → Notifications → Allow, then reload VLEBook.
 
 ### Techmin notices or blog posts do not appear
-They are fetched when the computer is online. Click **Check for new updates** in Techmin Updates.
+They are fetched when the computer is online. Click **Check for new updates** in Techmin Updates. Blog articles come through the Techmin registry; if the Blog tab still says *No articles yet*, update VLEBook to 3.1.2 or later (Help & Legal → Check for updates) and try again after a minute.
 
 ### "Enter a full web address starting with https:// (or http://)" in the Service Catalogue
 Type the complete address, for example *https://edistrict.kerala.gov.in*. Other kinds of links are refused for safety.
@@ -339,3 +339,5 @@ That challan number was saved before; it is not saved twice.
 ### The sign-in record shows a different city
 The city is looked up from the internet connection's IP address and often shows the internet provider's city. It is approximate.
 
+### VLEBook keeps asking me to confirm the GST registration
+Your centre's GSTIN was saved before version 3.1 and the registration type has not been confirmed yet. The Owner, Manager or Accountant chooses Regular, Composition or *Not GST registered* in that window and clicks **Confirm**; it is then not asked again. *Remind me later* asks again at the next sign-in. Staff without that permission see the notice only once.
