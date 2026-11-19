@@ -52,6 +52,8 @@ Version 3.2 features (professional invoice, signature, HSN / SAC master, editing
 
 The GST HSN / SAC list added in version 3.2.1 is part of the same full version; no separate fee is charged for it.
 
+Updates, including automatic updates (version 3.2.3), are part of the licence; no separate fee is charged for them.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.

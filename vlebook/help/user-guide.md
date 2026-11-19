@@ -243,6 +243,7 @@ VLEBook records **every activity from sign-in onwards** with the user name, date
 ## 6. Techmin Updates and notifications
 
 - The bell at the top shows notices from {{entity}} (software updates, offers, reminders) and articles from our blog. Click **↻ Check for new updates** in Techmin Updates at any time: VLEBook says *VLEBook is up to date (version …)* or *New version … is available* with an **Update now** button (your data stays on this computer; only the program files are reloaded). If the check cannot reach the server, it says so.
+- **Automatic updates (version 3.2.3).** In Techmin Updates, choose *Software updates on this computer*: **Update automatically when the computer is idle** (recommended, the default), **Ask me before updating**, or **Do not check automatically**. VLEBook checks at start, every 30 minutes and when the internet returns. In automatic mode it waits until nobody has used the computer for 2 minutes and no window or form is open, shows a 15-second notice (click **Later** to postpone, or **Update now**), then reloads with the new version. Only the program is updated; your data and any unfinished bill are kept. Each computer has its own choice.
 - Important notices pop up when VLEBook opens.
 - Turn on **push notifications** in Techmin Updates to receive notices on your computer even when VLEBook is closed (Chrome or Edge must be running).
 - **After every update** VLEBook shows each user, once, what is new in that version (Help & Legal → Release Notes has the full list).

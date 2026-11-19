@@ -316,7 +316,7 @@ async function vVleN() {
     '<div class="row"><div><label>Show from (optional)</label><input type="date" name="starts"></div><div><label>Show until (optional)</label><input type="date" name="ends"></div></div>' +
     '<label>How to send</label><div class="chk deliv"><label><input type="checkbox" name="asnotice" value="Y" checked> <span>📣 Show in VLEBook (notice)</span></label><label><input type="checkbox" name="popup" value="Y"> <span>Pop up when VLEBook opens</span></label><label><input type="checkbox" name="email" value="Y"> <span>✉️ Email to the centre\'s registered address</span></label><label><input type="checkbox" name="push" value="Y"> <span>🔔 Push notification (' + esc(V.push_count || 0) + ' computer(s) allowed)</span></label></div>' +
     '<p class="small mut">Emails go from the Techmin address set in VLEBook key &amp; settings. Google limits how many emails a day can be sent (about 100 on a free account, 1,500 on Google Workspace).</p>' +
-    '<p id="vreach" class="small mut"></p><p><button class="btn" type="submit">Send</button></p></form>' +
+    '<p id="vreach" class="small mut"></p><p><button class="btn alt" type="button" id="vprev">👁 Preview email</button> <button class="btn" type="submit">Send</button></p><p class="small mut">With ✉️ Email ticked, Send always shows the email preview first; nothing is sent until you click <b>Send email now</b>. Do not type "Subject:" or "Dear …" in the message — each email starts with "Dear &lt;owner name&gt;," automatically.</p></form>' +
     '<h1 style="margin-top:20px">VLEBook notices sent</h1><div class="card"><div class="tw"><table><thead><tr><th>Sent</th><th>Title</th><th>Audience</th><th>Reach</th><th>Seen by</th><th>Colour</th><th>Shown</th><th></th></tr></thead><tbody>' +
     (V.notices.slice().reverse().map(n => '<tr><td>' + dt(n.created_at) + '</td><td class="w"><b>' + esc(n.title) + '</b><div class="small mut">' + esc(String(n.message).slice(0, 140)) + '</div></td><td>' + esc(n.audience) + (n.audience === 'PLANS' ? ' (' + esc(n.plans) + ')' : n.audience === 'PAYMENT' ? ' (' + esc(n.payment_status) + ')' : '') + '</td><td>' + esc(n.reach) + '</td><td><button class="btn alt" data-vseen="' + esc(n.notice_id) + '" title="Who has seen this notice">' + esc(n.seen || 0) + ' of ' + esc(n.reach || 0) + ' centre(s)</button></td><td>' + esc(n.severity) + '</td><td>' + (String(n.active).toUpperCase() === 'N' ? '<span class="badge b-bad">Withdrawn</span>' : '<span class="badge b-ok">Showing</span>') + '</td><td style="white-space:nowrap"><button class="btn alt" data-vt="' + esc(n.notice_id) + '" data-to="' + (String(n.active).toUpperCase() === 'N' ? 'Y' : 'N') + '">' + (String(n.active).toUpperCase() === 'N' ? 'Show again' : 'Withdraw') + '</button> <button class="btn alt" data-vpush="' + esc(n.notice_id) + '">Push</button></td></tr>').join('') || '<tr><td colspan="8" class="mut">No notices yet.</td></tr>') + '</tbody></table></div></div>' +
     '<h1 style="margin-top:20px">Emails sent to centres</h1><div class="card"><div class="tw"><table><thead><tr><th>Sent</th><th>Subject</th><th>Audience</th><th>Centres</th><th>Delivered</th><th>Failed</th></tr></thead><tbody>' +
@@ -332,20 +332,49 @@ async function vVleN() {
     if (push && !asNotice) { msg('A push notification opens the notice, so tick "Show in VLEBook" too.', 'bad'); return; }
     if (push && !VK.vapid) { msg('Unlock the signing key first (VLEBook key & settings) to send push notifications.', 'bad'); return; }
     const how = [asNotice ? 'notice' : '', email ? 'email' : '', push ? 'push notification' : ''].filter(Boolean).join(' + ');
-    if (!confirm('Send "' + v.title + '" (' + how + ') to ' + $('#vreach').textContent.replace('Reaches ', '').replace(/\.$/, '') + '?')) return;
+    if (email) { if (!(await vMailPreview(mailValues(v), true))) return; }
+    else if (!confirm('Send "' + v.title + '" (' + how + ') to ' + $('#vreach').textContent.replace('Reaches ', '').replace(/\.$/, '') + '?')) return;
     b.disabled = true;
     try {
       const parts = [];
       let nid = '';
       if (asNotice) { nid = (await call('admin.vle_notice_save', { values: v })).notice_id; parts.push('Notice posted — centres see it the next time VLEBook is online.'); }
-      if (email) { const m = await call('admin.vle_mail', { values: { subject: v.title, message: v.message.replace(/\*\*|\*/g, ''), link_url: v.link_url, link_text: v.link_text, audience: a, centre_ids: v.centre_ids, plans: v.plans, payment_status: v.payment_status } }); parts.push('Email sent to ' + m.sent + ' of ' + m.targets + ' centre(s)' + (m.failed ? ' (' + m.failed + ' without a valid email or failed)' : '') + '.'); }
+      if (email) { const m = await call('admin.vle_mail', { values: mailValues(v) }); parts.push('Email sent to ' + m.sent + ' of ' + m.targets + ' centre(s)' + (m.failed ? ' (' + m.failed + ' without a valid email or failed)' : '') + '.'); }
       if (push && nid) parts.push(await vPush(nid));
       vdraft = {}; await vLoad(); vVleN(); msg(parts.join(' '));
     } catch (e) { msg(e.message, 'bad'); b.disabled = false; }
   };
+  const formValues = () => ({ title: f.title.value, message: f.message.value, link_text: f.link_text.value, link_url: f.link_url.value, audience: au.value, centre_ids: [...f.querySelectorAll('input[name=cid]:checked')].map(x => x.value).join(','), plans: [...f.querySelectorAll('input[name=plan]:checked')].map(x => x.value).join(','), payment_status: [...f.querySelectorAll('input[name=pay]:checked')].map(x => x.value).join(',') });
+  $('#vprev').onclick = async ev => { const v = formValues(); if (!v.title.trim() || !v.message.trim()) { msg('Type the title (email subject) and the message first.', 'bad'); return; } ev.target.disabled = true; try { await vMailPreview(mailValues(v), false); } catch (e) { msg(e.message, 'bad'); } ev.target.disabled = false; };
   document.querySelectorAll('[data-vseen]').forEach(b => b.onclick = () => vSeen(b.dataset.vseen));
   document.querySelectorAll('[data-vt]').forEach(b => b.onclick = async () => { b.disabled = true; try { await call('admin.vle_notice_save', { notice_id: b.dataset.vt, values: { active: b.dataset.to } }); await vLoad(); vVleN(); msg('Updated.'); } catch (e) { msg(e.message, 'bad'); b.disabled = false; } });
   document.querySelectorAll('[data-vpush]').forEach(b => b.onclick = async () => { if (!VK.vapid) { msg('Unlock the signing key first (VLEBook key & settings).', 'bad'); return; } b.disabled = true; try { msg('Push:' + await vPush(b.dataset.vpush)); } catch (e) { msg(e.message, 'bad'); } b.disabled = false; });
+}
+function mailValues(v) {
+  return { subject: v.title, message: v.message, link_url: v.link_url, link_text: v.link_text, audience: v.audience, centre_ids: v.centre_ids, plans: v.plans, payment_status: v.payment_status };
+}
+/** Email preview (3.2.3): exactly the email the registry will send, shown in a sealed frame. Resolves true when "Send email now" is clicked. */
+function vMailPreview(values, withSend) {
+  return new Promise(async (resolve, reject) => {
+    let p;
+    try { p = await call('admin.vle_mail_preview', { values }); } catch (e) { reject(e); return; }
+    const ov = document.createElement('div');
+    ov.className = 'vprev-ov';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;';
+    ov.innerHTML = '<div style="background:#fff;border-radius:12px;width:min(760px,100%);max-height:94vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35)">' +
+      '<div style="padding:12px 16px;border-bottom:1px solid #e3e7ee"><div style="font-weight:700;font-size:15px">Email preview</div><div class="small mut">Subject: <b>' + esc(p.subject) + '</b><br>Shown as it will reach <b>' + esc(p.sample_centre || 'a centre') + '</b>. Each centre sees its own owner name and centre ID.</div>' +
+      (p.removed_lines ? '<div class="msg ok" style="margin:6px 0 0">A "Subject:" line or greeting typed at the top of the message was left out, so the email has one greeting only.</div>' : '') + '</div>' +
+      '<iframe sandbox="" title="Email preview" style="border:0;width:100%;height:60vh;background:#F3F5F8"></iframe>' +
+      '<div style="padding:12px 16px;border-top:1px solid #e3e7ee;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div class="small" style="flex:1">Will be emailed to <b>' + esc(p.with_email) + '</b> of ' + esc(p.targets) + ' centre(s).' + (p.without_email.length ? ' No valid email: ' + esc(p.without_email.slice(0, 8).join(', ')) + (p.without_email.length > 8 ? ' …' : '') + '.' : '') + '</div>' +
+      '<button class="btn alt" type="button" data-pv="back">Back to edit</button>' + (withSend ? ' <button class="btn" type="button" data-pv="send"' + (p.with_email ? '' : ' disabled') + '>Send email now</button>' : '') + '</div></div>';
+    document.body.appendChild(ov);
+    ov.querySelector('iframe').srcdoc = p.html;
+    const done = ok => { ov.remove(); resolve(ok); };
+    ov.querySelector('[data-pv=back]').onclick = () => done(false);
+    const sb = ov.querySelector('[data-pv=send]');
+    if (sb) sb.onclick = () => done(true);
+    ov.addEventListener('keydown', e => { if (e.key === 'Escape') done(false); });
+  });
 }
 async function vPush(noticeId) {
   const t = await call('admin.vle_push_targets', { notice_id: noticeId });

@@ -2,6 +2,12 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.2.3 — 19 November 2026
+
+- **Automatic software updates.** VLEBook can now update itself: in Techmin Updates choose *Update automatically when the computer is idle* (default), *Ask me before updating* or *Do not check automatically*. Automatic updates wait until the computer has been idle for 2 minutes with no window or form open, show a 15-second notice with **Later** and **Update now**, and keep your data and any unfinished bill.
+- **Emails from Techmin look better.** Messages are laid out professionally (13-point text, even line spacing, headings and lists) with a single greeting, and Techmin previews every email before it is sent.
+- Legal documents updated to version 1.16 (automatic updates).
+
 ## Version 3.2.2 — 19 November 2026
 
 - Legal documents updated to version 1.15: the Privacy Policy, Terms, Disclaimer and Refund Policy now cover the built-in GST HSN / SAC list (searched on your computer, nothing sent to Techmin; the centre chooses the correct codes). The User Guide and Errors & Solutions are updated too. Each user is asked once to accept the updated documents.

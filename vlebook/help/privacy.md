@@ -30,6 +30,8 @@ If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the fi
 
 **Sign-ins are the exception.** From version 3.1 a short record of each sign-in (section 3, item 5) is also sent to Techmin; the full audit log stays on the computer. The sign-in screen tells every user about it, and the Owner should inform staff.
 
+**Automatic updates (version 3.2.3).** To find out whether a new version is published, VLEBook reads the version number from the VLEBook website at start, every 30 minutes and when the internet returns (unless switched off in Techmin Updates). Like any web page request this carries the computer's IP address; no centre or business data is sent, and the website does not record who checked.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:

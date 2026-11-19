@@ -54,6 +54,8 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 **GST HSN / SAC list (version 3.2.1).** The HSN / SAC list in VLEBook is provided only to help the Centre find codes. The Centre shall choose the correct HSN / SAC code and description for each of its goods and services, keep them up to date when the law or notifications change, and remains responsible for the codes printed on its invoices and returns. Techmin may update the list in later versions.
 
+**Automatic updates (version 3.2.3).** By default VLEBook installs new versions automatically when the computer is idle. The Centre may choose on each computer to be asked first or to update only manually, and should keep VLEBook updated, because older versions may not support current rules, features or security fixes.
+
 ## 5. Notices and communications
 
 By using VLEBook you agree that Techmin may show notices inside the software, send push notifications to computers where notifications are allowed, and contact the registered mobile number or email about your licence, renewals, payments, security and important updates. You can turn push notifications off at any time in your browser or in VLEBook.
