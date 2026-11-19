@@ -269,3 +269,46 @@ Check that Google Drive for desktop is running and signed in with the same Googl
 
 ### Invoice numbers now have a letter (VLE-A-1001)
 When the centre works on more than one computer, each computer has its own series so that two computers never give the same number. Earlier bills keep their numbers.
+
+### "Debits (…) and credits (…) are not equal"
+A voucher must balance. Add or correct a line so that the debit total equals the credit total, then post again. You can also **Save as draft** and finish later.
+
+### "This entry comes from a bill, receipt or other document"
+Vouchers made by VLEBook follow their documents. To change one, change or cancel the bill, payment or expense itself — the books correct themselves with a reversal.
+
+### "The books are locked up to …"
+The date is in a locked period (Books settings → Lock the books, or a closed financial year). The Owner can move the lock date back with a reason, or enter the correction in an open period.
+
+### "The counter for … is already closed" / "… closed. An Owner-authorised correction is needed"
+That day is closed. Open **Books & GST → Day close**, choose the day and click **Ask for a correction**. When the Owner approves it, the day is reopened; close it again after correcting.
+
+### "Counted cash differs from expected … Enter the reason"
+Give the reason for the shortage or excess (at least 5 characters). Tick *Post the difference* only if the count is final.
+
+### "Provider reference … is already recorded on this account"
+The same portal reference was already saved for this account, so it is not saved twice. Check **Wallets & portal fees** — the payment is probably already there.
+
+### The Government fee clearing balance is not zero
+The customer has not paid the full bill, the fee was paid to the portal but not yet collected, or the fee was collected but not yet paid to the portal. Click **Chain** to see which. Record the missing receipt or portal payment; only the Owner can write off a fee that will never be recovered.
+
+### "Bill … from … is already entered"
+That supplier bill number was entered before. Open Expenses and check; cancel the wrong one if needed.
+
+### GST: "Check before export" shows problems
+Each row says the document, the field and what to fix (for example a missing HSN/SAC code, a wrong GSTIN check character, or IGST used on an intra-State bill). Fix the service or bill and download again. The JSON is still made, but the GST portal may reject those rows.
+
+### "Customer GSTIN: … check character"
+One character of the GSTIN is mistyped. VLEBook checks only the format and the last (check) character — confirm the registration itself on the GST portal.
+
+### "Only … is still due on this bill" (supplier bill)
+You are paying more than is due. Reduce the amount; a part payment is fine.
+
+### "You do not have permission to do this. Please ask the Owner."
+Your role does not include that action. The Owner can change it in **Books & GST → Books settings → Who may do what**.
+
+### A sync conflict is listed under Day close
+The same bill, payment or other money record was changed on two computers at almost the same time. VLEBook kept this computer's version and held the other one. The Owner clicks **Compare** and chooses which to keep; the choice is shared with every computer.
+
+### The Google review QR does not appear on receipts
+Switch it on in **Books settings → Google review QR on receipts** with your own link from Google Business Profile (it must start with https:// and be a Google review link).
+

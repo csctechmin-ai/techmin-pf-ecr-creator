@@ -44,6 +44,8 @@ Goods a centre sells to its customers (for example paper, pens or pen drives), a
 
 Products or services bought on Techmin's other websites (ComplyPro, Finance and Accounting Tools, IFSC Tracker) follow the refund terms published on those websites. Opening them from VLEBook does not change those terms.
 
+**Books & GST** (from version 3.0) is part of the full version; it is included in the 14-day trial and in paid licences, and no separate fee is charged for it. Refunds that a centre gives its customers (for example when an application is cancelled) are recorded in VLEBook as the centre's own entries; a government fee the portal returns to the centre is recorded as a refund from the portal. VLEBook does not move money.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.
