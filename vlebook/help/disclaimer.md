@@ -22,6 +22,8 @@ VLEBook is an independent product. It is **not** made, endorsed or approved by C
 
 **GST HSN / SAC list (version 3.2.1).** The list of 22,479 codes is taken from the GST HSN and SAC masters supplied to Techmin, with the descriptions as given there (spelling not corrected). It may be incomplete or out of date: codes, descriptions and rates change by law and notification. VLEBook only checks the format of a code and whether it appears in this list; it does not decide the correct classification, which is for the Centre and its tax adviser.
 
+**Version 3.2.3.** An automatic update reloads VLEBook and may change screens or features. VLEBook waits for an idle computer and keeps unfinished bills as drafts, but cannot know about work outside VLEBook (for example a print job in progress); choose *Ask me before updating* if this matters, and keep regular backups.
+
 ## 3. Data on the centre's computer
 
 Business data is stored only on the centre's computer and in backup files the centre saves. {{entity}} has no access to it and cannot recover it. The centre is responsible for taking and keeping backups, for the security of its computer, and for handling customers' personal data lawfully. **Start fresh** in Settings permanently clears the centre's transactions on that computer; take a backup first — it can be undone only by restoring a backup. **Work on more than one computer** depends on Google Drive for desktop, the centre's Google account and the internet: changes may take time to reach other computers, and when the same record is changed on two computers at once the later change is kept. The centre is responsible for its Google account and for who can open the shared folder.

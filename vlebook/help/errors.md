@@ -368,3 +368,9 @@ The code you typed is not in the GST list built into VLEBook. Search the list by
 
 ### "The GST HSN / SAC list could not be opened"
 The list is part of VLEBook and is downloaded with the update. Open Help & Legal → **Check for updates**, reload VLEBook once while online, then try again. Your own HSN / SAC master is not affected.
+
+### VLEBook reloaded by itself / showed "Updating VLEBook to …"
+Automatic updates are on (Techmin Updates → *Software updates on this computer*). VLEBook updates only after 2 minutes without use and with no window open, and keeps your data and any unfinished bill. Click **Later** to postpone, or choose *Ask me before updating* or *Do not check automatically*.
+
+### The update notice keeps coming back
+Click **Update now** once, or choose *Do not check automatically* and use **↻ Check for new updates** when convenient. If the computer is offline, updates wait until it is online.
