@@ -312,3 +312,30 @@ The same bill, payment or other money record was changed on two computers at alm
 ### The Google review QR does not appear on receipts
 Switch it on in **Books settings → Google review QR on receipts** with your own link from Google Business Profile (it must start with https:// and be a Google review link).
 
+### "Your centre is not GST registered, so only a non-GST bill can be made"
+Add your GSTIN in **Books & GST → GST → GST profile** (choose Regular or Composition and the date registration starts). Bills then follow your registration.
+
+### "A composition dealer cannot collect GST"
+A composition dealer issues a Bill of Supply without GST. If you have moved to regular registration, change it in GST profile with the date it starts.
+
+### "Place of supply … is another State: IGST applies" / "is your own State: CGST + SGST apply"
+The place of supply decides the tax. Leave it on your own State for local customers; choose the customer's State (or type their GSTIN) for customers from another State.
+
+### "GSTR-1 / GSTR-3B / CMP-08 for … is marked as filed"
+That return period is locked. Use a date in an open period, or ask the Owner to **Reopen** it in Books & GST → GST (a reason is recorded).
+
+### "… % is used by … service(s) or item(s)"
+A GST rate still used by a service or stock item cannot be deleted. Change those services first, or give the rate an end date instead.
+
+### "A credit note can be at most …" / "Only … is still due on this bill"
+A credit note reduces only the service charge and GST still due. For a bill already paid, cancel it (VLEBook makes the credit note and refund) and make a new bill.
+
+### "TDS must be less than the amount paid" / "Choose a TDS section from the list"
+Check the amount and the TDS section. TDS applies only above the yearly limits and depends on who pays; ask your accountant if unsure.
+
+### "Challan … is already recorded"
+That challan number was saved before; it is not saved twice.
+
+### The sign-in record shows a different city
+The city is looked up from the internet connection's IP address and often shows the internet provider's city. It is approximate.
+

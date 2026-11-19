@@ -2,6 +2,21 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.1.0 — 19 November 2026
+
+- **GST follows your registration.** Not registered → VLEBook makes only non-GST bills. **Regular** GST dealer → every bill is a **Tax Invoice** (the non-GST option is no longer shown); CGST + SGST or IGST is chosen automatically from the place of supply or the customer's GSTIN. **Composition** dealer → **Bill of Supply** with the composition declaration; no GST is collected from customers. Add the GSTIN and choose Regular or Composition when you register, or later in **Books & GST → GST profile**.
+- **Customer GSTIN** (optional) on the bill and in the customer record, printed on the tax invoice so a registered customer can claim input tax credit. A wrong GSTIN check character is shown at once.
+- **Price + GST or price including GST** for each service (Service Management) and on each bill line, with a live "customer pays" preview. Services can also be marked **Exempt** or nil-rated.
+- **GST rates** can be added, edited and deleted (with valid-from / valid-to dates) in GST profile. A rate still used by a service cannot be deleted.
+- **GST returns help:** GSTR-3B table and JSON, CMP-08 quarterly figures for composition dealers, **Mark as filed** (locks GST documents in that period; the Owner can reopen with a reason) and **Record GST / TDS / composition tax payment** (challan).
+- **Credit notes** for part of a bill (wrong rate, discount after billing) and **debit notes** to suppliers, both in the books and in the GST tables.
+- **TDS on supplier payments** (rent, contractor, professional fees …) with section and rate under the Income-tax Act, 2025, the TDS register and TDS payment.
+- **Bank reconciliation** line by line, **accountant review** marks and questions on vouchers, **Export to Tally (XML)**, and new reports: TDS, tax payments, credit/debit notes, top customers, accountant review.
+- **No separate "direct cost" per service.** Paper, ink and other purchases are entered once as expenses, so profit is no longer reduced twice. Profit reports now use your actual expenses.
+- **Sign-in record:** each sign-in and sign-out (user, time, computer, IP address and approximate city) is sent to Techmin for licence security and support, and which Techmin notices were seen. No business data is sent. See the updated Privacy Policy.
+- **Join the VLEBook WhatsApp group** button in Techmin Updates, Help and the Techmin tab of the Service Catalogue. The separate Techmin menu was removed — its links are in the Techmin tab of the catalogue.
+- Legal documents updated to version 1.12.
+
 ## Version 3.0.0 — 19 November 2026
 
 - New: **Books & GST** — full double-entry accounts for the centre, kept automatically. Every bill, receipt, refund, cancellation, expense, transfer, AEPS entry, commission and portal payment is posted to the books by VLEBook; nothing has to be entered twice. Chart of accounts with ledgers and groups, vouchers (journal, payment, receipt, contra, sales, purchase, credit and debit notes), ledger statements, **Trial Balance, Profit & Loss, Balance Sheet and Cash Flow**, cash book, bank book, day book, registers, receivables, payables and more — 22 books and reports with search, sort, Excel, CSV and print.
