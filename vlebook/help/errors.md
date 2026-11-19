@@ -362,3 +362,6 @@ A cancelled invoice — including one replaced by a revised invoice — cannot b
 
 ### Editing an invoice says the GST period is marked as filed
 The original invoice's month is already filed, so it cannot be replaced. Issue a credit note (or a new invoice) in the current month.
+
+### "… is not in the GST HSN / SAC list"
+The code you typed is not in the GST list built into VLEBook. Search the list by words and click **Use**, or check the code with your tax adviser. You can still save it; it is marked *Not in list*.
