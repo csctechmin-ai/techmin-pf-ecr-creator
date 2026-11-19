@@ -32,6 +32,8 @@ If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the fi
 
 **Automatic updates (version 3.2.3).** To find out whether a new version is published, VLEBook reads the version number from the VLEBook website at start, every 30 minutes and when the internet returns (unless switched off in Techmin Updates). Like any web page request this carries the computer's IP address; no centre or business data is sent, and the website does not record who checked.
 
+**Opening balances and edited vouchers (version 3.2.4).** Opening balances, voucher corrections and their reasons are kept only in the books on your computer and in your backups, with an entry in the audit log; they are not sent to Techmin.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:

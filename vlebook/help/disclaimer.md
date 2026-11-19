@@ -24,6 +24,8 @@ VLEBook is an independent product. It is **not** made, endorsed or approved by C
 
 **Version 3.2.3.** An automatic update reloads VLEBook and may change screens or features. VLEBook waits for an idle computer and keeps unfinished bills as drafts, but cannot know about work outside VLEBook (for example a print job in progress); choose *Ask me before updating* if this matters, and keep regular backups.
 
+**Version 3.2.4.** Opening balances and voucher corrections are recorded exactly as entered. VLEBook checks that each voucher balances and that periods are open, and shows any difference in opening balances, but it does not verify the figures against your earlier books or bank statements; have them checked by your accountant.
+
 ## 3. Data on the centre's computer
 
 Business data is stored only on the centre's computer and in backup files the centre saves. {{entity}} has no access to it and cannot recover it. The centre is responsible for taking and keeping backups, for the security of its computer, and for handling customers' personal data lawfully. **Start fresh** in Settings permanently clears the centre's transactions on that computer; take a backup first — it can be undone only by restoring a backup. **Work on more than one computer** depends on Google Drive for desktop, the centre's Google account and the internet: changes may take time to reach other computers, and when the same record is changed on two computers at once the later change is kept. The centre is responsible for its Google account and for who can open the shared folder.

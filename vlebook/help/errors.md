@@ -374,3 +374,18 @@ Automatic updates are on (Techmin Updates → *Software updates on this computer
 
 ### The update notice keeps coming back
 Click **Update now** once, or choose *Do not check automatically* and use **↻ Check for new updates** when convenient. If the computer is offline, updates wait until it is online.
+
+### "A financial year is already closed, so opening balances can no longer be changed"
+Opening balances belong to the start of your books. After a year is closed, correct the balance with a journal voucher dated in the open year.
+
+### "Enter the amount without a minus sign and choose Debit or Credit"
+Type the opening amount as a plain number and pick Debit (assets, expenses, money owed to you) or Credit (capital, loans, money you owe).
+
+### "The opening debits and credits differ by …"
+The opening balances do not agree. Check each one (for example capital, bank, customers and suppliers) until debits equal credits; until then the difference shows as *Difference in opening balances*.
+
+### "Give the reason for changing this voucher" / "Only a posted voucher can be edited this way"
+Editing a posted voucher needs a reason of at least 5 characters. A reversed voucher cannot be edited again — edit its latest corrected version (the -R number).
+
+### "This entry comes from a bill, receipt or other document"
+Automatic entries follow their documents. Edit or cancel the invoice, receipt or expense instead, and the books update by themselves.
