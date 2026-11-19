@@ -63,7 +63,7 @@ We use the following providers to run VLEBook. They process data only to provide
 - **Google** (Google Apps Script, Google Sheets, Gmail) — the Techmin registry and email notifications.
 - **GitHub** — hosting of the VLEBook web application files.
 - **Browser push services** (Google, Microsoft, Mozilla, Apple) — delivery of push notifications to your browser, if you allow them.
-- **Blogger (Google)** — the Techmin blog articles shown in VLEBook are loaded directly from {{website}}.
+- **Blogger (Google)** — the Techmin blog articles from {{website}} are read by the Techmin registry and passed to VLEBook as plain text (title, date, summary, picture and link). No centre data is sent with this request; pictures are loaded from Google's image servers and the article opens on {{website}}.
 - **IP lookup (freeipapi.com, ipify.org)** — at sign-in, VLEBook asks these free services for the computer's public IP address and approximate location. Only the normal web request (which carries the IP address) reaches them; no other data is sent.
 
 Data may be stored on servers of these providers in or outside India, subject to applicable law.
