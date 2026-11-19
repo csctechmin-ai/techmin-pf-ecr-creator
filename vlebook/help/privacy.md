@@ -14,7 +14,7 @@ This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we")
 
 All records you enter in VLEBook are stored in your browser's storage (IndexedDB) on your computer and in backup files (.json / .txt) saved where you choose. Techmin has no access to them. For this data the **Centre is the data fiduciary** and is responsible for informing its customers, obtaining consent where needed, and keeping the data secure and accurate (see the Terms & Conditions, section 4).
 
-Passwords of VLEBook users are stored only as salted hashes. The centre logo is stored with the centre settings on your computer and in your backups; it is not sent to Techmin. PDF and image tools process files on your computer; files are not uploaded.
+Passwords of VLEBook users are stored only as salted hashes. The centre logo is stored with the centre settings on your computer and in your backups; it is not sent to Techmin. The image of the authorised signatory's signature (and the signatory's name, if entered) is stored the same way, only on your computer and in your backups, is used only to print the centre's own invoices and is never sent to Techmin. PDF and image tools process files on your computer; files are not uploaded.
 
 Techmin does not store, copy or back up this data and cannot recover it. The **audit log** (who signed in, failed sign-in attempts, sign-outs, backups and changes, with dates and times) is also kept only on your computer and in your backup folder; Techmin does not receive it.
 
@@ -63,7 +63,7 @@ We use the following providers to run VLEBook. They process data only to provide
 - **Google** (Google Apps Script, Google Sheets, Gmail) — the Techmin registry and email notifications.
 - **GitHub** — hosting of the VLEBook web application files.
 - **Browser push services** (Google, Microsoft, Mozilla, Apple) — delivery of push notifications to your browser, if you allow them.
-- **Blogger (Google)** — the Techmin blog articles from {{website}} are read by the Techmin registry and passed to VLEBook as plain text (title, date, summary, picture and link). No centre data is sent with this request; pictures are loaded from Google's image servers and the article opens on {{website}}.
+- **Blogger (Google)** — the Techmin blog articles from {{website}} are read by the Techmin registry and passed to VLEBook as plain text (title, date, short summary and link; no pictures). No centre data is sent with this request, and the article opens on {{website}}.
 - **IP lookup (freeipapi.com, ipify.org)** — at sign-in, VLEBook asks these free services for the computer's public IP address and approximate location. Only the normal web request (which carries the IP address) reaches them; no other data is sent.
 
 Data may be stored on servers of these providers in or outside India, subject to applicable law.

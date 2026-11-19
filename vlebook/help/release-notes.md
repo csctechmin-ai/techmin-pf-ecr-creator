@@ -2,6 +2,17 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.2.0 — 19 November 2026
+
+- **Professional invoice.** The A4 invoice and the PDF download now share one clean, professional layout: centre details and logo, Tax Invoice / Bill of Supply / Invoice with *Original for recipient* and payment status, a *Billed to* box with the customer's GSTIN, invoice number, date, place of supply and reverse charge, a full items table (HSN/SAC, government fee, taxable value, GST rate, CGST + SGST or IGST), a GST rate summary, amount in words, totals and an authorised-signatory block. The PDF looks exactly like the printed page.
+- **Compulsory round off.** Every bill is rounded to the nearest rupee — 49 paise or less down, 50 paise or more up (₹10.47 → ₹10, ₹10.50 → ₹11). The option to switch it off was removed.
+- **Round Off ledger.** The rounding difference is posted automatically to the *Round Off* ledger, shown as a separate line in Profit & Loss (income when net rounding gained, expense when net rounding given away). Books made earlier rename "Rounding off" to "Round Off" automatically.
+- **Authorised signatory's signature.** Upload a photo or scan of the signature once in Settings & Centre Setup (with the signatory's name and designation, if you like). VLEBook removes the paper background, crops and fits it, and prints it above "Authorised Signatory" on every A4 invoice, its PDF and the thermal receipt.
+- **HSN / SAC master** (GST-registered centres). Add, edit and delete the HSN codes (goods) and SAC codes (services) your centre uses in Books & GST → GST → *HSN / SAC master*, then choose them in Service Management and Stock & Inventory. Codes are checked (SAC: 6 digits starting with 99; HSN: 4, 6 or 8 digits); a code in use cannot be deleted, and renaming a code updates the services and items that use it. Centres without GST registration do not see this.
+- **Edit an issued invoice.** Click **Edit** in the invoice list, change the services, customer or payment, give the reason and save. VLEBook issues a revised invoice with the same date and the number *original-R1* (R2 for a later revision) and cancels the original with a credit note, so money, stock and books stay correct and both invoices remain on record. A GST month already marked as filed cannot be changed this way; use a credit note instead.
+- **Blog articles** in Techmin Updates now show only the title, date and a short summary of the article text — no pictures and no page code.
+- Legal documents updated to version 1.14 (signature image, editing issued invoices).
+
 ## Version 3.1.2 — 19 November 2026
 
 - **Blog articles from complypro.co.in now appear** in Techmin Updates → Blog. Blogger does not let other websites read its feed directly, so the Techmin registry reads the latest posts and passes on only the title, date, short summary, picture and link (as plain text). VLEBook sends no centre data with this request. Posts are kept on the computer so they show offline too.

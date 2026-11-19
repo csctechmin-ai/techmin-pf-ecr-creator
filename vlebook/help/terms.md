@@ -50,6 +50,8 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 **GST registration (version 3.1).** The Centre must set its GST registration correctly (none, regular or composition) and keep it up to date; VLEBook issues non-GST bills, tax invoices or bills of supply accordingly. Choosing TDS sections, GST rates, place of supply and exemptions remains the Centre's responsibility.
 
+**Signature and edited invoices (version 3.2).** The Centre shall upload only the signature of a person authorised to sign its invoices, with that person's consent, and is responsible for every document printed with it; Techmin does not verify it. An issued invoice is changed only by issuing a revised invoice and cancelling the original with a credit note; the Centre shall give a true reason, keep both documents, and not use editing to alter tax already reported. HSN / SAC codes, GST rates and the rounding of bills to the nearest rupee are applied as set by the Centre, which remains responsible for them.
+
 ## 5. Notices and communications
 
 By using VLEBook you agree that Techmin may show notices inside the software, send push notifications to computers where notifications are allowed, and contact the registered mobile number or email about your licence, renewals, payments, security and important updates. You can turn push notifications off at any time in your browser or in VLEBook.
