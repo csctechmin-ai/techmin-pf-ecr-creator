@@ -341,3 +341,24 @@ The city is looked up from the internet connection's IP address and often shows 
 
 ### VLEBook keeps asking me to confirm the GST registration
 Your centre's GSTIN was saved before version 3.1 and the registration type has not been confirmed yet. The Owner, Manager or Accountant chooses Regular, Composition or *Not GST registered* in that window and clicks **Confirm**; it is then not asked again. *Remind me later* asks again at the next sign-in. Staff without that permission see the notice only once.
+
+### I cannot switch off the round off on a bill
+From version 3.2 every bill is rounded to the nearest rupee (49 paise or less down, 50 paise or more up). The difference goes to the Round Off ledger in your books, so cash, bills and Profit & Loss always agree.
+
+### "No signature was found in this image"
+Sign in dark ink on plain white paper, then take a clear, well-lit photo or scan from straight above and upload it again. A very light or blurred photo cannot be used.
+
+### "An HSN / SAC code has digits only" / "A SAC (services) code has 6 digits and starts with 99" / "An HSN (goods) code has 4, 6 or 8 digits"
+Type the code without spaces or letters. Services use a 6-digit SAC such as 998599; goods use an HSN of 4, 6 or 8 digits such as 4802.
+
+### "… is used by … service(s) or item(s). Change them first." (HSN / SAC master)
+The code is still chosen for a service or stock item. Choose another code for them (or edit the code instead of deleting it), then delete.
+
+### "Enter the reason for editing this invoice"
+Editing an issued invoice needs a reason of at least 5 characters; it is printed on the revised invoice's record and written in the audit log.
+
+### "This invoice is cancelled and cannot be edited"
+A cancelled invoice — including one replaced by a revised invoice — cannot be edited. Edit the latest revision (the -R number) instead.
+
+### Editing an invoice says the GST period is marked as filed
+The original invoice's month is already filed, so it cannot be replaced. Issue a credit note (or a new invoice) in the current month.

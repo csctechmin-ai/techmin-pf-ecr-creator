@@ -48,6 +48,8 @@ Products or services bought on Techmin's other websites (ComplyPro, Finance and 
 
 Version 3.1 features (GST registration modes, notes, TDS, bank reconciliation, Tally export) are part of the same full version; no separate fee is charged for them.
 
+Version 3.2 features (professional invoice, signature, HSN / SAC master, editing invoices, compulsory round off) are part of the same full version; no separate fee is charged for them.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.
