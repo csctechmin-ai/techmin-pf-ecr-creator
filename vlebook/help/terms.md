@@ -46,6 +46,10 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 **Books & GST.** The accounting and GST features are tools to help the centre keep its books and prepare returns. The centre is responsible for the correctness of its entries, GSTINs, HSN/SAC codes, tax rates and place of supply, for reviewing every report and file, and for filing returns and paying tax on time. VLEBook never files a return or pays tax. Day closing, period locks and permissions protect records but do not replace the centre's own controls.
 
+**Sign-in record (version 3.1).** The Centre agrees that VLEBook sends Techmin a record of each sign-in (user name and role, times, computer code, IP address and approximate location, browser) for licence security and support, as described in the Privacy Policy, and that it will inform its staff who use VLEBook. Sharing a licence outside the Centre may be detected from these records. Techmin may contact the Centre by email, in-app notice and push notification.
+
+**GST registration (version 3.1).** The Centre must set its GST registration correctly (none, regular or composition) and keep it up to date; VLEBook issues non-GST bills, tax invoices or bills of supply accordingly. Choosing TDS sections, GST rates, place of supply and exemptions remains the Centre's responsibility.
+
 ## 5. Notices and communications
 
 By using VLEBook you agree that Techmin may show notices inside the software, send push notifications to computers where notifications are allowed, and contact the registered mobile number or email about your licence, renewals, payments, security and important updates. You can turn push notifications off at any time in your browser or in VLEBook.

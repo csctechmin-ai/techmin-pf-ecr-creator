@@ -1,4 +1,4 @@
-import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";import{saveCustomerRecord as O,getCustomer360Profile as _,recordCustomerLedgerPayment as T}from"../core/accounting.js";import{restoreScopeDraft as U,clearScopeDraft as V}from"../core/autosave.js";import{uid as j,todayISO as P,formatINR as g,formatDate as D,toPaise as W,esc as s,buildWhatsAppURL as z,exportToCSV as H,exportToExcel as G,generateSimplePDFBlob as J,downloadFile as K}from"../core/utils.js";import{formatWhatsAppTemplate as Q,getLang as X}from"../core/i18n.js";let L="",N=null,k=null;async function $(a,c,b=null){b&&(N=b);const[i,m,x,y]=await Promise.all([S("customers"),S("bills"),S("payments"),M("settings","CENTRE_CONFIG")]),u=i.map(e=>{const d=m.filter(n=>n.customerId===e.id&&n.status!=="CANCELLED"),f=x.filter(n=>n.customerId===e.id),E=d.reduce((n,C)=>n+(C.grandTotalPaise||0),0),w=d.reduce((n,C)=>n+(C.duePaise||0),0),R=f.filter(n=>n.type==="ADVANCE").reduce((n,C)=>n+(C.amountPaise||0),0),A=f.filter(n=>n.type==="ADVANCE_ADJUST").reduce((n,C)=>n+(C.amountPaise||0),0),I=Math.max(0,R-A),F=f.filter(n=>n.type==="PENDING_REFUND").reduce((n,C)=>n+(C.amountPaise||0),0),q=d.length?d[d.length-1].date:e.registrationDate;return{...e,visits:d.length,totalSpentPaise:E,duePaise:w,advancePaise:I,pendingRefundPaise:F,lastVisit:q}}),l=L.trim().toLowerCase(),h=u.filter(e=>!l||e.name.toLowerCase().includes(l)||String(e.mobile||"").includes(l)||String(e.id||"").toLowerCase().includes(l)),o=k?i.find(e=>e.id===k):null,t=N?await _(N):null;a.innerHTML=`
+import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";import{saveCustomerRecord as O,getCustomer360Profile as T,recordCustomerLedgerPayment as _}from"../core/accounting.js";import{restoreScopeDraft as U,clearScopeDraft as V}from"../core/autosave.js";import{uid as j,todayISO as P,formatINR as f,formatDate as D,toPaise as W,esc as s,buildWhatsAppURL as z,exportToCSV as G,exportToExcel as H,generateSimplePDFBlob as J,downloadFile as K}from"../core/utils.js";import{formatWhatsAppTemplate as Q,getLang as Z}from"../core/i18n.js";let L="",N=null,k=null;async function $(a,c,b=null){b&&(N=b);const[i,m,x,y]=await Promise.all([S("customers"),S("bills"),S("payments"),M("settings","CENTRE_CONFIG")]),u=i.map(e=>{const d=m.filter(n=>n.customerId===e.id&&n.status!=="CANCELLED"),g=x.filter(n=>n.customerId===e.id),E=d.reduce((n,C)=>n+(C.grandTotalPaise||0),0),w=d.reduce((n,C)=>n+(C.duePaise||0),0),A=g.filter(n=>n.type==="ADVANCE").reduce((n,C)=>n+(C.amountPaise||0),0),R=g.filter(n=>n.type==="ADVANCE_ADJUST").reduce((n,C)=>n+(C.amountPaise||0),0),I=Math.max(0,A-R),F=g.filter(n=>n.type==="PENDING_REFUND").reduce((n,C)=>n+(C.amountPaise||0),0),q=d.length?d[d.length-1].date:e.registrationDate;return{...e,visits:d.length,totalSpentPaise:E,duePaise:w,advancePaise:I,pendingRefundPaise:F,lastVisit:q}}),l=L.trim().toLowerCase(),h=u.filter(e=>!l||e.name.toLowerCase().includes(l)||String(e.mobile||"").includes(l)||String(e.id||"").toLowerCase().includes(l)),o=k?i.find(e=>e.id===k):null,t=N?await T(N):null;a.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Customer CRM & 360° Unified Ledger</h1>
@@ -14,7 +14,7 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
     <div class="grid-sidebar-right">
       <!-- Left Column: Customer Directory or Customer 360° View -->
       <div>
-        ${t?Y(t,y):`
+        ${t?X(t,y):`
           <div class="card">
             <div class="card-header">
               <div class="card-title">Registered Citizens & Customers (${h.length})</div>
@@ -43,12 +43,12 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
                           </td>
                           <td><strong>${s(e.mobile)}</strong></td>
                           <td>${s(e.category)}<br><small style="color:var(--color-text-muted);">${s(e.district||e.state)}</small></td>
-                          <td class="num">${g(e.totalSpentPaise)}</td>
+                          <td class="num">${f(e.totalSpentPaise)}</td>
                           <td class="num">
-                            ${e.duePaise>0?`<span class="badge badge-danger">${g(e.duePaise)}</span>`:'<span class="badge badge-success">₹0.00</span>'}
+                            ${e.duePaise>0?`<span class="badge badge-danger">${f(e.duePaise)}</span>`:'<span class="badge badge-success">₹0.00</span>'}
                           </td>
                           <td class="num">
-                            ${e.advancePaise>0?`<span class="badge badge-info">${g(e.advancePaise)}</span>`:"—"}
+                            ${e.advancePaise>0?`<span class="badge badge-info">${f(e.advancePaise)}</span>`:"—"}
                           </td>
                           <td>${s(D(e.lastVisit))}</td>
                           <td>
@@ -101,6 +101,11 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
                 <label class="form-label">Email Address</label>
                 <input type="email" class="form-control" name="email" placeholder="citizen@example.in" value="${s(o?.email||"")}">
               </div>
+              <div class="form-group">
+                <label class="form-label">GSTIN (optional, for business customers)</label>
+                <input type="text" class="form-control" name="gstin" maxlength="15" autocomplete="off" spellcheck="false" style="text-transform:uppercase;" placeholder="e.g. 32ABCDE1234F1Z5" value="${s(o?.gstin||"")}">
+                <div class="form-hint">Printed on tax invoices so the customer can claim input tax credit.</div>
+              </div>
             </div>
             <div class="form-group">
               <label class="form-label">Street / Ward / Village Address</label>
@@ -131,13 +136,13 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
         </div>
       </div>
     </div>
-  `;const r=a.querySelector('[data-autosave-scope="customer_form"]');!o&&r&&await U("customer_form",r);const v=a.querySelector("#cust-mobile"),p=a.querySelector("#cust-form-feedback");v?.addEventListener("input",()=>{const e=v.value.replace(/\D/g,"").slice(-10);if(e.length===10){const d=i.find(f=>f.mobile===e&&f.id!==k);d&&p?(p.innerHTML=`
+  `;const r=a.querySelector('[data-autosave-scope="customer_form"]');!o&&r&&await U("customer_form",r);const v=a.querySelector("#cust-mobile"),p=a.querySelector("#cust-form-feedback");v?.addEventListener("input",()=>{const e=v.value.replace(/\D/g,"").slice(-10);if(e.length===10){const d=i.find(g=>g.mobile===e&&g.id!==k);d&&p?(p.innerHTML=`
           <div class="callout warning">
             <div>
               <strong>Existing Customer Found:</strong> ${s(d.name)} (${s(d.id)}) already uses ${s(e)}.
             </div>
             <button type="button" class="btn btn-xs btn-teal" id="jump-existing-cust">Open 360°</button>
-          </div>`,p.querySelector("#jump-existing-cust")?.addEventListener("click",()=>{N=d.id,$(a,c)})):p&&(p.innerHTML="")}}),a.querySelector("#cust-search-input")?.addEventListener("input",e=>{L=e.target.value,$(a,c)}),a.querySelector("#customer-entry-form")?.addEventListener("submit",async e=>{e.preventDefault();const d=new FormData(e.target),f=Object.fromEntries(d.entries());try{const E=await O(f,!!k);await V("customer_form"),k=null,N=E.id,await $(a,c)}catch(E){p&&(p.innerHTML=`<div class="callout danger"><span>${s(E.message)}</span></div>`)}}),a.querySelector("#cust-cancel-edit")?.addEventListener("click",()=>{k=null,$(a,c)}),a.querySelectorAll("[data-open-360]").forEach(e=>{e.addEventListener("click",()=>{N=e.getAttribute("data-open-360"),$(a,c)})}),a.querySelectorAll("[data-edit-cust]").forEach(e=>{e.addEventListener("click",()=>{k=e.getAttribute("data-edit-cust"),$(a,c)})}),a.querySelectorAll("[data-bill-cust]").forEach(e=>{e.addEventListener("click",()=>{const d=e.getAttribute("data-bill-cust");sessionStorage.setItem("vlebook_preselect_customer",d),c("billing")})}),a.querySelector("#cust-new-bill-shortcut")?.addEventListener("click",()=>c("billing")),a.querySelector("#cust-export-csv")?.addEventListener("click",()=>{H(["Customer ID","Name","Mobile","Category","District","State","Total Spend INR","Pending Due INR","Advance INR"],u.map(e=>[e.id,e.name,e.mobile,e.category,e.district,e.state,(e.totalSpentPaise/100).toFixed(2),(e.duePaise/100).toFixed(2),(e.advancePaise/100).toFixed(2)]),`VLEBook_Customers_${P()}.csv`)}),a.querySelector("#cust-export-xls")?.addEventListener("click",()=>{G("Customers",["Customer ID","Name","Mobile","Category","District","State","Total Spend INR","Pending Due INR","Advance INR"],u.map(e=>[e.id,e.name,e.mobile,e.category,e.district,e.state,e.totalSpentPaise/100,e.duePaise/100,e.advancePaise/100]),`VLEBook_Customers_${P()}.xls`)}),t&&Z(a,t,y,c)}function Y(a,c){const{customer:b,metrics:i,frequentServices:m,bills:x,timeline:y,applications:u=[]}=a,l=[];(x||[]).filter(t=>t.status!=="CANCELLED").forEach(t=>(t.items||[]).filter(r=>r.kind!=="PRODUCT").forEach(r=>{const v=u.find(p=>p.billId===t.id&&(p.lineId?p.lineId===r.id:p.serviceId===r.serviceId));l.push({date:t.date,service:r.serviceName,invoiceNo:t.invoiceNo,refs:v?{...r,appRefNo:v.appRefNo||r.appRefNo,ackNo:v.ackNo||r.ackNo,trackNo:v.trackNo||r.trackNo}:r,status:v?.status||"",target:v?`app:${v.id}`:`line:${t.id}:${r.id}`})})),u.filter(t=>!t.billId).forEach(t=>l.push({date:t.appDate,service:t.serviceName,invoiceNo:"",refs:t,status:t.status,target:`app:${t.id}`})),l.sort((t,r)=>String(r.date||"").localeCompare(String(t.date||"")));const h=Q(X(),i.outstandingDuePaise>0?"due_reminder":"followup",{customerName:b.name,centreName:c?.centreName||"VLEBook Centre",dueAmount:g(i.outstandingDuePaise)},c?.whatsappTemplates),o=z(b.mobile,h);return`
+          </div>`,p.querySelector("#jump-existing-cust")?.addEventListener("click",()=>{N=d.id,$(a,c)})):p&&(p.innerHTML="")}}),a.querySelector("#cust-search-input")?.addEventListener("input",e=>{L=e.target.value,$(a,c)}),a.querySelector("#customer-entry-form")?.addEventListener("submit",async e=>{e.preventDefault();const d=new FormData(e.target),g=Object.fromEntries(d.entries());try{const E=await O(g,!!k);await V("customer_form"),k=null,N=E.id,await $(a,c)}catch(E){p&&(p.innerHTML=`<div class="callout danger"><span>${s(E.message)}</span></div>`)}}),a.querySelector("#cust-cancel-edit")?.addEventListener("click",()=>{k=null,$(a,c)}),a.querySelectorAll("[data-open-360]").forEach(e=>{e.addEventListener("click",()=>{N=e.getAttribute("data-open-360"),$(a,c)})}),a.querySelectorAll("[data-edit-cust]").forEach(e=>{e.addEventListener("click",()=>{k=e.getAttribute("data-edit-cust"),$(a,c)})}),a.querySelectorAll("[data-bill-cust]").forEach(e=>{e.addEventListener("click",()=>{const d=e.getAttribute("data-bill-cust");sessionStorage.setItem("vlebook_preselect_customer",d),c("billing")})}),a.querySelector("#cust-new-bill-shortcut")?.addEventListener("click",()=>c("billing")),a.querySelector("#cust-export-csv")?.addEventListener("click",()=>{G(["Customer ID","Name","Mobile","Category","District","State","Total Spend INR","Pending Due INR","Advance INR"],u.map(e=>[e.id,e.name,e.mobile,e.category,e.district,e.state,(e.totalSpentPaise/100).toFixed(2),(e.duePaise/100).toFixed(2),(e.advancePaise/100).toFixed(2)]),`VLEBook_Customers_${P()}.csv`)}),a.querySelector("#cust-export-xls")?.addEventListener("click",()=>{H("Customers",["Customer ID","Name","Mobile","Category","District","State","Total Spend INR","Pending Due INR","Advance INR"],u.map(e=>[e.id,e.name,e.mobile,e.category,e.district,e.state,e.totalSpentPaise/100,e.duePaise/100,e.advancePaise/100]),`VLEBook_Customers_${P()}.xls`)}),t&&Y(a,t,y,c)}function X(a,c){const{customer:b,metrics:i,frequentServices:m,bills:x,timeline:y,applications:u=[]}=a,l=[];(x||[]).filter(t=>t.status!=="CANCELLED").forEach(t=>(t.items||[]).filter(r=>r.kind!=="PRODUCT").forEach(r=>{const v=u.find(p=>p.billId===t.id&&(p.lineId?p.lineId===r.id:p.serviceId===r.serviceId));l.push({date:t.date,service:r.serviceName,invoiceNo:t.invoiceNo,refs:v?{...r,appRefNo:v.appRefNo||r.appRefNo,ackNo:v.ackNo||r.ackNo,trackNo:v.trackNo||r.trackNo}:r,status:v?.status||"",target:v?`app:${v.id}`:`line:${t.id}:${r.id}`})})),u.filter(t=>!t.billId).forEach(t=>l.push({date:t.appDate,service:t.serviceName,invoiceNo:"",refs:t,status:t.status,target:`app:${t.id}`})),l.sort((t,r)=>String(r.date||"").localeCompare(String(t.date||"")));const h=Q(Z(),i.outstandingDuePaise>0?"due_reminder":"followup",{customerName:b.name,centreName:c?.centreName||"VLEBook Centre",dueAmount:f(i.outstandingDuePaise)},c?.whatsappTemplates),o=z(b.mobile,h);return`
     <div class="card">
       <div class="card-header">
         <div>
@@ -157,23 +162,23 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
       <div class="grid-kpi" style="grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));">
         <div class="kpi-card navy">
           <div class="kpi-label">Total Business</div>
-          <div class="kpi-value">${g(i.totalBilledPaise)}</div>
+          <div class="kpi-value">${f(i.totalBilledPaise)}</div>
           <div class="kpi-sub">${i.totalVisits} Total Visits</div>
         </div>
         <div class="kpi-card success">
           <div class="kpi-label">Total Payments</div>
-          <div class="kpi-value">${g(i.totalReceiptsPaise)}</div>
+          <div class="kpi-value">${f(i.totalReceiptsPaise)}</div>
           <div class="kpi-sub">Last Visit: ${s(D(i.lastVisitDate))}</div>
         </div>
         <div class="kpi-card danger">
           <div class="kpi-label">Outstanding Due</div>
-          <div class="kpi-value">${g(i.outstandingDuePaise)}</div>
+          <div class="kpi-value">${f(i.outstandingDuePaise)}</div>
           <div class="kpi-sub">Across unpaid/partial bills</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Advance Balance</div>
-          <div class="kpi-value">${g(i.availableAdvancePaise)}</div>
-          <div class="kpi-sub">Pending Refund: ${g(i.pendingRefundPaise)}</div>
+          <div class="kpi-value">${f(i.availableAdvancePaise)}</div>
+          <div class="kpi-sub">Pending Refund: ${f(i.pendingRefundPaise)}</div>
         </div>
         <div class="kpi-card gold">
           <div class="kpi-label">Connected Jobs</div>
@@ -200,7 +205,7 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
               <label class="form-label">Link to Invoice (Optional)</label>
               <select class="form-control" name="billId">
                 <option value="">— General Ledger —</option>
-                ${x.filter(t=>t.duePaise>0).map(t=>`<option value="${s(t.id)}">${s(t.invoiceNo)} (Due: ${g(t.duePaise)})</option>`).join("")}
+                ${x.filter(t=>t.duePaise>0).map(t=>`<option value="${s(t.id)}">${s(t.invoiceNo)} (Due: ${f(t.duePaise)})</option>`).join("")}
               </select>
             </div>
             <div class="form-group">
@@ -251,7 +256,7 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
       <div style="margin-bottom:14px;">
         <strong style="font-size:12px; color:var(--color-text-muted); text-transform:uppercase;">Most Frequently Used Services:</strong>
         <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">
-          ${m.length===0?'<span class="badge badge-neutral">No billed services yet</span>':m.map(t=>`<span class="badge badge-info">${s(t.name)} ×${t.count} (${g(t.totalPaise)})</span>`).join("")}
+          ${m.length===0?'<span class="badge badge-neutral">No billed services yet</span>':m.map(t=>`<span class="badge badge-info">${s(t.name)} ×${t.count} (${f(t.totalPaise)})</span>`).join("")}
         </div>
       </div>
 
@@ -294,12 +299,12 @@ import{getAllRecords as S,getRecord as M,putRecord as B}from"../core/db.js";impo
                       <strong>${s(t.title)}</strong><br>
                       <small style="color:var(--color-text-muted);">${s(t.subtitle)}</small>
                     </td>
-                    <td class="num">${t.debitPaise>0?g(t.debitPaise):"—"}</td>
-                    <td class="num" style="color:var(--color-success);">${t.creditPaise>0?g(t.creditPaise):"—"}</td>
+                    <td class="num">${t.debitPaise>0?f(t.debitPaise):"—"}</td>
+                    <td class="num" style="color:var(--color-success);">${t.creditPaise>0?f(t.creditPaise):"—"}</td>
                     <td><span class="badge ${t.status==="PAID"||t.status==="Completed"||t.status==="COMPLETED"?"badge-success":"badge-warning"}">${s(t.status)}</span></td>
                   </tr>`).join("")}
           </tbody>
         </table>
       </div>
     </div>
-  `}function Z(a,c,b,i){a.querySelectorAll("[data-c360-refs]").forEach(u=>u.addEventListener("click",async()=>{const[l,h,o]=u.getAttribute("data-c360-refs").split(":"),{editReferenceNumbers:t}=await import("./pending-work.js");let r,v={},p="";if(l==="app"){const e=(c.applications||[]).find(d=>d.id===h);r={appId:h},v=e||{},p=`${e?.serviceName||""}${e?.invoiceNo?` — Invoice ${e.invoiceNo}`:""}`}else{const e=(c.bills||[]).find(f=>f.id===h),d=(e?.items||[]).find(f=>f.id===o)||{};r={billId:h,lineId:o},v=d,p=`${d.serviceName||""} — Invoice ${e?.invoiceNo||""}`}await t(r,v,p)&&$(a,i,c.customer.id)}));const{customer:m,metrics:x,timeline:y}=c;a.querySelector("#cust-back-dir")?.addEventListener("click",()=>{N=null,$(a,i)}),a.querySelector("#c360-bill-btn")?.addEventListener("click",()=>{sessionStorage.setItem("vlebook_preselect_customer",m.id),i("billing")}),a.querySelector("#c360-workbench-btn")?.addEventListener("click",()=>{sessionStorage.setItem("vlebook_preselect_customer",m.id),i("studio")}),a.querySelector("#c360-ledger-form")?.addEventListener("submit",async u=>{u.preventDefault();const l=new FormData(u.target);await T({customerId:m.id,customerName:m.name,billId:l.get("billId")||null,type:l.get("type"),amountPaise:W(l.get("amount")),mode:l.get("mode"),notes:l.get("notes")}),await $(a,i)}),a.querySelector("#c360-followup-form")?.addEventListener("submit",async u=>{u.preventDefault();const l=new FormData(u.target);await B("followups",{id:j("FLW"),date:P(),dueDate:l.get("dueDate")||P(),customerId:m.id,customerName:m.name,customerMobile:m.mobile,type:l.get("type")||"FOLLOWUP",status:"OPEN",summary:l.get("summary")}),await $(a,i)}),a.querySelector("#c360-statement-pdf")?.addEventListener("click",()=>{const u=J(`${b?.centreName||"VLEBook Centre"} - Customer 360 Statement`,`Customer: ${m.name} (${m.id}) | Mobile: ${m.mobile} | Date: ${P()}`,["Date","Type","Particulars","Debit (Rs)","Credit (Rs)","Status"],y.map(l=>[l.date,l.kind,l.title.slice(0,28),(l.debitPaise/100).toFixed(2),(l.creditPaise/100).toFixed(2),l.status]),[`Total Billed: Rs.${(x.totalBilledPaise/100).toFixed(2)} | Total Paid: Rs.${(x.totalReceiptsPaise/100).toFixed(2)}`,`Outstanding Due: Rs.${(x.outstandingDuePaise/100).toFixed(2)} | Available Advance: Rs.${(x.availableAdvancePaise/100).toFixed(2)}`]);K(u,`Customer_Statement_${m.id}_${P()}.pdf`,"application/pdf")})}export{$ as renderCustomersModule};
+  `}function Y(a,c,b,i){a.querySelectorAll("[data-c360-refs]").forEach(u=>u.addEventListener("click",async()=>{const[l,h,o]=u.getAttribute("data-c360-refs").split(":"),{editReferenceNumbers:t}=await import("./pending-work.js");let r,v={},p="";if(l==="app"){const e=(c.applications||[]).find(d=>d.id===h);r={appId:h},v=e||{},p=`${e?.serviceName||""}${e?.invoiceNo?` — Invoice ${e.invoiceNo}`:""}`}else{const e=(c.bills||[]).find(g=>g.id===h),d=(e?.items||[]).find(g=>g.id===o)||{};r={billId:h,lineId:o},v=d,p=`${d.serviceName||""} — Invoice ${e?.invoiceNo||""}`}await t(r,v,p)&&$(a,i,c.customer.id)}));const{customer:m,metrics:x,timeline:y}=c;a.querySelector("#cust-back-dir")?.addEventListener("click",()=>{N=null,$(a,i)}),a.querySelector("#c360-bill-btn")?.addEventListener("click",()=>{sessionStorage.setItem("vlebook_preselect_customer",m.id),i("billing")}),a.querySelector("#c360-workbench-btn")?.addEventListener("click",()=>{sessionStorage.setItem("vlebook_preselect_customer",m.id),i("studio")}),a.querySelector("#c360-ledger-form")?.addEventListener("submit",async u=>{u.preventDefault();const l=new FormData(u.target);await _({customerId:m.id,customerName:m.name,billId:l.get("billId")||null,type:l.get("type"),amountPaise:W(l.get("amount")),mode:l.get("mode"),notes:l.get("notes")}),await $(a,i)}),a.querySelector("#c360-followup-form")?.addEventListener("submit",async u=>{u.preventDefault();const l=new FormData(u.target);await B("followups",{id:j("FLW"),date:P(),dueDate:l.get("dueDate")||P(),customerId:m.id,customerName:m.name,customerMobile:m.mobile,type:l.get("type")||"FOLLOWUP",status:"OPEN",summary:l.get("summary")}),await $(a,i)}),a.querySelector("#c360-statement-pdf")?.addEventListener("click",()=>{const u=J(`${b?.centreName||"VLEBook Centre"} - Customer 360 Statement`,`Customer: ${m.name} (${m.id}) | Mobile: ${m.mobile} | Date: ${P()}`,["Date","Type","Particulars","Debit (Rs)","Credit (Rs)","Status"],y.map(l=>[l.date,l.kind,l.title.slice(0,28),(l.debitPaise/100).toFixed(2),(l.creditPaise/100).toFixed(2),l.status]),[`Total Billed: Rs.${(x.totalBilledPaise/100).toFixed(2)} | Total Paid: Rs.${(x.totalReceiptsPaise/100).toFixed(2)}`,`Outstanding Due: Rs.${(x.outstandingDuePaise/100).toFixed(2)} | Available Advance: Rs.${(x.availableAdvancePaise/100).toFixed(2)}`]);K(u,`Customer_Statement_${m.id}_${P()}.pdf`,"application/pdf")})}export{$ as renderCustomersModule};

@@ -312,3 +312,30 @@ GSTIN का एक अक्षर गलत टाइप हुआ है। V
 ### रसीदों पर गूगल रिव्यू QR नहीं दिखता
 **Books settings → Google review QR on receipts** में Google Business Profile के अपने लिंक के साथ इसे चालू करें (https:// से शुरू होने वाला गूगल रिव्यू लिंक)।
 
+### "Your centre is not GST registered, so only a non-GST bill can be made"
+**Books & GST → GST → GST profile** में अपना GSTIN डालें (Regular या Composition और पंजीकरण की आरंभ तिथि चुनें)। फिर बिल आपके पंजीकरण के अनुसार बनते हैं।
+
+### "A composition dealer cannot collect GST"
+कंपोज़िशन डीलर बिना जीएसटी के बिल ऑफ़ सप्लाई जारी करता है। यदि आप नियमित पंजीकरण में चले गए हैं, तो GST profile में आरंभ तिथि के साथ बदलें।
+
+### "Place of supply … is another State: IGST applies" / "is your own State: CGST + SGST apply"
+आपूर्ति का स्थान कर तय करता है। स्थानीय ग्राहकों के लिए अपना राज्य रखें; दूसरे राज्य के ग्राहक के लिए उसका राज्य चुनें (या उसका GSTIN लिखें)।
+
+### "GSTR-1 / GSTR-3B / CMP-08 for … is marked as filed"
+वह रिटर्न अवधि लॉक है। खुली अवधि की तिथि का उपयोग करें, या मालिक से Books & GST → GST में उसे **Reopen** करने को कहें (कारण दर्ज होता है)।
+
+### "… % is used by … service(s) or item(s)"
+किसी सेवा या स्टॉक आइटम में उपयोग हो रही जीएसटी दर हटाई नहीं जा सकती। पहले उन सेवाओं को बदलें, या दर को अंतिम तिथि दें।
+
+### "A credit note can be at most …" / "Only … is still due on this bill"
+क्रेडिट नोट केवल बकाया सेवा शुल्क और जीएसटी घटाता है। पूरा भुगतान हो चुका बिल रद्द करें (VLEBook क्रेडिट नोट और रिफ़ंड बनाता है) और नया बिल बनाएँ।
+
+### "TDS must be less than the amount paid" / "Choose a TDS section from the list"
+राशि और TDS धारा जाँचें। TDS केवल वार्षिक सीमा से ऊपर लगता है और भुगतानकर्ता पर निर्भर है; संदेह हो तो अपने लेखाकार से पूछें।
+
+### "Challan … is already recorded"
+यह चालान संख्या पहले सहेजी जा चुकी है; दोबारा नहीं सहेजी जाती।
+
+### साइन-इन रिकॉर्ड में दूसरा शहर दिखता है
+शहर इंटरनेट कनेक्शन के IP पते से निकाला जाता है और अक्सर इंटरनेट प्रदाता का शहर दिखाता है। यह अनुमानित है।
+

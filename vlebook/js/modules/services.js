@@ -1,4 +1,4 @@
-import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B}from"../core/db.js";import{notifyCrossTabSync as N,lineGstRate as O}from"../core/accounting.js";import{uid as V,formatINR as f,toPaise as c,fromPaise as m,esc as i}from"../core/utils.js";let h="ALL",w="",n=null,d="";const b=new Map,P=["Government & Citizen Services","Banking & Financial Services","Insurance & Agriculture","Digital & Commercial Services"];async function l(a){const p=await G("services"),s=n?p.find(e=>e.id===n):null,E=Array.from(new Set([...P,...p.map(e=>e.category).filter(Boolean)])),y=w.trim().toLowerCase(),A=p.filter(e=>h!=="ALL"&&e.category!==h?!1:y?String(e.name||"").toLowerCase().includes(y)||String(e.id||"").toLowerCase().includes(y)||String(e.category||"").toLowerCase().includes(y)||String(e.state||"").toLowerCase().includes(y):!0);a.innerHTML=`
+import{getAllRecords as O,putRecord as A,deleteRecord as U,DEFAULT_SERVICES as V}from"../core/db.js";import{notifyCrossTabSync as G,lineGstRate as D}from"../core/accounting.js";import{uid as j,formatINR as h,toPaise as p,fromPaise as f,esc as i}from"../core/utils.js";let $="ALL",L="",v=null,u="";const b=new Map,q=["Government & Citizen Services","Banking & Financial Services","Insurance & Agriculture","Digital & Commercial Services"];async function d(a){const M=await(await import("../core/gst.js")).ratesInForce().catch(()=>[0,5,12,18,28]),g=await O("services"),s=v?g.find(e=>e.id===v):null,T=Array.from(new Set([...q,...g.map(e=>e.category).filter(Boolean)])),S=L.trim().toLowerCase(),k=g.filter(e=>$!=="ALL"&&e.category!==$?!1:S?String(e.name||"").toLowerCase().includes(S)||String(e.id||"").toLowerCase().includes(S)||String(e.category||"").toLowerCase().includes(S)||String(e.state||"").toLowerCase().includes(S):!0);a.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Service Catalogue & Pricing Management</h1>
@@ -10,8 +10,8 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
       </div>
     </div>
 
-    ${d?`<div class="callout success">
-            <div><strong>${i(d)}</strong></div>
+    ${u?`<div class="callout success">
+            <div><strong>${i(u)}</strong></div>
             <button class="btn btn-xs btn-outline" id="srv-clear-msg">Dismiss</button>
           </div>`:""}
 
@@ -21,10 +21,10 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
         <div class="card">
           <div class="card-header">
             <div class="pill-tabs" id="srv-cat-tabs">
-              <button class="pill-tab ${h==="ALL"?"active":""}" data-cat="ALL">All Services (${p.length})</button>
-              ${E.map(e=>`<button class="pill-tab ${h===e?"active":""}" data-cat="${i(e)}">${i(e.split("&")[0].trim())}</button>`).join("")}
+              <button class="pill-tab ${$==="ALL"?"active":""}" data-cat="ALL">All Services (${g.length})</button>
+              ${T.map(e=>`<button class="pill-tab ${$===e?"active":""}" data-cat="${i(e)}">${i(e.split("&")[0].trim())}</button>`).join("")}
             </div>
-            <input type="search" class="form-control" id="srv-search-inp" placeholder="Search service name or ID..." value="${i(w)}" style="max-width:240px;">
+            <input type="search" class="form-control" id="srv-search-inp" placeholder="Search service name or ID..." value="${i(L)}" style="max-width:240px;">
           </div>
 
           <div class="callout" style="margin-bottom:14px; padding:9px 14px;">
@@ -45,8 +45,8 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
                 </tr>
               </thead>
               <tbody>
-                ${A.length===0?'<tr><td colspan="7" style="text-align:center; padding:22px; color:var(--color-text-muted);">No matching services found. Use the form on the right to create a new service.</td></tr>':A.map(e=>`
-                  <tr style="${n===e.id?"background:var(--color-info-bg);":""}">
+                ${k.length===0?'<tr><td colspan="7" style="text-align:center; padding:22px; color:var(--color-text-muted);">No matching services found. Use the form on the right to create a new service.</td></tr>':k.map(e=>`
+                  <tr style="${v===e.id?"background:var(--color-info-bg);":""}">
                     <td>
                       <input type="text" class="form-control inline-srv-name" data-id="${i(e.id)}" value="${i(e.name)}" style="font-weight:600; margin-bottom:4px; padding:4px 8px;">
                       <small style="color:var(--color-text-muted); display:block;">
@@ -55,16 +55,16 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
                       </small>
                     </td>
                     <td>
-                      <input type="number" step="0.01" min="0" class="form-control inline-srv-price" data-id="${i(e.id)}" value="${m(e.customerPricePaise)}" style="padding:4px 8px; font-weight:600;">
+                      <input type="number" step="0.01" min="0" class="form-control inline-srv-price" data-id="${i(e.id)}" value="${f(e.customerPricePaise)}" style="padding:4px 8px; font-weight:600;">
                     </td>
                     <td>
-                      <input type="number" step="0.01" min="0" class="form-control inline-srv-govt" data-id="${i(e.id)}" value="${m(e.govtFeePaise)}" style="padding:4px 8px;">
+                      <input type="number" step="0.01" min="0" class="form-control inline-srv-govt" data-id="${i(e.id)}" value="${f(e.govtFeePaise)}" style="padding:4px 8px;">
                     </td>
                     <td class="num" id="inline-op-${i(e.id)}" style="color:var(--color-success); font-weight:700;">
-                      ${f(e.serviceChargePaise)}
+                      ${h(e.serviceChargePaise)}
                     </td>
                     <td>
-                      <input type="number" step="0.01" min="0" class="form-control inline-srv-comm" data-id="${i(e.id)}" value="${m(e.commissionPaise||0)}" style="padding:4px 8px;">
+                      <input type="number" step="0.01" min="0" class="form-control inline-srv-comm" data-id="${i(e.id)}" value="${f(e.commissionPaise||0)}" style="padding:4px 8px;">
                     </td>
                     <td>
                       <input type="checkbox" class="inline-srv-active" data-id="${i(e.id)}" ${e.active!==!1?"checked":""} title="Active in Billing">
@@ -101,9 +101,9 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
             <div class="grid-2" style="gap:10px;">
               <div class="form-group">
                 <label class="form-label">Category</label>
-                <input type="text" class="form-control" name="category" list="srv-cat-datalist" required value="${i(s?.category||P[0])}">
+                <input type="text" class="form-control" name="category" list="srv-cat-datalist" required value="${i(s?.category||q[0])}">
                 <datalist id="srv-cat-datalist">
-                  ${E.map(e=>`<option value="${i(e)}"></option>`).join("")}
+                  ${T.map(e=>`<option value="${i(e)}"></option>`).join("")}
                 </datalist>
               </div>
               <div class="form-group">
@@ -115,26 +115,30 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
             <div class="grid-2" style="gap:10px;">
               <div class="form-group">
                 <label class="form-label">Customer Price (₹) <span class="req">*</span></label>
-                <input type="number" step="0.01" min="0" class="form-control" name="customerPrice" id="srv-price" required value="${s?m(s.customerPricePaise):"100"}">
+                <input type="number" step="0.01" min="0" class="form-control" name="customerPrice" id="srv-price" required value="${s?f(s.customerPricePaise):"100"}">
               </div>
               <div class="form-group">
                 <label class="form-label">Govt / Challan Fee (₹)</label>
-                <input type="number" step="0.01" min="0" class="form-control" name="govtFee" id="srv-govt" value="${s?m(s.govtFeePaise):"20"}">
+                <input type="number" step="0.01" min="0" class="form-control" name="govtFee" id="srv-govt" value="${s?f(s.govtFeePaise):"20"}">
               </div>
             </div>
 
             <div class="grid-3" style="gap:8px;">
               <div class="form-group">
                 <label class="form-label">Operator Charge (₹)</label>
-                <input type="number" step="0.01" min="0" class="form-control" name="serviceCharge" id="srv-charge" value="${s?m(s.serviceChargePaise):"80"}">
+                <input type="number" step="0.01" min="0" class="form-control" name="serviceCharge" id="srv-charge" value="${s?f(s.serviceChargePaise):"80"}">
               </div>
               <div class="form-group">
-                <label class="form-label">Direct Cost (₹)</label>
-                <input type="number" step="0.01" min="0" class="form-control" name="directCost" value="${s?m(s.directCostPaise||0):"5"}">
+                <label class="form-label">GST on this price</label>
+                <select class="form-control" name="gstPricing" id="srv-gstpricing">
+                  <option value="PLUS" ${s?.priceIncludesGst?"":"selected"}>Price + GST (GST added on top)</option>
+                  <option value="INCL" ${s?.priceIncludesGst?"selected":""}>Price includes GST</option>
+                </select>
+                <div class="form-hint" id="srv-gst-preview">Used only on tax invoices (GST-registered regular dealers).</div>
               </div>
               <div class="form-group">
                 <label class="form-label">Commission (₹)</label>
-                <input type="number" step="0.01" min="0" class="form-control" name="commission" value="${s?m(s.commissionPaise||0):"0"}">
+                <input type="number" step="0.01" min="0" class="form-control" name="commission" value="${s?f(s.commissionPaise||0):"0"}">
                 <div class="form-hint">Only the commission you actually receive for this service, if any. VLEBook does not add any commission rates.</div>
               </div>
             </div>
@@ -146,8 +150,9 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
               </div>
               <div class="form-group">
                 <label class="form-label">GST Rate (%)</label>
-                <select class="form-control" name="gstRate">
-                  ${[0,5,12,18,28].map(e=>`<option value="${e}" ${(s?O(s):18)===e?"selected":""}>${e?`${e}% GST`:"No GST (0%)"}</option>`).join("")}
+                <select class="form-control" name="gstRate" id="srv-gstrate">
+                  ${[...new Set([...M,...s&&!s.gstExempt?[D(s)]:[]])].sort((e,t)=>e-t).map(e=>`<option value="${e}" ${!s?.gstExempt&&(s?D(s):18)===e?"selected":""}>${e?`${e}% GST`:"Nil rated (0%)"}</option>`).join("")}
+                  <option value="EX" ${s?.gstExempt?"selected":""}>Exempt from GST</option>
                 </select>
                 <div class="form-hint">Used only on GST bills, on the service charge (never on the government fee).</div>
               </div>
@@ -180,4 +185,4 @@ import{getAllRecords as G,putRecord as x,deleteRecord as M,DEFAULT_SERVICES as B
         </div>
       </div>
     </div>
-  `,a.querySelector("#srv-clear-msg")?.addEventListener("click",()=>{d="",l(a)}),a.querySelector("#srv-focus-create-btn")?.addEventListener("click",()=>{n=null,d="",l(a).then(()=>{const e=a.querySelector("#srv-form-name");e?.focus(),e?.scrollIntoView({behavior:"smooth",block:"center"})})}),a.querySelector("#srv-restore-defaults-btn")?.addEventListener("click",async()=>{const e=new Set(p.map(r=>r.id));let t=0;for(const r of B)e.has(r.id)||(await x("services",r),t++);d=t>0?`Restored ${t} default service(s) to your catalogue.`:"All default services are already present.",await l(a)});const q=a.querySelector("#srv-price"),L=a.querySelector("#srv-govt"),k=a.querySelector("#srv-charge"),R=()=>{const e=Number(q?.value||0),t=Number(L?.value||0);k&&(k.value=Math.max(0,e-t).toFixed(2))};q?.addEventListener("input",R),L?.addEventListener("input",R);const $=async(e,t=!1)=>{const r=p.find(F=>F.id===e);if(!r)return;const o=a.querySelector(`.inline-srv-name[data-id="${e}"]`)?.value.trim()||r.name,v=c(a.querySelector(`.inline-srv-price[data-id="${e}"]`)?.value||0),u=c(a.querySelector(`.inline-srv-govt[data-id="${e}"]`)?.value||0),C=c(a.querySelector(`.inline-srv-comm[data-id="${e}"]`)?.value||0),g=!!a.querySelector(`.inline-srv-active[data-id="${e}"]`)?.checked,T=Math.max(0,v-u);Object.assign(r,{name:o,customerPricePaise:v,govtFeePaise:u,serviceChargePaise:T,commissionPaise:C,active:g}),await x("services",r),N("SERVICE_UPDATED",{id:e});const I=typeof CSS<"u"&&CSS.escape?CSS.escape(e):e,D=a.querySelector(`#inline-op-${I}`);D&&(D.textContent=f(T));const S=a.querySelector(`#inline-saved-${I}`);S&&(S.textContent="✓ Auto-Saved",setTimeout(()=>{S&&(S.textContent="")},2200)),t&&(d=`Saved service "${o}" (${f(v)}).`,await l(a))};a.querySelectorAll(".inline-srv-name, .inline-srv-price, .inline-srv-govt, .inline-srv-comm, .inline-srv-active").forEach(e=>{const t=e.getAttribute("data-id");t&&(e.addEventListener("input",()=>{const r=Number(a.querySelector(`.inline-srv-price[data-id="${t}"]`)?.value||0),o=Number(a.querySelector(`.inline-srv-govt[data-id="${t}"]`)?.value||0),v=typeof CSS<"u"&&CSS.escape?CSS.escape(t):t,u=a.querySelector(`#inline-op-${v}`);u&&(u.textContent=f(c(Math.max(0,r-o)))),b.has(t)&&clearTimeout(b.get(t)),b.set(t,setTimeout(()=>{$(t,!1)},350))}),e.addEventListener("change",()=>{b.has(t)&&clearTimeout(b.get(t)),$(t,!1)}))}),a.querySelectorAll("[data-inline-save]").forEach(e=>{e.addEventListener("click",async()=>{const t=e.getAttribute("data-inline-save");b.has(t)&&clearTimeout(b.get(t)),await $(t,!0)})}),a.querySelectorAll("#srv-cat-tabs .pill-tab").forEach(e=>{e.addEventListener("click",()=>{h=e.getAttribute("data-cat"),l(a)})}),a.querySelector("#srv-search-inp")?.addEventListener("input",e=>{w=e.target.value,l(a)}),a.querySelectorAll("[data-edit-srv]").forEach(e=>{e.addEventListener("click",()=>{n=e.getAttribute("data-edit-srv"),d="",l(a).then(()=>{a.querySelector("#srv-editor-card")?.scrollIntoView({behavior:"smooth",block:"center"})})})}),a.querySelectorAll("[data-del-srv]").forEach(e=>{e.addEventListener("click",async()=>{const t=e.getAttribute("data-del-srv"),r=p.find(o=>o.id===t);await M("services",t),n===t&&(n=null),d=`Removed service "${r?.name||t}".`,await l(a)})}),a.querySelector("#srv-cancel-edit")?.addEventListener("click",()=>{n=null,l(a)}),a.querySelector("#service-entry-form")?.addEventListener("submit",async e=>{e.preventDefault();const t=new FormData(e.target),r=c(t.get("customerPrice")),o=c(t.get("govtFee")),v=c(t.get("serviceCharge")),u=Number(t.get("gstRate")||0),C=!!t.get("id"),g=await x("services",{id:t.get("id")||V("SRV"),name:t.get("name").trim(),category:t.get("category").trim()||P[0],state:t.get("state").trim(),description:t.get("description")?.trim()||"",customerPricePaise:r,govtFeePaise:o,thirdPartyPaise:0,serviceChargePaise:v>0?v:Math.max(0,r-o),directCostPaise:c(t.get("directCost")),commissionPaise:c(t.get("commission")),gstApplicable:u>0,gstRate:u,sac:String(t.get("sac")||"").replace(/\D/g,"").slice(0,8),turnaroundTime:t.get("turnaroundTime"),checklist:t.get("checklist"),active:t.get("active")==="on"});N("SERVICE_UPDATED",{id:g.id}),n=null,d=C?`Updated service "${g.name}" (${f(g.customerPricePaise)}).`:`Created new service "${g.name}" (${f(g.customerPricePaise)}) and added to your catalogue.`,await l(a)})}export{P as SERVICE_CATEGORIES,l as renderServicesModule};
+  `,a.querySelector("#srv-clear-msg")?.addEventListener("click",()=>{u="",d(a)}),a.querySelector("#srv-focus-create-btn")?.addEventListener("click",()=>{v=null,u="",d(a).then(()=>{const e=a.querySelector("#srv-form-name");e?.focus(),e?.scrollIntoView({behavior:"smooth",block:"center"})})}),a.querySelector("#srv-restore-defaults-btn")?.addEventListener("click",async()=>{const e=new Set(g.map(r=>r.id));let t=0;for(const r of V)e.has(r.id)||(await A("services",r),t++);u=t>0?`Restored ${t} default service(s) to your catalogue.`:"All default services are already present.",await d(a)});const x=a.querySelector("#srv-price"),C=a.querySelector("#srv-govt"),I=a.querySelector("#srv-charge"),R=()=>{const e=Number(x?.value||0),t=Number(C?.value||0);I&&(I.value=Math.max(0,e-t).toFixed(2))};x?.addEventListener("input",R),C?.addEventListener("input",R);const P=()=>{const e=a.querySelector("#srv-gst-preview"),t=a.querySelector("#srv-gstrate"),r=a.querySelector("#srv-gstpricing")?.value;if(!e||!t)return;const l=Number(x?.value||0),c=Number(C?.value||0),o=Math.max(0,l-c),n=t.value==="EX"?0:Number(t.value||0);if(!n){e.textContent=`No GST on this service: the customer pays ₹${l.toFixed(2)}.`;return}if(r==="INCL"){const y=o*100/(100+n);e.textContent=`Customer pays ₹${l.toFixed(2)} (fee ₹${c.toFixed(2)} + charge ₹${y.toFixed(2)} + GST ₹${(o-y).toFixed(2)}).`}else e.textContent=`Customer pays ₹${(l+o*n/100).toFixed(2)} (fee ₹${c.toFixed(2)} + charge ₹${o.toFixed(2)} + GST ${n}% ₹${(o*n/100).toFixed(2)}).`};[x,C].forEach(e=>e?.addEventListener("input",P)),["#srv-gstrate","#srv-gstpricing"].forEach(e=>a.querySelector(e)?.addEventListener("change",P)),P();const E=async(e,t=!1)=>{const r=g.find(B=>B.id===e);if(!r)return;const l=a.querySelector(`.inline-srv-name[data-id="${e}"]`)?.value.trim()||r.name,c=p(a.querySelector(`.inline-srv-price[data-id="${e}"]`)?.value||0),o=p(a.querySelector(`.inline-srv-govt[data-id="${e}"]`)?.value||0),n=p(a.querySelector(`.inline-srv-comm[data-id="${e}"]`)?.value||0),y=!!a.querySelector(`.inline-srv-active[data-id="${e}"]`)?.checked,m=Math.max(0,c-o);Object.assign(r,{name:l,customerPricePaise:c,govtFeePaise:o,serviceChargePaise:m,commissionPaise:n,active:y}),await A("services",r),G("SERVICE_UPDATED",{id:e});const F=typeof CSS<"u"&&CSS.escape?CSS.escape(e):e,N=a.querySelector(`#inline-op-${F}`);N&&(N.textContent=h(m));const w=a.querySelector(`#inline-saved-${F}`);w&&(w.textContent="✓ Auto-Saved",setTimeout(()=>{w&&(w.textContent="")},2200)),t&&(u=`Saved service "${l}" (${h(c)}).`,await d(a))};a.querySelectorAll(".inline-srv-name, .inline-srv-price, .inline-srv-govt, .inline-srv-comm, .inline-srv-active").forEach(e=>{const t=e.getAttribute("data-id");t&&(e.addEventListener("input",()=>{const r=Number(a.querySelector(`.inline-srv-price[data-id="${t}"]`)?.value||0),l=Number(a.querySelector(`.inline-srv-govt[data-id="${t}"]`)?.value||0),c=typeof CSS<"u"&&CSS.escape?CSS.escape(t):t,o=a.querySelector(`#inline-op-${c}`);o&&(o.textContent=h(p(Math.max(0,r-l)))),b.has(t)&&clearTimeout(b.get(t)),b.set(t,setTimeout(()=>{E(t,!1)},350))}),e.addEventListener("change",()=>{b.has(t)&&clearTimeout(b.get(t)),E(t,!1)}))}),a.querySelectorAll("[data-inline-save]").forEach(e=>{e.addEventListener("click",async()=>{const t=e.getAttribute("data-inline-save");b.has(t)&&clearTimeout(b.get(t)),await E(t,!0)})}),a.querySelectorAll("#srv-cat-tabs .pill-tab").forEach(e=>{e.addEventListener("click",()=>{$=e.getAttribute("data-cat"),d(a)})}),a.querySelector("#srv-search-inp")?.addEventListener("input",e=>{L=e.target.value,d(a)}),a.querySelectorAll("[data-edit-srv]").forEach(e=>{e.addEventListener("click",()=>{v=e.getAttribute("data-edit-srv"),u="",d(a).then(()=>{a.querySelector("#srv-editor-card")?.scrollIntoView({behavior:"smooth",block:"center"})})})}),a.querySelectorAll("[data-del-srv]").forEach(e=>{e.addEventListener("click",async()=>{const t=e.getAttribute("data-del-srv"),r=g.find(l=>l.id===t);await U("services",t),v===t&&(v=null),u=`Removed service "${r?.name||t}".`,await d(a)})}),a.querySelector("#srv-cancel-edit")?.addEventListener("click",()=>{v=null,d(a)}),a.querySelector("#service-entry-form")?.addEventListener("submit",async e=>{e.preventDefault();const t=new FormData(e.target),r=p(t.get("customerPrice")),l=p(t.get("govtFee")),c=p(t.get("serviceCharge")),o=t.get("gstRate")==="EX",n=o?0:Number(t.get("gstRate")||0),y=!!t.get("id"),m=await A("services",{id:t.get("id")||j("SRV"),name:t.get("name").trim(),category:t.get("category").trim()||q[0],state:t.get("state").trim(),description:t.get("description")?.trim()||"",customerPricePaise:r,govtFeePaise:l,thirdPartyPaise:0,serviceChargePaise:c>0?c:Math.max(0,r-l),directCostPaise:0,commissionPaise:p(t.get("commission")),gstApplicable:n>0,gstRate:n,gstExempt:o,priceIncludesGst:t.get("gstPricing")==="INCL",sac:String(t.get("sac")||"").replace(/\D/g,"").slice(0,8),turnaroundTime:t.get("turnaroundTime"),checklist:t.get("checklist"),active:t.get("active")==="on"});G("SERVICE_UPDATED",{id:m.id}),v=null,u=y?`Updated service "${m.name}" (${h(m.customerPricePaise)}).`:`Created new service "${m.name}" (${h(m.customerPricePaise)}) and added to your catalogue.`,await d(a)})}export{q as SERVICE_CATEGORIES,d as renderServicesModule};

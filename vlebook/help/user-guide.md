@@ -84,7 +84,7 @@ Add each citizen once with mobile number and name. The **360° view** shows all 
 4. **Generate Invoice**, then print A4 / 80 mm thermal, download PDF or share on WhatsApp. Your centre logo, GSTIN, CSC ID and Akshaya ID (when filled in) are printed on the invoice.
 5. A wrong bill is **cancelled**, never deleted: a credit note is made and money, commission and stock are reversed (Owner/Manager only). When a bill is cancelled, the money taken on it goes back out of **each account it came into** (cash, UPI, bank — including payments collected later), any advance used is returned to the customer, its commission and linked applications are cancelled, and Accounts, the Day Book and the Smart Counter show the same figures as before the bill. In the Day Book the entry is marked **CANCELLED** in red.
 
-**GST bills (Tax Invoice).** Choose *GST Intra-State* or *GST Inter-State* only if the centre is GST-registered — VLEBook asks for your GSTIN in Settings before it saves a GST bill. GST is charged on the **service charge only, never on the government fee**, at each service's GST rate (set in Service Management; *No GST (0%)* for services without GST). The rate of a line can be changed in the **GST %** column of that bill. The invoice then says **TAX INVOICE** and shows your GSTIN, place of supply, taxable value, CGST + SGST (or IGST), any round off and an optional SAC code. Bills already saved keep their amounts; cancel and re-issue a bill if it must change.
+**GST bills (Tax Invoice).** From version 3.1 VLEBook chooses the kind of bill from your GST registration (see 4A): no GSTIN → non-GST bill; regular → Tax Invoice; composition → Bill of Supply. GST is charged on the **service charge only, never on the government fee**, at each service's GST rate (set in Service Management; *No GST (0%)* for services without GST). The rate of a line can be changed in the **GST %** column of that bill. The invoice then says **TAX INVOICE** and shows your GSTIN, place of supply, taxable value, CGST + SGST (or IGST), any round off and an optional SAC code. Bills already saved keep their amounts; cancel and re-issue a bill if it must change.
 
 **Selling items from stock.** Pens, paper, files, pen drives and any other item kept in Stock & Inventory can be billed: choose the item in **Add Item from Stock** below the service picker, then type the quantity. The item's selling price is used as set in Stock & Inventory — **including GST** (GST is worked out from inside the price) or **excluding GST** (GST is added on top) — with its GST rate and HSN code. On a GST bill, GST is charged on the full value of the item. Saving the bill reduces the stock by the quantity sold; cancelling the bill puts it back. If the quantity is more than the stock, the line shows *Stock will go negative* and VLEBook asks before saving.
 
@@ -136,7 +136,7 @@ Daily, monthly and yearly reports of income, true service profit, commissions, d
 ### Government Service Catalogue & Portal Directory
 Keep the official portal links your centre uses, with the documents needed, processing time and your fee guide. Use the tabs to filter by group or state, and **+ Add** your own links (only full web addresses starting with https:// or http:// are accepted). Your own links can be changed with **Edit** (the form on the right fills in; click **Save Changes**, or **Cancel edit**) and removed with **Delete** after you confirm. Every addition, change and deletion is written in the audit log.
 
-The **Techmin** tab lists Techmin's websites: ComplyPro (https://www.complypro.co.in/), Finance and Accounting Tools (https://tools.complypro.co.in/), Techmin Wealth Partners (https://www.techmincsc.in/), IFSC Tracker (https://www.ifsctracker.in/). These four links are built into VLEBook, are always available and cannot be edited or deleted. They are also in the **Techmin** menu on the left (available in every mode).
+The **Techmin** tab lists Techmin's websites: ComplyPro (https://www.complypro.co.in/), Finance and Accounting Tools (https://tools.complypro.co.in/), Techmin Wealth Partners (https://www.techmincsc.in/), IFSC Tracker (https://www.ifsctracker.in/). These four links are built into VLEBook, are always available and cannot be edited or deleted. The tab also has the **Join VLEBook WhatsApp group** button (also in Techmin Updates and Help). From version 3.1 there is no separate Techmin menu.
 
 ## 4A. Books & GST (accounts)
 
@@ -149,6 +149,24 @@ The **Techmin** tab lists Techmin's websites: ComplyPro (https://www.complypro.c
 4. When the customer pays the bill (₹50 fee + your service charge), the ₹50 comes back to clearing — the balance becomes **zero** — and only your service charge is counted as income.
 5. If the customer pays only part, the fee stays partly open; if the application is cancelled, any fee not recovered stays visible until it is recovered or the Owner writes it off with a reason.
 Click **Fee chain** (on the bill list, in Pending Work or in the clearing list) to see the whole story for one application.
+
+### GST registration decides the bill
+- **No GSTIN** → VLEBook makes **non-GST bills** only.
+- **Regular** registration → every bill is a **Tax Invoice**. VLEBook works out CGST + SGST (customer in your State) or IGST (another State) from the **place of supply** or the customer's GSTIN. You can type the customer's GSTIN on the bill (optional) so a registered customer can claim input tax credit; it is also saved in the customer record.
+- **Composition** registration → every bill is a **Bill of Supply** with the line "Composition taxable person, not eligible to collect tax on supplies". No GST is collected. In **Books & GST → GST** you see the quarter's turnover and composition tax for **CMP-08**.
+Set this when you register, or in **Books & GST → GST → GST profile** (GSTIN, Regular / Composition, the date registration starts, the composition rate). The same screen has the **GST rates** list: add a rate with the date it starts, edit or delete it.
+
+**Price + GST or including GST.** In Service Management choose for each service whether its price is **Price + GST** (GST added on top of the service charge) or **Price includes GST**. The form shows what the customer pays. On a bill line you can tick **incl. GST** for that line. GST is never charged on the government fee. A service can be **Exempt from GST** or **Nil rated (0%)**.
+
+**After billing.** Use **Credit note** in the bill list to reduce the service charge on a bill that is not fully paid (wrong rate, discount). For a bill already paid, cancel it and make a new one. For suppliers use **Debit note** in Expenses.
+
+**Returns.** In the GST tab: **GSTR-3B help** (table and JSON), **Mark GSTR-1 / GSTR-3B as filed** (new GST bills dated in a filed month are refused; the Owner can reopen with a reason), and **Record GST payment** (challan). VLEBook never files returns.
+
+**TDS.** When you pay a supplier bill (for example rent above the TDS limit), choose the TDS section; VLEBook works out the TDS, pays the supplier the rest and shows the TDS to pay in **Reports → TDS deducted and paid**. Record the challan with **Record GST / TDS payment**.
+
+**More tools.** **Bank reconciliation** tab (tick entries cleared in the bank statement), **Mark reviewed / Ask a question** on any voucher (for your accountant), and **Export to Tally (XML)** in Books & reports.
+
+**No separate direct cost.** Paper, ink, PVC cards and other purchases are entered once as expenses (Expenses or Accounts). VLEBook no longer deducts a per-service "direct cost" again, so profit is correct.
 
 ### Tabs in Books & GST
 - **Overview** — today's income, profit for the year, money in all accounts, what customers owe, fees to recover, GST estimate and quick actions.
@@ -163,6 +181,11 @@ Click **Fee chain** (on the bill list, in Pending Work or in the clearing list) 
 
 ### Who can do what
 The Owner can do everything. **Manager**, **Operator** and the new **Accountant** role have sensible defaults (for example, an Operator can record portal payments, enter expenses and close the day but cannot see the books; an Accountant can see the books and save draft vouchers but cannot post them). The Owner can change them in **Books settings → Who may do what**. The checks are made in the data itself, not only on screen.
+
+## 4B. Sign-in record and Techmin notices
+For licence security and support, each computer sends Techmin a short record of every sign-in: the user name and role, sign-in and sign-out time (or the last activity time if the computer was switched off), the computer's code, its IP address and the approximate city found from that IP address, the browser and the VLEBook version. When a user opens a Techmin notice, VLEBook tells Techmin that it was seen. No customer, bill or other business data is sent. The sign-in screen shows this notice; the Owner should tell staff about it.
+
+Techmin may also email the centre's registered email address about updates, renewals and important notices.
 
 ## 5. Backups — protect your data
 

@@ -7,7 +7,7 @@ This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we")
 ## 1. The short version
 
 - **Your business data never comes to Techmin.** Customers, bills, payments, applications, AEPS records, stock, staff, accounts, reports and backups are stored only on your computer and in backup files you save.
-- Techmin receives only what is needed to register the Centre, run the licence, send notices and support you (section 3).
+- Techmin receives only what is needed to register the Centre, run the licence, keep it secure, send notices and support you (section 3) — from version 3.1 this includes a record of each sign-in (user, times, computer, IP address and approximate city).
 - We do not sell personal data and we do not show third-party advertising in VLEBook.
 
 ## 2. Data stored only on your computer
@@ -28,6 +28,8 @@ If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the fi
 
 **Books & GST (version 3.0).** Ledgers, vouchers, GST figures, supplier details, wallet balances and the Google review link are stored only on the centre's computer (and in its own backup / shared Google Drive folder). The GSTIN check is done on the computer; no GSTIN, return or financial figure is sent to Techmin or to the GST portal by VLEBook. GST files are downloaded to the computer and uploaded to the GST portal only by the centre. A customer who scans the Google review QR goes directly to Google; VLEBook does not see it.
 
+**Sign-ins are the exception.** From version 3.1 a short record of each sign-in (section 3, item 5) is also sent to Techmin; the full audit log stays on the computer. The sign-in screen tells every user about it, and the Owner should inform staff.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:
@@ -36,12 +38,17 @@ When VLEBook is online it exchanges the following with the Techmin registry:
 2. **Check-in** (when VLEBook opens and every few hours): Device Code, Centre ID, VLEBook version, number of active users, current licence number, and — only if you turn on push notifications — the push address given by your browser's push service.
 3. **Licence and payment records** created by Techmin: plan, validity, computers and users allowed, amount, payment mode and reference.
 4. **Support communications** you send us (WhatsApp, email, phone).
+5. **Sign-in record** (from version 3.1): for each sign-in on each computer — Centre ID, Device Code, counter letter, user name, display name and role, sign-in time, sign-out time (or last activity time, marked as estimated, if VLEBook was closed without signing out), how the session ended, VLEBook version, browser and operating system name, the computer's public **IP address** and the **approximate city, state and country** looked up from that IP address. Passwords, customers, bills and other business data are never included.
+6. **Notices seen** (from version 3.1): the notice number, user name and time when a Techmin notice is opened.
+7. **Emails to the Centre:** Techmin may email the Centre's registered email address with service notices, updates, renewal reminders and important information.
 
 Techmin may also see the IP address and technical details of each request, as logged by its hosting providers.
 
 ## 4. Why we use it (purposes and legal basis)
 
 - To register your Centre, verify its identity (GSTIN, CSC ID, Akshaya ID), issue, renew, verify and cancel licences, raise invoices for licence fees, and prevent misuse of licence keys.
+- To keep licences secure and support Centres: to see which users and computers use a licence, detect sharing of a licence or unusual access, and help when a Centre reports a problem (sign-in record).
+- To know whether important notices reached the Centre (notices seen).
 - To send service notices, renewal and payment reminders, security alerts and software update information inside VLEBook, by push notification (if allowed), WhatsApp, SMS or email.
 - To provide support, including password-reset codes.
 - To keep accounts and tax records and meet legal obligations.
@@ -57,6 +64,7 @@ We use the following providers to run VLEBook. They process data only to provide
 - **GitHub** — hosting of the VLEBook web application files.
 - **Browser push services** (Google, Microsoft, Mozilla, Apple) — delivery of push notifications to your browser, if you allow them.
 - **Blogger (Google)** — the Techmin blog articles shown in VLEBook are loaded directly from {{website}}.
+- **IP lookup (freeipapi.com, ipify.org)** — at sign-in, VLEBook asks these free services for the computer's public IP address and approximate location. Only the normal web request (which carries the IP address) reaches them; no other data is sent.
 
 Data may be stored on servers of these providers in or outside India, subject to applicable law.
 
@@ -64,7 +72,7 @@ Data may be stored on servers of these providers in or outside India, subject to
 
 ## 6. Retention
 
-Centre registration, licence and payment records are kept while your Centre uses VLEBook and for up to 8 years afterwards to meet accounting and tax requirements, unless a longer period is required by law. Push addresses are deleted when notifications are turned off or the push service reports them invalid.
+Centre registration, licence and payment records are kept while your Centre uses VLEBook and for up to 8 years afterwards to meet accounting and tax requirements, unless a longer period is required by law. Push addresses are deleted when notifications are turned off or the push service reports them invalid. **Sign-in records and notice-seen records are kept for 12 months** and then deleted.
 
 ## 7. Security
 
