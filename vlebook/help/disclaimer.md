@@ -40,6 +40,8 @@ PDF & Image Tools and the Document Workbench process files on the centre's compu
 
 **Stock and sale of goods.** Stock balances, physical-check adjustments, consumption and negative-stock alerts are worked out only from the entries made in VLEBook; they are not an audit of physical stock. GST rates, HSN codes and whether a price includes GST are set by the centre and must be checked by it. VLEBook does not decide the tax treatment of any item. Application, acknowledgement and tracking numbers are recorded as typed; VLEBook does not check them with any portal or department.
 
+**PDF & Image Studio (version 3.3.0).** Photo and signature sizes in the examination database are marked with their verification level; most are not officially verified, and examination rules change every cycle — always check the current official notification. A GREEN result does not guarantee acceptance by any authority. OCR can misread names, numbers, dates and handwriting. Native PDF text editing works only where the PDF's fonts allow it. Secure redaction is checked after saving, but other copies of the original remain the Centre's responsibility. Print size and colour depend on the printer, paper, cards and settings; use the calibration sheet. Cards and documents produced are prints of what the customer supplied and are not official credentials.
+
 ## 5. Techmin Updates and blog
 
 Notices and blog articles shown in VLEBook are for general information. They may be summaries and may not reflect the latest change in law or procedure. Always confirm with the official source.

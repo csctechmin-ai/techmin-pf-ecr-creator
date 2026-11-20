@@ -2,6 +2,18 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.3.0 — 20 November 2026
+
+- **PDF & Image Studio.** The Document Studio and PDF & Image Tools are now one screen with workspaces: PDF Tools, PDF Editor, Image Tools, Photo & Signature, OCR & Scanner, PVC ID & Print, QR / stamp / calculators and Job history. The old *PDF & Image Tools* menu link opens the PDF Tools workspace.
+- **New PDF tools:** add / duplicate / crop pages and change page size; headers, footers and stamps; fill and flatten forms; view, edit and remove metadata; AES-256 password protection; secure redaction checked after saving; result preview with page navigation; Sort A–Z; Ctrl + Enter; WebP and page ranges for PDF to images.
+- **PDF Editor:** change existing text inside the PDF (when its font allows), shapes, arrows, highlights, real PDF comments, zoom, search, undo / redo, Save As; warning for digitally signed PDFs.
+- **Photo & Signature Studio:** an examination database covering Kerala, UPSC, SSC, NTA, banking, railway, defence, other central recruitment, all 28 State PSCs, Union Territories and admissions, each with a verification status and history; guided candidate workflow; exact pixel and KB control with min / max / target; GREEN / AMBER / RED validation; batch processing by file name; passport photo printing on A4 or 4 × 6 inch; custom profiles; export / import.
+- **OCR & Scanner:** read text in English, Malayalam and Hindi from photos and scanned PDFs, with confidence highlighting, correction, TXT and searchable PDF; phone photos of pages to a clean PDF.
+- **PVC ID & Print:** millimetre card designer with full colour and quality controls, templates, bulk cards from Excel / CSV / JSON, customer ID print sheets with card detection and Aadhaar masking by default, 600 DPI print PDFs, printer profiles, calibration sheet and honest print-job states.
+- **iPhone HEIC photos** open in all image tools.
+- Fixed: the old studio's "Combined PDF" button now really combines files (moved to PDF Tools); photo sizes now show the real file size instead of an estimate; the built-in test portrait was removed; image limits are never silently exceeded.
+- Legal documents updated to version 1.18.
+
 ## Version 3.2.4 — 19 November 2026
 
 - **Opening balances.** A new *Opening balances* tab in Books & GST lets you add, edit and delete the opening balance of any ledger — cash, bank, UPI and wallet accounts included — as Debit or Credit, with debit and credit totals and the difference shown. Every change is in the audit log.

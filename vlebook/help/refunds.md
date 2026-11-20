@@ -56,6 +56,8 @@ Updates, including automatic updates (version 3.2.3), are part of the licence; n
 
 Opening balances and voucher editing (version 3.2.4) are part of the same full version; no separate fee is charged for them.
 
+The PDF & Image Studio, Photo & Signature Studio, OCR and PVC ID & Print (version 3.3.0) are part of the same full version; no separate fee is charged for them. Printer hardware, cards, ribbons and paper are not supplied by Techmin.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.
