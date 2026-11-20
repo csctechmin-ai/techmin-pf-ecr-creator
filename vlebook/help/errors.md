@@ -389,3 +389,33 @@ Editing a posted voucher needs a reason of at least 5 characters. A reversed vou
 
 ### "This entry comes from a bill, receipt or other document"
 Automatic entries follow their documents. Edit or cancel the invoice, receipt or expense instead, and the books update by themselves.
+
+### "This file type is not supported (the file contents were checked, not just its name)"
+VLEBook checks what a file really is. Renaming a file does not change it — save it again as PDF, JPG, PNG, WebP or HEIC.
+
+### "Even at the lowest quality this image is larger than … KB" / "over the … KB maximum"
+The picture has too much detail for the size limit at that pixel size. Crop closer, use a plainer background, or check whether the portal allows a larger size. VLEBook will not quietly make a file bigger than the limit.
+
+### "… below the … KB minimum. VLEBook does not add meaningless data"
+The image is too small or too plain to reach the minimum size. Use a sharper, more detailed photo or scan, or check the required pixel size.
+
+### "Official specification not verified"
+The exam profile has no confirmed sizes. Type the width, height and KB limits from the official notification, or save a custom profile.
+
+### RED / AMBER / GREEN results
+RED: a size, format or limit is not met — the message says exactly which. AMBER: the sizes are met but the exam profile is not officially verified, or a manual check is needed. GREEN does not guarantee acceptance by the authority.
+
+### "This text is not stored as one editable piece" / "fonts are embedded as partial subsets"
+The PDF's own text cannot be changed safely here. Use *Text box over page* instead, or ask for the original document.
+
+### "Verification failed: some redacted text could still be found"
+Nothing was saved. Draw the redaction boxes a little larger, covering the whole words, and try again.
+
+### "This HEIC photo could not be opened"
+Some iPhone photos use newer formats. On the phone, share the photo as JPG (Settings → Camera → Formats → Most Compatible) and use that.
+
+### OCR language data does not load
+The first use of each language downloads its data from VLEBook's site (English 4 MB, Malayalam 5 MB, Hindi 1 MB). Connect to the internet once; afterwards it works offline.
+
+### Cards print in the wrong place or size
+Print at *Actual size / 100%* with "Fit to page" off. Print the calibration sheet, measure the 100 mm lines and the corner marks, and enter the numbers in the printer profile.

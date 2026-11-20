@@ -389,3 +389,33 @@ GSTIN का एक अक्षर गलत टाइप हुआ है। V
 
 ### "This entry comes from a bill, receipt or other document"
 स्वचालित प्रविष्टियाँ अपने दस्तावेज़ों का पालन करती हैं। इनवॉइस, रसीद या खर्च को बदलें या रद्द करें, बही अपने-आप अद्यतन होगी।
+
+### "This file type is not supported (the file contents were checked, not just its name)"
+VLEBook जाँचता है कि फ़ाइल वास्तव में क्या है। नाम बदलने से फ़ाइल नहीं बदलती — PDF, JPG, PNG, WebP या HEIC के रूप में दोबारा सहेजें।
+
+### "Even at the lowest quality this image is larger than … KB" / "over the … KB maximum"
+उस पिक्सेल आकार पर चित्र में सीमा से अधिक विवरण है। पास से काटें, सादी पृष्ठभूमि लें, या जाँचें कि पोर्टल बड़ा आकार अनुमति देता है। VLEBook चुपचाप सीमा से बड़ी फ़ाइल नहीं बनाता।
+
+### "… below the … KB minimum. VLEBook does not add meaningless data"
+चित्र न्यूनतम आकार तक पहुँचने के लिए बहुत छोटा या सादा है। अधिक स्पष्ट फोटो/स्कैन लें या पिक्सेल आकार जाँचें।
+
+### "Official specification not verified"
+परीक्षा प्रोफ़ाइल में पुष्ट आकार नहीं हैं। आधिकारिक अधिसूचना से चौड़ाई, ऊँचाई और KB सीमा भरें या कस्टम प्रोफ़ाइल सहेजें।
+
+### RED / AMBER / GREEN परिणाम
+RED: कोई आकार, प्रारूप या सीमा पूरी नहीं — संदेश ठीक बताता है। AMBER: आकार पूरे, पर प्रोफ़ाइल आधिकारिक रूप से सत्यापित नहीं या हाथ से जाँच ज़रूरी। GREEN प्राधिकरण द्वारा स्वीकृति की गारंटी नहीं है।
+
+### "This text is not stored as one editable piece" / "fonts are embedded as partial subsets"
+PDF का अपना टेक्स्ट यहाँ सुरक्षित रूप से नहीं बदला जा सकता। *Text box over page* उपयोग करें या मूल दस्तावेज़ माँगें।
+
+### "Verification failed: some redacted text could still be found"
+कुछ सहेजा नहीं गया। बॉक्स थोड़े बड़े बनाएँ ताकि पूरे शब्द ढकें, और फिर कोशिश करें।
+
+### "This HEIC photo could not be opened"
+कुछ iPhone फोटो नए प्रारूप में होती हैं। फ़ोन से फोटो JPG के रूप में भेजें (Settings → Camera → Formats → Most Compatible)।
+
+### OCR भाषा डेटा लोड नहीं होता
+हर भाषा का पहला उपयोग VLEBook साइट से डेटा लेता है (अंग्रेज़ी 4 MB, मलयालम 5 MB, हिंदी 1 MB)। एक बार इंटरनेट से जुड़ें; फिर ऑफ़लाइन काम करता है।
+
+### कार्ड गलत जगह या आकार में छपते हैं
+*Actual size / 100%* पर, "Fit to page" बंद करके प्रिंट करें। कैलिब्रेशन शीट छापें, 100 mm रेखाएँ और कोने के निशान नापें, और प्रिंटर प्रोफ़ाइल में भरें।

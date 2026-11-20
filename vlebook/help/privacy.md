@@ -34,6 +34,8 @@ If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the fi
 
 **Opening balances and edited vouchers (version 3.2.4).** Opening balances, voucher corrections and their reasons are kept only in the books on your computer and in your backups, with an entry in the audit log; they are not sent to Techmin.
 
+**PDF & Image Studio (version 3.3.0).** Files, photos, signatures and identity documents opened in the Studio are processed only in the browser on your computer and are never sent to Techmin or anyone else. They are not stored after you leave the screen; the job log keeps only what was done (tool, number of files, charge), never the files. The OCR engine, language data and HEIC decoder are downloaded once from VLEBook's own site and then work offline; no file is sent with that download. Examination profiles, card templates and centre presets you save are kept with your centre data and backups; printer profiles and the processing history (file names, sizes and results only) stay on that computer. Aadhaar numbers are masked by default on cards made from Aadhaar print sheets.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:

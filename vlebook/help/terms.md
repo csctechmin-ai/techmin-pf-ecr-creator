@@ -58,6 +58,8 @@ These Terms & Conditions ("Terms") are an agreement between **{{entity}}** (a pr
 
 **Opening balances and voucher corrections (version 3.2.4).** The Centre is responsible for the correctness of its opening balances and of every voucher correction. A posted voucher is corrected only by a reversal and a corrected voucher, both kept in the books; the Centre shall give a true reason and shall not use corrections to alter figures already reported to any authority.
 
+**PDF & Image Studio (version 3.3.0).** The Centre shall use the Studio only for documents that the customer has supplied or is entitled to, with the customer's consent, and in line with the law and the terms of each government portal. The Centre shall not use it to create counterfeit or imitation government credentials, to alter identity particulars, photographs or signatures beyond permitted formatting, to bypass passwords, logins, CAPTCHAs or portal restrictions, or to print a full Aadhaar number without the holder's request. The Centre is responsible for checking each examination's official notification before uploading files; a GREEN result means only that the configured technical sizes are met. Cards and documents produced are the Centre's own prints, not official credentials.
+
 ## 5. Notices and communications
 
 By using VLEBook you agree that Techmin may show notices inside the software, send push notifications to computers where notifications are allowed, and contact the registered mobile number or email about your licence, renewals, payments, security and important updates. You can turn push notifications off at any time in your browser or in VLEBook.

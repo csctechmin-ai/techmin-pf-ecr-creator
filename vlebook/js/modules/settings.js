@@ -194,7 +194,7 @@ import{getRecord as w,putRecord as S,getAllRecords as V,clearAllStores as j,logA
             <div class="form-group">
               <label class="form-label">Enable / Disable Sidebar Modules:</label>
               <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; background:var(--color-surface-alt); padding:10px; border-radius:var(--radius-sm);">
-                ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","Document Workbench"],["cv","CV & Resume Builder"],["tools","PDF & Image Tools"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,i])=>`
+                ${[["customers","Customers & 360°"],["services","Service Management"],["billing","Billing & Invoices"],["accounts","Accounts & Counter"],["pending","Pending Work"],["aeps","AEPS & Banking"],["commissions","Commissions"],["staff","Staff Commission"],["inventory","Inventory"],["studio","PDF & Image Studio"],["cv","CV & Resume Builder"],["catalogue","Govt Catalogue"],["reports","Reports & Profit BI"],["vault","Software Vault"]].map(([e,i])=>`
                   <label style="font-size:12px; display:flex; align-items:center; gap:6px;">
                     <input type="checkbox" name="mod_${e}" ${b[e]!==!1?"checked":""}> ${i}
                   </label>`).join("")}
