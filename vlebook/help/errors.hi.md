@@ -446,6 +446,9 @@ PDF का अपना टेक्स्ट यहाँ सुरक्षि
 ### सहायता टिकट नहीं भेजा जा रहा / "This computer is not registered with Techmin yet"
 टिकट के लिए इंटरनेट और Techmin में पंजीकृत कंप्यूटर चाहिए। इंटरनेट से जुड़ें, एक बार **उपयोगकर्ता व लाइसेंस → ऑनलाइन लाइसेंस जाँचें** खोलें, फिर दोबारा भेजें; तब तक टेक्स्ट इसी कंप्यूटर पर ड्राफ़्ट के रूप में रहता है। "The screenshot is still too large after shrinking" दिखे तो उसे ज़रूरी हिस्से तक क्रॉप करें।
 
+### Print Bridge विंडो में लाल "Unexpected token" या "Missing argument" त्रुटियाँ दिखती हैं और वह बंद हो जाती है
+Print Bridge 1.1.0 (21 नवंबर 2026 को डाउनलोड किया गया) Windows PowerShell में शुरू नहीं हो पाता था। पुराना फ़ोल्डर हटाएँ, **प्रिंट व प्रिंटर** से Print Bridge फिर से डाउनलोड करें (संस्करण 1.1.1 या बाद का), ZIP निकालें और **Start VLEBook Print Bridge.cmd** पर डबल-क्लिक करें। विंडो के शीर्षक में संस्करण दिखता है।
+
 ### "The VLEBook Print Bridge is not running on this computer" / प्रिंटर सूची में नहीं
 इस Windows कंप्यूटर पर **Start VLEBook Print Bridge.cmd** चलाएँ और उसकी विंडो खुली रखें, फिर **Connect** दबाकर उस विंडो में दिखा 6-अंकों का कोड लिखें। Chrome या Edge स्थानीय नेटवर्क के उपकरणों तक पहुँच की अनुमति माँगे तो Allow चुनें। Bridge के बिना भी आप Windows प्रिंट विंडो से प्रिंट कर सकते हैं या PDF डाउनलोड कर सकते हैं।
 

@@ -446,6 +446,9 @@ Deleting a customer's data is limited to the Owner and needs DELETE typed to con
 ### A support ticket cannot be sent / "This computer is not registered with Techmin yet"
 Tickets need an internet connection and a computer registered with Techmin. Connect to the internet, open **Users & Licence → Check licence online** once, then send again; the text stays as a draft on this computer meanwhile. If you see "The screenshot is still too large after shrinking", crop it to the important part.
 
+### The Print Bridge window shows red "Unexpected token" or "Missing argument" errors and closes
+Print Bridge 1.1.0 (downloaded on 21 November 2026) could not start in Windows PowerShell. Delete the old folder, download the Print Bridge again from **Print & printers** (version 1.1.1 or later), extract the ZIP and double-click **Start VLEBook Print Bridge.cmd**. The window title shows the version.
+
 ### "The VLEBook Print Bridge is not running on this computer" / printers are not listed
 Start **Start VLEBook Print Bridge.cmd** on this Windows computer and keep its window open, then click **Connect** and type the 6-digit code shown in that window. If Chrome or Edge asks to allow access to devices on your local network, choose Allow. Without the Bridge you can still print with the Windows print dialog or download the PDF.
 
