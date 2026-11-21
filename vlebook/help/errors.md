@@ -419,3 +419,64 @@ The first use of each language downloads its data from VLEBook's site (English 4
 
 ### Cards print in the wrong place or size
 Print at *Actual size / 100%* with "Fit to page" off. Print the calibration sheet, measure the 100 mm lines and the corner marks, and enter the numbers in the printer profile.
+
+## Version 3.4 — reminders, originals & privacy, support, printing
+
+### "The customer has not agreed to reminders. Record consent first."
+VLEBook prepares a reminder message only when consent is recorded. Ask the customer, then tick the consent box in the reminder or record it in **Originals & Privacy → Consent**. If the customer withdrew consent, reminders stay stopped until new consent is recorded.
+
+### "A reminder for this … already exists"
+The same customer, category, vehicle / document number and expiry date is already in the list. Open the existing reminder, or choose to save another one on purpose.
+
+### WhatsApp did not open, or opened without the message
+WhatsApp Desktop or WhatsApp Web must be installed or signed in on this computer. Check that the customer's mobile has 10 digits. VLEBook cannot press Send for you and cannot see whether a message was delivered; mark it sent only after you have sent it.
+
+### "Custody history does NOT verify from entry …" in Originals & Privacy
+An entry of the custody history was changed or removed outside VLEBook (for example by restoring an old backup over newer data). Restore the latest backup; if that is not possible, the Owner records a correction with the reason. Earlier entries are never edited.
+
+### "Check the requester's identity before preparing an export"
+Open the privacy request and use **Check identity** (in person with ID, call to the registered mobile, or authorised person with letter and ID). Only then can the copy of the data be prepared.
+
+### "Choose a password of at least 8 characters for the protected PDF"
+A customer's data export as a password-protected PDF needs a password of 8 or more characters. VLEBook fills in a strong one that you can change; tell it to the customer separately (in person or by phone), never in the same message as the file. The PDF opens in any PDF reader with that password; the data files are inside it as attachments (paper-clip panel).
+
+### "Only the Owner can carry out a deletion"
+Deleting a customer's data is limited to the Owner and needs DELETE typed to confirm. Invoices and accounts are kept as tax law requires and are shown as *kept*, with the reason.
+
+### A support ticket cannot be sent / "This computer is not registered with Techmin yet"
+Tickets need an internet connection and a computer registered with Techmin. Connect to the internet, open **Users & Licence → Check licence online** once, then send again; the text stays as a draft on this computer meanwhile. If you see "The screenshot is still too large after shrinking", crop it to the important part.
+
+### "The VLEBook Print Bridge is not running on this computer" / printers are not listed
+Start **Start VLEBook Print Bridge.cmd** on this Windows computer and keep its window open, then click **Connect** and type the 6-digit code shown in that window. If Chrome or Edge asks to allow access to devices on your local network, choose Allow. Without the Bridge you can still print with the Windows print dialog or download the PDF.
+
+### Pairing with the Print Bridge does not work
+The 6-digit code changes each time pairing starts and is valid only for a few minutes. Click **Connect** again and type the new code from the Bridge window.
+
+### The print shows "Sent to Windows" but nothing came out
+*Sent to Windows* means the Windows print queue accepted the job; it does not prove the page or card was printed. Use **Printer status** and **Check Windows queue** in the print window: an offline printer, paper or ribbon out, or a paused queue are shown when the driver reports them. Then mark the job **It did not print** so the record is correct.
+
+### An option (two-sided, colour, tray, resolution) is missing in the print window
+VLEBook offers only what the printer's driver reports to Windows. Open **Printer's own settings…** to use the maker's own features (for example ribbon type, K panel, overlay, magnetic encoding), or update the printer driver from the maker's website.
+
+### The backs of PVC cards print upside down or mirrored
+In **Edit profile** set *Back side* to **Turned 180°**, and only if your printer needs it (manual two-pass printing) set *Back mirror*. Print the two-sided calibration sheet to check before printing real cards.
+
+### Manual two-sided printing: the backs do not match the fronts
+After the fronts come out, put the printed cards back in the order and direction your printer's manual shows, then click **Print the backs**. Use the calibration sheet's back page to set the back shift in the printer profile.
+
+### "Narrowest bar is … mm — too thin" / "The last digit should be … (check digit)"
+Make the barcode wider or shorten the text so that the narrowest bar is at least about 0.19 mm and at least 2 printer dots. For EAN-13 type 12 digits and VLEBook adds the check digit, or type all 13 digits with the correct check digit.
+
+### Malayalam or Hindi text on a card shows boxes
+The card designer warns when the chosen font has no letters for that language on this computer. Choose **Nirmala UI** (built into Windows 10 and 11) or another installed Malayalam / Hindi font for that text box.
+
+### Some rows are not selected for printing in bulk cards
+The row check marks rows with a duplicate ID, an empty required field, a wrong date, a barcode that cannot be made or a photo file that was not added. Correct the value in the table (no need to import again) or remove the row; **Only rows without problems** selects the rest.
+
+### The card cost shows ₹0 or looks wrong
+Add the ribbon, cards and other consumables in **Print & printers → Consumables & card cost** with their cost and the number of prints or cards per pack. The cost is an estimate from what you entered.
+
+
+
+### PVC cards look blurred or have a faint shadow / second image
+Since 3.4.0 VLEBook prints PDF areas at full resolution and does not add sharpening halos. If cards are still soft: (1) choose the card area again from the PDF (pictures placed before 3.4.0 keep the old lower resolution); (2) set *Sharpness* to 0 in Colour & quality; (3) print at *Actual size / 100%*, never "Fit"; (4) in the card printer's own settings print black text and barcodes with the **black (K / resin) panel**, choose the ribbon type that is loaded, and run the printer's cleaning card — black printed as colour (YMC) and a dirty print head or roller are the usual causes of a faint second image.

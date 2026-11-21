@@ -58,6 +58,8 @@ Opening balances and voucher editing (version 3.2.4) are part of the same full v
 
 The PDF & Image Studio, Photo & Signature Studio, OCR and PVC ID & Print (version 3.3.0) are part of the same full version; no separate fee is charged for them. Printer hardware, cards, ribbons and paper are not supplied by Techmin.
 
+Renewal Reminders, Original Documents & Privacy, Help & Support tickets and the Print Bridge (version 3.4.0) are included without a separate fee. Renewal Reminders are part of the full version; Original Documents & Privacy and support tickets are available in every version. WhatsApp, internet, printers and consumables are the Centre's own costs.
+
 ## 6. How to ask for a refund
 
 Email **{{email}}** with your centre name, Centre ID and Device Code (Users & Licence), the payment reference / UTR and the reason. You will receive an acknowledgement within 2 working days.
