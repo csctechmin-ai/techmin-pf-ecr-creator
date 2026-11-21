@@ -447,13 +447,16 @@ Deleting a customer's data is limited to the Owner and needs DELETE typed to con
 Tickets need an internet connection and a computer registered with Techmin. Connect to the internet, open **Users & Licence → Check licence online** once, then send again; the text stays as a draft on this computer meanwhile. If you see "The screenshot is still too large after shrinking", crop it to the important part.
 
 ### The Print Bridge window shows red "Unexpected token" or "Missing argument" errors and closes
-Print Bridge 1.1.0 (downloaded on 21 November 2026) could not start in Windows PowerShell. Delete the old folder, download the Print Bridge again from **Print & printers** (version 1.1.1 or later), extract `VLEBook-Print-Bridge-1.1.1.zip` and double-click **Start VLEBook Print Bridge.cmd** in the folder **VLEBook Print Bridge 1.1.1**. The window title shows the version, and VLEBook warns in Print & printers when an older Bridge is running.
+Print Bridge 1.1.0 (downloaded on 21 November 2026) could not start in Windows PowerShell. Delete the old folder, download the Print Bridge again from **Print & printers** (version 1.2.0 or later), extract `VLEBook-Print-Bridge-1.2.0.zip` and double-click **Install VLEBook Print Bridge.cmd** in the folder **VLEBook Print Bridge 1.2.0**. Point at the Print Bridge icon in the notification area to see its version; VLEBook warns in Print & printers when an older Bridge is running.
 
 ### "The VLEBook Print Bridge is not running on this computer" / printers are not listed
-Start **Start VLEBook Print Bridge.cmd** on this Windows computer and keep its window open, then click **Connect** and type the 6-digit code shown in that window. If Chrome or Edge asks to allow access to devices on your local network, choose Allow. Without the Bridge you can still print with the Windows print dialog or download the PDF.
+Install the Bridge once with **Install VLEBook Print Bridge.cmd** (from the ZIP in **Print & printers**). It then runs in the background with an icon in the notification area and starts with Windows. If the icon is missing, open the Start menu → **VLEBook Print Bridge**. If Chrome or Edge asks to allow access to devices on your local network, choose Allow, then click **Check again** in VLEBook. Without the Bridge you can still print with the Windows print dialog or download the PDF.
 
-### Pairing with the Print Bridge does not work
-The 6-digit code changes each time pairing starts and is valid only for a few minutes. Click **Connect** again and type the new code from the Bridge window.
+### VLEBook asks for a pairing code
+VLEBook connects to Print Bridge 1.2 by itself. A code is asked only when an older Bridge is running (VLEBook then shows "A newer Print Bridge is available" — install the new one) or when VLEBook is opened from another address. In that case click **Connect with a code** and type the 6-digit code shown in the Print Bridge notification (bottom right of the screen); it is valid for 3 minutes.
+
+### The Print Bridge icon is not in the notification area
+Click ^ next to the clock — Windows often keeps new icons in the hidden-icons area; you can drag it onto the taskbar. If it is not there, start **VLEBook Print Bridge** from the Start menu. To see what happened, right-click the icon → **Show log**, or run **Start VLEBook Print Bridge (window).cmd** from %LOCALAPPDATA%\VLEBook Print Bridge to see messages in a window.
 
 ### The print shows "Sent to Windows" but nothing came out
 *Sent to Windows* means the Windows print queue accepted the job; it does not prove the page or card was printed. Use **Printer status** and **Check Windows queue** in the print window: an offline printer, paper or ribbon out, or a paused queue are shown when the driver reports them. Then mark the job **It did not print** so the record is correct.
