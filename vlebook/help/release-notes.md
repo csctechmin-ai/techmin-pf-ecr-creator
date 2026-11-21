@@ -22,7 +22,11 @@ Published by {{entity}}. The version you are using is shown in **Settings** and 
 - **Fixed:** Print Bridge 1.1.1 — the first download (1.1.0) did not start in Windows PowerShell 5.1 and could not take large print jobs; download it again.
 - **Fixed:** the calibration sheet for A4 could not be made; alignment to the card edge left a 0.1 mm gap; choosing the same file again in Print & printers did nothing.
 - **Known limits:** VLEBook does not add fonts (Malayalam and Hindi use the fonts on the computer); maker-specific card printer features are used through the printer's own settings window; VLEBook data on the computer is protected by Windows sign-in, not by separate encryption.
-- Legal documents updated to version 1.19.
+- **Learning Centre:** the Help screen is now *Learning Centre & Guides*. Lessons for every screen in English, Hindi and Malayalam with real screenshots, search, learning paths with progress, quick checks, guided tours that only point (never click), FAQs, glossary, What's new, and printable manuals (complete manual, quick start, staff training checklist). A **🎓 Learn** button on each screen opens its lesson. All documents are under *Guides & Legal*.
+- **Fixed:** printing Help documents could give a blank page after an invoice had been printed.
+- **PVC ID & Print — fit documents to the card:** a tick box (on by default) auto-crops an uploaded document to the card's edges and resizes it exactly to the PVC card; untick it to place the whole picture and resize by hand with the new *Resize to card* buttons and Zoom. Hand-marked areas keep the card shape.
+- **Open-source licences:** a new page in Help lists every open-source component included in VLEBook, its licence and what it is used for; the Terms link to it.
+- Legal documents updated to version 1.20.
 
 ## Version 3.3.0 — 20 November 2026
 
