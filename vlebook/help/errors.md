@@ -486,3 +486,9 @@ Add the ribbon, cards and other consumables in **Print & printers → Consumable
 
 ### PVC cards look blurred or have a faint shadow / second image
 Since 3.4.0 VLEBook prints PDF areas at full resolution and does not add sharpening halos. If cards are still soft: (1) choose the card area again from the PDF (pictures placed before 3.4.0 keep the old lower resolution); (2) set *Sharpness* to 0 in Colour & quality; (3) print at *Actual size / 100%*, never "Fit"; (4) in the card printer's own settings print black text and barcodes with the **black (K / resin) panel**, choose the ribbon type that is loaded, and run the printer's cleaning card — black printed as colour (YMC) and a dirty print head or roller are the usual causes of a faint second image.
+
+### The card picture is cut in the wrong place, or the whole page appears on the card
+With **Auto-crop & resize to the PVC card** ticked, VLEBook looks for a card-shaped area in the file. If it chose the wrong area: click the file and choose another area found (each shows a match %), or drag to mark the card yourself — **Keep the PVC card shape** keeps the right width : height. If no card was found (a message says so), the whole picture is placed: use **Resize to card → Auto-crop to the card edges**, or **Zoom** and *From left* / *From top* under Crop. To place the whole picture on purpose, untick Auto.
+
+### The Learning Centre says it could not be opened, or a tour says a part is not visible
+The Learning Centre is saved for offline use the first time it is opened with the internet; connect once and open it again. A guided tour points at parts of the real screen: if a part is not shown (it needs the full version, another role or another tab), the tour explains the step and you can press Next. Esc ends a tour at any time. Printed manuals: in the print window choose *Save as PDF* or your printer, *Portrait*, *A4*.

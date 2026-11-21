@@ -1,0 +1,672 @@
+{
+ "doc_version": "1.0",
+ "vlebook_version": "3.4.0",
+ "updated": "2026-11-21",
+ "languages": [
+  "en",
+  "hi",
+  "ml"
+ ],
+ "categories": [
+  "start",
+  "daily",
+  "money",
+  "studio",
+  "safety",
+  "help"
+ ],
+ "paths": {
+  "beginner": [
+   "gs-what",
+   "gs-setup",
+   "gs-screen",
+   "gs-save",
+   "customers",
+   "billing",
+   "backup"
+  ],
+  "daily": [
+   "services",
+   "pending",
+   "accounts",
+   "reminders",
+   "aeps",
+   "printing",
+   "studio-photo",
+   "studio-pdf",
+   "support"
+  ],
+  "advanced": [
+   "billing-edit",
+   "books",
+   "gst",
+   "inventory",
+   "commissions",
+   "staff",
+   "originals",
+   "privacy",
+   "studio-ocr",
+   "studio-pvc",
+   "cv",
+   "catalogue",
+   "reports",
+   "news",
+   "multi",
+   "account",
+   "settings"
+  ]
+ },
+ "lessons": [
+  {
+   "id": "gs-what",
+   "cat": "start",
+   "nav": "dashboard",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "index.html",
+    "js/app.js"
+   ],
+   "img": "dashboard"
+  },
+  {
+   "id": "gs-setup",
+   "cat": "start",
+   "nav": "settings",
+   "level": "beginner",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/gate.js",
+    "js/modules/settings.js"
+   ],
+   "img": "settings"
+  },
+  {
+   "id": "gs-screen",
+   "cat": "start",
+   "nav": "dashboard",
+   "level": "beginner",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/app.js",
+    "js/modules/dashboard.js"
+   ],
+   "img": "dashboard",
+   "tour": "tour-screen"
+  },
+  {
+   "id": "gs-save",
+   "cat": "start",
+   "nav": "backup",
+   "level": "beginner",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/autobackup.js",
+    "js/core/db.js"
+   ]
+  },
+  {
+   "id": "customers",
+   "cat": "daily",
+   "nav": "customers",
+   "level": "beginner",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/customers.js"
+   ],
+   "img": "customers",
+   "tour": "tour-customer"
+  },
+  {
+   "id": "services",
+   "cat": "daily",
+   "nav": "services",
+   "level": "daily",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/services.js"
+   ],
+   "img": "services"
+  },
+  {
+   "id": "billing",
+   "cat": "daily",
+   "nav": "billing",
+   "level": "beginner",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/billing.js",
+    "js/core/invoicelayout.js"
+   ],
+   "img": "billing",
+   "tour": "tour-bill"
+  },
+  {
+   "id": "billing-edit",
+   "cat": "daily",
+   "nav": "billing",
+   "level": "advanced",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/billing.js",
+    "js/core/ledgerops.js"
+   ]
+  },
+  {
+   "id": "pending",
+   "cat": "daily",
+   "nav": "pending",
+   "level": "daily",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/pending-work.js"
+   ],
+   "img": "pending"
+  },
+  {
+   "id": "reminders",
+   "cat": "daily",
+   "nav": "reminders",
+   "level": "daily",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/reminders.js",
+    "js/core/reminders.js"
+   ],
+   "img": "reminders"
+  },
+  {
+   "id": "aeps",
+   "cat": "daily",
+   "nav": "aeps",
+   "level": "daily",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/aeps.js"
+   ],
+   "img": "aeps"
+  },
+  {
+   "id": "inventory",
+   "cat": "daily",
+   "nav": "inventory",
+   "level": "advanced",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/inventory.js",
+    "js/core/stock.js"
+   ],
+   "img": "inventory"
+  },
+  {
+   "id": "accounts",
+   "cat": "money",
+   "nav": "accounts",
+   "level": "daily",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/accounts.js"
+   ],
+   "img": "accounts"
+  },
+  {
+   "id": "books",
+   "cat": "money",
+   "nav": "books",
+   "level": "advanced",
+   "min": 7,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/books.js",
+    "js/core/books.js"
+   ],
+   "img": "books"
+  },
+  {
+   "id": "gst",
+   "cat": "money",
+   "nav": "books",
+   "level": "advanced",
+   "min": 7,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/gst.js",
+    "js/modules/books.js"
+   ]
+  },
+  {
+   "id": "commissions",
+   "cat": "money",
+   "nav": "commissions",
+   "level": "advanced",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/commissions.js"
+   ]
+  },
+  {
+   "id": "staff",
+   "cat": "money",
+   "nav": "staff",
+   "level": "advanced",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/staff.js"
+   ]
+  },
+  {
+   "id": "reports",
+   "cat": "money",
+   "nav": "reports",
+   "level": "advanced",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/reports.js"
+   ],
+   "img": "reports"
+  },
+  {
+   "id": "studio-pdf",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "daily",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/studio.js",
+    "js/core/pdftools.js"
+   ],
+   "img": "studio"
+  },
+  {
+   "id": "studio-photo",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "daily",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/studio-photo.js",
+    "js/core/examdb.js"
+   ]
+  },
+  {
+   "id": "studio-ocr",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "advanced",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/studio-ocr.js",
+    "js/core/ocr.js"
+   ]
+  },
+  {
+   "id": "studio-pvc",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "advanced",
+   "min": 8,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/studio-pvc.js",
+    "js/core/cardengine.js",
+    "js/core/printsheet.js"
+   ]
+  },
+  {
+   "id": "printing",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "daily",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/printservice.js",
+    "js/modules/printdialog.js",
+    "print-bridge/VLEBook-Print-Bridge.ps1"
+   ]
+  },
+  {
+   "id": "cv",
+   "cat": "studio",
+   "nav": "cv",
+   "level": "advanced",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/cv.js"
+   ],
+   "img": "cv"
+  },
+  {
+   "id": "catalogue",
+   "cat": "studio",
+   "nav": "catalogue",
+   "level": "advanced",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/catalogue.js"
+   ]
+  },
+  {
+   "id": "originals",
+   "cat": "safety",
+   "nav": "privacy",
+   "level": "advanced",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/privacy.js",
+    "js/core/privacy.js"
+   ],
+   "img": "privacy"
+  },
+  {
+   "id": "privacy",
+   "cat": "safety",
+   "nav": "privacy",
+   "level": "advanced",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/privacy.js",
+    "js/core/privacy.js"
+   ]
+  },
+  {
+   "id": "backup",
+   "cat": "safety",
+   "nav": "backup",
+   "level": "beginner",
+   "min": 6,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/backup-ui.js",
+    "js/core/autobackup.js",
+    "js/core/folderrestore.js"
+   ],
+   "img": "backup",
+   "tour": "tour-backup"
+  },
+  {
+   "id": "multi",
+   "cat": "safety",
+   "nav": "backup",
+   "level": "advanced",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/sync.js"
+   ]
+  },
+  {
+   "id": "account",
+   "cat": "safety",
+   "nav": "account",
+   "level": "advanced",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/account.js",
+    "js/core/licence.js"
+   ],
+   "img": "account"
+  },
+  {
+   "id": "settings",
+   "cat": "safety",
+   "nav": "settings",
+   "level": "advanced",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/settings.js",
+    "js/core/auditlog.js"
+   ]
+  },
+  {
+   "id": "news",
+   "cat": "help",
+   "nav": "news",
+   "level": "advanced",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/news.js",
+    "js/core/appupdate.js"
+   ]
+  },
+  {
+   "id": "support",
+   "cat": "help",
+   "nav": "support",
+   "level": "daily",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/support.js",
+    "js/core/support.js"
+   ],
+   "img": "support"
+  },
+  {
+   "id": "learning",
+   "cat": "help",
+   "nav": "help",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/help.js",
+    "js/modules/learn.js"
+   ]
+  }
+ ],
+ "nav_lesson": {
+  "dashboard": "gs-screen",
+  "customers": "customers",
+  "services": "services",
+  "billing": "billing",
+  "accounts": "accounts",
+  "books": "books",
+  "pending": "pending",
+  "reminders": "reminders",
+  "privacy": "originals",
+  "aeps": "aeps",
+  "commissions": "commissions",
+  "staff": "staff",
+  "inventory": "inventory",
+  "studio": "studio-pdf",
+  "cv": "cv",
+  "catalogue": "catalogue",
+  "reports": "reports",
+  "vault": "catalogue",
+  "news": "news",
+  "backup": "backup",
+  "account": "account",
+  "support": "support",
+  "help": "learning",
+  "settings": "settings"
+ },
+ "glossary": [
+  "dashboard",
+  "customer",
+  "ledger360",
+  "service",
+  "govfee",
+  "servicecharge",
+  "invoice",
+  "creditnote",
+  "roundoff",
+  "autosave",
+  "save",
+  "backup",
+  "restore",
+  "sync",
+  "pdf",
+  "printpreview",
+  "printbridge",
+  "reconciliation",
+  "dayclose",
+  "gstin",
+  "sac",
+  "auditlog",
+  "consent",
+  "licence",
+  "basic",
+  "recovery"
+ ],
+ "faq": [
+  "offline",
+  "datawhere",
+  "browserclear",
+  "newpc",
+  "lostpw",
+  "billwrong",
+  "govfee",
+  "gstfile",
+  "whatsapp",
+  "printfit",
+  "cardblur",
+  "bridge",
+  "backupask",
+  "basicmode",
+  "ocrsure",
+  "photogreen"
+ ],
+ "tours": {
+  "tour-screen": [
+   {
+    "nav": "dashboard",
+    "sel": "#sidebar-nav-list"
+   },
+   {
+    "nav": "dashboard",
+    "sel": "#workspace-content"
+   },
+   {
+    "nav": "dashboard",
+    "sel": "#header-user-chip"
+   },
+   {
+    "nav": "dashboard",
+    "sel": "#persistent-save-btn"
+   }
+  ],
+  "tour-customer": [
+   {
+    "nav": "customers",
+    "sel": "#cust-search-input"
+   },
+   {
+    "nav": "customers",
+    "sel": "#cust-mobile"
+   },
+   {
+    "nav": "customers",
+    "sel": "#cust-name"
+   },
+   {
+    "nav": "customers",
+    "sel": "#customer-entry-form button[type=submit]"
+   }
+  ],
+  "tour-bill": [
+   {
+    "nav": "billing",
+    "sel": "#bill-cust-mobile"
+   },
+   {
+    "nav": "billing",
+    "sel": "#bill-add-service-select"
+   },
+   {
+    "nav": "billing",
+    "sel": "#bill-pay-mode"
+   },
+   {
+    "nav": "billing",
+    "sel": "#bill-paid-now"
+   },
+   {
+    "nav": "billing",
+    "sel": "#bill-submit-btn"
+   }
+  ],
+  "tour-backup": [
+   {
+    "nav": "backup",
+    "sel": "#auto-backup-card"
+   },
+   {
+    "nav": "backup",
+    "sel": "#ab-provider"
+   },
+   {
+    "nav": "backup",
+    "sel": "#ab-choose"
+   },
+   {
+    "nav": "backup",
+    "sel": "#ab-hourly"
+   },
+   {
+    "nav": "backup",
+    "sel": "#bkp-export-json-btn"
+   }
+  ]
+ }
+}

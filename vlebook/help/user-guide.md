@@ -185,6 +185,7 @@ Every print in VLEBook can go three ways: **Windows print dialog** (works with e
 
 ### PVC cards — several files, front and back, turning the card (version 3.4.0)
 - **Open PDF / images** now accepts several files (and each page of a PDF). Every file stays as a thumbnail: click **Front** or **Back** under any of them, in any order, or click the thumbnail to choose a card area inside it. Nothing is replaced when you open the next file.
+- **Auto-crop & resize to the PVC card** (tick box under the opened files, on by default): **Front** / **Back** finds the card in the file, crops to its edges, trims it to the card shape (85.60 × 53.98 mm for CR80) and fits it exactly to the card; a message shows how sure the match is — check the edges. Untick it to place the whole picture without cropping and resize it yourself. A placed document picture has **Resize to card**: *Auto-crop to the card edges*, *Fit exactly to the card*, *Fill the card (crop edges)*, *Whole picture (no crop)* and a **Zoom** slider (move the picture with *From left* / *From top* under Crop). When you mark an area by hand, **Keep the PVC card shape** keeps the card's width : height. A card lying the other way round is turned, never stretched.
 - **Colour & quality** of the document picture: with **Auto** ticked (default) brightness, contrast, colour, sharpness and the other settings apply to the front and back document pictures together. Untick Auto to adjust each side separately, or use **Manual: copy these settings** to copy them once.
 - **Turn the card** between landscape and portrait in the Card panel: **Reflow layout** keeps each item's size and moves it to the same relative place; **Rotate whole design 90°** turns everything with the card. Both sides change, nothing is deleted, and Undo brings it back.
 - **Print to a printer…** sends the cards through the same print dialog: with the Print Bridge the card printer is chosen first, the CR80 card size reported by its driver is selected, front and back are sent as pages at 600 DPI with two-sided printing when the driver supports it, and the shift from your printer profile is filled in.
@@ -358,4 +359,13 @@ Switch between English, हिन्दी and മലയാളം from the langu
 
 ## 9. Help
 
-Help & Legal also has the **Release Notes**, the **Disclaimer** and the **Refund Policy**. See **Errors & Solutions** for common problems. Contact {{entity}}: {{email}}{{phoneSep}} · {{website}}
+### Learning Centre (version 3.4.0)
+The menu item **Learning Centre & Guides** (earlier *User Guide & Legal*) opens the **Learning Centre**; the documents (this guide, Errors & Solutions, Release Notes, Terms, Privacy, Refund Policy, Disclaimer and Open-source licences) are under **Guides & Legal** on the same screen. The language buttons switch both between English, हिन्दी and മലയാളം.
+- **Lessons** for every screen, each with *What is this? · Why do I need it? · Before you begin · Step by step · What will happen? · Be careful · If something goes wrong*, a screenshot of the real screen (sample data) and an optional quick check. Search by any word, in your language or with the English button names. Categories and three **learning paths** (Beginner, Daily operator, Advanced operator).
+- **🎓 Learn** at the top of each screen opens its lesson. **Show me on the screen** starts a guided tour that rings the parts of the real screen one by one with Next / Back / Exit (Esc). A tour only points: it never clicks, saves or deletes anything.
+- **Mark as completed** keeps your progress on this computer for your user name only.
+- **What's new**, **Questions & answers**, **Words used in VLEBook** (glossary) and links to Errors & Solutions and Help & Support.
+- **Manuals to print or save as PDF:** the complete manual, the quick start (beginner path) and a staff training checklist, in the chosen language. In the print window choose a printer or *Save as PDF*.
+- There are no video lessons; each lesson has a screenshot instead. The Learning Centre is saved for offline use after it has been opened once with the internet.
+
+Help & Legal also has the **Release Notes**, the **Disclaimer**, the **Refund Policy** and **Open-source licences** (the open-source components included in VLEBook and their licences). See **Errors & Solutions** for common problems. Contact {{entity}}: {{email}}{{phoneSep}} · {{website}}

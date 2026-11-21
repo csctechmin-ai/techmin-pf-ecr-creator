@@ -1,0 +1,1218 @@
+{
+ "ui": {
+  "lc": "Learning Centre",
+  "lc_sub": "Learn every part of VLEBook step by step, in simple words. Lessons, guided tours, questions and answers, and the full guides.",
+  "tab_learn": "Learning Centre",
+  "tab_docs": "Guides & Legal",
+  "search": "Search lessons, questions and words (for example: bill, backup, GST)",
+  "no_results": "Nothing found. Try another word, or open Guides & Legal → Errors & Solutions.",
+  "cat_all": "All lessons",
+  "cat_start": "Getting started",
+  "cat_daily": "Daily counter work",
+  "cat_money": "Money, accounts & GST",
+  "cat_studio": "PDF, photo, cards & printing",
+  "cat_safety": "Data safety, users & settings",
+  "cat_help": "Updates & help",
+  "sec_paths": "Learning paths",
+  "path_beginner": "Beginner",
+  "path_daily": "Daily operator",
+  "path_advanced": "Advanced operator",
+  "path_hint": "Follow a path in order. Nothing is locked — open any lesson at any time.",
+  "sec_faq": "Questions & answers",
+  "sec_glossary": "Words used in VLEBook",
+  "sec_new": "What's new",
+  "sec_trouble": "Something is not working?",
+  "trouble_text": "Errors & Solutions lists common problems by what you see on the screen, with a safe fix for each. If the fix does not help, raise a ticket in Help & Support.",
+  "open_errors": "Open Errors & Solutions",
+  "open_support": "Open Help & Support",
+  "sec_downloads": "Manuals to print or save as PDF",
+  "dl_manual": "Complete manual (all lessons)",
+  "dl_quick": "Quick start (beginner path)",
+  "dl_checklist": "Staff training checklist",
+  "dl_hint": "Opens a print-ready page in the chosen language. In the print window choose a printer, or Save as PDF.",
+  "minutes": "min",
+  "level_beginner": "Beginner",
+  "level_daily": "Daily",
+  "level_advanced": "Advanced",
+  "new_badge": "New",
+  "updated_badge": "Updated",
+  "done": "Completed",
+  "mark_done": "Mark as completed",
+  "mark_undone": "Mark as not completed",
+  "progress": "Your progress",
+  "progress_of": "{done} of {total} lessons completed",
+  "progress_note": "Progress is kept only on this computer, for your user name. Nobody else sees it.",
+  "h_what": "What is this?",
+  "h_why": "Why do I need it?",
+  "h_before": "Before you begin",
+  "h_steps": "Step by step",
+  "h_result": "What will happen?",
+  "h_careful": "Be careful",
+  "h_wrong": "If something goes wrong",
+  "h_related": "Related lessons",
+  "open_screen": "Open this screen",
+  "show_me": "Show me on the screen",
+  "back": "← All lessons",
+  "screenshot": "Screenshot of the screen in VLEBook {v} (sample data)",
+  "tour_next": "Next",
+  "tour_back": "Back",
+  "tour_skip": "Skip",
+  "tour_exit": "Exit tour",
+  "tour_done": "Finish",
+  "tour_missing": "This part is not visible on the screen right now (it may need the full version, a different role or another tab). Read the explanation, then press Next.",
+  "tour_safe": "The tour only points at things. It never clicks, saves or deletes anything.",
+  "learn_btn": "Learn",
+  "learn_btn_title": "Open the lesson for this screen",
+  "new_in": "New and changed in VLEBook {v}",
+  "release_link": "All release notes",
+  "manual_title": "VLEBook Learning Centre — manual",
+  "manual_cover": "Guide version {d} · covers VLEBook {v} · updated {u}",
+  "manual_print": "Print / Save as PDF",
+  "checklist_title": "Staff training checklist",
+  "checklist_intro": "For the Owner or trainer. Tick each lesson when the staff member can do it alone.",
+  "checklist_staff": "Staff name",
+  "checklist_date": "Date",
+  "checklist_sign": "Trainer's signature",
+  "check_q": "Quick check",
+  "check_right": "Correct.",
+  "check_wrong": "Not quite — read the steps again.",
+  "lang_label": "Lesson language"
+ },
+ "lessons": {
+  "gs-what": {
+   "title": "What is VLEBook?",
+   "summary": "Office software for CSC, Akshaya and e-Seva centres that runs in Chrome or Edge.",
+   "what": "VLEBook is the office book of your centre, on the computer. It keeps your customers, bills, applications, money, stock and staff records in one place, and has tools for PDFs, photos, ID cards and printing.",
+   "why": "Instead of a notebook, a calculator and many separate tools, you do the day's work on one screen. VLEBook adds up the money for you and keeps the government fee separate from your own income.",
+   "before": [
+    "A Windows computer with Google Chrome or Microsoft Edge.",
+    "Internet for the first opening and for activation. After that, daily work also runs without internet."
+   ],
+   "steps": [
+    "Open tools.complypro.co.in/vlebook in Chrome or Edge.",
+    "Press Ctrl + D to bookmark the page, so you can open it quickly every day.",
+    "Sign in with your user name and password.",
+    "Use the menu on the left to open a screen. The big middle area shows that screen."
+   ],
+   "result": "VLEBook opens on the Dashboard with today's summary.",
+   "careful": "Your business data is stored only on this computer and in the backups you save. Techmin does not keep a copy. Set up automatic backup on the first day (see the lesson Backup and restore).",
+   "wrong": "If the page does not open, check the internet for the first visit, and use Chrome or Edge (not Internet Explorer). If you see an error, open Guides & Legal → Errors & Solutions.",
+   "check": {
+    "q": "Where is your centre's business data kept?",
+    "a": [
+     "On Techmin's server",
+     "On this computer and in your own backups",
+     "On the government portal"
+    ],
+    "right": 1
+   }
+  },
+  "gs-setup": {
+   "title": "First-time setup: Owner account and centre details",
+   "summary": "Create the Owner account, keep the recovery code, and fill in the centre details for invoices.",
+   "what": "The Owner account is the main login of the centre. Centre details (name, address, GSTIN, logo, signature) are printed on your invoices and reports.",
+   "why": "Without the Owner account VLEBook cannot be activated. Correct centre details make your bills look professional and correct.",
+   "before": [
+    "Internet connection (activation needs it).",
+    "Centre name, full address, district, state, PIN code, your mobile and email.",
+    "GSTIN, CSC ID or Akshaya Centre ID if you have them."
+   ],
+   "steps": [
+    "On the first screen fill in the centre name, your name, mobile, email, type of centre and full address.",
+    "Type a user name and password, read and accept the Terms, Privacy, Refund Policy and Disclaimer, and click Create.",
+    "VLEBook shows a recovery code once. Write it down or download it and keep it safe.",
+    "Open Settings & Centre Setup. Check the details, add the invoice prefix and UPI ID.",
+    "Under Centre logo click Upload logo (PNG, JPG or WEBP, up to 3 MB).",
+    "Under Authorised signatory's signature upload a clear photo of the signature on white paper."
+   ],
+   "result": "A welcome email arrives with your user name, Centre ID and Device Code (never the password). The logo and signature appear on invoices.",
+   "careful": "The recovery code is the only way to reset the Owner password without Techmin's help. Do not share it.",
+   "wrong": "If activation fails, check the internet and try again. If you lost the recovery code and the password, contact Techmin support with your Centre ID.",
+   "check": {
+    "q": "Which code lets the Owner reset the password without Techmin's help?",
+    "a": [
+     "The Device Code",
+     "The recovery code",
+     "The invoice prefix"
+    ],
+    "right": 1
+   }
+  },
+  "gs-screen": {
+   "title": "The main screen: menu, Dashboard and top bar",
+   "summary": "Find your way around: the menu, the Dashboard, language, your name and the Save button.",
+   "what": "The screen has three parts: the menu on the left, the work area in the middle, and the top bar with language, sync, notices, the Save button and your name.",
+   "why": "When you know where things are, every task is quicker and you do not get lost.",
+   "before": [
+    "Sign in to VLEBook."
+   ],
+   "steps": [
+    "Look at the menu on the left. Click any name to open that screen. A small number next to a name shows things waiting (for example pending applications).",
+    "The Dashboard shows today's income, dues and alerts. Click an alert to open the screen it talks about.",
+    "Use the language box at the top to switch between English, हिन्दी and മലയാളം.",
+    "Click your name at the top right for Change my password and Sign out.",
+    "The Save button saves all open edits at once. A yellow Backup needed button means data changed since the last backup."
+   ],
+   "result": "You can open every screen and come back to the Dashboard at any time.",
+   "careful": "Sign out when you leave the counter, so nobody else works under your name.",
+   "wrong": "If a menu item shows FULL, it needs the full version (trial or licence). If a menu item is missing, your role may not allow it — ask the Owner.",
+   "check": {
+    "q": "Where do you change the language of the screens?",
+    "a": [
+     "Settings → Start fresh",
+     "The language box at the top",
+     "Users & Licence"
+    ],
+    "right": 1
+   }
+  },
+  "gs-save": {
+   "title": "Saving, internet and offline work",
+   "summary": "How VLEBook saves your work, and what needs the internet.",
+   "what": "VLEBook saves every record on this computer as soon as you save a form or create a bill. Backups are extra copies in a folder you choose.",
+   "why": "Knowing what is saved where protects you from losing a day's work.",
+   "before": [
+    "Nothing special."
+   ],
+   "steps": [
+    "When you click a Save or Generate button, the record is saved on this computer at once.",
+    "Unfinished forms are kept as drafts; if you leave a screen and come back, VLEBook restores them.",
+    "The Save button at the top saves any open edits and, when data changed, takes a backup too.",
+    "Daily work (billing, customers, accounts, tools) works without internet.",
+    "The internet is needed only for activation, licences, Techmin notices, the welcome email and push notifications."
+   ],
+   "result": "Your work stays on this computer, and the backup folder keeps copies you can restore.",
+   "careful": "Do not use VLEBook in a private / incognito window — that data is erased when the window closes. Do not clear 'Cookies and site data' for the VLEBook address.",
+   "wrong": "If data seems missing after the browser was reset, use Restore from backup folder on the first screen (see Backup and restore).",
+   "check": {
+    "q": "Does billing need the internet?",
+    "a": [
+     "Yes, always",
+     "No, daily work runs offline",
+     "Only on Sundays"
+    ],
+    "right": 1
+   }
+  },
+  "customers": {
+   "title": "Customers and the 360° ledger",
+   "summary": "Add a customer once and see all their bills, payments, dues and applications.",
+   "what": "A customer record is like writing a person's details in the centre notebook. VLEBook keeps the name and mobile number, and links every bill and application to that person.",
+   "why": "When the customer returns, you find them by mobile number and see what they owe, what they paid and which applications are pending.",
+   "before": [
+    "The customer's name and mobile number."
+   ],
+   "steps": [
+    "Open Customers & 360° Ledger from the menu.",
+    "In Register New Customer type the mobile number and the name (other details are optional).",
+    "Click Save Customer & Open 360° Profile.",
+    "To find a customer later, type the name or mobile in the search box above the list.",
+    "Open a customer to see the 360° ledger: bills, payments, dues, advances and applications."
+   ],
+   "result": "The customer appears in the list and opens with the full history.",
+   "careful": "A mobile number can belong to only one customer — duplicates are blocked. Never store a customer's PIN, OTP or passwords.",
+   "wrong": "If VLEBook says the mobile number already exists, search for it — the customer is already registered. Use Edit to correct a name.",
+   "check": {
+    "q": "What does VLEBook use to stop duplicate customers?",
+    "a": [
+     "The mobile number",
+     "The bill amount",
+     "The date"
+    ],
+    "right": 0
+   }
+  },
+  "services": {
+   "title": "Service Management: prices, government fee and GST",
+   "summary": "Set up the services you offer, with the government fee and your service charge kept apart.",
+   "what": "A service is a job you do for customers, like an income certificate or a PAN application. For each service you set the government fee, your service charge and, for GST-registered centres, the GST rate.",
+   "why": "When you bill, VLEBook fills these amounts in for you, so every bill is right and fast.",
+   "before": [
+    "Your own price list. VLEBook does not add any prices or commission rates by itself."
+   ],
+   "steps": [
+    "Open Service Management.",
+    "Add a new service, or Edit an existing one.",
+    "Type the government fee (paid to the portal) and your service charge.",
+    "If your centre has GST registration, choose the GST rate, the SAC code, and Price + GST or Price includes GST.",
+    "Save. The service now appears when you make a bill."
+   ],
+   "result": "Bills use these amounts automatically. GST is charged only on the service charge, never on the government fee.",
+   "careful": "Choosing the correct GST rate and SAC code is the centre's responsibility. Check with your tax adviser.",
+   "wrong": "If a bill shows a wrong amount, check the service here. Bills already saved keep their amounts; cancel and re-issue if a bill must change.",
+   "check": {
+    "q": "Is GST charged on the government fee?",
+    "a": [
+     "Yes",
+     "No, only on the service charge"
+    ],
+    "right": 1
+   }
+  },
+  "billing": {
+   "title": "Make a bill (invoice)",
+   "summary": "Type the mobile number, add services, take payment and print or share the invoice.",
+   "what": "A bill (invoice) records what the customer paid for. VLEBook adds the government fee, your charge and any GST, and posts the money to your accounts.",
+   "why": "Every rupee is recorded the same way, the customer gets a proper receipt, and your accounts stay correct without extra work.",
+   "before": [
+    "Your services set up in Service Management.",
+    "The customer's mobile number."
+   ],
+   "steps": [
+    "Open Billing & Invoices.",
+    "Type the customer's mobile number. An existing customer is filled in; a new one is registered automatically when you add the name.",
+    "Choose a service in the service list. Add more services if needed. Under a service you can type the Application, Acknowledgement or Tracking number.",
+    "Choose who handled the bill, the payment mode (cash, UPI …) and the amount received. A part payment leaves a balance due.",
+    "Click Generate Invoice & Post to Ledger.",
+    "Print (A4 or 80 mm), download the PDF, or share it on WhatsApp."
+   ],
+   "result": "The invoice gets the next number, the money goes to the right account, and the customer's ledger is updated. The total is rounded to the nearest rupee.",
+   "careful": "Check the services and amounts before generating — a generated bill is not deleted. To correct it, it is edited or cancelled with a credit note (see Correct or cancel a bill).",
+   "wrong": "If VLEBook asks for at least one service, add a service first. If a GST bill is refused, check the GST rate of the service or stock item.",
+   "check": {
+    "q": "Which button saves the bill?",
+    "a": [
+     "Generate Invoice & Post to Ledger",
+     "Sign out",
+     "Backup needed"
+    ],
+    "right": 0
+   }
+  },
+  "billing-edit": {
+   "title": "Correct or cancel a bill",
+   "summary": "Edit an issued invoice into a revised one, give a credit note, or cancel a wrong bill.",
+   "what": "Issued bills are never deleted. A change creates a revised invoice (number-R1) and a credit note for the old one, so the history stays complete.",
+   "why": "Mistakes happen. This way the money, stock, commission and books are reversed correctly and the change is in the audit log.",
+   "before": [
+    "Owner or Manager login (Operators cannot cancel or edit invoices).",
+    "The reason for the change."
+   ],
+   "steps": [
+    "Open Billing & Invoices and find the bill in the invoice list.",
+    "To change it: click Edit, correct the services, customer or payment, type the reason and click Save revised invoice.",
+    "To reduce only the service charge on a bill not fully paid: use Credit note.",
+    "To cancel the whole bill: use Cancel and give the reason.",
+    "Open the customer's 360° ledger to see both invoices linked."
+   ],
+   "result": "A revised invoice with the same date and number -R1 is issued, or the bill is marked CANCELLED. Money goes back out of each account it came into.",
+   "careful": "A GST month marked as filed cannot be edited. Issue a credit note in the current month instead.",
+   "wrong": "If Edit or Cancel is missing, your role does not allow it — ask the Owner or Manager.",
+   "check": {
+    "q": "Can an issued bill be deleted?",
+    "a": [
+     "Yes",
+     "No — it is edited or cancelled with a credit note"
+    ],
+    "right": 1
+   }
+  },
+  "pending": {
+   "title": "Pending Work & Applications",
+   "summary": "Track every application from Received to Delivered.",
+   "what": "A list of the applications you are working on for customers, with their status, portal reference numbers and expected dates.",
+   "why": "You can tell a customer the status at once, and nothing is forgotten. Overdue applications are highlighted.",
+   "before": [
+    "A bill or a customer with an application."
+   ],
+   "steps": [
+    "Open Pending Work & Apps.",
+    "Find the application in the list (search or filter by status).",
+    "Change the status in its status box when work moves forward (for example Submitted, Approved, Completed, Delivered).",
+    "Use Edit numbers to add portal application, acknowledgement or tracking numbers received later.",
+    "Use the WhatsApp button to send the customer a status update."
+   ],
+   "result": "The status and numbers are saved, the menu count of pending work updates at once, and the history is kept.",
+   "careful": "Cancel work needs a reason (at least 5 characters) and cannot be reopened — enter the work again if needed.",
+   "wrong": "If an application is missing, check the filter, or open the customer's 360° ledger.",
+   "check": {
+    "q": "Can a cancelled work be reopened?",
+    "a": [
+     "Yes",
+     "No — enter it again if needed"
+    ],
+    "right": 1
+   }
+  },
+  "reminders": {
+   "title": "Renewal & Expiry Reminders",
+   "summary": "Remind customers before insurance, pollution, tax, licences and certificates expire.",
+   "what": "A list of things that expire for your customers, with dates and a schedule of reminder messages.",
+   "why": "Customers come back to you for renewals, and they are grateful for the reminder.",
+   "before": [
+    "The customer's agreement to receive reminders (consent).",
+    "The expiry date and document or vehicle number."
+   ],
+   "steps": [
+    "Open Renewal Reminders and click + Add reminder.",
+    "Choose the customer, the category, the reference (vehicle or document number) and the expiry date.",
+    "Tick 'The customer agreed to receive renewal reminders' only when they agreed.",
+    "Check the cards at the top: Overdue, Due today, Next 7 days, Next 30 days.",
+    "Open a reminder, choose the message (English, Malayalam, Hindi) and click Open WhatsApp with this message. Press Send in WhatsApp.",
+    "Back in VLEBook click I sent it — mark as sent. When the customer renews, click Mark renewed."
+   ],
+   "result": "VLEBook records message prepared, WhatsApp opened and sent (confirmed by you). For repeating items a new reminder is created for the next period.",
+   "careful": "VLEBook cannot see whether a WhatsApp message was delivered or read and never says so. Without consent no message is prepared.",
+   "wrong": "If WhatsApp does not open, check that WhatsApp (app or web) is installed and signed in. If a duplicate is reported, open the existing reminder.",
+   "check": {
+    "q": "Who presses Send in WhatsApp?",
+    "a": [
+     "VLEBook, automatically",
+     "You, the operator"
+    ],
+    "right": 1
+   }
+  },
+  "aeps": {
+   "title": "AEPS & Banking Records",
+   "summary": "Record AEPS, Micro-ATM, deposits, Aadhaar Pay, DMT and BBPS entries.",
+   "what": "A register of the banking services you do at the counter, showing the effect on your cash in hand and your wallet, with commission and TDS.",
+   "why": "At day end your cash and wallet balances match what really happened.",
+   "before": [
+    "The transaction details from the bank or AEPS portal (type, amount, reference)."
+   ],
+   "steps": [
+    "Open AEPS & Banking Records.",
+    "Choose the type: withdrawal, deposit, Aadhaar Pay, DMT or BBPS.",
+    "Enter the amount, commission and reference number from the portal.",
+    "Save. The effect on cash and wallet is shown at once."
+   ],
+   "result": "The entry is saved and the cash and wallet figures in Accounts update.",
+   "careful": "Never type a customer's PIN, OTP or biometric data into VLEBook. VLEBook does not connect to bank systems — it only records what you did on the portal.",
+   "wrong": "If cash does not match at day end, check the AEPS entries of the day for a wrong type (withdrawal vs deposit).",
+   "check": {
+    "q": "Should you type the customer's OTP into VLEBook?",
+    "a": [
+     "Yes",
+     "Never"
+    ],
+    "right": 1
+   }
+  },
+  "inventory": {
+   "title": "Stock & Inventory",
+   "summary": "Keep paper, cards, pens and other items, sell them on bills, and check the shelf count.",
+   "what": "A stock book: what came in, what went out, and what is left, with value.",
+   "why": "You know when to buy more, and items sold on bills reduce the stock by themselves.",
+   "before": [
+    "The list of items you keep, with selling price, GST rate and HSN code (for GST centres)."
+   ],
+   "steps": [
+    "Open Stock & Inventory and click + New Item. Enter the name, prices, reorder level and, for GST, includes / excludes GST, GST rate and HSN code.",
+    "Use Stock Inward for purchases and opening stock, Stock Outward for use, damage or returns.",
+    "To sell an item, choose it in Add Item from Stock on the bill.",
+    "To correct a quantity, Edit the item and use Correct stock to, with a reason.",
+    "Every 30 days do a Physical Stock Check: type what is really on the shelf."
+   ],
+   "result": "Stock Summary shows opening, inward, outward, closing and value. Alerts show low and negative stock.",
+   "careful": "You must choose the GST rate of each item — VLEBook does not assume one. A red Negative stock alert means more was sold than recorded: record the missing purchase.",
+   "wrong": "If a bill warns Stock will go negative, check the quantity or record the purchase first.",
+   "check": {
+    "q": "What happens to stock when you cancel a bill with an item?",
+    "a": [
+     "It is lost",
+     "It is put back"
+    ],
+    "right": 1
+   }
+  },
+  "accounts": {
+   "title": "Accounts & Smart Counter (daily cash)",
+   "summary": "Expenses, transfers between cash, bank and wallets, and the daily counter closing.",
+   "what": "The daily money screen of the counter: what came in, what went out, and the cash count at day end.",
+   "why": "At the end of the day you know that the cash in the drawer matches the software. Every difference has a reason.",
+   "before": [
+    "Opening balances set once (Set Opening).",
+    "Bills, AEPS and expenses of the day entered."
+   ],
+   "steps": [
+    "Open Accounts & Smart Counter.",
+    "Record expenses and transfers with Record Transaction in Day Book.",
+    "At day end count the cash with the denomination calculator.",
+    "If the count differs from the expected cash, type the reason.",
+    "Click Save Daily Counter Closing & Reconciliation. Download Counter Closing PDF if you need a copy."
+   ],
+   "result": "The day is closed and locked. The books in Books & GST follow these entries automatically.",
+   "careful": "After closing, a day can be changed only through a correction that the Owner approves.",
+   "wrong": "If cash does not match, check today's bills, AEPS entries and expenses for a wrong payment mode.",
+   "check": {
+    "q": "What must you give when the cash count differs?",
+    "a": [
+     "A reason",
+     "Nothing"
+    ],
+    "right": 0
+   }
+  },
+  "books": {
+   "title": "Books & GST: your accounts",
+   "summary": "Double-entry books that VLEBook writes for you, and why the government fee is not your income.",
+   "what": "Full accounts of the centre: vouchers, ledgers, trial balance, profit and loss, balance sheet, cash and bank books. VLEBook writes the entries from your bills, receipts, expenses and AEPS work.",
+   "why": "Your accountant gets proper books, and you see your true profit. The government fee you collect is kept in Government fee clearing, not counted as income.",
+   "before": [
+    "Opening balances (Books & GST → Opening balances) if you start mid-year."
+   ],
+   "steps": [
+    "Open Books & GST. The Overview shows income, profit, money in all accounts, what customers owe and fees to recover.",
+    "On a bill, for each service choose Govt / portal fee paid from (for example Current account) and type the portal reference.",
+    "Use Wallets & portal fees to record portal payments and reconcile wallet balances.",
+    "Use Expenses for supplier bills, with GST and TDS when they apply.",
+    "Open Books & reports for trial balance, profit & loss, balance sheet, day book and others — each has Excel, CSV and Print.",
+    "Close the day in Day close; corrections need the Owner's approval."
+   ],
+   "result": "When the customer pays, the fee clearing becomes zero and only your service charge counts as income.",
+   "careful": "A posted voucher is never edited or deleted — Reverse it, or use Edit, which posts a corrected -R1 voucher. Locked periods cannot be changed.",
+   "wrong": "If a figure looks wrong, click Fee chain on the bill to see the whole story, or Mark reviewed / Ask a question for your accountant.",
+   "check": {
+    "q": "Is the government fee your income?",
+    "a": [
+     "Yes",
+     "No — it is kept in Government fee clearing"
+    ],
+    "right": 1
+   }
+  },
+  "gst": {
+   "title": "GST bills and GST returns help",
+   "summary": "How your GST registration decides the bill, and how VLEBook helps prepare returns.",
+   "what": "VLEBook chooses the kind of bill from your GST registration and prepares tables and files that help with GSTR-1, GSTR-3B and CMP-08.",
+   "why": "Bills are correct for your registration type, and preparing returns takes less time.",
+   "before": [
+    "Your GSTIN and registration type (Regular or Composition), set in Books & GST → GST → GST profile."
+   ],
+   "steps": [
+    "No GSTIN: VLEBook makes non-GST bills only. Regular: every bill is a Tax Invoice. Composition: every bill is a Bill of Supply.",
+    "Set GST rates and the HSN / SAC master in the GST tab, then choose them in services and stock items.",
+    "On a bill you may type the customer's GSTIN, so a registered customer can claim input tax credit.",
+    "Choose the return month in the GST tab, check the tables and click Check before export.",
+    "Download the Excel workbook or GSTR-1 JSON; use GSTR-3B help; after filing on the portal, Mark as filed."
+   ],
+   "result": "New GST bills dated in a filed month are refused (the Owner can reopen with a reason).",
+   "careful": "VLEBook never files returns — you file on the GST portal. Choosing correct rates and codes is the centre's responsibility.",
+   "wrong": "If the export check shows problems, open each listed bill and correct it (credit note in the current month if the month is filed).",
+   "check": {
+    "q": "Does VLEBook file your GST return?",
+    "a": [
+     "Yes",
+     "No — it prepares help; you file on the portal"
+    ],
+    "right": 1
+   }
+  },
+  "commissions": {
+   "title": "Commission Management & Partner Reconciliation",
+   "summary": "Track commissions expected, earned and received from CSC, Akshaya, banks, insurance and other partners.",
+   "what": "A register of the commissions your partners owe you, so you can check what they paid.",
+   "why": "Partners pay commission later; this screen shows what is still to come.",
+   "before": [
+    "Your partners' commission statements."
+   ],
+   "steps": [
+    "Open Commission Management.",
+    "Record the commission expected or earned for a partner.",
+    "When the partner pays, record the amount received.",
+    "Check the difference between expected and received."
+   ],
+   "result": "You see which commissions are pending from which partner.",
+   "careful": "Rates and amounts are the ones you enter — VLEBook does not know partners' commission rates.",
+   "wrong": "If a received amount does not match, compare with the partner's statement and record the difference with a note.",
+   "check": {
+    "q": "Who enters the commission rates?",
+    "a": [
+     "VLEBook, automatically",
+     "You, from the partner's statement"
+    ],
+    "right": 1
+   }
+  },
+  "staff": {
+   "title": "Staff Commission",
+   "summary": "Commission earned by each staff member on the bills they handle, with daily and monthly payable.",
+   "what": "A screen that works out what you owe each staff member as commission, from the bills they handled.",
+   "why": "Staff are paid fairly and on time, and you can show them the calculation.",
+   "before": [
+    "Each staff member's commission setting (percentage or fixed per service, daily or monthly).",
+    "Bills made with the correct staff chosen in 'handled by'."
+   ],
+   "steps": [
+    "Open Staff Commission.",
+    "Set each staff member's commission rule.",
+    "Open the Daily or Monthly tab to see what is payable.",
+    "Record a payout when you pay the staff member."
+   ],
+   "result": "Payable and paid amounts are shown per staff member.",
+   "careful": "Choose the right staff on every bill — commission follows the 'handled by' name.",
+   "wrong": "If a staff member's commission seems low, check the bills where another name was chosen.",
+   "check": {
+    "q": "Commission follows which name on a bill?",
+    "a": [
+     "The customer",
+     "The staff who handled the bill"
+    ],
+    "right": 1
+   }
+  },
+  "reports": {
+   "title": "Reports & Profit BI",
+   "summary": "Daily, monthly and yearly reports of income, true profit, dues, AEPS and stock.",
+   "what": "Ready reports that add up your work, so you can see how the centre is doing.",
+   "why": "You see which services earn most, what customers still owe and how the month compares.",
+   "before": [
+    "Some bills and entries for the period."
+   ],
+   "steps": [
+    "Open Reports & Profit BI.",
+    "Choose the report and the period (day, month or year).",
+    "Read the totals and the table.",
+    "Export to CSV, Excel or PDF, or print."
+   ],
+   "result": "The report shows your figures for the chosen period.",
+   "careful": "Reports show what was entered. Service profitability is an estimate from your own figures.",
+   "wrong": "If a figure looks wrong, check the period and any cancelled bills.",
+   "check": {
+    "q": "Where do report figures come from?",
+    "a": [
+     "Your own entries in VLEBook",
+     "The government portal"
+    ],
+    "right": 0
+   }
+  },
+  "studio-pdf": {
+   "title": "PDF & Image Studio: PDF tools and editor",
+   "summary": "Merge, split, compress, convert, protect, redact and edit PDFs on this computer.",
+   "what": "A workshop for PDF and image files. Everything runs on this computer — files are never uploaded.",
+   "why": "Customers often need a PDF merged, made smaller, converted or protected before uploading to a portal.",
+   "before": [
+    "The customer's file on this computer (USB, download folder, email)."
+   ],
+   "steps": [
+    "Open PDF & Image Studio and choose the PDF Tools workspace.",
+    "Choose a tool: merge, split / extract, compress, convert, add pages, headers & stamps, forms, metadata, password-protect or Redact (secure).",
+    "Add the file(s) and set the options.",
+    "Run the tool (Ctrl + Enter also works) and preview the result page by page.",
+    "Download the result. Several results download as one ZIP.",
+    "For editing, use the PDF Editor workspace and Save As New PDF — the original is never overwritten."
+   ],
+   "result": "A new file is made. The original file stays as it was.",
+   "careful": "A white cover box is not redaction — use Redact (secure), which removes the hidden words and checks it. Editing a digitally signed PDF breaks its signature.",
+   "wrong": "If a PDF does not open, it may be password-protected: use Unlock with the customer's password. If a size limit cannot be met, VLEBook says so.",
+   "check": {
+    "q": "Is the original PDF overwritten when you edit?",
+    "a": [
+     "Yes",
+     "No — Save As New PDF makes a new file"
+    ],
+    "right": 1
+   }
+  },
+  "studio-photo": {
+   "title": "Photo & Signature for exam and job portals",
+   "summary": "Make photos and signatures in the exact size each examination asks for, and check them.",
+   "what": "A tool that crops, resizes and compresses photos and signatures to the sizes recorded for each examination, then checks them as GREEN, AMBER or RED.",
+   "why": "Portals refuse files of the wrong size. This tool prepares them right the first time.",
+   "before": [
+    "The candidate's photo and signature (scan, phone photo or webcam).",
+    "The examination name. Check the official notification for the sizes."
+   ],
+   "steps": [
+    "Open PDF & Image Studio → Photo & Signature → One candidate (or Batch for many).",
+    "Search and select the examination. Note its status (for example Officially verified or Unverified).",
+    "Add the photograph, crop it with the guide and adjust brightness if needed.",
+    "Add the signature; the signature area is found automatically.",
+    "Click Validate and read GREEN, AMBER or RED for each file.",
+    "Download the files (one ZIP with a processing report)."
+   ],
+   "result": "Files named like Candidate_001_Kerala_PSC_Photo.jpg, in the recorded size.",
+   "careful": "GREEN means the file meets the recorded sizes; it does not guarantee the authority will accept it. Profiles marked unverified must be checked against the notification. VLEBook never changes the face.",
+   "wrong": "RED shows the exact problem (size, format, KB limit). If a minimum KB cannot be reached, VLEBook explains why instead of adding meaningless data.",
+   "check": {
+    "q": "Does GREEN guarantee the portal accepts the file?",
+    "a": [
+     "Yes",
+     "No — it matches the recorded sizes"
+    ],
+    "right": 1
+   }
+  },
+  "studio-ocr": {
+   "title": "OCR & Scanner: read text from pictures",
+   "summary": "Read text from photos and scanned PDFs in English, Malayalam and Hindi, and make clean scans.",
+   "what": "OCR turns the letters in a picture into text you can copy and edit. The scanner turns phone photos of pages into one clean PDF.",
+   "why": "You save typing when a customer brings a printed document.",
+   "before": [
+    "A clear, straight photo or scan of the page."
+   ],
+   "steps": [
+    "Open PDF & Image Studio → OCR & Scanner.",
+    "Add the picture or PDF and choose the language (English, Malayalam, Hindi).",
+    "Start reading. Words the computer is not sure about are highlighted.",
+    "Correct the text, then download TXT or a searchable PDF.",
+    "For scans: add the page photos, choose colour, grey or black & white, straighten and reorder, then save one PDF."
+   ],
+   "result": "Editable text or a clean PDF, made on this computer.",
+   "careful": "OCR can misread names, numbers and handwriting — always check before using the text.",
+   "wrong": "If the text is poor, retake the photo in good light, straight, without shadows.",
+   "check": {
+    "q": "Should you check OCR text before using it?",
+    "a": [
+     "Yes, always",
+     "No"
+    ],
+    "right": 0
+   }
+  },
+  "studio-pvc": {
+   "title": "PVC ID & Print: design and print cards",
+   "summary": "Design ID cards in millimetres, make bulk cards from Excel, and print customer ID print sheets.",
+   "what": "A card designer and print tool for PVC and paper ID cards, front and back.",
+   "why": "You can offer ID cards for schools, offices and customers with correct size and alignment.",
+   "before": [
+    "A template or design idea, photos, and for bulk cards an Excel / CSV list.",
+    "Your printer's calibration (see the steps)."
+   ],
+   "steps": [
+    "Open PDF & Image Studio → PVC ID & Print.",
+    "Design the card: text, photos, QR, barcode, shapes. Use the safe zone line and the align tools. Save as a template.",
+    "For bulk cards import Excel / CSV, use {{Column}} fields, open Rows to check problems, then print only good rows.",
+    "For a customer ID print sheet (e-PAN, e-Aadhaar, Voter ID …) open the PDF / images, mark Front and Back and confirm the card area. With Auto-crop & resize to the PVC card ticked, Front / Back cuts the card out and fits it exactly; untick it to place the whole picture and use Resize to card and Zoom yourself.",
+    "Print the calibration sheet at Actual size / 100%, measure, and enter the shifts in Edit profile.",
+    "Print to a printer… or download the 600 DPI PDF. Mark the job Done, Failed or Cancel."
+   ],
+   "result": "Cards print in the right size and position for your printer.",
+   "careful": "Print at Actual size / 100%, never Fit to page. For Aadhaar a mask over the first 8 digits is added by default. Printing on your own card printer is to be checked by you after going live.",
+   "wrong": "If the back is upside down, set Back side to Turned 180° in Edit profile. If the card is shifted, print the calibration sheet again and correct the shifts. If text has no Malayalam letters, choose Nirmala UI.",
+   "check": {
+    "q": "Which print size should you choose for cards?",
+    "a": [
+     "Fit to page",
+     "Actual size / 100%"
+    ],
+    "right": 1
+   }
+  },
+  "printing": {
+   "title": "Printing to any printer and the Print Bridge",
+   "summary": "Print through the Windows print dialog, as PDF, or direct to a printer with the free Print Bridge.",
+   "what": "Every print in VLEBook opens the same print window with three choices: Windows print dialog, Download PDF, or Direct to a printer.",
+   "why": "A web page cannot see your printers by itself. The free Print Bridge helper lists the printers and their real features.",
+   "before": [
+    "A Windows computer for the Print Bridge (phones and tablets use the browser's print or PDF)."
+   ],
+   "steps": [
+    "Click any Print button. The print window opens.",
+    "Choose Windows print dialog to print through Windows, or Download PDF.",
+    "For direct printing, open PDF & Image Studio → Print & printers → Download the Print Bridge.",
+    "Unzip it and double-click Install VLEBook Print Bridge.cmd. It then runs with an icon near the clock and starts with Windows.",
+    "VLEBook connects by itself. Choose the printer, paper, copies, colour, two-sided and size, then Print.",
+    "When the paper comes out, click It printed correctly or It did not print."
+   ],
+   "result": "'Sent to Windows' means Windows accepted the job. Your answer finishes the job record.",
+   "careful": "VLEBook shows only the options your printer's driver reports. If Chrome or Edge asks to allow devices on your local network, choose Allow.",
+   "wrong": "If VLEBook says the Bridge is not running, run Install VLEBook Print Bridge.cmd again. If an older Bridge is running, VLEBook shows a notice to download the new one.",
+   "check": {
+    "q": "What does 'Sent to Windows' mean?",
+    "a": [
+     "The page has printed",
+     "Windows accepted the job"
+    ],
+    "right": 1
+   }
+  },
+  "cv": {
+   "title": "CV & Resume Builder",
+   "summary": "Make a professional CV for a customer from their own details, and let them choose the design.",
+   "what": "A step-by-step CV maker with several designs, including the Europass format.",
+   "why": "Job seekers come to the centre for CVs. This gives a good CV quickly, using only true details.",
+   "before": [
+    "The customer's details: education, work, skills, languages."
+   ],
+   "steps": [
+    "Open CV & Resume Builder → + New resume or + New Europass CV.",
+    "Answer the questions step by step. The preview on the right updates as you type.",
+    "For the profile summary type your own or click Build summary from my answers.",
+    "Click Show designs to customer, let the customer choose, type their name and click Customer approved this design.",
+    "Print / Save as PDF, or download a Word copy."
+   ],
+   "result": "An approved CV saved on this computer and included in backups.",
+   "careful": "Use only what the customer tells you — nothing is invented. Photo, date of birth, gender and marital status print only if ticked.",
+   "wrong": "If the CV changes after approval it goes back to Draft — show it to the customer again.",
+   "check": {
+    "q": "Where does the CV content come from?",
+    "a": [
+     "Only the customer's own details",
+     "VLEBook invents it"
+    ],
+    "right": 0
+   }
+  },
+  "catalogue": {
+   "title": "Government Service Catalogue and Saved Links",
+   "summary": "Keep the portal links your centre uses, with documents needed, time taken and your fee guide.",
+   "what": "Your own directory of government portals and official software links (biometric and DSC utilities) in Saved Links & Software Vault.",
+   "why": "Staff open the right portal quickly and know which documents to ask for.",
+   "before": [
+    "The official portal address (starting with https://)."
+   ],
+   "steps": [
+    "Open Govt Service Catalogue (or Saved Links & Software Vault).",
+    "Filter by group or state, or search.",
+    "Click + Add to add your own link with the documents needed and your fee guide.",
+    "Use Edit to change your own link and Delete to remove it."
+   ],
+   "result": "The link appears in the list for every user of the centre.",
+   "careful": "Only full addresses starting with https:// or http:// are accepted. Check that a link is the official government site.",
+   "wrong": "The four Techmin links are built in and cannot be edited or deleted.",
+   "check": {
+    "q": "Which links can you edit?",
+    "a": [
+     "Your own links",
+     "Techmin's built-in links"
+    ],
+    "right": 0
+   }
+  },
+  "originals": {
+   "title": "Original documents register",
+   "summary": "Give a receipt when you keep a customer's originals, and a return acknowledgement when you give them back.",
+   "what": "A register of customers' original documents kept at the centre, with receipts, returns and a custody history that cannot be edited.",
+   "why": "Originals are valuable. A clear record protects the customer and the centre.",
+   "before": [
+    "The customer, the documents and where you will keep them."
+   ],
+   "steps": [
+    "Open Originals & Privacy → + Receive originals.",
+    "Choose the customer, add each document (type, description, condition), the purpose, expected return date and storage place.",
+    "Print the receipt with the barcode reference and give it to the customer.",
+    "When returning, open the record → Return, choose who received it and how it was acknowledged, and print the return acknowledgement.",
+    "Check Due for Return for overdue items."
+   ],
+   "result": "The menu shows the number of overdue originals. The custody history shows every step.",
+   "careful": "Only the last 4 characters of an ID number are saved unless the Owner chooses otherwise. Corrections are added by the Owner with a reason; old entries stay.",
+   "wrong": "If something is reported missing, record it on the item and inform the Owner at once.",
+   "check": {
+    "q": "Can custody history entries be edited?",
+    "a": [
+     "Yes",
+     "No — corrections are added with a reason"
+    ],
+    "right": 1
+   }
+  },
+  "privacy": {
+   "title": "Consent, retention and customer privacy requests",
+   "summary": "Record customers' consent, decide how long records are kept, and handle requests for a copy or deletion.",
+   "what": "Records that help the centre handle personal data responsibly: consent per purpose, retention rules and customer requests.",
+   "why": "Customers may ask what you keep, ask for a copy, or ask you to delete it. These screens guide you safely.",
+   "before": [
+    "Owner login for deletions.",
+    "The customer's identity proof when they make a request."
+   ],
+   "steps": [
+    "Consent Register: record consent per purpose, with the notice shown. Withdraw stops what depends on it (for example reminders).",
+    "Retention Rules: set how long each kind of record is kept and what happens then. Items appear 14 days before; nothing is deleted automatically.",
+    "Privacy Requests: open a request and check identity first.",
+    "For a copy choose Password-protected PDF (recommended); tell the password to the customer separately.",
+    "For deletion (Owner only) read what will be deleted, anonymised or kept, then type DELETE to confirm."
+   ],
+   "result": "The request is completed and recorded in the deletion log with coded references.",
+   "careful": "VLEBook cannot delete copies in old backups, WhatsApp, email, paper files or portals. These screens help keep records; they are not legal advice and do not by themselves make the centre compliant with any law.",
+   "wrong": "If deletion is blocked, the record may be on legal hold or required by tax law — the screen says why.",
+   "check": {
+    "q": "What should you check before giving a customer their data?",
+    "a": [
+     "Their identity",
+     "Their bill total"
+    ],
+    "right": 0
+   }
+  },
+  "backup": {
+   "title": "Backup and restore",
+   "summary": "Set up automatic backup to Google Drive, OneDrive, Dropbox or a USB folder, and restore when needed.",
+   "what": "A backup is a copy of all your VLEBook data in a file. Restore brings the data back from that file.",
+   "why": "If the computer breaks or the browser is reset, a backup is the only way to get your data back. Techmin does not keep a copy.",
+   "before": [
+    "Google Drive / OneDrive / Dropbox for desktop installed, or a USB drive."
+   ],
+   "steps": [
+    "Open Data Ownership & Backup.",
+    "Under Where should backups be saved? choose Google Drive, OneDrive, Dropbox or This computer / USB drive.",
+    "Click Choose backup folder and pick a folder inside that service's folder (for example G:\\My Drive\\VLEBook backups).",
+    "Choose Every hour and/or fixed times, and JSON and/or TXT.",
+    "To restore: Restore → choose the .json or .txt file → Validate → Restore. On a new computer use Restore from backup folder on the first screen."
+   ],
+   "result": "Backups are saved automatically, without asking, and every save is in the audit log.",
+   "careful": "After VLEBook is reopened, Chrome may ask again for folder access: click Reconnect backup folder. Until then automatic backups are paused.",
+   "wrong": "If a TXT backup is refused, it was edited — use another backup. If no backup exists, the data cannot be recovered by Techmin.",
+   "check": {
+    "q": "Who can recover your data if you have no backup?",
+    "a": [
+     "Techmin",
+     "Nobody — keep backups"
+    ],
+    "right": 1
+   }
+  },
+  "multi": {
+   "title": "Working on more than one computer",
+   "summary": "Let staff work at the same time on two or more computers through the centre's Google Drive folder.",
+   "what": "Each computer keeps the full data and works offline; changes are shared through the centre's own Google Drive folder.",
+   "why": "Two counters can bill at the same time and still see the same customers and figures.",
+   "before": [
+    "Google Drive for desktop with the same Google account on every computer.",
+    "Automatic backup to a Google Drive folder on the main computer."
+   ],
+   "steps": [
+    "On the main computer (Owner): Data Ownership & Backup → Work on more than one computer → Turn on (internet needed). It becomes counter A.",
+    "On each other computer: install Google Drive for desktop with the same account, open VLEBook and click Join my centre (shared Google Drive folder), choosing the same folder.",
+    "Staff sign in with their own user name and password.",
+    "Ask Techmin to issue the licence for Any computer."
+   ],
+   "result": "Changes reach the other computers in about a minute. Each counter has its own invoice series (VLE-A-1001, VLE-B-1001).",
+   "careful": "Start fresh on one computer clears transactions on every computer. Restoring a backup changes only the computer where it is done.",
+   "wrong": "If the Sync button shows Sync paused, click Reconnect backup folder. Money records changed on two computers are kept as a sync conflict for the Owner in Books & GST → Day close.",
+   "check": {
+    "q": "How are changes shared between computers?",
+    "a": [
+     "Through Techmin's server",
+     "Through the centre's own Google Drive folder"
+    ],
+    "right": 1
+   }
+  },
+  "account": {
+   "title": "Users, roles and licence",
+   "summary": "Add staff logins with roles, and see or activate the licence.",
+   "what": "Users & Licence is where the Owner adds staff, resets their passwords and manages the licence.",
+   "why": "Each person signs in with their own name, so work and commission are recorded correctly.",
+   "before": [
+    "Owner login.",
+    "The full version (trial or licence) for staff logins."
+   ],
+   "steps": [
+    "Open Users & Licence.",
+    "Click Add User, enter the name, user name and password, and choose the role: Owner, Manager, Operator or Accountant.",
+    "Use Reset password when a staff member forgets theirs.",
+    "To renew, send your Device Code and payment to Techmin. The licence arrives automatically when online, or paste a key in Activate Licence."
+   ],
+   "result": "Staff can sign in. The top of the screen shows how many days the licence is valid.",
+   "careful": "After the trial or licence ends, VLEBook moves to Basic mode — your data is never locked, and only the Owner can sign in.",
+   "wrong": "If the licence does not arrive, connect to the internet and wait a minute, or contact Techmin with your Device Code.",
+   "check": {
+    "q": "What happens to your data when the licence ends?",
+    "a": [
+     "It is deleted",
+     "It stays; VLEBook moves to Basic mode"
+    ],
+    "right": 1
+   }
+  },
+  "settings": {
+   "title": "Settings, audit log and safety",
+   "summary": "Centre details, appearance, auto-lock PIN, audit log and Start fresh.",
+   "what": "Settings & Centre Setup holds the centre profile, logo, signature, appearance, the audit log and safety tools.",
+   "why": "Correct settings make invoices right; the audit log shows who did what and when.",
+   "before": [
+    "Owner (or Manager) login for most settings."
+   ],
+   "steps": [
+    "Open Settings & Centre Setup and check the centre details, invoice prefix and UPI ID.",
+    "Choose Appearance (colours, Night mode) and set an auto-lock PIN.",
+    "Open the Audit log to search activity by user, screen or date; download the full log as CSV.",
+    "Start fresh (Owner only) clears transactions but keeps users, customers, services and settings — type START FRESH to confirm."
+   ],
+   "result": "Changes apply at once and are written in the audit log.",
+   "careful": "Start fresh cannot be undone except by restoring a backup. Take the offered backup first.",
+   "wrong": "If 'Chain check' is not intact, contact Techmin support — an entry may have been changed outside VLEBook.",
+   "check": {
+    "q": "What does Start fresh keep?",
+    "a": [
+     "Nothing",
+     "Users, customers, services and settings"
+    ],
+    "right": 1
+   }
+  },
+  "news": {
+   "title": "Techmin Updates and software updates",
+   "summary": "Notices from Techmin, and how VLEBook updates itself.",
+   "what": "The bell at the top shows notices and articles from Techmin. Techmin Updates also checks for new versions of VLEBook.",
+   "why": "You learn about new features, offers and important notices, and get fixes without reinstalling.",
+   "before": [
+    "Internet connection for notices and updates."
+   ],
+   "steps": [
+    "Click the bell or open Techmin Updates.",
+    "Click ↻ Check for new updates to see if a new version is available; Update now reloads the program.",
+    "Choose how updates happen: automatically when the computer is idle (recommended), ask me first, or do not check automatically.",
+    "Turn on push notifications if you want notices while VLEBook is closed (Chrome or Edge must be running)."
+   ],
+   "result": "After an update each user sees What's new once. Your data and any unfinished bill are kept.",
+   "careful": "Only the program is updated — your data stays on this computer.",
+   "wrong": "If the check cannot reach the server, it says so — try again when online.",
+   "check": {
+    "q": "Does an update change your data?",
+    "a": [
+     "Yes",
+     "No — only the program is updated"
+    ],
+    "right": 1
+   }
+  },
+  "support": {
+   "title": "Help & Support tickets",
+   "summary": "Raise a problem with Techmin from inside VLEBook, safely.",
+   "what": "A ticket is a message to Techmin support about a problem, with optional screenshots, and a conversation for replies.",
+   "why": "Support gets the details it needs, and you can follow the replies in one place.",
+   "before": [
+    "What happened, on which screen, and when."
+   ],
+   "steps": [
+    "Open Help & Support and click + New ticket.",
+    "Choose what the problem is about and how urgent it is; write a short subject and what happened.",
+    "Optional: add up to 3 screenshots. Drag on each to black out customer names, numbers or amounts.",
+    "Tick the privacy check and click Send to Techmin.",
+    "Read replies in the conversation; confirm and close when solved, or reopen with a reason."
+   ],
+   "result": "Techmin receives only what you typed and chose. The menu shows a badge for new replies.",
+   "careful": "Never send passwords, OTPs, full Aadhaar numbers or bank credentials. VLEBook warns if your text looks like it contains them.",
+   "wrong": "If sending fails, check the internet. The draft stays on this computer.",
+   "check": {
+    "q": "What should you do with customer names in a screenshot?",
+    "a": [
+     "Black them out",
+     "Leave them"
+    ],
+    "right": 0
+   }
+  },
+  "learning": {
+   "title": "How to use the Learning Centre",
+   "summary": "Find lessons, use the search, follow a path, take a guided tour and print a manual.",
+   "what": "The Learning Centre teaches every part of VLEBook, in English, Hindi and Malayalam.",
+   "why": "You can learn at the moment you need it, in the language you understand.",
+   "before": [
+    "Nothing."
+   ],
+   "steps": [
+    "Open Learning Centre & Guides from the menu, or click Learn on any screen.",
+    "Choose the lesson language. Search by word, or choose a category or a learning path.",
+    "Open a lesson and read the steps. Click Open this screen to go there, or Show me on the screen for a guided tour.",
+    "Click Mark as completed when you can do it yourself.",
+    "Use Manuals to print or save the complete manual, the quick start or the staff training checklist as PDF."
+   ],
+   "result": "Your progress is shown by path and kept on this computer for your user name.",
+   "careful": "Tours only point at things; they never click, save or delete anything.",
+   "wrong": "If a tour cannot find a part of the screen, it explains the step and lets you continue.",
+   "check": {
+    "q": "Does a guided tour save or delete anything?",
+    "a": [
+     "Yes",
+     "No — it only points"
+    ],
+    "right": 1
+   }
+  }
+ },
+ "tours": {
+  "tour-screen": [
+   "This is the menu. Click a name to open that screen. Numbers show things waiting.",
+   "This is the work area. The screen you open appears here.",
+   "Your name. Click it for Change my password and Sign out.",
+   "The Save button saves all open edits. When it says Backup needed, click it to take a backup."
+  ],
+  "tour-customer": [
+   "Search here by name or mobile number to find a customer.",
+   "Type the customer's mobile number here.",
+   "Type the customer's name here.",
+   "This button saves the customer and opens the 360° profile. (The tour does not press it.)"
+  ],
+  "tour-bill": [
+   "Type the customer's mobile number here.",
+   "Choose a service here. Add more services if needed.",
+   "Choose how the customer pays (cash, UPI …).",
+   "Type the amount received. Less than the total leaves a balance due.",
+   "This button saves the bill. Check everything first. (The tour does not press it.)"
+  ],
+  "tour-backup": [
+   "Automatic backup is set up here.",
+   "Choose where backups go: Google Drive, OneDrive, Dropbox or this computer / USB.",
+   "Choose the backup folder inside that service's folder.",
+   "Tick Every hour (and/or add fixed times).",
+   "You can also save a full backup file at any time with this button."
+  ]
+ },
+ "glossary": {
+  "dashboard": {
+   "term": "Dashboard",
+   "def": "The first screen after sign-in, with today's summary and alerts."
+  },
+  "customer": {
+   "term": "Customer",
+   "def": "A person you serve, saved once with name and mobile number."
+  },
+  "ledger360": {
+   "term": "360° ledger",
+   "def": "One page showing all bills, payments, dues, advances and applications of a customer."
+  },
+  "service": {
+   "term": "Service",
+   "def": "A job you do for customers, with its government fee, service charge and GST rate."
+  },
+  "govfee": {
+   "term": "Government fee",
+   "def": "Money paid to the portal or department for the customer. It is not your income."
+  },
+  "servicecharge": {
+   "term": "Service charge",
+   "def": "Your own charge for the work. This is your income; GST applies only to this."
+  },
+  "invoice": {
+   "term": "Invoice (bill)",
+   "def": "The record of a sale given to the customer: Tax Invoice, Bill of Supply or non-GST bill."
+  },
+  "creditnote": {
+   "term": "Credit note",
+   "def": "A document that reduces or cancels an issued bill, instead of deleting it."
+  },
+  "roundoff": {
+   "term": "Round off",
+   "def": "Rounding the bill to the nearest rupee; the difference goes to the Round Off ledger."
+  },
+  "autosave": {
+   "term": "Autosave",
+   "def": "Unfinished forms are kept as drafts and restored when you return to the screen."
+  },
+  "save": {
+   "term": "Save",
+   "def": "Store the record on this computer. The Save button at the top saves all open edits."
+  },
+  "backup": {
+   "term": "Backup",
+   "def": "A copy of all VLEBook data in a file, kept in a folder you choose."
+  },
+  "restore": {
+   "term": "Restore",
+   "def": "Bring the data back from a backup file."
+  },
+  "sync": {
+   "term": "Sync",
+   "def": "Sharing changes between the centre's computers through its own Google Drive folder."
+  },
+  "pdf": {
+   "term": "PDF",
+   "def": "A file format for documents that looks the same on every computer and printer."
+  },
+  "printpreview": {
+   "term": "Print preview",
+   "def": "A view of the pages before printing, to check size and layout."
+  },
+  "printbridge": {
+   "term": "Print Bridge",
+   "def": "A free helper for Windows that lets VLEBook print directly to installed printers."
+  },
+  "reconciliation": {
+   "term": "Reconciliation",
+   "def": "Matching two records (for example the bank statement and the books) and explaining any difference."
+  },
+  "dayclose": {
+   "term": "Day close",
+   "def": "Counting the cash at day end, explaining differences and locking the day."
+  },
+  "gstin": {
+   "term": "GSTIN",
+   "def": "The 15-character GST registration number of a business."
+  },
+  "sac": {
+   "term": "HSN / SAC code",
+   "def": "Codes that classify goods (HSN) and services (SAC) under GST."
+  },
+  "auditlog": {
+   "term": "Audit log",
+   "def": "A record of every activity, with user, date and time, that cannot be edited."
+  },
+  "consent": {
+   "term": "Consent",
+   "def": "The customer's agreement to a use of their data, such as receiving reminders."
+  },
+  "licence": {
+   "term": "Licence",
+   "def": "Permission to use the full version for a period, after the 14-day trial."
+  },
+  "basic": {
+   "term": "Basic mode",
+   "def": "The limited free mode after a trial or licence ends. Your data stays."
+  },
+  "recovery": {
+   "term": "Recovery code",
+   "def": "A code shown once at setup that lets the Owner reset the password."
+  }
+ },
+ "faq": {
+  "offline": {
+   "q": "Does VLEBook work without internet?",
+   "a": "Yes, for daily work: billing, customers, accounts, tools and backups. The internet is needed for activation, licences, Techmin notices, the welcome email and push notifications."
+  },
+  "datawhere": {
+   "q": "Where is my data? Can Techmin see it?",
+   "a": "Your business data is stored only on this computer and in the backups you save. Techmin does not store or see it. Techmin receives only registration, device codes, the app version, sign-in records, notice-seen records and the support tickets you send."
+  },
+  "browserclear": {
+   "q": "Will clearing the browser delete my data?",
+   "a": "Clearing history or cached images does not. Clearing 'Cookies and site data' for VLEBook, resetting the browser or using another Windows user removes the copy in the browser — restore it with Restore from backup folder."
+  },
+  "newpc": {
+   "q": "How do I move to a new computer?",
+   "a": "Take a backup, open VLEBook on the new computer (internet needed), restore the backup, then ask Techmin to move your licence to the new Device Code."
+  },
+  "lostpw": {
+   "q": "I forgot my password.",
+   "a": "Staff: ask the Owner to use Reset password in Users & Licence. Owner: click Forgot password? on the sign-in screen and enter the recovery code, or a reset code from Techmin support."
+  },
+  "billwrong": {
+   "q": "I made a wrong bill. Can I delete it?",
+   "a": "No. An Owner or Manager can Edit it (a revised invoice -R1 is issued) or Cancel it with a credit note. Money, stock and commission are reversed automatically."
+  },
+  "govfee": {
+   "q": "Why is the government fee not shown as income?",
+   "a": "Because it is the customer's money paid to the portal. VLEBook keeps it in Government fee clearing; only your service charge is income."
+  },
+  "gstfile": {
+   "q": "Does VLEBook file my GST return?",
+   "a": "No. It prepares tables, the Excel workbook, GSTR-1 JSON and GSTR-3B help. You file on the GST portal, then mark the month as filed in VLEBook."
+  },
+  "whatsapp": {
+   "q": "Does VLEBook send WhatsApp messages by itself?",
+   "a": "No. It opens WhatsApp with the message ready; you press Send. VLEBook cannot see whether a message was delivered or read."
+  },
+  "printfit": {
+   "q": "My printout is too small or cut off.",
+   "a": "In the print window choose Actual size / 100% (not Fit to page), the right paper size and orientation. For cards, use the calibration sheet and Edit profile."
+  },
+  "cardblur": {
+   "q": "My PVC card looks blurred or shows a faint second image.",
+   "a": "Send cards at the printer's own resolution with the Print Bridge, keep sharpening low, and check the card printer's driver settings; the print window explains the settings that cause blur."
+  },
+  "bridge": {
+   "q": "VLEBook says the Print Bridge is not running.",
+   "a": "Run Install VLEBook Print Bridge.cmd once from the downloaded folder. It then starts with Windows and VLEBook connects by itself. If a notice says a newer Bridge is available, download it again."
+  },
+  "backupask": {
+   "q": "Chrome asks again for access to the backup folder.",
+   "a": "This is normal after VLEBook is reopened. Click Reconnect backup folder (choose Allow on every visit if offered). Until then automatic backups are paused."
+  },
+  "basicmode": {
+   "q": "My trial ended. Is my data gone?",
+   "a": "No. VLEBook moves to Basic mode: your data stays and minimal daily work continues. Buying a licence brings back all features at once."
+  },
+  "ocrsure": {
+   "q": "Can I trust the OCR text?",
+   "a": "Always check it. OCR can misread names, numbers and handwriting; doubtful words are highlighted."
+  },
+  "photogreen": {
+   "q": "The photo shows GREEN. Will the portal accept it?",
+   "a": "GREEN means it matches the recorded sizes for that examination. It does not guarantee acceptance; check unverified profiles against the official notification."
+  }
+ }
+}
