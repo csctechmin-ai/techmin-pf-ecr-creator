@@ -7,7 +7,7 @@ Find the message you see (or the problem) below. If it is not solved, contact {{
 ### "Activation needs an internet connection"
 Creating the Owner account and activating a licence are done online with {{entity}}. Connect the computer to the internet (Wi-Fi, broadband or mobile hotspot) and click the button again. If the internet works and the message continues, the Techmin service may be busy: try again after a few minutes, or contact {{entity}}. After activation, daily work continues offline.
 
-### "Your 14-day full-version trial has ended. VLEBook now works in Basic mode"
+### "Your 45-day full-version trial has ended. VLEBook now works in Basic mode"
 The trial is over. Your data is safe and you can still add customers, make up to 10 invoices a day, track pending work and take backups. To use all features again, send your **Device Code** (Users & Licence) and payment to {{entity}} for a licence of 1 month or more. The licence arrives automatically when the computer is online, or paste the licence key you receive and click **Activate Licence**.
 
 ### "Your licence ended on …. VLEBook now works in Basic mode" / red strip "VLEBook will change to Basic mode in … day(s)"
@@ -226,7 +226,7 @@ The link was saved by an older version without https:// or http://. Delete it an
 ## CV & Resume Builder
 
 ### "This feature needs a VLEBook licence" when opening CV & Resume Builder
-The CV & Resume Builder is part of the full version (14-day trial or paid licence). It is not available in Basic mode.
+The CV & Resume Builder is part of the full version (45-day trial or paid licence). It is not available in Basic mode.
 
 ### The printed CV has no colours or the side panel is white
 In the print window open **More settings** and tick **Background graphics**, then print or *Save as PDF* again.
@@ -507,3 +507,6 @@ Link the right print services to the counter (*Change this printer*). Readings a
 
 ### Malayalam / Hindi suggestion is wrong, or 🎤 is missing / refused
 Suggestions are transliteration and can be wrong for unusual names: tap the nearest one and correct it. 🎤 appears only in browsers with voice typing (Chrome, Edge) and needs the internet. If the microphone was refused, click the lock icon in the address bar → Microphone → Allow, then try again.
+
+### Online payment: money was taken but the licence did not arrive, or "Online payment is not available right now"
+Open Users & Licence and click **Check my payment**: VLEBook asks Techmin, which checks the order with Razorpay and issues the licence and invoice if the payment is complete. If no payment is found, nothing was charged; if money left your account for a failed payment, Razorpay normally returns it in 5–7 working days. "Not available right now" means online sales are paused: contact Techmin to renew. "The GSTIN is not valid": check the 15 characters, or leave it empty if you are not registered.

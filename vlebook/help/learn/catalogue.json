@@ -24,7 +24,8 @@
    "customers",
    "billing",
    "backup",
-   "training"
+   "training",
+   "buy-plan"
   ],
   "daily": [
    "services",
@@ -596,6 +597,19 @@
     "js/core/translit.js",
     "js/modules/localscript.js"
    ]
+  },
+  {
+   "id": "buy-plan",
+   "cat": "start",
+   "nav": "account",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/subscribe.js",
+    "js/core/plans.js"
+   ]
   }
  ],
  "nav_lesson": {
@@ -675,7 +689,8 @@
   "ocrsure",
   "photogreen",
   "trainingsafe",
-  "voiceonline"
+  "voiceonline",
+  "gstinvoice"
  ],
  "tours": {
   "tour-screen": [

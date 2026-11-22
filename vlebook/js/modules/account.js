@@ -1,6 +1,6 @@
-import{getAllRecords as x}from"../core/db.js";import{esc as a,formatDate as E}from"../core/utils.js";import{getLicenceState as A,activateLicence as C,refreshRemoteStatus as N}from"../core/licence.js";import{listUsers as R,createUser as I,updateUser as S,setPassword as U,regenerateRecoveryCode as T,getCurrentUser as P,ROLES as m,ROLE_HELP as D}from"../core/auth.js";import{getVendor as B}from"../core/feed.js";import{licenceSummary as h,planName as j,recoveryCodeHTML as M,bindRecoveryCode as O,openChangePasswordDialog as q}from"./gate.js";import{allowNextUnload as V}from"../core/closeguard.js";let u=null,y="";async function G(d){const[s,o,g,b]=await Promise.all([A(),R(),x("staff"),B()]),l=P(),w=o.filter(e=>e.active!==!1).length,r=s.maxUsers||0,c=u?o.find(e=>e.id===u):null,$={ACTIVE:"success",TRIAL:"navy",EXPIRING:"warning",GRACE:"danger",BASIC:"danger"}[s.status]||"danger",k={TRIAL:"Full-version trial",EXPIRING:"Expiring soon",GRACE:"Ended – grace days",BASIC:"Basic mode",ACTIVE:"Active"}[s.status]||"Active",v=String(b.whatsapp||"").replace(/\D/g,""),L=encodeURIComponent(`Hello ${b.name}, please renew my VLEBook licence.
+import{getRecord as C}from"../core/db.js";import{getAllRecords as A}from"../core/db.js";import{esc as a,formatDate as N}from"../core/utils.js";import{getLicenceState as R,activateLicence as I,refreshRemoteStatus as S}from"../core/licence.js";import{listUsers as T,createUser as U,updateUser as P,setPassword as D,regenerateRecoveryCode as O,getCurrentUser as B,ROLES as m,ROLE_HELP as j}from"../core/auth.js";import{getVendor as q}from"../core/feed.js";import{licenceSummary as w,planName as M,recoveryCodeHTML as V,bindRecoveryCode as G,openChangePasswordDialog as H}from"./gate.js";import{allowNextUnload as _}from"../core/closeguard.js";let u=null,y="";async function $(l){const[s,o,g,b]=await Promise.all([R(),T(),A("staff"),q()]),n=B(),k=o.filter(e=>e.active!==!1).length,d=s.maxUsers||0,c=u?o.find(e=>e.id===u):null,L={ACTIVE:"success",TRIAL:"navy",EXPIRING:"warning",GRACE:"danger",BASIC:"danger"}[s.status]||"danger",x={TRIAL:"Full-version trial",EXPIRING:"Expiring soon",GRACE:"Ended – grace days",BASIC:"Basic mode",ACTIVE:"Active"}[s.status]||"Active",v=String(b.whatsapp||"").replace(/\D/g,""),E=encodeURIComponent(`Hello ${b.name}, please renew my VLEBook licence.
 Centre: ${s.centre||""}
-Device Code: ${s.deviceCode}`);d.innerHTML=`
+Device Code: ${s.deviceCode}`);l.innerHTML=`
     <div class="module-header">
       <div class="module-title-group">
         <h1>Users & Licence</h1>
@@ -11,11 +11,13 @@ Device Code: ${s.deviceCode}`);d.innerHTML=`
     ${s.testKey?'<div class="callout warning"><div><strong>Test signing key in use.</strong> Before giving VLEBook to customers, create your own key in the Techmin console and replace js/core/licence-pubkey.js.</div></div>':""}
 
     <div class="grid-kpi">
-      <div class="kpi-card ${$}"><div class="kpi-label">Licence Status</div><div class="kpi-value" style="font-size:20px;">${a(k)}</div><div class="kpi-sub">${a(h(s))}</div></div>
-      <div class="kpi-card"><div class="kpi-label">Plan</div><div class="kpi-value" style="font-size:20px;">${a(j(s))}</div><div class="kpi-sub">${s.centre?`Licensed to <span data-no-i18n>${a(s.centre)}</span>`:"Not yet licensed"}</div></div>
-      <div class="kpi-card"><div class="kpi-label">Licence valid for</div><div class="kpi-value" style="font-size:20px;">${a(s.status==="BASIC"?"0 days":s.daysLeft==null?s.payload?"Lifetime":"—":`${s.daysLeft} day(s)`)}</div><div class="kpi-sub">${s.validTill?`till ${a(E(s.validTill))}`:""}</div></div>
-      <div class="kpi-card navy"><div class="kpi-label">Users</div><div class="kpi-value">${w}${r?` / ${r}`:""}</div><div class="kpi-sub">${r?"Active / allowed by plan":"Unlimited users"}</div></div>
+      <div class="kpi-card ${L}"><div class="kpi-label">Licence Status</div><div class="kpi-value" style="font-size:20px;">${a(x)}</div><div class="kpi-sub">${a(w(s))}</div></div>
+      <div class="kpi-card"><div class="kpi-label">Plan</div><div class="kpi-value" style="font-size:20px;">${a(M(s))}</div><div class="kpi-sub">${s.centre?`Licensed to <span data-no-i18n>${a(s.centre)}</span>`:"Not yet licensed"}</div></div>
+      <div class="kpi-card"><div class="kpi-label">Licence valid for</div><div class="kpi-value" style="font-size:20px;">${a(s.status==="BASIC"?"0 days":s.daysLeft==null?s.payload?"Lifetime":"—":`${s.daysLeft} day(s)`)}</div><div class="kpi-sub">${s.validTill?`till ${a(N(s.validTill))}`:""}</div></div>
+      <div class="kpi-card navy"><div class="kpi-label">Users</div><div class="kpi-value">${k}${d?` / ${d}`:""}</div><div class="kpi-sub">${d?"Active / allowed by plan":"Unlimited users"}</div></div>
     </div>
+
+    ${n?.role==="OWNER"||!n?'<div id="acc-subscribe"></div>':""}
 
     <div class="grid-sidebar-right">
       <div class="card">
@@ -23,7 +25,7 @@ Device Code: ${s.deviceCode}`);d.innerHTML=`
         <div class="auth-device" style="margin-bottom:10px;">
           <div><small>This computer's Device Code</small><div class="device-code" id="acc-device" data-no-i18n>${a(s.deviceCode)}</div></div>
           <button type="button" class="btn btn-sm btn-outline" id="acc-copy-device">Copy</button>
-          ${v?`<a class="btn btn-sm btn-success" target="_blank" rel="noopener" href="https://wa.me/${v.length===10?"91"+v:v}?text=${L}">Ask ${a(b.name)} to renew</a>`:""}
+          ${v?`<a class="btn btn-sm btn-success" target="_blank" rel="noopener" href="https://wa.me/${v.length===10?"91"+v:v}?text=${E}">Ask ${a(b.name)} to renew</a>`:""}
         </div>
         <form id="acc-licence-form" class="auth-form">
           <label class="form-label">New licence key</label>
@@ -38,10 +40,10 @@ Device Code: ${s.deviceCode}`);d.innerHTML=`
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">My account</div></div>
-        <p style="margin:0 0 10px;">Signed in as <strong data-no-i18n>${a(l?.displayName||"")}</strong> (<span data-no-i18n>${a(l?.username||"")}</span>) · ${a(m[l?.role]||"")}</p>
+        <p style="margin:0 0 10px;">Signed in as <strong data-no-i18n>${a(n?.displayName||"")}</strong> (<span data-no-i18n>${a(n?.username||"")}</span>) · ${a(m[n?.role]||"")}</p>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <button type="button" class="btn btn-outline btn-sm" id="acc-change-pass">Change my password</button>
-          ${l?.role==="OWNER"?'<button type="button" class="btn btn-outline btn-sm" id="acc-new-recovery">Make a new recovery code</button>':""}
+          ${n?.role==="OWNER"?'<button type="button" class="btn btn-outline btn-sm" id="acc-new-recovery">Make a new recovery code</button>':""}
         </div>
         <div id="acc-recovery-box" style="margin-top:12px;"></div>
       </div>
@@ -55,7 +57,7 @@ Device Code: ${s.deviceCode}`);d.innerHTML=`
             <thead><tr><th>Name</th><th>User name</th><th>Role</th><th>Linked staff</th><th>Status</th><th>Last sign-in</th><th></th></tr></thead>
             <tbody>
               ${o.map(e=>`<tr style="${e.active===!1?"opacity:0.55;":""}">
-                <td><strong data-no-i18n>${a(e.displayName)}</strong>${e.id===l?.id?" <small>(you)</small>":""}</td>
+                <td><strong data-no-i18n>${a(e.displayName)}</strong>${e.id===n?.id?" <small>(you)</small>":""}</td>
                 <td data-no-i18n>${a(e.username)}</td>
                 <td><span class="badge ${e.role==="OWNER"?"badge-success":e.role==="MANAGER"?"badge-info":"badge-neutral"}">${a(m[e.role])}</span></td>
                 <td data-no-i18n>${a(g.find(t=>t.id===e.staffId)?.name||"—")}</td>
@@ -67,7 +69,7 @@ Device Code: ${s.deviceCode}`);d.innerHTML=`
           </table>
         </div>
         <ul class="tool-help-list" style="margin-top:12px;">
-          ${Object.entries(D).map(([e,t])=>`<li><strong>${a(m[e])}:</strong> ${a(t)}</li>`).join("")}
+          ${Object.entries(j).map(([e,t])=>`<li><strong>${a(m[e])}:</strong> ${a(t)}</li>`).join("")}
         </ul>
       </div>
       <div class="card">
@@ -87,4 +89,4 @@ Device Code: ${s.deviceCode}`);d.innerHTML=`
           <div class="auth-error" id="acc-user-error"></div>
         </form>
       </div>
-    </div>`;const i=e=>d.querySelector(e),n=(e="")=>(y=e,G(d));i("#acc-copy-device").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(s.deviceCode)}catch{}i("#acc-copy-device").textContent="Copied ✓"}),i("#acc-licence-file").addEventListener("change",async e=>{const t=e.target.files?.[0];t&&(i("#acc-licence-form [name=key]").value=(await t.text()).trim())}),i("#acc-licence-form").addEventListener("submit",async e=>{e.preventDefault();try{const t=await C(new FormData(e.target).get("key"));await n(`Licence activated: ${h(t)}. VLEBook will restart in a moment.`),setTimeout(()=>{V(),window.location.reload()},1500)}catch(t){i("#acc-licence-error").textContent=t.message}}),i("#acc-check-online").addEventListener("click",async()=>{const e=await N();await n(e?"Licence checked online.":"Could not reach the internet. Licence will be checked next time you are online.")}),i("#acc-change-pass").addEventListener("click",q),i("#acc-new-recovery")?.addEventListener("click",async()=>{if(!confirm("Make a new recovery code? The old code will stop working."))return;const e=await T(l.id);i("#acc-recovery-box").innerHTML=M(e),O(i("#acc-recovery-box"),e)}),i("#acc-user-new").addEventListener("click",()=>{u=null,n()}),d.querySelectorAll("[data-user-edit]").forEach(e=>e.addEventListener("click",()=>{u=e.getAttribute("data-user-edit"),n()})),d.querySelectorAll("[data-user-reset]").forEach(e=>e.addEventListener("click",async()=>{const t=o.find(f=>f.id===e.getAttribute("data-user-reset")),p=prompt(`New password for ${t.displayName} (at least 6 characters):`);if(p)try{await U(t.id,p,"reset"),await n(`Password reset for ${t.displayName}.`)}catch(f){alert(f.message)}})),i("#acc-user-form").addEventListener("submit",async e=>{e.preventDefault();const t=new FormData(e.target);try{c?(await S(c.id,{displayName:String(t.get("displayName")).trim(),role:t.get("role"),staffId:t.get("staffId")||"",active:t.get("active")==="on"},{maxUsers:r}),await n(`User updated: ${t.get("displayName")}.`)):(await I({displayName:t.get("displayName"),username:t.get("username"),password:t.get("password"),role:t.get("role"),staffId:t.get("staffId")},{maxUsers:r}),await n(`User added: ${t.get("displayName")}.`))}catch(p){i("#acc-user-error").textContent=p.message}})}export{G as renderAccountModule};
+    </div>`;const h=l.querySelector("#acc-subscribe");if(h){const e=await C("settings","CENTRE_CONFIG")||{};import("./subscribe.js").then(t=>t.renderSubscribe(h,{centre:e,onLicence:()=>setTimeout(()=>$(l),1500)})).catch(()=>{})}const i=e=>l.querySelector(e),r=(e="")=>(y=e,$(l));i("#acc-copy-device").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(s.deviceCode)}catch{}i("#acc-copy-device").textContent="Copied ✓"}),i("#acc-licence-file").addEventListener("change",async e=>{const t=e.target.files?.[0];t&&(i("#acc-licence-form [name=key]").value=(await t.text()).trim())}),i("#acc-licence-form").addEventListener("submit",async e=>{e.preventDefault();try{const t=await I(new FormData(e.target).get("key"));await r(`Licence activated: ${w(t)}. VLEBook will restart in a moment.`),setTimeout(()=>{_(),window.location.reload()},1500)}catch(t){i("#acc-licence-error").textContent=t.message}}),i("#acc-check-online").addEventListener("click",async()=>{const e=await S();await r(e?"Licence checked online.":"Could not reach the internet. Licence will be checked next time you are online.")}),i("#acc-change-pass").addEventListener("click",H),i("#acc-new-recovery")?.addEventListener("click",async()=>{if(!confirm("Make a new recovery code? The old code will stop working."))return;const e=await O(n.id);i("#acc-recovery-box").innerHTML=V(e),G(i("#acc-recovery-box"),e)}),i("#acc-user-new").addEventListener("click",()=>{u=null,r()}),l.querySelectorAll("[data-user-edit]").forEach(e=>e.addEventListener("click",()=>{u=e.getAttribute("data-user-edit"),r()})),l.querySelectorAll("[data-user-reset]").forEach(e=>e.addEventListener("click",async()=>{const t=o.find(f=>f.id===e.getAttribute("data-user-reset")),p=prompt(`New password for ${t.displayName} (at least 6 characters):`);if(p)try{await D(t.id,p,"reset"),await r(`Password reset for ${t.displayName}.`)}catch(f){alert(f.message)}})),i("#acc-user-form").addEventListener("submit",async e=>{e.preventDefault();const t=new FormData(e.target);try{c?(await P(c.id,{displayName:String(t.get("displayName")).trim(),role:t.get("role"),staffId:t.get("staffId")||"",active:t.get("active")==="on"},{maxUsers:d}),await r(`User updated: ${t.get("displayName")}.`)):(await U({displayName:t.get("displayName"),username:t.get("username"),password:t.get("password"),role:t.get("role"),staffId:t.get("staffId")},{maxUsers:d}),await r(`User added: ${t.get("displayName")}.`))}catch(p){i("#acc-user-error").textContent=p.message}})}export{$ as renderAccountModule};

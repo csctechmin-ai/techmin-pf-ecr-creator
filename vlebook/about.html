@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>VLEBook — Features &amp; Plans | Office software for CSC, Akshaya and e-Seva centres</title>
+  <meta name="description" content="VLEBook: billing with GST invoices, double-entry books, PDF & photo studio, PVC cards, reminders and more for CSC, Akshaya and e-Seva centres. 45-day free trial, then from ₹249 a month + GST.">
+  <link rel="icon" href="icons/vlebook-mark.svg">
+  <link rel="canonical" href="https://tools.complypro.co.in/vlebook/about.html">
+  <style>
+    :root { --ink: #0f172a; --muted: #475569; --brand: #1D4ED8; --navy: #0F2A5F; --gold: #F59E0B; --bg: #f6f8fc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.6 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Malayalam', 'Noto Sans Devanagari', sans-serif; color: var(--ink); background: var(--bg); }
+    a { color: var(--brand); }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    header.top { background: #fff; border-bottom: 1px solid #e5e9f2; position: sticky; top: 0; z-index: 5; }
+    header.top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+    header.top img { height: 34px; }
+    header.top nav { margin-left: auto; display: flex; gap: 18px; font-size: 14px; }
+    header.top nav a { color: var(--ink); text-decoration: none; }
+    .btn { display: inline-block; padding: 11px 20px; border-radius: 10px; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; font-size: 15px; }
+    .btn.primary { background: var(--brand); color: #fff; }
+    .btn.gold { background: #FCD34D; color: #3B2A00; }
+    .btn.ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.4); }
+    .hero { background: linear-gradient(150deg, var(--navy) 0%, #1D4ED8 75%, #2563EB 100%); color: #fff; padding: 56px 0 64px; }
+    .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+    .hero h1 { font-size: 40px; line-height: 1.15; margin: 14px 0 12px; }
+    .hero p.lead { font-size: 17px; opacity: .92; margin: 0 0 22px; }
+    .pill { display: inline-block; background: #FCD34D; color: #3B2A00; font-weight: 800; padding: 6px 14px; border-radius: 999px; font-size: 14px; }
+    .hero .shot { border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.35); background: #fff; }
+    .hero .shot img { display: block; width: 100%; }
+    .trust { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; font-size: 13.5px; opacity: .9; }
+    section { padding: 56px 0; }
+    section h2 { font-size: 30px; margin: 0 0 8px; text-align: center; }
+    section .sub { text-align: center; color: var(--muted); margin: 0 auto 30px; max-width: 760px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feat { background: #fff; border: 1px solid #e5e9f2; border-radius: 14px; padding: 20px; }
+    .feat .ic { width: 42px; height: 42px; border-radius: 10px; background: #EEF2FF; display: grid; place-items: center; font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { margin: 0 0 6px; font-size: 17px; }
+    .feat ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+    .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .gallery figure { margin: 0; background: #fff; border: 1px solid #e5e9f2; border-radius: 12px; overflow: hidden; }
+    .gallery img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: left top; }
+    .gallery figcaption { padding: 8px 12px; font-size: 13.5px; font-weight: 600; }
+    .toggle { display: flex; justify-content: center; gap: 6px; margin: 0 0 22px; }
+    .toggle button { border: 1px solid #cbd5e1; background: #fff; padding: 9px 18px; border-radius: 999px; font-weight: 700; cursor: pointer; }
+    .toggle button.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .plan { background: #fff; border: 1px solid #e5e9f2; border-radius: 16px; padding: 22px; position: relative; display: flex; flex-direction: column; }
+    .plan.pop { border: 2px solid var(--gold); box-shadow: 0 10px 30px rgba(245,158,11,.18); }
+    .plan .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #fff; font-size: 12px; font-weight: 800; padding: 3px 12px; border-radius: 999px; }
+    .plan h3 { margin: 0; font-size: 19px; }
+    .plan .price { font-size: 34px; font-weight: 800; margin: 8px 0 0; }
+    .plan .price small { font-size: 14px; font-weight: 500; color: var(--muted); }
+    .plan .gst { color: var(--muted); font-size: 13.5px; }
+    .plan .save { color: #047857; font-weight: 700; font-size: 13px; min-height: 20px; }
+    .plan ul { padding-left: 18px; margin: 12px 0 16px; font-size: 14px; flex: 1; }
+    .note { max-width: 900px; margin: 22px auto 0; background: #fff; border: 1px solid #e5e9f2; border-radius: 14px; padding: 18px 22px; font-size: 14px; color: var(--muted); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+    .steps div { background: #fff; border: 1px solid #e5e9f2; border-radius: 14px; padding: 18px; }
+    .steps div::before { counter-increment: s; content: counter(s); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--brand); color: #fff; font-weight: 800; margin-bottom: 8px; }
+    details { background: #fff; border: 1px solid #e5e9f2; border-radius: 12px; padding: 14px 18px; margin: 0 auto 10px; max-width: 900px; }
+    summary { font-weight: 700; cursor: pointer; }
+    footer { background: var(--navy); color: #cbd5e1; padding: 30px 0; font-size: 13.5px; }
+    footer a { color: #FDE68A; }
+    .cta { text-align: center; background: linear-gradient(150deg, var(--navy), #1D4ED8); color: #fff; border-radius: 18px; padding: 36px 20px; }
+    .cta h2 { color: #fff; }
+    @media (max-width: 980px) { .hero .wrap, .grid, .plans, .steps { grid-template-columns: 1fr 1fr; } .gallery { grid-template-columns: 1fr 1fr; } .hero h1 { font-size: 32px; } header.top nav { display: none; } }
+    @media (max-width: 620px) { .hero .wrap, .grid, .plans, .steps, .gallery { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <img src="icons/vlebook-logo.svg" alt="VLEBook">
+    <nav><a href="#features">Features</a><a href="#screens">Screens</a><a href="#pricing">Pricing</a><a href="#billing">Payment &amp; GST invoice</a><a href="#faq">FAQ</a></nav>
+    <a class="btn primary" href="./">Open VLEBook</a>
+  </div></header>
+
+  <section class="hero"><div class="wrap">
+    <div>
+      <span class="pill" id="trial-pill">45-day free trial — every feature</span>
+      <h1>The complete office software for CSC, Akshaya &amp; e-Seva centres</h1>
+      <p class="lead">Billing with GST invoices, accounts that keep themselves, a full PDF &amp; photo studio, PVC cards, renewal reminders and customer records — on your own computer, in English, हिन्दी and മലയാളം.</p>
+      <a class="btn gold" href="./">Start the free trial</a> <a class="btn ghost" href="#pricing">See plans</a>
+      <div class="trust"><span>✔ Works offline</span><span>✔ Your data stays on your computer</span><span>✔ GST tax invoice from Techmin for every payment</span></div>
+    </div>
+    <div class="shot"><img src="help/learn/img/dashboard.jpg" alt="VLEBook dashboard with sample data"></div>
+  </div></section>
+
+  <section id="features"><div class="wrap">
+    <h2>Everything a service centre needs</h2>
+    <p class="sub">Built around how CSC and Akshaya centres really work: government fees kept apart from your service charge, portal wallets, applications to follow up and documents to prepare.</p>
+    <div class="grid">
+      <div class="feat"><div class="ic">🧾</div><h3>Billing &amp; GST</h3><ul><li>Multi-service bills; government fee and service charge kept apart</li><li>Tax Invoice, Bill of Supply or non-GST bill as per your registration</li><li>Customer GSTIN, credit notes, revised invoices, round off</li><li>Print A4 / 80 mm, PDF, WhatsApp share</li></ul></div>
+      <div class="feat"><div class="ic">📒</div><h3>Books kept automatically</h3><ul><li>Double-entry books, trial balance, P&amp;L, balance sheet</li><li>Cash book, bank book, day book, day close</li><li>Portal wallets and government fee clearing</li><li>GSTR-1 JSON, GSTR-3B and CMP-08 help, Tally XML</li></ul></div>
+      <div class="feat"><div class="ic">👥</div><h3>Customers &amp; applications</h3><ul><li>360° customer ledger with dues and advances</li><li>Application / acknowledgement / tracking numbers</li><li>Pending work follow-up</li><li>Names and addresses in Malayalam / Hindi</li></ul></div>
+      <div class="feat"><div class="ic">🖨️</div><h3>PDF, photo &amp; PVC studio</h3><ul><li>Merge, split, compress, edit and protect PDFs</li><li>Exam photo &amp; signature sizes with GREEN / AMBER / RED check</li><li>OCR in English, Malayalam and Hindi</li><li>PVC ID cards, auto-fit to the card, any printer</li></ul></div>
+      <div class="feat"><div class="ic">🔔</div><h3>Reminders &amp; documents</h3><ul><li>Insurance, pollution, tax and licence renewals</li><li>WhatsApp messages in three languages, with consent</li><li>Original-document receipts and custody history</li><li>Customer data requests and retention rules</li></ul></div>
+      <div class="feat"><div class="ic">📦</div><h3>Stock, staff &amp; AEPS</h3><ul><li>Stock in / out, physical check, low-stock alerts</li><li>Staff logins, roles and commissions</li><li>AEPS and banking records</li><li>Print meter: pages used vs billed</li></ul></div>
+      <div class="feat"><div class="ic">🎓</div><h3>Learn &amp; get help</h3><ul><li>Lessons for every screen with guided tours</li><li>Training mode on practice data</li><li>Printable manuals in three languages</li><li>Support tickets to Techmin from inside VLEBook</li></ul></div>
+      <div class="feat"><div class="ic">🔒</div><h3>Safe and private</h3><ul><li>Business data stays on your computer</li><li>Automatic backups to your own Drive, OneDrive, Dropbox or folder</li><li>Audit log of every action; staff permissions</li><li>System health check and backup test</li></ul></div>
+      <div class="feat"><div class="ic">🖥️</div><h3>One centre, many counters</h3><ul><li>Two or three computers working together</li><li>Separate invoice series per counter</li><li>Keyboard shortcuts for fast billing</li><li>Automatic updates</li></ul></div>
+    </div>
+  </div></section>
+
+  <section id="screens" style="background:#fff"><div class="wrap">
+    <h2>See it in action</h2>
+    <p class="sub">Real VLEBook screens, shown with sample data.</p>
+    <div class="gallery">
+      <figure><img src="help/learn/img/billing.jpg" alt="Billing screen" loading="lazy"><figcaption>Billing &amp; invoices</figcaption></figure>
+      <figure><img src="help/learn/img/books.jpg" alt="Books and GST" loading="lazy"><figcaption>Books &amp; GST</figcaption></figure>
+      <figure><img src="help/learn/img/customers.jpg" alt="Customers" loading="lazy"><figcaption>Customers &amp; 360° ledger</figcaption></figure>
+      <figure><img src="help/learn/img/studio.jpg" alt="PDF and Image Studio" loading="lazy"><figcaption>PDF &amp; Image Studio</figcaption></figure>
+      <figure><img src="help/learn/img/reminders.jpg" alt="Reminders" loading="lazy"><figcaption>Renewal reminders</figcaption></figure>
+      <figure><img src="help/learn/img/reports.jpg" alt="Reports" loading="lazy"><figcaption>Reports &amp; profit</figcaption></figure>
+      <figure><img src="help/learn/img/inventory.jpg" alt="Stock" loading="lazy"><figcaption>Stock &amp; inventory</figcaption></figure>
+      <figure><img src="help/learn/img/productivity.jpg" alt="Productivity and tools" loading="lazy"><figcaption>Productivity &amp; tools</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section id="pricing"><div class="wrap">
+    <h2>Simple pricing</h2>
+    <p class="sub">Start with a <b>45-day free trial</b> (1 month + 15 days) with every feature. Then pay monthly, or yearly and get <b>12 months for the price of 11</b>. Prices are before 18% GST.</p>
+    <div class="toggle"><button type="button" data-cycle="M">Monthly</button><button type="button" data-cycle="Y" class="on">Yearly — 1 month free</button></div>
+    <div class="plans" id="plans"></div>
+    <div class="note">GST @ 18% is added: CGST 9% + SGST 9% for centres in Kerala, IGST 18% for other States. Without a plan, VLEBook keeps working in free <b>Basic</b> mode, so you never lose access to your own data. Prices may change for future periods, never for a period already paid.</div>
+  </div></section>
+
+  <section id="billing" style="background:#fff"><div class="wrap">
+    <h2>Pay online — licence and GST invoice in seconds</h2>
+    <p class="sub">Buy or renew from inside VLEBook: <i>Users &amp; Licence → Buy or renew</i>.</p>
+    <div class="steps">
+      <div><b>Choose a plan</b><br>Monthly or yearly, and enter your GSTIN if you are registered.</div>
+      <div><b>Pay with Razorpay</b><br>UPI, debit / credit card, net banking or wallet. VLEBook never sees your card or bank details.</div>
+      <div><b>Licence applied instantly</b><br>Techmin confirms the payment with Razorpay and your licence is applied automatically.</div>
+      <div><b>GST tax invoice &amp; receipt</b><br>Issued by Techmin Wealth Partners (GSTIN 32AEQPV4581H1ZZ), emailed to you and kept in <i>My invoices</i>.</div>
+    </div>
+  </div></section>
+
+  <section id="faq"><div class="wrap">
+    <h2>Questions</h2>
+    <details><summary>Do I need the internet?</summary><p>Daily work runs offline on your computer. The internet is needed to set up the account, buy or renew, receive Techmin notices and for automatic backups to an online folder.</p></details>
+    <details><summary>Where is my data kept? Can Techmin see it?</summary><p>Your customers, bills and accounts stay on your own computer and in the backup folder you choose. Techmin receives only registration, licence and sign-in records — never your business data. See the Privacy Policy in VLEBook (Help &amp; Legal).</p></details>
+    <details><summary>Can I claim input tax credit?</summary><p>Yes, if you enter your GSTIN when you buy. Techmin's tax invoice then shows your GSTIN. Check eligibility with your accountant.</p></details>
+    <details><summary>What happens when my plan ends?</summary><p>You get 3 grace days, then VLEBook works in free Basic mode (customers, up to 10 invoices a day, pending work and backup) until you renew. Your data is never deleted.</p></details>
+    <details><summary>Can I get a refund?</summary><p>See the Refund Policy in VLEBook (Help &amp; Legal). Contact admin@techmincsc.in.</p></details>
+    <details><summary>Is VLEBook a government or CSC product?</summary><p>No. VLEBook is an independent product of Techmin Wealth Partners. It is not made, approved or endorsed by CSC SPV, the Kerala State IT Mission (Akshaya) or any Government department.</p></details>
+  </div></section>
+
+  <section><div class="wrap"><div class="cta">
+    <h2>Try VLEBook free for 45 days</h2>
+    <p>No payment needed to start. All features open.</p>
+    <a class="btn gold" href="./">Open VLEBook</a>
+  </div></div></section>
+
+  <footer><div class="wrap">
+    VLEBook is published by <b>Techmin Wealth Partners</b>, 1/676D, AK Building, Marampally, Aluva – 683105, Ernakulam, Kerala · GSTIN 32AEQPV4581H1ZZ · <a href="mailto:admin@techmincsc.in">admin@techmincsc.in</a> ·
+    <a href="help.html?doc=terms">Terms</a> · <a href="help.html?doc=privacy">Privacy</a> · <a href="help.html?doc=refunds">Refunds</a>. Screens shown with sample data. Early access: features may change.
+  </div></footer>
+  <script type="module" src="js/about-page.js"></script>
+</body>
+</html>
