@@ -1212,6 +1212,35 @@
     ],
     "right": 0
    }
+  },
+  "studio-tools": {
+   "title": "QR codes, centre stamp and calculators",
+   "summary": "Make a UPI QR, a round centre stamp, and work out age, GST, EMI and interest.",
+   "what": "The QR, Stamp & Calculators workspace in the PDF & Image Studio has small tools a centre needs every day.",
+   "why": "Exact age for exam cut-off dates, the GST in a price and a stamp image for documents are needed often; doing them here avoids mistakes.",
+   "before": [
+    "Open PDF & Image Studio."
+   ],
+   "steps": [
+    "Click QR, Stamp & Calculators.",
+    "For a stamp: type the centre name (curves around the top), the place (around the bottom), the label and choose the date option. The preview changes as you type; click Download PNG.",
+    "For age: open Age, GST, EMI & text utilities and enter the date of birth and the cut-off date. Years, months and days appear at once.",
+    "For GST: choose GST, type the amount, the rate, whether the amount is before or including GST, and within the State or another State.",
+    "For a loan or deposit: choose Loan EMI or Interest and enter the rate and months.",
+    "For names and addresses: paste the text and choose UPPERCASE, Title Case or Fix spaces, then click Copy."
+   ],
+   "result": "You get the stamp as a transparent PNG and calculations shown in rupees, ready to use.",
+   "careful": "The stamp is a picture you made; use it only where your centre is allowed to. Check the age rules (as on which date) in the official notification.",
+   "wrong": "If a long centre name looks small on the stamp, shorten it or move the place to the bottom line. If the age shows nothing, check that the cut-off date is after the date of birth.",
+   "check": {
+    "q": "Where does the centre name appear on the stamp?",
+    "a": [
+     "Around the top of the ring",
+     "Only in the middle",
+     "It is not printed"
+    ],
+    "right": 0
+   }
   }
  },
  "tours": {

@@ -1,5 +1,5 @@
 {
- "doc_version": "1.0",
+ "doc_version": "1.1",
  "vlebook_version": "3.4.0",
  "updated": "2026-11-22",
  "languages": [
@@ -39,7 +39,8 @@
    "support",
    "productivity",
    "shortcuts",
-   "localscript"
+   "localscript",
+   "studio-tools"
   ],
   "advanced": [
    "billing-edit",
@@ -611,6 +612,19 @@
     "js/modules/subscribe.js",
     "js/core/plans.js"
    ]
+  },
+  {
+   "id": "studio-tools",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/studio.js"
+   ],
+   "img": "studio-tools"
   }
  ],
  "nav_lesson": {
