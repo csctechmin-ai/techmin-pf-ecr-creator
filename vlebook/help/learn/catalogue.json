@@ -464,7 +464,8 @@
    "updated": "3.4.0",
    "src": [
     "js/modules/account.js",
-    "js/core/licence.js"
+    "js/core/licence.js",
+    "js/modules/subscribe.js"
    ],
    "img": "account"
   },
