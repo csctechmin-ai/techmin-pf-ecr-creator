@@ -26,7 +26,11 @@ Published by {{entity}}. The version you are using is shown in **Settings** and 
 - **Fixed:** printing Help documents could give a blank page after an invoice had been printed.
 - **PVC ID & Print — fit documents to the card:** a tick box (on by default) auto-crops an uploaded document to the card's edges and resizes it exactly to the PVC card; untick it to place the whole picture and resize by hand with the new *Resize to card* buttons and Zoom. Hand-marked areas keep the card shape.
 - **Open-source licences:** a new page in Help lists every open-source component included in VLEBook, its licence and what it is used for; the Terms link to it.
-- Legal documents updated to version 1.20.
+- **Productivity & Tools** (new menu item, Alt+T): **training mode** with a separate practice copy (sample data, PRACTICE bills, WhatsApp / backups / sync / Techmin switched off, per browser tab, reset); **keyboard shortcuts** (Alt+N, Alt+C, Alt+S, Alt+Q, Alt+P, Alt+A, Ctrl+Enter, Esc, ?) that you can change, with browser / Windows keys refused; **System health** (storage, protected storage, database read / write, data format, last backup, offline, update, errors, backup integrity test, diagnostic report previewed before saving); **Print meter** (printer / copier counter readings with photo, pages used vs billed, roll-over, reset / replacement, corrections with history, missing-reading and unusual-jump warnings, CSV, permissions).
+- **Malayalam / Hindi names and addresses:** *Suggest* transliterates an English name or address into Malayalam or Hindi letters (offline, with alternatives; a word list for names, Kerala places and address words) and saves it with the customer as the local-script name / address. **Voice typing** 🎤 in the customer form uses the browser's online speech service, after a notice and with a review step.
+- **Techmin notices** can now be sent to some states, districts, app versions, roles or users of certain screens, in Hindi and Malayalam, and can ask each user to confirm *I have read and understood*. Expired notices are hidden.
+- Data format 11 (two new tables for the print meter). Learning Centre: six new lessons, glossary words and questions in English, Hindi and Malayalam.
+- Legal documents updated to version 1.21 (Privacy: notice confirmations and voice typing; Disclaimer: training mode, print meter and transliteration).
 
 ## Version 3.3.0 — 20 November 2026
 

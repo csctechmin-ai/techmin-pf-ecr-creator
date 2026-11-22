@@ -492,3 +492,18 @@ With **Auto-crop & resize to the PVC card** ticked, VLEBook looks for a card-sha
 
 ### The Learning Centre says it could not be opened, or a tour says a part is not visible
 The Learning Centre is saved for offline use the first time it is opened with the internet; connect once and open it again. A guided tour points at parts of the real screen: if a part is not shown (it needs the full version, another role or another tab), the tour explains the step and you can press Next. Esc ends a tour at any time. Printed manuals: in the print window choose *Save as PDF* or your printer, *Portrait*, *A4*.
+
+### Training mode: "… is switched off in training mode"
+WhatsApp, backups to your folder, restore, sync and contact with Techmin do nothing while practising, so nothing real can be sent or changed. Click **Exit training** in the amber band to go back to your real data. If the band is not shown you are on real data.
+
+### A keyboard shortcut does nothing or is refused
+Billing shortcuts (Alt+S, Alt+Q, Alt+P, Alt+A, Ctrl+Enter) work only on the Billing screen. *?* does not work while the cursor is in a text box. Keys kept by the browser or Windows (Ctrl+W, Ctrl+T, Alt+F4 …) and keys already used for another action are refused; choose another, or *Reset to the original keys*.
+
+### System health shows a warning or a problem
+*Last backup*: take a backup now in Data Ownership & Backup. *Protected storage*: click *Ask to protect storage*; if the browser refuses, install VLEBook as an app and use it daily. *Data format* asks to finish an upgrade: close other VLEBook tabs and reload. *Database read / write* fails: take a backup, close other tabs, reload, run the checks again, then raise a support ticket and attach the diagnostic report if you wish.
+
+### Print meter: billed pages are 0, or the difference looks wrong
+Link the right print services to the counter (*Change this printer*). Readings are end-of-day readings: bills dated after the earlier reading up to the later reading are counted. A reading lower than the one before is treated as a counter roll-over — if it was a typing mistake, use **Correct**; if the technician reset the counter, record a *Counter was reset* reading with the old counter's last value.
+
+### Malayalam / Hindi suggestion is wrong, or 🎤 is missing / refused
+Suggestions are transliteration and can be wrong for unusual names: tap the nearest one and correct it. 🎤 appears only in browsers with voice typing (Chrome, Edge) and needs the internet. If the microphone was refused, click the lock icon in the address bar → Microphone → Allow, then try again.

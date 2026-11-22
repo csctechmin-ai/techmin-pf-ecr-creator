@@ -1013,6 +1013,174 @@
     ],
     "right": 1
    }
+  },
+  "productivity": {
+   "title": "Productivity & Tools",
+   "summary": "One screen with training mode, keyboard shortcuts, system health, the print meter and Malayalam / Hindi typing.",
+   "what": "Productivity & Tools collects the helpers that make daily work faster and safer. Each card opens one tool.",
+   "why": "You find these tools in one place instead of searching through Settings.",
+   "before": [
+    "Sign in to VLEBook."
+   ],
+   "steps": [
+    "Click Productivity & Tools in the menu (or press Alt+T).",
+    "Click a card: Training mode, Keyboard shortcuts, System health, Print meter or Malayalam / Hindi typing & voice.",
+    "Click ← All tools to come back to the cards."
+   ],
+   "result": "The chosen tool opens. The Learning Centre and PDF & Image tools cards open those screens.",
+   "careful": "Some tools need a permission from the Owner (for example adding printers to the print meter).",
+   "wrong": "If a card says you do not have permission, ask the Owner to allow it in Settings → Users & permissions.",
+   "check": {
+    "q": "Which key opens Productivity & Tools?",
+    "a": [
+     "Alt+T",
+     "Ctrl+W",
+     "F5"
+    ],
+    "right": 0
+   }
+  },
+  "training": {
+   "title": "Practise safely in training mode",
+   "summary": "Learn billing and other work on sample data without touching your real records.",
+   "what": "Training mode opens a separate practice copy of VLEBook with sample customers and bills. Your real data is not opened while you practise.",
+   "why": "New staff can learn without risk: practice bills never reach your accounts, cash, stock or reports.",
+   "before": [
+    "Sign in as yourself. The same user name and password work in training mode."
+   ],
+   "steps": [
+    "Open Productivity & Tools → Training mode.",
+    "Click Start training mode and confirm. VLEBook reloads with an amber TRAINING MODE band at the top.",
+    "Practise: make bills, add customers, try reports. Bills say PRACTICE — NOT VALID.",
+    "Click Exit in the amber band (or Leave training mode) to go back to your real data.",
+    "To start again with fresh sample data, click Reset practice data."
+   ],
+   "result": "Your real records are exactly as you left them. The practice data stays on this computer for next time until you reset it.",
+   "careful": "WhatsApp, SMS and email links, backups to your folder, restore, sync and contact with Techmin are switched off in training mode. Training mode is for that browser tab only.",
+   "wrong": "If you do not see the amber band, you are working on real data. Open Productivity & Tools → Training mode and start it.",
+   "check": {
+    "q": "Does a bill made in training mode change your real accounts?",
+    "a": [
+     "No, practice data is kept separately",
+     "Yes, it is added to today's cash",
+     "Only if printed"
+    ],
+    "right": 0
+   }
+  },
+  "shortcuts": {
+   "title": "Keyboard shortcuts",
+   "summary": "Use Alt+N for a new bill, Alt+C to find a customer and more. Change the keys if you like.",
+   "what": "Shortcuts are key combinations that open a screen or jump to a box without the mouse.",
+   "why": "At a busy counter the keyboard is faster than the mouse.",
+   "before": [
+    "A computer with a keyboard."
+   ],
+   "steps": [
+    "Press ? (outside a text box) to see all shortcuts.",
+    "Alt+N opens a new bill; Alt+C goes to the customer search; in Billing, Alt+S chooses a service, Alt+Q the quantity, Alt+P the payment mode, Alt+A the amount paid and Ctrl+Enter saves the bill.",
+    "Esc closes the open dialog.",
+    "To change a key: Productivity & Tools → Keyboard shortcuts → Change, then press the new keys.",
+    "Reset to the original keys returns all of them to the defaults."
+   ],
+   "result": "The shortcut works at once on this computer.",
+   "careful": "Keys kept by the browser or Windows (Ctrl+W, Ctrl+T, Alt+F4 …) cannot be used. Ctrl+Enter only saves after you have checked the bill.",
+   "wrong": "If a shortcut does nothing, check that you are on the right screen (Billing shortcuts work only in Billing) and that the key is not used twice.",
+   "check": {
+    "q": "What does Esc do?",
+    "a": [
+     "Closes the open dialog",
+     "Deletes the bill",
+     "Signs you out"
+    ],
+    "right": 0
+   }
+  },
+  "health": {
+   "title": "Check the system health",
+   "summary": "See in one place whether storage, backups, the database, offline use and updates are fine.",
+   "what": "System health runs checks on this computer and shows each result as OK, warning or problem.",
+   "why": "Problems such as an old backup or a full disk are found before they cost you data.",
+   "before": [
+    "Nothing; the checks run in the browser."
+   ],
+   "steps": [
+    "Open Productivity & Tools → System health.",
+    "Read each line: browser, version, storage space, protected storage, database read / write, data format, last backup, offline readiness, internet, errors and update.",
+    "Click Test backup integrity to build a test backup in memory and read it back (nothing is saved).",
+    "Click Ask to protect storage if protected storage shows a warning.",
+    "Click Diagnostic report…, check the text, and save it only if you want to attach it to a support ticket."
+   ],
+   "result": "You know what needs attention. The report contains versions, results and record counts only — no customer details.",
+   "careful": "A warning on Last backup means take a backup now from Backup & Restore.",
+   "wrong": "If the database check fails, take a backup, close other VLEBook tabs, reload and run the checks again; then raise a support ticket with the report.",
+   "check": {
+    "q": "Does the diagnostic report contain customer names?",
+    "a": [
+     "No — only versions, results and counts",
+     "Yes, all customers",
+     "Only mobile numbers"
+    ],
+    "right": 0
+   }
+  },
+  "printmeter": {
+   "title": "Print meter: pages used vs billed",
+   "summary": "Enter the printer's counter reading each day and see pages printed but not billed.",
+   "what": "The print meter compares the pages your printer or copier counted with the pages billed on the services linked to it.",
+   "why": "Unbilled copies, wasted paper and misuse show up as a difference you can check.",
+   "before": [
+    "The Owner adds the printer: Productivity & Tools → Print meter → Add a printer / copier, and links the print services (for example Print B/W).",
+    "Find the counter in the printer's menu (Counter / Usage / Page count)."
+   ],
+   "steps": [
+    "At the end of the day open Print meter and choose the printer.",
+    "Type the counter reading. Add a photo of the counter if you like.",
+    "Click Save reading.",
+    "Read Used vs billed: pages used, pages billed and the difference for each period.",
+    "If the technician reset or replaced the counter, choose that kind and type the old counter's last reading and a note.",
+    "A wrong reading is corrected with Correct; the old value and the reason are kept."
+   ],
+   "result": "Each day shows pages used, billed and the difference, with warnings for unusual jumps and days without a reading.",
+   "careful": "The figures are only as accurate as the readings entered and the services linked. A lower reading than before is treated as a counter roll-over — check it.",
+   "wrong": "If billed pages are always 0, link the correct print services to the counter (Change this printer).",
+   "check": {
+    "q": "When should the reading be taken?",
+    "a": [
+     "At the end of each day",
+     "Only once a year",
+     "Only when the printer breaks"
+    ],
+    "right": 0
+   }
+  },
+  "localscript": {
+   "title": "Names and addresses in Malayalam / Hindi",
+   "summary": "Turn an English name or address into Malayalam or Hindi letters, or type by voice.",
+   "what": "VLEBook suggests how an English name or address is written in Malayalam or Hindi (transliteration — the same sounds, not a translation). The English stays the main record.",
+   "why": "Certificates and letters often need the name in the local script; typing it is slow.",
+   "before": [
+    "Type the name and address in English first."
+   ],
+   "steps": [
+    "In Customers, open Name & address in Malayalam / Hindi on the customer form.",
+    "Choose the script: Malayalam or Hindi.",
+    "Click Suggest next to the name. Tap the right spelling; correct it if needed.",
+    "Do the same for the address, then save the customer.",
+    "For voice typing, tap 🎤, agree to the note, speak, check what was heard and tap Use this."
+   ],
+   "result": "The customer keeps the English name and address and also the local-script version you chose.",
+   "careful": "Always check the spelling with the customer. Voice typing uses the browser's online speech service; never speak Aadhaar numbers, OTPs or passwords.",
+   "wrong": "If 🎤 is missing, the browser has no voice typing — use Chrome or Edge, or type. If the microphone is refused, allow it in the browser's site settings.",
+   "check": {
+    "q": "Is the suggestion a translation?",
+    "a": [
+     "No, it writes the same sounds in another script",
+     "Yes, it translates the meaning",
+     "It replaces the English name"
+    ],
+    "right": 0
+   }
   }
  },
  "tours": {
@@ -1147,6 +1315,22 @@
   "recovery": {
    "term": "Recovery code",
    "def": "A code shown once at setup that lets the Owner reset the password."
+  },
+  "trainingmode": {
+   "term": "Training mode",
+   "def": "A separate practice copy with sample data. Real records are not opened while it is on."
+  },
+  "transliteration": {
+   "term": "Transliteration",
+   "def": "Writing the same sounds in another script, e.g. 'Aluva' → 'ആലുവ'. Not translation."
+  },
+  "printmeter": {
+   "term": "Print meter",
+   "def": "The printer's page counter. VLEBook compares its readings with the pages billed."
+  },
+  "shortcut": {
+   "term": "Keyboard shortcut",
+   "def": "A key combination (such as Alt+N) that does an action without the mouse."
   }
  },
  "faq": {
@@ -1213,6 +1397,14 @@
   "photogreen": {
    "q": "The photo shows GREEN. Will the portal accept it?",
    "a": "GREEN means it matches the recorded sizes for that examination. It does not guarantee acceptance; check unverified profiles against the official notification."
+  },
+  "trainingsafe": {
+   "q": "Can training mode change my real data?",
+   "a": "No. Training mode opens a separate practice database; your real records are not opened until you leave training mode. WhatsApp, backups to your folder, restore, sync and contact with Techmin are switched off while practising."
+  },
+  "voiceonline": {
+   "q": "Is voice typing done on my computer?",
+   "a": "No. Voice typing uses your browser's speech service (Chrome or Edge), which processes the audio online. Transliteration (Suggest) works offline on your computer. Never speak Aadhaar numbers, OTPs or passwords."
   }
  }
 }

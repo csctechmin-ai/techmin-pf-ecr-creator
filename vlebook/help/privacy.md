@@ -47,7 +47,7 @@ When VLEBook is online it exchanges the following with the Techmin registry:
 3. **Licence and payment records** created by Techmin: plan, validity, computers and users allowed, amount, payment mode and reference.
 4. **Support communications** you send us (WhatsApp, email, phone).
 5. **Sign-in record** (from version 3.1): for each sign-in on each computer — Centre ID, Device Code, counter letter, user name, display name and role, sign-in time, sign-out time (or last activity time, marked as estimated, if VLEBook was closed without signing out), how the session ended, VLEBook version, browser and operating system name, the computer's public **IP address** and the **approximate city, state and country** looked up from that IP address. Passwords, customers, bills and other business data are never included.
-6. **Notices seen** (from version 3.1): the notice number, user name and time when a Techmin notice is opened.
+6. **Notices seen and confirmed** (from version 3.1; confirmations from 3.4): the notice number, user name and time when a Techmin notice is opened and, for a notice that asks for it, when the user confirms *I have read and understood*. To show the right notices, the check-in also sends the VLEBook version; which notices suit your role, screens and language is decided inside VLEBook and is not sent.
 7. **Emails to the Centre:** Techmin may email the Centre's registered email address with service notices, updates, renewal reminders and important information.
 
 Techmin may also see the IP address and technical details of each request, as logged by its hosting providers.
@@ -72,6 +72,7 @@ We use the following providers to run VLEBook. They process data only to provide
 - **GitHub** — hosting of the VLEBook web application files.
 - **Browser push services** (Google, Microsoft, Mozilla, Apple) — delivery of push notifications to your browser, if you allow them.
 - **Blogger (Google)** — the Techmin blog articles from {{website}} are read by the Techmin registry and passed to VLEBook as plain text (title, date, short summary and link; no pictures). No centre data is sent with this request, and the article opens on {{website}}.
+- **Browser speech service (only if you use 🎤 voice typing, from version 3.4)** — Chrome and Edge send the spoken audio to their speech service (Google or Microsoft) to turn it into text. VLEBook shows a notice before the first use in a session and never sends the audio to Techmin. Do not speak Aadhaar numbers, OTPs or passwords. Transliteration (*Suggest*), training mode, keyboard shortcuts, System health and the print meter work on your computer and send nothing; a diagnostic report is saved on your computer and goes to Techmin only if you attach it to a support ticket.
 - **IP lookup (freeipapi.com, ipify.org)** — at sign-in, VLEBook asks these free services for the computer's public IP address and approximate location. Only the normal web request (which carries the IP address) reaches them; no other data is sent.
 
 Data may be stored on servers of these providers in or outside India, subject to applicable law.
