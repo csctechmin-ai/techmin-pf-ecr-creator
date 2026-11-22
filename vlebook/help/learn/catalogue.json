@@ -1,7 +1,7 @@
 {
  "doc_version": "1.0",
  "vlebook_version": "3.4.0",
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "languages": [
   "en",
   "hi",
@@ -23,7 +23,8 @@
    "gs-save",
    "customers",
    "billing",
-   "backup"
+   "backup",
+   "training"
   ],
   "daily": [
    "services",
@@ -34,7 +35,10 @@
    "printing",
    "studio-photo",
    "studio-pdf",
-   "support"
+   "support",
+   "productivity",
+   "shortcuts",
+   "localscript"
   ],
   "advanced": [
    "billing-edit",
@@ -53,7 +57,9 @@
    "news",
    "multi",
    "account",
-   "settings"
+   "settings",
+   "health",
+   "printmeter"
   ]
  },
  "lessons": [
@@ -513,6 +519,83 @@
     "js/modules/help.js",
     "js/modules/learn.js"
    ]
+  },
+  {
+   "id": "productivity",
+   "cat": "daily",
+   "nav": "productivity",
+   "level": "beginner",
+   "min": 2,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/modules/productivity.js"
+   ],
+   "img": "productivity"
+  },
+  {
+   "id": "training",
+   "cat": "start",
+   "nav": "productivity",
+   "level": "beginner",
+   "min": 4,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/training.js",
+    "js/modules/productivity.js"
+   ],
+   "img": "training"
+  },
+  {
+   "id": "shortcuts",
+   "cat": "daily",
+   "nav": "productivity",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/shortcuts.js"
+   ]
+  },
+  {
+   "id": "health",
+   "cat": "safety",
+   "nav": "productivity",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/health.js"
+   ],
+   "img": "health"
+  },
+  {
+   "id": "printmeter",
+   "cat": "money",
+   "nav": "productivity",
+   "level": "advanced",
+   "min": 5,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/printmeter.js"
+   ]
+  },
+  {
+   "id": "localscript",
+   "cat": "daily",
+   "nav": "customers",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.4.0",
+   "updated": "3.4.0",
+   "src": [
+    "js/core/translit.js",
+    "js/modules/localscript.js"
+   ]
   }
  ],
  "nav_lesson": {
@@ -539,7 +622,8 @@
   "account": "account",
   "support": "support",
   "help": "learning",
-  "settings": "settings"
+  "settings": "settings",
+  "productivity": "productivity"
  },
  "glossary": [
   "dashboard",
@@ -567,7 +651,11 @@
   "consent",
   "licence",
   "basic",
-  "recovery"
+  "recovery",
+  "trainingmode",
+  "transliteration",
+  "printmeter",
+  "shortcut"
  ],
  "faq": [
   "offline",
@@ -585,7 +673,9 @@
   "backupask",
   "basicmode",
   "ocrsure",
-  "photogreen"
+  "photogreen",
+  "trainingsafe",
+  "voiceonline"
  ],
  "tours": {
   "tour-screen": [
