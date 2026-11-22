@@ -894,11 +894,11 @@
     "Open Users & Licence.",
     "Click Add User, enter the name, user name and password, and choose the role: Owner, Manager, Operator or Accountant.",
     "Use Reset password when a staff member forgets theirs.",
-    "To renew, send your Device Code and payment to Techmin. The licence arrives automatically when online, or paste a key in Activate Licence."
+    "To renew, use Buy or renew on this screen: choose a plan and pay with Razorpay — the licence is applied at once and Techmin's GST invoice is emailed. A key sent by Techmin can still be pasted in Activate Licence."
    ],
    "result": "Staff can sign in. The top of the screen shows how many days the licence is valid.",
    "careful": "After the trial or licence ends, VLEBook moves to Basic mode — your data is never locked, and only the Owner can sign in.",
-   "wrong": "If the licence does not arrive, connect to the internet and wait a minute, or contact Techmin with your Device Code.",
+   "wrong": "If the licence does not arrive after paying, click Check my payment. Otherwise connect to the internet and wait a minute, or contact Techmin with your Device Code.",
    "check": {
     "q": "What happens to your data when the licence ends?",
     "a": [
