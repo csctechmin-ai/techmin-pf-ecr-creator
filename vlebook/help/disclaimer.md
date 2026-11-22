@@ -62,7 +62,7 @@ Creating the Owner account and activating a licence need an internet connection;
 
 VLEBook is in early access: it is still being developed, features may change and some errors may remain. Use it with regular backups and check important figures.
 
-The 14-day trial and Basic mode are provided free of charge so that centres can evaluate VLEBook and are never cut off from their own records. Their features and limits may change with notice. Choose a paid licence if your centre depends on the full version every day.
+The 45-day trial and Basic mode are provided free of charge so that centres can evaluate VLEBook and are never cut off from their own records. Their features and limits may change with notice. Choose a paid licence if your centre depends on the full version every day.
 
 ## 8. Translations
 

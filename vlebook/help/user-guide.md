@@ -29,8 +29,8 @@ VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billin
 
 ## 2. Trial, licence and Basic mode
 
-### 14-day full-version trial
-A new centre account starts a **14-day trial of the full version**: every feature is open, for up to 3 users. The top of the screen shows *Full trial · N days left*.
+### 45-day full-version trial
+A new centre account starts a **45-day trial of the full version**: every feature is open, for up to 3 users. The top of the screen shows *Full trial · N days left*.
 
 ### Paid licence
 To continue with all features after the trial, buy a licence from {{entity}} for **1 month or more** (for example 1, 2, 3, 6 or 12 months).
@@ -390,3 +390,8 @@ On the customer form open **Name & address in Malayalam / Hindi (optional)**, ch
 
 ### Techmin notices for some centres or users
 Techmin can send a notice only to some states or districts, app versions, roles (for example Owner and Manager) or users who can open certain screens, and can write it in Hindi and Malayalam — you see the language VLEBook is set to. Expired notices are hidden. Some notices ask you to confirm **I have read and understood**; they stay as a pop-up and unread until you do, and Techmin receives the notice number, your user name and the time of the confirmation.
+
+## 11. Plans, online payment and invoices (version 3.4.0)
+A new centre gets a **45-day free trial** (1 month + 15 days) of the full version. Then choose a plan (prices before 18% GST): **Standard** ₹249 a month or ₹2,739 a year (1 computer, 1 user), **Professional** ₹299 / ₹3,289 (2 computers, 2 users), **Premium** ₹399 / ₹4,389 (3 computers, 3 users). Yearly plans give 12 months for the price of 11. Without a plan VLEBook works in free **Basic** mode.
+
+**To buy or renew (Owner):** Users & Licence → **Buy or renew** → choose Monthly or Yearly and a plan → check the invoice details (name, GSTIN only if you are registered, address, State, email, mobile) → the summary shows the GST (CGST + SGST in Kerala, IGST in other States) and the rounded total → **Pay with Razorpay** → pay by UPI, card, net banking or wallet. Techmin confirms the payment with Razorpay, the licence is applied at once and the **GST tax invoice with receipt** opens (Print / Save as PDF) and is emailed to you. A plan bought before the current licence ends starts the day after it ends. **My invoices** lists every invoice. If the window closed before the confirmation, use **Check my payment**. The sign-in screen and the page *All features & plans* show the plans too.

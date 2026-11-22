@@ -1181,6 +1181,37 @@
     ],
     "right": 0
    }
+  },
+  "buy-plan": {
+   "title": "Buy or renew your plan",
+   "summary": "Pay monthly or yearly with Razorpay; the licence is applied at once and Techmin's GST invoice is emailed.",
+   "what": "After the 45-day free trial, a plan keeps every feature. You buy it inside VLEBook and pay through Razorpay.",
+   "why": "No waiting for a licence key: payment, licence and GST tax invoice happen in one step.",
+   "before": [
+    "Sign in as the Owner.",
+    "Internet connection.",
+    "Your GSTIN, only if you are registered under GST."
+   ],
+   "steps": [
+    "Open Users & Licence and find Buy or renew.",
+    "Choose Monthly or Yearly (12 months for the price of 11) and click a plan: Standard, Professional or Premium.",
+    "Check the invoice details: name, GSTIN (leave empty if not registered), address, State, email and mobile.",
+    "Read the summary: price, CGST + SGST (Kerala) or IGST (other States) and the total.",
+    "Click Pay with Razorpay and pay by UPI, card, net banking or wallet.",
+    "The licence is applied and the tax invoice with receipt opens. Print or save it as PDF; it is also emailed."
+   ],
+   "result": "Your plan is active (or starts after the current licence ends) and the invoice is listed in My invoices.",
+   "careful": "Enter the correct GSTIN before paying if you want input tax credit. Never share card or UPI PINs with anyone.",
+   "wrong": "If the payment window closed before the licence came, click Check my payment. If money was taken for a failed payment, Razorpay returns it automatically, usually in 5–7 working days.",
+   "check": {
+    "q": "Where do you buy or renew a plan?",
+    "a": [
+     "Users & Licence → Buy or renew",
+     "Billing → New bill",
+     "Settings → Appearance"
+    ],
+    "right": 0
+   }
   }
  },
  "tours": {
@@ -1306,7 +1337,7 @@
   },
   "licence": {
    "term": "Licence",
-   "def": "Permission to use the full version for a period, after the 14-day trial."
+   "def": "Permission to use the full version for a period, after the 45-day trial."
   },
   "basic": {
    "term": "Basic mode",
@@ -1405,6 +1436,10 @@
   "voiceonline": {
    "q": "Is voice typing done on my computer?",
    "a": "No. Voice typing uses your browser's speech service (Chrome or Edge), which processes the audio online. Transliteration (Suggest) works offline on your computer. Never speak Aadhaar numbers, OTPs or passwords."
+  },
+  "gstinvoice": {
+   "q": "Will I get a GST invoice for my VLEBook plan?",
+   "a": "Yes. Techmin Wealth Partners (GSTIN 32AEQPV4581H1ZZ) issues a GST tax invoice with receipt for every payment: CGST + SGST in Kerala, IGST in other States. Enter your GSTIN before paying if you are registered. Invoices are emailed and listed in Users & Licence → My invoices."
   }
  }
 }

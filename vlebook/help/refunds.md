@@ -6,7 +6,7 @@ This policy explains how payments, cancellations and refunds work for VLEBook li
 
 ## 1. Free trial
 
-Every new centre gets a **14-day free trial of the full version**. No payment is collected for the trial, so no refund arises. Please use the trial to check that VLEBook suits your centre before you pay. After the trial VLEBook continues in free Basic mode; buying a licence is never compulsory.
+Every new centre gets a **45-day free trial of the full version**. No payment is collected for the trial, so no refund arises. Please use the trial to check that VLEBook suits your centre before you pay. After the trial VLEBook continues in free Basic mode; buying a licence is never compulsory.
 
 VLEBook is in **early access**. Please use the trial to check that it suits your centre before you pay.
 
@@ -18,6 +18,8 @@ VLEBook is in **early access**. Please use the trial to check that it suits your
 - There is no automatic renewal or automatic debit. When a licence ends, VLEBook changes to Basic mode until you renew.
 - Any free licence that {{entity}} gives (for example during a launch offer) has no fee and so no refund.
 - Techmin Wealth Partners is registered under GST (GSTIN {{gstin}}) and issues a GST tax invoice for every payment. When a refund is approved, the GST is adjusted with a credit note as GST law requires.
+
+- **Online payments (Razorpay).** When a refund of an online payment is approved, it is sent back through Razorpay to the same UPI ID, card or bank account; banks usually credit it within 5–7 working days. A payment that failed or was not confirmed is not charged; if money was taken for a failed payment, Razorpay normally returns it automatically within 5–7 working days. Use **Check my payment** in Users & Licence, or write to us with the order number.
 
 ## 3. Refunds
 
@@ -38,13 +40,13 @@ VLEBook is in **early access**. Please use the trial to check that it suits your
 
 Fees, government charges and service charges that a centre collects from its own customers are the centre's matter. {{entity}} does not collect them and cannot refund them.
 
-This includes fees a centre charges its customers for preparing a CV or resume. The CV & Resume Builder is part of the full version; it is included in the 14-day trial and in paid licences, and no separate fee is charged for it.
+This includes fees a centre charges its customers for preparing a CV or resume. The CV & Resume Builder is part of the full version; it is included in the 45-day trial and in paid licences, and no separate fee is charged for it.
 
 Goods a centre sells to its customers (for example paper, pens or pen drives), and any return or refund of them, are also the centre's matter under its own policy. In VLEBook, cancelling the invoice returns the items to stock; it does not refund any money by itself.
 
 Products or services bought on Techmin's other websites (ComplyPro, Finance and Accounting Tools, IFSC Tracker) follow the refund terms published on those websites. Opening them from VLEBook does not change those terms.
 
-**Books & GST** (from version 3.0) is part of the full version; it is included in the 14-day trial and in paid licences, and no separate fee is charged for it. Refunds that a centre gives its customers (for example when an application is cancelled) are recorded in VLEBook as the centre's own entries; a government fee the portal returns to the centre is recorded as a refund from the portal. VLEBook does not move money.
+**Books & GST** (from version 3.0) is part of the full version; it is included in the 45-day trial and in paid licences, and no separate fee is charged for it. Refunds that a centre gives its customers (for example when an application is cancelled) are recorded in VLEBook as the centre's own entries; a government fee the portal returns to the centre is recorded as a refund from the portal. VLEBook does not move money.
 
 Version 3.1 features (GST registration modes, notes, TDS, bank reconciliation, Tally export) are part of the same full version; no separate fee is charged for them.
 
