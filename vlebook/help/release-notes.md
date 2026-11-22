@@ -31,7 +31,7 @@ Published by {{entity}}. The version you are using is shown in **Settings** and 
 - **Techmin notices** can now be sent to some states, districts, app versions, roles or users of certain screens, in Hindi and Malayalam, and can ask each user to confirm *I have read and understood*. Expired notices are hidden.
 - Data format 11 (two new tables for the print meter). Learning Centre: six new lessons, glossary words and questions in English, Hindi and Malayalam.
 - **Plans and online payment:** 45-day free trial (1 month + 15 days); Standard ₹249 / Professional ₹299 / Premium ₹399 a month, or 12 months for the price of 11 (+ 18% GST). Buy or renew in Users & Licence with Razorpay; the licence is applied instantly and Techmin's GST tax invoice with receipt is emailed and kept in My invoices. Early renewals start after the current licence.
-- **New sign-in screen** with features, real screenshots and plans, and a new *All features & plans* page.
+- **New sign-in screen** with features, real screenshots and plans, and a new *All features & plans* page, which is now the first page for new visitors.
 - **Security:** online licences are signed by a separate key on Techmin's server and accepted only within the plan limits; Techmin can stop that key remotely.
 - Legal documents updated to version 1.22 (Terms: plans, online payment, tax invoices; Refunds: online payments; Privacy: Razorpay and purchase records).
 - Legal documents updated to version 1.21 (Privacy: notice confirmations and voice typing; Disclaimer: training mode, print meter and transliteration).
