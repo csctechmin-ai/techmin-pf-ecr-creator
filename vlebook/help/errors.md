@@ -510,3 +510,6 @@ Suggestions are transliteration and can be wrong for unusual names: tap the near
 
 ### Online payment: money was taken but the licence did not arrive, or "Online payment is not available right now"
 Open Users & Licence and click **Check my payment**: VLEBook asks Techmin, which checks the order with Razorpay and issues the licence and invoice if the payment is complete. If no payment is found, nothing was charged; if money left your account for a failed payment, Razorpay normally returns it in 5–7 working days. "Not available right now" means online sales are paused: contact Techmin to renew. "The GSTIN is not valid": check the 15 characters, or leave it empty if you are not registered.
+
+### No sign-in box — only "Create the Owner account" or the Features & Plans page
+This computer or browser has no VLEBook centre yet; user names and passwords are kept on the computer where the centre was set up. Sign in on that computer (on the Features & Plans page click **Sign in**). To use this computer too, choose **Join my centre (shared Google Drive folder)** or **Restore from backup folder**, then sign in. Use the same Chrome profile as before — another browser or profile counts as another computer. Do not create a new Owner account for an existing centre.

@@ -1,5 +1,5 @@
 {
- "doc_version": "1.1",
+ "doc_version": "1.2",
  "vlebook_version": "3.4.0",
  "updated": "2026-11-22",
  "languages": [
@@ -688,6 +688,7 @@
  ],
  "faq": [
   "offline",
+  "no-signin-box",
   "datawhere",
   "browserclear",
   "newpc",
