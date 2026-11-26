@@ -65,11 +65,11 @@ const busy = d => { BUSY = Math.max(0, BUSY + d); document.body.classList.toggle
 async function call(action, extra) { busy(1); try { return await call0(action, extra); } finally { busy(-1); } }
 async function call0(action, extra) {
   if (!REGISTRY_URL) throw new Error('This console is not connected to the registry yet.');
-  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 120000); // Apps Script can be slow on a cold start or with large sheets
   try {
     const r = await fetch(REGISTRY_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action, admin_key: KEY }, extra || {})), redirect: 'follow', credentials: 'omit', signal: ctl.signal });
     const j = JSON.parse(await r.text()); if (!j.ok) { const e = new Error(j.error.message + ' [' + j.error.code + ']'); e.code = j.error.code; throw e; } return j.data;
-  } catch (e) { if (e.code) throw e; throw new Error('Could not reach the registry. Check the internet connection and try again. [NET]'); } finally { clearTimeout(t); }
+  } catch (e) { if (e && e.name === 'AbortError') throw new Error('The registry took too long to answer (more than 2 minutes). Please press Refresh and try again. [TIMEOUT]'); if (e.code && !(e instanceof DOMException)) throw e; throw new Error('Could not reach the registry. Check the internet connection and try again. [NET]'); } finally { clearTimeout(t); }
 }
 const dmy = s => { s = String(s || ''); const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '-' + m[2] + '-' + m[1] : s; };
 const dt = s => { s = String(s || ''); return s ? dmy(s) + ' ' + s.slice(11, 16) : '-'; };

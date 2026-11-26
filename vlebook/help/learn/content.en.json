@@ -126,7 +126,7 @@
     "Under Authorised signatory's signature upload a clear photo of the signature on white paper."
    ],
    "result": "A welcome email arrives with your user name, Centre ID and Device Code (never the password). The logo and signature appear on invoices.",
-   "careful": "The recovery code is the only way to reset the Owner password without Techmin's help. Do not share it. Your centre is already set up on another computer? Do not create a new Owner account here: choose Join my centre or Restore from backup folder.",
+   "careful": "The recovery code is the only way to reset the Owner password without Techmin's help. Do not share it. Your centre already uses VLEBook? Do not create a new Owner account here: click I already have a user name — Sign in to my centre, type your user name and password and choose your centre's folder.",
    "wrong": "If activation fails, check the internet and try again. If you lost the recovery code and the password, contact Techmin support with your Centre ID.",
    "check": {
     "q": "Which code lets the Owner reset the password without Techmin's help?",
@@ -708,7 +708,7 @@
     "When the paper comes out, click It printed correctly or It did not print."
    ],
    "result": "'Sent to Windows' means Windows accepted the job. Your answer finishes the job record.",
-   "careful": "VLEBook shows only the options your printer's driver reports. If Chrome or Edge asks to allow devices on your local network, choose Allow.",
+   "careful": "VLEBook shows only the options your printer's driver reports. If Chrome or Edge asks to allow devices on your local network, choose Allow. Print Bridge 1.3 also tells VLEBook which browsers are on the same PC (a hashed Windows machine ID, never the MAC address), so a new browser can take over an idle counter.",
    "wrong": "If VLEBook says the Bridge is not running, run Install VLEBook Print Bridge.cmd again. If an older Bridge is running, VLEBook shows a notice to download the new one.",
    "check": {
     "q": "What does 'Sent to Windows' mean?",
@@ -843,7 +843,7 @@
     "To restore: Restore → choose the .json or .txt file → Validate → Restore. On a new computer use Restore from backup folder on the first screen."
    ],
    "result": "Backups are saved automatically, without asking, and every save is in the audit log.",
-   "careful": "After VLEBook is reopened, Chrome may ask again for folder access: click Reconnect backup folder. Until then automatic backups are paused.",
+   "careful": "After VLEBook is reopened, Chrome may ask again for folder access: click Reconnect backup folder. Until then automatic backups are paused. On a new browser you can also use Sign in to my centre with your user name and password.",
    "wrong": "If a TXT backup is refused, it was edited — use another backup. If no backup exists, the data cannot be recovered by Techmin.",
    "check": {
     "q": "Who can recover your data if you have no backup?",
@@ -867,11 +867,12 @@
     "On the main computer (Owner): Data Ownership & Backup → Work on more than one computer → Turn on (internet needed). It becomes counter A.",
     "On each other computer: install Google Drive for desktop with the same account, open VLEBook and click Join my centre (shared Google Drive folder), choosing the same folder.",
     "Staff sign in with their own user name and password.",
-    "Ask Techmin to issue the licence for Any computer."
+    "Ask Techmin to issue the licence for Any computer.",
+    "On another browser or computer you can also use Sign in to my centre on the first screen: your user name, password and the shared folder."
    ],
    "result": "Changes reach the other computers in about a minute. Each counter has its own invoice series (VLE-A-1001, VLE-B-1001).",
-   "careful": "Start fresh on one computer clears transactions on every computer. Restoring a backup changes only the computer where it is done.",
-   "wrong": "If the Sync button shows Sync paused, click Reconnect backup folder. Money records changed on two computers are kept as a sync conflict for the Owner in Books & GST → Day close.",
+   "careful": "Start fresh on one computer clears transactions on every computer. Restoring a backup changes only the computer where it is done. The Owner can Remove a counter that is no longer used; it stops sharing and is no longer counted for the licence. Counters unseen for 30 days show inactive.",
+   "wrong": "If the Sync button shows Sync paused, click Reconnect backup folder. Money records changed on two computers are kept as a sync conflict for the Owner in Books & GST → Day close. If a browser says the Owner removed it, use the other browser or join again.",
    "check": {
     "q": "How are changes shared between computers?",
     "a": [
@@ -1201,7 +1202,7 @@
     "The licence is applied and the tax invoice with receipt opens. Print or save it as PDF; it is also emailed."
    ],
    "result": "Your plan is active (or starts after the current licence ends) and the invoice is listed in My invoices.",
-   "careful": "Enter the correct GSTIN before paying if you want input tax credit. Never share card or UPI PINs with anyone.",
+   "careful": "Enter the correct GSTIN before paying if you want input tax credit. Never share card or UPI PINs with anyone. When several computers share the centre, the licence covers this computer and the counters used in the last 30 days first.",
    "wrong": "If the payment window closed before the licence came, click Check my payment. If money was taken for a failed payment, Razorpay returns it automatically, usually in 5–7 working days.",
    "check": {
     "q": "Where do you buy or renew a plan?",
@@ -1472,7 +1473,7 @@
   },
   "no-signin-box": {
    "q": "I signed out (or opened VLEBook on another computer) and there is no sign-in box. How do I sign in?",
-   "a": "User names and passwords are kept on the computer and browser where your centre was set up. On that computer, signing out brings back the User name / Password screen; on the Features & Plans page click Sign in. On a computer where VLEBook was never set up there is no account yet: choose Join my centre (shared Google Drive folder) or Restore from backup folder, then sign in. Do not create a new Owner account for an existing centre."
+   "a": "User names and passwords are kept on the computer and browser where your centre was set up. On that computer, signing out brings back the User name / Password screen; on the Features & Plans page click Sign in. On a computer or browser where VLEBook is not set up yet, use Sign in to my centre: type your user name and password and choose the folder that contains VLEBook-sync or your backup files. VLEBook checks them against your centre's own data, brings the centre there and signs you in. Do not create a new Owner account for an existing centre."
   }
  }
 }
