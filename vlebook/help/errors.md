@@ -452,6 +452,9 @@ Print Bridge 1.1.0 (downloaded on 21 November 2026) could not start in Windows P
 ### "The VLEBook Print Bridge is not running on this computer" / printers are not listed
 Install the Bridge once with **Install VLEBook Print Bridge.cmd** (from the ZIP in **Print & printers**). It then runs in the background with an icon in the notification area and starts with Windows. If the icon is missing, open the Start menu → **VLEBook Print Bridge**. If Chrome or Edge asks to allow access to devices on your local network, choose Allow, then click **Check again** in VLEBook. Without the Bridge you can still print with the Windows print dialog or download the PDF.
 
+### Installer: "An older version of the VLEBook Print Bridge … was found"
+The installer found a Bridge already on this computer. Press **Y** to uninstall the old version and install the new one (printer connection settings are kept), or **N** to keep the old one — nothing is changed. If it says a **newer** version is installed, keep it unless Techmin support asked you to go back. If the window closes with an error, run **Uninstall VLEBook Print Bridge.cmd** from the old folder, then install again.
+
 ### VLEBook asks for a pairing code
 VLEBook connects to Print Bridge 1.2 by itself. A code is asked only when an older Bridge is running (VLEBook then shows "A newer Print Bridge is available" — install the new one) or when VLEBook is opened from another address. In that case click **Connect with a code** and type the 6-digit code shown in the Print Bridge notification (bottom right of the screen); it is valid for 3 minutes.
 

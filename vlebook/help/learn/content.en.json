@@ -94,7 +94,7 @@
     "Sign in with your user name and password.",
     "Use the menu on the left to open a screen. The big middle area shows that screen."
    ],
-   "result": "VLEBook opens on the Dashboard with today's summary.",
+   "result": "VLEBook opens on the Dashboard with today's summary. The Dashboard also shows the VLEBook version and What's new.",
    "careful": "Your business data is stored only on this computer and in the backups you save. Techmin does not keep a copy. Set up automatic backup on the first day (see the lesson Backup and restore).",
    "wrong": "If the page does not open, check the internet for the first visit, and use Chrome or Edge (not Internet Explorer). If you see an error, open Guides & Legal → Errors & Solutions.",
    "check": {
@@ -709,7 +709,7 @@
    ],
    "result": "'Sent to Windows' means Windows accepted the job. Your answer finishes the job record.",
    "careful": "VLEBook shows only the options your printer's driver reports. If Chrome or Edge asks to allow devices on your local network, choose Allow. Print Bridge 1.3 also tells VLEBook which browsers are on the same PC (a hashed Windows machine ID, never the MAC address), so a new browser can take over an idle counter.",
-   "wrong": "If VLEBook says the Bridge is not running, run Install VLEBook Print Bridge.cmd again. If an older Bridge is running, VLEBook shows a notice to download the new one.",
+   "wrong": "If VLEBook says the Bridge is not running, run Install VLEBook Print Bridge.cmd again. If an older Bridge is running, VLEBook shows a notice to download the new one. When you install a new Print Bridge, the installer finds the older one and asks before replacing it (see the lesson Install or update the Print Bridge).",
    "check": {
     "q": "What does 'Sent to Windows' mean?",
     "a": [
@@ -871,7 +871,7 @@
     "On another browser or computer you can also use Sign in to my centre on the first screen: your user name, password and the shared folder."
    ],
    "result": "Changes reach the other computers in about a minute. Each counter has its own invoice series (VLE-A-1001, VLE-B-1001).",
-   "careful": "Start fresh on one computer clears transactions on every computer. Restoring a backup changes only the computer where it is done. The Owner can Remove a counter that is no longer used; it stops sharing and is no longer counted for the licence. Counters unseen for 30 days show inactive.",
+   "careful": "Start fresh on one computer clears transactions on every computer. Restoring a backup changes only the computer where it is done. The Owner can Remove a counter that is no longer used; it stops sharing and is no longer counted for the licence. Counters unseen for 30 days show inactive. A new computer gets the lowest free letter (A, then B …); letters already given do not change.",
    "wrong": "If the Sync button shows Sync paused, click Reconnect backup folder. Money records changed on two computers are kept as a sync conflict for the Owner in Books & GST → Day close. If a browser says the Owner removed it, use the other browser or join again.",
    "check": {
     "q": "How are changes shared between computers?",
@@ -1241,6 +1241,119 @@
      "It is not printed"
     ],
     "right": 0
+   }
+  },
+  "signin-centre": {
+   "title": "Sign in on a new computer or browser",
+   "summary": "Use your own user name and password on another computer, browser or Chrome profile with Sign in to my centre.",
+   "what": "User names and passwords are kept on the computer where your centre was set up. A computer or browser that has never had VLEBook shows no sign-in box. Sign in to my centre checks your user name and password against your centre's own data in its folder and brings the centre to that computer.",
+   "why": "So you never create a second Owner account by mistake, and staff can start work on a new computer in a minute. Browsers cannot read a computer's MAC address, so VLEBook recognises an existing user this way.",
+   "before": [
+    "Google Drive for desktop (or the same backup folder) is on this computer.",
+    "You know your VLEBook user name and password."
+   ],
+   "steps": [
+    "Open tools.complypro.co.in/vlebook and click Sign in (top right of the Features & Plans page).",
+    "On the first screen click I already have a user name — Sign in to my centre.",
+    "Type your user name and password.",
+    "Click Choose the centre folder and sign in, and choose the folder that contains VLEBook-sync or your backup files (not the VLEBook-sync folder itself).",
+    "Allow Chrome to use the folder when it asks."
+   ],
+   "result": "VLEBook checks the password on this computer, brings the centre here and signs you in. Nothing is sent to Techmin for the check.",
+   "careful": "Do not click Create Owner Account for a centre that already exists. Use the same Chrome profile every day — another browser or profile counts as another computer.",
+   "wrong": "If it says the user name or password does not match, type them exactly as on the main computer. If the backups are password-protected, use Restore from backup folder with the backup password.",
+   "check": {
+    "q": "Your centre already uses VLEBook. On a new computer you see Create the Owner account. What do you do?",
+    "a": [
+     "Create a new Owner account",
+     "Use Sign in to my centre with my user name, password and the centre folder",
+     "Ask Techmin for the password"
+    ],
+    "right": 1
+   }
+  },
+  "counters": {
+   "title": "Manage your computers: remove, inactive, letters, same PC",
+   "summary": "See every computer of the centre, remove the ones no longer used and understand the counter letters.",
+   "what": "Data Ownership & Backup → Work on more than one computer lists each computer (counter) with its letter, last seen time, user and version. The Owner can Remove a computer that is no longer used. Counters not seen for 30 days are marked inactive. With Print Bridge 1.3 a badge shows browsers on the same PC.",
+   "why": "An unused computer should not hold a counter letter or a place in your licence. Online licences cover this computer and the counters used in the last 30 days first.",
+   "before": [
+    "Sign in as the Owner.",
+    "Sharing with other computers is turned on."
+   ],
+   "steps": [
+    "Open Data Ownership & Backup and scroll to Work on more than one computer.",
+    "Find the computer you no longer use (old PC, another browser or profile).",
+    "Click Remove next to it and confirm.",
+    "When you add a new computer, it gets the lowest free letter: after removing A and B, the next computer is A and the one after it B."
+   ],
+   "result": "The removed computer stops sharing the next time it opens, its letter becomes free, and Techmin stops counting it for your licence at the next check-in.",
+   "careful": "Remove only a computer that is no longer used: changes made on it that never reached the folder will not come to the others. Letters already given are not changed, because each counter's invoice series uses its letter.",
+   "wrong": "If a computer says the Owner removed it, use the other browser or join the centre again from the first screen.",
+   "check": {
+    "q": "Counters A to F exist. The Owner removes A and B. Which letter does the next new computer get?",
+    "a": [
+     "G",
+     "A",
+     "B"
+    ],
+    "right": 1
+   }
+  },
+  "bridge-update": {
+   "title": "Install or update the Print Bridge",
+   "summary": "Install the free Windows Print Bridge, or replace an older version safely.",
+   "what": "The VLEBook Print Bridge is a small Windows helper that lets VLEBook print straight to your printers. The installer now looks for a Bridge that is already installed or running and tells you its version before changing anything.",
+   "why": "An older Bridge may miss new features such as the same-PC check. Replacing it with one click keeps your printer connection settings.",
+   "before": [
+    "Windows 10 or 11.",
+    "Download the Print Bridge from VLEBook (Print window or Studio → Print & printers)."
+   ],
+   "steps": [
+    "Unzip the download.",
+    "Double-click Install VLEBook Print Bridge.cmd.",
+    "If it says an older version was found, read the two version numbers and press Y to uninstall the old one and install the new one (N changes nothing).",
+    "Wait for the message that the Bridge is installed and running; its icon is in the notification area.",
+    "In VLEBook open the print window: it shows Print Bridge connected with the new version."
+   ],
+   "result": "The old Bridge is stopped and removed from start-up, the new one is installed for your Windows user and starts with Windows. Your printer connection settings are kept.",
+   "careful": "No administrator rights are needed. If it says a NEWER Bridge is installed, keep it unless Techmin support asked you to go back.",
+   "wrong": "If the Bridge does not start, run Install VLEBook Print Bridge.cmd again or see the Print Bridge entries in Errors & Solutions. Printing on real printers, including PVC card printers, is to be checked by you after going live.",
+   "check": {
+    "q": "The installer says an older Print Bridge was found. What happens if you press N?",
+    "a": [
+     "The old Bridge is deleted",
+     "Nothing changes; the old Bridge keeps working",
+     "Both versions run"
+    ],
+    "right": 1
+   }
+  },
+  "whatsnew-dash": {
+   "title": "What's new and the VLEBook version on the Dashboard",
+   "summary": "The Dashboard opens first and shows the version, the update date and a short What's new animation.",
+   "what": "Every time you open VLEBook and sign in, the Dashboard comes first. At the top it shows VLEBook with its version number and the date of the latest update, and a short animation of what changed, in English, Hindi or Malayalam.",
+   "why": "You always know which version you are using and what is new, without searching the Release Notes.",
+   "before": [
+    "Sign in to VLEBook."
+   ],
+   "steps": [
+    "Look at the What's new card at the top of the Dashboard.",
+    "Click All release notes to read the full list.",
+    "Click Hide until next update if you have seen it; a one-line strip with the version stays.",
+    "Click Show what's new to see it again."
+   ],
+   "result": "After the next update the card comes back by itself with the new changes.",
+   "careful": "Quote the version number shown here when you contact Techmin support.",
+   "wrong": "If the old card or old text still shows, close every VLEBook tab and open VLEBook again so the update is loaded.",
+   "check": {
+    "q": "Where can you see the VLEBook version and update date?",
+    "a": [
+     "Only in Techmin's emails",
+     "At the top of the Dashboard",
+     "In the printer settings"
+    ],
+    "right": 1
    }
   }
  },
