@@ -2,9 +2,13 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
-## Version 3.4.0 (update) — 26 November 2026
+## Version 3.5.0 — 26 November 2026
 
 - **Always starts on the Dashboard:** every time VLEBook is opened and you sign in, the Dashboard is shown first.
+- **What's new on the Dashboard:** a short animation of the latest changes in English, Hindi or Malayalam, with the VLEBook version and the date of the update. It can be hidden until the next update.
+- **Counter letters:** a new computer gets the lowest free letter — letters of removed computers are given again (A, then B …).
+- **Print Bridge 1.3.1 installer:** if a Bridge is already installed or running, the installer shows its version and asks before it uninstalls the old one and installs the new one (Y/N); N changes nothing. Printer connection settings are kept.
+- **Learning Centre: 46 lessons** — new lessons *Sign in on a new computer or browser*, *Manage your computers*, *Install or update the Print Bridge* and *What's new and the VLEBook version on the Dashboard*, in English, Hindi and Malayalam.
 - **Offline start is more reliable:** VLEBook opens without internet even on web hosts that shorten page addresses (for example *about.html* → *about*). Your data, sign-ins and licence are not affected.
 - **Sign in from the Features & Plans page:** a **Sign in** button (top right) and a note for existing users. On a computer where VLEBook is not set up, VLEBook now explains that there is no account there yet and points to *Join my centre* and *Restore from backup folder*.
 - **Sign in to my centre, Remove counter, same-PC check:** on a new computer or browser, type your user name and password and choose your centre's folder — VLEBook checks them against the centre's own data (nothing is sent to Techmin), brings the centre and signs you in. Browsers cannot read MAC addresses, so this replaces a hardware check. The Owner can **Remove** a counter that is no longer used: it stops sharing, its letter becomes free and Techmin stops counting it for the licence; counters unseen for 30 days are marked inactive and the next online licence covers the computers in use first. **Print Bridge 1.3.0** adds a same-PC check (hashed Windows machine ID) so a second browser on the same PC can take over an idle counter. Privacy Policy updated (legal version 1.23).

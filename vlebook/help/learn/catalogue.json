@@ -1,6 +1,6 @@
 {
- "doc_version": "1.3",
- "vlebook_version": "3.4.0",
+ "doc_version": "1.4",
+ "vlebook_version": "3.5.0",
  "updated": "2026-11-22",
  "languages": [
   "en",
@@ -25,7 +25,9 @@
    "billing",
    "backup",
    "training",
-   "buy-plan"
+   "buy-plan",
+   "signin-centre",
+   "whatsnew-dash"
   ],
   "daily": [
    "services",
@@ -40,7 +42,8 @@
    "productivity",
    "shortcuts",
    "localscript",
-   "studio-tools"
+   "studio-tools",
+   "bridge-update"
   ],
   "advanced": [
    "billing-edit",
@@ -61,7 +64,8 @@
    "account",
    "settings",
    "health",
-   "printmeter"
+   "printmeter",
+   "counters"
   ]
  },
  "lessons": [
@@ -72,7 +76,7 @@
    "level": "beginner",
    "min": 3,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "index.html",
     "js/app.js"
@@ -86,12 +90,26 @@
    "level": "beginner",
    "min": 6,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "js/modules/gate.js",
     "js/modules/settings.js"
    ],
    "img": "settings"
+  },
+  {
+   "id": "signin-centre",
+   "cat": "safety",
+   "nav": "backup",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.5.0",
+   "updated": "3.5.0",
+   "src": [
+    "js/core/centresignin.js",
+    "js/modules/gate.js"
+   ],
+   "img": "signin-centre"
   },
   {
    "id": "gs-screen",
@@ -100,13 +118,27 @@
    "level": "beginner",
    "min": 4,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "js/app.js",
     "js/modules/dashboard.js"
    ],
    "img": "dashboard",
    "tour": "tour-screen"
+  },
+  {
+   "id": "whatsnew-dash",
+   "cat": "start",
+   "nav": "dashboard",
+   "level": "beginner",
+   "min": 2,
+   "added": "3.5.0",
+   "updated": "3.5.0",
+   "src": [
+    "js/modules/dashboard.js",
+    "js/app.js"
+   ],
+   "img": "whatsnew"
   },
   {
    "id": "gs-save",
@@ -368,11 +400,25 @@
    "level": "daily",
    "min": 6,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "js/core/printservice.js",
     "js/modules/printdialog.js",
     "print-bridge/VLEBook-Print-Bridge.ps1"
+   ]
+  },
+  {
+   "id": "bridge-update",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "daily",
+   "min": 4,
+   "added": "3.5.0",
+   "updated": "3.5.0",
+   "src": [
+    "print-bridge/Install VLEBook Print Bridge.cmd",
+    "print-bridge/VLEBook-Print-Bridge.ps1",
+    "js/core/printservice.js"
    ]
   },
   {
@@ -434,7 +480,7 @@
    "level": "beginner",
    "min": 6,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "js/modules/backup-ui.js",
     "js/core/autobackup.js",
@@ -450,10 +496,24 @@
    "level": "advanced",
    "min": 5,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "js/core/sync.js"
    ]
+  },
+  {
+   "id": "counters",
+   "cat": "safety",
+   "nav": "backup",
+   "level": "advanced",
+   "min": 4,
+   "added": "3.5.0",
+   "updated": "3.5.0",
+   "src": [
+    "js/core/sync.js",
+    "js/modules/backup-ui.js"
+   ],
+   "img": "counters"
   },
   {
    "id": "account",
@@ -607,7 +667,7 @@
    "level": "beginner",
    "min": 3,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.0",
    "src": [
     "js/modules/subscribe.js",
     "js/core/plans.js"

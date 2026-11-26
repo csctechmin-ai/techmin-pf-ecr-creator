@@ -1,28 +1,43 @@
-import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core/accounting.js";import{getAllRecords as f,getRecord as V}from"../core/db.js";import{isValidLogo as K}from"../core/branding.js";import{formatINR as s,fromPaise as S,resolveDateRange as Y,isDateInRange as q,renderCanvasChart as $,esc as d}from"../core/utils.js";import{loadOptionalAcceptanceDataset as z}from"../core/sample-data.js";let k="today",B="",O="";async function w(i,c){const v=await V("settings","CENTRE_CONFIG"),{start:u,end:p}=Y(k,B,O),[h,m,E,M,T]=await Promise.all([W(u,p),j(),f("bills"),f("pending_work"),f("inventory")]),{stockAlerts:G}=await import("../core/stock.js"),n=G(T,v),H=(n.negative.length?`<div class="callout danger"><div><strong>Negative stock:</strong> ${n.negative.map(t=>`<span data-no-i18n>${d(t.name)}</span> (${d(t.currentStock)} ${d(t.unit||"")})`).join(", ")}. <button class="btn btn-xs btn-outline" data-dash-stock>Open Stock & Inventory</button></div></div>`:"")+(n.checkDue?`<div class="callout warning"><div><strong>Physical stock check due:</strong> ${n.last?`last check ${d(n.last)} (${n.daysSince} days ago)`:"no physical stock check yet"}. <button class="btn btn-xs btn-outline" data-dash-stock="PHYSICAL">Count stock now</button></div></div>`:"");let x="";try{const{can:t,canAccess:l}=await import("../core/auth.js"),C=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Kolkata"}).format(new Date),P=[];if(l("reminders")){const A=(await f("reminders")).filter(o=>o.status==="ACTIVE"),a=A.filter(o=>(o.dueDate||o.expiryDate)<C).length,r=A.filter(o=>(o.dueDate||o.expiryDate)===C).length;(a||r)&&P.push(`<div class="callout warning"><div><strong>Renewal reminders:</strong> ${a} overdue, ${r} due today. <button class="btn btn-xs btn-outline" data-dash-go="reminders">Open reminders</button></div></div>`)}if(l("privacy")){const a=await(await import("../core/privacy.js")).privacyDashboard(C),r=[];a.custody.OVERDUE&&r.push(`${a.custody.OVERDUE} original document(s) overdue for return`),a.custody.MISSING&&r.push(`${a.custody.MISSING} reported missing`),a.custody.HELD_LONG&&r.push(`${a.custody.HELD_LONG} held for a long time`),a.custody.NO_ACK&&r.push(`${a.custody.NO_ACK} receipt(s) not acknowledged`),t("manage_privacy")&&a.retentionDue&&r.push(`${a.retentionDue} record(s) past their retention period`),t("handle_privacy_requests")&&a.openRequests&&r.push(`${a.openRequests} open customer privacy request(s)${a.overdueRequests?` — ${a.overdueRequests} older than 30 days`:""}`),r.length&&P.push(`<div class="callout ${a.custody.OVERDUE||a.custody.MISSING||a.overdueRequests?"danger":"warning"}"><div><strong>Originals & privacy:</strong> ${r.join(" · ")}. <button class="btn btn-xs btn-outline" data-dash-go="privacy">Open</button></div></div>`)}const{kvGet:F}=await import("../core/devicestore.js"),R=Number(await F("supportUpdates")||0);R&&P.push(`<div class="callout info"><div><strong>Techmin support:</strong> ${R} ticket(s) with a new reply. <button class="btn btn-xs btn-outline" data-dash-go="support">Open Help & Support</button></div></div>`),x=P.join("")}catch{}const _=m.find(t=>t.id==="ACC-CASH")?.currentBalancePaise||0,U=m.find(t=>t.id==="ACC-BANK")?.currentBalancePaise||0,D=m.find(t=>t.id==="ACC-UPI")?.currentBalancePaise||0,L=(m.find(t=>t.id==="ACC-WALLET")?.currentBalancePaise||0)+(m.find(t=>t.id==="ACC-AEPS")?.currentBalancePaise||0),e=h.totals;i.innerHTML=`
+import{computeBusinessIntelligence as z,computeAccountBalances as Q}from"../core/accounting.js";import{getAllRecords as w,getRecord as Z}from"../core/db.js";import{isValidLogo as J}from"../core/branding.js";import{formatINR as s,fromPaise as A,resolveDateRange as X,isDateInRange as O,renderCanvasChart as $,esc as l}from"../core/utils.js";import{loadOptionalAcceptanceDataset as tt}from"../core/sample-data.js";import{APP_VERSION as M,APP_UPDATED as _}from"../core/utils.js";import{getLang as E}from"../core/i18n.js";import{getCurrentUser as et}from"../core/auth.js";const T=`${M}|${_}`,L=()=>`vlebook_wn_hidden_${et()?.username||""}`;function st(){try{return localStorage.getItem(L())===T}catch{return!1}}function at(){const e=["hi","ml"].includes(E())?E():"en",r=_.split("-").reverse().join("-"),d=`<span class="wn-ver"><span>VLEBook</span> <strong data-no-i18n>${M}</strong> · <span>Updated</span> <span data-no-i18n>${r}</span></span>`;return st()?`<div class="dash-wn-mini" id="dash-whatsnew">${d} · <button type="button" class="btn-link" id="wn-show">Show what's new</button></div>`:`<div class="card dash-whatsnew" id="dash-whatsnew">
+      <img class="wn-gif" src="help/learn/img/whatsnew-${e}.gif" alt="What's new in VLEBook" loading="lazy" width="640" height="360">
+      <div class="wn-body">
+        ${d}
+        <h3>What's new</h3>
+        <ul>
+          <li>Opens on the Dashboard every time you sign in</li>
+          <li>Sign in to my centre on a new computer or browser</li>
+          <li>Remove unused counters; free letters are given again (A, B, C…)</li>
+          <li>Print Bridge 1.3.1: same-PC check; the installer asks before replacing an older version</li>
+          <li>Learning Centre: 46 lessons in English, Hindi and Malayalam</li>
+        </ul>
+        <div class="wn-actions"><button type="button" class="btn btn-sm btn-primary" id="wn-notes">All release notes</button><button type="button" class="btn btn-sm btn-outline" id="wn-hide">Hide until next update</button></div>
+      </div>
+    </div>`}let k="today",H="",G="";async function h(e,r){const d=await Z("settings","CENTRE_CONFIG"),{start:u,end:p}=X(k,H,G),[b,m,x,U,W]=await Promise.all([z(u,p),Q(),w("bills"),w("pending_work"),w("inventory")]),{stockAlerts:F}=await import("../core/stock.js"),v=F(W,d),V=(v.negative.length?`<div class="callout danger"><div><strong>Negative stock:</strong> ${v.negative.map(t=>`<span data-no-i18n>${l(t.name)}</span> (${l(t.currentStock)} ${l(t.unit||"")})`).join(", ")}. <button class="btn btn-xs btn-outline" data-dash-stock>Open Stock & Inventory</button></div></div>`:"")+(v.checkDue?`<div class="callout warning"><div><strong>Physical stock check due:</strong> ${v.last?`last check ${l(v.last)} (${v.daysSince} days ago)`:"no physical stock check yet"}. <button class="btn btn-xs btn-outline" data-dash-stock="PHYSICAL">Count stock now</button></div></div>`:"");let D="";try{const{can:t,canAccess:o}=await import("../core/auth.js"),C=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Kolkata"}).format(new Date),P=[];if(o("reminders")){const S=(await w("reminders")).filter(c=>c.status==="ACTIVE"),i=S.filter(c=>(c.dueDate||c.expiryDate)<C).length,n=S.filter(c=>(c.dueDate||c.expiryDate)===C).length;(i||n)&&P.push(`<div class="callout warning"><div><strong>Renewal reminders:</strong> ${i} overdue, ${n} due today. <button class="btn btn-xs btn-outline" data-dash-go="reminders">Open reminders</button></div></div>`)}if(o("privacy")){const i=await(await import("../core/privacy.js")).privacyDashboard(C),n=[];i.custody.OVERDUE&&n.push(`${i.custody.OVERDUE} original document(s) overdue for return`),i.custody.MISSING&&n.push(`${i.custody.MISSING} reported missing`),i.custody.HELD_LONG&&n.push(`${i.custody.HELD_LONG} held for a long time`),i.custody.NO_ACK&&n.push(`${i.custody.NO_ACK} receipt(s) not acknowledged`),t("manage_privacy")&&i.retentionDue&&n.push(`${i.retentionDue} record(s) past their retention period`),t("handle_privacy_requests")&&i.openRequests&&n.push(`${i.openRequests} open customer privacy request(s)${i.overdueRequests?` — ${i.overdueRequests} older than 30 days`:""}`),n.length&&P.push(`<div class="callout ${i.custody.OVERDUE||i.custody.MISSING||i.overdueRequests?"danger":"warning"}"><div><strong>Originals & privacy:</strong> ${n.join(" · ")}. <button class="btn btn-xs btn-outline" data-dash-go="privacy">Open</button></div></div>`)}const{kvGet:Y}=await import("../core/devicestore.js"),q=Number(await Y("supportUpdates")||0);q&&P.push(`<div class="callout info"><div><strong>Techmin support:</strong> ${q} ticket(s) with a new reply. <button class="btn btn-xs btn-outline" data-dash-go="support">Open Help & Support</button></div></div>`),D=P.join("")}catch{}const j=m.find(t=>t.id==="ACC-CASH")?.currentBalancePaise||0,K=m.find(t=>t.id==="ACC-BANK")?.currentBalancePaise||0,I=m.find(t=>t.id==="ACC-UPI")?.currentBalancePaise||0,N=(m.find(t=>t.id==="ACC-WALLET")?.currentBalancePaise||0)+(m.find(t=>t.id==="ACC-AEPS")?.currentBalancePaise||0),a=b.totals;e.innerHTML=`
     <div class="module-header">
-      ${K(v?.centreLogo)?`<img class="dash-centre-logo" src="${v.centreLogo}" alt="">`:""}
+      ${J(d?.centreLogo)?`<img class="dash-centre-logo" src="${d.centreLogo}" alt="">`:""}
       <div class="module-title-group" style="flex:1;">
-        <h1>${v?.centreName?`<span data-no-i18n>${d(v.centreName)}</span> — `:""}Financial Overview</h1>
-        <p>Period: <strong>${d(u)}</strong> to <strong>${d(p)}</strong> • Real-time transaction & profitability metrics</p>
+        <h1>${d?.centreName?`<span data-no-i18n>${l(d.centreName)}</span> — `:""}Financial Overview</h1>
+        <p>Period: <strong>${l(u)}</strong> to <strong>${l(p)}</strong> • Real-time transaction & profitability metrics</p>
       </div>
       <div class="module-actions">
-        ${e.totalCustomers===0?'<button class="btn btn-gold" id="dash-load-demo-btn" title="Load optional realistic acceptance dataset">Load Sample Data</button>':""}
+        ${a.totalCustomers===0?'<button class="btn btn-gold" id="dash-load-demo-btn" title="Load optional realistic acceptance dataset">Load Sample Data</button>':""}
         <button class="btn btn-outline" id="dash-workbench-btn">Document Workbench</button>
         <button class="btn btn-outline" id="dash-counter-close-btn">Counter Reconciliation</button>
         <button class="btn btn-primary" id="dash-new-bill-btn">+ New Counter Invoice</button>
       </div>
     </div>
-    ${H}${x}
+    ${V}${D}
+    ${at()}
 
     <!-- Clean Period Selector Bar -->
     <div class="filter-bar" style="justify-content:space-between;">
       <div class="pill-tabs" id="dash-period-tabs">
-        ${[["today","Today"],["yesterday","Yesterday"],["week","7 Days"],["month","This Month"],["prev_month","Last Month"],["fy","Financial Year"],["all","All Time"],["custom","Custom"]].map(([t,l])=>`<button class="pill-tab ${k===t?"active":""}" data-preset="${t}">${l}</button>`).join("")}
+        ${[["today","Today"],["yesterday","Yesterday"],["week","7 Days"],["month","This Month"],["prev_month","Last Month"],["fy","Financial Year"],["all","All Time"],["custom","Custom"]].map(([t,o])=>`<button class="pill-tab ${k===t?"active":""}" data-preset="${t}">${o}</button>`).join("")}
       </div>
       <div style="display:${k==="custom"?"flex":"none"}; gap:8px; align-items:center;" id="dash-custom-dates">
-        <input type="date" class="form-control" id="dash-date-from" value="${d(u)}" style="width:140px;">
+        <input type="date" class="form-control" id="dash-date-from" value="${l(u)}" style="width:140px;">
         <span style="color:var(--color-text-muted);">to</span>
-        <input type="date" class="form-control" id="dash-date-to" value="${d(p)}" style="width:140px;">
+        <input type="date" class="form-control" id="dash-date-to" value="${l(p)}" style="width:140px;">
         <button class="btn btn-sm btn-primary" id="dash-apply-custom">Apply</button>
       </div>
     </div>
@@ -34,8 +49,8 @@ import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core
           <span>Gross Customer Billing</span>
           <span class="kpi-dot"></span>
         </div>
-        <div class="kpi-value">${s(e.grossCollectionsPaise)}</div>
-        <div class="kpi-sub">Govt Challan Pass-through: ${s(e.govtFeesTotalPaise)}</div>
+        <div class="kpi-value">${s(a.grossCollectionsPaise)}</div>
+        <div class="kpi-sub">Govt Challan Pass-through: ${s(a.govtFeesTotalPaise)}</div>
       </div>
 
       <div class="kpi-card">
@@ -43,7 +58,7 @@ import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core
           <span>Centre Service Revenue</span>
           <span class="kpi-dot"></span>
         </div>
-        <div class="kpi-value">${s(e.centreServiceChargesPaise)}</div>
+        <div class="kpi-value">${s(a.centreServiceChargesPaise)}</div>
         <div class="kpi-sub">Pure operator service charges</div>
       </div>
 
@@ -52,16 +67,16 @@ import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core
           <span>Actual Collections</span>
           <span class="kpi-dot"></span>
         </div>
-        <div class="kpi-value">${s(e.actualCollectedPaise)}</div>
+        <div class="kpi-value">${s(a.actualCollectedPaise)}</div>
         <div class="kpi-sub">Cash, UPI, Bank & Wallet inflows</div>
       </div>
 
       <div class="kpi-card highlight">
         <div class="kpi-label">
           <span>True Service Contribution</span>
-          <span class="badge badge-info">Net Profit: ${s(e.netOperatingProfitPaise)}</span>
+          <span class="badge badge-info">Net Profit: ${s(a.netOperatingProfitPaise)}</span>
         </div>
-        <div class="kpi-value" style="color:var(--color-brand);">${s(e.totalServiceContributionPaise)}</div>
+        <div class="kpi-value" style="color:var(--color-brand);">${s(a.totalServiceContributionPaise)}</div>
         <div class="kpi-sub">After expenses entered in Accounts, plus commissions</div>
       </div>
     </div>
@@ -70,42 +85,42 @@ import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core
     <div class="metric-strip">
       <div class="metric-strip-item">
         <div class="metric-strip-label">Cash in Hand (Drawer)</div>
-        <div class="metric-strip-val" style="color:var(--color-success);">${s(_)}</div>
+        <div class="metric-strip-val" style="color:var(--color-success);">${s(j)}</div>
         <div class="metric-strip-sub">Physical counter balance</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Bank, UPI & Wallets</div>
-        <div class="metric-strip-val">${s(U+D+L)}</div>
-        <div class="metric-strip-sub">UPI: ${s(D)} • Wallet: ${s(L)}</div>
+        <div class="metric-strip-val">${s(K+I+N)}</div>
+        <div class="metric-strip-sub">UPI: ${s(I)} • Wallet: ${s(N)}</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Pending Customer Dues</div>
-        <div class="metric-strip-val" style="color:${e.pendingCustomerDuesPaise>0?"var(--color-danger)":"var(--color-text)"};">${s(e.pendingCustomerDuesPaise)}</div>
-        <div class="metric-strip-sub">Advances Held: ${s(e.customerAdvancesPaise)}</div>
+        <div class="metric-strip-val" style="color:${a.pendingCustomerDuesPaise>0?"var(--color-danger)":"var(--color-text)"};">${s(a.pendingCustomerDuesPaise)}</div>
+        <div class="metric-strip-sub">Advances Held: ${s(a.customerAdvancesPaise)}</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Commissions Earned</div>
-        <div class="metric-strip-val">${s(e.commissionEarnedTotalPaise)}</div>
-        <div class="metric-strip-sub">Recvd: ${s(e.commissionReceivedTotalPaise)} • Due: ${s(e.commissionPendingTotalPaise)}</div>
+        <div class="metric-strip-val">${s(a.commissionEarnedTotalPaise)}</div>
+        <div class="metric-strip-sub">Recvd: ${s(a.commissionReceivedTotalPaise)} • Due: ${s(a.commissionPendingTotalPaise)}</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Total Expenses</div>
-        <div class="metric-strip-val">${s(e.totalExpensesPaise)}</div>
-        <div class="metric-strip-sub">Purchases: ${s(e.directCostsTotalPaise)} • Other expenses: ${s(e.commonOperatingExpensesPaise)}</div>
+        <div class="metric-strip-val">${s(a.totalExpensesPaise)}</div>
+        <div class="metric-strip-sub">Purchases: ${s(a.directCostsTotalPaise)} • Other expenses: ${s(a.commonOperatingExpensesPaise)}</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Applications Tracker</div>
-        <div class="metric-strip-val">${e.pendingApplications} Pending</div>
-        <div class="metric-strip-sub">${e.completedApplications} Completed / Approved</div>
+        <div class="metric-strip-val">${a.pendingApplications} Pending</div>
+        <div class="metric-strip-sub">${a.completedApplications} Completed / Approved</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Registered Customers</div>
-        <div class="metric-strip-val">${e.totalCustomers} Citizens</div>
-        <div class="metric-strip-sub">+${e.newCustomersInPeriod} New • Refunds Due: ${s(e.pendingRefundsPaise)}</div>
+        <div class="metric-strip-val">${a.totalCustomers} Citizens</div>
+        <div class="metric-strip-sub">+${a.newCustomersInPeriod} New • Refunds Due: ${s(a.pendingRefundsPaise)}</div>
       </div>
       <div class="metric-strip-item">
         <div class="metric-strip-label">Print Volume</div>
-        <div class="metric-strip-val">${e.totalPagesPrinted} Pages</div>
+        <div class="metric-strip-val">${a.totalPagesPrinted} Pages</div>
         <div class="metric-strip-sub">Printing services billed in period</div>
       </div>
     </div>
@@ -164,11 +179,11 @@ import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core
             </tr>
           </thead>
           <tbody>
-            ${h.rankings.mostProfitableServices.length===0?'<tr><td colspan="10" style="text-align:center; padding:24px; color:var(--color-text-muted);">No service transactions recorded in this period. Click <strong>+ New Counter Invoice</strong> or <strong>Load Sample Data</strong> above to get started.</td></tr>':h.rankings.mostProfitableServices.map(t=>`
+            ${b.rankings.mostProfitableServices.length===0?'<tr><td colspan="10" style="text-align:center; padding:24px; color:var(--color-text-muted);">No service transactions recorded in this period. Click <strong>+ New Counter Invoice</strong> or <strong>Load Sample Data</strong> above to get started.</td></tr>':b.rankings.mostProfitableServices.map(t=>`
                   <tr>
                     <td>
-                      <strong style="color:var(--color-text);">${d(t.serviceName)}</strong><br>
-                      <small style="color:var(--color-text-muted);">${d(t.category)}</small>
+                      <strong style="color:var(--color-text);">${l(t.serviceName)}</strong><br>
+                      <small style="color:var(--color-text-muted);">${l(t.category)}</small>
                     </td>
                     <td class="num">${t.qtyCount}</td>
                     <td class="num">${s(t.customerCollectionPaise)}</td>
@@ -186,4 +201,4 @@ import{computeBusinessIntelligence as W,computeAccountBalances as j}from"../core
         </table>
       </div>
     </div>
-  `,i.querySelectorAll("[data-dash-go]").forEach(t=>t.addEventListener("click",()=>c(t.getAttribute("data-dash-go")))),i.querySelectorAll("[data-dash-stock]").forEach(t=>t.addEventListener("click",()=>c("inventory",t.getAttribute("data-dash-stock")||void 0))),i.querySelector("#dash-new-bill-btn")?.addEventListener("click",()=>c("billing")),i.querySelector("#dash-counter-close-btn")?.addEventListener("click",()=>c("accounts")),i.querySelector("#dash-workbench-btn")?.addEventListener("click",()=>c("studio")),i.querySelector("#dash-go-reports")?.addEventListener("click",()=>c("reports")),i.querySelector("#dash-load-demo-btn")?.addEventListener("click",async()=>{await z(),await w(i,c)}),i.querySelectorAll("#dash-period-tabs .pill-tab").forEach(t=>{t.addEventListener("click",()=>{k=t.getAttribute("data-preset"),w(i,c)})}),i.querySelector("#dash-apply-custom")?.addEventListener("click",()=>{B=i.querySelector("#dash-date-from")?.value||"",O=i.querySelector("#dash-date-to")?.value||"",w(i,c)});const N=h.rankings.mostProfitableServices.slice(0,6);$(i.querySelector("#chart-service-profit"),{type:"bar",labels:N.map(t=>t.serviceName.slice(0,14)),values:N.map(t=>S(t.serviceContributionPaise))});const b=new Map;E.filter(t=>t.status!=="CANCELLED"&&q(t.date,u,p)).forEach(t=>{const l=t.paymentMode||"CASH";b.set(l,(b.get(l)||0)+S(t.grandTotalPaise))}),$(i.querySelector("#chart-payment-modes"),{type:"doughnut",labels:Array.from(b.keys()),values:Array.from(b.values())});const y=new Map;E.filter(t=>t.status!=="CANCELLED"&&q(t.date,u,p)).forEach(t=>{y.set(t.date,(y.get(t.date)||0)+S(t.grandTotalPaise))});const I=Array.from(y.keys()).sort();$(i.querySelector("#chart-daily-trend"),{type:"line",labels:I.map(t=>t.slice(5)),values:I.map(t=>y.get(t))});const g=new Map;M.forEach(t=>{const l=t.status||"New";g.set(l,(g.get(l)||0)+1)}),$(i.querySelector("#chart-app-status"),{type:"doughnut",labels:Array.from(g.keys()),values:Array.from(g.values())})}export{w as renderDashboardModule};
+  `,e.querySelectorAll("[data-dash-go]").forEach(t=>t.addEventListener("click",()=>r(t.getAttribute("data-dash-go")))),e.querySelectorAll("[data-dash-stock]").forEach(t=>t.addEventListener("click",()=>r("inventory",t.getAttribute("data-dash-stock")||void 0))),e.querySelector("#dash-new-bill-btn")?.addEventListener("click",()=>r("billing")),e.querySelector("#wn-hide")?.addEventListener("click",()=>{try{localStorage.setItem(L(),T)}catch{}h(e,r)}),e.querySelector("#wn-show")?.addEventListener("click",()=>{try{localStorage.removeItem(L())}catch{}h(e,r)}),e.querySelector("#wn-notes")?.addEventListener("click",async()=>{await r("help");const{renderHelpModule:t}=await import("./help.js");t(document.getElementById("workspace-content"),{docId:"release",lang:E()}).catch(()=>{})}),e.querySelector("#dash-counter-close-btn")?.addEventListener("click",()=>r("accounts")),e.querySelector("#dash-workbench-btn")?.addEventListener("click",()=>r("studio")),e.querySelector("#dash-go-reports")?.addEventListener("click",()=>r("reports")),e.querySelector("#dash-load-demo-btn")?.addEventListener("click",async()=>{await tt(),await h(e,r)}),e.querySelectorAll("#dash-period-tabs .pill-tab").forEach(t=>{t.addEventListener("click",()=>{k=t.getAttribute("data-preset"),h(e,r)})}),e.querySelector("#dash-apply-custom")?.addEventListener("click",()=>{H=e.querySelector("#dash-date-from")?.value||"",G=e.querySelector("#dash-date-to")?.value||"",h(e,r)});const B=b.rankings.mostProfitableServices.slice(0,6);$(e.querySelector("#chart-service-profit"),{type:"bar",labels:B.map(t=>t.serviceName.slice(0,14)),values:B.map(t=>A(t.serviceContributionPaise))});const y=new Map;x.filter(t=>t.status!=="CANCELLED"&&O(t.date,u,p)).forEach(t=>{const o=t.paymentMode||"CASH";y.set(o,(y.get(o)||0)+A(t.grandTotalPaise))}),$(e.querySelector("#chart-payment-modes"),{type:"doughnut",labels:Array.from(y.keys()),values:Array.from(y.values())});const g=new Map;x.filter(t=>t.status!=="CANCELLED"&&O(t.date,u,p)).forEach(t=>{g.set(t.date,(g.get(t.date)||0)+A(t.grandTotalPaise))});const R=Array.from(g.keys()).sort();$(e.querySelector("#chart-daily-trend"),{type:"line",labels:R.map(t=>t.slice(5)),values:R.map(t=>g.get(t))});const f=new Map;U.forEach(t=>{const o=t.status||"New";f.set(o,(f.get(o)||0)+1)}),$(e.querySelector("#chart-app-status"),{type:"doughnut",labels:Array.from(f.keys()),values:Array.from(f.values())})}export{h as renderDashboardModule};
