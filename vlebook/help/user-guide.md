@@ -64,6 +64,7 @@ Take a backup, open VLEBook on the new computer (the internet is needed to set i
 ## 3. Signing in and staff accounts
 
 - Each person signs in with their own user name and password. To sign out, click your name at the top right → **Sign out**.
+- **Where you can sign in.** User names and passwords are kept on the computer (and browser) where the centre was set up, not on Techmin's server. After **Sign out** the same computer shows the **User name / Password** screen. On the Features & Plans page, click **Sign in** (top right). On a computer where VLEBook was never set up there is no sign-in box: choose **Join my centre (shared Google Drive folder)** or **Restore from backup folder**, then sign in. Do not create a new Owner account for a centre that already exists.
 - The Owner adds staff in **Users & Licence → Add User** (full version). Choose a role:
   - **Owner**: everything, including users, licence, settings, reports and backup.
   - **Manager**: everything except users and licence.
