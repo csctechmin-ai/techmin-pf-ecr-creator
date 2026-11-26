@@ -414,8 +414,8 @@ Nothing was saved. Draw the redaction boxes a little larger, covering the whole 
 ### "This HEIC photo could not be opened"
 Some iPhone photos use newer formats. On the phone, share the photo as JPG (Settings → Camera → Formats → Most Compatible) and use that.
 
-### OCR language data does not load
-The first use of each language downloads its data from VLEBook's site (English 4 MB, Malayalam 5 MB, Hindi 1 MB). Connect to the internet once; afterwards it works offline.
+### "I cannot find OCR, Read text or Edit PDF"
+These tools were removed in version 3.5.1. To turn paper into a PDF use **PDF & Image Studio → Document scanner**; to hide parts of a PDF use **PDF Tools → Redact (secure)**. Your saved data is not affected.
 
 ### Cards print in the wrong place or size
 Print at *Actual size / 100%* with "Fit to page" off. Print the calibration sheet, measure the 100 mm lines and the corner marks, and enter the numbers in the printer profile.

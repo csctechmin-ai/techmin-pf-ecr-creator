@@ -1,6 +1,6 @@
 {
- "doc_version": "1.4",
- "vlebook_version": "3.5.0",
+ "doc_version": "1.5",
+ "vlebook_version": "3.5.1",
  "updated": "2026-11-22",
  "languages": [
   "en",
@@ -54,7 +54,7 @@
    "staff",
    "originals",
    "privacy",
-   "studio-ocr",
+   "studio-scan",
    "studio-pvc",
    "cv",
    "catalogue",
@@ -346,7 +346,7 @@
    "level": "daily",
    "min": 6,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.1",
    "src": [
     "js/modules/studio.js",
     "js/core/pdftools.js"
@@ -367,16 +367,15 @@
    ]
   },
   {
-   "id": "studio-ocr",
+   "id": "studio-scan",
    "cat": "studio",
    "nav": "studio",
    "level": "advanced",
-   "min": 4,
+   "min": 3,
    "added": "3.4.0",
-   "updated": "3.4.0",
+   "updated": "3.5.1",
    "src": [
-    "js/modules/studio-ocr.js",
-    "js/core/ocr.js"
+    "js/modules/studio-scan.js"
    ]
   },
   {
@@ -762,7 +761,6 @@
   "bridge",
   "backupask",
   "basicmode",
-  "ocrsure",
   "photogreen",
   "trainingsafe",
   "voiceonline",

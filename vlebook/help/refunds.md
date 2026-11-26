@@ -58,7 +58,7 @@ Updates, including automatic updates (version 3.2.3), are part of the licence; n
 
 Opening balances and voucher editing (version 3.2.4) are part of the same full version; no separate fee is charged for them.
 
-The PDF & Image Studio, Photo & Signature Studio, OCR and PVC ID & Print (version 3.3.0) are part of the same full version; no separate fee is charged for them. Printer hardware, cards, ribbons and paper are not supplied by Techmin.
+The PDF & Image Studio, Photo & Signature Studio and PVC ID & Print (version 3.3.0) are part of the same full version; no separate fee is charged for them. Printer hardware, cards, ribbons and paper are not supplied by Techmin.
 
 Renewal Reminders, Original Documents & Privacy, Help & Support tickets and the Print Bridge (version 3.4.0) are included without a separate fee. Renewal Reminders are part of the full version; Original Documents & Privacy and support tickets are available in every version. WhatsApp, internet, printers and consumables are the Centre's own costs.
 

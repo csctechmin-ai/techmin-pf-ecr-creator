@@ -580,7 +580,7 @@
   },
   "studio-pdf": {
    "title": "PDF & Image Studio: PDF tools and editor",
-   "summary": "Merge, split, compress, convert, protect, redact and edit PDFs on this computer.",
+   "summary": "Merge, split, compress, convert, protect and redact PDFs on this computer.",
    "what": "A workshop for PDF and image files. Everything runs on this computer — files are never uploaded.",
    "why": "Customers often need a PDF merged, made smaller, converted or protected before uploading to a portal.",
    "before": [
@@ -592,7 +592,7 @@
     "Add the file(s) and set the options.",
     "Run the tool (Ctrl + Enter also works) and preview the result page by page.",
     "Download the result. Several results download as one ZIP.",
-    "For editing, use the PDF Editor workspace and Save As New PDF — the original is never overwritten."
+    "Redact (secure) saves a new PDF with the marked areas removed — the original is never overwritten. (The PDF Editor was removed in 3.5.1.)"
    ],
    "result": "A new file is made. The original file stays as it was.",
    "careful": "A white cover box is not redaction — use Redact (secure), which removes the hidden words and checks it. Editing a digitally signed PDF breaks its signature.",
@@ -635,29 +635,29 @@
     "right": 1
    }
   },
-  "studio-ocr": {
-   "title": "OCR & Scanner: read text from pictures",
-   "summary": "Read text from photos and scanned PDFs in English, Malayalam and Hindi, and make clean scans.",
-   "what": "OCR turns the letters in a picture into text you can copy and edit. The scanner turns phone photos of pages into one clean PDF.",
-   "why": "You save typing when a customer brings a printed document.",
+  "studio-scan": {
+   "title": "Document scanner: photos of paper to one PDF",
+   "summary": "Turn phone photos of pages into one clean PDF, or print them.",
+   "what": "The scanner turns phone or camera photos of paper pages into one clean PDF. (Reading text from pictures — OCR — was removed from VLEBook in 3.5.1.)",
+   "why": "Customers often bring paper; a clean PDF is easier to upload, send and keep.",
    "before": [
-    "A clear, straight photo or scan of the page."
+    "Clear, straight photos of each page, taken in good light."
    ],
    "steps": [
-    "Open PDF & Image Studio → OCR & Scanner.",
-    "Add the picture or PDF and choose the language (English, Malayalam, Hindi).",
-    "Start reading. Words the computer is not sure about are highlighted.",
-    "Correct the text, then download TXT or a searchable PDF.",
-    "For scans: add the page photos, choose colour, grey or black & white, straighten and reorder, then save one PDF."
+    "Open PDF & Image Studio → Document scanner.",
+    "Add the page photos, drag them in, or use 📷 Capture page.",
+    "For each page choose Colour (auto), Grayscale, Black & white or As taken.",
+    "Straighten with the slider, turn with ⟳ 90°, and use ↑ to change the order.",
+    "Click Make PDF to download one PDF, or Print to print the pages."
    ],
-   "result": "Editable text or a clean PDF, made on this computer.",
-   "careful": "OCR can misread names, numbers and handwriting — always check before using the text.",
-   "wrong": "If the text is poor, retake the photo in good light, straight, without shadows.",
+   "result": "One clean PDF of all the pages, made on this computer — nothing is uploaded or kept.",
+   "careful": "Check every page is readable before you upload it to a portal.",
+   "wrong": "If a page looks dark or blurred, retake the photo in good light, straight, without shadows.",
    "check": {
-    "q": "Should you check OCR text before using it?",
+    "q": "Where are the scanned pages processed?",
     "a": [
-     "Yes, always",
-     "No"
+     "On this computer",
+     "On Techmin's server"
     ],
     "right": 0
    }
@@ -1563,10 +1563,6 @@
   "basicmode": {
    "q": "My trial ended. Is my data gone?",
    "a": "No. VLEBook moves to Basic mode: your data stays and minimal daily work continues. Buying a licence brings back all features at once."
-  },
-  "ocrsure": {
-   "q": "Can I trust the OCR text?",
-   "a": "Always check it. OCR can misread names, numbers and handwriting; doubtful words are highlighted."
   },
   "photogreen": {
    "q": "The photo shows GREEN. Will the portal accept it?",
