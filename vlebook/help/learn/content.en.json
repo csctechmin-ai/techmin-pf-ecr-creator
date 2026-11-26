@@ -153,7 +153,7 @@
     "Click your name at the top right for Change my password and Sign out.",
     "The Save button saves all open edits at once. A yellow Backup needed button means data changed since the last backup."
    ],
-   "result": "You can open every screen and come back to the Dashboard at any time.",
+   "result": "You can open every screen and come back to the Dashboard at any time. After you sign in, VLEBook always opens on the Dashboard.",
    "careful": "Sign out when you leave the counter, so nobody else works under your name.",
    "wrong": "If a menu item shows FULL, it needs the full version (trial or licence). If a menu item is missing, your role may not allow it — ask the Owner.",
    "check": {
