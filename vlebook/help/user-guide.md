@@ -4,6 +4,8 @@ VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billin
 
 **Early access.** VLEBook is in early access: it is still being developed, features and screens may change, and some errors may remain. Keep regular backups, check important figures before you rely on them, and report problems to {{email}}.
 
+**New in this update (26 November 2026):** **Sign in to my centre** on a new computer or browser — see *3. Signing in and staff accounts → Where you can sign in*. **Remove** a counter you no longer use, **inactive** counters and the **same-PC** check with Print Bridge 1.3 — see *5B. Working on more than one computer*. A **Sign in** button on the Features & Plans page. Full list: *Release Notes*.
+
 ## 1. Getting started
 
 1. Open VLEBook at **tools.complypro.co.in/vlebook/** in **Google Chrome** or **Microsoft Edge**, on a computer that is connected to the internet.
@@ -64,6 +66,7 @@ Take a backup, open VLEBook on the new computer (the internet is needed to set i
 ## 3. Signing in and staff accounts
 
 - Each person signs in with their own user name and password. To sign out, click your name at the top right → **Sign out**.
+- **After sign-in VLEBook always opens on the Dashboard**, whichever screen was open when you last closed it.
 - **Where you can sign in.** User names and passwords are kept on the computer (and browser) where the centre was set up, not on Techmin's server. After **Sign out** the same computer shows the **User name / Password** screen. On the Features & Plans page, click **Sign in** (top right). On a computer or browser where VLEBook is not set up yet, use **Sign in to my centre**: type your user name and password, then choose your centre's folder (the folder that contains *VLEBook-sync*, or your backup files — not the *VLEBook-sync* folder itself). VLEBook checks them against your centre's own data on that computer, brings the centre there and signs you in. Browsers cannot read a computer's MAC address, so this is how an existing user is recognised. Do not create a new Owner account for a centre that already exists.
 - The Owner adds staff in **Users & Licence → Add User** (full version). Choose a role:
   - **Owner**: everything, including users, licence, settings, reports and backup.
