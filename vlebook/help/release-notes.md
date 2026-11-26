@@ -2,6 +2,12 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.5.1 — 26 November 2026
+
+- **Removed at the owner's request:** the **OCR** tools (read text from pictures and scanned PDFs, and *Suggest type* in PVC ID & Print) and the **PDF Editor** (*Edit PDF*). The PDF & Image Studio keeps PDF Tools, **Redact (secure)**, Image Tools, Photo & Signature, the **Document scanner** (now its own workspace), PVC ID & Print, Print & printers and QR, Stamp & Calculators. In PVC ID & Print, choose the document type from the list.
+- **No data is affected:** no table or record was changed or removed; backups and sync work as before. The OCR files kept by earlier versions (about 18 MB) are deleted from the computer automatically.
+- Learning Centre: a *Document scanner* lesson replaces the OCR lesson (still 46 lessons). Privacy Policy, Disclaimer, Licences and Refunds updated (legal version 1.24).
+
 ## Version 3.5.0 — 26 November 2026
 
 - **Always starts on the Dashboard:** every time VLEBook is opened and you sign in, the Dashboard is shown first.

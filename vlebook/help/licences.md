@@ -1,6 +1,6 @@
 # Open-source licences
 
-VLEBook is published by {{entity}}. Most of VLEBook is original code written for VLEBook. A few open-source components are included so that PDF, OCR and photo tools work fully offline on your computer. Each is used under its own licence, shown below. These components run only on your computer; nothing is uploaded.
+VLEBook is published by {{entity}}. Most of VLEBook is original code written for VLEBook. A few open-source components are included so that PDF and photo tools work fully offline on your computer. Each is used under its own licence, shown below. These components run only on your computer; nothing is uploaded.
 
 ## Components included in VLEBook
 
@@ -10,8 +10,6 @@ VLEBook is published by {{entity}}. Most of VLEBook is original code written for
 | pdf.js standard fonts (Foxit, Liberation) | BSD-style (Foxit), SIL Open Font Licence 1.1 (Liberation) | Showing PDFs that use standard fonts |
 | pdf.js image decoders (OpenJPEG, JBIG2, QCMS) | Their own permissive licences | Decoding some scanned-PDF image types |
 | pdf-lib 1.17.1 | MIT | Merging, splitting, editing and creating PDFs |
-| Tesseract OCR (tesseract.js-core 7.0.0) with its image libraries | Apache License 2.0; image libraries under permissive licences | Reading text from images and scanned pages (OCR) |
-| Tesseract language data: English, Malayalam, Hindi | Apache License 2.0 | OCR language models |
 | libheif with libde265 (JavaScript build) | GNU LGPL version 3.0 | Opening iPhone HEIC / HEIF photos |
 
 ## About libheif (LGPL 3.0)
