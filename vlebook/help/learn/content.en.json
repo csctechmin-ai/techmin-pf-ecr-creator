@@ -1355,6 +1355,61 @@
     ],
     "right": 1
    }
+  },
+  "gforms": {
+   "title": "Google Forms: create, publish and share a real Google Form",
+   "summary": "Make a real Google Form in your own Gmail account from a template or from scratch, publish it and share the link.",
+   "what": "VLEBook creates the form in your own Google account through Google's official Forms service. Customers fill it on Google; VLEBook shows the responses.",
+   "why": "Collect enquiries, registrations and feedback without paper, in English, Hindi or Malayalam.",
+   "before": [
+    "A Gmail (Google) account. On the free trial and in Basic mode one Gmail account and 2 forms are allowed; paid plans allow any number."
+   ],
+   "steps": [
+    "Open Google Forms → Gmail accounts. Click Use this Gmail, or type your Gmail ID (the Owner does this once).",
+    "Sign in in Google's own window and tick all the permissions. VLEBook never sees your Google password.",
+    "Open Template gallery, choose a category and the form language, then Preview or Use template — or open Create new form for a blank form.",
+    "Check and change the questions, options and Required ticks; click Preview to see them.",
+    "Click Create Google Form. The form is made in your Google account but is not published yet.",
+    "Click Publish now when you are ready, then Copy link, WhatsApp or E-mail to share it."
+   ],
+   "result": "A real Google Form that accepts responses, listed under My forms.",
+   "careful": "Never ask for full Aadhaar numbers, bank PINs or passwords in a form. Google cannot check the format of answers (such as a 10-digit mobile number) for forms made by an app — check them when you review responses.",
+   "wrong": "If the Google window says this app is unverified or you are not a test user, Techmin's Google approval is still pending — contact Techmin support. If you chose a different Google account, click Connect again and choose the Gmail shown.",
+   "check": {
+    "q": "When does a new form start accepting responses?",
+    "a": [
+     "Only after you click Publish",
+     "As soon as it is created"
+    ],
+    "right": 0
+   }
+  },
+  "gforms-responses": {
+   "title": "Google Forms: see, search and export the responses",
+   "summary": "Bring the answers your customers gave on Google into VLEBook, find them, print them or export them.",
+   "what": "VLEBook reads the responses of your forms from Google with your connected Gmail account and keeps a copy in your centre's own data.",
+   "why": "All answers from all your Gmail accounts in one place, next to your other work.",
+   "before": [
+    "A published form and a connected Gmail account."
+   ],
+   "steps": [
+    "Open Google Forms → Form responses and click Refresh responses (VLEBook also checks every 5 minutes while the screen is open).",
+    "Choose a Gmail account, a form or dates, or type in Search to narrow the list.",
+    "Click View to see one response with every question and answer; Print prints it.",
+    "Click CSV or JSON to export, or Print report for the list.",
+    "In My forms use Stop responses / Reopen, Duplicate, Edit in Google, or Remove / delete."
+   ],
+   "result": "The latest responses with the time of the last refresh.",
+   "careful": "Responses contain customers' personal details. Export only what you need, keep files safe and delete them when no longer needed. Delete the Google Form moves it to the Google Drive bin; Delete saved responses removes only VLEBook's copy.",
+   "wrong": "If an account shows Not connected or Reconnect, click Connect in Gmail accounts — saved responses are kept. New responses appear only after a refresh; there are no instant alerts.",
+   "check": {
+    "q": "Does deleting saved responses in VLEBook delete them in Google?",
+    "a": [
+     "No, only VLEBook's copy",
+     "Yes"
+    ],
+    "right": 0
+   }
   }
  },
  "tours": {
@@ -1505,6 +1560,10 @@
   "shortcut": {
    "term": "Keyboard shortcut",
    "def": "A key combination (such as Alt+N) that does an action without the mouse."
+  },
+  "gform": {
+   "term": "Google Form",
+   "def": "A form made in your own Google account that customers fill on Google; VLEBook creates it and shows its responses."
   }
  },
  "faq": {
@@ -1583,6 +1642,10 @@
   "no-signin-box": {
    "q": "I signed out (or opened VLEBook on another computer) and there is no sign-in box. How do I sign in?",
    "a": "User names and passwords are kept on the computer and browser where your centre was set up. On that computer, signing out brings back the User name / Password screen; on the Features & Plans page click Sign in. On a computer or browser where VLEBook is not set up yet, use Sign in to my centre: type your user name and password and choose the folder that contains VLEBook-sync or your backup files. VLEBook checks them against your centre's own data, brings the centre there and signs you in. Do not create a new Owner account for an existing centre."
+  },
+  "gformswhere": {
+   "q": "Where are Google Forms responses kept? Does Techmin see them?",
+   "a": "The form and its responses are in your own Google account. VLEBook keeps a copy in your centre's own data on your computers and in your backups. Techmin never receives them."
   }
  }
 }

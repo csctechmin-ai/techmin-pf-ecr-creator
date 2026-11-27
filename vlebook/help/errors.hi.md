@@ -522,3 +522,50 @@ Users & Licence खोलकर **Check my payment** पर क्लिक क�
 
 ### "The Owner removed this computer from the centre" / "Another browser on this same computer now works as this counter"
 इस कंप्यूटर या ब्राउज़र ने साझा करना बंद कर दिया क्योंकि Owner ने इसे हटा दिया, या उसी पीसी के नए ब्राउज़र ने इसका काउंटर ले लिया (Print Bridge 1.3)। दूसरा ब्राउज़र उपयोग करें, या फिर से जुड़ें: Data Ownership & Backup → Work on more than one computer, या पहली स्क्रीन पर **Sign in to my centre**।
+
+## संस्करण 3.6 — गूगल फ़ॉर्म्स
+
+### "This app isn't verified" या "Access blocked: … has not completed the Google verification process"
+Techmin का ऐप गूगल की स्वीकृति की प्रतीक्षा में होने तक गूगल यह दिखाता है। परीक्षण के दौरान केवल वे जीमेल खाते जुड़ सकते हैं जिन्हें Techmin ने टेस्ट उपयोगकर्ता के रूप में जोड़ा है। जिस जीमेल आईडी का उपयोग करना है उसके साथ Techmin सहायता से संपर्क करें।
+
+### "The browser blocked the Google sign-in window"
+tools.complypro.co.in के लिए पॉप-अप की अनुमति दें (एड्रेस बार के दाईं ओर का आइकन), फिर Connect दोबारा दबाएँ।
+
+### "The Google window was closed before signing in"
+Connect दबाएँ और गूगल विंडो में साइन-इन पूरा करें।
+
+### "Some Google permissions were not ticked" / "Google permission was not given"
+गूगल विंडो में हर बॉक्स पर टिक करें (VLEBook के बनाए फ़ॉर्म देखना और बदलना, उनके उत्तर देखना, VLEBook की बनाई फ़ाइलें, आपका ई-मेल पता)। Reconnect दबाएँ और सब पर टिक करें।
+
+### "You signed in with a different Google account"
+कुछ नहीं बदला। Connect फिर दबाएँ और दिखाया गया जीमेल खाता चुनें (या Gmail accounts में जोड़ा गया)।
+
+### "The Google connection has expired" / खाते पर Not connected
+कनेक्शन VLEBook खुला रहने तक चलता है। Gmail accounts में Connect / Reconnect दबाएँ। सहेजे फ़ॉर्म और उत्तर बने रहते हैं।
+
+### "Your current plan allows one Gmail account" / "allows 2 forms"
+फ़्री ट्रायल और बेसिक मोड में एक जीमेल खाता और 2 फ़ॉर्म की अनुमति है। कोई फ़ॉर्म हटाएँ (Remove / delete → Delete the Google Form) या पेड प्लान खरीदें।
+
+### "Only the Owner can add or change the Gmail accounts"
+मालिक से साइन इन करके जीमेल खाता जोड़ने को कहें। अन्य उपयोगकर्ता मालिक द्वारा जोड़े खातों से फ़ॉर्म बना और उत्तर देख सकते हैं।
+
+### "Google refused this action for this account (permission denied)" / "This form belongs to a different Gmail account"
+जिस जीमेल खाते का फ़ॉर्म है उसे जोड़ें (My forms में दिखता है)। दूसरे खाते में बना फ़ॉर्म इस खाते से नहीं संभाला जा सकता।
+
+### "Google could not find this form"
+यह गूगल फ़ॉर्म्स में हटाया या खिसकाया गया है, या किसी दूसरे खाते का है। VLEBook में सहेजे उत्तर बने रहते हैं; ज़रूरत न हो तो इसे सूची से हटाएँ।
+
+### "This Google account's organisation does not allow forms to be published to everyone"
+कार्यालय या स्कूल के गूगल खाते सार्वजनिक फ़ॉर्म रोक सकते हैं। उस खाते के एडमिनिस्ट्रेटर से पूछें, या व्यक्तिगत जीमेल खाता उपयोग करें।
+
+### "Google is limiting requests right now (quota)"
+VLEBook स्वयं फिर कोशिश करता है। एक मिनट रुककर Refresh responses दबाएँ।
+
+### "The form was created in Google, but its questions could not be added"
+जाँचने के लिए Edit in Google से खोलें, या इसे हटाएँ (Remove / delete) और फिर से बनाएँ।
+
+### नए उत्तर नहीं दिखते
+Refresh responses दबाएँ। गूगल फ़ॉर्म्स स्क्रीन खुली हो तो VLEBook हर 5 मिनट में भी जाँचता है; तुरंत सूचना नहीं आती। फ़ॉर्म जिस जीमेल खाते का है वह जुड़ा होना चाहिए।
+
+### "The Google Forms service is not available for this app (API_DISABLED)"
+यह Techmin की ओर की सेटिंग है। Techmin सहायता से संपर्क करें।

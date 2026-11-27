@@ -522,3 +522,50 @@ Type the same user name and password you use on the main computer (passwords are
 
 ### "The Owner removed this computer from the centre" / "Another browser on this same computer now works as this counter"
 This computer or browser stopped sharing because the Owner removed it, or because a newer browser on the same PC took over its counter (Print Bridge 1.3). Use the other browser, or join again: Data Ownership & Backup → Work on more than one computer, or **Sign in to my centre** on the first screen.
+
+## Version 3.6 — Google Forms
+
+### "This app isn't verified" or "Access blocked: … has not completed the Google verification process"
+Google shows this while Techmin's app is waiting for Google's approval. During testing only the Gmail accounts Techmin has added as test users can connect. Contact Techmin support with the Gmail ID you want to use.
+
+### "The browser blocked the Google sign-in window"
+Allow pop-ups for tools.complypro.co.in (the icon at the right of the address bar), then click Connect again.
+
+### "The Google window was closed before signing in"
+Click Connect and finish signing in in the Google window.
+
+### "Some Google permissions were not ticked" / "Google permission was not given"
+In the Google window, tick every box (see and manage the forms VLEBook makes, see their responses, the files VLEBook creates, your e-mail address). Click Reconnect and tick all of them.
+
+### "You signed in with a different Google account"
+Nothing was changed. Click Connect again and choose the Gmail account shown (or the one tagged in Gmail accounts).
+
+### "The Google connection has expired" / account shows Not connected
+The connection lasts while VLEBook is open. Click Connect / Reconnect in Gmail accounts. Saved forms and responses are kept.
+
+### "Your current plan allows one Gmail account" / "allows 2 forms"
+On the free trial and in Basic mode, one Gmail account and 2 forms are allowed. Delete a form (Remove / delete → Delete the Google Form) or buy a paid plan.
+
+### "Only the Owner can add or change the Gmail accounts"
+Ask the Owner to sign in and add the Gmail account. Other users can still create forms and see responses with accounts the Owner added.
+
+### "Google refused this action for this account (permission denied)" / "This form belongs to a different Gmail account"
+Connect the Gmail account that owns the form (shown in My forms). A form made in another account cannot be managed from this one.
+
+### "Google could not find this form"
+It was deleted or moved in Google Forms, or belongs to another account. Responses already saved in VLEBook are kept; remove it from the list if it is no longer needed.
+
+### "This Google account's organisation does not allow forms to be published to everyone"
+Work or school Google accounts may block public forms. Ask that account's administrator, or use a personal Gmail account.
+
+### "Google is limiting requests right now (quota)"
+VLEBook tries again by itself. Wait a minute and click Refresh responses.
+
+### "The form was created in Google, but its questions could not be added"
+Open it with Edit in Google to check, or delete it (Remove / delete) and create it again.
+
+### New responses do not appear
+Click Refresh responses. VLEBook also checks every 5 minutes while the Google Forms screen is open; there are no instant alerts. The Gmail account that owns the form must be connected.
+
+### "The Google Forms service is not available for this app (API_DISABLED)"
+A setting at Techmin's side. Contact Techmin support.

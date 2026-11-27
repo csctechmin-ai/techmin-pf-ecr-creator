@@ -522,3 +522,50 @@ Users & Licence തുറന്ന് **Check my payment** ക്ലിക്ക
 
 ### "The Owner removed this computer from the centre" / "Another browser on this same computer now works as this counter"
 Owner ഈ കമ്പ്യൂട്ടർ നീക്കം ചെയ്തതിനാലോ, ഒരേ പിസിയിലെ പുതിയ ബ്രൗസർ ഇതിന്റെ കൗണ്ടർ ഏറ്റെടുത്തതിനാലോ (Print Bridge 1.3) ഇവിടെ പങ്കിടൽ നിർത്തി. മറ്റേ ബ്രൗസർ ഉപയോഗിക്കുക, അല്ലെങ്കിൽ വീണ്ടും ചേരുക: Data Ownership & Backup → Work on more than one computer, അല്ലെങ്കിൽ ആദ്യ സ്ക്രീനിലെ **Sign in to my centre**.
+
+## പതിപ്പ് 3.6 — ഗൂഗിൾ ഫോംസ്
+
+### "This app isn't verified" അല്ലെങ്കിൽ "Access blocked: … has not completed the Google verification process"
+Techmin-ന്റെ ആപ്പ് ഗൂഗിളിന്റെ അംഗീകാരത്തിനായി കാത്തിരിക്കുമ്പോൾ ഗൂഗിൾ ഇത് കാണിക്കും. പരിശോധനാ സമയത്ത് Techmin ടെസ്റ്റ് ഉപയോക്താക്കളായി ചേർത്ത ജിമെയിൽ അക്കൗണ്ടുകൾക്ക് മാത്രമേ ബന്ധിപ്പിക്കാനാകൂ. ഉപയോഗിക്കേണ്ട ജിമെയിൽ ഐഡിയുമായി Techmin സപ്പോർട്ടിനെ ബന്ധപ്പെടുക.
+
+### "The browser blocked the Google sign-in window"
+tools.complypro.co.in-ന് പോപ്പ്-അപ്പുകൾ അനുവദിക്കുക (അഡ്രസ് ബാറിന്റെ വലതുവശത്തെ ഐക്കൺ), എന്നിട്ട് Connect വീണ്ടും അമർത്തുക.
+
+### "The Google window was closed before signing in"
+Connect അമർത്തി ഗൂഗിൾ വിൻഡോയിൽ സൈൻ-ഇൻ പൂർത്തിയാക്കുക.
+
+### "Some Google permissions were not ticked" / "Google permission was not given"
+ഗൂഗിൾ വിൻഡോയിൽ എല്ലാ ബോക്സുകളും ടിക്ക് ചെയ്യുക (VLEBook ഉണ്ടാക്കുന്ന ഫോമുകൾ കാണാനും മാറ്റാനും, അവയുടെ മറുപടികൾ കാണാനും, VLEBook ഉണ്ടാക്കുന്ന ഫയലുകൾ, നിങ്ങളുടെ ഇ-മെയിൽ വിലാസം). Reconnect അമർത്തി എല്ലാം ടിക്ക് ചെയ്യുക.
+
+### "You signed in with a different Google account"
+ഒന്നും മാറിയിട്ടില്ല. Connect വീണ്ടും അമർത്തി കാണിച്ച ജിമെയിൽ അക്കൗണ്ട് (അല്ലെങ്കിൽ Gmail accounts-ൽ ചേർത്തത്) തിരഞ്ഞെടുക്കുക.
+
+### "The Google connection has expired" / അക്കൗണ്ടിന് Not connected
+VLEBook തുറന്നിരിക്കുന്നിടത്തോളം കണക്ഷൻ നിലനിൽക്കും. Gmail accounts-ൽ Connect / Reconnect അമർത്തുക. സേവ് ചെയ്ത ഫോമുകളും മറുപടികളും നിലനിൽക്കും.
+
+### "Your current plan allows one Gmail account" / "allows 2 forms"
+ഫ്രീ ട്രയലിലും ബേസിക് മോഡിലും ഒരു ജിമെയിൽ അക്കൗണ്ടും 2 ഫോമുകളും അനുവദനീയം. ഒരു ഫോം നീക്കം ചെയ്യുക (Remove / delete → Delete the Google Form) അല്ലെങ്കിൽ പെയ്ഡ് പ്ലാൻ വാങ്ങുക.
+
+### "Only the Owner can add or change the Gmail accounts"
+ഉടമയോട് സൈൻ ഇൻ ചെയ്ത് ജിമെയിൽ അക്കൗണ്ട് ചേർക്കാൻ പറയുക. ഉടമ ചേർത്ത അക്കൗണ്ടുകൾ ഉപയോഗിച്ച് മറ്റ് ഉപയോക്താക്കൾക്ക് ഫോമുകൾ ഉണ്ടാക്കാനും മറുപടികൾ കാണാനും കഴിയും.
+
+### "Google refused this action for this account (permission denied)" / "This form belongs to a different Gmail account"
+ഫോമിന്റെ ഉടമയായ ജിമെയിൽ അക്കൗണ്ട് ബന്ധിപ്പിക്കുക (My forms-ൽ കാണാം). മറ്റൊരു അക്കൗണ്ടിൽ ഉണ്ടാക്കിയ ഫോം ഈ അക്കൗണ്ടിൽ നിന്ന് കൈകാര്യം ചെയ്യാനാവില്ല.
+
+### "Google could not find this form"
+ഇത് ഗൂഗിൾ ഫോംസിൽ നീക്കം ചെയ്യുകയോ മാറ്റുകയോ ചെയ്തു, അല്ലെങ്കിൽ മറ്റൊരു അക്കൗണ്ടിന്റേതാണ്. VLEBook-ൽ സേവ് ചെയ്ത മറുപടികൾ നിലനിൽക്കും; ആവശ്യമില്ലെങ്കിൽ പട്ടികയിൽ നിന്ന് നീക്കുക.
+
+### "This Google account's organisation does not allow forms to be published to everyone"
+ഓഫീസ് അല്ലെങ്കിൽ സ്കൂൾ ഗൂഗിൾ അക്കൗണ്ടുകൾ പൊതു ഫോമുകൾ തടഞ്ഞേക്കാം. ആ അക്കൗണ്ടിന്റെ അഡ്മിനിസ്ട്രേറ്ററോട് ചോദിക്കുക, അല്ലെങ്കിൽ വ്യക്തിഗത ജിമെയിൽ അക്കൗണ്ട് ഉപയോഗിക്കുക.
+
+### "Google is limiting requests right now (quota)"
+VLEBook സ്വയം വീണ്ടും ശ്രമിക്കും. ഒരു മിനിറ്റ് കാത്ത് Refresh responses അമർത്തുക.
+
+### "The form was created in Google, but its questions could not be added"
+പരിശോധിക്കാൻ Edit in Google ഉപയോഗിച്ച് തുറക്കുക, അല്ലെങ്കിൽ നീക്കം ചെയ്ത് (Remove / delete) വീണ്ടും ഉണ്ടാക്കുക.
+
+### പുതിയ മറുപടികൾ കാണുന്നില്ല
+Refresh responses അമർത്തുക. ഗൂഗിൾ ഫോംസ് സ്ക്രീൻ തുറന്നിരിക്കുമ്പോൾ VLEBook ഓരോ 5 മിനിറ്റിലും പരിശോധിക്കും; തൽക്ഷണ അറിയിപ്പുകളില്ല. ഫോമിന്റെ ഉടമയായ ജിമെയിൽ അക്കൗണ്ട് ബന്ധിപ്പിച്ചിരിക്കണം.
+
+### "The Google Forms service is not available for this app (API_DISABLED)"
+Techmin-ന്റെ ഭാഗത്തുള്ള ഒരു ക്രമീകരണമാണ്. Techmin സപ്പോർട്ടിനെ ബന്ധപ്പെടുക.
