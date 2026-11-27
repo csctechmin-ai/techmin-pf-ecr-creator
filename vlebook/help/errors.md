@@ -526,7 +526,7 @@ This computer or browser stopped sharing because the Owner removed it, or becaus
 ## Version 3.6 — Google Forms
 
 ### "This app isn't verified" or "Access blocked: … has not completed the Google verification process"
-Google shows this while Techmin's app is waiting for Google's approval. During testing only the Gmail accounts Techmin has added as test users can connect. Contact Techmin support with the Gmail ID you want to use.
+Google shows this while Techmin's app is waiting for Google's review. *Google hasn't verified this app*: click **Advanced**, then **Go to VLEBook**, and continue. *Access blocked*: send the Gmail ID you want to use to Techmin support, who will add it.
 
 ### "The browser blocked the Google sign-in window"
 Allow pop-ups for tools.complypro.co.in (the icon at the right of the address bar), then click Connect again.

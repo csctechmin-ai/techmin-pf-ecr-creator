@@ -4,7 +4,9 @@ VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billin
 
 **Early access.** VLEBook is in early access: it is still being developed, features and screens may change, and some errors may remain. Keep regular backups, check important figures before you rely on them, and report problems to {{email}}.
 
-**Version 3.6.0 (26 November 2026):** **Google Forms** — real Google Forms in your own Gmail account(s): 30 templates in English, Hindi and Malayalam, create, publish, share and see the responses in VLEBook. See *Google Forms (version 3.6.0)* in section 4. Being tested with real Google accounts; the menu item appears when testing is complete.
+**Version 3.6.1 (27 November 2026):** **Google Forms is open to all centres** — open *Google Forms* in the menu (Digital Studio). New forms always stay unpublished until you click Publish.
+
+**Version 3.6.0 (26 November 2026):** **Google Forms** — real Google Forms in your own Gmail account(s): 30 templates in English, Hindi and Malayalam, create, publish, share and see the responses in VLEBook. See *Google Forms (version 3.6.0)* in section 4.
 
 **Version 3.5.1 (26 November 2026):** the **OCR** (read text) tools and the **PDF Editor** were removed from the PDF & Image Studio; the **Document scanner** and **Redact (secure)** stay. No data is affected.
 
@@ -135,7 +137,7 @@ Set each staff member's commission (percentage or fixed per service, daily or mo
 ### Google Forms (version 3.6.0)
 Make **real Google Forms in your own Gmail account** from VLEBook, publish and share them, and see the responses here. Customers fill the form on Google; nothing passes through Techmin.
 
-**Status:** Google Forms is being tested with real Google accounts. The *Google Forms* menu item appears when Techmin completes this testing; until then it is not shown.
+**Google's sign-in screen:** Google is still reviewing Techmin's app. Until it finishes, Google may show *Google hasn't verified this app* — click **Advanced**, then **Go to VLEBook**, and tick all the permissions. If Google shows *Access blocked*, send your Gmail ID to Techmin support (see Errors & Solutions).
 
 - **Gmail accounts** (Owner): click **Use this Gmail** if the centre registered with a Gmail address, or type the Gmail ID to use for forms (for example when you registered with Yahoo or another address). Google's own window opens with that Gmail filled in; sign in there and tick **all** the permissions. VLEBook never sees the Google password. If a different Google account is chosen in that window, nothing is created and VLEBook asks again. These accounts are only for forms, not for signing in to VLEBook. A VLE without Gmail can make a free Google account with any e-mail address.
 - **Plan limits:** free trial and Basic mode — one Gmail account and at most **2 forms** (deleting a form in Google frees a place); paid plans — any number of Gmail accounts and forms.
