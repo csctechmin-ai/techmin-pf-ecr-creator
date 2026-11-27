@@ -2,6 +2,14 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.6.0 — 26 November 2026
+
+- **New: Google Forms** — real Google Forms in your own Gmail account, made from VLEBook through Google's official Forms service (not an imitation). Connect a Gmail account with Google's own sign-in window (Owner; use the registration Gmail or tag another Gmail ID); choose from **30 templates** in five groups, each in English, Hindi and Malayalam, or start a blank form; review and change the questions (short answer, paragraph, multiple choice, checkboxes, dropdown, date, time, linear scale, rating, sections); create the form (unpublished), then **publish** after confirming and share by link, WhatsApp or e-mail. **Responses** are fetched from Google (Refresh, and every 5 minutes while the screen is open) and shown with search, account / form / date filters, single view, print, CSV and JSON; a dashboard shows totals, today, this month and per form. Stop / reopen responses, duplicate, edit in Google, remove from the list, delete in Google (to the Drive bin) and delete saved responses — each confirmed.
+- **Plans:** free trial and Basic mode — one Gmail account and 2 forms; paid plans — any number of Gmail accounts and forms. Responses of all the centre's Gmail accounts are shown together.
+- **Privacy:** the Google sign-in is kept only in the browser's memory (never saved, backed up or sent to Techmin); forms and responses stay in the VLE's own Google account and the Centre's own data. Customer answers are not written to the activity log.
+- **Status:** being tested with real Google accounts; the *Google Forms* menu item appears when Techmin completes this testing.
+- Data format 12 (three new tables; nothing existing changed). Learning Centre: 48 lessons (*Google Forms: create, publish and share* and *Google Forms: see, search and export the responses*). Privacy Policy and Disclaimer updated (legal version 1.25).
+
 ## Version 3.5.1 — 26 November 2026
 
 - **Removed at the owner's request:** the **OCR** tools (read text from pictures and scanned PDFs, and *Suggest type* in PVC ID & Print) and the **PDF Editor** (*Edit PDF*). The PDF & Image Studio keeps PDF Tools, **Redact (secure)**, Image Tools, Photo & Signature, the **Document scanner** (now its own workspace), PVC ID & Print, Print & printers and QR, Stamp & Calculators. In PVC ID & Print, choose the document type from the list.

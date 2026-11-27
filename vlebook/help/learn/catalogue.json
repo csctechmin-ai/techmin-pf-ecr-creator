@@ -1,6 +1,6 @@
 {
- "doc_version": "1.5",
- "vlebook_version": "3.5.1",
+ "doc_version": "1.6",
+ "vlebook_version": "3.6.0",
  "updated": "2026-11-22",
  "languages": [
   "en",
@@ -43,7 +43,9 @@
    "shortcuts",
    "localscript",
    "studio-tools",
-   "bridge-update"
+   "bridge-update",
+   "gforms",
+   "gforms-responses"
   ],
   "advanced": [
    "billing-edit",
@@ -684,6 +686,35 @@
     "js/modules/studio.js"
    ],
    "img": "studio-tools"
+  },
+  {
+   "id": "gforms",
+   "cat": "studio",
+   "nav": "gforms",
+   "level": "daily",
+   "min": 6,
+   "added": "3.6.0",
+   "updated": "3.6.0",
+   "src": [
+    "js/modules/gforms.js",
+    "js/core/gforms-store.js",
+    "js/core/gforms-auth.js",
+    "js/core/gforms-templates.js"
+   ]
+  },
+  {
+   "id": "gforms-responses",
+   "cat": "studio",
+   "nav": "gforms",
+   "level": "daily",
+   "min": 4,
+   "added": "3.6.0",
+   "updated": "3.6.0",
+   "src": [
+    "js/modules/gforms.js",
+    "js/core/gforms-store.js",
+    "js/core/gforms-api.js"
+   ]
   }
  ],
  "nav_lesson": {
@@ -711,7 +742,8 @@
   "support": "support",
   "help": "learning",
   "settings": "settings",
-  "productivity": "productivity"
+  "productivity": "productivity",
+  "gforms": "gforms"
  },
  "glossary": [
   "dashboard",
@@ -743,7 +775,8 @@
   "trainingmode",
   "transliteration",
   "printmeter",
-  "shortcut"
+  "shortcut",
+  "gform"
  ],
  "faq": [
   "offline",
@@ -764,7 +797,8 @@
   "photogreen",
   "trainingsafe",
   "voiceonline",
-  "gstinvoice"
+  "gstinvoice",
+  "gformswhere"
  ],
  "tours": {
   "tour-screen": [

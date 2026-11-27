@@ -4,6 +4,8 @@ VLEBook is office software for CSC, Akshaya, E-Seva and Jan Seva centres: billin
 
 **Early access.** VLEBook is in early access: it is still being developed, features and screens may change, and some errors may remain. Keep regular backups, check important figures before you rely on them, and report problems to {{email}}.
 
+**Version 3.6.0 (26 November 2026):** **Google Forms** — real Google Forms in your own Gmail account(s): 30 templates in English, Hindi and Malayalam, create, publish, share and see the responses in VLEBook. See *Google Forms (version 3.6.0)* in section 4. Being tested with real Google accounts; the menu item appears when testing is complete.
+
 **Version 3.5.1 (26 November 2026):** the **OCR** (read text) tools and the **PDF Editor** were removed from the PDF & Image Studio; the **Document scanner** and **Redact (secure)** stay. No data is affected.
 
 **New in version 3.5.0 (26 November 2026):** **Sign in to my centre** on a new computer or browser — see *3. Signing in and staff accounts → Where you can sign in*. **Remove** a counter you no longer use, **inactive** counters and the **same-PC** check with Print Bridge 1.3 — see *5B. Working on more than one computer*. A **Sign in** button on the Features & Plans page. Full list: *Release Notes*.
@@ -129,6 +131,21 @@ Expenses, transfers and daily closing (the books in **Books & GST** follow these
 
 ### Staff Commission
 Set each staff member's commission (percentage or fixed per service, daily or monthly). See what is payable today or this month and record payouts.
+
+### Google Forms (version 3.6.0)
+Make **real Google Forms in your own Gmail account** from VLEBook, publish and share them, and see the responses here. Customers fill the form on Google; nothing passes through Techmin.
+
+**Status:** Google Forms is being tested with real Google accounts. The *Google Forms* menu item appears when Techmin completes this testing; until then it is not shown.
+
+- **Gmail accounts** (Owner): click **Use this Gmail** if the centre registered with a Gmail address, or type the Gmail ID to use for forms (for example when you registered with Yahoo or another address). Google's own window opens with that Gmail filled in; sign in there and tick **all** the permissions. VLEBook never sees the Google password. If a different Google account is chosen in that window, nothing is created and VLEBook asks again. These accounts are only for forms, not for signing in to VLEBook. A VLE without Gmail can make a free Google account with any e-mail address.
+- **Plan limits:** free trial and Basic mode — one Gmail account and at most **2 forms** (deleting a form in Google frees a place); paid plans — any number of Gmail accounts and forms.
+- **Template gallery:** 30 ready-made templates in five groups (customer management, CSC centre operations, financial services, business management, general purpose), each in English, Hindi and Malayalam, with Preview and *Use template*. **Create new form** starts a blank form.
+- **Questions:** short answer, paragraph, multiple choice, checkboxes, dropdown, date, time, linear scale, rating and section breaks, each with a description and *Required*. Google cannot check the format of an answer (for example a 10-digit mobile number) in forms made by an app; check such answers yourself.
+- **Create, then publish:** *Create Google Form* makes the form in your Google account **unpublished**. VLEBook then asks before publishing; **Publish now** makes it accept responses. Share with **Copy link**, **WhatsApp** or **E-mail**, or open the form or the Google Forms editor.
+- **My forms:** status, responses, **Stop responses / Reopen**, **Refresh**, **Duplicate**, **Edit in Google** (change questions in the Google Forms editor so answers already given are not lost), and **Remove / delete**: *Remove from VLEBook list* (hides it here only), *Delete the Google Form* (moves it to the Google Drive bin of that account, restorable there for 30 days; saved responses stay in VLEBook) and *Delete saved responses* (Owner or Manager; only VLEBook's copy).
+- **Form responses:** **Refresh responses** fetches new and changed responses from Google (also every 5 minutes while the screen is open — there are no instant alerts). All the centre's Gmail accounts are shown together with an *Account* filter, plus form and date filters, search, **View** and **Print** for one response, **CSV**, **JSON** and **Print report**. The dashboard shows total forms, total responses, responses today and this month, per-form counts and the latest submissions.
+- **Connection:** the Google connection lasts while VLEBook is open; after a restart click **Connect** (Google usually reconnects without asking). If it shows *Reconnect*, saved forms and responses are kept.
+- Forms and responses are the centre's own data: they sync only between the centre's own computers and are included in its backups.
 
 ### PDF & Image Studio (version 3.3.0)
 One menu item, **PDF & Image Studio**, holds every PDF, image, photo, scanner and card tool. Everything runs on your computer — files are never uploaded and are not kept after you leave. Choose a customer and service at the top to **Log job** or **Log & add to bill**.
