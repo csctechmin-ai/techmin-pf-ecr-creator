@@ -1,6 +1,6 @@
 {
  "doc_version": "1.6",
- "vlebook_version": "3.6.0",
+ "vlebook_version": "3.6.1",
  "updated": "2026-11-22",
  "languages": [
   "en",
@@ -135,7 +135,7 @@
    "level": "beginner",
    "min": 2,
    "added": "3.5.0",
-   "updated": "3.5.0",
+   "updated": "3.6.1",
    "src": [
     "js/modules/dashboard.js",
     "js/app.js"
@@ -694,13 +694,14 @@
    "level": "daily",
    "min": 6,
    "added": "3.6.0",
-   "updated": "3.6.0",
+   "updated": "3.6.1",
    "src": [
     "js/modules/gforms.js",
     "js/core/gforms-store.js",
     "js/core/gforms-auth.js",
     "js/core/gforms-templates.js"
-   ]
+   ],
+   "img": "gforms"
   },
   {
    "id": "gforms-responses",
@@ -709,7 +710,7 @@
    "level": "daily",
    "min": 4,
    "added": "3.6.0",
-   "updated": "3.6.0",
+   "updated": "3.6.1",
    "src": [
     "js/modules/gforms.js",
     "js/core/gforms-store.js",

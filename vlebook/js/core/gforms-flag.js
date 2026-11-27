@@ -1,1 +1,1 @@
-const r=!1;function o(){try{const e=new URLSearchParams(location.search).get("gforms");return e==="1"&&localStorage.setItem("vlebook_gforms_preview","1"),e==="0"&&localStorage.removeItem("vlebook_gforms_preview"),localStorage.getItem("vlebook_gforms_preview")==="1"}catch{return!1}}export{r as GFORMS_RELEASED,o as gformsPreviewOn};
+const r=!0;function o(){return!0}export{r as GFORMS_RELEASED,o as gformsPreviewOn};

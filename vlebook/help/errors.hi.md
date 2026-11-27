@@ -526,7 +526,7 @@ Users & Licence खोलकर **Check my payment** पर क्लिक क�
 ## संस्करण 3.6 — गूगल फ़ॉर्म्स
 
 ### "This app isn't verified" या "Access blocked: … has not completed the Google verification process"
-Techmin का ऐप गूगल की स्वीकृति की प्रतीक्षा में होने तक गूगल यह दिखाता है। परीक्षण के दौरान केवल वे जीमेल खाते जुड़ सकते हैं जिन्हें Techmin ने टेस्ट उपयोगकर्ता के रूप में जोड़ा है। जिस जीमेल आईडी का उपयोग करना है उसके साथ Techmin सहायता से संपर्क करें।
+Techmin का ऐप गूगल की समीक्षा की प्रतीक्षा में होने तक गूगल यह दिखाता है। *Google hasn't verified this app*: **Advanced** दबाएँ, फिर **Go to VLEBook**, और आगे बढ़ें। *Access blocked*: जिस जीमेल आईडी का उपयोग करना है उसे Techmin सहायता को भेजें, वे उसे जोड़ देंगे।
 
 ### "The browser blocked the Google sign-in window"
 tools.complypro.co.in के लिए पॉप-अप की अनुमति दें (एड्रेस बार के दाईं ओर का आइकन), फिर Connect दोबारा दबाएँ।
