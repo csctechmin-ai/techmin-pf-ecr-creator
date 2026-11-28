@@ -1,5 +1,5 @@
 @echo off
-title VLEBook Local Server
+title VLE360 Local Server
 cd /d "%~dp0"
 where node >nul 2>nul
 if errorlevel 1 (
@@ -11,8 +11,8 @@ if errorlevel 1 (
   exit /b 1
 )
 echo.
-echo  Starting VLEBook... your browser will open in a moment.
-echo  Keep this window open while you use VLEBook. Close it to stop.
+echo  Starting VLE360... your browser will open in a moment.
+echo  Keep this window open while you use VLE360. Close it to stop.
 echo.
 start "" http://localhost:4150
 node backend\server.js

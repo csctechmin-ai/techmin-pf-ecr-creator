@@ -273,4 +273,162 @@ Mobile: [Mobile Number] | Email: [Email Address]</p>
     [Signature]<br>
     <strong>[Your Name]</strong>
   </div>
-</div>`}];export{t as OFFICE_TEMPLATES};
+</div>`},{id:"tmpl_en_marriage_biodata",category:"Personal Documents",lang:"en",title:"Marriage Biodata",description:"Personal, family, education and contact details for marriage proposals",contentHtml:`<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+  <h2 style="margin:0; color:#12345a;">MARRIAGE BIODATA</h2>
+  <div style="width:35mm; height:45mm; border:1px dashed #94a3b8; display:flex; align-items:center; justify-content:center; font-size:11px; color:#64748b; text-align:center;">[Photo]</div>
+</div>
+<h4 style="margin:14px 0 6px; color:#12345a;">Personal details</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Full name</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Full name]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Date of birth / time / place</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[DD/MM/YYYY] · [Time] · [Place]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Height</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Height]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Religion / community</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Religion / community]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Star / rashi (if wanted)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Star / rashi]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Mother tongue</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Language]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">Education and work</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Education</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Qualification, institution]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Occupation</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Job / business]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Working at / place</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Employer / place]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Annual income (if wanted)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Amount]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">Family</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Father's name and occupation</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Name] · [Occupation]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Mother's name and occupation</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Name] · [Occupation]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Brothers / sisters</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Details]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Native place / address</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Address]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">Contact</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Contact person</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Name and relation]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Mobile</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Mobile number]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Email</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Email]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">Expectations</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Looking for</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Brief expectations]</td></tr>
+</table>
+<p style="font-size:12px; color:#475569; margin-top:14px;">Share only the details the family is comfortable sharing. Remove any row that is not needed.</p>`},{id:"tmpl_hi_marriage_biodata",category:"Personal Documents",lang:"hi",title:"विवाह बायोडाटा",description:"विवाह प्रस्ताव के लिए व्यक्तिगत, पारिवारिक, शिक्षा और संपर्क विवरण",contentHtml:`<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+  <h2 style="margin:0; color:#12345a;">विवाह बायोडाटा</h2>
+  <div style="width:35mm; height:45mm; border:1px dashed #94a3b8; display:flex; align-items:center; justify-content:center; font-size:11px; color:#64748b; text-align:center;">[Photo]</div>
+</div>
+<h4 style="margin:14px 0 6px; color:#12345a;">व्यक्तिगत विवरण</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">पूरा नाम</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[पूरा नाम]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">जन्म तिथि / समय / स्थान</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[DD/MM/YYYY] · [समय] · [स्थान]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">लंबाई</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[लंबाई]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">धर्म / समुदाय</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[धर्म / समुदाय]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">गोत्र / राशि (यदि चाहें)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[गोत्र / राशि]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">मातृभाषा</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[भाषा]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">शिक्षा और व्यवसाय</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">शिक्षा</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[योग्यता, संस्थान]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">व्यवसाय</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[नौकरी / व्यापार]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">कार्यस्थल</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[संस्था / स्थान]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">वार्षिक आय (यदि चाहें)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[राशि]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">परिवार</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">पिता का नाम और व्यवसाय</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[नाम] · [व्यवसाय]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">माता का नाम और व्यवसाय</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[नाम] · [व्यवसाय]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">भाई / बहन</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[विवरण]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">मूल स्थान / पता</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[पता]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">संपर्क</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">संपर्क व्यक्ति</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[नाम और संबंध]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">मोबाइल</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[मोबाइल नंबर]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ईमेल</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ईमेल]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">अपेक्षाएँ</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">जीवनसाथी से अपेक्षा</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[संक्षिप्त विवरण]</td></tr>
+</table>
+<p style="font-size:12px; color:#475569; margin-top:14px;">केवल वही विवरण दें जो परिवार साझा करना चाहता है। जो पंक्ति ज़रूरी न हो उसे हटा दें।</p>`},{id:"tmpl_ml_marriage_biodata",category:"Personal Documents",lang:"ml",title:"വിവാഹ ബയോഡാറ്റ",description:"വിവാഹാലോചനയ്ക്കുള്ള വ്യക്തിപരം, കുടുംബം, വിദ്യാഭ്യാസം, ബന്ധപ്പെടാനുള്ള വിവരങ്ങൾ",contentHtml:`<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+  <h2 style="margin:0; color:#12345a;">വിവാഹ ബയോഡാറ്റ</h2>
+  <div style="width:35mm; height:45mm; border:1px dashed #94a3b8; display:flex; align-items:center; justify-content:center; font-size:11px; color:#64748b; text-align:center;">[Photo]</div>
+</div>
+<h4 style="margin:14px 0 6px; color:#12345a;">വ്യക്തിഗത വിവരങ്ങൾ</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">പൂർണ്ണ നാമം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[പൂർണ്ണ നാമം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ജനന തീയതി / സമയം / സ്ഥലം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[DD/MM/YYYY] · [സമയം] · [സ്ഥലം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ഉയരം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ഉയരം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">മതം / സമുദായം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[മതം / സമുദായം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">നക്ഷത്രം (ആവശ്യമെങ്കിൽ)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[നക്ഷത്രം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">മാതൃഭാഷ</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ഭാഷ]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">വിദ്യാഭ്യാസവും ജോലിയും</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">വിദ്യാഭ്യാസം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[യോഗ്യത, സ്ഥാപനം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ജോലി</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ജോലി / ബിസിനസ്]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ജോലി സ്ഥലം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[സ്ഥാപനം / സ്ഥലം]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">വാർഷിക വരുമാനം (ആവശ്യമെങ്കിൽ)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[തുക]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">കുടുംബം</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">അച്ഛന്റെ പേരും ജോലിയും</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[പേര്] · [ജോലി]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">അമ്മയുടെ പേരും ജോലിയും</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[പേര്] · [ജോലി]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">സഹോദരങ്ങൾ</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[വിവരങ്ങൾ]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">സ്വദേശം / വിലാസം</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[വിലാസം]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">ബന്ധപ്പെടാൻ</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ബന്ധപ്പെടേണ്ട വ്യക്തി</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[പേരും ബന്ധവും]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">മൊബൈൽ</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[മൊബൈൽ നമ്പർ]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">ഇമെയിൽ</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ഇമെയിൽ]</td></tr>
+</table>
+<h4 style="margin:14px 0 6px; color:#12345a;">പ്രതീക്ഷകൾ</h4>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">പങ്കാളിയെക്കുറിച്ചുള്ള പ്രതീക്ഷ</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ചുരുക്കത്തിൽ]</td></tr>
+</table>
+<p style="font-size:12px; color:#475569; margin-top:14px;">കുടുംബം പങ്കിടാൻ തയ്യാറുള്ള വിവരങ്ങൾ മാത്രം നൽകുക. ആവശ്യമില്ലാത്ത വരികൾ ഒഴിവാക്കുക.</p>`},{id:"tmpl_en_rent_receipt",category:"Receipts & Payroll",lang:"en",title:"House Rent Receipt",description:"Monthly rent receipt from landlord to tenant",contentHtml:`<h2 style="text-align:center; text-decoration:underline; margin:0 0 16px;">RENT RECEIPT</h2>
+<p>Receipt No: [No.] &nbsp;&nbsp; Date: [DD/MM/YYYY]</p>
+<p>Received with thanks from <strong>[Tenant's full name]</strong> the sum of <strong>₹[Amount]</strong> (Rupees [amount in words] only) by [cash / UPI / cheque no. ___] towards the rent of the property at <strong>[Full address of the rented property]</strong> for the period <strong>[from DD/MM/YYYY to DD/MM/YYYY]</strong>.</p>
+<table class="doc-table" style="width:100%; border-collapse:collapse; margin:12px 0;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Landlord's name</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Name]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Landlord's address</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Address]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Landlord's PAN (if the tenant needs it)</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[PAN]</td></tr>
+</table>
+<div style="margin-top:50px; text-align:right;">[Signature]<br><strong>[Landlord's name]</strong><br>Landlord</div>`},{id:"tmpl_en_salary_slip",category:"Receipts & Payroll",lang:"en",title:"Monthly Salary Slip",description:"Pay slip with earnings, deductions and net pay for one month",contentHtml:`<div style="text-align:center; border-bottom:2px solid #0f172a; padding-bottom:8px; margin-bottom:12px;">
+  <h2 style="margin:0;">[ESTABLISHMENT NAME]</h2>
+  <p style="margin:4px 0 0; font-size:13px;">[Address]</p>
+  <h3 style="margin:8px 0 0;">Salary slip for [Month YYYY]</h3>
+</div>
+<table class="doc-table" style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Employee name</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Name]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Employee ID / designation</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[ID] · [Designation]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Days worked / days in month</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Days] / [Days]</td></tr>
+    <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Bank account / payment mode</th><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Last 4 digits] · [Mode]</td></tr>
+</table>
+<table class="doc-table" style="width:100%; border-collapse:collapse;">
+  <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Earnings</th><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Amount (₹)</th><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Deductions</th><th style="border:1px solid #cbd5e1; padding:6px 8px; background:#f8fafc; width:38%; text-align:left;">Amount (₹)</th></tr>
+  <tr><td style="border:1px solid #cbd5e1; padding:6px 8px;">Basic</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Deduction]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td></tr>
+  <tr><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Allowance]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Deduction]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td></tr>
+  <tr><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Allowance]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">Advance recovered</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td></tr>
+  <tr style="font-weight:bold;"><td style="border:1px solid #cbd5e1; padding:6px 8px;">Gross earnings</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">Total deductions</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[₹]</td></tr>
+</table>
+<p style="font-size:15px; margin-top:12px;"><strong>Net pay: ₹[Amount]</strong> (Rupees [amount in words] only)</p>
+<div style="margin-top:40px; display:flex; justify-content:space-between;"><div>Employee's signature</div><div style="text-align:right;">For [Establishment]<br><br>Authorised signatory</div></div>`},{id:"tmpl_en_cover_letter",category:"Certificates & Office Letters",lang:"en",title:"Job Application Cover Letter",description:"Short cover letter to send with a CV",contentHtml:`<p>[Your full name]<br>[Address]<br>[Mobile] · [Email]</p>
+<p>Date: [DD/MM/YYYY]</p>
+<p>To<br>[Name / designation of the person]<br>[Organisation name]<br>[Address]</p>
+<p><strong>Subject: Application for the post of [Job title]</strong> [— Ref. no. if any]</p>
+<p>Dear Sir / Madam,</p>
+<p>I would like to apply for the post of [Job title] advertised in [where you saw it] on [date]. I have [qualification] and [number] years of experience in [field], and I believe I can contribute to [organisation name].</p>
+<p>In my present / last job at [employer], I [one or two achievements or duties that match the job]. I am good at [skills that match the job].</p>
+<p>My CV is attached. I would be glad to attend an interview at your convenience.</p>
+<p>Thank you for considering my application.</p>
+<p>Yours faithfully,<br><br>[Signature]<br>[Your full name]</p>`},{id:"tmpl_en_authorisation_letter",category:"Certificates & Office Letters",lang:"en",title:"Authorisation Letter",description:"Authorise a person to collect documents or submit an application on your behalf",contentHtml:`<p>Date: [DD/MM/YYYY]</p>
+<p>To<br>[The Officer / Manager]<br>[Office / bank / institution name]<br>[Address]</p>
+<p><strong>Subject: Authorisation to [collect / submit] [document or application]</strong></p>
+<p>Sir / Madam,</p>
+<p>I, <strong>[Your full name]</strong>, [son / daughter / wife] of [name], residing at [address], hereby authorise <strong>[Authorised person's full name]</strong>, [relation, if any], residing at [address], to [collect / submit] <strong>[name of document / application, reference no.]</strong> on my behalf, as I am unable to come in person because [reason].</p>
+<p>The authorised person will carry [his / her] own identity proof. A copy of my identity proof is enclosed.</p>
+<table class="doc-table" style="width:100%; border-collapse:collapse; margin:16px 0;">
+  <tr><th style="border:1px solid #cbd5e1; padding:6px 8px; width:50%;">Signature of the person giving authority</th><th style="border:1px solid #cbd5e1; padding:6px 8px;">Specimen signature of the authorised person</th></tr>
+  <tr><td style="border:1px solid #cbd5e1; height:60px;"></td><td style="border:1px solid #cbd5e1; height:60px;"></td></tr>
+  <tr><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Your full name]</td><td style="border:1px solid #cbd5e1; padding:6px 8px;">[Authorised person's name]</td></tr>
+</table>
+<p>Yours faithfully,<br>[Your full name]<br>[Mobile]</p>`}];export{t as OFFICE_TEMPLATES};

@@ -1,8 +1,8 @@
 # Open-source licences
 
-VLEBook is published by {{entity}}. Most of VLEBook is original code written for VLEBook. A few open-source components are included so that PDF and photo tools work fully offline on your computer. Each is used under its own licence, shown below. These components run only on your computer; nothing is uploaded.
+VLE360 is published by {{entity}}. Most of VLE360 is original code written for VLE360. A few open-source components are included so that PDF and photo tools work fully offline on your computer. Each is used under its own licence, shown below. These components run only on your computer; nothing is uploaded.
 
-## Components included in VLEBook
+## Components included in VLE360
 
 | Component | Licence | Used for |
 |---|---|---|
@@ -14,14 +14,14 @@ VLEBook is published by {{entity}}. Most of VLEBook is original code written for
 
 ## About libheif (LGPL 3.0)
 
-The HEIC photo decoder is licensed under the GNU Lesser General Public License version 3.0. VLEBook uses it unmodified, in its own separate file that is loaded only when a HEIC photo is opened, so it can be replaced by any compatible build. Its source code is available at [github.com/strukturag/libheif](https://github.com/strukturag/libheif) and [github.com/strukturag/libde265](https://github.com/strukturag/libde265). The full licence texts (LGPL 3.0 and GPL 3.0) are supplied with VLEBook next to the file.
+The HEIC photo decoder is licensed under the GNU Lesser General Public License version 3.0. VLE360 uses it unmodified, in its own separate file that is loaded only when a HEIC photo is opened, so it can be replaced by any compatible build. Its source code is available at [github.com/strukturag/libheif](https://github.com/strukturag/libheif) and [github.com/strukturag/libde265](https://github.com/strukturag/libde265). The full licence texts (LGPL 3.0 and GPL 3.0) are supplied with VLE360 next to the file.
 
 ## Licence texts
 
-The full licence text of every component is supplied with VLEBook in the folder of that component (`js/vendor/…`), and the complete list is in the file *THIRD_PARTY_NOTICES.md* published with VLEBook.
+The full licence text of every component is supplied with VLE360 in the folder of that component (`js/vendor/…`), and the complete list is in the file *THIRD_PARTY_NOTICES.md* published with VLE360.
 
-## VLEBook's own code
+## VLE360's own code
 
-Everything else in VLEBook (billing, accounts, reminders, card designer, QR and barcode makers, ZIP, Word and Excel writers, PDF password protection, redaction, photo and signature sizing and the other features) is original code owned by {{entity}}. Other open-source projects were studied for ideas only; no code was copied from them. VLEBook does not load code, fonts or data from other websites.
+Everything else in VLE360 (billing, accounts, reminders, card designer, QR and barcode makers, ZIP, Word and Excel writers, PDF password protection, redaction, photo and signature sizing and the other features) is original code owned by {{entity}}. Other open-source projects were studied for ideas only; no code was copied from them. VLE360 does not load code, fonts or data from other websites.
 
 Questions about licences: {{email}}.

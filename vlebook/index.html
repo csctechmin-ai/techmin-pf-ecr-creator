@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VLEBook (Early Access) — Billing and Office Software for CSC, Akshaya and e-Seva Centres</title>
-  <meta name="description" content="VLEBook (early access) is billing and office software for CSC, Akshaya, e-Seva and Jan Seva centres: customers, GST invoices for services and goods, double-entry books with trial balance, P&L and balance sheet, government fee clearing, GST return help (GSTR-1 JSON), application and acknowledgement number tracking, AEPS records, accounts, stock with physical stock check, CV & resume builder (incl. Europass format) and backups. Business data stays on the centre's computer. 45-day free trial.">
+  <title>VLE360 (formerly VLEBook) — The Operating System for VLEs: CSC, Akshaya and e-Seva centre software</title>
+  <meta name="description" content="VLE360 (formerly VLEBook, early access) — the operating system for VLEs — is billing and office software for CSC, Akshaya, e-Seva and Jan Seva centres: customers, GST invoices for services and goods, double-entry books with trial balance, P&L and balance sheet, government fee clearing, GST return help (GSTR-1 JSON), application and acknowledgement number tracking, AEPS records, accounts, stock with physical stock check, CV & resume builder (incl. Europass format) and backups. Business data stays on the centre's computer. 45-day free trial.">
   <link rel="canonical" href="https://tools.complypro.co.in/vlebook/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="VLEBook (Early Access) — Billing and Office Software for CSC, Akshaya and e-Seva Centres">
+  <meta property="og:title" content="VLE360 (formerly VLEBook) — The Operating System for VLEs: CSC, Akshaya and e-Seva centre software">
   <meta property="og:description" content="Billing, GST invoices, customers, applications, AEPS records, accounts, stock and a CV &amp; resume builder for digital service centres. Business data stays on the centre's computer. 45-day free trial.">
   <meta property="og:url" content="https://tools.complypro.co.in/vlebook/">
   <meta property="og:site_name" content="ComplyPro Tools">
@@ -17,7 +17,7 @@
   <script src="js/frameguard.js"></script>
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="icons/vlebook-mark.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/vle360-mark.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="css/variables.css">
@@ -27,19 +27,19 @@
 </head>
 <body class="booting">
   <div id="boot-splash" role="status" aria-live="polite">
-    <img src="icons/vlebook-logo.svg" alt="VLEBook" width="210" height="56">
+    <img src="icons/vle360-logo.svg" alt="VLE360" width="210" height="56">
     <div class="boot-spinner" aria-hidden="true"></div>
-    <p>Starting VLEBook…</p>
+    <p>Starting VLE360…</p>
   </div>
   <div class="app-shell">
     <!-- Left Collapsible Sidebar -->
     <aside class="app-sidebar" id="app-sidebar" aria-label="Main Navigation">
       <div class="sidebar-brand">
         <div class="brand-logo-wrap">
-          <img class="brand-mark" src="icons/vlebook-mark.svg" alt="VLEBook" width="32" height="32">
+          <img class="brand-mark" src="icons/vle360-mark.svg" alt="VLE360" width="32" height="32">
           <div class="brand-titles">
-            <span class="brand-name">VLEBook</span>
-            <span class="brand-sub">CSC • Akshaya • E-Seva · Early access</span>
+            <span class="brand-name">VLE360</span>
+            <span class="brand-sub" data-no-i18n>The Operating System for VLEs</span>
           </div>
         </div>
         <button class="sidebar-toggle-btn" id="sidebar-collapse-btn" title="Collapse/Expand Sidebar" aria-label="Toggle Sidebar">
@@ -123,6 +123,11 @@
             Backup needed
           </button>
 
+          <button type="button" class="btn btn-sm btn-outline header-qrsend" id="header-qrsend-btn" title="Send to counter by QR — the customer sends photos or PDFs from their phone">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>
+            <span class="hide-sm">QR</span>
+          </button>
+
           <button type="button" class="btn btn-sm btn-outline header-bell" id="header-bell-btn" title="Techmin Updates — notices and blog">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
             <span class="bell-count" id="header-bell-count" hidden>0</span>
@@ -158,7 +163,7 @@
   <div class="modal-backdrop" id="pin-lock-modal">
     <div class="modal-dialog" style="max-width:380px;">
       <div class="modal-header">
-        <h3>VLEBook Session Locked</h3>
+        <h3>VLE360 Session Locked</h3>
       </div>
       <div class="modal-body">
         <p style="font-size:12.5px; color:var(--color-text-muted); margin-bottom:12px;">

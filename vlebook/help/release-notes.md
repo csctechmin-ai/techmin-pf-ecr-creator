@@ -1,6 +1,26 @@
-# VLEBook Release Notes
+# VLE360 Release Notes
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
+
+## Version 3.8.0 — 28 November 2026
+
+- **New name: VLE360 — The Operating System for VLEs** (was VLEBook), with a new logo and app icon. Another company sells a different product called “VLE Book” to the same centres; a clearly different name avoids mix-ups. Each user who used VLEBook before sees a one-time note explaining this. Data, licences, plans and prices, the web address, backups and sign-in do not change; the sync folder *VLEBook-sync*, the backup tag *VLEBOOK_BACKUP*, database names and the Windows Print Bridge files keep their names so that nothing breaks. tools.complypro.co.in/vle360/ opens the same app.
+- **Send to counter by QR** (new, every plan, no extra cost): **QR** button at the top; the customer scans, picks up to 20 photos or PDFs (10 MB each) and sends them from the phone page (English, Hindi, Malayalam). Files are encrypted on the phone (AES-GCM, key only in the QR code), pass through Techmin's relay (VLEBookDrop.gs; Google Drive) in that form, are deleted from the relay as soon as the counter has them and in any case within 30 minutes, and are never saved in VLE360's data. Open, print, download or add the pages to the bill (pages × copies).
+- **UPI QR on bills**: the centre's UPI ID (Settings) gives a *Scan to pay by UPI* QR with the balance due on the A4 bill, its PDF and the 80 mm receipt, and a payment line in the WhatsApp bill. VLE360 does not receive or confirm payments.
+- **Dues** view in Customers (largest first, oldest unpaid bill, WhatsApp reminder with UPI ID); *See dues* on the dashboard.
+- **Family members**: link a customer to the head of the family; members may share the head's mobile; the 360° page lists the family; billing asks which person when a shared mobile is typed.
+- **Quick size** (exact KB for photos, signatures and PDFs) and **Clean up a photo** (WhatsApp photos, thumb impressions) on the Studio home.
+- **Passport photo sheet**: background colour, joint photo, name and date strip, saved printer settings.
+- **Aadhaar prints follow UIDAI**: personal-copy confirmation with a link to UIDAI's myAadhaar portal before any Aadhaar card print or picture export; first 8 digits masked by default; a personal-copy line in the A4 margin; the job is marked as a personal copy.
+- **Farmer ID (Kisan)** document type in PVC ID & Print.
+- **Rate list** from the service catalogue (A4 print or image for WhatsApp, with UPI QR).
+- **Reminders**: Passport, Ration card, Scholarship, Pension life certificate and Exam / job date types; reminders can be started from the customer's 360° page and from each application. New types appear also for centres that changed their reminder categories.
+- **Document Studio**: 16 templates (new: marriage biodata in English, Hindi and Malayalam; rent receipt; salary slip; cover letter; authorisation letter).
+- **Invoice PDF**: the centre's full name and address wrap instead of being cut short.
+- **Free tools page** (free-tools.html): Quick size, photo clean-up and passport sheet for anyone, in the browser.
+- **Not included:** the old-font (ML-TT / Kruti Dev) converter from Indic Document Studio — held until the licence of its character table is confirmed.
+- Techmin's registry was updated (VLEBookDrop.gs; VLEBook.gs routes vle.drop_*). Legal documents version 1.27: Privacy Policy, Terms, Disclaimer and Refund Policy updated for the new name, Send to counter by QR, UPI QR and Aadhaar prints.
+- **Fixed:** a new screen-lock PIN could be lost if the lock minutes were changed straight after typing it. The Google review QR on A4 receipts again has its spoken label for screen readers.
 
 ## Version 3.7.0 — 27 November 2026
 

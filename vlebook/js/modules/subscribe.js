@@ -6,7 +6,7 @@ import{esc as t}from"../core/utils.js";import{PLANS as S,paidPlans as N,gstBreak
       ${n==="Y"&&o.monthly?'<div class="plan-save">12 months for the price of 11</div>':""}
       <ul><li>${o.computers} computer${o.computers>1?"s":""}${o.computers>1?" (counters synced)":""}</li><li>${o.users} user${o.users>1?"s":""}</li><li>${t(o.note)}</li></ul>
     </div>`}).join("")}</div>`}async function D(n,{centre:i={},onLicence:l}={}){const u=await f("vle.plans",{}).catch(()=>null),o=!!(u?.enabled&&u?.key_id),c=await T("pendingOrder"),b=i.gstin?String(i.gstin).slice(0,2):A(i.state)||"32";n.innerHTML=`<div class="card" id="sub-card">
-    <div class="card-header"><div class="card-title">Buy or renew VLEBook</div></div>
+    <div class="card-header"><div class="card-title">Buy or renew VLE360</div></div>
     <p class="form-hint">New centres get a ${q}-day free trial (1 month + 15 days). Yearly plans: 12 months for the price of 11. Prices are before 18% GST (CGST + SGST in Kerala, IGST in other States). Techmin issues a GST tax invoice and receipt for every payment.</p>
     <div class="pill-tabs" role="tablist"><button type="button" class="pill-tab ${d.cycle==="M"?"active":""}" data-cycle="M">Monthly</button><button type="button" class="pill-tab ${d.cycle==="Y"?"active":""}" data-cycle="Y">Yearly (1 month free)</button></div>
     ${Y({cycle:d.cycle,selected:d.plan,stateCode:b})}
@@ -25,7 +25,7 @@ import{esc as t}from"../core/utils.js";import{PLANS as S,paidPlans as N,gstBreak
       </div>
       <div id="sub-summary" class="sub-summary"></div>
       <button type="submit" class="btn btn-primary" id="sub-pay">Pay with Razorpay</button>
-      <span class="form-hint">UPI, cards, net banking and wallets. Payment is handled by Razorpay; VLEBook never sees your card or bank details.</span>
+      <span class="form-hint">UPI, cards, net banking and wallets. Payment is handled by Razorpay; VLE360 never sees your card or bank details.</span>
     </form>
     ${c?`<div class="callout info">A payment was started on ${t(new Date(c.at).toLocaleString("en-IN"))} but not confirmed. <button type="button" class="btn btn-xs btn-outline" id="sub-check">Check my payment</button></div>`:""}
     <div id="sub-msg"></div>
