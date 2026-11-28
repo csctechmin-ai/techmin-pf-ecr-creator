@@ -8,6 +8,7 @@ This Privacy Policy explains what personal data **{{entity}}** ("Techmin", "we")
 
 - **Your business data never comes to Techmin.** Customers, bills, payments, applications, AEPS records, stock, staff, accounts, reports and backups are stored only on your computer and in backup files you save.
 - Techmin receives only what is needed to register the Centre, run the licence, keep it secure, send notices and support you (section 3) — from version 3.1 this includes a record of each sign-in (user, times, computer, IP address and approximate city).
+- **Only if the Owner applies to be a Faircent Sub DSA partner** (from version 3.7): Techmin receives the details typed in that form, including PAN and Aadhaar, and may share them with Faircent for that purpose (section 3).
 - We do not sell personal data and we do not show third-party advertising in VLEBook.
 
 ## 2. Data stored only on your computer
@@ -40,6 +41,8 @@ If you choose a **Google Drive, OneDrive or Dropbox** folder for backups, the fi
 
 **Google Forms (version 3.6.0).** When a Gmail account is connected for Google Forms, VLEBook talks to Google directly from the browser with that account's permission (sign-in with Google's own window; VLEBook never sees the Google password). It asks Google only for: the account's e-mail address and Google account ID (to check that the right Gmail signed in), creating and changing the forms VLEBook makes, reading the responses to those forms, and moving those forms to the Drive bin when you choose *Delete*. The access permission given by Google is kept only in the browser's memory while VLEBook is open; it is never saved, backed up, synced or sent to Techmin. The forms and their responses are in the VLE's own Google account; VLEBook keeps a copy of the forms list, the Gmail addresses tagged for forms and the responses in the Centre's own data (on its computers, in its shared folder and backups), never sent to Techmin. Customer answers are not copied into the activity log. The Centre is responsible for telling respondents why it collects their answers (each template has a consent question that can be changed), for asking only what is needed, and for deleting responses it no longer needs — in Google and with *Delete saved responses* in VLEBook. Google's own privacy policy applies to Google accounts and to the forms on Google.
 
+**Document Studio (version 3.7.0).** Documents, the personal word list and the legal form being filled are kept in the Centre's own VLEBook data on its computers. Documents and the word list are in the Centre's backups, auto-backup and its shared folder for its other computers, like its other records; the legal form being filled stays on the computer where it is filled (it is in that computer's backups, not shared) until *Clear the form*. Typing suggestions are worked out on the computer; nothing typed is sent to Techmin or to any other service. The activity log records that a document was created, renamed or deleted (with its name), not its text. Documents may contain customers' personal details: the Centre should keep only what it needs and delete documents it no longer needs; deleted documents remain in older backups until those backups are deleted.
+
 ## 3. Data processed by Techmin
 
 When VLEBook is online it exchanges the following with the Techmin registry:
@@ -55,6 +58,8 @@ When VLEBook is online it exchanges the following with the Techmin registry:
 
 Techmin may also see the IP address and technical details of each request, as logged by its hosting providers.
 
+**Faircent Sub DSA application** (from version 3.7, only if the Owner applies): first and last name, mobile number, PAN, Aadhaar number, e-mail, address, state, city and PIN code typed in the form, the time and version of the consent given, the Centre ID, Device Code, user name and VLEBook version. They are stored in Techmin's registry (Google Sheets). Techmin staff see PAN and Aadhaar masked; showing the full numbers needs a reason and is logged. E-mails about an application never contain the full numbers. VLEBook keeps only masked PAN and Aadhaar on the Centre's computer.
+
 ## 4. Why we use it (purposes and legal basis)
 
 - To register your Centre, verify its identity (GSTIN, CSC ID, Akshaya ID), issue, renew, verify and cancel licences, raise invoices for licence fees, and prevent misuse of licence keys.
@@ -67,6 +72,8 @@ Techmin may also see the IP address and technical details of each request, as lo
 
 We process this data on the basis of your consent given when you accept these terms and create the Owner account, and for the legitimate uses permitted under the DPDP Act (including performance of the licence you requested and compliance with law).
 
+**Faircent Sub DSA applications** (from version 3.7) are used only to consider the application, to verify the applicant's identity and to register the applicant as a Sub DSA partner of Faircent through Techmin, and to contact the applicant about it — on the basis of the consent given in the form.
+
 ## 5. Service providers
 
 We use the following providers to run VLEBook. They process data only to provide their service:
@@ -78,6 +85,7 @@ We use the following providers to run VLEBook. They process data only to provide
 - **Blogger (Google)** — the Techmin blog articles from {{website}} are read by the Techmin registry and passed to VLEBook as plain text (title, date, short summary and link; no pictures). No centre data is sent with this request, and the article opens on {{website}}.
 - **Browser speech service (only if you use 🎤 voice typing, from version 3.4)** — Chrome and Edge send the spoken audio to their speech service (Google or Microsoft) to turn it into text. VLEBook shows a notice before the first use in a session and never sends the audio to Techmin. Do not speak Aadhaar numbers, OTPs or passwords. Transliteration (*Suggest*), training mode, keyboard shortcuts, System health and the print meter work on your computer and send nothing; a diagnostic report is saved on your computer and goes to Techmin only if you attach it to a support ticket.
 - **Razorpay (only when you buy online, from version 3.4)** — processes the payment. Card, UPI and bank details are entered in Razorpay's own window and are never seen or kept by VLEBook or Techmin. Razorpay tells Techmin the payment ID, amount and status.
+- **Faircent (only if the Owner applies to be a Sub DSA partner, from version 3.7)** — Techmin shares the application details, including PAN and Aadhaar, with Faircent for identity checks and partner registration. Faircent's own privacy policy and terms apply to what Faircent does with them.
 - **IP lookup (freeipapi.com, ipify.org)** — at sign-in, VLEBook asks these free services for the computer's public IP address and approximate location. Only the normal web request (which carries the IP address) reaches them; no other data is sent.
 
 Data may be stored on servers of these providers in or outside India, subject to applicable law.
@@ -87,6 +95,8 @@ Data may be stored on servers of these providers in or outside India, subject to
 ## 6. Retention
 
 Centre registration, licence and payment records are kept while your Centre uses VLEBook and for up to 8 years afterwards to meet accounting and tax requirements, unless a longer period is required by law. Push addresses are deleted when notifications are turned off or the push service reports them invalid. **Sign-in records and notice-seen records are kept for 12 months** and then deleted.
+
+**Faircent Sub DSA applications** are kept while the application is considered and, if approved, while the partnership continues. Techmin removes the full PAN and Aadhaar numbers from its registry once they are no longer needed for the application (the masked numbers and the history of the application stay). The applicant can ask Techmin to delete the application at any time (see section 12).
 
 ## 7. Security
 

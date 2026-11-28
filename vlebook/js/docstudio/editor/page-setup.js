@@ -1,0 +1,13 @@
+const o={A4:{name:"A4 (210 × 297 mm)",width:"210mm",height:"297mm",printClass:"page-a4"},A3:{name:"A3 (297 × 420 mm)",width:"297mm",height:"420mm",printClass:"page-a3"},Letter:{name:"Letter (8.5 × 11 in)",width:"8.5in",height:"11in",printClass:"page-letter"},Legal:{name:"Legal (8.5 × 14 in)",width:"8.5in",height:"14in",printClass:"page-legal"}},m={normal:{name:"Normal (1 in / 25.4 mm)",top:"25.4mm",right:"25.4mm",bottom:"25.4mm",left:"25.4mm"},narrow:{name:"Narrow (0.5 in / 12.7 mm)",top:"12.7mm",right:"12.7mm",bottom:"12.7mm",left:"12.7mm"},moderate:{name:"Moderate (0.75 in / 19 mm)",top:"19mm",right:"19mm",bottom:"19mm",left:"19mm"},wide:{name:"Wide (1.25 in / 32 mm)",top:"32mm",right:"32mm",bottom:"32mm",left:"32mm"}};class h{constructor(i,t={}){this.container=i,this.config={size:t.size||"A4",orientation:t.orientation||"portrait",margin:t.margin||"normal",headerText:t.headerText||"",footerText:t.footerText||"",showPageNumbers:t.showPageNumbers!==void 0?t.showPageNumbers:!0,hasBorder:t.hasBorder||!1,lineHeight:t.lineHeight||"1.6",fontFamily:t.fontFamily||'system-ui, "Noto Sans Malayalam", "Noto Sans Devanagari", sans-serif'},this.applyLayout()}updateConfig(i){this.config={...this.config,...i},this.applyLayout()}applyLayout(){if(!this.container)return;const i=o[this.config.size]||o.A4,t=m[this.config.margin]||m.normal,e=this.config.orientation==="landscape",a=e?i.height:i.width,n=e?i.width:i.height;this.container.style.width=a,this.container.style.minHeight=n,this.container.style.paddingTop=t.top,this.container.style.paddingRight=t.right,this.container.style.paddingBottom=t.bottom,this.container.style.paddingLeft=t.left,this.container.style.lineHeight=this.config.lineHeight,this.container.style.fontFamily=this.config.fontFamily,this.config.hasBorder?this.container.style.border="2px solid #334155":this.container.style.border="none",this.updatePrintStyles(a,n,t,e)}updatePrintStyles(){}printCss(){const i=o[this.config.size]||o.A4,t=m[this.config.margin]||m.normal,e=this.config.orientation==="landscape";return`@page { size: ${this.config.size} ${e?"landscape":"portrait"}; margin: ${t.top} ${t.right} ${t.bottom} ${t.left}; }`}_oldUpdatePrintStyles(i,t,e,a){let n=document.getElementById("indic-dynamic-print-style");n||(n=document.createElement("style"),n.id="indic-dynamic-print-style",document.head.appendChild(n));const r=a?"landscape":"portrait";n.innerHTML=`
+      @media print {
+        @page {
+          size: ${this.config.size} ${r};
+          margin: ${e.top} ${e.right} ${e.bottom} ${e.left};
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          background: #ffffff !important;
+        }
+      }
+    `}}export{m as MARGIN_PRESETS,o as PAGE_SIZES,h as PageLayoutController};

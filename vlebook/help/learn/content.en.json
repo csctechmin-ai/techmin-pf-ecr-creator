@@ -1410,6 +1410,89 @@
     ],
     "right": 0
    }
+  },
+  "docstudio": {
+   "title": "Document Studio: type in Malayalam, Hindi or English",
+   "summary": "Write letters and applications, typing Malayalam or Hindi words in English letters, and keep them in VLEBook.",
+   "what": "A document editor inside VLEBook. Type a Malayalam word in English letters (Manglish) or a Hindi word (Hinglish) and pick the right word from the suggestions. Documents are saved in VLEBook by themselves.",
+   "why": "Prepare applications, letters and declarations for customers in their own language without a separate typing tool or file folder.",
+   "before": [
+    "Nothing to install. The Owner, Managers and Operators can use it."
+   ],
+   "steps": [
+    "Open Document Studio → Start → New document (or Office templates → Use this template).",
+    "Choose മലയാളം, हिन्दी or English above the page.",
+    "Type a word in English letters, e.g. namaskaram. Press Space or Enter to take the first suggestion, 1–5 for another, Esc to keep the English. Ctrl+M turns suggestions on or off.",
+    "Add names you type often in My word list — they come first next time.",
+    "Use the toolbar for bold, lists, tables, page breaks, paper size and margins.",
+    "Click Word (.docx) for a Word copy, or Print / PDF to print or save a PDF."
+   ],
+   "result": "The document is in My documents, saved in VLEBook and included in your backups.",
+   "careful": "Suggestions can be wrong — read what you typed. Documents may contain customers' personal details; delete those you no longer need.",
+   "wrong": "If words stay in English, suggestions are off: click മലയാളം / हिन्दी or press Ctrl+M. If it says Not saved, read the message and copy your text before leaving.",
+   "check": {
+    "q": "How do you save a document in Document Studio?",
+    "a": [
+     "It is saved in VLEBook by itself",
+     "Click Save As (PC) every time"
+    ],
+    "right": 0
+   }
+  },
+  "docstudio-legal": {
+   "title": "Legal drafts: agreements, notices and letters",
+   "summary": "Fill in the parties and details and get a draft agreement, notice or letter to check and print.",
+   "what": "85 drafts in 19 groups, such as rent agreements, rent receipts, notices, employment letters and power of attorney. 8 tenancy drafts are in English, Malayalam and Hindi; the others are in English.",
+   "why": "Prepare a clean first draft quickly for a customer to check with the other party or an advocate.",
+   "before": [
+    "The parties' names and addresses, and the details of the matter (rent, dates, property, etc.)."
+   ],
+   "steps": [
+    "Open Document Studio → Legal drafts.",
+    "Search for the document by name, or choose it in the list, and choose the state.",
+    "Fill in the parties, the document details and the witnesses; the draft on the right changes as you type.",
+    "Choose the language where Malayalam / Hindi are offered.",
+    "Click Print Instrument, or Open in Multilingual Editor to change the wording as a document.",
+    "When finished, click Clear the form (twice) to remove the names and details from this computer."
+   ],
+   "result": "A draft to check. Agreements print on A4 with 175 mm left blank at the top of page 1 for stamp paper.",
+   "careful": "Drafts only — not legal advice and not checked by a lawyer. VLEBook does not work out stamp duty, registration or how the document must be signed. Check every draft before anyone signs.",
+   "wrong": "If the language buttons are missing, that draft is available in English only.",
+   "check": {
+    "q": "Can a legal draft from VLEBook be signed without checking it?",
+    "a": [
+     "No, it must be checked first",
+     "Yes, it is approved by a lawyer"
+    ],
+    "right": 0
+   }
+  },
+  "faircent": {
+   "title": "Faircent Sub DSA Partner: apply through Techmin",
+   "summary": "The Owner can apply to join Techmin as a Sub DSA partner of Faircent and follow the application in VLEBook.",
+   "what": "A form that sends the Owner's details, including PAN and Aadhaar, to Techmin with the Owner's consent. Techmin checks it and may share it with Faircent.",
+   "why": "To apply for the partnership without paper forms and to see its status in one place.",
+   "before": [
+    "Only the Owner sees this screen. Keep your PAN card and Aadhaar handy. The computer must be registered with Techmin (online once)."
+   ],
+   "steps": [
+    "Open Faircent Sub DSA in the menu (Partner Programmes).",
+    "Check the details filled in from your registration; type your PAN and Aadhaar.",
+    "Read the consent and tick it.",
+    "Click Send to Techmin and note the application number.",
+    "Later, click Check status to see Techmin's update. If Techmin needs more information, click Correct and send again."
+   ],
+   "result": "An application with Techmin, its number and status shown in VLEBook.",
+   "careful": "Send only your own details, or details you have permission to send. VLEBook keeps only the last digits of PAN and Aadhaar on your computer. Joining is not guaranteed.",
+   "wrong": "If it says the computer is not registered, open Users & Licence → Check licence online once. If it says your centre already has an application, click Check status.",
+   "check": {
+    "q": "Who can send the Faircent Sub DSA application?",
+    "a": [
+     "Only the Owner of the centre",
+     "Any staff member"
+    ],
+    "right": 0
+   }
   }
  },
  "tours": {
@@ -1564,6 +1647,14 @@
   "gform": {
    "term": "Google Form",
    "def": "A form made in your own Google account that customers fill on Google; VLEBook creates it and shows its responses."
+  },
+  "manglish": {
+   "term": "Manglish / Hinglish typing",
+   "def": "Typing a Malayalam or Hindi word in English letters and choosing the word in Malayalam or Hindi script from the suggestions."
+  },
+  "subdsa": {
+   "term": "Sub DSA partner",
+   "def": "A partner who brings customers to a lender or lending platform under a main DSA (direct selling agent) — here, Techmin for Faircent."
   }
  },
  "faq": {
@@ -1646,6 +1737,14 @@
   "gformswhere": {
    "q": "Where are Google Forms responses kept? Does Techmin see them?",
    "a": "The form and its responses are in your own Google account. VLEBook keeps a copy in your centre's own data on your computers and in your backups. Techmin never receives them."
+  },
+  "docstudiosave": {
+   "q": "Where are Document Studio documents saved? Is there a Save button?",
+   "a": "There is no Save button. Documents and your word list are saved in VLEBook by themselves, are included in your backups and auto-backup, and are shared with the centre's other computers. Word and PDF are copies for sending or printing."
+  },
+  "faircentdata": {
+   "q": "What happens to the PAN and Aadhaar I send in the Faircent Sub DSA form?",
+   "a": "They go to Techmin only after you tick the consent, and Techmin may share them with Faircent for your partner registration. Techmin staff see them masked; showing the full numbers is logged. VLEBook keeps only the last digits on your computer."
   }
  }
 }

@@ -523,6 +523,56 @@ Type the same user name and password you use on the main computer (passwords are
 ### "The Owner removed this computer from the centre" / "Another browser on this same computer now works as this counter"
 This computer or browser stopped sharing because the Owner removed it, or because a newer browser on the same PC took over its counter (Print Bridge 1.3). Use the other browser, or join again: Data Ownership & Backup → Work on more than one computer, or **Sign in to my centre** on the first screen.
 
+## Version 3.7 — Document Studio
+
+### Document Studio is not in the menu
+The Accountant role does not see it, and the Owner may have hidden it in Settings (*Enable / Disable Sidebar Modules*).
+
+### Words stay in English / no suggestion box appears
+Suggestions are off: click മലയാളം or हिन्दी above the page, or press **Ctrl+M** (the bar shows *Suggestions on*). Suggestions are made only for English letters a–z; numbers and signs are typed as they are.
+
+### The wrong Malayalam or Hindi word is suggested
+Press **2**–**5** to pick another suggestion, or **Esc** to keep the English and correct it by hand. Add the word to **My word list** — it will come first next time.
+
+### "Not saved — This document is no longer in VLEBook"
+It was deleted, probably on another computer of the centre. Copy your text (Ctrl+A, Ctrl+C) before leaving the screen, start a new document and paste it.
+
+### "Not saved — This document is too large to keep in VLEBook"
+A document can hold about 4 MB of text and pictures. Remove large pasted pictures, or split it into two documents.
+
+### "Could not open this file"
+*Open a file* takes .docx, .html, .htm and .txt files up to 20 MB. Old Word files (.doc) and PDF files cannot be opened — save them as .docx first (in Word: *File → Save As → Word Document*). Password-protected or damaged .docx files cannot be opened. Only text, headings, lists and simple tables come in; pictures, text boxes, headers and footers do not.
+
+### The Word (.docx) copy looks different
+The Word copy keeps the text, headings, bold / italic / underline, lists and simple tables. Colours, fonts and page settings may look different in Word. For a copy that looks exactly like the screen, use **Print / PDF** and choose *Save as PDF*.
+
+### The printed agreement has a large blank space on the first page
+Agreements and deeds leave 175 mm blank at the top of page 1 for stamp paper. Notices, letters and receipts do not. To change the layout, click *Open in Multilingual Editor* and edit the document.
+
+### A legal draft has no Malayalam or Hindi
+Only 8 drafts (rent and lease agreements, rent receipt and tenancy notices / letters) have Malayalam and Hindi wording. The others are in English only; the language buttons appear only where a translation exists.
+
+### "Delete" is missing for a document
+Staff can delete only documents they made. The Owner and Managers can delete any document. A deleted document comes back only from a backup taken before it was deleted.
+
+### Faircent Sub DSA is not in the menu
+It is shown only to the Owner of the centre (not for Managers, Operators or Accountants). The Owner may also have hidden it in Settings.
+
+### "This Aadhaar number has a typing mistake" / "PAN has 10 characters"
+VLEBook checks the Aadhaar check digit and the form of the PAN (5 letters, 4 numbers, 1 letter). Check every digit against the card. These checks catch typing mistakes only.
+
+### "This computer is not registered with Techmin yet"
+Connect to the internet and open Users & Licence → *Check licence online* once, then send the form again.
+
+### "Your centre already has an application with Techmin"
+Only one open application per centre. Click *Check status* to see it. If Techmin asks for more information, use *Correct and send again*; after *Not approved* you can apply again.
+
+### "Too many applications from this computer today"
+At most 5 applications a day can be sent from one computer. Try again tomorrow.
+
+### "Techmin has not switched on Sub DSA applications yet"
+Techmin's server is not ready for applications yet. Try again later or contact Techmin support.
+
 ## Version 3.6 — Google Forms
 
 ### "This app isn't verified" or "Access blocked: … has not completed the Google verification process"
