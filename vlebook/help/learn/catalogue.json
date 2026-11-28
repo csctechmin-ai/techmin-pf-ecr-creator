@@ -1,7 +1,7 @@
 {
- "doc_version": "1.6",
- "vlebook_version": "3.6.1",
- "updated": "2026-11-22",
+ "doc_version": "1.7",
+ "vlebook_version": "3.7.0",
+ "updated": "2026-11-27",
  "languages": [
   "en",
   "hi",
@@ -45,7 +45,9 @@
    "studio-tools",
    "bridge-update",
    "gforms",
-   "gforms-responses"
+   "gforms-responses",
+   "docstudio",
+   "docstudio-legal"
   ],
   "advanced": [
    "billing-edit",
@@ -67,7 +69,8 @@
    "settings",
    "health",
    "printmeter",
-   "counters"
+   "counters",
+   "faircent"
   ]
  },
  "lessons": [
@@ -135,7 +138,7 @@
    "level": "beginner",
    "min": 2,
    "added": "3.5.0",
-   "updated": "3.6.1",
+   "updated": "3.7.0",
    "src": [
     "js/modules/dashboard.js",
     "js/app.js"
@@ -716,6 +719,51 @@
     "js/core/gforms-store.js",
     "js/core/gforms-api.js"
    ]
+  },
+  {
+   "id": "docstudio",
+   "cat": "studio",
+   "nav": "docstudio",
+   "level": "daily",
+   "min": 6,
+   "added": "3.7.0",
+   "updated": "3.7.0",
+   "src": [
+    "js/modules/docstudio.js",
+    "js/core/docstudio-store.js",
+    "js/docstudio/transliteration/editor-integration.js",
+    "js/docstudio/transliteration/custom-dict.js"
+   ],
+   "img": "docstudio"
+  },
+  {
+   "id": "docstudio-legal",
+   "cat": "studio",
+   "nav": "docstudio",
+   "level": "daily",
+   "min": 5,
+   "added": "3.7.0",
+   "updated": "3.7.0",
+   "src": [
+    "js/modules/docstudio.js",
+    "js/docstudio/legal/questionnaire.js",
+    "js/docstudio/legal/catalogue.js"
+   ],
+   "img": "docstudio-legal"
+  },
+  {
+   "id": "faircent",
+   "cat": "help",
+   "nav": "faircent",
+   "level": "advanced",
+   "min": 4,
+   "added": "3.7.0",
+   "updated": "3.7.0",
+   "src": [
+    "js/modules/faircent.js",
+    "js/core/faircent.js"
+   ],
+   "img": "faircent"
   }
  ],
  "nav_lesson": {
@@ -744,7 +792,9 @@
   "help": "learning",
   "settings": "settings",
   "productivity": "productivity",
-  "gforms": "gforms"
+  "gforms": "gforms",
+  "docstudio": "docstudio",
+  "faircent": "faircent"
  },
  "glossary": [
   "dashboard",
@@ -777,7 +827,9 @@
   "transliteration",
   "printmeter",
   "shortcut",
-  "gform"
+  "gform",
+  "manglish",
+  "subdsa"
  ],
  "faq": [
   "offline",
@@ -799,7 +851,9 @@
   "trainingsafe",
   "voiceonline",
   "gstinvoice",
-  "gformswhere"
+  "gformswhere",
+  "docstudiosave",
+  "faircentdata"
  ],
  "tours": {
   "tour-screen": [

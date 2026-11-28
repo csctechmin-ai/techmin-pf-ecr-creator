@@ -2,6 +2,17 @@
 
 Published by {{entity}}. The version you are using is shown in **Settings** and in the footer of exported reports.
 
+## Version 3.7.0 — 27 November 2026
+
+- **Document Studio** (new; menu → Digital Studio), built from Techmin's Indic Document Studio 2.5.0: a document editor with Manglish → Malayalam and Hinglish → Hindi typing (offline suggestions, *My word list*, on-screen keyboard), formatting, tables, page size and margins, Word (.docx) download and opening, and Print / PDF; 9 office templates in Malayalam, Hindi and English; 85 legal drafts in 19 groups (8 of them in English, Malayalam and Hindi, the rest in English only), marked as drafts that are not legal advice; *My documents* with search, language filter, duplicate and delete.
+- **Saved in VLEBook.** Documents and the word list are VLEBook records — no separate Save button, file manager, PC folder or workspace backup. They are saved a second after typing stops and when you leave the screen, and are part of backups, auto-backup and sharing with the centre's other computers. Database update 13 adds two tables; nothing existing is changed.
+- **Not brought in from Indic Document Studio:** its own document manager, *Save As (PC)*, folder link and workspace backup (VLEBook's backups do this), and its font converter and image studio (removed in Indic Document Studio 2.5.0; images are done in VLEBook's PDF & Image Studio).
+- **Changes made while bringing it in:** a word ended with Space or Enter before its suggestions appeared (fast typing) stayed in English — it is now converted; opened HTML files and saved documents are cleaned (no scripts, outside pictures or links that run code); printing a document no longer changes how other VLEBook pages print; typing suggestions and the legal draft preview are not changed by VLEBook's screen translation; the power-of-attorney draft no longer cites an Act for revocation (now: *may be revoked by the Principal by written notice to the Attorney*).
+- **Faircent Sub DSA Partner** (new; menu → Partner Programmes, Owner only): the form *Create Sub DSA Partner* (name, mobile, PAN, Aadhaar, e-mail, address, state, city, PIN code), filled in from the registration, checked (PAN form, Aadhaar check digit, mobile, PIN code), sent to Techmin with the Owner's consent; status, Techmin's messages and *Correct and send again* in VLEBook. VLEBook keeps only masked PAN and Aadhaar after sending and never saves them as drafts. Techmin console: new *Faircent Sub DSA* tab (masked numbers; showing full numbers needs a reason and is logged; status, Faircent reference, notes; remove full numbers). Techmin's registry was updated for it (VLEBookPartners.gs).
+- VLEBook's automatic drafts can now be turned off for a screen; Document Studio (saves itself) and the Faircent form use this.
+- **Available to all centres** from this version: *Document Studio* (menu → Digital Studio) and *Faircent Sub DSA* (menu → Partner Programmes, Owner only).
+- Legal documents version 1.26: Privacy Policy, Terms and Disclaimer have a *Document Studio* paragraph.
+
 ## Version 3.6.1 — 27 November 2026
 
 - **Google Forms is open to all centres** (menu → Digital Studio → *Google Forms*). It was tested on the live site with two real Gmail accounts: forms created from templates in English and Malayalam, published, filled on Google, responses fetched with the right question labels, no duplicates on refresh, close / reopen, duplicate, delete to the Drive bin, both accounts' responses shown together, and one account unable to read, close or delete another account's form.
