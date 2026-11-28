@@ -1,7 +1,7 @@
 {
- "doc_version": "1.7",
- "vlebook_version": "3.7.0",
- "updated": "2026-11-27",
+ "doc_version": "1.8",
+ "vlebook_version": "3.8.0",
+ "updated": "2026-11-28",
  "languages": [
   "en",
   "hi",
@@ -27,7 +27,8 @@
    "training",
    "buy-plan",
    "signin-centre",
-   "whatsnew-dash"
+   "whatsnew-dash",
+   "quicksize"
   ],
   "daily": [
    "services",
@@ -47,7 +48,11 @@
    "gforms",
    "gforms-responses",
    "docstudio",
-   "docstudio-legal"
+   "docstudio-legal",
+   "qrsend",
+   "upi-dues",
+   "aadhaar-uidai",
+   "family"
   ],
   "advanced": [
    "billing-edit",
@@ -138,7 +143,7 @@
    "level": "beginner",
    "min": 2,
    "added": "3.5.0",
-   "updated": "3.7.0",
+   "updated": "3.8.0",
    "src": [
     "js/modules/dashboard.js",
     "js/app.js"
@@ -764,6 +769,79 @@
     "js/core/faircent.js"
    ],
    "img": "faircent"
+  },
+  {
+   "id": "qrsend",
+   "cat": "daily",
+   "nav": "billing",
+   "level": "daily",
+   "min": 4,
+   "added": "3.8.0",
+   "updated": "3.8.0",
+   "src": [
+    "js/modules/qrsend.js",
+    "js/send-page.js",
+    "js/core/drop.js"
+   ],
+   "img": "qrsend"
+  },
+  {
+   "id": "upi-dues",
+   "cat": "money",
+   "nav": "customers",
+   "level": "daily",
+   "min": 4,
+   "added": "3.8.0",
+   "updated": "3.8.0",
+   "src": [
+    "js/core/upi.js",
+    "js/modules/customers.js",
+    "js/core/invoicelayout.js"
+   ],
+   "img": "upi-dues"
+  },
+  {
+   "id": "quicksize",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "beginner",
+   "min": 3,
+   "added": "3.8.0",
+   "updated": "3.8.0",
+   "src": [
+    "js/modules/studio-quick.js",
+    "js/modules/studio-photo.js"
+   ],
+   "img": "quicksize"
+  },
+  {
+   "id": "aadhaar-uidai",
+   "cat": "studio",
+   "nav": "studio",
+   "level": "daily",
+   "min": 3,
+   "added": "3.8.0",
+   "updated": "3.8.0",
+   "src": [
+    "js/modules/studio-pvc.js",
+    "js/core/printsheet.js"
+   ],
+   "img": "aadhaar-uidai"
+  },
+  {
+   "id": "family",
+   "cat": "daily",
+   "nav": "customers",
+   "level": "daily",
+   "min": 3,
+   "added": "3.8.0",
+   "updated": "3.8.0",
+   "src": [
+    "js/core/accounting.js",
+    "js/modules/customers.js",
+    "js/modules/ratelist.js",
+    "js/core/reminders.js"
+   ]
   }
  ],
  "nav_lesson": {
@@ -829,7 +907,9 @@
   "shortcut",
   "gform",
   "manglish",
-  "subdsa"
+  "subdsa",
+  "upiqr",
+  "maskedaadhaar"
  ],
  "faq": [
   "offline",
@@ -853,7 +933,9 @@
   "gstinvoice",
   "gformswhere",
   "docstudiosave",
-  "faircentdata"
+  "faircentdata",
+  "rename360",
+  "qrprivacy"
  ],
  "tours": {
   "tour-screen": [

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free tools for CSC and Akshaya centres — photo and PDF to exact KB, passport photo sheet | VLE360</title>
+  <meta name="description" content="Free browser tools by VLE360 (formerly VLEBook): make a photo, signature or PDF smaller than an exact size in KB, clean up a WhatsApp photo or thumb impression, and print a passport photo sheet on A4 or 4×6. Files stay on your computer.">
+  <link rel="icon" href="icons/vle360-mark.svg">
+  <link rel="canonical" href="https://tools.complypro.co.in/vlebook/free-tools.html">
+  <style>
+    :root { --navy: #12345A; --teal: #0B7A8A; --line: #D5DEE8; --muted: #5B6B7B; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', 'Nirmala UI', Roboto, Arial, sans-serif; background: #F4F7FA; color: #0F172A; }
+    header { background: var(--navy); padding: 14px 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    header img { height: 46px; }
+    header a.cta { margin-left: auto; background: #F4B400; color: #12345A; font-weight: 700; padding: 9px 14px; border-radius: 8px; text-decoration: none; }
+    main { max-width: 980px; margin: 0 auto; padding: 18px; }
+    h1 { color: var(--navy); font-size: 26px; margin: 6px 0; }
+    .lead { color: var(--muted); }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 14px 0; }
+    .card-title { font-weight: 700; color: var(--navy); font-size: 18px; margin-bottom: 4px; }
+    .form-hint { color: var(--muted); font-size: 13px; }
+    .form-control { padding: 8px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+    .studio-toolrow { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--teal); background: #fff; color: var(--teal); font-weight: 600; cursor: pointer; font: inherit; }
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-xs { padding: 4px 10px; font-size: 13px; }
+    .util-result { margin-top: 10px; }
+    .text-danger { color: #B42318; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .grid .form-control { width: 100%; }
+    label.form-label { display: block; font-size: 13px; color: var(--muted); }
+    footer { text-align: center; color: var(--muted); font-size: 13px; padding: 20px; }
+    footer a { color: var(--teal); }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="about.html"><img src="icons/vle360-logo-dark.svg" alt="VLE360 — The Operating System for VLEs" width="192" height="46"></a>
+    <a class="cta" href="./">Try VLE360 free for 45 days</a>
+  </header>
+  <main>
+    <h1>Free tools for CSC, Akshaya and e-Seva centres</h1>
+    <p class="lead">Photo and PDF to an exact size in KB, photo clean-up and passport photo sheets. Everything runs in this browser — your customers' files are never uploaded.</p>
+    <p class="lead" lang="hi">फ़ोटो और PDF को सही KB में बदलें, फ़ोटो साफ़ करें, पासपोर्ट फ़ोटो शीट बनाएँ — सब मुफ़्त, फ़ाइलें अपलोड नहीं होतीं।</p>
+    <p class="lead" lang="ml">ഫോട്ടോയും PDF-ഉം കൃത്യമായ KB-യിലേക്ക്, ഫോട്ടോ ക്ലീൻ-അപ്പ്, പാസ്‌പോർട്ട് ഫോട്ടോ ഷീറ്റ് — എല്ലാം സൗജന്യം, ഫയലുകൾ അപ്‌ലോഡ് ചെയ്യുന്നില്ല.</p>
+    <div id="tools"></div>
+    <div class="card" id="pp-card">
+      <div class="card-title">Passport photo sheet</div>
+      <div class="form-hint">Print size is on paper in millimetres. Check the photo rules of the office you apply to.</div>
+      <div class="grid" style="margin-top:8px">
+        <div><label class="form-label" for="pp-file">Photo</label><input type="file" id="pp-file" accept="image/*" class="form-control"></div>
+        <div><label class="form-label" for="pp-size">Size</label><select id="pp-size" class="form-control"><option value="35x45">35 × 45 mm</option><option value="51x51">2 × 2 inch (51 × 51 mm)</option><option value="25x35">25 × 35 mm</option><option value="20x25">Stamp size 20 × 25 mm</option></select></div>
+        <div><label class="form-label" for="pp-sheet">Paper</label><select id="pp-sheet" class="form-control"><option value="A4">A4</option><option value="4x6">4 × 6 inch photo paper</option></select></div>
+        <div><label class="form-label" for="pp-copies">Copies</label><input type="number" id="pp-copies" min="1" max="60" value="8" class="form-control"></div>
+        <div><label class="form-label" for="pp-bg">Background</label><select id="pp-bg" class="form-control"><option value="">Keep as it is</option><option value="#FFFFFF">White</option><option value="#DCEBFA">Light blue</option></select></div>
+      </div>
+      <div class="studio-toolrow" style="margin-top:10px"><button type="button" class="btn btn-primary" id="pp-make">Make PDF</button></div>
+      <div id="pp-out" class="util-result" aria-live="polite"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Need billing, books, customers and reminders too?</div>
+      <p>VLE360 is office software for digital service centres: GST bills with a UPI QR, double-entry books, customer dues, applications, renewal reminders, a full photo, PDF and PVC card studio, and files from the customer's phone by QR. Your business data stays on your computer. English, Hindi and Malayalam.</p>
+      <p><a class="btn btn-primary" href="./" style="text-decoration:none">Start the 45-day free trial</a> <a class="btn" href="about.html" style="text-decoration:none">Features and plans</a></p>
+    </div>
+  </main>
+  <footer>VLE360 by Techmin Wealth Partners, Aluva, Kerala · <a href="help.html">Help, terms and privacy</a></footer>
+  <script type="module" src="js/free-tools-page.js"></script>
+</body>
+</html>

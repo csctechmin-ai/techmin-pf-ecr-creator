@@ -1,7 +1,7 @@
 {
-  "name": "VLEBook — Office Software for CSC, Akshaya and e-Seva Centres",
-  "short_name": "VLEBook",
-  "description": "Billing, customers, applications, AEPS records, accounts and stock for CSC, Akshaya and e-Seva centres (early access).",
+  "name": "VLE360 — The Operating System for VLEs",
+  "short_name": "VLE360",
+  "description": "VLE360 (formerly VLEBook): billing, customers, applications, AEPS records, accounts and stock for CSC, Akshaya and e-Seva centres (early access).",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F4F7FA",
@@ -9,7 +9,7 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "icons/vlebook-mark.svg",
+      "src": "icons/vle360-mark.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

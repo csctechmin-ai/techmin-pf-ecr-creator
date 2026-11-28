@@ -1,7 +1,7 @@
 {
  "ui": {
   "lc": "Learning Centre",
-  "lc_sub": "Learn every part of VLEBook step by step, in simple words. Lessons, guided tours, questions and answers, and the full guides.",
+  "lc_sub": "Learn every part of VLE360 step by step, in simple words. Lessons, guided tours, questions and answers, and the full guides.",
   "tab_learn": "Learning Centre",
   "tab_docs": "Guides & Legal",
   "search": "Search lessons, questions and words (for example: bill, backup, GST)",
@@ -19,7 +19,7 @@
   "path_advanced": "Advanced operator",
   "path_hint": "Follow a path in order. Nothing is locked — open any lesson at any time.",
   "sec_faq": "Questions & answers",
-  "sec_glossary": "Words used in VLEBook",
+  "sec_glossary": "Words used in VLE360",
   "sec_new": "What's new",
   "sec_trouble": "Something is not working?",
   "trouble_text": "Errors & Solutions lists common problems by what you see on the screen, with a safe fix for each. If the fix does not help, raise a ticket in Help & Support.",
@@ -53,7 +53,7 @@
   "open_screen": "Open this screen",
   "show_me": "Show me on the screen",
   "back": "← All lessons",
-  "screenshot": "Screenshot of the screen in VLEBook {v} (sample data)",
+  "screenshot": "Screenshot of the screen in VLE360 {v} (sample data)",
   "tour_next": "Next",
   "tour_back": "Back",
   "tour_skip": "Skip",
@@ -63,10 +63,10 @@
   "tour_safe": "The tour only points at things. It never clicks, saves or deletes anything.",
   "learn_btn": "Learn",
   "learn_btn_title": "Open the lesson for this screen",
-  "new_in": "New and changed in VLEBook {v}",
+  "new_in": "New and changed in VLE360 {v}",
   "release_link": "All release notes",
-  "manual_title": "VLEBook Learning Centre — manual",
-  "manual_cover": "Guide version {d} · covers VLEBook {v} · updated {u}",
+  "manual_title": "VLE360 Learning Centre — manual",
+  "manual_cover": "Guide version {d} · covers VLE360 {v} · updated {u}",
   "manual_print": "Print / Save as PDF",
   "checklist_title": "Staff training checklist",
   "checklist_intro": "For the Owner or trainer. Tick each lesson when the staff member can do it alone.",
@@ -80,10 +80,10 @@
  },
  "lessons": {
   "gs-what": {
-   "title": "What is VLEBook?",
+   "title": "What is VLE360?",
    "summary": "Office software for CSC, Akshaya and e-Seva centres that runs in Chrome or Edge.",
-   "what": "VLEBook is the office book of your centre, on the computer. It keeps your customers, bills, applications, money, stock and staff records in one place, and has tools for PDFs, photos, ID cards and printing.",
-   "why": "Instead of a notebook, a calculator and many separate tools, you do the day's work on one screen. VLEBook adds up the money for you and keeps the government fee separate from your own income.",
+   "what": "VLE360 is the office book of your centre, on the computer. It keeps your customers, bills, applications, money, stock and staff records in one place, and has tools for PDFs, photos, ID cards and printing.",
+   "why": "Instead of a notebook, a calculator and many separate tools, you do the day's work on one screen. VLE360 adds up the money for you and keeps the government fee separate from your own income.",
    "before": [
     "A Windows computer with Google Chrome or Microsoft Edge.",
     "Internet for the first opening and for activation. After that, daily work also runs without internet."
@@ -94,7 +94,7 @@
     "Sign in with your user name and password.",
     "Use the menu on the left to open a screen. The big middle area shows that screen."
    ],
-   "result": "VLEBook opens on the Dashboard with today's summary. The Dashboard also shows the VLEBook version and What's new.",
+   "result": "VLE360 opens on the Dashboard with today's summary. The Dashboard also shows the VLE360 version and What's new.",
    "careful": "Your business data is stored only on this computer and in the backups you save. Techmin does not keep a copy. Set up automatic backup on the first day (see the lesson Backup and restore).",
    "wrong": "If the page does not open, check the internet for the first visit, and use Chrome or Edge (not Internet Explorer). If you see an error, open Guides & Legal → Errors & Solutions.",
    "check": {
@@ -111,7 +111,7 @@
    "title": "First-time setup: Owner account and centre details",
    "summary": "Create the Owner account, keep the recovery code, and fill in the centre details for invoices.",
    "what": "The Owner account is the main login of the centre. Centre details (name, address, GSTIN, logo, signature) are printed on your invoices and reports.",
-   "why": "Without the Owner account VLEBook cannot be activated. Correct centre details make your bills look professional and correct.",
+   "why": "Without the Owner account VLE360 cannot be activated. Correct centre details make your bills look professional and correct.",
    "before": [
     "Internet connection (activation needs it).",
     "Centre name, full address, district, state, PIN code, your mobile and email.",
@@ -120,13 +120,13 @@
    "steps": [
     "On the first screen fill in the centre name, your name, mobile, email, type of centre and full address.",
     "Type a user name and password, read and accept the Terms, Privacy, Refund Policy and Disclaimer, and click Create.",
-    "VLEBook shows a recovery code once. Write it down or download it and keep it safe.",
+    "VLE360 shows a recovery code once. Write it down or download it and keep it safe.",
     "Open Settings & Centre Setup. Check the details, add the invoice prefix and UPI ID.",
     "Under Centre logo click Upload logo (PNG, JPG or WEBP, up to 3 MB).",
     "Under Authorised signatory's signature upload a clear photo of the signature on white paper."
    ],
    "result": "A welcome email arrives with your user name, Centre ID and Device Code (never the password). The logo and signature appear on invoices.",
-   "careful": "The recovery code is the only way to reset the Owner password without Techmin's help. Do not share it. Your centre already uses VLEBook? Do not create a new Owner account here: click I already have a user name — Sign in to my centre, type your user name and password and choose your centre's folder.",
+   "careful": "The recovery code is the only way to reset the Owner password without Techmin's help. Do not share it. Your centre already uses VLE360? Do not create a new Owner account here: click I already have a user name — Sign in to my centre, type your user name and password and choose your centre's folder.",
    "wrong": "If activation fails, check the internet and try again. If you lost the recovery code and the password, contact Techmin support with your Centre ID.",
    "check": {
     "q": "Which code lets the Owner reset the password without Techmin's help?",
@@ -144,7 +144,7 @@
    "what": "The screen has three parts: the menu on the left, the work area in the middle, and the top bar with language, sync, notices, the Save button and your name.",
    "why": "When you know where things are, every task is quicker and you do not get lost.",
    "before": [
-    "Sign in to VLEBook."
+    "Sign in to VLE360."
    ],
    "steps": [
     "Look at the menu on the left. Click any name to open that screen. A small number next to a name shows things waiting (for example pending applications).",
@@ -153,7 +153,7 @@
     "Click your name at the top right for Change my password and Sign out.",
     "The Save button saves all open edits at once. A yellow Backup needed button means data changed since the last backup."
    ],
-   "result": "You can open every screen and come back to the Dashboard at any time. After you sign in, VLEBook always opens on the Dashboard.",
+   "result": "You can open every screen and come back to the Dashboard at any time. After you sign in, VLE360 always opens on the Dashboard.",
    "careful": "Sign out when you leave the counter, so nobody else works under your name.",
    "wrong": "If a menu item shows FULL, it needs the full version (trial or licence). If a menu item is missing, your role may not allow it — ask the Owner.",
    "check": {
@@ -168,21 +168,21 @@
   },
   "gs-save": {
    "title": "Saving, internet and offline work",
-   "summary": "How VLEBook saves your work, and what needs the internet.",
-   "what": "VLEBook saves every record on this computer as soon as you save a form or create a bill. Backups are extra copies in a folder you choose.",
+   "summary": "How VLE360 saves your work, and what needs the internet.",
+   "what": "VLE360 saves every record on this computer as soon as you save a form or create a bill. Backups are extra copies in a folder you choose.",
    "why": "Knowing what is saved where protects you from losing a day's work.",
    "before": [
     "Nothing special."
    ],
    "steps": [
     "When you click a Save or Generate button, the record is saved on this computer at once.",
-    "Unfinished forms are kept as drafts; if you leave a screen and come back, VLEBook restores them.",
+    "Unfinished forms are kept as drafts; if you leave a screen and come back, VLE360 restores them.",
     "The Save button at the top saves any open edits and, when data changed, takes a backup too.",
     "Daily work (billing, customers, accounts, tools) works without internet.",
     "The internet is needed only for activation, licences, Techmin notices, the welcome email and push notifications."
    ],
    "result": "Your work stays on this computer, and the backup folder keeps copies you can restore.",
-   "careful": "Do not use VLEBook in a private / incognito window — that data is erased when the window closes. Do not clear 'Cookies and site data' for the VLEBook address.",
+   "careful": "Do not use VLE360 in a private / incognito window — that data is erased when the window closes. Do not clear 'Cookies and site data' for the VLE360 address.",
    "wrong": "If data seems missing after the browser was reset, use Restore from backup folder on the first screen (see Backup and restore).",
    "check": {
     "q": "Does billing need the internet?",
@@ -197,7 +197,7 @@
   "customers": {
    "title": "Customers and the 360° ledger",
    "summary": "Add a customer once and see all their bills, payments, dues and applications.",
-   "what": "A customer record is like writing a person's details in the centre notebook. VLEBook keeps the name and mobile number, and links every bill and application to that person.",
+   "what": "A customer record is like writing a person's details in the centre notebook. VLE360 keeps the name and mobile number, and links every bill and application to that person.",
    "why": "When the customer returns, you find them by mobile number and see what they owe, what they paid and which applications are pending.",
    "before": [
     "The customer's name and mobile number."
@@ -211,9 +211,9 @@
    ],
    "result": "The customer appears in the list and opens with the full history.",
    "careful": "A mobile number can belong to only one customer — duplicates are blocked. Never store a customer's PIN, OTP or passwords.",
-   "wrong": "If VLEBook says the mobile number already exists, search for it — the customer is already registered. Use Edit to correct a name.",
+   "wrong": "If VLE360 says the mobile number already exists, search for it — the customer is already registered. Use Edit to correct a name.",
    "check": {
-    "q": "What does VLEBook use to stop duplicate customers?",
+    "q": "What does VLE360 use to stop duplicate customers?",
     "a": [
      "The mobile number",
      "The bill amount",
@@ -226,9 +226,9 @@
    "title": "Service Management: prices, government fee and GST",
    "summary": "Set up the services you offer, with the government fee and your service charge kept apart.",
    "what": "A service is a job you do for customers, like an income certificate or a PAN application. For each service you set the government fee, your service charge and, for GST-registered centres, the GST rate.",
-   "why": "When you bill, VLEBook fills these amounts in for you, so every bill is right and fast.",
+   "why": "When you bill, VLE360 fills these amounts in for you, so every bill is right and fast.",
    "before": [
-    "Your own price list. VLEBook does not add any prices or commission rates by itself."
+    "Your own price list. VLE360 does not add any prices or commission rates by itself."
    ],
    "steps": [
     "Open Service Management.",
@@ -252,7 +252,7 @@
   "billing": {
    "title": "Make a bill (invoice)",
    "summary": "Type the mobile number, add services, take payment and print or share the invoice.",
-   "what": "A bill (invoice) records what the customer paid for. VLEBook adds the government fee, your charge and any GST, and posts the money to your accounts.",
+   "what": "A bill (invoice) records what the customer paid for. VLE360 adds the government fee, your charge and any GST, and posts the money to your accounts.",
    "why": "Every rupee is recorded the same way, the customer gets a proper receipt, and your accounts stay correct without extra work.",
    "before": [
     "Your services set up in Service Management.",
@@ -268,7 +268,7 @@
    ],
    "result": "The invoice gets the next number, the money goes to the right account, and the customer's ledger is updated. The total is rounded to the nearest rupee.",
    "careful": "Check the services and amounts before generating — a generated bill is not deleted. To correct it, it is edited or cancelled with a credit note (see Correct or cancel a bill).",
-   "wrong": "If VLEBook asks for at least one service, add a service first. If a GST bill is refused, check the GST rate of the service or stock item.",
+   "wrong": "If VLE360 asks for at least one service, add a service first. If a GST bill is refused, check the GST rate of the service or stock item.",
    "check": {
     "q": "Which button saves the bill?",
     "a": [
@@ -349,15 +349,15 @@
     "Tick 'The customer agreed to receive renewal reminders' only when they agreed.",
     "Check the cards at the top: Overdue, Due today, Next 7 days, Next 30 days.",
     "Open a reminder, choose the message (English, Malayalam, Hindi) and click Open WhatsApp with this message. Press Send in WhatsApp.",
-    "Back in VLEBook click I sent it — mark as sent. When the customer renews, click Mark renewed."
+    "Back in VLE360 click I sent it — mark as sent. When the customer renews, click Mark renewed."
    ],
-   "result": "VLEBook records message prepared, WhatsApp opened and sent (confirmed by you). For repeating items a new reminder is created for the next period.",
-   "careful": "VLEBook cannot see whether a WhatsApp message was delivered or read and never says so. Without consent no message is prepared.",
+   "result": "VLE360 records message prepared, WhatsApp opened and sent (confirmed by you). For repeating items a new reminder is created for the next period.",
+   "careful": "VLE360 cannot see whether a WhatsApp message was delivered or read and never says so. Without consent no message is prepared.",
    "wrong": "If WhatsApp does not open, check that WhatsApp (app or web) is installed and signed in. If a duplicate is reported, open the existing reminder.",
    "check": {
     "q": "Who presses Send in WhatsApp?",
     "a": [
-     "VLEBook, automatically",
+     "VLE360, automatically",
      "You, the operator"
     ],
     "right": 1
@@ -378,10 +378,10 @@
     "Save. The effect on cash and wallet is shown at once."
    ],
    "result": "The entry is saved and the cash and wallet figures in Accounts update.",
-   "careful": "Never type a customer's PIN, OTP or biometric data into VLEBook. VLEBook does not connect to bank systems — it only records what you did on the portal.",
+   "careful": "Never type a customer's PIN, OTP or biometric data into VLE360. VLE360 does not connect to bank systems — it only records what you did on the portal.",
    "wrong": "If cash does not match at day end, check the AEPS entries of the day for a wrong type (withdrawal vs deposit).",
    "check": {
-    "q": "Should you type the customer's OTP into VLEBook?",
+    "q": "Should you type the customer's OTP into VLE360?",
     "a": [
      "Yes",
      "Never"
@@ -405,7 +405,7 @@
     "Every 30 days do a Physical Stock Check: type what is really on the shelf."
    ],
    "result": "Stock Summary shows opening, inward, outward, closing and value. Alerts show low and negative stock.",
-   "careful": "You must choose the GST rate of each item — VLEBook does not assume one. A red Negative stock alert means more was sold than recorded: record the missing purchase.",
+   "careful": "You must choose the GST rate of each item — VLE360 does not assume one. A red Negative stock alert means more was sold than recorded: record the missing purchase.",
    "wrong": "If a bill warns Stock will go negative, check the quantity or record the purchase first.",
    "check": {
     "q": "What happens to stock when you cancel a bill with an item?",
@@ -446,8 +446,8 @@
   },
   "books": {
    "title": "Books & GST: your accounts",
-   "summary": "Double-entry books that VLEBook writes for you, and why the government fee is not your income.",
-   "what": "Full accounts of the centre: vouchers, ledgers, trial balance, profit and loss, balance sheet, cash and bank books. VLEBook writes the entries from your bills, receipts, expenses and AEPS work.",
+   "summary": "Double-entry books that VLE360 writes for you, and why the government fee is not your income.",
+   "what": "Full accounts of the centre: vouchers, ledgers, trial balance, profit and loss, balance sheet, cash and bank books. VLE360 writes the entries from your bills, receipts, expenses and AEPS work.",
    "why": "Your accountant gets proper books, and you see your true profit. The government fee you collect is kept in Government fee clearing, not counted as income.",
    "before": [
     "Opening balances (Books & GST → Opening balances) if you start mid-year."
@@ -474,24 +474,24 @@
   },
   "gst": {
    "title": "GST bills and GST returns help",
-   "summary": "How your GST registration decides the bill, and how VLEBook helps prepare returns.",
-   "what": "VLEBook chooses the kind of bill from your GST registration and prepares tables and files that help with GSTR-1, GSTR-3B and CMP-08.",
+   "summary": "How your GST registration decides the bill, and how VLE360 helps prepare returns.",
+   "what": "VLE360 chooses the kind of bill from your GST registration and prepares tables and files that help with GSTR-1, GSTR-3B and CMP-08.",
    "why": "Bills are correct for your registration type, and preparing returns takes less time.",
    "before": [
     "Your GSTIN and registration type (Regular or Composition), set in Books & GST → GST → GST profile."
    ],
    "steps": [
-    "No GSTIN: VLEBook makes non-GST bills only. Regular: every bill is a Tax Invoice. Composition: every bill is a Bill of Supply.",
+    "No GSTIN: VLE360 makes non-GST bills only. Regular: every bill is a Tax Invoice. Composition: every bill is a Bill of Supply.",
     "Set GST rates and the HSN / SAC master in the GST tab, then choose them in services and stock items.",
     "On a bill you may type the customer's GSTIN, so a registered customer can claim input tax credit.",
     "Choose the return month in the GST tab, check the tables and click Check before export.",
     "Download the Excel workbook or GSTR-1 JSON; use GSTR-3B help; after filing on the portal, Mark as filed."
    ],
    "result": "New GST bills dated in a filed month are refused (the Owner can reopen with a reason).",
-   "careful": "VLEBook never files returns — you file on the GST portal. Choosing correct rates and codes is the centre's responsibility.",
+   "careful": "VLE360 never files returns — you file on the GST portal. Choosing correct rates and codes is the centre's responsibility.",
    "wrong": "If the export check shows problems, open each listed bill and correct it (credit note in the current month if the month is filed).",
    "check": {
-    "q": "Does VLEBook file your GST return?",
+    "q": "Does VLE360 file your GST return?",
     "a": [
      "Yes",
      "No — it prepares help; you file on the portal"
@@ -514,12 +514,12 @@
     "Check the difference between expected and received."
    ],
    "result": "You see which commissions are pending from which partner.",
-   "careful": "Rates and amounts are the ones you enter — VLEBook does not know partners' commission rates.",
+   "careful": "Rates and amounts are the ones you enter — VLE360 does not know partners' commission rates.",
    "wrong": "If a received amount does not match, compare with the partner's statement and record the difference with a note.",
    "check": {
     "q": "Who enters the commission rates?",
     "a": [
-     "VLEBook, automatically",
+     "VLE360, automatically",
      "You, from the partner's statement"
     ],
     "right": 1
@@ -572,7 +572,7 @@
    "check": {
     "q": "Where do report figures come from?",
     "a": [
-     "Your own entries in VLEBook",
+     "Your own entries in VLE360",
      "The government portal"
     ],
     "right": 0
@@ -596,7 +596,7 @@
    ],
    "result": "A new file is made. The original file stays as it was.",
    "careful": "A white cover box is not redaction — use Redact (secure), which removes the hidden words and checks it. Editing a digitally signed PDF breaks its signature.",
-   "wrong": "If a PDF does not open, it may be password-protected: use Unlock with the customer's password. If a size limit cannot be met, VLEBook says so.",
+   "wrong": "If a PDF does not open, it may be password-protected: use Unlock with the customer's password. If a size limit cannot be met, VLE360 says so.",
    "check": {
     "q": "Is the original PDF overwritten when you edit?",
     "a": [
@@ -624,8 +624,8 @@
     "Download the files (one ZIP with a processing report)."
    ],
    "result": "Files named like Candidate_001_Kerala_PSC_Photo.jpg, in the recorded size.",
-   "careful": "GREEN means the file meets the recorded sizes; it does not guarantee the authority will accept it. Profiles marked unverified must be checked against the notification. VLEBook never changes the face.",
-   "wrong": "RED shows the exact problem (size, format, KB limit). If a minimum KB cannot be reached, VLEBook explains why instead of adding meaningless data.",
+   "careful": "GREEN means the file meets the recorded sizes; it does not guarantee the authority will accept it. Profiles marked unverified must be checked against the notification. VLE360 never changes the face.",
+   "wrong": "RED shows the exact problem (size, format, KB limit). If a minimum KB cannot be reached, VLE360 explains why instead of adding meaningless data.",
    "check": {
     "q": "Does GREEN guarantee the portal accepts the file?",
     "a": [
@@ -638,7 +638,7 @@
   "studio-scan": {
    "title": "Document scanner: photos of paper to one PDF",
    "summary": "Turn phone photos of pages into one clean PDF, or print them.",
-   "what": "The scanner turns phone or camera photos of paper pages into one clean PDF. (Reading text from pictures — OCR — was removed from VLEBook in 3.5.1.)",
+   "what": "The scanner turns phone or camera photos of paper pages into one clean PDF. (Reading text from pictures — OCR — was removed from VLE360 in 3.5.1.)",
    "why": "Customers often bring paper; a clean PDF is easier to upload, send and keep.",
    "before": [
     "Clear, straight photos of each page, taken in good light."
@@ -694,7 +694,7 @@
   "printing": {
    "title": "Printing to any printer and the Print Bridge",
    "summary": "Print through the Windows print dialog, as PDF, or direct to a printer with the free Print Bridge.",
-   "what": "Every print in VLEBook opens the same print window with three choices: Windows print dialog, Download PDF, or Direct to a printer.",
+   "what": "Every print in VLE360 opens the same print window with three choices: Windows print dialog, Download PDF, or Direct to a printer.",
    "why": "A web page cannot see your printers by itself. The free Print Bridge helper lists the printers and their real features.",
    "before": [
     "A Windows computer for the Print Bridge (phones and tablets use the browser's print or PDF)."
@@ -704,12 +704,12 @@
     "Choose Windows print dialog to print through Windows, or Download PDF.",
     "For direct printing, open PDF & Image Studio → Print & printers → Download the Print Bridge.",
     "Unzip it and double-click Install VLEBook Print Bridge.cmd. It then runs with an icon near the clock and starts with Windows.",
-    "VLEBook connects by itself. Choose the printer, paper, copies, colour, two-sided and size, then Print.",
+    "VLE360 connects by itself. Choose the printer, paper, copies, colour, two-sided and size, then Print.",
     "When the paper comes out, click It printed correctly or It did not print."
    ],
    "result": "'Sent to Windows' means Windows accepted the job. Your answer finishes the job record.",
-   "careful": "VLEBook shows only the options your printer's driver reports. If Chrome or Edge asks to allow devices on your local network, choose Allow. Print Bridge 1.3 also tells VLEBook which browsers are on the same PC (a hashed Windows machine ID, never the MAC address), so a new browser can take over an idle counter.",
-   "wrong": "If VLEBook says the Bridge is not running, run Install VLEBook Print Bridge.cmd again. If an older Bridge is running, VLEBook shows a notice to download the new one. When you install a new Print Bridge, the installer finds the older one and asks before replacing it (see the lesson Install or update the Print Bridge).",
+   "careful": "VLE360 shows only the options your printer's driver reports. If Chrome or Edge asks to allow devices on your local network, choose Allow. Print Bridge 1.3 also tells VLE360 which browsers are on the same PC (a hashed Windows machine ID, never the MAC address), so a new browser can take over an idle counter.",
+   "wrong": "If VLE360 says the Bridge is not running, run Install VLEBook Print Bridge.cmd again. If an older Bridge is running, VLE360 shows a notice to download the new one. When you install a new Print Bridge, the installer finds the older one and asks before replacing it (see the lesson Install or update the Print Bridge).",
    "check": {
     "q": "What does 'Sent to Windows' mean?",
     "a": [
@@ -741,7 +741,7 @@
     "q": "Where does the CV content come from?",
     "a": [
      "Only the customer's own details",
-     "VLEBook invents it"
+     "VLE360 invents it"
     ],
     "right": 0
    }
@@ -816,7 +816,7 @@
     "For deletion (Owner only) read what will be deleted, anonymised or kept, then type DELETE to confirm."
    ],
    "result": "The request is completed and recorded in the deletion log with coded references.",
-   "careful": "VLEBook cannot delete copies in old backups, WhatsApp, email, paper files or portals. These screens help keep records; they are not legal advice and do not by themselves make the centre compliant with any law.",
+   "careful": "VLE360 cannot delete copies in old backups, WhatsApp, email, paper files or portals. These screens help keep records; they are not legal advice and do not by themselves make the centre compliant with any law.",
    "wrong": "If deletion is blocked, the record may be on legal hold or required by tax law — the screen says why.",
    "check": {
     "q": "What should you check before giving a customer their data?",
@@ -830,7 +830,7 @@
   "backup": {
    "title": "Backup and restore",
    "summary": "Set up automatic backup to Google Drive, OneDrive, Dropbox or a USB folder, and restore when needed.",
-   "what": "A backup is a copy of all your VLEBook data in a file. Restore brings the data back from that file.",
+   "what": "A backup is a copy of all your VLE360 data in a file. Restore brings the data back from that file.",
    "why": "If the computer breaks or the browser is reset, a backup is the only way to get your data back. Techmin does not keep a copy.",
    "before": [
     "Google Drive / OneDrive / Dropbox for desktop installed, or a USB drive."
@@ -838,12 +838,12 @@
    "steps": [
     "Open Data Ownership & Backup.",
     "Under Where should backups be saved? choose Google Drive, OneDrive, Dropbox or This computer / USB drive.",
-    "Click Choose backup folder and pick a folder inside that service's folder (for example G:\\My Drive\\VLEBook backups).",
+    "Click Choose backup folder and pick a folder inside that service's folder (for example G:\\My Drive\\VLE360 backups).",
     "Choose Every hour and/or fixed times, and JSON and/or TXT.",
     "To restore: Restore → choose the .json or .txt file → Validate → Restore. On a new computer use Restore from backup folder on the first screen."
    ],
    "result": "Backups are saved automatically, without asking, and every save is in the audit log.",
-   "careful": "After VLEBook is reopened, Chrome may ask again for folder access: click Reconnect backup folder. Until then automatic backups are paused. On a new browser you can also use Sign in to my centre with your user name and password.",
+   "careful": "After VLE360 is reopened, Chrome may ask again for folder access: click Reconnect backup folder. Until then automatic backups are paused. On a new browser you can also use Sign in to my centre with your user name and password.",
    "wrong": "If a TXT backup is refused, it was edited — use another backup. If no backup exists, the data cannot be recovered by Techmin.",
    "check": {
     "q": "Who can recover your data if you have no backup?",
@@ -865,7 +865,7 @@
    ],
    "steps": [
     "On the main computer (Owner): Data Ownership & Backup → Work on more than one computer → Turn on (internet needed). It becomes counter A.",
-    "On each other computer: install Google Drive for desktop with the same account, open VLEBook and click Join my centre (shared Google Drive folder), choosing the same folder.",
+    "On each other computer: install Google Drive for desktop with the same account, open VLE360 and click Join my centre (shared Google Drive folder), choosing the same folder.",
     "Staff sign in with their own user name and password.",
     "Ask Techmin to issue the licence for Any computer.",
     "On another browser or computer you can also use Sign in to my centre on the first screen: your user name, password and the shared folder."
@@ -898,13 +898,13 @@
     "To renew, use Buy or renew on this screen: choose a plan and pay with Razorpay — the licence is applied at once and Techmin's GST invoice is emailed. A key sent by Techmin can still be pasted in Activate Licence."
    ],
    "result": "Staff can sign in. The top of the screen shows how many days the licence is valid.",
-   "careful": "After the trial or licence ends, VLEBook moves to Basic mode — your data is never locked, and only the Owner can sign in.",
+   "careful": "After the trial or licence ends, VLE360 moves to Basic mode — your data is never locked, and only the Owner can sign in.",
    "wrong": "If the licence does not arrive after paying, click Check my payment. Otherwise connect to the internet and wait a minute, or contact Techmin with your Device Code.",
    "check": {
     "q": "What happens to your data when the licence ends?",
     "a": [
      "It is deleted",
-     "It stays; VLEBook moves to Basic mode"
+     "It stays; VLE360 moves to Basic mode"
     ],
     "right": 1
    }
@@ -925,7 +925,7 @@
    ],
    "result": "Changes apply at once and are written in the audit log.",
    "careful": "Start fresh cannot be undone except by restoring a backup. Take the offered backup first.",
-   "wrong": "If 'Chain check' is not intact, contact Techmin support — an entry may have been changed outside VLEBook.",
+   "wrong": "If 'Chain check' is not intact, contact Techmin support — an entry may have been changed outside VLE360.",
    "check": {
     "q": "What does Start fresh keep?",
     "a": [
@@ -937,8 +937,8 @@
   },
   "news": {
    "title": "Techmin Updates and software updates",
-   "summary": "Notices from Techmin, and how VLEBook updates itself.",
-   "what": "The bell at the top shows notices and articles from Techmin. Techmin Updates also checks for new versions of VLEBook.",
+   "summary": "Notices from Techmin, and how VLE360 updates itself.",
+   "what": "The bell at the top shows notices and articles from Techmin. Techmin Updates also checks for new versions of VLE360.",
    "why": "You learn about new features, offers and important notices, and get fixes without reinstalling.",
    "before": [
     "Internet connection for notices and updates."
@@ -947,7 +947,7 @@
     "Click the bell or open Techmin Updates.",
     "Click ↻ Check for new updates to see if a new version is available; Update now reloads the program.",
     "Choose how updates happen: automatically when the computer is idle (recommended), ask me first, or do not check automatically.",
-    "Turn on push notifications if you want notices while VLEBook is closed (Chrome or Edge must be running)."
+    "Turn on push notifications if you want notices while VLE360 is closed (Chrome or Edge must be running)."
    ],
    "result": "After an update each user sees What's new once. Your data and any unfinished bill are kept.",
    "careful": "Only the program is updated — your data stays on this computer.",
@@ -963,7 +963,7 @@
   },
   "support": {
    "title": "Help & Support tickets",
-   "summary": "Raise a problem with Techmin from inside VLEBook, safely.",
+   "summary": "Raise a problem with Techmin from inside VLE360, safely.",
    "what": "A ticket is a message to Techmin support about a problem, with optional screenshots, and a conversation for replies.",
    "why": "Support gets the details it needs, and you can follow the replies in one place.",
    "before": [
@@ -977,7 +977,7 @@
     "Read replies in the conversation; confirm and close when solved, or reopen with a reason."
    ],
    "result": "Techmin receives only what you typed and chose. The menu shows a badge for new replies.",
-   "careful": "Never send passwords, OTPs, full Aadhaar numbers or bank credentials. VLEBook warns if your text looks like it contains them.",
+   "careful": "Never send passwords, OTPs, full Aadhaar numbers or bank credentials. VLE360 warns if your text looks like it contains them.",
    "wrong": "If sending fails, check the internet. The draft stays on this computer.",
    "check": {
     "q": "What should you do with customer names in a screenshot?",
@@ -991,7 +991,7 @@
   "learning": {
    "title": "How to use the Learning Centre",
    "summary": "Find lessons, use the search, follow a path, take a guided tour and print a manual.",
-   "what": "The Learning Centre teaches every part of VLEBook, in English, Hindi and Malayalam.",
+   "what": "The Learning Centre teaches every part of VLE360, in English, Hindi and Malayalam.",
    "why": "You can learn at the moment you need it, in the language you understand.",
    "before": [
     "Nothing."
@@ -1021,7 +1021,7 @@
    "what": "Productivity & Tools collects the helpers that make daily work faster and safer. Each card opens one tool.",
    "why": "You find these tools in one place instead of searching through Settings.",
    "before": [
-    "Sign in to VLEBook."
+    "Sign in to VLE360."
    ],
    "steps": [
     "Click Productivity & Tools in the menu (or press Alt+T).",
@@ -1044,14 +1044,14 @@
   "training": {
    "title": "Practise safely in training mode",
    "summary": "Learn billing and other work on sample data without touching your real records.",
-   "what": "Training mode opens a separate practice copy of VLEBook with sample customers and bills. Your real data is not opened while you practise.",
+   "what": "Training mode opens a separate practice copy of VLE360 with sample customers and bills. Your real data is not opened while you practise.",
    "why": "New staff can learn without risk: practice bills never reach your accounts, cash, stock or reports.",
    "before": [
     "Sign in as yourself. The same user name and password work in training mode."
    ],
    "steps": [
     "Open Productivity & Tools → Training mode.",
-    "Click Start training mode and confirm. VLEBook reloads with an amber TRAINING MODE band at the top.",
+    "Click Start training mode and confirm. VLE360 reloads with an amber TRAINING MODE band at the top.",
     "Practise: make bills, add customers, try reports. Bills say PRACTICE — NOT VALID.",
     "Click Exit in the amber band (or Leave training mode) to go back to your real data.",
     "To start again with fresh sample data, click Reset practice data."
@@ -1114,7 +1114,7 @@
    ],
    "result": "You know what needs attention. The report contains versions, results and record counts only — no customer details.",
    "careful": "A warning on Last backup means take a backup now from Backup & Restore.",
-   "wrong": "If the database check fails, take a backup, close other VLEBook tabs, reload and run the checks again; then raise a support ticket with the report.",
+   "wrong": "If the database check fails, take a backup, close other VLE360 tabs, reload and run the checks again; then raise a support ticket with the report.",
    "check": {
     "q": "Does the diagnostic report contain customer names?",
     "a": [
@@ -1158,7 +1158,7 @@
   "localscript": {
    "title": "Names and addresses in Malayalam / Hindi",
    "summary": "Turn an English name or address into Malayalam or Hindi letters, or type by voice.",
-   "what": "VLEBook suggests how an English name or address is written in Malayalam or Hindi (transliteration — the same sounds, not a translation). The English stays the main record.",
+   "what": "VLE360 suggests how an English name or address is written in Malayalam or Hindi (transliteration — the same sounds, not a translation). The English stays the main record.",
    "why": "Certificates and letters often need the name in the local script; typing it is slow.",
    "before": [
     "Type the name and address in English first."
@@ -1186,7 +1186,7 @@
   "buy-plan": {
    "title": "Buy or renew your plan",
    "summary": "Pay monthly or yearly with Razorpay; the licence is applied at once and Techmin's GST invoice is emailed.",
-   "what": "After the 45-day free trial, a plan keeps every feature. You buy it inside VLEBook and pay through Razorpay.",
+   "what": "After the 45-day free trial, a plan keeps every feature. You buy it inside VLE360 and pay through Razorpay.",
    "why": "No waiting for a licence key: payment, licence and GST tax invoice happen in one step.",
    "before": [
     "Sign in as the Owner.",
@@ -1246,11 +1246,11 @@
   "signin-centre": {
    "title": "Sign in on a new computer or browser",
    "summary": "Use your own user name and password on another computer, browser or Chrome profile with Sign in to my centre.",
-   "what": "User names and passwords are kept on the computer where your centre was set up. A computer or browser that has never had VLEBook shows no sign-in box. Sign in to my centre checks your user name and password against your centre's own data in its folder and brings the centre to that computer.",
-   "why": "So you never create a second Owner account by mistake, and staff can start work on a new computer in a minute. Browsers cannot read a computer's MAC address, so VLEBook recognises an existing user this way.",
+   "what": "User names and passwords are kept on the computer where your centre was set up. A computer or browser that has never had VLE360 shows no sign-in box. Sign in to my centre checks your user name and password against your centre's own data in its folder and brings the centre to that computer.",
+   "why": "So you never create a second Owner account by mistake, and staff can start work on a new computer in a minute. Browsers cannot read a computer's MAC address, so VLE360 recognises an existing user this way.",
    "before": [
     "Google Drive for desktop (or the same backup folder) is on this computer.",
-    "You know your VLEBook user name and password."
+    "You know your VLE360 user name and password."
    ],
    "steps": [
     "Open tools.complypro.co.in/vlebook and click Sign in (top right of the Features & Plans page).",
@@ -1259,11 +1259,11 @@
     "Click Choose the centre folder and sign in, and choose the folder that contains VLEBook-sync or your backup files (not the VLEBook-sync folder itself).",
     "Allow Chrome to use the folder when it asks."
    ],
-   "result": "VLEBook checks the password on this computer, brings the centre here and signs you in. Nothing is sent to Techmin for the check.",
+   "result": "VLE360 checks the password on this computer, brings the centre here and signs you in. Nothing is sent to Techmin for the check.",
    "careful": "Do not click Create Owner Account for a centre that already exists. Use the same Chrome profile every day — another browser or profile counts as another computer.",
    "wrong": "If it says the user name or password does not match, type them exactly as on the main computer. If the backups are password-protected, use Restore from backup folder with the backup password.",
    "check": {
-    "q": "Your centre already uses VLEBook. On a new computer you see Create the Owner account. What do you do?",
+    "q": "Your centre already uses VLE360. On a new computer you see Create the Owner account. What do you do?",
     "a": [
      "Create a new Owner account",
      "Use Sign in to my centre with my user name, password and the centre folder",
@@ -1303,18 +1303,18 @@
   "bridge-update": {
    "title": "Install or update the Print Bridge",
    "summary": "Install the free Windows Print Bridge, or replace an older version safely.",
-   "what": "The VLEBook Print Bridge is a small Windows helper that lets VLEBook print straight to your printers. The installer now looks for a Bridge that is already installed or running and tells you its version before changing anything.",
+   "what": "The VLE360 Print Bridge is a small Windows helper that lets VLE360 print straight to your printers. The installer now looks for a Bridge that is already installed or running and tells you its version before changing anything.",
    "why": "An older Bridge may miss new features such as the same-PC check. Replacing it with one click keeps your printer connection settings.",
    "before": [
     "Windows 10 or 11.",
-    "Download the Print Bridge from VLEBook (Print window or Studio → Print & printers)."
+    "Download the Print Bridge from VLE360 (Print window or Studio → Print & printers)."
    ],
    "steps": [
     "Unzip the download.",
     "Double-click Install VLEBook Print Bridge.cmd.",
     "If it says an older version was found, read the two version numbers and press Y to uninstall the old one and install the new one (N changes nothing).",
     "Wait for the message that the Bridge is installed and running; its icon is in the notification area.",
-    "In VLEBook open the print window: it shows Print Bridge connected with the new version."
+    "In VLE360 open the print window: it shows Print Bridge connected with the new version."
    ],
    "result": "The old Bridge is stopped and removed from start-up, the new one is installed for your Windows user and starts with Windows. Your printer connection settings are kept.",
    "careful": "No administrator rights are needed. If it says a NEWER Bridge is installed, keep it unless Techmin support asked you to go back.",
@@ -1330,12 +1330,12 @@
    }
   },
   "whatsnew-dash": {
-   "title": "What's new and the VLEBook version on the Dashboard",
+   "title": "What's new and the VLE360 version on the Dashboard",
    "summary": "The Dashboard opens first and shows the version, the update date and a short What's new animation.",
-   "what": "Every time you open VLEBook and sign in, the Dashboard comes first. At the top it shows VLEBook with its version number and the date of the latest update, and a short animation of what changed, in English, Hindi or Malayalam.",
+   "what": "Every time you open VLE360 and sign in, the Dashboard comes first. At the top it shows VLE360 with its version number and the date of the latest update, and a short animation of what changed, in English, Hindi or Malayalam.",
    "why": "You always know which version you are using and what is new, without searching the Release Notes.",
    "before": [
-    "Sign in to VLEBook."
+    "Sign in to VLE360."
    ],
    "steps": [
     "Look at the What's new card at the top of the Dashboard.",
@@ -1345,9 +1345,9 @@
    ],
    "result": "After the next update the card comes back by itself with the new changes.",
    "careful": "Quote the version number shown here when you contact Techmin support.",
-   "wrong": "If the old card or old text still shows, close every VLEBook tab and open VLEBook again so the update is loaded.",
+   "wrong": "If the old card or old text still shows, close every VLE360 tab and open VLE360 again so the update is loaded.",
    "check": {
-    "q": "Where can you see the VLEBook version and update date?",
+    "q": "Where can you see the VLE360 version and update date?",
     "a": [
      "Only in Techmin's emails",
      "At the top of the Dashboard",
@@ -1359,14 +1359,14 @@
   "gforms": {
    "title": "Google Forms: create, publish and share a real Google Form",
    "summary": "Make a real Google Form in your own Gmail account from a template or from scratch, publish it and share the link.",
-   "what": "VLEBook creates the form in your own Google account through Google's official Forms service. Customers fill it on Google; VLEBook shows the responses.",
+   "what": "VLE360 creates the form in your own Google account through Google's official Forms service. Customers fill it on Google; VLE360 shows the responses.",
    "why": "Collect enquiries, registrations and feedback without paper, in English, Hindi or Malayalam.",
    "before": [
     "A Gmail (Google) account. On the free trial and in Basic mode one Gmail account and 2 forms are allowed; paid plans allow any number."
    ],
    "steps": [
     "Open Google Forms → Gmail accounts. Click Use this Gmail, or type your Gmail ID (the Owner does this once).",
-    "Sign in in Google's own window and tick all the permissions. VLEBook never sees your Google password.",
+    "Sign in in Google's own window and tick all the permissions. VLE360 never sees your Google password.",
     "Open Template gallery, choose a category and the form language, then Preview or Use template — or open Create new form for a blank form.",
     "Check and change the questions, options and Required ticks; click Preview to see them.",
     "Click Create Google Form. The form is made in your Google account but is not published yet.",
@@ -1386,26 +1386,26 @@
   },
   "gforms-responses": {
    "title": "Google Forms: see, search and export the responses",
-   "summary": "Bring the answers your customers gave on Google into VLEBook, find them, print them or export them.",
-   "what": "VLEBook reads the responses of your forms from Google with your connected Gmail account and keeps a copy in your centre's own data.",
+   "summary": "Bring the answers your customers gave on Google into VLE360, find them, print them or export them.",
+   "what": "VLE360 reads the responses of your forms from Google with your connected Gmail account and keeps a copy in your centre's own data.",
    "why": "All answers from all your Gmail accounts in one place, next to your other work.",
    "before": [
     "A published form and a connected Gmail account."
    ],
    "steps": [
-    "Open Google Forms → Form responses and click Refresh responses (VLEBook also checks every 5 minutes while the screen is open).",
+    "Open Google Forms → Form responses and click Refresh responses (VLE360 also checks every 5 minutes while the screen is open).",
     "Choose a Gmail account, a form or dates, or type in Search to narrow the list.",
     "Click View to see one response with every question and answer; Print prints it.",
     "Click CSV or JSON to export, or Print report for the list.",
     "In My forms use Stop responses / Reopen, Duplicate, Edit in Google, or Remove / delete."
    ],
    "result": "The latest responses with the time of the last refresh.",
-   "careful": "Responses contain customers' personal details. Export only what you need, keep files safe and delete them when no longer needed. Delete the Google Form moves it to the Google Drive bin; Delete saved responses removes only VLEBook's copy.",
+   "careful": "Responses contain customers' personal details. Export only what you need, keep files safe and delete them when no longer needed. Delete the Google Form moves it to the Google Drive bin; Delete saved responses removes only VLE360's copy.",
    "wrong": "If an account shows Not connected or Reconnect, click Connect in Gmail accounts — saved responses are kept. New responses appear only after a refresh; there are no instant alerts.",
    "check": {
-    "q": "Does deleting saved responses in VLEBook delete them in Google?",
+    "q": "Does deleting saved responses in VLE360 delete them in Google?",
     "a": [
-     "No, only VLEBook's copy",
+     "No, only VLE360's copy",
      "Yes"
     ],
     "right": 0
@@ -1413,8 +1413,8 @@
   },
   "docstudio": {
    "title": "Document Studio: type in Malayalam, Hindi or English",
-   "summary": "Write letters and applications, typing Malayalam or Hindi words in English letters, and keep them in VLEBook.",
-   "what": "A document editor inside VLEBook. Type a Malayalam word in English letters (Manglish) or a Hindi word (Hinglish) and pick the right word from the suggestions. Documents are saved in VLEBook by themselves.",
+   "summary": "Write letters and applications, typing Malayalam or Hindi words in English letters, and keep them in VLE360.",
+   "what": "A document editor inside VLE360. Type a Malayalam word in English letters (Manglish) or a Hindi word (Hinglish) and pick the right word from the suggestions. Documents are saved in VLE360 by themselves.",
    "why": "Prepare applications, letters and declarations for customers in their own language without a separate typing tool or file folder.",
    "before": [
     "Nothing to install. The Owner, Managers and Operators can use it."
@@ -1427,13 +1427,13 @@
     "Use the toolbar for bold, lists, tables, page breaks, paper size and margins.",
     "Click Word (.docx) for a Word copy, or Print / PDF to print or save a PDF."
    ],
-   "result": "The document is in My documents, saved in VLEBook and included in your backups.",
+   "result": "The document is in My documents, saved in VLE360 and included in your backups.",
    "careful": "Suggestions can be wrong — read what you typed. Documents may contain customers' personal details; delete those you no longer need.",
    "wrong": "If words stay in English, suggestions are off: click മലയാളം / हिन्दी or press Ctrl+M. If it says Not saved, read the message and copy your text before leaving.",
    "check": {
     "q": "How do you save a document in Document Studio?",
     "a": [
-     "It is saved in VLEBook by itself",
+     "It is saved in VLE360 by itself",
      "Click Save As (PC) every time"
     ],
     "right": 0
@@ -1456,10 +1456,10 @@
     "When finished, click Clear the form (twice) to remove the names and details from this computer."
    ],
    "result": "A draft to check. Agreements print on A4 with 175 mm left blank at the top of page 1 for stamp paper.",
-   "careful": "Drafts only — not legal advice and not checked by a lawyer. VLEBook does not work out stamp duty, registration or how the document must be signed. Check every draft before anyone signs.",
+   "careful": "Drafts only — not legal advice and not checked by a lawyer. VLE360 does not work out stamp duty, registration or how the document must be signed. Check every draft before anyone signs.",
    "wrong": "If the language buttons are missing, that draft is available in English only.",
    "check": {
-    "q": "Can a legal draft from VLEBook be signed without checking it?",
+    "q": "Can a legal draft from VLE360 be signed without checking it?",
     "a": [
      "No, it must be checked first",
      "Yes, it is approved by a lawyer"
@@ -1469,7 +1469,7 @@
   },
   "faircent": {
    "title": "Faircent Sub DSA Partner: apply through Techmin",
-   "summary": "The Owner can apply to join Techmin as a Sub DSA partner of Faircent and follow the application in VLEBook.",
+   "summary": "The Owner can apply to join Techmin as a Sub DSA partner of Faircent and follow the application in VLE360.",
    "what": "A form that sends the Owner's details, including PAN and Aadhaar, to Techmin with the Owner's consent. Techmin checks it and may share it with Faircent.",
    "why": "To apply for the partnership without paper forms and to see its status in one place.",
    "before": [
@@ -1482,14 +1482,150 @@
     "Click Send to Techmin and note the application number.",
     "Later, click Check status to see Techmin's update. If Techmin needs more information, click Correct and send again."
    ],
-   "result": "An application with Techmin, its number and status shown in VLEBook.",
-   "careful": "Send only your own details, or details you have permission to send. VLEBook keeps only the last digits of PAN and Aadhaar on your computer. Joining is not guaranteed.",
+   "result": "An application with Techmin, its number and status shown in VLE360.",
+   "careful": "Send only your own details, or details you have permission to send. VLE360 keeps only the last digits of PAN and Aadhaar on your computer. Joining is not guaranteed.",
    "wrong": "If it says the computer is not registered, open Users & Licence → Check licence online once. If it says your centre already has an application, click Check status.",
    "check": {
     "q": "Who can send the Faircent Sub DSA application?",
     "a": [
      "Only the Owner of the centre",
      "Any staff member"
+    ],
+    "right": 0
+   }
+  },
+  "qrsend": {
+   "title": "Send to counter by QR: files from the customer's phone",
+   "summary": "The customer scans a QR code and sends photos or PDFs from the phone straight to your counter.",
+   "what": "A QR window at the counter. The customer scans it with the phone camera, picks photos or PDFs and presses Send. The files appear at your counter to open, print, download or bill.",
+   "why": "No more WhatsApp forwards to the centre's phone, pen drives or e-mails to receive a customer's documents.",
+   "before": [
+    "Internet on the counter computer and on the customer's phone.",
+    "The computer must be registered with Techmin (online once). Included in every plan."
+   ],
+   "steps": [
+    "Click the QR button at the top of the screen.",
+    "Turn the screen to the customer; they scan the QR code with the phone camera.",
+    "On the phone they choose photos or PDFs (up to 20, each up to 10 MB) and press Send.",
+    "The files appear in the window: Open, Print or Download.",
+    "To bill printing: tick the files, choose the service and copies, and click Add the ticked pages to the bill, then Open billing."
+   ],
+   "result": "The customer's files are at your counter, and the print pages can be on the bill in one step.",
+   "careful": "Files are locked on the phone and Techmin cannot open them; they are deleted from the relay as soon as they arrive, and within 30 minutes. They are not saved in VLE360 — download what you must keep. Ask only for the files you need.",
+   "wrong": "If the phone says the code expired, click QR again for a new code. If it says not registered, open Users & Licence → Check licence online once.",
+   "check": {
+    "q": "How long does one QR code work?",
+    "a": [
+     "About 30 minutes",
+     "One week",
+     "For ever"
+    ],
+    "right": 0
+   }
+  },
+  "upi-dues": {
+   "title": "UPI QR on bills and the Dues list",
+   "summary": "Bills show a UPI QR with the amount due, and one list shows everyone who owes money with a WhatsApp reminder.",
+   "what": "With your UPI ID in Settings, a bill with a balance due shows a Scan to pay by UPI QR with that amount. Customers → Dues lists the customers who owe money, largest first.",
+   "why": "Customers pay the exact amount in seconds, and you collect old dues without searching bill by bill.",
+   "before": [
+    "Your centre's UPI ID from your UPI app (for example centre@okaxis)."
+   ],
+   "steps": [
+    "Settings → Centre Configuration → Centre's UPI ID. Keep the tick Show a UPI QR… on and save.",
+    "Make a bill with part payment: the A4 bill, PDF and 80 mm receipt show the QR with the balance due.",
+    "Customers → click the Dues button.",
+    "Click WhatsApp on a row: a ready reminder with your UPI ID opens; check it and press Send.",
+    "When the money arrives, check your bank or UPI app, then record the payment in the customer's 360° Ledger."
+   ],
+   "result": "Bills carry a pay-now QR, and the Dues list shows who still owes and since when.",
+   "careful": "VLE360 never sees or confirms the payment. Always check your bank or UPI app before you record it. Fully paid bills show no QR.",
+   "wrong": "If Settings says the UPI ID looks wrong, copy it exactly from your UPI app. If there is no QR, the bill may be fully paid.",
+   "check": {
+    "q": "Does VLE360 confirm that the customer paid by UPI?",
+    "a": [
+     "No, check your bank or UPI app",
+     "Yes, it marks the bill paid by itself"
+    ],
+    "right": 0
+   }
+  },
+  "quicksize": {
+   "title": "Quick size and photo clean-up",
+   "summary": "Make a photo, signature or PDF smaller than the size a portal allows, and clean up WhatsApp photos and thumb impressions.",
+   "what": "Two cards on the PDF & Image Studio home: Quick size (20, 50, 100, 200 KB or any size) and Clean up a photo (WhatsApp photo, thumb impression). The passport sheet also has background colour, joint photo and a name / date strip.",
+   "why": "Portals reject files that are a few KB too big. Forwarded photos are often blurry and grey.",
+   "before": [
+    "The file the customer gave you."
+   ],
+   "steps": [
+    "Open PDF & Image Studio.",
+    "In Quick size, choose the file and press the size the portal allows.",
+    "Click Download. The result is never larger than that size.",
+    "For a forwarded photo, use Clean up a photo → WhatsApp photo clean-up; for a thumb impression, Thumb impression.",
+    "For passport photos, open Photo & Signature → print and use Photo finishing."
+   ],
+   "result": "A file that fits the portal's limit, and clearer photos.",
+   "careful": "Check the result against the office's or portal's rules. A large PDF made small becomes page pictures, so its text can no longer be selected.",
+   "wrong": "If it says still larger than the limit, remove pages or use a larger limit if the portal allows.",
+   "check": {
+    "q": "What does Quick size promise?",
+    "a": [
+     "The file is never larger than the size you pressed",
+     "The file is always exactly 50 KB"
+    ],
+    "right": 0
+   }
+  },
+  "aadhaar-uidai": {
+   "title": "Aadhaar prints: follow UIDAI",
+   "summary": "A card made from an e-Aadhaar is the customer's personal copy, not an official Aadhaar PVC card.",
+   "what": "Before printing or saving an Aadhaar card in PVC ID & Print, VLE360 asks you to confirm it is a personal copy and shows a link to UIDAI's myAadhaar portal, where the official PVC card is ordered.",
+   "why": "UIDAI issues the official Aadhaar PVC card. Presenting an open-market print as an official card misleads the customer.",
+   "before": [
+    "The customer's own e-Aadhaar, given by the customer."
+   ],
+   "steps": [
+    "Open PVC ID & Print and make the card from the customer's e-Aadhaar.",
+    "Keep the mask over the first 8 digits unless the customer asked in writing for the full number.",
+    "Click Make print PDF or Print.",
+    "Read Aadhaar — personal copy only, then click Print personal copy — or open UIDAI's myAadhaar portal if the customer wants the official card."
+   ],
+   "result": "A personal copy, with a note in the A4 margin that it is a personal copy; the job is recorded as one.",
+   "careful": "Never call or sell such a print an official, UIDAI or 'PVC Aadhaar' card. UIDAI's fee for the official card is shown on its portal.",
+   "wrong": "If the note appears for a card that is not Aadhaar, change the document type to the right one.",
+   "check": {
+    "q": "Where does a customer order the official Aadhaar PVC card?",
+    "a": [
+     "On UIDAI's myAadhaar portal",
+     "At any print shop"
+    ],
+    "right": 0
+   }
+  },
+  "family": {
+   "title": "Family members, rate list and reminders",
+   "summary": "Link family members to one head, print your rate list, and remind customers of expiry and exam dates.",
+   "what": "Customers can be linked to the head of their family and share the head's mobile. Services → Rate list prints your prices. Reminders now cover passport, ration card, scholarship, life certificate and exam dates.",
+   "why": "Families often share one phone; a wall rate list answers price questions; reminders bring customers back on time.",
+   "before": [
+    "The head of the family is already a customer."
+   ],
+   "steps": [
+    "Customers → add the member; in Family of, type the head's mobile or customer ID and choose the Relation.",
+    "Open the head's 360° page to see the family, their dues and open applications.",
+    "On a bill, type the shared mobile and pick the person.",
+    "Services → Rate list → Print A4, or Save as image for WhatsApp.",
+    "On a customer's 360° page click + Expiry reminder; on an application click Exam / job date."
+   ],
+   "result": "Family records together, a printed price board, and reminders set from where you work.",
+   "careful": "Remind only customers who agreed to receive reminders. Check the prices before you print the rate list.",
+   "wrong": "If it says Duplicate mobile number, fill in Family of with the head's mobile.",
+   "check": {
+    "q": "Can a family member use the head's mobile number?",
+    "a": [
+     "Yes, when Family of names the head",
+     "No, never"
     ],
     "right": 0
    }
@@ -1570,7 +1706,7 @@
   },
   "backup": {
    "term": "Backup",
-   "def": "A copy of all VLEBook data in a file, kept in a folder you choose."
+   "def": "A copy of all VLE360 data in a file, kept in a folder you choose."
   },
   "restore": {
    "term": "Restore",
@@ -1590,7 +1726,7 @@
   },
   "printbridge": {
    "term": "Print Bridge",
-   "def": "A free helper for Windows that lets VLEBook print directly to installed printers."
+   "def": "A free helper for Windows that lets VLE360 print directly to installed printers."
   },
   "reconciliation": {
    "term": "Reconciliation",
@@ -1638,7 +1774,7 @@
   },
   "printmeter": {
    "term": "Print meter",
-   "def": "The printer's page counter. VLEBook compares its readings with the pages billed."
+   "def": "The printer's page counter. VLE360 compares its readings with the pages billed."
   },
   "shortcut": {
    "term": "Keyboard shortcut",
@@ -1646,7 +1782,7 @@
   },
   "gform": {
    "term": "Google Form",
-   "def": "A form made in your own Google account that customers fill on Google; VLEBook creates it and shows its responses."
+   "def": "A form made in your own Google account that customers fill on Google; VLE360 creates it and shows its responses."
   },
   "manglish": {
    "term": "Manglish / Hinglish typing",
@@ -1655,11 +1791,19 @@
   "subdsa": {
    "term": "Sub DSA partner",
    "def": "A partner who brings customers to a lender or lending platform under a main DSA (direct selling agent) — here, Techmin for Faircent."
+  },
+  "upiqr": {
+   "term": "UPI QR",
+   "def": "A QR code with your UPI ID (and the amount due) that a customer scans with any UPI app to pay you directly."
+  },
+  "maskedaadhaar": {
+   "term": "Masked Aadhaar",
+   "def": "An Aadhaar where the first 8 digits are hidden as XXXX XXXX and only the last 4 digits show, as UIDAI describes it."
   }
  },
  "faq": {
   "offline": {
-   "q": "Does VLEBook work without internet?",
+   "q": "Does VLE360 work without internet?",
    "a": "Yes, for daily work: billing, customers, accounts, tools and backups. The internet is needed for activation, licences, Techmin notices, the welcome email and push notifications."
   },
   "datawhere": {
@@ -1668,11 +1812,11 @@
   },
   "browserclear": {
    "q": "Will clearing the browser delete my data?",
-   "a": "Clearing history or cached images does not. Clearing 'Cookies and site data' for VLEBook, resetting the browser or using another Windows user removes the copy in the browser — restore it with Restore from backup folder."
+   "a": "Clearing history or cached images does not. Clearing 'Cookies and site data' for VLE360, resetting the browser or using another Windows user removes the copy in the browser — restore it with Restore from backup folder."
   },
   "newpc": {
    "q": "How do I move to a new computer?",
-   "a": "Take a backup, open VLEBook on the new computer (internet needed), restore the backup, then ask Techmin to move your licence to the new Device Code."
+   "a": "Take a backup, open VLE360 on the new computer (internet needed), restore the backup, then ask Techmin to move your licence to the new Device Code."
   },
   "lostpw": {
    "q": "I forgot my password.",
@@ -1684,15 +1828,15 @@
   },
   "govfee": {
    "q": "Why is the government fee not shown as income?",
-   "a": "Because it is the customer's money paid to the portal. VLEBook keeps it in Government fee clearing; only your service charge is income."
+   "a": "Because it is the customer's money paid to the portal. VLE360 keeps it in Government fee clearing; only your service charge is income."
   },
   "gstfile": {
-   "q": "Does VLEBook file my GST return?",
-   "a": "No. It prepares tables, the Excel workbook, GSTR-1 JSON and GSTR-3B help. You file on the GST portal, then mark the month as filed in VLEBook."
+   "q": "Does VLE360 file my GST return?",
+   "a": "No. It prepares tables, the Excel workbook, GSTR-1 JSON and GSTR-3B help. You file on the GST portal, then mark the month as filed in VLE360."
   },
   "whatsapp": {
-   "q": "Does VLEBook send WhatsApp messages by itself?",
-   "a": "No. It opens WhatsApp with the message ready; you press Send. VLEBook cannot see whether a message was delivered or read."
+   "q": "Does VLE360 send WhatsApp messages by itself?",
+   "a": "No. It opens WhatsApp with the message ready; you press Send. VLE360 cannot see whether a message was delivered or read."
   },
   "printfit": {
    "q": "My printout is too small or cut off.",
@@ -1703,16 +1847,16 @@
    "a": "Send cards at the printer's own resolution with the Print Bridge, keep sharpening low, and check the card printer's driver settings; the print window explains the settings that cause blur."
   },
   "bridge": {
-   "q": "VLEBook says the Print Bridge is not running.",
-   "a": "Run Install VLEBook Print Bridge.cmd once from the downloaded folder. It then starts with Windows and VLEBook connects by itself. If a notice says a newer Bridge is available, download it again."
+   "q": "VLE360 says the Print Bridge is not running.",
+   "a": "Run Install VLEBook Print Bridge.cmd once from the downloaded folder. It then starts with Windows and VLE360 connects by itself. If a notice says a newer Bridge is available, download it again."
   },
   "backupask": {
    "q": "Chrome asks again for access to the backup folder.",
-   "a": "This is normal after VLEBook is reopened. Click Reconnect backup folder (choose Allow on every visit if offered). Until then automatic backups are paused."
+   "a": "This is normal after VLE360 is reopened. Click Reconnect backup folder (choose Allow on every visit if offered). Until then automatic backups are paused."
   },
   "basicmode": {
    "q": "My trial ended. Is my data gone?",
-   "a": "No. VLEBook moves to Basic mode: your data stays and minimal daily work continues. Buying a licence brings back all features at once."
+   "a": "No. VLE360 moves to Basic mode: your data stays and minimal daily work continues. Buying a licence brings back all features at once."
   },
   "photogreen": {
    "q": "The photo shows GREEN. Will the portal accept it?",
@@ -1727,24 +1871,32 @@
    "a": "No. Voice typing uses your browser's speech service (Chrome or Edge), which processes the audio online. Transliteration (Suggest) works offline on your computer. Never speak Aadhaar numbers, OTPs or passwords."
   },
   "gstinvoice": {
-   "q": "Will I get a GST invoice for my VLEBook plan?",
+   "q": "Will I get a GST invoice for my VLE360 plan?",
    "a": "Yes. Techmin Wealth Partners (GSTIN 32AEQPV4581H1ZZ) issues a GST tax invoice with receipt for every payment: CGST + SGST in Kerala, IGST in other States. Enter your GSTIN before paying if you are registered. Invoices are emailed and listed in Users & Licence → My invoices."
   },
   "no-signin-box": {
-   "q": "I signed out (or opened VLEBook on another computer) and there is no sign-in box. How do I sign in?",
-   "a": "User names and passwords are kept on the computer and browser where your centre was set up. On that computer, signing out brings back the User name / Password screen; on the Features & Plans page click Sign in. On a computer or browser where VLEBook is not set up yet, use Sign in to my centre: type your user name and password and choose the folder that contains VLEBook-sync or your backup files. VLEBook checks them against your centre's own data, brings the centre there and signs you in. Do not create a new Owner account for an existing centre."
+   "q": "I signed out (or opened VLE360 on another computer) and there is no sign-in box. How do I sign in?",
+   "a": "User names and passwords are kept on the computer and browser where your centre was set up. On that computer, signing out brings back the User name / Password screen; on the Features & Plans page click Sign in. On a computer or browser where VLE360 is not set up yet, use Sign in to my centre: type your user name and password and choose the folder that contains VLEBook-sync or your backup files. VLE360 checks them against your centre's own data, brings the centre there and signs you in. Do not create a new Owner account for an existing centre."
   },
   "gformswhere": {
    "q": "Where are Google Forms responses kept? Does Techmin see them?",
-   "a": "The form and its responses are in your own Google account. VLEBook keeps a copy in your centre's own data on your computers and in your backups. Techmin never receives them."
+   "a": "The form and its responses are in your own Google account. VLE360 keeps a copy in your centre's own data on your computers and in your backups. Techmin never receives them."
   },
   "docstudiosave": {
    "q": "Where are Document Studio documents saved? Is there a Save button?",
-   "a": "There is no Save button. Documents and your word list are saved in VLEBook by themselves, are included in your backups and auto-backup, and are shared with the centre's other computers. Word and PDF are copies for sending or printing."
+   "a": "There is no Save button. Documents and your word list are saved in VLE360 by themselves, are included in your backups and auto-backup, and are shared with the centre's other computers. Word and PDF are copies for sending or printing."
   },
   "faircentdata": {
    "q": "What happens to the PAN and Aadhaar I send in the Faircent Sub DSA form?",
-   "a": "They go to Techmin only after you tick the consent, and Techmin may share them with Faircent for your partner registration. Techmin staff see them masked; showing the full numbers is logged. VLEBook keeps only the last digits on your computer."
+   "a": "They go to Techmin only after you tick the consent, and Techmin may share them with Faircent for your partner registration. Techmin staff see them masked; showing the full numbers is logged. VLE360 keeps only the last digits on your computer."
+  },
+  "rename360": {
+   "q": "Why is VLEBook now called VLE360? Does anything change?",
+   "a": "Another company sells a different product called “VLE Book” to centres like yours; a clearly different name avoids mix-ups when you search for help, recommend the software or pay for your plan. VLE360 belongs only to this software and to Techmin, and “360” stands for the whole centre. Your data, licence, plan and price, web address, backups and sign-in do not change, and you do not need to do anything. A few names such as the sync folder VLEBook-sync and the Print Bridge files are kept so that nothing breaks."
+  },
+  "qrprivacy": {
+   "q": "Can Techmin see the files customers send by QR?",
+   "a": "No. The phone locks (encrypts) each file with a key that is only in the QR code shown at your counter; that key never reaches Techmin. Techmin's relay holds only the locked file and deletes it as soon as your counter receives it, and every session within 30 minutes. The files are not saved in VLE360's data either."
   }
  }
 }
