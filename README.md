@@ -8,10 +8,10 @@ Published at https://tools.complypro.co.in/
 | ESIC Monthly Contribution Creator | `esic-mc-creator/` | 2.0.0 |
 | Statutory Payroll Planner | `payroll-planner/` | 1.2.0 |
 | Income Tax Calculator for Government Employees | `govt-tax-calculator/` | 1.2.0 |
-| Indian Financial Statements Studio | `fs-studio/` | 3.7 (under testing) |
-| Techmin Payroll Manager | `payroll-manager/` | 1.2.0 (under testing) |
+| Indian Financial Statements Studio | `fs-studio/` | 3.7 |
+| Techmin Payroll Manager | `payroll-manager/` | 1.2.0 |
 | GSTR-7 Return Preparer | `gstr7-utility/` | 1.0.0 |
-| Project Report Generator | `project-report/` | 1.0.0 (under testing) |
+| Project Report Generator | `project-report/` | 1.0.0 |
 | GST Refund Preparer (inverted tax structure) | `gst-refund/` | 1.0.18 |
 | VLEBook (CSC, Akshaya and e-Seva centres) | `vlebook/` | 2.10.3 (multi-file app; early access; 14-day trial then paid licence; help, release notes, terms, privacy, refund policy and disclaimer at `vlebook/help.html`) |
 
